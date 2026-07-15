@@ -679,28 +679,29 @@ export function ToolsClient() {
   return (
     <div className="w-full min-h-screen bg-background">
       {/* Background Ornaments */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 surface-mesh" />
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px]" />
-        <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-cyan-500/8 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[10%] left-[20%] w-[25%] h-[25%] bg-emerald-500/8 rounded-full blur-[100px]" />
+        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/15 rounded-full blur-[120px]" />
+        <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-cyan-500/12 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[10%] left-[20%] w-[25%] h-[25%] bg-violet-500/10 rounded-full blur-[100px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-12">
+      <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-12 md:py-16">
         {/* Hero Section */}
         <div className="text-center mb-12 animate-slide-up">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6 border border-primary/20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold mb-6 border border-primary/25 shadow-[0_0_30px_-8px_hsl(var(--primary)/0.45)]">
             <Sparkles className="h-4 w-4" />
-            <span>All Tools. Free. No Sign-up.</span>
+            <span>All tools · Free to open · No sign-up</span>
           </div>
 
-          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6">
-            <span className="text-gradient-animated">AI Tools</span>{" "}
+          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6">
+            <span className="text-brand-gradient">AI Tools</span>{" "}
             <span className="text-foreground">Library</span>
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            Powerful AI tools for students, writers, and professionals.
-            Supercharge your productivity in seconds.
+            A premium catalog of AI and browser tools for students, writers, and
+            professionals — built for speed and clarity.
           </p>
 
           {/* Stats Bar */}
@@ -725,8 +726,8 @@ export function ToolsClient() {
           {/* Search Bar */}
           <div className="max-w-3xl mx-auto mb-12">
             <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary via-teal-500 to-cyan-500 rounded-2xl opacity-15 group-hover:opacity-35 transition duration-500 blur-lg" />
-              <div className="relative flex items-center bg-card/90 backdrop-blur-xl rounded-2xl border border-border shadow-lg shadow-primary/5 transition-all duration-300 focus-within:border-primary/40 focus-within:shadow-primary/10">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary via-violet-500 to-cyan-500 rounded-2xl opacity-25 group-hover:opacity-50 transition duration-500 blur-lg" />
+              <div className="relative flex items-center bg-card/95 backdrop-blur-xl rounded-2xl border border-border shadow-xl shadow-primary/10 transition-all duration-300 focus-within:border-primary/50 focus-within:shadow-primary/20">
                 <Search className="text-muted-foreground h-5 w-5 ml-5 mr-3 shrink-0 transition-colors group-focus-within:text-primary" />
                 <input
                   ref={searchRef}

@@ -119,9 +119,9 @@ export function PremiumToolWrapper({
             </div>
 
             <div className="relative mb-5">
-              <div className="absolute -inset-x-16 -top-8 bottom-0 bg-gradient-to-r from-primary/15 via-teal-500/10 to-cyan-500/10 opacity-70 blur-3xl" />
-              <h1 className="relative font-heading text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight">
-                <span className="bg-gradient-to-r from-primary via-teal-600 to-cyan-600 dark:from-teal-300 dark:via-emerald-300 dark:to-cyan-300 bg-clip-text text-transparent">
+              <div className="absolute -inset-x-16 -top-8 bottom-0 bg-gradient-to-r from-primary/20 via-violet-500/15 to-cyan-500/15 opacity-80 blur-3xl" />
+              <h1 className="relative font-heading text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.08] tracking-tight">
+                <span className="text-brand-gradient">
                   {toolName}
                 </span>
               </h1>
@@ -262,13 +262,13 @@ export function PremiumToolWrapper({
 
       {ctaTitle && (
         <section className="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-20">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 p-10 sm:p-16 text-center text-white shadow-2xl">
-            <div className="absolute inset-0 bg-pattern-dots opacity-30" />
+          <div className="relative overflow-hidden rounded-3xl bg-hero-premium p-10 sm:p-16 text-center text-white shadow-2xl">
+            <div className="absolute inset-0 surface-mesh opacity-40" />
             <div className="relative z-10">
               <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md">
                 <CtaIcon className="h-7 w-7" />
               </div>
-              <h3 className="font-heading mb-4 text-3xl sm:text-4xl font-bold">
+              <h3 className="font-heading mb-4 text-3xl sm:text-4xl font-extrabold tracking-tight">
                 {ctaTitle}
               </h3>
               {ctaDescription && (
@@ -278,7 +278,7 @@ export function PremiumToolWrapper({
               )}
               <a
                 href="#tool-input"
-                className="inline-flex items-center gap-3 rounded-2xl bg-white px-8 py-4 font-bold text-teal-800 shadow-xl transition-all hover:scale-[1.03]"
+                className="btn-premium inline-flex items-center gap-3 rounded-2xl px-8 py-4 font-bold"
               >
                 {ctaButtonText} <ArrowRight className="h-5 w-5" />
               </a>

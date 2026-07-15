@@ -51,8 +51,8 @@ export async function exportAsPDF(
               padding: 20px;
             }
             h1 {
-              color: #0d9488;
-              border-bottom: 2px solid #0d9488;
+              color: #7c5cff;
+              border-bottom: 2px solid #7c5cff;
               padding-bottom: 10px;
             }
             pre {

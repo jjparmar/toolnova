@@ -128,7 +128,7 @@ export default function MobileMenu({ onClose, id }: MobileMenuProps) {
             <Link href="/signup" onClick={onClose} className="w-full block">
               <button
                 type="button"
-                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-teal-600 text-primary-foreground font-bold h-12 rounded-xl shadow-md shadow-primary/25 transition-all"
+                className="btn-premium w-full flex items-center justify-center gap-2 font-bold h-12 rounded-xl"
               >
                 <Sparkles className="h-4 w-4" /> Get Started Free
               </button>

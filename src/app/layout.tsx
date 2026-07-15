@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/google-font-preconnect */
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Space_Grotesk, Geist_Mono } from "next/font/google";
+import { Outfit, Syne, Geist_Mono } from "next/font/google";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ConsentedScripts } from "@/components/ConsentedScripts";
 import Script from "next/script";
@@ -19,8 +19,9 @@ import { adsenseConfig } from "@/config/adsense";
 import { Providers } from "@/components/Providers";
 import { TOOL_COUNT_LABEL } from "@/data/tools";
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
+/** Clean geometric UI body — premium SaaS readability */
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
@@ -29,11 +30,12 @@ const plusJakarta = Plus_Jakarta_Sans({
   fallback: ["system-ui", "arial"],
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+/** Distinctive display face for brand headlines */
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
   display: "swap",
-  weight: ["500", "600", "700"],
+  weight: ["600", "700", "800"],
   preload: true,
   adjustFontFallback: true,
   fallback: ["system-ui", "arial"],
@@ -154,8 +156,8 @@ export const metadata: Metadata = {
   other: {
     language: "English",
     "content-language": "en",
-    "theme-color": "#0d9488",
-    "msapplication-TileColor": "#0d9488",
+    "theme-color": "#7c5cff",
+    "msapplication-TileColor": "#7c5cff",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
     "mobile-web-app-capable": "yes",
@@ -227,15 +229,15 @@ export default function RootLayout({
         />
 
         {/* Theme Color — required for Google Discover & PWA */}
-        <meta name="theme-color" content="#0d9488" />
-        <meta name="msapplication-TileColor" content="#0d9488" />
+        <meta name="theme-color" content="#7c5cff" />
+        <meta name="msapplication-TileColor" content="#7c5cff" />
 
 
         {/* NOTE: Page-level JSON-LD schemas are injected by each page component.
             No global schema here to avoid duplicate JSON-LD across all pages. */}
       </head>
       <body
-        className={`${plusJakarta.variable} ${spaceGrotesk.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${outfit.variable} ${syne.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"

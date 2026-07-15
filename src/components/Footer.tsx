@@ -36,13 +36,13 @@ const footerLinkClass =
 
 export function Footer() {
   return (
-    <footer className="w-full mt-auto border-t border-border bg-gradient-to-b from-muted/40 to-background">
+    <footer className="w-full mt-auto border-t border-border bg-gradient-to-b from-muted/50 via-background to-background">
       <div className="mx-auto max-w-[1200px] px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl shadow-md shadow-primary/20 ring-1 ring-primary/15">
+              <div className="relative h-10 w-10 overflow-hidden rounded-2xl shadow-lg shadow-primary/30 ring-2 ring-primary/20">
                 <Image
                   src="/logo.webp"
                   alt=""
@@ -51,8 +51,8 @@ export function Footer() {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <span className="font-heading text-xl font-bold text-foreground tracking-tight">
-                Tool<span className="text-primary">Nova</span>
+              <span className="font-heading text-xl font-extrabold text-foreground tracking-tight">
+                Tool<span className="text-brand-gradient">Nova</span>
               </span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-4">

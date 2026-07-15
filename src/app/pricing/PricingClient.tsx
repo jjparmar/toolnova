@@ -183,7 +183,7 @@ export default function PricingClient() {
             toast.message("Payment submitted. Refresh dashboard in a minute.");
           }
         },
-        theme: { color: "#0d9488" },
+        theme: { color: "#7c5cff" },
       };
 
       const rzp = new window.Razorpay(options);
@@ -208,9 +208,9 @@ export default function PricingClient() {
             <Crown className="h-4 w-4" />
             Simple pricing
           </div>
-          <h1 className="font-heading text-4xl md:text-5xl font-bold tracking-tight mb-4">
+          <h1 className="font-heading text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
             Free to start.{" "}
-            <span className="text-primary">Pro when you need unlimited AI.</span>
+            <span className="text-brand-gradient">Pro when you need unlimited AI.</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
             Use {TOOL_COUNT_LABEL} tools without a credit card. Browser PDF &amp;
@@ -292,8 +292,9 @@ export default function PricingClient() {
           </div>
 
           {/* Pro */}
-          <div className="rounded-3xl border-2 border-primary bg-white dark:bg-slate-900 p-8 shadow-xl shadow-primary/10 flex flex-col relative overflow-hidden">
-            <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary text-white text-[10px] font-black uppercase tracking-wider">
+          <div className="rounded-3xl border-2 border-primary bg-card p-8 shadow-2xl shadow-primary/20 flex flex-col relative overflow-hidden ring-1 ring-primary/20">
+            <div className="absolute -top-20 -right-20 w-48 h-48 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-4 right-4 px-3 py-1 rounded-full btn-premium text-[10px] font-black uppercase tracking-wider">
               Best value
             </div>
             <div className="flex items-center gap-2 mb-2">
