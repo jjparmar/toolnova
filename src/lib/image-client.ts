@@ -3,6 +3,12 @@
  * High-quality canvas ops, downloads, size labels.
  */
 
+/** Accept image by MIME or common extension. */
+export function isImageFile(file: File): boolean {
+  if (file.type.startsWith("image/")) return true;
+  return /\.(jpe?g|png|webp|gif|bmp|avif|heic|heif)$/i.test(file.name);
+}
+
 export function formatBytes(bytes: number): string {
   if (!bytes || bytes <= 0) return "0 B";
   const k = 1024;

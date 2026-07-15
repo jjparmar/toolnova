@@ -16,18 +16,18 @@ interface QuickAnswerBoxProps {
 export function QuickAnswerBox({ question, answer, className = '' }: QuickAnswerBoxProps) {
     return (
         <div
-            className={`quick-answer bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-6 md:p-8 mb-8 ${className}`}
+            className={`quick-answer bg-gradient-to-br from-primary/8 to-teal-500/8 dark:from-primary/15 dark:to-teal-900/20 border-2 border-primary/20 dark:border-primary/30 rounded-2xl p-6 md:p-8 mb-8 ${className}`}
             data-speakable="true"
         >
             <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 dark:bg-blue-500 flex items-center justify-center">
-                    <Info className="w-5 h-5 text-white" />
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-md shadow-primary/25">
+                    <Info className="w-5 h-5 text-primary-foreground" />
                 </div>
                 <div className="flex-1">
-                    <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">
+                    <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground mb-3">
                         {question}
                     </h2>
-                    <p className="text-base md:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                         {answer}
                     </p>
                 </div>

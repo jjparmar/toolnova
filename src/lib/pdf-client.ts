@@ -2,11 +2,24 @@
  * Browser-side PDF helpers: thumbnails (pdf.js) + ZIP (jszip).
  */
 
+/** Accept PDF by MIME or extension (some OSes leave type empty). */
+export function isPdfFile(file: File): boolean {
+  if (file.type === "application/pdf") return true;
+  return /\.pdf$/i.test(file.name);
+}
+
 export async function loadPdfJs() {
   const pdfjs = await import("pdfjs-dist");
   // Pin worker to installed major.line — package requires Node 20-friendly 4.x
   const version = (pdfjs as { version?: string }).version || "4.10.38";
-  pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
+  // Primary CDN + fallback (blocked CDNs break reorder thumbnails)
+  const primary = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
+  const fallback = `https://unpkg.com/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
+  if (!pdfjs.GlobalWorkerOptions.workerSrc) {
+    pdfjs.GlobalWorkerOptions.workerSrc = primary;
+  }
+  // Expose fallback for callers that retry
+  (pdfjs as { __workerFallback?: string }).__workerFallback = fallback;
   return pdfjs;
 }
 
@@ -17,8 +30,28 @@ export async function renderPdfPageThumbnails(
   const maxWidth = options?.maxWidth ?? 160;
   const maxPages = options?.maxPages ?? 80;
   const pdfjs = await loadPdfJs();
-  const loadingTask = pdfjs.getDocument({ data: new Uint8Array(data) });
-  const pdf = await loadingTask.promise;
+
+  const tryLoad = async () => {
+    const loadingTask = pdfjs.getDocument({
+      data: new Uint8Array(data),
+      // Improve robustness for slightly damaged student PDFs
+      stopAtErrors: false,
+    });
+    return loadingTask.promise;
+  };
+
+  let pdf: Awaited<ReturnType<typeof tryLoad>>;
+  try {
+    pdf = await tryLoad();
+  } catch {
+    const fallback = (pdfjs as { __workerFallback?: string }).__workerFallback;
+    if (fallback && pdfjs.GlobalWorkerOptions.workerSrc !== fallback) {
+      pdfjs.GlobalWorkerOptions.workerSrc = fallback;
+      pdf = await tryLoad();
+    } else {
+      throw new Error("Could not render PDF previews (worker or file error)");
+    }
+  }
   const pageCount = pdf.numPages;
   const limit = Math.min(pageCount, maxPages);
   const thumbs: string[] = [];

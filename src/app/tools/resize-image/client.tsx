@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Upload, Download, Maximize2, Loader2, ArrowLeft, Shield, Sparkles, Star, ImageIcon, FileText, Layers, RefreshCw, RotateCw, FlipHorizontal2 } from 'lucide-react';
 import { toast } from 'sonner';
 import Link from 'next/link';
-import { transformImageSrc } from '@/lib/image-client';
+import { isImageFile, transformImageSrc } from '@/lib/image-client';
 
 const relatedTools = [
     { name: 'Crop Image', slug: 'image-crop', icon: Maximize2, color: 'from-violet-500 to-purple-500' },
@@ -43,10 +43,11 @@ export default function ResizeImageClient() {
     const handleFileSelect = (files: FileList | null) => {
         if (!files || files.length === 0) return;
         const file = files[0];
-        if (!file.type.startsWith('image/')) {
+        if (!isImageFile(file)) {
             toast.error('Please select an image file');
             return;
         }
+        if (resizedUrl) URL.revokeObjectURL(resizedUrl);
         setImage(file);
         setResizedUrl('');
         const reader = new FileReader();
@@ -57,10 +58,10 @@ export default function ResizeImageClient() {
             // Read dimensions
             const img = new window.Image();
             img.onload = () => {
-                setOriginalWidth(img.width);
-                setOriginalHeight(img.height);
-                setTargetWidth(img.width);
-                setTargetHeight(img.height);
+                setOriginalWidth(img.naturalWidth || img.width);
+                setOriginalHeight(img.naturalHeight || img.height);
+                setTargetWidth(img.naturalWidth || img.width);
+                setTargetHeight(img.naturalHeight || img.height);
             };
             img.src = result;
         };
@@ -96,6 +97,12 @@ export default function ResizeImageClient() {
             const img = new window.Image();
 
             img.onload = () => {
+                const maxDim = 12000;
+                if (targetWidth > maxDim || targetHeight > maxDim) {
+                    toast.error(`Max dimension is ${maxDim}px per side`);
+                    setResizing(false);
+                    return;
+                }
                 canvas.width = targetWidth;
                 canvas.height = targetHeight;
                 if (ctx) {
@@ -136,9 +143,16 @@ export default function ResizeImageClient() {
 
     const downloadResized = () => {
         if (!resizedUrl) return;
+        const base = (image?.name || 'image').replace(/\.[^.]+$/, '');
+        const ext =
+            image?.type === 'image/png'
+                ? 'png'
+                : image?.type === 'image/webp'
+                  ? 'webp'
+                  : 'jpg';
         const a = document.createElement('a');
         a.href = resizedUrl;
-        a.download = `resized-${targetWidth}x${targetHeight}-${image?.name || 'image.png'}`;
+        a.download = `resized-${targetWidth}x${targetHeight}-${base}.${ext}`;
         a.click();
     };
 
@@ -187,6 +201,11 @@ export default function ResizeImageClient() {
                         {!image ? (
                             <div
                                 onClick={() => fileInputRef.current?.click()}
+                                onDragOver={(e) => { e.preventDefault(); }}
+                                onDrop={(e) => {
+                                    e.preventDefault();
+                                    handleFileSelect(e.dataTransfer.files);
+                                }}
                                 className="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl p-10 text-center cursor-pointer hover:border-primary/50 transition-all"
                             >
                                 <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
@@ -198,7 +217,9 @@ export default function ResizeImageClient() {
                                 <div className="flex items-center justify-between">
                                     <h3 className="font-semibold text-lg">{image.name}</h3>
                                     <button 
+                                        type="button"
                                         onClick={() => {
+                                            if (resizedUrl) URL.revokeObjectURL(resizedUrl);
                                             setImage(null);
                                             setPreview('');
                                             setResizedUrl('');
@@ -269,6 +290,7 @@ export default function ResizeImageClient() {
                                                 key={p.label}
                                                 type="button"
                                                 onClick={() => {
+                                                    // Percentage presets scale original; fixed presets use exact W×H
                                                     if ('pct' in p && p.pct) {
                                                         const w = Math.max(1, Math.round((originalWidth * p.pct) / 100));
                                                         const h = Math.max(1, Math.round((originalHeight * p.pct) / 100));
@@ -276,11 +298,7 @@ export default function ResizeImageClient() {
                                                         setTargetHeight(h);
                                                     } else {
                                                         setTargetWidth(p.w);
-                                                        setTargetHeight(
-                                                            maintainAspectRatio && originalWidth > 0
-                                                                ? Math.round((p.w / originalWidth) * originalHeight)
-                                                                : p.h,
-                                                        );
+                                                        setTargetHeight(p.h);
                                                     }
                                                 }}
                                                 className="px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:border-primary/50"
@@ -333,7 +351,7 @@ export default function ResizeImageClient() {
 
                                 <p className="text-sm text-muted-foreground">Original: {originalWidth}×{originalHeight} px → Target: {targetWidth}×{targetHeight} px</p>
 
-                                <Button onClick={resizeImage} disabled={resizing} className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold rounded-2xl shadow-xl shadow-blue-500/30">
+                                <Button type="button" onClick={resizeImage} disabled={resizing} className="w-full h-14 bg-gradient-to-r from-primary to-teal-600 text-primary-foreground font-bold rounded-2xl shadow-xl shadow-primary/25">
                                     {resizing ? <><Loader2 className="h-5 w-5 animate-spin mr-2" /> Resizing...</> : <><Maximize2 className="h-5 w-5 mr-2" /> Resize Image</>}
                                 </Button>
 

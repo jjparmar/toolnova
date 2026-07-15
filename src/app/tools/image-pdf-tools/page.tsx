@@ -66,13 +66,13 @@ export default function ImagePDFToolsPage() {
                 </div>
 
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-500/10 to-orange-500/10 text-red-600 dark:text-red-400 text-sm font-semibold mb-5">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/15 text-sm font-semibold mb-5">
                         <ImageIcon className="h-4 w-4" />
-                        {tools.length} Free Tools
+                        {tools.length} Free Tools · Browser-private
                     </div>
-                    <h1 className="text-foreground text-4xl md:text-5xl font-black tracking-tight mb-4">Image & PDF Tools</h1>
+                    <h1 className="font-heading text-foreground text-4xl md:text-5xl font-bold tracking-tight mb-4">Image & PDF Tools</h1>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                        Merge, split, convert, and compress files - all processed locally for privacy.
+                        Merge, split, reorder, crop, convert, and compress — processed in your browser for privacy.
                     </p>
                 </div>
 

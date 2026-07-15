@@ -67,7 +67,7 @@ export default function BlogSidebar() {
         </div>
         <Link
           href="/tools"
-          className="flex items-center justify-center gap-2 mt-4 py-3 px-4 bg-purple-50 text-purple-600 rounded-xl font-bold hover:bg-purple-100 transition-colors"
+          className="flex items-center justify-center gap-2 mt-4 py-3 px-4 bg-primary/10 text-primary rounded-xl font-bold hover:bg-primary/15 transition-colors"
         >
           View All Tools
           <FaArrowRight className="text-sm" />
@@ -78,17 +78,17 @@ export default function BlogSidebar() {
       <SidebarAd />
 
       {/* CTA Card */}
-      <div className="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl p-6 text-white">
-        <h3 className="font-bold text-lg mb-2">Boost Your Productivity</h3>
-        <p className="text-purple-100 text-sm mb-4">
+      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 rounded-2xl p-6 text-white border border-white/10">
+        <h3 className="font-heading font-bold text-lg mb-2">Boost your productivity</h3>
+        <p className="text-slate-300 text-sm mb-4">
           Try our AI-powered tools to write better, study smarter, and save
           time.
         </p>
         <Link
           href="/tools"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white text-purple-600 rounded-lg font-bold text-sm hover:bg-purple-50 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white text-teal-800 rounded-lg font-bold text-sm hover:bg-teal-50 transition-colors"
         >
-          Get Started Free
+          Get started free
           <FaArrowRight className="text-xs" />
         </Link>
       </div>

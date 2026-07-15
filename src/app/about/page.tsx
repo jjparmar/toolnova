@@ -45,7 +45,7 @@ export default function AboutPage() {
     <div className="container mx-auto px-6 py-24 max-w-5xl">
       {/* Hero */}
       <div className="text-center mb-20">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600">
+        <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-teal-500">
           Democratizing AI for Everyone
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">

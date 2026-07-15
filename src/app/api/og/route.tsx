@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   return new ImageResponse(
     <div
       style={{
-        background: "linear-gradient(135deg, #3b82f6 0%, #1e40af 100%)",
+        background: "linear-gradient(135deg, #0f172a 0%, #0d9488 55%, #0e7490 100%)",
         width: "100%",
         height: "100%",
         display: "flex",

@@ -102,8 +102,9 @@ const generatePrompt = (input: string, options?: Record<string, any>) => {
       "EXECUTIVE-LEVEL FOCUS: Present as a transformational leader. Highlight company-level and industry-level impact. Emphasize board experience, M&A, fundraising, and P&L ownership. Show thought leadership through media mentions, keynotes, and publications. Use language that conveys authority and vision.",
   };
 
+  // Keys MUST match toolOptions values (tech, marketing, finance, healthcare, sales, general)
   const industryKeywords: Record<string, string> = {
-    technology:
+    tech:
       "TECH KEYWORDS: Software Development, Cloud Computing, AI/ML, DevOps, Agile, Scrum, Full-Stack, Data Science, Cybersecurity, SaaS, API, Microservices, CI/CD, Product Management, UX/UI, React, Python, AWS, Azure, Digital Transformation",
     marketing:
       "MARKETING KEYWORDS: Digital Marketing, SEO, SEM, Content Strategy, Brand Management, Marketing Analytics, Social Media Marketing, Growth Hacking, CRM, HubSpot, Google Analytics, Conversion Optimization, Campaign Management, Market Research, ABM, ROI",
@@ -111,21 +112,22 @@ const generatePrompt = (input: string, options?: Record<string, any>) => {
       "FINANCE KEYWORDS: Financial Analysis, Investment Banking, Portfolio Management, Risk Assessment, Financial Modeling, M&A, Private Equity, Compliance, Fintech, Bloomberg, Valuation, Capital Markets, Forecasting, P&L, Revenue Growth, FP&A",
     healthcare:
       "HEALTHCARE KEYWORDS: Clinical Research, Patient Care, HIPAA, EHR, Healthcare Analytics, Telemedicine, Population Health, Quality Improvement, Regulatory Compliance, Clinical Trials, Medical Devices, Pharmacovigilance, Value-Based Care",
-    education:
-      "EDUCATION KEYWORDS: Curriculum Development, EdTech, Student Engagement, Instructional Design, Learning Management Systems, Assessment, Differentiated Instruction, STEM, Professional Development, Academic Research, Online Learning",
+    sales:
+      "SALES KEYWORDS: B2B Sales, Pipeline Management, CRM, Salesforce, Quota Attainment, Enterprise Sales, Account Management, Lead Generation, Negotiation, Customer Success, ARR, SaaS Sales, Discovery Calls, Closing",
     general:
       "GENERAL KEYWORDS: Project Management, Leadership, Strategic Planning, Data Analysis, Team Building, Process Improvement, Stakeholder Management, Cross-functional Collaboration, Problem Solving, Communication, Change Management, Innovation",
   };
 
+  // Keys MUST match toolOptions focus values
   const focusStrategy: Record<string, string> = {
     keywords:
-      "KEYWORD OPTIMIZATION: Maximize search visibility. Identify and weave 20-30 relevant keywords throughout the profile naturally. Focus on job titles, skills, tools, methodologies, and industry terms that recruiters actively search. Use LinkedIn's autocomplete and job postings to identify high-value keywords.",
-    storytelling:
-      "STORYTELLING FOCUS: Create a compelling narrative arc. Use specific anecdotes, challenges overcome, and transformation stories. Make the reader feel invested in the professional journey. Balance data with human elements. Show personality while maintaining professionalism.",
+      "KEYWORD OPTIMIZATION: Maximize search visibility. Weave relevant job titles, skills, tools, and industry terms naturally. Prefer searchable phrases recruiters actually use — never keyword-stuff.",
+    engagement:
+      "ENGAGEMENT FOCUS: Write in a warm, scannable voice that invites connection. Clear hook, short paragraphs, conversational first person, and a soft CTA (message/connect). Optimize for human readers first, SEO second.",
     achievements:
-      "ACHIEVEMENT FOCUS: Lead with quantified results and measurable impact. Use the CAR formula (Challenge → Action → Result) for each achievement. Include percentages, dollar amounts, team sizes, and timeframes. Show consistent pattern of exceeding expectations.",
-    "thought-leadership":
-      "THOUGHT LEADERSHIP FOCUS: Position as an industry authority. Reference publications, speaking engagements, and unique perspectives. Use forward-looking language about industry trends. Demonstrate expertise through specific insights, not just credentials. Include original frameworks or methodologies.",
+      "ACHIEVEMENT FOCUS: Lead with real results from the user's input. Use CAR (Challenge → Action → Result) only with facts they provided. If metrics are missing, describe impact qualitatively — never invent numbers.",
+    network:
+      "NETWORKING FOCUS: Position for outreach and collaboration. Clear who they help, what problems they solve, and who should connect. Include a friendly CTA and collaboration-friendly language without sounding spammy.",
   };
 
   return `You are an expert LinkedIn personal branding strategist, recruiter-perspective optimization specialist, and career marketing consultant who has optimized 10,000+ profiles across industries. You understand LinkedIn's search algorithm, recruiter behavior patterns, and ATS (Applicant Tracking System) requirements to maximize profile visibility, engagement, and career opportunities.
@@ -134,10 +136,15 @@ const generatePrompt = (input: string, options?: Record<string, any>) => {
 Optimize the LinkedIn ${section} section for a ${experienceLevel}-level professional in the ${industry} industry, focused on ${focus}.
 
 ## SPECIFICATIONS
-**Section**: ${section.toUpperCase()} - ${sectionGuidance[section]}
-**Experience Level**: ${experienceLevel.toUpperCase()} - ${experienceGuidance[experienceLevel]}
-**Industry**: ${industry.toUpperCase()} - ${industryKeywords[industry]}
-**Optimization Focus**: ${focus.toUpperCase()} - ${focusStrategy[focus]}
+**Section**: ${section.toUpperCase()} - ${sectionGuidance[section] || sectionGuidance.full}
+**Experience Level**: ${experienceLevel.toUpperCase()} - ${experienceGuidance[experienceLevel] || experienceGuidance.mid}
+**Industry**: ${industry.toUpperCase()} - ${industryKeywords[industry] || industryKeywords.general}
+**Optimization Focus**: ${focus.toUpperCase()} - ${focusStrategy[focus] || focusStrategy.keywords}
+
+## HONESTY
+- Rewrite and improve ONLY using facts from the user's profile text.
+- Do not invent jobs, metrics, companies, degrees, or tools.
+- If metrics are missing, write strong qualitative lines instead.
 
 ## LINKEDIN OPTIMIZATION FRAMEWORK
 

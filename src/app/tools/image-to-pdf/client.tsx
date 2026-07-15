@@ -7,6 +7,7 @@ import { Sparkles, Upload, Download, Trash2, Image as ImageIcon, Loader2, CheckC
 import { toast } from 'sonner';
 import Link from 'next/link';
 import { PDFDocument } from 'pdf-lib';
+import { isImageFile } from '@/lib/image-client';
 
 interface ImageFile {
     id: string;
@@ -38,9 +39,9 @@ export default function ImageToPDFClient() {
         if (!selectedFiles) return;
         setLoading(true);
 
-        const imageFiles = Array.from(selectedFiles).filter(f => f.type.startsWith('image/'));
+        const imageFiles = Array.from(selectedFiles).filter(isImageFile);
         if (imageFiles.length === 0) {
-            toast.error('Please select image files (JPG, PNG, etc.)');
+            toast.error('Please select image files (JPG, PNG, WebP, etc.)');
             setLoading(false);
             return;
         }
@@ -57,6 +58,7 @@ export default function ImageToPDFClient() {
         setImages(prev => [...prev, ...newImages]);
         toast.success(`Added ${newImages.length} image(s)`);
         setLoading(false);
+        if (fileInputRef.current) fileInputRef.current.value = '';
     };
 
     const handleDrop = async (e: React.DragEvent) => {
@@ -66,7 +68,23 @@ export default function ImageToPDFClient() {
     };
 
     const removeImage = (id: string) => {
-        setImages(prev => prev.filter(img => img.id !== id));
+        setImages((prev) => {
+            const target = prev.find((img) => img.id === id);
+            if (target?.preview?.startsWith('blob:')) {
+                URL.revokeObjectURL(target.preview);
+            }
+            return prev.filter((img) => img.id !== id);
+        });
+    };
+
+    const clearAllImages = () => {
+        setImages((prev) => {
+            prev.forEach((img) => {
+                if (img.preview?.startsWith('blob:')) URL.revokeObjectURL(img.preview);
+            });
+            return [];
+        });
+        toast.success('Cleared all images');
     };
 
     const moveImage = (index: number, dir: -1 | 1) => {
@@ -138,7 +156,7 @@ export default function ImageToPDFClient() {
                 }
             }
 
-            const pdfBytes = await pdfDoc.save();
+            const pdfBytes = await pdfDoc.save({ useObjectStreams: false });
             const pdfArrayBuffer = new ArrayBuffer(pdfBytes.byteLength);
             new Uint8Array(pdfArrayBuffer).set(pdfBytes);
             const blob = new Blob([pdfArrayBuffer], { type: 'application/pdf' });
@@ -150,11 +168,11 @@ export default function ImageToPDFClient() {
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            setTimeout(() => URL.revokeObjectURL(url), 2500);
 
             toast.success(`PDF created with ${images.length} page(s)!`);
         } catch (error) {
-            toast.error('Failed to create PDF. Try JPG/PNG images.');
+            toast.error('Failed to create PDF. Try JPG/PNG images (avoid exotic formats).');
             console.error('Convert error:', error);
         } finally {
             setConverting(false);
@@ -252,7 +270,7 @@ export default function ImageToPDFClient() {
                             <div className="mt-6 space-y-4">
                                 <div className="flex items-center justify-between">
                                     <span className="font-bold text-foreground">{images.length} image(s) selected</span>
-                                    <Button variant="ghost" size="sm" onClick={() => setImages([])} className="text-red-500">
+                                    <Button type="button" variant="ghost" size="sm" onClick={clearAllImages} className="text-red-500">
                                         <Trash2 className="h-4 w-4 mr-1" /> Clear
                                     </Button>
                                 </div>

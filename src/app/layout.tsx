@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/google-font-preconnect */
 import type { Metadata } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Space_Grotesk, Geist_Mono } from "next/font/google";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ConsentedScripts } from "@/components/ConsentedScripts";
 import Script from "next/script";
@@ -19,12 +19,21 @@ import { adsenseConfig } from "@/config/adsense";
 import { Providers } from "@/components/Providers";
 import { TOOL_COUNT_LABEL } from "@/data/tools";
 
-const inter = Inter({
-  variable: "--font-inter",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
   display: "swap",
-  // Fewer weights = less font download / better LCP
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
+  preload: true,
+  adjustFontFallback: true,
+  fallback: ["system-ui", "arial"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["500", "600", "700"],
   preload: true,
   adjustFontFallback: true,
   fallback: ["system-ui", "arial"],
@@ -145,8 +154,8 @@ export const metadata: Metadata = {
   other: {
     language: "English",
     "content-language": "en",
-    "theme-color": "#3b82f6",
-    "msapplication-TileColor": "#3b82f6",
+    "theme-color": "#0d9488",
+    "msapplication-TileColor": "#0d9488",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
     "mobile-web-app-capable": "yes",
@@ -218,15 +227,15 @@ export default function RootLayout({
         />
 
         {/* Theme Color — required for Google Discover & PWA */}
-        <meta name="theme-color" content="#3b82f6" />
-        <meta name="msapplication-TileColor" content="#3b82f6" />
+        <meta name="theme-color" content="#0d9488" />
+        <meta name="msapplication-TileColor" content="#0d9488" />
 
 
         {/* NOTE: Page-level JSON-LD schemas are injected by each page component.
             No global schema here to avoid duplicate JSON-LD across all pages. */}
       </head>
       <body
-        className={`${inter.variable} ${geistMono.variable} font-display antialiased bg-background text-foreground`}
+        className={`${plusJakarta.variable} ${spaceGrotesk.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"

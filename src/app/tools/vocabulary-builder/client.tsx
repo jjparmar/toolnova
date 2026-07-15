@@ -78,27 +78,28 @@ const generatePrompt = (input: string, options?: Record<string, any>) => {
   const includeExtras = options?.includeExtras || "all";
 
   const levelGuidance: Record<string, string> = {
-    beginner:
-      "BEGINNER (CEFR A1-A2 / GRE 140-150): Common everyday vocabulary. Words most educated adults know but students may not. Focus on high-frequency utility words. Definitions should use simple language. Examples should reflect everyday situations.",
+    basic:
+      "BASIC (CEFR A1-A2): High-frequency everyday vocabulary. Simple definitions and everyday example sentences. Ideal for beginners building a foundation.",
     intermediate:
-      "INTERMEDIATE (CEFR B1-B2 / GRE 150-155): Academic and professional vocabulary. Words commonly found in textbooks, news articles, and formal writing. Include some SAT/GRE-level words. Definitions may use moderate complexity.",
+      "INTERMEDIATE (CEFR B1-B2 / GRE ~150): Academic and professional vocabulary found in textbooks, news, and formal writing. Clear definitions with moderate complexity.",
     advanced:
-      "ADVANCED (CEFR C1-C2 / GRE 155-165): Sophisticated vocabulary for essays, tests, and scholarly writing. GRE/GMAT/IELTS-level words. Include nuanced meanings, formal register words, and academic terminology. Definitions should be precise.",
-    expert:
-      "EXPERT (GRE 165-170 / PhD-level): Rare, erudite vocabulary for competitive exams and scholarly discourse. Obscure but useful words found in advanced academic texts, literary criticism, and professional journals. Include etymological depth.",
+      "ADVANCED (CEFR C1 / GRE 155-165): Sophisticated vocabulary for essays and exams. Precise definitions, nuanced meanings, formal register.",
+    competitive:
+      "COMPETITIVE EXAMS (GRE/GMAT/SAT/IELTS): High-frequency test words, reading-passage vocabulary, and verbal-reasoning terms. Precise definitions + exam-useful examples.",
   };
 
+  // Keys MUST match toolOptions category values
   const categoryGuidance: Record<string, string> = {
     general:
-      "GENERAL: Diverse vocabulary across topics—no domain restriction. Include a mix of abstract concepts, descriptive words, action verbs, and modifiers. Prioritize words with high utility across contexts.",
+      "GENERAL: Diverse high-utility vocabulary—abstract concepts, descriptive words, action verbs, and modifiers across topics.",
     academic:
-      "ACADEMIC: Words commonly used in scholarly writing, research papers, and textbook discussions. Focus on analytical terms (e.g., 'elucidate', 'paradigm', 'empirical'), transition vocabulary, and abstract reasoning words.",
-    competitive:
-      "COMPETITIVE EXAMS: Words frequently tested in GRE, GMAT, SAT, CAT, UPSC, SSC, and Banking exams. Prioritize words with high exam frequency. Include words commonly used in reading comprehension passages and verbal reasoning.",
-    professional:
-      "PROFESSIONAL: Business, corporate, and industry vocabulary. Words used in emails, reports, presentations, and meetings. Focus on leadership, strategy, innovation, and communication terminology.",
-    literary:
-      "LITERARY: Words found in classic and contemporary literature, creative writing, and literary criticism. Include figurative language, mood words, character descriptors, and narrative terminology.",
+      "ACADEMIC: Scholarly writing terms (e.g. elucidate, paradigm, empirical), transitions, and abstract reasoning words.",
+    business:
+      "BUSINESS: Corporate and workplace vocabulary for emails, reports, strategy, leadership, and meetings.",
+    "gre-sat":
+      "GRE/SAT: High-frequency exam words for verbal reasoning and reading comprehension. Prioritize tested items over obscure rarities.",
+    technical:
+      "TECHNICAL: STEM and tech-adjacent vocabulary (systems, data, engineering, product) with accessible definitions for non-experts.",
   };
 
   const extrasConfig: Record<string, string> = {
@@ -119,9 +120,9 @@ Generate ${wordCount} carefully curated ${level}-level vocabulary words for ${ca
 
 ## SPECIFICATIONS
 **Word Count**: ${wordCount} words
-**Level**: ${level.toUpperCase()} - ${levelGuidance[level]}
-**Category**: ${category.toUpperCase()} - ${categoryGuidance[category]}
-**Detail**: ${includeExtras.toUpperCase()} - ${extrasConfig[includeExtras]}
+**Level**: ${level.toUpperCase()} - ${levelGuidance[level] || levelGuidance.intermediate}
+**Category**: ${category.toUpperCase()} - ${categoryGuidance[category] || categoryGuidance.general}
+**Detail**: ${includeExtras.toUpperCase()} - ${extrasConfig[includeExtras] || extrasConfig.all}
 
 ## VOCABULARY GENERATION FRAMEWORK
 
@@ -129,7 +130,7 @@ Generate ${wordCount} carefully curated ${level}-level vocabulary words for ${ca
 - **Utility**: Choose words the learner will actually encounter and use
 - **Difficulty calibration**: Match ${level} level precisely — not too easy, not too hard
 - **Diversity**: Mix nouns, verbs, adjectives, and adverbs; avoid clustering one part of speech
-- **Exam relevance**: ${category === "competitive" ? "Prioritize frequently tested words from past exam papers" : "Include words commonly seen in academic and professional contexts"}
+- **Exam relevance**: ${category === "gre-sat" || level === "competitive" ? "Prioritize frequently tested exam vocabulary" : "Include words commonly seen in academic and professional contexts"}
 - **Progressive complexity**: Order words from slightly easier to harder within the set
 - **No repeats**: Each word must be unique and distinct from others in the list
 

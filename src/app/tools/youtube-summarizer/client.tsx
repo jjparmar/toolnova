@@ -98,6 +98,10 @@ ${text.substring(0, 28000)}`;
       placeholder="Paste a YouTube video link here (e.g., https://www.youtube.com/watch?v=...)"
       isNonAITool={true}
       nonAIHandler={fetchAndSummarize}
+      showFreeTierNote={true}
+      generateButtonText="Summarize video"
+      resultLabel="Summary"
+      inputLabel="YouTube URL"
       options={[]}
     />
   );

@@ -48,49 +48,47 @@ export function UtilityToolsClient({ tools }: UtilityToolsClientProps) {
         <>
             {/* Hero Section */}
             <div className="relative overflow-hidden mb-12">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-blue-50 to-indigo-50 dark:from-cyan-950/20 dark:via-blue-950/20 dark:to-indigo-950/20"></div>
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-50 via-emerald-50 to-cyan-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-cyan-950/20"></div>
+                <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl"></div>
                 
                 <div className="relative text-center py-16 px-6">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400 text-sm font-semibold mb-6 backdrop-blur-sm">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-6 backdrop-blur-sm">
                         <Wrench className="h-4 w-4" />
-                        {tools.length} Utility Tools
+                        {tools.length} Utility Tools · Browser-private
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-6 bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    <h1 className="font-heading text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6 bg-gradient-to-r from-primary via-teal-600 to-cyan-600 bg-clip-text text-transparent">
                         Utility Tools Library
                     </h1>
-                    <p className="text-slate-600 dark:text-slate-400 text-lg max-w-3xl mx-auto leading-relaxed mb-8">
-                        Handy text tools and calculators for everyday tasks. All free, always.
+                    <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed mb-8">
+                        Handy text tools and calculators for everyday tasks. Free, instant, and private.
                     </p>
 
                     {/* Search Bar */}
                     <div className="max-w-xl mx-auto">
                         <div className="relative group">
-                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
-                            <div className="relative flex items-center bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-                                <Search className="text-slate-400 h-5 w-5 ml-5" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-primary to-teal-500 rounded-2xl blur opacity-15 group-hover:opacity-25 transition-opacity duration-300"></div>
+                            <div className="relative flex items-center bg-card rounded-2xl shadow-xl border border-border overflow-hidden focus-within:border-primary/40">
+                                <Search className="text-muted-foreground h-5 w-5 ml-5 shrink-0" />
                                 <input
-                                    type="text"
+                                    type="search"
                                     placeholder="Search utility tools..."
-                                    className="flex-1 px-4 py-4 bg-transparent border-none text-foreground placeholder:text-slate-400 focus:outline-none text-base"
+                                    className="flex-1 px-4 py-4 bg-transparent border-none text-foreground placeholder:text-muted-foreground focus:outline-none text-base"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
+                                    aria-label="Search utility tools"
                                 />
-                                <button className="px-6 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all">
-                                    Search
-                                </button>
                             </div>
                         </div>
                     </div>
 
                     {/* Quick Features */}
                     <div className="flex flex-wrap justify-center gap-3 mt-8">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full text-sm font-medium text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
-                            <Zap className="h-4 w-4 text-yellow-500" /> Instant Results
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-card/80 backdrop-blur-sm rounded-full text-sm font-medium text-muted-foreground border border-border">
+                            <Zap className="h-4 w-4 text-amber-500" /> Instant Results
                         </div>
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full text-sm font-medium text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
-                            <Star className="h-4 w-4 text-cyan-500" /> Essential
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-card/80 backdrop-blur-sm rounded-full text-sm font-medium text-muted-foreground border border-border">
+                            <Star className="h-4 w-4 text-primary" /> No signup
                         </div>
                     </div>
                 </div>

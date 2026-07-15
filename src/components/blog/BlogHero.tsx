@@ -11,7 +11,7 @@ interface BlogHeroProps {
 
 export function BlogHero({ post }: BlogHeroProps) {
     return (
-        <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+        <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
                 <div className="absolute inset-0" style={{
@@ -25,10 +25,10 @@ export function BlogHero({ post }: BlogHeroProps) {
                     <div className="space-y-6">
                         {/* Category Badge */}
                         <div className="inline-flex items-center gap-2">
-                            <span className="px-4 py-1.5 bg-blue-500/20 text-blue-300 text-sm font-semibold rounded-full border border-blue-500/30">
+                            <span className="px-4 py-1.5 bg-primary/20 text-teal-200 text-sm font-semibold rounded-full border border-primary/30">
                                 {post.category}
                             </span>
-                            <span className="text-blue-300/60 text-sm">Featured Article</span>
+                            <span className="text-teal-200/60 text-sm">Featured article</span>
                         </div>
 
                         {/* Title */}

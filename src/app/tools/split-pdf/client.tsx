@@ -21,7 +21,7 @@ import {
 import { toast } from 'sonner';
 import Link from 'next/link';
 import { PDFDocument } from 'pdf-lib';
-import { downloadBytes, zipPdfFiles } from '@/lib/pdf-client';
+import { downloadBytes, isPdfFile, zipPdfFiles } from '@/lib/pdf-client';
 
 const relatedTools = [
     { name: 'Merge PDF', slug: 'merge-pdf', icon: Layers, color: 'from-red-500 to-orange-500' },
@@ -49,7 +49,7 @@ export default function SplitPDFClient() {
         if (!selectedFiles || selectedFiles.length === 0) return;
         const selectedFile = selectedFiles[0];
 
-        if (selectedFile.type !== 'application/pdf') {
+        if (!isPdfFile(selectedFile)) {
             toast.error('Please select a PDF file.');
             return;
         }
@@ -161,17 +161,7 @@ export default function SplitPDFClient() {
     };
 
     const downloadPDF = (pdfBytes: Uint8Array, filename: string) => {
-        const pdfArrayBuffer = new ArrayBuffer(pdfBytes.byteLength);
-        new Uint8Array(pdfArrayBuffer).set(pdfBytes);
-        const blob = new Blob([pdfArrayBuffer], { type: 'application/pdf' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        downloadBytes(pdfBytes, filename, 'application/pdf');
     };
 
     const clearFile = () => {
@@ -192,11 +182,12 @@ export default function SplitPDFClient() {
             <div className="max-w-[1000px] mx-auto px-4 sm:px-6 py-10">
                 {/* Back Button */}
                 <button
-                    onClick={() => router.back()}
-                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
+                    type="button"
+                    onClick={() => router.push('/tools/image-pdf-tools')}
+                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-card border border-border hover:border-primary/50 hover:bg-muted transition-all shadow-sm"
                 >
                     <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                    <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back</span>
+                    <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back to Image & PDF</span>
                 </button>
 
                 {/* Breadcrumbs */}
@@ -406,9 +397,13 @@ export default function SplitPDFClient() {
 
                                 {/* Split Button */}
                                 <Button
+                                    type="button"
                                     onClick={splitPDF}
-                                    disabled={splitting}
-                                    className="w-full h-14 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-500/30"
+                                    disabled={
+                                        splitting ||
+                                        (splitMode === 'pages' && selectedPages.size === 0)
+                                    }
+                                    className="w-full h-14 bg-gradient-to-r from-primary to-teal-600 hover:from-primary/90 hover:to-teal-600/90 text-primary-foreground font-bold rounded-2xl shadow-xl shadow-primary/25"
                                 >
                                     {splitting ? <><Loader2 className="h-5 w-5 animate-spin mr-2" /> Splitting...</> : <><Download className="h-5 w-5 mr-2" /> Split & Download</>}
                                 </Button>

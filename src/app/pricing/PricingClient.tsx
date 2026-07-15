@@ -183,7 +183,7 @@ export default function PricingClient() {
             toast.message("Payment submitted. Refresh dashboard in a minute.");
           }
         },
-        theme: { color: "#135bec" },
+        theme: { color: "#0d9488" },
       };
 
       const rzp = new window.Razorpay(options);
@@ -200,15 +200,15 @@ export default function PricingClient() {
   const proPeriod = isYearly ? "year" : "month";
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#0f1419] dark:to-background pb-20">
-      <div className="container mx-auto px-6 pt-16 md:pt-24 max-w-6xl">
+    <div className="min-h-screen bg-background pb-20">
+      <div className="container mx-auto px-6 pt-12 md:pt-16 max-w-6xl">
         {/* Hero */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6 border border-primary/15">
             <Crown className="h-4 w-4" />
             Simple pricing
           </div>
-          <h1 className="text-4xl md:text-5xl font-black tracking-tight mb-4">
+          <h1 className="font-heading text-4xl md:text-5xl font-bold tracking-tight mb-4">
             Free to start.{" "}
             <span className="text-primary">Pro when you need unlimited AI.</span>
           </h1>

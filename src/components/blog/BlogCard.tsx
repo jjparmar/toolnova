@@ -80,7 +80,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
                     {/* Author & CTA */}
                     <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
                         <div className="flex items-center gap-2 text-sm text-slate-500">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-xs font-bold">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center text-white text-xs font-bold">
                                 {post.author.split(' ').map(n => n[0]).join('')}
                             </div>
                             <span>{post.author}</span>

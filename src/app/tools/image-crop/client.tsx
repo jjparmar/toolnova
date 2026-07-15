@@ -22,7 +22,11 @@ import {
   InteractiveCropper,
   type CropRect,
 } from "@/components/image/InteractiveCropper";
-import { transformImageSrc, type RotateDeg } from "@/lib/image-client";
+import {
+  isImageFile,
+  transformImageSrc,
+  type RotateDeg,
+} from "@/lib/image-client";
 
 const relatedTools = [
   { name: "Resize Image", slug: "resize-image" },
@@ -90,7 +94,7 @@ export default function ImageCropClient() {
   };
 
   const loadFile = (f: File) => {
-    if (!f.type.startsWith("image/")) {
+    if (!isImageFile(f)) {
       toast.error("Please choose an image file");
       return;
     }

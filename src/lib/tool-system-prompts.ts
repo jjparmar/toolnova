@@ -12,7 +12,9 @@ RULES:
 - Do NOT add long intros, apologies, or "As an AI" disclaimers.
 - Be accurate; if unsure, say so briefly rather than invent facts.
 - Match requested length; full essays, quizzes, and card sets may be long.
-- Write natural, fluent English unless the user asks for another language.`;
+- Write natural, fluent English unless the user asks for another language.
+- Never invent citations, URLs, statistics, employers, or credentials the user did not provide.
+- Prefer specific, actionable content over vague filler.`;
 
 export const TOOL_SYSTEM_PROMPTS: Record<string, string> = {
   "text-summarizer": `${BASE}
@@ -33,7 +35,7 @@ Write a well-structured essay with introduction, body paragraphs with clear topi
 
   "email-writer": `${BASE}
 Role: Professional communications expert.
-Write a complete email with Subject, greeting, body, and sign-off. Match tone (formal/casual/urgent) and keep it concise and actionable.`,
+Write a complete email with Subject, greeting, body, and sign-off. Match tone and length. Be specific and actionable. No meta commentary.`,
 
   "speech-writer": `${BASE}
 Role: Speechwriter.
@@ -117,7 +119,7 @@ Break the request into a prioritized, ordered checklist with optional time estim
 
   "vocabulary-builder": `${BASE}
 Role: Vocabulary teacher.
-For each word: meaning, part of speech, example sentence, and a memory tip. Level-appropriate and accurate.`,
+For each word: meaning, part of speech, example sentence, and a memory tip. Level-appropriate and accurate. Match the requested count and extras format exactly.`,
 
   "synonym-finder": `${BASE}
 Role: Lexicographer.
@@ -137,19 +139,19 @@ Give the best single-word substitute(s) for the phrase, with a short definition 
 
   "resume-bullets": `${BASE}
 Role: Career coach / resume writer.
-Write achievement bullets: strong verb + action + metric/result when possible. Truthful tone; do not invent employers or numbers the user did not provide.`,
+Write achievement bullets: strong verb + action + result when possible. TRUTHFUL only — never invent employers, tools, or metrics. If no numbers are given, write strong qualitative impact bullets.`,
 
   "cover-letter-writer": `${BASE}
 Role: Career coach.
-Write a tailored cover letter with hook, fit, proof, and close. Professional, specific, no generic fluff. Do not invent experience.`,
+Write a tailored cover letter with hook, fit, proof, and close. Professional and specific. Never invent experience, metrics, degrees, or company facts not in the user input.`,
 
   "interview-generator": `${BASE}
 Role: Interview coach.
-Provide role-relevant questions and strong sample answer frameworks (e.g. STAR). Practical and realistic.`,
+Provide role-relevant questions and strong sample answer frameworks (e.g. STAR). Practical and realistic. Label sample answers as examples, not the user's real experience.`,
 
   "linkedin-optimizer": `${BASE}
 Role: LinkedIn profile strategist.
-Improve headline/About/experience with clear value, keywords, and scannable structure. Keep voice human and credible.`,
+Improve headline/About/experience with clear value, keywords, and scannable structure. Human voice. Never invent jobs, metrics, or credentials.`,
 
   "plagiarism-checker": `${BASE}
 Role: Writing coach / AI-pattern analyst.
@@ -194,6 +196,8 @@ export function getGenerationParams(toolSlug: string | undefined, isPremium: boo
     "caption-generator",
     "speech-writer",
     "bio-generator",
+    "paragraph-generator",
+    "email-writer",
   ].includes(slug);
   const precise = [
     "homework-solver",
@@ -201,10 +205,34 @@ export function getGenerationParams(toolSlug: string | undefined, isPremium: boo
     "mcq-generator",
     "grammar-fix",
     "plagiarism-checker",
+    "doubt-solver",
+    "concept-explainer",
+  ].includes(slug);
+  const longForm = [
+    "essay-writer",
+    "speech-writer",
+    "cover-letter-writer",
+    "notes-generator",
+    "chapter-summary",
+    "quiz-generator",
+    "mcq-generator",
+    "flashcard-maker",
+    "story-generator",
+    "revision-planner",
+    "timetable-generator",
+    "interview-generator",
+    "youtube-summarizer",
   ].includes(slug);
 
   return {
-    temperature: creative ? 0.85 : precise ? 0.35 : 0.55,
-    max_tokens: isPremium ? 4096 : 3500,
+    temperature: creative ? 0.82 : precise ? 0.32 : 0.55,
+    // Longer max for essays/notes/quizzes so free tier is still complete
+    max_tokens: isPremium
+      ? longForm
+        ? 4500
+        : 4096
+      : longForm
+        ? 4000
+        : 3200,
   };
 }

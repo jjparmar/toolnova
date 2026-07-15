@@ -56,16 +56,16 @@ export function WritingToolsClient({ tools }: WritingToolsClientProps) {
         <>
             {/* Hero Section */}
             <div className="relative overflow-hidden mb-12">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 dark:from-purple-950/20 dark:via-pink-950/20 dark:to-rose-950/20"></div>
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-50 via-emerald-50 to-cyan-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-cyan-950/20"></div>
+                <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
                 
                 <div className="relative text-center py-16 px-6">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 text-sm font-semibold mb-6 backdrop-blur-sm">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary/10 to-teal-500/10 border border-primary/20 text-primary text-sm font-semibold mb-6 backdrop-blur-sm">
                         <Pencil className="h-4 w-4" />
                         {tools.length} AI-Powered Writing Tools
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent">
+                    <h1 className="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-6 bg-gradient-to-r from-primary via-teal-600 to-cyan-600 bg-clip-text text-transparent">
                         Writing Tools Library
                     </h1>
                     <p className="text-slate-600 dark:text-slate-400 text-lg max-w-3xl mx-auto leading-relaxed mb-8">
@@ -75,7 +75,7 @@ export function WritingToolsClient({ tools }: WritingToolsClientProps) {
                     {/* Search Bar */}
                     <div className="max-w-xl mx-auto">
                         <div className="relative group">
-                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-primary to-teal-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
                             <div className="relative flex items-center bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
                                 <Search className="text-slate-400 h-5 w-5 ml-5" />
                                 <input
@@ -85,7 +85,7 @@ export function WritingToolsClient({ tools }: WritingToolsClientProps) {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
-                                <button className="px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:from-purple-600 hover:to-pink-600 transition-all">
+                                <button className="px-6 py-4 bg-gradient-to-r from-primary to-teal-600 text-white font-semibold hover:from-primary/90 hover:to-teal-600/90 transition-all">
                                     Search
                                 </button>
                             </div>
@@ -98,7 +98,7 @@ export function WritingToolsClient({ tools }: WritingToolsClientProps) {
                             <Zap className="h-4 w-4 text-yellow-500" /> Instant Results
                         </div>
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full text-sm font-medium text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
-                            <Star className="h-4 w-4 text-purple-500" /> Writer Favorite
+                            <Star className="h-4 w-4 text-primary" /> Writer Favorite
                         </div>
                     </div>
                 </div>
@@ -131,10 +131,10 @@ export function WritingToolsClient({ tools }: WritingToolsClientProps) {
                                 <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/10 dark:from-slate-800/40 dark:to-slate-900/10 backdrop-blur-sm"></div>
                                 
                                 {/* Animated gradient border */}
-                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary to-teal-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                                 
                                 {/* Decorative elements */}
-                                <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-purple-500 to-pink-500 opacity-10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                                <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-primary to-teal-600 opacity-10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
                                 
                                 {/* Badge */}
                                 {tool.badge && (
@@ -145,7 +145,7 @@ export function WritingToolsClient({ tools }: WritingToolsClientProps) {
 
                                 <div className="relative">
                                     <div className="flex items-start gap-4">
-                                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 text-white shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-teal-600 text-white shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
                                             <Icon className="h-7 w-7" strokeWidth={2} />
                                         </div>
                                         <div className="flex-1">

@@ -12,28 +12,35 @@ import {
   Copy,
   Check,
   Trash2,
+  ClipboardPaste,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
 import { toolFAQs } from "@/lib/content-database";
+import {
+  countParagraphs,
+  countSentences,
+  countWords,
+  graphemeLength,
+} from "@/lib/text-utils";
 
 function analyze(text: string) {
-  const trimmed = text.trim();
-  const words = trimmed
-    ? trimmed.split(/\s+/).filter((w) => w.length > 0)
-    : [];
-  const characters = text.length;
-  const charactersNoSpaces = text.replace(/\s+/g, "").length;
-  const sentenceCount = trimmed
-    ? trimmed.split(/[.!?]+/).filter((s) => s.trim().length > 0).length
-    : 0;
-  const paragraphCount = trimmed
-    ? trimmed.split(/\n\s*\n/).filter((p) => p.trim().length > 0).length
-    : 0;
+  const words = countWords(text);
+  const characters = graphemeLength(text);
+  const charactersNoSpaces = graphemeLength(text.replace(/\s+/g, ""));
+  const utf16Length = text.length;
+  const sentenceCount = countSentences(text);
+  const paragraphCount = countParagraphs(text);
   const lines = text.length ? text.split(/\n/).length : 0;
-  const readingTime = Math.max(words.length ? 1 : 0, Math.ceil(words.length / 200));
-  const speakingTime = Math.max(words.length ? 1 : 0, Math.ceil(words.length / 130));
+  const readingTime = Math.max(
+    words.length ? 1 : 0,
+    Math.ceil(words.length / 200),
+  );
+  const speakingTime = Math.max(
+    words.length ? 1 : 0,
+    Math.ceil(words.length / 130),
+  );
   const avgWordLen =
     words.length > 0
       ? (charactersNoSpaces / words.length).toFixed(1)
@@ -41,7 +48,6 @@ function analyze(text: string) {
   const safeSentences = Math.max(1, sentenceCount);
   const safeParagraphs = Math.max(1, paragraphCount);
 
-  // Top words (simple frequency, stopwords stripped)
   const stop = new Set(
     "the a an and or but in on at to for of is are was were be been being it this that with as by from your you we they he she i".split(
       " ",
@@ -57,7 +63,6 @@ function analyze(text: string) {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 8);
 
-  // Platform limits
   const platforms = [
     { name: "X / Twitter", limit: 280 },
     { name: "Instagram caption", limit: 2200 },
@@ -70,6 +75,7 @@ function analyze(text: string) {
     words: words.length,
     characters,
     charactersNoSpaces,
+    utf16Length,
     sentenceCount,
     paragraphCount,
     lines,
@@ -99,8 +105,9 @@ export default function WordCounterClient() {
 
   const copyStats = async () => {
     const report = `Words: ${stats.words}
-Characters: ${stats.characters}
+Characters (graphemes): ${stats.characters}
 Characters (no spaces): ${stats.charactersNoSpaces}
+UTF-16 length: ${stats.utf16Length}
 Sentences: ${stats.sentenceCount}
 Paragraphs: ${stats.paragraphCount}
 Lines: ${stats.lines}
@@ -116,19 +123,33 @@ Speaking time: ~${stats.speakingTime} min`;
     }
   };
 
+  const paste = async () => {
+    try {
+      const t = await navigator.clipboard.readText();
+      if (!t) {
+        toast.message("Clipboard is empty");
+        return;
+      }
+      setText(t);
+      toast.success("Pasted");
+    } catch {
+      toast.error("Could not read clipboard — use Ctrl+V");
+    }
+  };
+
   const statCards = [
-    { label: "Words", value: stats.words, icon: FileText, color: "text-blue-600" },
+    { label: "Words", value: stats.words, icon: FileText, color: "text-primary" },
     {
       label: "Characters",
       value: stats.characters,
       icon: Hash,
-      color: "text-indigo-600",
+      color: "text-teal-600",
     },
     {
       label: "No spaces",
       value: stats.charactersNoSpaces,
       icon: Type,
-      color: "text-violet-600",
+      color: "text-cyan-600",
     },
     {
       label: "Sentences",
@@ -140,7 +161,7 @@ Speaking time: ~${stats.speakingTime} min`;
       label: "Paragraphs",
       value: stats.paragraphCount,
       icon: BarChart2,
-      color: "text-orange-600",
+      color: "text-amber-600",
     },
     {
       label: "Read time",
@@ -153,11 +174,11 @@ Speaking time: ~${stats.speakingTime} min`;
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-8 space-y-10">
       <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-xs font-semibold">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/15">
           <BarChart2 className="h-3.5 w-3.5" />
           100% free · Instant · Private (browser-only)
         </div>
-        <h1 className="text-3xl md:text-4xl font-black tracking-tight">
+        <h1 className="font-heading text-3xl md:text-4xl font-bold tracking-tight">
           Word Counter
         </h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -170,10 +191,10 @@ Speaking time: ~${stats.speakingTime} min`;
         {statCards.map((s) => (
           <div
             key={s.label}
-            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 text-center shadow-sm"
+            className="rounded-2xl border border-border bg-card p-4 text-center shadow-sm"
           >
             <s.icon className={`h-4 w-4 mx-auto mb-2 ${s.color}`} />
-            <div className="text-2xl font-black tabular-nums text-foreground">
+            <div className="text-2xl font-bold tabular-nums text-foreground font-heading">
               {s.value}
             </div>
             <div className="text-[11px] uppercase tracking-wide text-muted-foreground font-semibold mt-1">
@@ -183,17 +204,19 @@ Speaking time: ~${stats.speakingTime} min`;
         ))}
       </div>
 
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl overflow-hidden">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/50">
-          <span className="text-sm font-semibold text-foreground">
-            Your text
-          </span>
-          <div className="flex gap-2">
+      <div className="rounded-2xl border border-border bg-card shadow-lg shadow-primary/5 overflow-hidden">
+        <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 border-b border-border bg-muted/40">
+          <span className="text-sm font-semibold text-foreground">Your text</span>
+          <div className="flex flex-wrap gap-1">
+            <Button type="button" variant="ghost" size="sm" onClick={() => void paste()}>
+              <ClipboardPaste className="h-4 w-4 mr-1" />
+              Paste
+            </Button>
             <Button
               type="button"
               variant="ghost"
               size="sm"
-              onClick={copyStats}
+              onClick={() => void copyStats()}
               disabled={!text}
             >
               {copied ? (
@@ -227,42 +250,40 @@ Speaking time: ~${stats.speakingTime} min`;
 
       {text.trim() && (
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 bg-white dark:bg-slate-900">
-            <h2 className="font-bold text-lg mb-4">Writing metrics</h2>
+          <div className="rounded-2xl border border-border p-6 bg-card">
+            <h2 className="font-heading font-bold text-lg mb-4">Writing metrics</h2>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 Avg. sentence length:{" "}
-                <strong className="text-foreground">
-                  {stats.avgSentence} words
-                </strong>
+                <strong className="text-foreground">{stats.avgSentence} words</strong>
               </li>
               <li>
                 Avg. paragraph length:{" "}
-                <strong className="text-foreground">
-                  {stats.avgParagraph} words
-                </strong>
+                <strong className="text-foreground">{stats.avgParagraph} words</strong>
               </li>
               <li>
                 Avg. word length:{" "}
-                <strong className="text-foreground">
-                  {stats.avgWordLen} chars
-                </strong>
+                <strong className="text-foreground">{stats.avgWordLen} chars</strong>
               </li>
               <li>
                 Speaking time (~130 wpm):{" "}
-                <strong className="text-foreground">
-                  ~{stats.speakingTime} min
-                </strong>
+                <strong className="text-foreground">~{stats.speakingTime} min</strong>
               </li>
               <li>
-                Lines:{" "}
-                <strong className="text-foreground">{stats.lines}</strong>
+                Lines: <strong className="text-foreground">{stats.lines}</strong>
               </li>
+              {stats.utf16Length !== stats.characters && (
+                <li className="text-xs pt-1">
+                  UTF-16 length (JS .length):{" "}
+                  <strong className="text-foreground">{stats.utf16Length}</strong>
+                  {" · "}Characters use grapheme clusters when supported (better for emoji).
+                </li>
+              )}
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 bg-white dark:bg-slate-900">
-            <h2 className="font-bold text-lg mb-4">Platform limits</h2>
+          <div className="rounded-2xl border border-border p-6 bg-card">
+            <h2 className="font-heading font-bold text-lg mb-4">Platform limits</h2>
             <ul className="space-y-3">
               {stats.platforms.map((p) => {
                 const over = stats.characters > p.limit;
@@ -284,7 +305,7 @@ Speaking time: ~${stats.speakingTime} min`;
                         {stats.characters}/{p.limit}
                       </span>
                     </div>
-                    <div className="h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                    <div className="h-1.5 rounded-full bg-muted overflow-hidden">
                       <div
                         className={`h-full rounded-full ${over ? "bg-red-500" : "bg-primary"}`}
                         style={{ width: `${pct}%` }}
@@ -297,13 +318,13 @@ Speaking time: ~${stats.speakingTime} min`;
           </div>
 
           {stats.topWords.length > 0 && (
-            <div className="md:col-span-2 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 bg-white dark:bg-slate-900">
-              <h2 className="font-bold text-lg mb-4">Frequent words</h2>
+            <div className="md:col-span-2 rounded-2xl border border-border p-6 bg-card">
+              <h2 className="font-heading font-bold text-lg mb-4">Frequent words</h2>
               <div className="flex flex-wrap gap-2">
                 {stats.topWords.map(([w, n]) => (
                   <span
                     key={w}
-                    className="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-sm font-medium"
+                    className="px-3 py-1.5 rounded-full bg-muted text-sm font-medium"
                   >
                     {w}{" "}
                     <span className="text-muted-foreground">×{n}</span>
@@ -316,7 +337,7 @@ Speaking time: ~${stats.speakingTime} min`;
       )}
 
       <div>
-        <h2 className="font-bold text-lg mb-3">Related tools</h2>
+        <h2 className="font-heading font-bold text-lg mb-3">Related tools</h2>
         <div className="flex flex-wrap gap-3 text-sm">
           {relatedTools.map((t) => (
             <Link
@@ -336,7 +357,7 @@ Speaking time: ~${stats.speakingTime} min`;
             {
               question: "Is the word counter accurate?",
               answer:
-                "Yes. It uses standard whitespace tokenization for words and common sentence punctuation for sentence counts. Results update live as you type.",
+                "Yes. It uses standard whitespace tokenization for words. Character counts prefer grapheme clusters (better for emoji) when your browser supports Intl.Segmenter.",
               category: "Usage",
             },
             {

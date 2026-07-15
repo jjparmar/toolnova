@@ -35,13 +35,13 @@ export function FAQAccordion({
         <section className={`py-12 ${className}`}>
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4">
-                        <HelpCircle className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                        <span className="text-sm font-semibold text-purple-600 dark:text-purple-400">
-                            Got Questions?
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4 border border-primary/15">
+                        <HelpCircle className="w-4 h-4 text-primary" />
+                        <span className="text-sm font-semibold text-primary">
+                            Got questions?
                         </span>
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
                         {title}
                     </h2>
                 </div>
@@ -53,7 +53,7 @@ export function FAQAccordion({
                         return (
                             <div
                                 key={index}
-                                className="bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-700"
+                                className="bg-card rounded-xl border-2 border-border overflow-hidden transition-all duration-200 hover:border-primary/40"
                                 data-speakable={isOpen ? "true" : undefined}
                             >
                                 <button
@@ -65,7 +65,7 @@ export function FAQAccordion({
                                         {faq.question}
                                     </h3>
                                     <ChevronDown
-                                        className={`w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
+                                        className={`w-5 h-5 text-primary flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
                                             }`}
                                     />
                                 </button>

@@ -38,10 +38,10 @@ export function ToolFeaturesList({
                         return (
                             <div
                                 key={index}
-                                className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-200"
+                                className="bg-card rounded-xl p-6 shadow-sm border border-border hover:shadow-lg hover:border-primary/40 transition-all duration-200"
                             >
                                 <div className="flex items-start gap-4">
-                                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center">
                                         <Icon className="w-6 h-6 text-white" />
                                     </div>
                                     <div className="flex-1">
@@ -59,15 +59,15 @@ export function ToolFeaturesList({
                 </div>
 
                 {/* Feature Summary for Schema */}
-                <div className="mt-8 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 rounded-xl p-6 border border-purple-200 dark:border-purple-800">
+                <div className="mt-8 bg-gradient-to-r from-primary/8 to-teal-500/10 dark:from-primary/15 dark:to-teal-900/20 rounded-xl p-6 border border-primary/20 dark:border-primary/30">
                     <div className="flex items-center gap-2 mb-3">
-                        <Check className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                        <span className="font-semibold text-purple-900 dark:text-purple-100">
-                            All features included for free
+                        <Check className="w-5 h-5 text-primary" />
+                        <span className="font-semibold text-foreground">
+                            Free to start · clear limits on AI
                         </span>
                     </div>
-                    <p className="text-sm text-slate-600 dark:text-slate-300">
-                        No sign-up required. Start using all features immediately with no limitations.
+                    <p className="text-sm text-muted-foreground">
+                        No sign-up required to open tools. Browser PDF/image tools stay unlimited; AI tools include free daily use.
                     </p>
                 </div>
             </div>

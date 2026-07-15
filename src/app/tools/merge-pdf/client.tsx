@@ -24,6 +24,7 @@ import {
 import { toast } from 'sonner';
 import Link from 'next/link';
 import { PDFDocument } from 'pdf-lib';
+import { isPdfFile } from '@/lib/pdf-client';
 
 interface PDFFile {
     id: string;
@@ -84,11 +85,15 @@ export default function MergePDFClient() {
         if (!selectedFiles) return;
         setLoading(true);
 
-        const pdfFiles = Array.from(selectedFiles).filter(f => f.type === 'application/pdf');
+        const pdfFiles = Array.from(selectedFiles).filter(isPdfFile);
         if (pdfFiles.length === 0) {
             toast.error('Please select PDF files only.');
             setLoading(false);
             return;
+        }
+        const skipped = selectedFiles.length - pdfFiles.length;
+        if (skipped > 0) {
+            toast.message(`Skipped ${skipped} non-PDF file(s)`);
         }
 
         const processedFiles = await Promise.all(pdfFiles.map(processFile));
@@ -207,11 +212,12 @@ export default function MergePDFClient() {
 
                 {/* Back Button */}
                 <button
-                    onClick={() => router.back()}
-                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
+                    type="button"
+                    onClick={() => router.push('/tools/image-pdf-tools')}
+                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-card border border-border hover:border-primary/50 hover:bg-muted transition-all duration-300 shadow-sm hover:shadow-md"
                 >
                     <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                    <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back</span>
+                    <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back to Image & PDF</span>
                 </button>
 
                 {/* Breadcrumbs */}

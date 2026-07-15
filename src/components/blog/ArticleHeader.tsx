@@ -57,7 +57,7 @@ export function ArticleHeader({
                     href={`/author/${author.slug}`}
                     className="flex items-center gap-3 hover:opacity-80 transition-opacity"
                 >
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center text-white font-bold text-lg">
                         {author.image}
                     </div>
                     <div>

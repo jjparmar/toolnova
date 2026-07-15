@@ -65,7 +65,7 @@ export function FeedbackWidget() {
             {!isOpen && (
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-gradient-primary text-white shadow-glow-md hover:shadow-glow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center"
+                    className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-gradient-to-br from-primary to-teal-600 text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 hover:scale-110 flex items-center justify-center"
                     aria-label="Give feedback"
                 >
                     <Star className="h-6 w-6" />
@@ -74,10 +74,10 @@ export function FeedbackWidget() {
 
             {/* Feedback Card */}
             {isOpen && (
-                <Card className="fixed bottom-6 right-6 z-50 w-96 shadow-premium-lg glass-card animate-scale-in">
+                <Card className="fixed bottom-6 right-6 z-50 w-[min(24rem,calc(100vw-2rem))] shadow-premium-lg border-border bg-card animate-scale-in">
                     <CardHeader>
                         <div className="flex items-center justify-between">
-                            <CardTitle>Share Your Feedback</CardTitle>
+                            <CardTitle className="font-heading">Share your feedback</CardTitle>
                             <Button
                                 variant="ghost"
                                 size="sm"
@@ -87,7 +87,7 @@ export function FeedbackWidget() {
                                 <X className="h-4 w-4" />
                             </Button>
                         </div>
-                        <CardDescription>Help us improve AI Study Tools</CardDescription>
+                        <CardDescription>Help us improve ToolNova</CardDescription>
                     </CardHeader>
 
                     <CardContent className="space-y-4">

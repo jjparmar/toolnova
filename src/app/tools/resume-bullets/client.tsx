@@ -139,17 +139,21 @@ Include numbers in EVERY bullet possible using:
 - Rankings: "Ranked #1 in regional performance"
 - Frequency: "Delivered 20+ presentations quarterly"
 
-${style === "impact" ? "\n**EMPHASIS**: Every single bullet MUST contain at least 2 quantifiable metrics" : ""}
+### CRITICAL HONESTY RULES
+- Use ONLY facts, tools, roles, and numbers the user provided.
+- If the user gives metrics, weave them in. If not, write strong qualitative bullets — do NOT invent percentages, revenue, headcount, or rankings.
+- Prefer "Improved checkout reliability for peak traffic" over fake "Improved conversion 35%".
+- Never invent employers, titles, tools, or certifications.
 
 ### 3. BULLET STRUCTURE FORMULA
 
-Use this proven structure:
-**[Action Verb] + [What You Did] + [How/Method] + [Quantified Result]**
+Use this structure:
+**[Action Verb] + [What You Did] + [How/Method] + [Result if known]**
 
-Examples:
-✅ "Spearheaded migration of legacy system to microservices architecture, reducing downtime by 60% and improving response times by 2.5x"
-✅ "Managed cross-functional team of 8 to launch new product line, generating $1.2M in first-quarter revenue and acquiring 3,500 customers"
-✅ "Optimized SQL database queries and implemented caching layer, decreasing page load times from 4.2s to 0.8s for 100K+ daily users"
+Examples (patterns only — adapt to the user's real input):
+✅ "Spearheaded migration of legacy checkout to microservices, cutting deployment friction and improving release reliability"
+✅ "Led a cross-functional squad to ship a new onboarding flow used by new customers in the first quarter"
+✅ "Optimized SQL queries and caching, reducing page load times for high-traffic product pages"
 
 ### 4. ATS OPTIMIZATION KEYWORDS
 
@@ -159,35 +163,32 @@ ${industry === "tech" ? "- Technical: Cloud computing, Agile, CI/CD, APIs, frame
 ### 5. CONTENT FOCUS
 
 **DO Include**:
-- Specific achievements and measurable results
-- Initiative taken and leadership shown
-- Problems solved and value created
-- Technical skills and tools used
-- Scope of responsibility (team size, budget)
-- ${style === "skills" ? "Specific technologies, methodologies, and competencies" : style === "impact" ? "Multiple metrics demonstrating business impact" : "Strong action verbs and proactive contributions"}
+- Specific achievements grounded in the user's input
+- Initiative, problem-solving, and outcomes described honestly
+- Real tools/methods the user mentioned
+- Scope only when the user stated it (team size, budget, etc.)
+- ${style === "skills" ? "Technologies and competencies the user actually listed" : style === "impact" ? "Real impact language — metrics only if user provided them" : "Strong action verbs and clear contributions"}
 
 **DON'T Include**:
-- Job responsibilities without achievements ("Responsible for...")
-- Vague statements without metrics ("Improved performance")
+- Job duties with no achievement framing ("Responsible for...")
+- Invented metrics, tools, or employers
 - Personal pronouns (I, me, my, we)
-- Buzzwords without substance (synergy, leveraged, innovative)
-- Confidential company information
+- Empty buzzwords (synergy, leveraged, innovative) without substance
+- Confidential data the user did not share
 
 ## QUALITY CHECKPOINTS
 
 Before finalizing each bullet, verify:
-1. ✓ Starts with powerful action verb (not weak verb)
-2. ✓ Contains at least 1-2 quantifiable metrics (numbers, %, $, time)
-3. ✓ Length: 15-25 words (1-2 lines maximum)
-4. ✓ Shows achievement/result, not just responsibility
-5. ✓ Includes industry-relevant keywords for ATS
-6. ✓ Specific and concrete (not vague or generic)
-7. ✓ No personal pronouns (I, me, my, we)
-8. ✓ Proper grammar and punctuation
-9. ✓ Demonstrates clear value to organization
-10. ✓ Unique from other bullets (no repetition)
-11. ✓ Style: Matches ${style} requirements
-12. ✓ ${bulletCount} distinct bullets generated
+1. ✓ Starts with a strong action verb
+2. ✓ Uses real details from the user input (no invented numbers)
+3. ✓ Length: ~12–25 words (1–2 lines)
+4. ✓ Shows result or value, not only duty
+5. ✓ Industry keywords used naturally when relevant
+6. ✓ Specific and concrete
+7. ✓ No personal pronouns
+8. ✓ Unique from other bullets
+9. ✓ Matches ${style} style
+10. ✓ Exactly ${bulletCount} bullets
 
 ## JOB/EXPERIENCE DETAILS
 ${input}

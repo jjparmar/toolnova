@@ -680,15 +680,9 @@ export function ToolsClient() {
     <div className="w-full min-h-screen bg-background">
       {/* Background Ornaments */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div
-          className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-purple-500/10 rounded-full blur-[100px] animate-pulse"
-          style={{ animationDelay: "2s" }}
-        ></div>
-        <div
-          className="absolute bottom-[10%] left-[20%] w-[25%] h-[25%] bg-emerald-500/8 rounded-full blur-[100px] animate-pulse"
-          style={{ animationDelay: "4s" }}
-        ></div>
+        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px]" />
+        <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-cyan-500/8 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[10%] left-[20%] w-[25%] h-[25%] bg-emerald-500/8 rounded-full blur-[100px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-12">
@@ -699,10 +693,8 @@ export function ToolsClient() {
             <span>All Tools. Free. No Sign-up.</span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[1.1] tracking-tight mb-6">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              AI Tools{" "}
-            </span>
+          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6">
+            <span className="text-gradient-animated">AI Tools</span>{" "}
             <span className="text-foreground">Library</span>
           </h1>
 
@@ -715,11 +707,11 @@ export function ToolsClient() {
           <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-12">
             {heroStats.map((stat) => (
               <div key={stat.label} className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/10">
                   <stat.icon className="h-5 w-5 text-primary" />
                 </div>
                 <div className="text-left">
-                  <div className="text-xl font-black text-foreground leading-tight">
+                  <div className="text-xl font-bold font-heading text-foreground leading-tight">
                     {stat.value}
                   </div>
                   <div className="text-xs text-muted-foreground font-medium">
@@ -733,26 +725,27 @@ export function ToolsClient() {
           {/* Search Bar */}
           <div className="max-w-3xl mx-auto mb-12">
             <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-2xl opacity-20 group-hover:opacity-40 transition duration-500 blur-lg"></div>
-              <div className="relative flex items-center bg-background/80 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl transition-all duration-300">
-                <Search className="text-muted-foreground h-6 w-6 ml-6 mr-4 shrink-0 transition-colors group-hover:text-primary" />
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary via-teal-500 to-cyan-500 rounded-2xl opacity-15 group-hover:opacity-35 transition duration-500 blur-lg" />
+              <div className="relative flex items-center bg-card/90 backdrop-blur-xl rounded-2xl border border-border shadow-lg shadow-primary/5 transition-all duration-300 focus-within:border-primary/40 focus-within:shadow-primary/10">
+                <Search className="text-muted-foreground h-5 w-5 ml-5 mr-3 shrink-0 transition-colors group-focus-within:text-primary" />
                 <input
                   ref={searchRef}
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search tools... (e.g. 'essay', 'pdf', 'resume')"
-                  className="flex-1 py-5 bg-transparent border-none text-foreground placeholder:text-muted-foreground/50 focus:outline-none text-lg font-medium tracking-wide"
+                  className="flex-1 py-4 md:py-5 bg-transparent border-none text-foreground placeholder:text-muted-foreground/50 focus:outline-none text-base md:text-lg font-medium"
                 />
                 {searchQuery ? (
                   <button
+                    type="button"
                     onClick={() => setSearchQuery("")}
-                    className="mr-2 p-2 rounded-xl hover:bg-muted/80 text-muted-foreground hover:text-foreground transition-all duration-200"
+                    className="mr-2 p-2 rounded-xl hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
                   >
                     <X className="h-5 w-5" />
                   </button>
                 ) : (
-                  <div className="hidden md:flex items-center mr-6 px-3 py-1.5 rounded-lg bg-muted/40 text-muted-foreground/60 text-xs font-mono border border-border/30">
+                  <div className="hidden md:flex items-center mr-5 px-2.5 py-1 rounded-lg bg-muted/60 text-muted-foreground text-xs font-mono border border-border">
                     Ctrl + K
                   </div>
                 )}
@@ -761,32 +754,37 @@ export function ToolsClient() {
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap justify-center gap-3 mb-16">
+          <div className="flex flex-wrap justify-center gap-2.5 mb-14">
             <button
+              type="button"
               onClick={() => setActiveCategory("All")}
-              className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${activeCategory === "All"
-                ? "bg-foreground text-background shadow-xl scale-105"
-                : "bg-background/50 backdrop-blur-sm text-muted-foreground border border-border/50 hover:text-foreground hover:border-foreground/20 hover:bg-background/80"
-                }`}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                activeCategory === "All"
+                  ? "bg-primary text-primary-foreground shadow-md shadow-primary/25"
+                  : "bg-card text-muted-foreground border border-border hover:text-foreground hover:border-primary/30"
+              }`}
             >
               All Tools ({ALL_TOOLS.length})
             </button>
             {categories.map((cat) => (
               <button
+                type="button"
                 key={cat.name}
                 onClick={() => setActiveCategory(cat.name)}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${activeCategory === cat.name
-                  ? `bg-gradient-to-r ${cat.gradient} text-white shadow-lg shadow-purple-500/20 scale-105 ring-2 ring-offset-2 ring-offset-background ring-transparent`
-                  : "bg-background/50 backdrop-blur-sm text-muted-foreground border border-border/50 hover:text-foreground hover:border-foreground/20 hover:bg-background/80"
-                  }`}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  activeCategory === cat.name
+                    ? `bg-gradient-to-r ${cat.gradient} text-white shadow-md`
+                    : "bg-card text-muted-foreground border border-border hover:text-foreground hover:border-primary/30"
+                }`}
               >
-                <cat.icon className={`h-4 w-4 ${activeCategory === cat.name ? "text-white" : ""}`} />
+                <cat.icon className="h-4 w-4" />
                 <span>{cat.name.replace(" Tools", "")}</span>
                 <span
-                  className={`text-[10px] font-black px-1.5 py-0.5 rounded-full ml-1 ${activeCategory === cat.name
-                    ? "bg-white/20 text-white"
-                    : "bg-muted text-muted-foreground"
-                    }`}
+                  className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                    activeCategory === cat.name
+                      ? "bg-white/20 text-white"
+                      : "bg-muted text-muted-foreground"
+                  }`}
                 >
                   {toolCountByCategory[cat.name] || 0}
                 </span>
@@ -799,10 +797,10 @@ export function ToolsClient() {
         {!searchQuery && activeCategory === "All" && (
           <div className="mb-16 animate-fade-in">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center">
                 <Award className="h-4 w-4 text-white" />
               </div>
-              <h2 className="text-2xl font-black text-foreground">
+              <h2 className="font-heading text-2xl font-bold text-foreground">
                 Popular Tools
               </h2>
             </div>
@@ -836,7 +834,7 @@ export function ToolsClient() {
         {/* Tools Grid */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-foreground">
+            <h2 className="font-heading text-xl font-bold text-foreground">
               {activeCategory === "All" ? "All Tools" : activeCategory}
               <span className="text-muted-foreground font-medium ml-2 text-base">
                 ({filteredTools.length})
@@ -850,34 +848,34 @@ export function ToolsClient() {
                   <div key={tool.slug} className="h-full">
                     <Link
                       href={`/tools/${tool.slug}`}
-                      className="group glass-card hover-float block h-full"
+                      className="group flex flex-col h-full rounded-2xl bg-card border border-border p-6 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300"
                     >
                       <div className="flex items-start justify-between mb-5">
                         <div
-                          className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${tool.gradient} flex items-center justify-center text-white shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}
+                          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${tool.gradient} flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300`}
                         >
-                          <tool.icon className="h-7 w-7" strokeWidth={1.5} />
+                          <tool.icon className="h-6 w-6" strokeWidth={1.5} />
                         </div>
                         <div className="flex items-center gap-2">
                           {tool.isNew && (
-                            <span className="px-2.5 py-1 rounded-full bg-green-500/15 text-green-600 dark:text-green-400 text-[10px] font-black uppercase tracking-wider">
+                            <span className="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
                               New
                             </span>
                           )}
-                          <span className="px-3 py-1.5 rounded-full bg-muted text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                          <span className="px-2.5 py-1 rounded-full bg-muted text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                             {tool.category.replace(" Tools", "")}
                           </span>
                         </div>
                       </div>
 
-                      <h3 className="text-xl font-black text-foreground mb-2 group-hover:text-primary transition-colors">
+                      <h3 className="font-heading text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                         {tool.name}
                       </h3>
-                      <p className="text-muted-foreground text-[15px] leading-relaxed mb-6 line-clamp-2">
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-6 line-clamp-2 flex-1">
                         {tool.description}
                       </p>
 
-                      <div className="flex items-center gap-2 text-primary font-bold text-sm group-hover:gap-3 transition-all mt-auto pt-4">
+                      <div className="flex items-center gap-2 text-primary font-semibold text-sm group-hover:gap-3 transition-all pt-3 border-t border-border">
                         <span>Open Tool</span>
                         <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -889,18 +887,19 @@ export function ToolsClient() {
                 <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
                   <Search className="h-10 w-10 text-muted-foreground" />
                 </div>
-                <h3 className="text-2xl font-black text-foreground mb-2">
+                <h3 className="font-heading text-2xl font-bold text-foreground mb-2">
                   No tools found
                 </h3>
                 <p className="text-muted-foreground mb-6">
                   Try a different search term or browse by category.
                 </p>
                 <button
+                  type="button"
                   onClick={() => {
                     setSearchQuery("");
                     setActiveCategory("All");
                   }}
-                  className="px-6 py-3 rounded-2xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity"
+                  className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity"
                 >
                   Show All Tools
                 </button>
@@ -914,7 +913,7 @@ export function ToolsClient() {
           <div className="mb-24 animate-fade-in">
             <div className="flex items-center gap-3 mb-8 justify-center">
               <Filter className="h-6 w-6 text-primary" />
-              <h2 className="text-3xl font-black text-foreground">
+              <h2 className="font-heading text-3xl font-bold text-foreground">
                 Browse by Category
               </h2>
             </div>
@@ -923,14 +922,14 @@ export function ToolsClient() {
                 <Link
                   key={category.slug}
                   href={`/tools/${category.slug}`}
-                  className="group glass-card text-center hover-float"
+                  className="group text-center rounded-2xl bg-card border border-border p-6 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300"
                 >
                   <div
-                    className={`w-16 h-16 mx-auto mb-5 rounded-2xl bg-gradient-to-br ${category.gradient} flex items-center justify-center text-white shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
+                    className={`w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br ${category.gradient} flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300`}
                   >
-                    <category.icon className="h-8 w-8" />
+                    <category.icon className="h-7 w-7" />
                   </div>
-                  <h4 className="font-black text-foreground mb-1.5 text-lg">
+                  <h4 className="font-heading font-bold text-foreground mb-1.5 text-lg">
                     {category.name}
                   </h4>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-3">
@@ -947,9 +946,9 @@ export function ToolsClient() {
         )}
 
         {/* SEO Text Block for AdSense / Thin Content Prevention */}
-        <section className="mt-24 py-12 border-t border-slate-200 dark:border-slate-800">
-          <div className="max-w-4xl mx-auto prose prose-slate dark:prose-invert">
-            <h2 className="text-2xl font-bold mb-4">About ToolNova's Free AI Tool Library</h2>
+        <section className="mt-24 py-12 border-t border-border">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="font-heading text-2xl font-bold mb-4 text-foreground">About ToolNova&apos;s Free AI Tool Library</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
               Welcome to the internet's most comprehensive collection of browser-based productivity utilities. Our library features over 50 specialized tools designed to streamline the workflows of students, educators, writers, and digital professionals. Unlike complex enterprise software suites that require expensive subscriptions and steep learning curves, ToolNova offers specialized, single-purpose micro-applications that solve immediate problems instantly.
             </p>

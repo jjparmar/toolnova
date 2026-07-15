@@ -1,18 +1,19 @@
-﻿export default function Loading() {
-    return (
-        <div className="w-full min-h-screen animate-pulse">
-            <div className="bg-gradient-to-br from-primary/80 via-blue-600/80 to-indigo-700/80 h-[500px]" />
-            <div className="bg-[#f8f9fb] py-24">
-                <div className="max-w-[1200px] mx-auto px-6">
-                    <div className="h-8 w-32 bg-slate-200 rounded-full mx-auto mb-4" />
-                    <div className="h-12 w-64 bg-slate-200 rounded-lg mx-auto mb-16" />
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {[1, 2, 3].map(i => (
-                            <div key={i} className="h-64 bg-white rounded-2xl shadow-lg" />
-                        ))}
-                    </div>
-                </div>
-            </div>
+export default function Loading() {
+  return (
+    <div className="w-full min-h-[60vh] animate-pulse bg-background">
+      <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-teal-950 h-[280px] md:h-[360px]" />
+      <div className="max-w-[1200px] mx-auto px-6 py-16">
+        <div className="h-6 w-28 bg-muted rounded-full mx-auto mb-4" />
+        <div className="h-10 w-56 bg-muted rounded-lg mx-auto mb-12" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="h-52 bg-card border border-border rounded-2xl shadow-sm"
+            />
+          ))}
         </div>
-    );
+      </div>
+    </div>
+  );
 }

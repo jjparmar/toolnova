@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, Twitter, Github, Linkedin } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { TOOL_COUNT, TOOL_COUNT_LABEL } from "@/data/tools";
+import { TOOL_COUNT_LABEL } from "@/data/tools";
 
 const writingTools = [
   { name: "Grammar Checker", href: "/tools/grammar-fix" },
@@ -28,16 +28,21 @@ const studyCareerTools = [
   { name: "Image Compressor", href: "/tools/image-compressor" },
 ];
 
+const socialLinkClass =
+  "h-10 w-10 flex items-center justify-center rounded-xl bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300";
+
+const footerLinkClass =
+  "text-muted-foreground hover:text-primary transition-colors text-sm";
+
 export function Footer() {
   return (
-    <footer className="w-full bg-gradient-to-b from-slate-50 to-white dark:from-[#0f1419] dark:to-background border-t border-slate-100 dark:border-slate-800 mt-auto">
+    <footer className="w-full mt-auto border-t border-border bg-gradient-to-b from-muted/40 to-background">
       <div className="mx-auto max-w-[1200px] px-6 py-16">
-        {/* Top Section */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-12">
-          {/* Brand & Description */}
+          {/* Brand */}
           <div className="col-span-2 md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl shadow-lg shadow-primary/25">
+              <div className="relative h-10 w-10 overflow-hidden rounded-xl shadow-md shadow-primary/20 ring-1 ring-primary/15">
                 <Image
                   src="/logo.webp"
                   alt=""
@@ -46,8 +51,8 @@ export function Footer() {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <span className="text-xl font-bold text-foreground tracking-tight">
-                ToolNova
+              <span className="font-heading text-xl font-bold text-foreground tracking-tight">
+                Tool<span className="text-primary">Nova</span>
               </span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-4">
@@ -65,7 +70,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow ToolNova on Twitter/X"
-                className="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-muted-foreground hover:bg-primary hover:text-white transition-all duration-300"
+                className={socialLinkClass}
               >
                 <Twitter className="h-5 w-5" />
               </a>
@@ -74,7 +79,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="ToolNova on GitHub"
-                className="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-muted-foreground hover:bg-primary hover:text-white transition-all duration-300"
+                className={socialLinkClass}
               >
                 <Github className="h-5 w-5" />
               </a>
@@ -83,14 +88,14 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="ToolNova on LinkedIn"
-                className="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-muted-foreground hover:bg-primary hover:text-white transition-all duration-300"
+                className={socialLinkClass}
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href={`mailto:${siteConfig.author.email}`}
                 aria-label="Email ToolNova support"
-                className="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-muted-foreground hover:bg-primary hover:text-white transition-all duration-300"
+                className={socialLinkClass}
               >
                 <Mail className="h-5 w-5" />
               </a>
@@ -99,16 +104,13 @@ export function Footer() {
 
           {/* Writing Tools */}
           <div className="col-span-1">
-            <h4 className="text-foreground font-bold mb-4 text-sm uppercase tracking-wider">
+            <h4 className="font-heading text-foreground font-bold mb-4 text-sm uppercase tracking-wider">
               Writing Tools
             </h4>
             <ul className="space-y-2.5">
               {writingTools.map((tool) => (
                 <li key={tool.href}>
-                  <Link
-                    href={tool.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  >
+                  <Link href={tool.href} className={footerLinkClass}>
                     {tool.name}
                   </Link>
                 </li>
@@ -124,18 +126,15 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Study & Career Tools */}
+          {/* Study & Career */}
           <div className="col-span-1">
-            <h4 className="text-foreground font-bold mb-4 text-sm uppercase tracking-wider">
+            <h4 className="font-heading text-foreground font-bold mb-4 text-sm uppercase tracking-wider">
               Study &amp; Career
             </h4>
             <ul className="space-y-2.5">
               {studyCareerTools.map((tool) => (
                 <li key={tool.href}>
-                  <Link
-                    href={tool.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  >
+                  <Link href={tool.href} className={footerLinkClass}>
                     {tool.name}
                   </Link>
                 </li>
@@ -151,127 +150,52 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Company + Legal combined */}
+          {/* Company + Legal */}
           <div className="col-span-2 md:col-span-1">
-            <h4 className="text-foreground font-bold mb-4 text-sm uppercase tracking-wider">
+            <h4 className="font-heading text-foreground font-bold mb-4 text-sm uppercase tracking-wider">
               Company
             </h4>
             <ul className="space-y-2.5 mb-8">
-              <li>
-                <Link
-                  href="/"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tools"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  All Tools
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/pricing"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Contact
-                </Link>
-              </li>
+              {[
+                { href: "/", label: "Home" },
+                { href: "/tools", label: "All Tools" },
+                { href: "/blog", label: "Blog" },
+                { href: "/pricing", label: "Pricing" },
+                { href: "/about", label: "About Us" },
+                { href: "/contact", label: "Contact" },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className={footerLinkClass}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
-            <h4 className="text-foreground font-bold mb-4 text-sm uppercase tracking-wider">
+            <h4 className="font-heading text-foreground font-bold mb-4 text-sm uppercase tracking-wider">
               Legal
             </h4>
             <ul className="space-y-2.5">
-              <li>
-                <Link
-                  href="/privacy"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/terms"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/editorial-policy"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Editorial Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/disclaimer"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Disclaimer
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cookie-policy"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Cookie Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/advertising"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Advertising Disclosure
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/refund"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  Refund Policy
-                </Link>
-              </li>
+              {[
+                { href: "/privacy", label: "Privacy Policy" },
+                { href: "/terms", label: "Terms of Service" },
+                { href: "/editorial-policy", label: "Editorial Policy" },
+                { href: "/disclaimer", label: "Disclaimer" },
+                { href: "/cookie-policy", label: "Cookie Policy" },
+                { href: "/advertising", label: "Advertising Disclosure" },
+                { href: "/refund", label: "Refund Policy" },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className={footerLinkClass}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Tool Categories Bar */}
-        <div className="border-t border-slate-100 dark:border-slate-800 pt-8 pb-6">
+        {/* Categories */}
+        <div className="border-t border-border pt-8 pb-6">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
             Tool Categories
           </p>
@@ -301,62 +225,28 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-slate-100 dark:border-slate-800 pt-6">
+        {/* Bottom */}
+        <div className="border-t border-border pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-muted-foreground text-sm">
-              © 2026 ToolNova. All rights reserved. ·
-              Free AI Tools for Students &amp; Professionals · Founded in Singapore
+            <div className="text-muted-foreground text-sm text-center md:text-left">
+              © 2026 ToolNova. All rights reserved. · Free AI Tools for Students
+              &amp; Professionals · Founded in Singapore
             </div>
-            <div className="flex gap-6 flex-wrap justify-center">
-              <Link
-                href="/privacy"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm"
-              >
-                Privacy
-              </Link>
-              <Link
-                href="/terms"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm"
-              >
-                Terms
-              </Link>
-              <Link
-                href="/editorial-policy"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm"
-              >
-                Editorial Policy
-              </Link>
-              <Link
-                href="/advertising"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm"
-              >
-                Advertising
-              </Link>
-              <Link
-                href="/pricing"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm"
-              >
-                Pricing
-              </Link>
-              <Link
-                href="/about"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm"
-              >
-                About
-              </Link>
-              <Link
-                href="/sitemap-page"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm"
-              >
-                Sitemap
-              </Link>
-              <Link
-                href="/contact"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm"
-              >
-                Contact
-              </Link>
+            <div className="flex gap-5 flex-wrap justify-center">
+              {[
+                { href: "/privacy", label: "Privacy" },
+                { href: "/terms", label: "Terms" },
+                { href: "/editorial-policy", label: "Editorial" },
+                { href: "/advertising", label: "Advertising" },
+                { href: "/pricing", label: "Pricing" },
+                { href: "/about", label: "About" },
+                { href: "/sitemap-page", label: "Sitemap" },
+                { href: "/contact", label: "Contact" },
+              ].map((item) => (
+                <Link key={item.href} href={item.href} className={footerLinkClass}>
+                  {item.label}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

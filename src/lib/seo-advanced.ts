@@ -541,8 +541,8 @@ export function generateDiscoverMetaTags(
     // Swipeable for mobile
     "mobile-web-app-capable": "yes",
     // Theme color
-    "theme-color": "#3b82f6",
-    "msapplication-navbutton-color": "#3b82f6",
+    "theme-color": "#0d9488",
+    "msapplication-navbutton-color": "#0d9488",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
   };
 }

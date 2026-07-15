@@ -59,11 +59,11 @@ export function CookieConsent() {
             role="dialog"
             aria-labelledby="cookie-consent-title"
             aria-describedby="cookie-consent-desc"
-            className="fixed bottom-0 left-0 w-full bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-50 p-4 md:p-6 animate-slide-up"
+            className="fixed bottom-0 left-0 w-full bg-card/95 backdrop-blur-xl border-t border-border shadow-[0_-10px_40px_hsl(var(--foreground)/0.08)] z-50 p-4 md:p-6 animate-slide-up"
         >
             <div className="container mx-auto max-w-6xl flex flex-col md:flex-row items-center justify-between gap-6 relative">
                 <div className="flex-1">
-                    <h3 id="cookie-consent-title" className="font-bold text-lg mb-1">
+                    <h3 id="cookie-consent-title" className="font-heading font-bold text-lg mb-1 text-foreground">
                         We value your privacy
                     </h3>
                     <p
@@ -105,7 +105,7 @@ export function CookieConsent() {
                 <button
                     type="button"
                     onClick={dismissConsent}
-                    className="absolute top-3 right-3 md:static text-muted-foreground p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                    className="absolute top-3 right-3 md:static text-muted-foreground p-2 rounded-lg hover:bg-muted"
                     aria-label="Close cookie notice (essential cookies only)"
                 >
                     <X className="h-4 w-4" />

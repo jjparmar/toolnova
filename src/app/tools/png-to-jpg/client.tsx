@@ -21,6 +21,7 @@ import {
   downloadBlob,
   formatBytes,
   imageToBlob,
+  isImageFile,
   readFileAsDataURL,
 } from "@/lib/image-client";
 
@@ -51,7 +52,7 @@ export default function PNGtoJPGClient() {
 
   const addFiles = async (list: FileList | null) => {
     if (!list?.length) return;
-    const files = Array.from(list).filter((f) => f.type.startsWith("image/"));
+    const files = Array.from(list).filter(isImageFile);
     if (!files.length) {
       toast.error("Please select image files");
       return;

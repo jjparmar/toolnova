@@ -20,7 +20,7 @@ export default async function DashboardPage() {
   const user = session?.user;
 
   if (!user || !user.email) {
-    redirect("/login");
+    redirect("/login?callbackUrl=/dashboard");
   }
 
   const startOfToday = new Date();
@@ -44,7 +44,7 @@ export default async function DashboardPage() {
             </div>
             <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">No history yet</h3>
             <p className="text-slate-500 dark:text-slate-400 mb-6">Start using our AI tools to see your history here.</p>
-            <Link href="/tools" className="inline-flex items-center justify-center rounded-lg bg-purple-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-700">Explore Tools</Link>
+            <Link href="/tools" className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Explore Tools</Link>
           </div>
         </div>
       </div>
@@ -90,7 +90,7 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {/* Plan Card */}
           <div className={`rounded-2xl p-5 border ${isPremium
-            ? "bg-gradient-to-br from-indigo-600 to-purple-600 border-transparent text-white"
+            ? "bg-gradient-to-br from-primary to-teal-600 border-transparent text-white"
             : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800"}`}>
             <div className="flex items-center gap-3 mb-3">
               <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${isPremium ? "bg-white/20" : "bg-indigo-50 dark:bg-indigo-900/30"}`}>
@@ -152,8 +152,8 @@ export default async function DashboardPage() {
           {/* Account */}
           <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
             <div className="flex items-center gap-3 mb-3">
-              <div className="h-10 w-10 rounded-xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center">
-                <User className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+              <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <User className="h-5 w-5 text-primary" />
               </div>
               <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">
                 Account
@@ -171,7 +171,7 @@ export default async function DashboardPage() {
         {/* Generation History */}
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-purple-500" />
+            <Sparkles className="h-5 w-5 text-primary" />
             Recent Generations
           </h2>
           <Link
@@ -193,7 +193,7 @@ export default async function DashboardPage() {
             </p>
             <Link
               href="/tools"
-              className="inline-flex items-center justify-center rounded-lg bg-purple-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-700"
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
               Explore Tools
             </Link>
@@ -223,7 +223,7 @@ export default async function DashboardPage() {
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="inline-flex items-center rounded-full bg-purple-50 dark:bg-purple-500/10 px-2.5 py-0.5 text-xs font-semibold text-purple-700 dark:text-purple-400">
+                          <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
                             {item.toolSlug.replace(/-/g, " ").toUpperCase()}
                           </span>
                           <span className="flex items-center text-xs text-slate-500 dark:text-slate-400">
@@ -258,7 +258,7 @@ export default async function DashboardPage() {
 
         {/* Upgrade CTA for free users */}
         {!isPremium && (
-          <div className="mt-8 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-8 text-center text-white">
+          <div className="mt-8 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 p-8 text-center text-white">
             <Crown className="h-10 w-10 mx-auto mb-3 text-yellow-300" />
             <h3 className="text-xl font-black mb-2">Unlock Unlimited Generations</h3>
             <p className="text-white/80 mb-5 max-w-md mx-auto">

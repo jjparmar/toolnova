@@ -70,7 +70,7 @@ export function GlobalSearch() {
                 type="button"
                 onClick={() => setOpen(true)}
                 aria-label="Search tools (Ctrl+K)"
-                className="flex items-center gap-2 px-3 py-2 sm:px-3.5 text-sm text-muted-foreground hover:text-foreground bg-background/60 hover:bg-muted/40 rounded-full transition-colors duration-200 border border-border/60 focus:outline-none focus:ring-2 focus:ring-primary/15 w-full sm:w-auto justify-between sm:justify-start"
+                className="flex items-center gap-2 px-3 py-2 sm:px-3.5 text-sm text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-xl transition-colors duration-200 border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 w-full sm:w-auto justify-between sm:justify-start"
             >
                 <span className="flex items-center gap-2">
                     <Search className="h-4 w-4 shrink-0" />

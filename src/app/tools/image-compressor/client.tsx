@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Upload, Download, Trash2, Image as ImageIcon, Loader2, ArrowLeft, Shield, Zap, Sparkles, Layers, Star, FileText } from 'lucide-react';
 import { toast } from 'sonner';
 import Link from 'next/link';
+import { isImageFile } from '@/lib/image-client';
 
 const relatedTools = [
     { name: 'Crop Image', slug: 'image-crop', icon: ImageIcon, color: 'from-violet-500 to-purple-500' },
@@ -40,7 +41,7 @@ export default function ImageCompressorClient() {
     const handleFileSelect = (files: FileList | null) => {
         if (!files || files.length === 0) return;
         const file = files[0];
-        if (!file.type.startsWith('image/')) {
+        if (!isImageFile(file)) {
             toast.error('Please select an image file');
             return;
         }

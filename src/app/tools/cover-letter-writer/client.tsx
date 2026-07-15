@@ -215,23 +215,24 @@ Write a persuasive ${experience}-level cover letter for a ${jobType} position wi
 - Demonstrate you've done homework on company
 - Frame experience as solution to their needs
 
+## HONESTY (CRITICAL)
+- Use ONLY details the candidate provided in the input.
+- Do NOT invent employers, degrees, metrics, tools, or company facts.
+- If metrics are missing, describe impact qualitatively.
+- If company/role details are thin, keep "why this company" general but professional — do not invent product lines or values.
+
 ## QUALITY CHECKPOINTS
 
 Before finalizing, verify:
-1. ✓ Length: 300-400 words (3-4 paragraphs)
-2. ✓ Structure: Opening → Qualifications → Why Company → Closing
-3. ✓ Experience level: Appropriate for ${experience} position
-4. ✓ Job type: Aligns with ${jobType} culture and expectations
-5. ✓ Tone: Consistently ${tone} throughout
-6. ✓ Metrics: 2-3 quantified achievements included
-7. ✓ Company research: Specific references to company/role
-8. ✓ Keywords: Job description language incorporated naturally
-9. ✓ No clichés: Original language, not templated phrases
-10. ✓ Call-to-action: Clear next steps mentioned
-11. ✓ Zero errors: Perfect grammar and spelling
-12. ✓ Authenticity: Genuine voice, not robotic
-13. ✓ Value proposition: Clear "why hire me" answer
-14. ✓ Not resume repeat: Provides narrative context
+1. ✓ Length: ~300-400 words (3-4 paragraphs)
+2. ✓ Structure: Opening → Qualifications → Why company → Closing
+3. ✓ Experience level fits ${experience}
+4. ✓ Tone is consistently ${tone}
+5. ✓ Metrics only if user provided them
+6. ✓ No clichés or fabricated claims
+7. ✓ Clear call-to-action
+8. ✓ Perfect grammar
+9. ✓ Distinct from a resume dump
 
 ## JOB & CANDIDATE DETAILS
 ${input}
@@ -244,9 +245,9 @@ Provide the complete cover letter in standard business letter format:
 
 [Paragraph 1: Opening hook]
 
-[Paragraph 2: Core qualifications with metrics]
+[Paragraph 2: Core qualifications (honest, specific)]
 
-[Paragraph 3: Why this company]
+[Paragraph 3: Why this company / role]
 
 [Paragraph 4: Closing with CTA]
 

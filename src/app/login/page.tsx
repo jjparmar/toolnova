@@ -6,6 +6,9 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Sparkles, Shield, Zap, ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
+import { DAILY_FREE_LIMIT } from "@/lib/limits";
+import { TOOL_COUNT_LABEL } from "@/data/tools";
+import { getClientCallbackUrl } from "@/lib/auth-callback";
 
 export default function LoginPage() {
     const [loading, setLoading] = useState(false);
@@ -13,28 +16,29 @@ export default function LoginPage() {
     const handleGoogleLogin = async () => {
         setLoading(true);
         try {
-            await signIn("google", { callbackUrl: "/dashboard" });
-        } catch (error) {
+            const callbackUrl = getClientCallbackUrl("/dashboard");
+            await signIn("google", { callbackUrl });
+        } catch {
             toast.error("Failed to login with Google");
             setLoading(false);
         }
     };
 
     const benefits = [
-        { icon: Zap, text: "5 Free AI generations daily" },
+        { icon: Zap, text: `${DAILY_FREE_LIMIT} free AI generations daily` },
         { icon: Shield, text: "Your data stays private" },
-        { icon: Sparkles, text: "Access 30+ AI-powered tools" },
+        { icon: Sparkles, text: `Access ${TOOL_COUNT_LABEL} tools` },
     ];
 
     return (
         <div className="min-h-screen w-full flex flex-col lg:flex-row">
             {/* Left Panel - Branding */}
-            <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-primary via-blue-600 to-indigo-700 overflow-hidden">
+            <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 overflow-hidden">
                 {/* Animated Background Elements */}
                 <div className="absolute inset-0">
-                    <div className="absolute top-20 left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-                    <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-                    <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-indigo-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+                    <div className="absolute top-20 left-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-20 right-20 w-96 h-96 bg-teal-400/15 rounded-full blur-3xl"></div>
+                    <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-cyan-400/10 rounded-full blur-3xl"></div>
                 </div>
 
                 {/* Grid Pattern Overlay */}
@@ -51,15 +55,15 @@ export default function LoginPage() {
                         <span className="text-2xl font-black tracking-tight">ToolNova</span>
                     </Link>
 
-                    <h1 className="text-4xl lg:text-5xl font-black leading-tight mb-6">
+                    <h1 className="font-heading text-4xl lg:text-5xl font-bold leading-tight mb-6">
                         Unlock the Power of
-                        <span className="block mt-2 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
+                        <span className="block mt-2 bg-gradient-to-r from-teal-200 via-emerald-100 to-cyan-200 bg-clip-text text-transparent">
                             ToolNova
                         </span>
                     </h1>
 
                     <p className="text-lg text-white/80 leading-relaxed mb-10 max-w-md">
-                        Join thousands of students using AI to write better essays, solve problems, and study smarter.
+                        Sign in for extra free AI uses, history, and Pro upgrades — or keep using tools without an account.
                     </p>
 
                     {/* Benefits */}
@@ -94,22 +98,24 @@ export default function LoginPage() {
             </div>
 
             {/* Right Panel - Login Form */}
-            <div className="flex-1 flex items-center justify-center p-6 sm:p-10 bg-gradient-to-b from-slate-50 to-white dark:from-[#0f1419] dark:to-background">
+            <div className="flex-1 flex items-center justify-center p-6 sm:p-10 bg-background">
                 <div className="w-full max-w-md">
                     {/* Mobile Logo */}
                     <div className="lg:hidden text-center mb-10">
                         <Link href="/" className="inline-flex items-center gap-3 group">
-                            <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl shadow-primary/30">
+                            <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl shadow-primary/30">
                                 <Sparkles className="h-7 w-7 text-white" />
                             </div>
-                            <span className="text-2xl font-black tracking-tight text-foreground">ToolNova</span>
+                            <span className="font-heading text-2xl font-bold tracking-tight text-foreground">
+                              Tool<span className="text-primary">Nova</span>
+                            </span>
                         </Link>
                     </div>
 
                     {/* Card */}
-                    <div className="bg-white dark:bg-[#1a1f2e] rounded-3xl shadow-2xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 p-8 sm:p-10">
+                    <div className="bg-card rounded-2xl shadow-xl shadow-primary/5 border border-border p-8 sm:p-10">
                         <div className="text-center mb-8">
-                            <h2 className="text-2xl sm:text-3xl font-black text-foreground mb-2">
+                            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground mb-2">
                                 Welcome to ToolNova
                             </h2>
                             <p className="text-muted-foreground">
@@ -158,7 +164,7 @@ export default function LoginPage() {
                                 <div className="w-full border-t border-slate-200 dark:border-slate-700"></div>
                             </div>
                             <div className="relative flex justify-center">
-                                <span className="bg-white dark:bg-[#1a1f2e] px-4 text-sm text-muted-foreground">
+                                <span className="bg-card px-4 text-sm text-muted-foreground">
                                     Quick & Secure
                                 </span>
                             </div>

@@ -25,7 +25,7 @@ export function ToolCTA({ toolName, toolSlug, description, variant = 'inline' }:
     }
 
     return (
-        <div className="my-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-100">
+        <div className="my-8 p-6 bg-gradient-to-r from-primary/8 to-teal-500/10 rounded-2xl border border-primary/20">
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 <div className="flex-grow">
                     <div className="flex items-center gap-2 mb-2">

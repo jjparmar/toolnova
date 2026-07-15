@@ -2,36 +2,28 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Copy, Check, Trash2, Type } from "lucide-react";
+import { Copy, Check, Trash2, Type, ClipboardPaste } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
+import {
+  toCamelCase,
+  toKebabCase,
+  toPascalCase,
+  toSentenceCase,
+  toSnakeCase,
+  toTitleCase,
+} from "@/lib/text-utils";
 
 function convertAll(input: string) {
   const uppercase = input.toUpperCase();
   const lowercase = input.toLowerCase();
-  const titleCase = input
-    .toLowerCase()
-    .replace(/\b\w/g, (char) => char.toUpperCase());
-  const sentenceCase = input
-    .toLowerCase()
-    .replace(/(^\w|\.\s+\w)/g, (char) => char.toUpperCase());
-  const camelCase = input
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9]+(.)/g, (_, char) => char.toUpperCase())
-    .replace(/^[A-Z]/, (char) => char.toLowerCase());
-  const pascalCase = input
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9]+(.)/g, (_, char) => char.toUpperCase())
-    .replace(/^[a-z]/, (char) => char.toUpperCase());
-  const snakeCase = input
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9]+/g, "_")
-    .replace(/^_+|_+$/g, "");
-  const kebabCase = input
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+  const titleCase = toTitleCase(input);
+  const sentenceCase = toSentenceCase(input);
+  const camelCase = toCamelCase(input);
+  const pascalCase = toPascalCase(input);
+  const snakeCase = toSnakeCase(input);
+  const kebabCase = toKebabCase(input);
   const constantCase = snakeCase.toUpperCase();
   const alternatingCase = input
     .split("")
@@ -40,7 +32,11 @@ function convertAll(input: string) {
   const inverseCase = input
     .split("")
     .map((char) =>
-      char === char.toUpperCase() ? char.toLowerCase() : char.toUpperCase(),
+      char === char.toUpperCase() && char !== char.toLowerCase()
+        ? char.toLowerCase()
+        : char === char.toLowerCase() && char !== char.toUpperCase()
+          ? char.toUpperCase()
+          : char,
     )
     .join("");
 
@@ -75,14 +71,28 @@ export default function CaseConverterClient() {
     }
   };
 
+  const paste = async () => {
+    try {
+      const t = await navigator.clipboard.readText();
+      if (!t) {
+        toast.message("Clipboard is empty");
+        return;
+      }
+      setText(t);
+      toast.success("Pasted");
+    } catch {
+      toast.error("Could not read clipboard — paste with Ctrl+V");
+    }
+  };
+
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 text-xs font-semibold">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/15">
           <Type className="h-3.5 w-3.5" />
           Free · Instant · 100% browser-side
         </div>
-        <h1 className="text-3xl md:text-4xl font-black tracking-tight">
+        <h1 className="font-heading text-3xl md:text-4xl font-bold tracking-tight">
           Case Converter
         </h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -91,20 +101,26 @@ export default function CaseConverterClient() {
         </p>
       </div>
 
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl overflow-hidden">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/50">
+      <div className="rounded-2xl border border-border bg-card shadow-lg shadow-primary/5 overflow-hidden">
+        <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 border-b border-border bg-muted/40">
           <span className="text-sm font-semibold">Your text</span>
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            onClick={() => setText("")}
-            disabled={!text}
-            className="text-red-600"
-          >
-            <Trash2 className="h-4 w-4 mr-1" />
-            Clear
-          </Button>
+          <div className="flex gap-1">
+            <Button type="button" variant="ghost" size="sm" onClick={() => void paste()}>
+              <ClipboardPaste className="h-4 w-4 mr-1" />
+              Paste
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={() => setText("")}
+              disabled={!text}
+              className="text-red-600"
+            >
+              <Trash2 className="h-4 w-4 mr-1" />
+              Clear
+            </Button>
+          </div>
         </div>
         <textarea
           value={text}
@@ -120,7 +136,7 @@ export default function CaseConverterClient() {
           {results.map((r) => (
             <div
               key={r.id}
-              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 flex flex-col gap-2"
+              className="rounded-2xl border border-border bg-card p-4 flex flex-col gap-2 hover:border-primary/30 transition-colors"
             >
               <div className="flex items-center justify-between gap-2">
                 <span className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
@@ -130,17 +146,18 @@ export default function CaseConverterClient() {
                   type="button"
                   variant="ghost"
                   size="sm"
-                  onClick={() => copy(r.id, r.value)}
+                  onClick={() => void copy(r.id, r.value)}
                   className="h-8"
+                  aria-label={`Copy ${r.label}`}
                 >
                   {copiedId === r.id ? (
-                    <Check className="h-3.5 w-3.5" />
+                    <Check className="h-3.5 w-3.5 text-emerald-600" />
                   ) : (
                     <Copy className="h-3.5 w-3.5" />
                   )}
                 </Button>
               </div>
-              <p className="text-sm font-medium break-words whitespace-pre-wrap text-foreground min-h-[2.5rem]">
+              <p className="text-sm font-medium break-words whitespace-pre-wrap text-foreground min-h-[2.5rem] font-mono">
                 {r.value || "—"}
               </p>
             </div>
@@ -149,7 +166,7 @@ export default function CaseConverterClient() {
       )}
 
       <div className="text-sm">
-        <h2 className="font-bold mb-2">Related tools</h2>
+        <h2 className="font-heading font-bold mb-2">Related tools</h2>
         <div className="flex flex-wrap gap-3 text-muted-foreground">
           <Link href="/tools/word-counter" className="underline underline-offset-4 hover:text-primary">
             Word Counter
@@ -180,7 +197,7 @@ export default function CaseConverterClient() {
           {
             question: "Is Title Case perfect for every language?",
             answer:
-              "Title Case rules vary by style guide and language. Review output for small words (a, of, the) if you follow a strict house style.",
+              "Title Case follows common English small-word rules (a, of, the, …). Review output for house style or non-English text.",
             category: "Usage",
           },
         ]}

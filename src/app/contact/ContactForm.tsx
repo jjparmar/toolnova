@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/config/site";
+import { toast } from "sonner";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -23,7 +24,14 @@ export function ContactForm() {
       String(data.get("subject") || "").trim() || "ToolNova support request";
     const message = String(data.get("message") || "").trim();
 
-    if (!firstName || !email || !message) return;
+    if (!firstName || !email || !message) {
+      toast.error("Please fill in name, email, and message");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
 
     const body = [
       message,

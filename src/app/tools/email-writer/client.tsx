@@ -103,9 +103,9 @@ const generatePrompt = (input: string, options?: Record<string, any>) => {
 Write a complete ${type} email with a ${tone} tone that communicates clearly and prompts the desired response.
 
 ## SPECIFICATIONS
-**Email Type**: ${type} - ${typeGuidance[type]}
-**Tone**: ${tone} - ${toneGuidance[tone]}
-**Target Length**: ${lengthGuide[length]}
+**Email Type**: ${type} - ${typeGuidance[type] || typeGuidance.professional}
+**Tone**: ${tone} - ${toneGuidance[tone] || toneGuidance.formal}
+**Target Length**: ${lengthGuide[length] || lengthGuide.medium}
 
 ## EMAIL STRUCTURE FRAMEWORK
 
@@ -374,6 +374,7 @@ export default function EmailWriterClient() {
       <EnhancedToolLayout
         toolSlug="email-writer"
         toolName="Email Writer"
+        systemPrompt="You are an expert professional email writer. Output a complete email with Subject line, greeting, body, and sign-off. Match the requested tone and length. No meta commentary. Be specific and actionable."
         placeholder={`📧 Describe what you need to communicate...
 
 Examples:

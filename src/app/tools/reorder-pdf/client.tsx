@@ -19,7 +19,11 @@ import {
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { PDFDocument } from "pdf-lib";
-import { downloadBytes, renderPdfPageThumbnails } from "@/lib/pdf-client";
+import {
+  downloadBytes,
+  isPdfFile,
+  renderPdfPageThumbnails,
+} from "@/lib/pdf-client";
 
 const related = [
   { name: "Merge PDF", href: "/tools/merge-pdf" },
@@ -46,7 +50,7 @@ export default function ReorderPdfClient() {
   const dragIndex = useRef<number | null>(null);
 
   const loadFile = async (f: File) => {
-    if (f.type !== "application/pdf" && !f.name.toLowerCase().endsWith(".pdf")) {
+    if (!isPdfFile(f)) {
       toast.error("Please select a PDF file");
       return;
     }
@@ -161,17 +165,17 @@ export default function ReorderPdfClient() {
       <div className="max-w-[1100px] mx-auto px-4 py-10">
         <button
           type="button"
-          onClick={() => router.back()}
+          onClick={() => router.push("/tools/image-pdf-tools")}
           className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary"
         >
-          <ArrowLeft className="h-4 w-4" /> Back
+          <ArrowLeft className="h-4 w-4" /> Back to Image & PDF
         </button>
 
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-600 text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold mb-3">
             <GripVertical className="h-3.5 w-3.5" /> Free · Private · Thumbnails
           </div>
-          <h1 className="text-4xl font-black mb-2">Reorder PDF Pages</h1>
+          <h1 className="font-heading text-4xl font-bold mb-2">Reorder PDF Pages</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             See each page as a thumbnail, drag to reorder, then download a new
             PDF. All processing stays in your browser.
@@ -223,7 +227,7 @@ export default function ReorderPdfClient() {
             <>
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-3 min-w-0">
-                  <FileText className="h-8 w-8 text-indigo-600 shrink-0" />
+                  <FileText className="h-8 w-8 text-primary shrink-0" />
                   <div className="min-w-0">
                     <p className="font-semibold truncate">{file.name}</p>
                     <p className="text-sm text-muted-foreground">

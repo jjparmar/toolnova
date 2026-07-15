@@ -2,10 +2,11 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Copy, Check, Trash2, Hash } from "lucide-react";
+import { Copy, Check, Trash2, Hash, ClipboardPaste } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
+import { countWords, graphemeLength } from "@/lib/text-utils";
 
 const PLATFORMS = [
   { name: "X / Twitter post", limit: 280 },
@@ -18,13 +19,12 @@ const PLATFORMS = [
 ] as const;
 
 function analyze(text: string) {
-  const total = text.length;
-  const noSpaces = text.replace(/\s+/g, "").length;
-  const words = text.trim()
-    ? text.trim().split(/\s+/).filter(Boolean).length
-    : 0;
+  const total = graphemeLength(text);
+  const noSpaces = graphemeLength(text.replace(/\s+/g, ""));
+  const words = countWords(text).length;
   const lines = text.length ? text.split("\n").length : 0;
-  return { total, noSpaces, spaces: total - noSpaces, words, lines };
+  const utf16 = text.length;
+  return { total, noSpaces, spaces: Math.max(0, total - noSpaces), words, lines, utf16 };
 }
 
 export default function CharacterCounterClient() {
@@ -33,7 +33,7 @@ export default function CharacterCounterClient() {
   const stats = useMemo(() => analyze(text), [text]);
 
   const copyStats = async () => {
-    const msg = `Characters: ${stats.total}\nNo spaces: ${stats.noSpaces}\nWords: ${stats.words}\nLines: ${stats.lines}`;
+    const msg = `Characters: ${stats.total}\nNo spaces: ${stats.noSpaces}\nWords: ${stats.words}\nLines: ${stats.lines}\nUTF-16 length: ${stats.utf16}`;
     try {
       await navigator.clipboard.writeText(msg);
       setCopied(true);
@@ -44,19 +44,33 @@ export default function CharacterCounterClient() {
     }
   };
 
+  const paste = async () => {
+    try {
+      const t = await navigator.clipboard.readText();
+      if (!t) {
+        toast.message("Clipboard is empty");
+        return;
+      }
+      setText(t);
+      toast.success("Pasted");
+    } catch {
+      toast.error("Could not read clipboard — use Ctrl+V");
+    }
+  };
+
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 text-xs font-semibold">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/15">
           <Hash className="h-3.5 w-3.5" />
           Live character count · Free forever
         </div>
-        <h1 className="text-3xl md:text-4xl font-black tracking-tight">
+        <h1 className="font-heading text-3xl md:text-4xl font-bold tracking-tight">
           Character Counter
         </h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Count characters with and without spaces, plus social and SEO limits.
-          Updates as you type — nothing uploaded.
+          Updates as you type — nothing uploaded. Emoji-friendly when supported.
         </p>
       </div>
 
@@ -69,9 +83,9 @@ export default function CharacterCounterClient() {
         ].map((s) => (
           <div
             key={s.label}
-            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 text-center"
+            className="rounded-2xl border border-border bg-card p-4 text-center"
           >
-            <div className="text-2xl font-black tabular-nums">{s.value}</div>
+            <div className="font-heading text-2xl font-bold tabular-nums">{s.value}</div>
             <div className="text-[11px] uppercase tracking-wide text-muted-foreground font-semibold mt-1">
               {s.label}
             </div>
@@ -79,11 +93,21 @@ export default function CharacterCounterClient() {
         ))}
       </div>
 
-      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl overflow-hidden">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/50">
+      <div className="rounded-2xl border border-border bg-card shadow-lg shadow-primary/5 overflow-hidden">
+        <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 border-b border-border bg-muted/40">
           <span className="text-sm font-semibold">Your text</span>
-          <div className="flex gap-2">
-            <Button type="button" variant="ghost" size="sm" onClick={copyStats} disabled={!text}>
+          <div className="flex gap-1">
+            <Button type="button" variant="ghost" size="sm" onClick={() => void paste()}>
+              <ClipboardPaste className="h-4 w-4 mr-1" />
+              Paste
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={() => void copyStats()}
+              disabled={!text}
+            >
               {copied ? <Check className="h-4 w-4 mr-1" /> : <Copy className="h-4 w-4 mr-1" />}
               Copy stats
             </Button>
@@ -109,23 +133,40 @@ export default function CharacterCounterClient() {
         />
       </div>
 
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6">
-        <h2 className="font-bold text-lg mb-4">Platform limits</h2>
+      <div className="rounded-2xl border border-border bg-card p-6">
+        <h2 className="font-heading font-bold text-lg mb-4">Platform limits</h2>
         <ul className="space-y-3">
           {PLATFORMS.map((p) => {
             const over = stats.total > p.limit;
+            const remaining = p.limit - stats.total;
             const pct = Math.min(100, Math.round((stats.total / p.limit) * 100));
             return (
               <li key={p.name}>
-                <div className="flex justify-between text-sm mb-1">
+                <div className="flex justify-between text-sm mb-1 gap-2">
                   <span className="text-muted-foreground">{p.name}</span>
-                  <span className={over ? "text-red-600 font-semibold" : "font-medium"}>
+                  <span
+                    className={
+                      over
+                        ? "text-red-600 font-semibold shrink-0"
+                        : "font-medium shrink-0"
+                    }
+                  >
                     {stats.total}/{p.limit}
+                    {!over && remaining <= 40 && remaining >= 0 && (
+                      <span className="text-muted-foreground font-normal ml-1">
+                        ({remaining} left)
+                      </span>
+                    )}
+                    {over && (
+                      <span className="ml-1">
+                        (+{stats.total - p.limit})
+                      </span>
+                    )}
                   </span>
                 </div>
-                <div className="h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                <div className="h-1.5 rounded-full bg-muted overflow-hidden">
                   <div
-                    className={`h-full rounded-full ${over ? "bg-red-500" : "bg-primary"}`}
+                    className={`h-full rounded-full ${over ? "bg-red-500" : pct > 90 ? "bg-amber-500" : "bg-primary"}`}
                     style={{ width: `${pct}%` }}
                   />
                 </div>
@@ -133,10 +174,14 @@ export default function CharacterCounterClient() {
             );
           })}
         </ul>
+        <p className="text-xs text-muted-foreground mt-4">
+          Counts use grapheme clusters when available (better for emoji). Platforms
+          may still count links or emoji differently — always preview before posting.
+        </p>
       </div>
 
       <div className="text-sm">
-        <h2 className="font-bold mb-2">Related tools</h2>
+        <h2 className="font-heading font-bold mb-2">Related tools</h2>
         <div className="flex flex-wrap gap-3 text-muted-foreground">
           <Link href="/tools/word-counter" className="underline underline-offset-4 hover:text-primary">
             Word Counter
@@ -163,6 +208,12 @@ export default function CharacterCounterClient() {
             answer:
               "No. Counting runs in your browser only. Refreshing the page clears the text.",
             category: "Privacy",
+          },
+          {
+            question: "How are emoji counted?",
+            answer:
+              "When your browser supports Intl.Segmenter, each emoji/grapheme cluster counts as 1 character. Otherwise we fall back to Unicode code points.",
+            category: "Features",
           },
         ]}
       />

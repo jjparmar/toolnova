@@ -23,11 +23,11 @@ const popularTools = [
 
 export default function NotFound() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-slate-50 to-white dark:from-[#0f1419] dark:to-background px-6 py-24">
+    <div className="min-h-[80vh] flex items-center justify-center bg-background px-6 py-24">
       <div className="max-w-2xl w-full text-center">
         {/* 404 Visual */}
         <div className="mb-8">
-          <span className="text-8xl md:text-9xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-500 to-indigo-600 select-none">
+          <span className="font-heading text-8xl md:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-teal-500 to-cyan-600 select-none">
             404
           </span>
         </div>
@@ -46,7 +46,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-8 bg-gradient-to-r from-primary to-blue-600 text-white text-sm font-bold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-8 bg-gradient-to-r from-primary to-teal-600 text-white text-sm font-bold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

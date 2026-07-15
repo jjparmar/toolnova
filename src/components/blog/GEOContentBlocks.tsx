@@ -7,7 +7,7 @@ interface KeyFactsBoxProps {
 
 export function KeyFactsBox({ facts }: KeyFactsBoxProps) {
     return (
-        <div className="my-8 p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-2 border-blue-200 dark:border-blue-800 rounded-2xl">
+        <div className="my-8 p-6 bg-gradient-to-br from-primary/8 to-teal-500/10 dark:from-primary/15 dark:to-teal-900/20 border-2 border-primary/20 dark:border-primary/30 rounded-2xl">
             <div className="flex items-center gap-2 mb-4">
                 <TrendingUp className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                 <h3 className="text-lg font-bold text-foreground">Key Facts</h3>
@@ -50,9 +50,9 @@ interface ExpertInsightProps {
 
 export function ExpertInsight({ quote, author, credentials }: ExpertInsightProps) {
     return (
-        <div className="my-8 p-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border-l-4 border-purple-500 rounded-r-2xl">
+        <div className="my-8 p-6 bg-gradient-to-br from-primary/5 to-teal-500/10 dark:from-primary/10 dark:to-teal-900/20 border-l-4 border-primary rounded-r-2xl">
             <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center text-white font-bold">
                     {author.charAt(0)}
                 </div>
                 <div className="flex-1">
@@ -77,7 +77,7 @@ export function ComparisonTable({ headers, rows }: ComparisonTableProps) {
         <div className="my-8 overflow-x-auto">
             <table className="w-full border-collapse bg-white dark:bg-slate-900 rounded-lg overflow-hidden shadow-sm">
                 <thead>
-                    <tr className="bg-gradient-to-r from-primary to-blue-600">
+                    <tr className="bg-gradient-to-r from-primary to-teal-700">
                         {headers.map((header, index) => (
                             <th
                                 key={index}

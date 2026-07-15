@@ -1,6 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
 
 export type CropRect = { x: number; y: number; w: number; h: number };
 
@@ -107,7 +114,7 @@ export function InteractiveCropper({
   };
 
   const onPointerDown = (
-    e: React.PointerEvent,
+    e: ReactPointerEvent,
     mode: DragMode,
   ) => {
     e.preventDefault();
@@ -186,7 +193,7 @@ export function InteractiveCropper({
   }, [scaleX, scaleY, naturalWidth, naturalHeight, onChange, aspectRatio]);
 
   const box = toDisplay(value);
-  const handles: { mode: DragMode; style: React.CSSProperties; cursor: string }[] =
+  const handles: { mode: DragMode; style: CSSProperties; cursor: string }[] =
     [
       { mode: "nw", style: { left: -6, top: -6 }, cursor: "nwse-resize" },
       { mode: "ne", style: { right: -6, top: -6 }, cursor: "nesw-resize" },

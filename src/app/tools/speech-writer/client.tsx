@@ -98,12 +98,12 @@ const generatePrompt = (input: string, options?: Record<string, any>) => {
   return `You are an expert speechwriter and public speaking coach. Your task is to craft a compelling, memorable ${occasion} speech that resonates with the audience and achieves its intended impact.
 
 ## YOUR TASK
-Write a complete ${occasion} speech with a ${tone} tone that captivates the audience and delivers a powerful message.
+Write a complete ${occasion} speech with a ${tone} tone that captivates the audience and delivers a powerful message. Use the speaker's notes/details below — do not invent personal stories that contradict the user.
 
 ## SPECIFICATIONS
-**Occasion**: ${occasion} - ${occasionGuidance[occasion]}
-**Target Length**: ${durationWords[duration]} (strictly adhere to word count)
-**Tone**: ${tone} - ${toneGuidance[tone]}
+**Occasion**: ${occasion} - ${occasionGuidance[occasion] || occasionGuidance.graduation}
+**Target Length**: ${durationWords[duration] || durationWords["5min"]} (strictly adhere to word count)
+**Tone**: ${tone} - ${toneGuidance[tone] || toneGuidance.heartfelt}
 **Delivery Time**: Designed for ${duration} speaking pace with natural pauses
 
 ## SPEECH STRUCTURE FRAMEWORK

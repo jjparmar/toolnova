@@ -87,11 +87,16 @@ const generatePrompt = (input: string, options?: Record<string, any>) => {
 Generate 10 strategic ${roleType} interview questions for ${difficulty}-level positions that effectively assess candidate qualifications and readiness.
 
 ## SPECIFICATIONS
-**Interview Type**: ${roleType.toUpperCase()} - ${roleGuidance[roleType]}
-**Level**: ${difficulty.toUpperCase()} - ${difficultyGuidance[difficulty]}
+**Interview Type**: ${roleType.toUpperCase()} - ${roleGuidance[roleType] || roleGuidance.general}
+**Level**: ${difficulty.toUpperCase()} - ${difficultyGuidance[difficulty] || difficultyGuidance.mid}
 **Sample Answers**: ${answerStrategy}
 **Quantity**: Exactly 10 distinct, non-repetitive questions
 **Purpose**: Assess both competency and cultural fit authentically
+
+## HONESTY
+- Tailor questions to the role/context the user described (see JOB/ROLE DETAILS below).
+- Sample answers are EXAMPLES only — never present them as the user's real experience.
+- Do not invent employers, metrics, or credentials for the candidate.
 
 ## INTERVIEW DESIGN FRAMEWORK
 
