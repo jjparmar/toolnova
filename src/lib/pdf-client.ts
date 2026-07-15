@@ -4,8 +4,8 @@
 
 export async function loadPdfJs() {
   const pdfjs = await import("pdfjs-dist");
-  // Prefer same-version worker from jsDelivr
-  const version = (pdfjs as { version?: string }).version || "5.4.296";
+  // Pin worker to installed major.line — package requires Node 20-friendly 4.x
+  const version = (pdfjs as { version?: string }).version || "4.10.38";
   pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
   return pdfjs;
 }

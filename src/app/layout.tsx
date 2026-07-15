@@ -10,7 +10,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 import { SkipLinks } from "@/components/SkipLinks";
-import dynamic from "next/dynamic";
+import { FeedbackWidgetLazy } from "@/components/FeedbackWidgetLazy";
 import { VitalsInitializer } from "@/components/VitalsInitializer";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -18,13 +18,6 @@ import { siteConfig } from "@/config/site";
 import { adsenseConfig } from "@/config/adsense";
 import { Providers } from "@/components/Providers";
 import { TOOL_COUNT_LABEL } from "@/data/tools";
-
-// Defer feedback widget JS until after hydration (not critical for LCP)
-const FeedbackWidget = dynamic(
-  () =>
-    import("@/components/FeedbackWidget").then((m) => m.FeedbackWidget),
-  { ssr: false },
-);
 
 const inter = Inter({
   variable: "--font-inter",
@@ -251,7 +244,7 @@ export default function RootLayout({
             </div>
             <Toaster />
             <SonnerToaster position="top-center" richColors closeButton />
-            <FeedbackWidget />
+            <FeedbackWidgetLazy />
           </Providers>
         </ThemeProvider>
         <CookieConsent />
