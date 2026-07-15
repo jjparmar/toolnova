@@ -20,6 +20,7 @@ import {
     Type,
     Youtube,
     ShieldAlert,
+    X,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TOOL_COUNT, TOOL_COUNT_LABEL } from '@/data/tools';
@@ -35,17 +36,19 @@ export function ToolsLibrary() {
                 title: 'Merge PDF',
                 description: 'Combine multiple PDF files into a single document instantly.',
                 icon: Merge,
-                gradient: 'from-red-500 to-rose-600',
+                gradient: 'from-rose-500 to-orange-500',
+                glowColor: 'shadow-rose-500/20',
                 category: 'PDF & Image',
                 href: '/tools/merge-pdf',
                 badge: 'Top Rated',
-                badgeColor: 'bg-red-500',
+                badgeVariant: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20',
             },
             {
                 title: 'Split PDF',
                 description: 'Extract pages or split large PDFs in your browser.',
                 icon: FileText,
-                gradient: 'from-orange-500 to-amber-600',
+                gradient: 'from-orange-500 to-amber-500',
+                glowColor: 'shadow-orange-500/20',
                 category: 'PDF & Image',
                 href: '/tools/split-pdf',
             },
@@ -53,57 +56,63 @@ export function ToolsLibrary() {
                 title: 'Image Compressor',
                 description: 'Reduce image file size while keeping visual quality.',
                 icon: Shrink,
-                gradient: 'from-amber-500 to-yellow-600',
+                gradient: 'from-amber-500 to-yellow-500',
+                glowColor: 'shadow-amber-500/20',
                 category: 'PDF & Image',
                 href: '/tools/image-compressor',
                 badge: 'Popular',
-                badgeColor: 'bg-amber-500',
+                badgeVariant: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20',
             },
             {
                 title: 'Image Resizer',
                 description: 'Change dimensions by pixels or percentage without quality loss.',
                 icon: Scaling,
-                gradient: 'from-purple-500 to-violet-600',
+                gradient: 'from-violet-500 to-purple-600',
+                glowColor: 'shadow-violet-500/20',
                 category: 'PDF & Image',
                 href: '/tools/resize-image',
                 badge: 'Trending',
-                badgeColor: 'bg-purple-500',
+                badgeVariant: 'bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20',
             },
             {
                 title: 'Flashcard Maker',
                 description: 'Create digital study sets to memorize efficiently.',
                 icon: Library,
-                gradient: 'from-teal-500 to-cyan-600',
+                gradient: 'from-teal-500 to-cyan-500',
+                glowColor: 'shadow-teal-500/20',
                 category: 'Study',
                 href: '/tools/flashcard-maker',
                 badge: 'Student Pick',
-                badgeColor: 'bg-teal-500',
+                badgeVariant: 'bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20',
             },
             {
                 title: 'Homework Solver',
                 description: 'Step-by-step solutions for math, science, and more.',
                 icon: School,
                 gradient: 'from-blue-500 to-indigo-600',
+                glowColor: 'shadow-blue-500/20',
                 category: 'Study',
                 href: '/tools/homework-solver',
                 badge: 'Popular',
-                badgeColor: 'bg-blue-500',
+                badgeVariant: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20',
             },
             {
                 title: 'YouTube Summarizer',
                 description: 'Paste a video URL and get a structured AI summary.',
                 icon: Youtube,
                 gradient: 'from-red-500 to-rose-600',
+                glowColor: 'shadow-red-500/20',
                 category: 'Study',
                 href: '/tools/youtube-summarizer',
                 badge: 'New',
-                badgeColor: 'bg-green-500',
+                badgeVariant: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20',
             },
             {
                 title: 'Essay Writer',
                 description: 'Generate structured essays with clear introductions and conclusions.',
                 icon: Pencil,
                 gradient: 'from-violet-500 to-purple-600',
+                glowColor: 'shadow-violet-500/20',
                 category: 'Writing',
                 href: '/tools/essay-writer',
             },
@@ -112,6 +121,7 @@ export function ToolsLibrary() {
                 description: 'Fix grammar, spelling, and clarity with AI proofreading.',
                 icon: Type,
                 gradient: 'from-emerald-500 to-green-600',
+                glowColor: 'shadow-emerald-500/20',
                 category: 'Writing',
                 href: '/tools/grammar-fix',
             },
@@ -120,16 +130,18 @@ export function ToolsLibrary() {
                 description: 'Spot AI-writing patterns and get humanization tips.',
                 icon: ShieldAlert,
                 gradient: 'from-indigo-500 to-blue-600',
+                glowColor: 'shadow-indigo-500/20',
                 category: 'Writing',
                 href: '/tools/plagiarism-checker',
                 badge: 'New',
-                badgeColor: 'bg-indigo-500',
+                badgeVariant: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20',
             },
             {
                 title: 'Cover Letter Writer',
                 description: 'Tailored cover letters for job applications.',
                 icon: Briefcase,
-                gradient: 'from-amber-500 to-orange-600',
+                gradient: 'from-amber-500 to-orange-500',
+                glowColor: 'shadow-amber-500/20',
                 category: 'Career',
                 href: '/tools/cover-letter-writer',
             },
@@ -138,6 +150,7 @@ export function ToolsLibrary() {
                 description: 'Impact-focused resume bullets with action verbs.',
                 icon: Zap,
                 gradient: 'from-cyan-500 to-blue-600',
+                glowColor: 'shadow-cyan-500/20',
                 category: 'Career',
                 href: '/tools/resume-bullets',
             },
@@ -151,7 +164,7 @@ export function ToolsLibrary() {
             counts[t.category] = (counts[t.category] || 0) + 1;
         });
         return [
-            { name: 'All Tools', icon: null, count: counts['All Tools'] },
+            { name: 'All Tools', icon: Sparkles, count: counts['All Tools'] },
             { name: 'PDF & Image', icon: ImageIcon, count: counts['PDF & Image'] || 0 },
             { name: 'Study', icon: School, count: counts['Study'] || 0 },
             { name: 'Writing', icon: Pencil, count: counts['Writing'] || 0 },
@@ -172,94 +185,138 @@ export function ToolsLibrary() {
 
     return (
         <section className="py-16 md:py-24">
-            <div className="mx-auto max-w-[1200px] px-6">
-                <div className="text-center mb-10">
-                    <span className="inline-flex items-center gap-2 text-primary font-bold tracking-wider uppercase text-sm mb-3 px-4 py-1.5 bg-primary/10 rounded-full">
-                        <Sparkles className="h-4 w-4" />
+            <div className="mx-auto max-w-[1240px] px-6">
+
+                {/* Header */}
+                <div className="text-center mb-12">
+                    <span className="section-label mb-5">
+                        <Sparkles className="h-3.5 w-3.5" />
                         {TOOL_COUNT_LABEL} tools
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+                    <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-foreground mb-4 tracking-tight mt-4">
                         Tools library
                     </h2>
-                    <p className="text-muted-foreground max-w-xl mx-auto">
-                        Every link below is live — {TOOL_COUNT} free tools for writing, study, PDF,
-                        and career work.
+                    <p className="text-muted-foreground max-w-lg mx-auto text-base md:text-lg">
+                        Every link below is live — {TOOL_COUNT} free tools for writing, study, PDF, and career work.
                     </p>
                 </div>
 
-                <div className="max-w-xl mx-auto mb-8 relative">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                {/* Search bar */}
+                <div className="max-w-lg mx-auto mb-8 relative group">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-muted-foreground group-focus-within:text-primary transition-colors" style={{ height: '1.1rem', width: '1.1rem' }} />
                     <input
                         type="search"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search tools..."
-                        className="w-full h-12 pl-11 pr-4 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+                        placeholder="Search tools…"
+                        className="w-full h-13 pl-12 pr-12 rounded-2xl border border-border bg-card text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all shadow-sm text-[0.95rem]"
+                        style={{ height: '3.25rem' }}
                         aria-label="Search tools library"
                     />
+                    {searchQuery && (
+                        <button
+                            type="button"
+                            onClick={() => setSearchQuery('')}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                            aria-label="Clear search"
+                        >
+                            <X className="h-4 w-4" />
+                        </button>
+                    )}
                 </div>
 
+                {/* Category filter pills */}
                 <div className="flex flex-wrap justify-center gap-2 mb-10">
                     {categories.map((cat) => (
                         <button
                             key={cat.name}
                             type="button"
                             onClick={() => setActiveCategory(cat.name)}
-                            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
                                 activeCategory === cat.name
-                                    ? 'bg-primary text-white shadow-md'
-                                    : 'bg-muted/60 text-muted-foreground hover:text-foreground'
+                                    ? 'bg-primary text-white shadow-lg shadow-primary/25 scale-105'
+                                    : 'bg-muted/70 text-muted-foreground hover:text-foreground hover:bg-muted border border-border/60'
                             }`}
                         >
-                            {cat.icon && <cat.icon className="h-4 w-4" />}
+                            {cat.icon && <cat.icon className="h-3.5 w-3.5" />}
                             {cat.name}
-                            <span className="opacity-70 text-xs">({cat.count})</span>
+                            <span className={`text-xs px-1.5 py-0.5 rounded-full font-bold ${
+                                activeCategory === cat.name
+                                    ? 'bg-white/20 text-white'
+                                    : 'bg-foreground/8 text-muted-foreground'
+                            }`}
+                            style={{ background: activeCategory === cat.name ? 'rgba(255,255,255,0.2)' : undefined }}
+                            >
+                                {cat.count}
+                            </span>
                         </button>
                     ))}
                 </div>
 
+                {/* Tools grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {filtered.map((tool) => (
                         <Link
                             key={tool.href}
                             href={tool.href}
-                            className="group relative flex flex-col rounded-2xl bg-card border border-border p-6 hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
+                            className="group relative flex flex-col rounded-2xl bg-card border border-border p-6 hover:shadow-xl hover:shadow-foreground/[0.06] hover:border-primary/30 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
                         >
+                            {/* Top hover accent */}
+                            <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${tool.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-400`} />
+
+                            {/* Badge */}
                             {tool.badge && (
-                                <span
-                                    className={`absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wide text-white px-2 py-0.5 rounded-full ${tool.badgeColor}`}
-                                >
+                                <span className={`absolute top-4 right-4 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full ${tool.badgeVariant}`}>
                                     {tool.badge}
                                 </span>
                             )}
+
+                            {/* Icon */}
                             <div
-                                className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${tool.gradient} text-white shadow-lg group-hover:scale-110 transition-transform`}
+                                className={`mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${tool.gradient} text-white shadow-lg ${tool.glowColor} group-hover:scale-110 group-hover:rotate-3 transition-all duration-400`}
                             >
-                                <tool.icon className="h-6 w-6" />
+                                <tool.icon className="h-5.5 w-5.5" style={{ height: '1.375rem', width: '1.375rem' }} />
                             </div>
-                            <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+
+                            {/* Content */}
+                            <h3 className="text-base font-bold text-foreground mb-2 tracking-tight group-hover:text-primary transition-colors leading-snug">
                                 {tool.title}
                             </h3>
                             <p className="text-sm text-muted-foreground leading-relaxed flex-1">
                                 {tool.description}
                             </p>
-                            <div className="mt-4 flex items-center text-primary text-sm font-semibold">
+
+                            {/* Footer */}
+                            <div className="mt-5 flex items-center text-primary text-sm font-semibold pt-4 border-t border-border/60">
                                 Open tool
-                                <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                                <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1.5 transition-transform" />
                             </div>
                         </Link>
                     ))}
                 </div>
 
+                {/* Empty state */}
                 {filtered.length === 0 && (
-                    <p className="text-center text-muted-foreground py-12">
-                        No tools match your search. Try another keyword.
-                    </p>
+                    <div className="text-center py-16">
+                        <div className="h-14 w-14 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-4">
+                            <Search className="h-6 w-6 text-muted-foreground" />
+                        </div>
+                        <p className="text-muted-foreground font-medium mb-2">No tools found</p>
+                        <p className="text-muted-foreground/70 text-sm">Try another keyword or browse all tools.</p>
+                        <button
+                            type="button"
+                            onClick={() => { setSearchQuery(''); setActiveCategory('All Tools'); }}
+                            className="mt-4 text-primary text-sm font-semibold hover:underline underline-offset-4"
+                        >
+                            Clear filters
+                        </button>
+                    </div>
                 )}
 
+                {/* CTA */}
                 <div className="text-center mt-12">
                     <Link href="/tools">
-                        <Button className="h-12 px-8 rounded-xl font-semibold gap-2">
+                        <Button className="h-12 px-8 rounded-2xl font-bold gap-2 shadow-md shadow-primary/20 hover:shadow-primary/35 transition-shadow">
                             View all {TOOL_COUNT_LABEL} tools
                             <ArrowRight className="h-4 w-4" />
                         </Button>
