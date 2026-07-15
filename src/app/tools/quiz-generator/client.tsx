@@ -19,6 +19,12 @@ import {
   Target,
 } from "lucide-react";
 
+const systemPrompt = `You are an expert assessment designer.
+
+Create accurate, clear quiz questions that test real understanding.
+Follow the user format exactly. Include the answer key when requested.
+No filler intro. Markdown is preferred for structure.`;
+
 const toolOptions = [
   {
     id: "questionCount",
@@ -382,6 +388,7 @@ export default function QuizGeneratorClient() {
     >
       <EnhancedToolLayout
         toolSlug="quiz-generator"
+        systemPrompt={systemPrompt}
         toolName="Quiz Generator"
         placeholder={`📖 Enter your topic or paste study content...
 

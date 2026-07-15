@@ -1,16 +1,21 @@
 # ToolNova robots.txt — https://www.toolnovahub.com
 # Comprehensive crawl policy for search engines, AI bots, and research crawlers
-# Last Updated: 2026-06-19
+# Last Updated: 2026-07-14
 
 # ─── Default for all bots ────────────────────────────────────────────────────
 User-agent: *
 Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+Allow: /openapi.yaml
+Allow: /feed.xml
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /auth/
 Disallow: /login
 Disallow: /signup
+Disallow: /dashboard
 Disallow: /*?*preview=*
 Disallow: /*?*debug=*
 Disallow: /*?*_next=*

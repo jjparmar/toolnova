@@ -14,7 +14,7 @@ import {
 
 export const metadata = {
     title: 'Image & PDF Tools - Merge, Split, Compress & Convert | ToolNova',
-    description: 'Free image and PDF tools: merge PDF, split PDF, image to PDF, image compressor, JPG to PNG, PNG to JPG.',
+    description: 'Free image and PDF tools: merge, split, reorder pages with thumbnails, crop, resize, compress, convert JPG/PNG. Private browser tools.',
     alternates: { canonical: 'https://www.toolnovahub.com/tools/image-pdf-tools' },
     openGraph: {
         title: 'Image & PDF Tools - Merge, Split, Compress & Convert | ToolNova',
@@ -31,9 +31,12 @@ export const metadata = {
 
 const tools = [
     { name: 'Merge PDF', slug: 'merge-pdf', description: 'Combine multiple PDFs into one file', icon: Merge },
-    { name: 'Split PDF', slug: 'split-pdf', description: 'Extract pages or split PDFs', icon: Scissors },
+    { name: 'Split PDF', slug: 'split-pdf', description: 'Extract pages, pick pages, or ZIP all', icon: Scissors },
+    { name: 'Reorder PDF', slug: 'reorder-pdf', description: 'Drag thumbnails to rearrange pages', icon: FileText },
     { name: 'Image to PDF', slug: 'image-to-pdf', description: 'Convert images to PDF documents', icon: ImagePlus },
     { name: 'Image Compressor', slug: 'image-compressor', description: 'Reduce image file size', icon: Shrink },
+    { name: 'Crop Image', slug: 'image-crop', description: 'Select region, rotate, flip & crop', icon: ImageIcon },
+    { name: 'Resize Image', slug: 'resize-image', description: 'Resize images by pixels or percentage', icon: ImageIcon },
     { name: 'JPG to PNG', slug: 'jpg-to-png', description: 'Convert JPG images to PNG format', icon: ArrowRightLeft },
     { name: 'PNG to JPG', slug: 'png-to-jpg', description: 'Convert PNG images to JPG format', icon: ArrowRightLeft },
 ];
@@ -97,6 +100,52 @@ export default function ImagePDFToolsPage() {
                         </Link>
                     ))}
                 </div>
+
+                {/* Pillar content — SEO / AdSense depth */}
+                <section className="mt-20 max-w-4xl mx-auto prose prose-slate dark:prose-invert prose-lg">
+                    <h2>Free image &amp; PDF tools that run in your browser</h2>
+                    <p>
+                        ToolNova&apos;s image and PDF utilities are built for students and professionals who need
+                        reliable document workflows without installing desktop software. Merge handouts for class,
+                        compress screenshots for email, convert slides to PDF for portals, and resize images for
+                        web — with client-side processing wherever possible so files stay private.
+                    </p>
+                    <h3>Recommended document workflow</h3>
+                    <ol>
+                        <li>Crop a region with <Link href="/tools/image-crop">Crop Image</Link>, then compress or resize with <Link href="/tools/image-compressor">Image Compressor</Link> / <Link href="/tools/resize-image">Resize Image</Link>.</li>
+                        <li>Convert photos to PDF with <Link href="/tools/image-to-pdf">Image to PDF</Link>.</li>
+                        <li>Combine chapters or appendices with <Link href="/tools/merge-pdf">Merge PDF</Link>.</li>
+                        <li>Extract pages when you only need a section with <Link href="/tools/split-pdf">Split PDF</Link>.</li>
+                    </ol>
+                    <h3>When to use each format</h3>
+                    <ul>
+                        <li><strong>PDF</strong> — multi-page submissions, print, stable layout across devices</li>
+                        <li><strong>JPG</strong> — photos and large camera images (smaller files)</li>
+                        <li><strong>PNG</strong> — screenshots, logos, and transparency</li>
+                    </ul>
+                    <p>
+                        Guides:{" "}
+                        <Link href="/blog/merge-pdf-without-losing-formatting">Merge without losing formatting</Link>
+                        {" · "}
+                        <Link href="/blog/compress-images-for-web-speed">Compress images for web speed</Link>
+                        {" · "}
+                        <Link href="/blog/jpg-png-pdf-workflow-guide">JPG / PNG / PDF workflow</Link>
+                    </p>
+                </section>
+
+                {aeoContent.faqs?.length > 0 && (
+                    <section className="mt-16 max-w-3xl mx-auto">
+                        <h2 className="text-2xl font-bold mb-6 text-center">Image &amp; PDF FAQ</h2>
+                        <div className="space-y-4">
+                            {aeoContent.faqs.map((f, i) => (
+                                <div key={i} className="rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-900">
+                                    <h3 className="font-semibold text-foreground mb-2">{f.question}</h3>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">{f.answer}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
 
                 <div className="mt-10 p-6 bg-green-50 dark:bg-green-900/10 rounded-2xl border border-green-200 dark:border-green-800">
                     <p className="text-center text-green-700 dark:text-green-400 font-medium">

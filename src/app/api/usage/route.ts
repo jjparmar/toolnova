@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { DAILY_FREE_LIMIT } from '@/lib/limits';
 import { db } from '@/lib/db';
+import { getGuestUsage } from '@/lib/guest-limits';
 
 export async function GET() {
     try {
@@ -10,7 +11,15 @@ export async function GET() {
         const user = session?.user;
 
         if (!user || !user.email) {
-            return NextResponse.json({ count: 0, limit: DAILY_FREE_LIMIT, remaining: DAILY_FREE_LIMIT, isPremium: false });
+            // Guest free tier — cookie-based daily counter (no sign-up required)
+            const guest = await getGuestUsage();
+            return NextResponse.json({
+                count: guest.count,
+                limit: guest.limit,
+                remaining: guest.remaining,
+                isPremium: false,
+                isGuest: true,
+            });
         }
         
         const userId = (user as any).id;

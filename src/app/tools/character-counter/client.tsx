@@ -1,237 +1,171 @@
 "use client";
 
-import EnhancedToolLayout from "@/components/EnhancedToolLayout";
-import { PremiumToolWrapper } from "@/components/PremiumToolWrapper";
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { Copy, Check, Trash2, Hash } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
-import {
-  Hash,
-  Type,
-  Zap,
-  Users,
-  Star,
-  Clock,
-  Twitter,
-  MessageSquare,
-  FileText,
-  BarChart2,
-} from "lucide-react";
 
-// Non-AI Handler Function
-function characterCounterHandler(input: string): string {
-  const totalChars = input.length;
-  const charsNoSpaces = input.replace(/\s+/g, "").length;
-  const spaces = totalChars - charsNoSpaces;
-  const words = input
-    .trim()
-    .split(/\s+/)
-    .filter((word) => word.length > 0).length;
-  const lines = input.split("\n").length;
-  const sentences = input
-    .split(/[.!?]+/)
-    .filter((s) => s.trim().length > 0).length;
-  const paragraphs = input
-    .split(/\n\n+/)
-    .filter((p) => p.trim().length > 0).length;
+const PLATFORMS = [
+  { name: "X / Twitter post", limit: 280 },
+  { name: "Instagram caption", limit: 2200 },
+  { name: "LinkedIn post", limit: 3000 },
+  { name: "TikTok caption", limit: 2200 },
+  { name: "Meta description", limit: 160 },
+  { name: "SEO title (approx)", limit: 60 },
+  { name: "SMS segment", limit: 160 },
+] as const;
 
-  const twitterRemaining = 280 - totalChars;
-  const facebookLimit = 63206;
-  const smsCount = Math.ceil(totalChars / 160);
-  const instagramCaptionLimit = 2200;
-
-  return `📊 **Complete Character Analysis**
-
-✅ **Character Counts:**
-- Total Characters: ${totalChars}
-- Characters (no spaces): ${charsNoSpaces}
-- Spaces: ${spaces}
-- Words: ${words}
-- Lines: ${lines}
-- Sentences: ${sentences}
-- Paragraphs: ${paragraphs}
-
-📱 **Social Media Limits:**
-${
-  twitterRemaining >= 0
-    ? `🐦 Twitter: ${twitterRemaining} characters remaining (${totalChars}/280)`
-    : `🐦 Twitter: ${Math.abs(twitterRemaining)} characters over limit (${totalChars}/280)`
+function analyze(text: string) {
+  const total = text.length;
+  const noSpaces = text.replace(/\s+/g, "").length;
+  const words = text.trim()
+    ? text.trim().split(/\s+/).filter(Boolean).length
+    : 0;
+  const lines = text.length ? text.split("\n").length : 0;
+  return { total, noSpaces, spaces: total - noSpaces, words, lines };
 }
-${
-  totalChars <= instagramCaptionLimit
-    ? `📸 Instagram: ${instagramCaptionLimit - totalChars} characters remaining (${totalChars}/2200)`
-    : `📸 Instagram: ${totalChars - instagramCaptionLimit} characters over limit (${totalChars}/2200)`
-}
-${
-  totalChars <= facebookLimit
-    ? `📘 Facebook: Within limit (${totalChars}/63,206)`
-    : `📘 Facebook: Over limit (${totalChars}/63,206)`
-}
-💬 SMS: ${smsCount} message${smsCount > 1 ? "s" : ""} (160 chars/message)
-
-${words > 0 ? `📈 **Statistics:**\n- Average word length: ${(charsNoSpaces / words).toFixed(1)} characters\n- Average sentence length: ${(words / Math.max(sentences, 1)).toFixed(1)} words` : ""}`;
-}
-
-
-const features = [
-  {
-    icon: Hash,
-    title: "Comprehensive Counting",
-    description:
-      "Count total characters, characters without spaces, words, lines, sentences, and paragraphs all at once",
-    gradient: "from-blue-500 to-indigo-600",
-    bgLight: "bg-blue-50",
-  },
-  {
-    icon: MessageSquare,
-    title: "Social Media Limits",
-    description:
-      "Instantly check character limits for Twitter, Instagram, Facebook, and SMS messages",
-    gradient: "from-purple-500 to-pink-600",
-    bgLight: "bg-purple-50",
-  },
-  {
-    icon: Zap,
-    title: "Real-time Updates",
-    description:
-      "See character counts update instantly as you type - no need to click any buttons",
-    gradient: "from-green-500 to-emerald-600",
-    bgLight: "bg-green-50",
-  },
-];
-
-const howItWorks = [
-  {
-    step: 1,
-    title: "Paste Text",
-    desc: "Add your content to the text area",
-    icon: FileText,
-    color: "from-blue-500 to-indigo-600",
-  },
-  {
-    step: 2,
-    title: "Instant Count",
-    desc: "See all character statistics immediately",
-    icon: BarChart2,
-    color: "from-purple-500 to-pink-600",
-  },
-  {
-    step: 3,
-    title: "Check Limits",
-    desc: "Verify social media platform requirements",
-    icon: MessageSquare,
-    color: "from-green-500 to-emerald-600",
-  },
-];
-
-const relatedTools = [
-  {
-    name: "Word Counter",
-    slug: "word-counter",
-    icon: FileText,
-    color: "text-blue-600",
-  },
-  {
-    name: "Case Converter",
-    slug: "case-converter",
-    icon: Type,
-    color: "text-purple-600",
-  },
-  {
-    name: "Text Summarizer",
-    slug: "text-summarizer",
-    icon: BarChart2,
-    color: "text-green-600",
-  },
-  {
-    name: "Paraphraser",
-    slug: "paraphraser",
-    icon: MessageSquare,
-    color: "text-orange-600",
-  },
-];
-
-const faqs = [
-  {
-    question: "How is this different from Word Counter?",
-    answer:
-      "Character Counter focuses specifically on character counts and social media limits, while Word Counter emphasizes word count and reading time. Both provide comprehensive text analysis.",
-    category: "Comparison",
-  },
-  {
-    question: "Does it count spaces as characters?",
-    answer:
-      "Yes! We show both total characters (including spaces) and characters without spaces, so you can see both counts clearly.",
-    category: "Features",
-  },
-  {
-    question: "Are the social media limits accurate?",
-    answer:
-      "Yes, we use current platform limits: Twitter (280 chars), Instagram captions (2,200 chars), Facebook posts (63,206 chars), and SMS (160 chars per message).",
-    category: "Accuracy",
-  },
-  {
-    question: "Can I use this for Twitter threads?",
-    answer:
-      "Absolutely! It's perfect for checking if each tweet in your thread is within the 280-character limit before posting.",
-    category: "Usage",
-  },
-  {
-    question: "Does it work offline?",
-    answer:
-      "Once the page loads, all counting happens in your browser locally, so you don't need an internet connection to use the tool.",
-    category: "Technical",
-  },
-  {
-    question: "Is there a character limit for the tool itself?",
-    answer:
-      "No, you can analyze texts of any length. The tool will count everything you paste, regardless of size.",
-    category: "Usage",
-  },
-];
 
 export default function CharacterCounterClient() {
+  const [text, setText] = useState("");
+  const [copied, setCopied] = useState(false);
+  const stats = useMemo(() => analyze(text), [text]);
+
+  const copyStats = async () => {
+    const msg = `Characters: ${stats.total}\nNo spaces: ${stats.noSpaces}\nWords: ${stats.words}\nLines: ${stats.lines}`;
+    try {
+      await navigator.clipboard.writeText(msg);
+      setCopied(true);
+      toast.success("Stats copied");
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      toast.error("Could not copy");
+    }
+  };
+
   return (
-    <PremiumToolWrapper
-      toolName="Character Counter"
-      toolSlug="character-counter"
-      tagline="Count characters instantly with social media limits"
-      description="Professional character counting tool with real-time analysis. Check Twitter, Instagram, Facebook, and SMS character limits instantly. Perfect for social media managers and content creators."
-      badge="Utility Tool"
-      category="Utility Tools"
-      categorySlug="utility-tools"
-      features={features}
-      howItWorks={howItWorks}
-      relatedTools={relatedTools}
-      ctaTitle="Count Your Characters Now"
-      ctaDescription="Perfect for social media posts, SMS, and content creation"
-      ctaIcon={Hash}
-    >
-      <EnhancedToolLayout
-        toolSlug="character-counter"
-        toolName="Character Counter"
-        placeholder={`📝 Paste or type your text here...
-
-Instantly get:
-• Total character count (with and without spaces)
-• Word, line, sentence, and paragraph counts
-• Twitter character limit check (280 chars)
-• Instagram caption limit check (2,200 chars)
-• Facebook post limit check (63,206 chars)
-• SMS message count (160 chars per message)
-
-Try typing a tweet or social media post to see the limits!`}
-        promptTemplate={(input) => input}
-        inputRows={12}
-        isNonAITool={true}
-        nonAIHandler={characterCounterHandler}
-        resultLabel="📊 Character Analysis"
-        generateButtonText="📊 Count Characters"
-        inputLabel="📝 Your Text"
-        showAdvancedOptions={false}
-        maxHistoryItems={5}
-      />
-      <div className="px-6 pb-6">
-        <FAQSection faqs={faqs} />
+    <div className="w-full max-w-5xl mx-auto px-4 py-8 space-y-8">
+      <div className="text-center space-y-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 text-xs font-semibold">
+          <Hash className="h-3.5 w-3.5" />
+          Live character count · Free forever
+        </div>
+        <h1 className="text-3xl md:text-4xl font-black tracking-tight">
+          Character Counter
+        </h1>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Count characters with and without spaces, plus social and SEO limits.
+          Updates as you type — nothing uploaded.
+        </p>
       </div>
-    </PremiumToolWrapper>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {[
+          { label: "Characters", value: stats.total },
+          { label: "No spaces", value: stats.noSpaces },
+          { label: "Words", value: stats.words },
+          { label: "Lines", value: stats.lines },
+        ].map((s) => (
+          <div
+            key={s.label}
+            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 text-center"
+          >
+            <div className="text-2xl font-black tabular-nums">{s.value}</div>
+            <div className="text-[11px] uppercase tracking-wide text-muted-foreground font-semibold mt-1">
+              {s.label}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl overflow-hidden">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/50">
+          <span className="text-sm font-semibold">Your text</span>
+          <div className="flex gap-2">
+            <Button type="button" variant="ghost" size="sm" onClick={copyStats} disabled={!text}>
+              {copied ? <Check className="h-4 w-4 mr-1" /> : <Copy className="h-4 w-4 mr-1" />}
+              Copy stats
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={() => setText("")}
+              disabled={!text}
+              className="text-red-600"
+            >
+              <Trash2 className="h-4 w-4 mr-1" />
+              Clear
+            </Button>
+          </div>
+        </div>
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Paste a caption, bio, meta description, or tweet…"
+          className="w-full min-h-[240px] p-5 text-base leading-relaxed bg-transparent outline-none resize-y"
+          aria-label="Text for character count"
+        />
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6">
+        <h2 className="font-bold text-lg mb-4">Platform limits</h2>
+        <ul className="space-y-3">
+          {PLATFORMS.map((p) => {
+            const over = stats.total > p.limit;
+            const pct = Math.min(100, Math.round((stats.total / p.limit) * 100));
+            return (
+              <li key={p.name}>
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="text-muted-foreground">{p.name}</span>
+                  <span className={over ? "text-red-600 font-semibold" : "font-medium"}>
+                    {stats.total}/{p.limit}
+                  </span>
+                </div>
+                <div className="h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                  <div
+                    className={`h-full rounded-full ${over ? "bg-red-500" : "bg-primary"}`}
+                    style={{ width: `${pct}%` }}
+                  />
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <div className="text-sm">
+        <h2 className="font-bold mb-2">Related tools</h2>
+        <div className="flex flex-wrap gap-3 text-muted-foreground">
+          <Link href="/tools/word-counter" className="underline underline-offset-4 hover:text-primary">
+            Word Counter
+          </Link>
+          <Link href="/tools/case-converter" className="underline underline-offset-4 hover:text-primary">
+            Case Converter
+          </Link>
+          <Link href="/tools/caption-generator" className="underline underline-offset-4 hover:text-primary">
+            Caption Generator
+          </Link>
+        </div>
+      </div>
+
+      <FAQSection
+        faqs={[
+          {
+            question: "Are social limits exact?",
+            answer:
+              "Limits are common published caps. Some platforms count emoji or links differently. Always preview in the app before posting.",
+            category: "Usage",
+          },
+          {
+            question: "Is text stored?",
+            answer:
+              "No. Counting runs in your browser only. Refreshing the page clears the text.",
+            category: "Privacy",
+          },
+        ]}
+      />
+    </div>
   );
 }

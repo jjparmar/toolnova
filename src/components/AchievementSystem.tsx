@@ -27,7 +27,7 @@ export default function AchievementSystem() {
 
         // Listen for storage changes (achievements unlocked in other tabs)
         const handleStorageChange = (e: StorageEvent) => {
-            if (e.key === 'aimultitools_achievements') {
+            if (e.key === 'toolnova_achievements') {
                 loadAchievements();
             }
         };

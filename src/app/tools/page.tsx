@@ -1,11 +1,12 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { ToolsClient } from "./client";
 import { siteConfig } from "@/config/site";
 import { TOOL_COUNT } from "@/data/tools";
 
 export const metadata: Metadata = {
-  title: `All Free AI Tools - 46+ Writing, Study, PDF & Career Tools | ToolNova`,
-  description: `Explore 46+ free AI-powered tools for study, writing, exam prep, image editing, PDF management, and career development. No sign-up required.`,
+  title: `All Free AI Tools - ${TOOL_COUNT}+ Writing, Study, PDF & Career Tools | ToolNova`,
+  description: `Explore ${TOOL_COUNT}+ free AI-powered tools for study, writing, exam prep, image editing, PDF management, and career development. No sign-up required.`,
   keywords: [
     "free AI tools",
     "online tools",
@@ -23,8 +24,8 @@ export const metadata: Metadata = {
     canonical: "https://www.toolnovahub.com/tools",
   },
   openGraph: {
-    title: "All Free AI Tools - 46+ Writing, Study, PDF & Career Tools | ToolNova",
-    description: "Explore 46+ free AI-powered tools for study, writing, exam prep, image editing, PDF management, and career development.",
+    title: `All Free AI Tools - ${TOOL_COUNT}+ Writing, Study, PDF & Career Tools | ToolNova`,
+    description: `Explore ${TOOL_COUNT}+ free AI-powered tools for study, writing, exam prep, image editing, PDF management, and career development.`,
     url: "https://www.toolnovahub.com/tools",
     type: "website",
     images: [
@@ -38,8 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "All Free AI Tools - 46+ Tools | ToolNova",
-    description: "Explore 46+ free AI-powered tools. No sign-up required.",
+    title: `All Free AI Tools - ${TOOL_COUNT}+ Tools | ToolNova`,
+    description: `Explore ${TOOL_COUNT}+ free AI-powered tools. No sign-up required.`,
     images: ["https://www.toolnovahub.com/og-image.png"],
     creator: "@toolnovahub",
   },
@@ -145,6 +146,39 @@ export default function ToolsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(toolsSchema) }}
       />
       <ToolsClient />
+
+      <section className="mx-auto max-w-[1200px] px-6 mt-12 not-prose">
+        <h2 className="text-xl font-bold mb-4">Browse by category</h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+          {[
+            { href: "/tools/writing-tools", label: "Writing tools", desc: "Essay, grammar, paraphrase, summarize" },
+            { href: "/tools/study-tools", label: "Study tools", desc: "Homework, flashcards, quizzes, notes" },
+            { href: "/tools/exam-prep-tools", label: "Exam prep", desc: "Vocabulary, synonyms, idioms" },
+            { href: "/tools/image-pdf-tools", label: "Image & PDF", desc: "Merge, split, compress, convert" },
+            { href: "/tools/career-tools", label: "Career tools", desc: "Resume, LinkedIn, cover letter, interview" },
+            { href: "/tools/utility-tools", label: "Utility tools", desc: "Word count, case convert, age calc" },
+          ].map((c) => (
+            <Link
+              key={c.href}
+              href={c.href}
+              className="rounded-xl border border-slate-200 dark:border-slate-800 p-4 hover:border-primary/40 hover:bg-primary/5 transition-colors"
+            >
+              <div className="font-semibold text-foreground">{c.label}</div>
+              <div className="text-muted-foreground mt-1">{c.desc}</div>
+            </Link>
+          ))}
+        </div>
+        <p className="text-sm text-muted-foreground mt-4">
+          Popular guides:{" "}
+          <Link href="/blog/merge-pdf-without-losing-formatting" className="underline underline-offset-4 hover:text-primary">Merge PDF guide</Link>
+          {" · "}
+          <Link href="/blog/homework-solver-best-practices" className="underline underline-offset-4 hover:text-primary">Homework best practices</Link>
+          {" · "}
+          <Link href="/blog/resume-bullets-that-get-interviews" className="underline underline-offset-4 hover:text-primary">Resume bullets</Link>
+          {" · "}
+          <Link href="/advertising" className="underline underline-offset-4 hover:text-primary">How we stay free</Link>
+        </p>
+      </section>
       
       {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
       <section className="mt-20 border-t border-slate-200/60 dark:border-slate-800/60 pt-16 pb-24 max-w-4xl mx-auto prose prose-slate dark:prose-invert prose-lg">

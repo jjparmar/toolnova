@@ -329,6 +329,7 @@ export default function GrammarFixClient() {
     >
       <EnhancedToolLayout
         toolSlug="grammar-fix"
+        systemPrompt={systemPrompt}
         toolName="AI Grammar Fix"
         placeholder={`📝 Paste or type your text here...
 

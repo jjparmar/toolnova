@@ -340,10 +340,10 @@ export const optimizedToolMetadata: Record<string, ToolMetadata> = {
     },
     'plagiarism-checker': {
         slug: 'plagiarism-checker',
-        name: 'Plagiarism Checker',
-        title: 'Check Text for Plagiarism Free – AI Detector | ToolNova',
-        description: 'Detect copied or AI-generated content in your essays and assignments. Get a plagiarism score with highlighted sections. Free plagiarism checker for students, no login.',
-        keywords: ['check essay for plagiarism free online', 'free plagiarism checker for students no login', 'detect copied content in assignment free', 'AI plagiarism detector free no signup', 'plagiarism score checker for college essays free', 'check originality of text free online'],
+        name: 'AI Writing Detector',
+        title: 'AI Writing Detector – Spot AI Patterns Free | ToolNova',
+        description: 'Estimate AI-like writing patterns in essays and get humanization tips. Not a legal plagiarism database scan — use as a writing coach. Free daily AI use, no login required to start.',
+        keywords: ['AI writing detector free online', 'detect AI writing patterns free', 'AI content detector for students', 'humanize AI text free', 'check AI footprint in essay free', 'originality writing coach free'],
     },
 };
 

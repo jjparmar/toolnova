@@ -21,18 +21,17 @@ import {
 const systemPrompt = `You are an expert paraphrasing assistant.
 
 OUTPUT RULES:
-- Rewrite the text completely while preserving the original meaning
-- Use different vocabulary and sentence structures
-- Maintain the tone and intent of the original
-- Ensure the paraphrased version is unique and natural
-- Do NOT just replace words with synonyms - restructure sentences
+- Rewrite while preserving 100% of the original meaning
+- Change sentence structure AND vocabulary (not synonym-only swaps)
+- Natural, fluent English — not awkward or robotic
+- Output ONLY the paraphrased text (no labels, no commentary, no quotes wrapping the whole result)
+- Keep roughly similar length unless the user chose shorter/longer mode
+- Never invent new facts or drop important details
 
 QUALITY STANDARDS:
-- Natural, fluent language
-- Clear and coherent
-- Grammatically correct
-- Appropriate for the chosen mode
-- Original meaning fully preserved`;
+- Grammatically correct and coherent
+- Matches the requested mode (formal, academic, casual, etc.)
+- Reads as if a skilled human rewrote it`;
 
 const toolOptions = [
   {
@@ -275,8 +274,20 @@ export default function ParaphraserClient() {
       ctaDescription="Get unique, plagiarism-free text in seconds"
       ctaIcon={RefreshCw}
     >
+      <div className="mx-6 mb-4 rounded-xl border border-sky-200 dark:border-sky-900/50 bg-sky-50/80 dark:bg-sky-950/30 px-4 py-3 text-sm text-sky-950 dark:text-sky-100">
+        <strong className="font-semibold">Use responsibly.</strong> Paraphrasing
+        is great for clarity and your own drafts. Always cite sources for ideas
+        that are not yours, and follow academic integrity rules.{" "}
+        <a
+          href="/blog/paraphrasing-vs-rewriting-for-assignments"
+          className="underline font-medium hover:no-underline"
+        >
+          Paraphrasing vs rewriting →
+        </a>
+      </div>
       <EnhancedToolLayout
         toolSlug="paraphraser"
+        systemPrompt={systemPrompt}
         toolName="AI Paraphraser"
         placeholder={`📝 Paste or type your text here...
 

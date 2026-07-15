@@ -28,7 +28,7 @@ const REVIEW_DATE = 'June 2026';
 const getAnswerSnippet = (title: string, description: string) => {
     // Keep it concise (40-70 words) and answer-shaped for AI/voice extraction.
     const trimmedDesc = description.trim();
-    return `The ${title} is a free online tool from ToolNova. ${trimmedDesc} It runs in your browser with no sign-up required and is free to use.`;
+    return `The ${title} is a free online tool from ToolNova. ${trimmedDesc} No sign-up is required to start. Browser-based PDF/image tools are unlimited; AI tools include free daily use with optional Pro for higher limits.`;
 };
 
 export const ToolRichContent: React.FC<ToolRichContentProps> = ({

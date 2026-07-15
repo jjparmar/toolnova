@@ -3,16 +3,27 @@
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Upload, Download, Maximize2, Loader2, ArrowLeft, Shield, Sparkles, Star, ImageIcon, FileText, Layers, RefreshCw } from 'lucide-react';
+import { Upload, Download, Maximize2, Loader2, ArrowLeft, Shield, Sparkles, Star, ImageIcon, FileText, Layers, RefreshCw, RotateCw, FlipHorizontal2 } from 'lucide-react';
 import { toast } from 'sonner';
 import Link from 'next/link';
+import { transformImageSrc } from '@/lib/image-client';
 
 const relatedTools = [
+    { name: 'Crop Image', slug: 'image-crop', icon: Maximize2, color: 'from-violet-500 to-purple-500' },
     { name: 'Image Compressor', slug: 'image-compressor', icon: RefreshCw, color: 'from-orange-500 to-red-500' },
     { name: 'JPG to PNG', slug: 'jpg-to-png', icon: ImageIcon, color: 'from-cyan-500 to-blue-500' },
-    { name: 'PNG to JPG', slug: 'png-to-jpg', icon: ImageIcon, color: 'from-amber-500 to-orange-500' },
     { name: 'Image to PDF', slug: 'image-to-pdf', icon: FileText, color: 'from-green-500 to-teal-500' },
 ];
+
+const SIZE_PRESETS = [
+    { label: 'Instagram square', w: 1080, h: 1080 },
+    { label: 'Story 9:16', w: 1080, h: 1920 },
+    { label: 'YouTube thumb', w: 1280, h: 720 },
+    { label: 'HD 1920', w: 1920, h: 1080 },
+    { label: 'Avatar 400', w: 400, h: 400 },
+    { label: '50%', w: 0, h: 0, pct: 50 },
+    { label: '25%', w: 0, h: 0, pct: 25 },
+] as const;
 
 export default function ResizeImageClient() {
     const router = useRouter();
@@ -87,19 +98,33 @@ export default function ResizeImageClient() {
             img.onload = () => {
                 canvas.width = targetWidth;
                 canvas.height = targetHeight;
-                ctx?.drawImage(img, 0, 0, targetWidth, targetHeight);
+                if (ctx) {
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+                    // White fill for formats that don't support transparency well when upscaling from empty
+                    if ((image.type || '').includes('jpeg') || (image.type || '').includes('jpg')) {
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(0, 0, targetWidth, targetHeight);
+                    }
+                    ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+                }
 
+                const mime =
+                    image.type === 'image/png' || image.type === 'image/webp'
+                        ? image.type
+                        : 'image/jpeg';
                 canvas.toBlob(
                     (blob) => {
                         if (blob) {
+                            if (resizedUrl) URL.revokeObjectURL(resizedUrl);
                             const url = URL.createObjectURL(blob);
                             setResizedUrl(url);
-                            toast.success(`Resized to ${targetWidth}x${targetHeight}!`);
+                            toast.success(`Resized to ${targetWidth}×${targetHeight}!`);
                         }
                         setResizing(false);
                     },
-                    image.type || 'image/jpeg',
-                    1.0
+                    mime,
+                    mime === 'image/jpeg' ? 0.95 : undefined,
                 );
             };
             img.src = preview;
@@ -188,6 +213,90 @@ export default function ResizeImageClient() {
                                     <img src={preview} alt="Preview" className="object-contain w-full h-full" />
                                 </div>
 
+                                <div className="flex flex-wrap gap-2">
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={async () => {
+                                            try {
+                                                const { dataUrl, width, height } = await transformImageSrc(preview, { rotate: 90 });
+                                                setPreview(dataUrl);
+                                                setOriginalWidth(width);
+                                                setOriginalHeight(height);
+                                                setTargetWidth(width);
+                                                setTargetHeight(height);
+                                                setResizedUrl('');
+                                                toast.success('Rotated 90°');
+                                            } catch {
+                                                toast.error('Rotate failed');
+                                            }
+                                        }}
+                                    >
+                                        <RotateCw className="h-4 w-4 mr-1" /> Rotate 90°
+                                    </Button>
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={async () => {
+                                            try {
+                                                const { dataUrl, width, height } = await transformImageSrc(preview, { flipH: true });
+                                                setPreview(dataUrl);
+                                                setOriginalWidth(width);
+                                                setOriginalHeight(height);
+                                                setResizedUrl('');
+                                                toast.success('Flipped horizontally');
+                                            } catch {
+                                                toast.error('Flip failed');
+                                            }
+                                        }}
+                                    >
+                                        <FlipHorizontal2 className="h-4 w-4 mr-1" /> Flip H
+                                    </Button>
+                                    <Link href="/tools/image-crop" className="inline-flex">
+                                        <Button type="button" variant="outline" size="sm">
+                                            Crop region →
+                                        </Button>
+                                    </Link>
+                                </div>
+
+                                <div>
+                                    <p className="text-sm font-medium text-muted-foreground mb-2">Quick size presets</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {SIZE_PRESETS.map((p) => (
+                                            <button
+                                                key={p.label}
+                                                type="button"
+                                                onClick={() => {
+                                                    if ('pct' in p && p.pct) {
+                                                        const w = Math.max(1, Math.round((originalWidth * p.pct) / 100));
+                                                        const h = Math.max(1, Math.round((originalHeight * p.pct) / 100));
+                                                        setTargetWidth(w);
+                                                        setTargetHeight(h);
+                                                    } else {
+                                                        setTargetWidth(p.w);
+                                                        setTargetHeight(
+                                                            maintainAspectRatio && originalWidth > 0
+                                                                ? Math.round((p.w / originalWidth) * originalHeight)
+                                                                : p.h,
+                                                        );
+                                                    }
+                                                }}
+                                                className="px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:border-primary/50"
+                                            >
+                                                {p.label}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <p className="text-xs text-muted-foreground mt-2">
+                                        Need to cut a region first?{" "}
+                                        <Link href="/tools/image-crop" className="text-primary font-medium underline underline-offset-2">
+                                            Open Crop Image
+                                        </Link>
+                                    </p>
+                                </div>
+
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <label className="text-sm font-medium text-muted-foreground">Width (px)</label>
@@ -222,25 +331,26 @@ export default function ResizeImageClient() {
                                     </label>
                                 </div>
 
-                                <p className="text-sm text-muted-foreground">Original: {originalWidth}x{originalHeight} px</p>
+                                <p className="text-sm text-muted-foreground">Original: {originalWidth}×{originalHeight} px → Target: {targetWidth}×{targetHeight} px</p>
 
                                 <Button onClick={resizeImage} disabled={resizing} className="w-full h-14 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold rounded-2xl shadow-xl shadow-blue-500/30">
                                     {resizing ? <><Loader2 className="h-5 w-5 animate-spin mr-2" /> Resizing...</> : <><Maximize2 className="h-5 w-5 mr-2" /> Resize Image</>}
                                 </Button>
 
                                 {resizedUrl && (
-                                    <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
-                                        <div className="flex items-center justify-between mb-3">
+                                    <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800 space-y-3">
+                                        <div className="flex flex-wrap items-center justify-between gap-3">
                                             <div>
-                                                <p className="font-bold text-green-700 dark:text-green-400">Resized Successfully!</p>
+                                                <p className="font-bold text-green-700 dark:text-green-400">Resized successfully</p>
                                                 <p className="text-sm text-green-600 dark:text-green-500">
-                                                    New Dimensions: {targetWidth}x{targetHeight} px
+                                                    {targetWidth}×{targetHeight} px
                                                 </p>
                                             </div>
                                             <Button onClick={downloadResized} className="bg-green-600 hover:bg-green-700">
                                                 <Download className="h-4 w-4 mr-2" /> Download
                                             </Button>
                                         </div>
+                                        <img src={resizedUrl} alt="Resized preview" className="max-h-48 mx-auto object-contain rounded-lg" />
                                     </div>
                                 )}
                             </div>

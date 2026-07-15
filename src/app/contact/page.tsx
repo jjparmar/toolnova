@@ -94,7 +94,13 @@ export default function ContactPage() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Have questions about our tools, a partnership idea, or just want to
-            say hello? We&apos;d love to hear from you.
+            say hello? We&apos;d love to hear from you. Prefer email?{" "}
+            <a
+              href="mailto:support@toolnovahub.com"
+              className="text-primary hover:underline font-medium"
+            >
+              support@toolnovahub.com
+            </a>
           </p>
         </div>
         <ContactForm />

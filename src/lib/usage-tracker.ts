@@ -25,9 +25,9 @@ export interface Achievement {
     target?: number;
 }
 
-const STORAGE_KEY = 'aimultitools_usage';
-const ACHIEVEMENTS_KEY = 'aimultitools_achievements';
-const CHALLENGE_KEY = 'aimultitools_daily_challenge';
+const STORAGE_KEY = 'toolnova_usage';
+const ACHIEVEMENTS_KEY = 'toolnova_achievements';
+const CHALLENGE_KEY = 'toolnova_daily_challenge';
 
 /**
  * Get current usage data
@@ -201,10 +201,10 @@ export function getAllAchievements(): Achievement[] {
         {
             id: 'completionist',
             name: 'Completionist',
-            description: 'Try all 18 tools',
+            description: 'Try 40+ different tools',
             icon: '🏆',
             unlocked: false,
-            target: 18,
+            target: 40,
         },
         {
             id: 'daily_dedicated',
@@ -290,7 +290,7 @@ function checkAchievements(usageData: UsageData): Achievement[] {
                 break;
             case 'completionist':
                 progress = usageData.toolsUsed.length;
-                shouldUnlock = usageData.toolsUsed.length >= 18;
+                shouldUnlock = usageData.toolsUsed.length >= 40;
                 break;
             case 'daily_dedicated':
                 progress = usageData.currentStreak;

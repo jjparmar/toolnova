@@ -8,8 +8,8 @@ import { toast } from 'sonner';
 import Link from 'next/link';
 
 const relatedTools = [
+    { name: 'Crop Image', slug: 'image-crop', icon: ImageIcon, color: 'from-violet-500 to-purple-500' },
     { name: 'JPG to PNG', slug: 'jpg-to-png', icon: ImageIcon, color: 'from-cyan-500 to-blue-500' },
-    { name: 'PNG to JPG', slug: 'png-to-jpg', icon: ImageIcon, color: 'from-amber-500 to-orange-500' },
     { name: 'Image to PDF', slug: 'image-to-pdf', icon: FileText, color: 'from-green-500 to-teal-500' },
     { name: 'Merge PDF', slug: 'merge-pdf', icon: Layers, color: 'from-red-500 to-orange-500' },
 ];
@@ -19,10 +19,14 @@ export default function ImageCompressorClient() {
     const [image, setImage] = useState<File | null>(null);
     const [preview, setPreview] = useState<string>('');
     const [compressing, setCompressing] = useState(false);
-    const [quality, setQuality] = useState(70);
+    const [quality, setQuality] = useState(75);
+    const [maxWidth, setMaxWidth] = useState(0); // 0 = original
+    const [outputFormat, setOutputFormat] = useState<'image/jpeg' | 'image/webp' | 'image/png'>('image/jpeg');
     const [originalSize, setOriginalSize] = useState<number>(0);
     const [compressedSize, setCompressedSize] = useState<number>(0);
     const [compressedUrl, setCompressedUrl] = useState<string>('');
+    const [dragOver, setDragOver] = useState(false);
+    const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const formatSize = (bytes: number) => {
@@ -40,45 +44,87 @@ export default function ImageCompressorClient() {
             toast.error('Please select an image file');
             return;
         }
+        if (file.size > 40 * 1024 * 1024) {
+            toast.error('Please use an image under 40MB for browser compression');
+            return;
+        }
         setImage(file);
         setOriginalSize(file.size);
         setCompressedUrl('');
         setCompressedSize(0);
+        setDims(null);
+        if (file.type === 'image/png') setOutputFormat('image/png');
+        else if (file.type === 'image/webp') setOutputFormat('image/webp');
+        else setOutputFormat('image/jpeg');
         const reader = new FileReader();
-        reader.onload = (e) => setPreview(e.target?.result as string);
+        reader.onload = (e) => {
+            const url = e.target?.result as string;
+            setPreview(url);
+            const probe = new window.Image();
+            probe.onload = () => setDims({ w: probe.width, h: probe.height });
+            probe.src = url;
+        };
         reader.readAsDataURL(file);
     };
 
     const compressImage = async () => {
-        if (!image) return;
+        if (!image || !preview) return;
         setCompressing(true);
 
         try {
+            if (compressedUrl) URL.revokeObjectURL(compressedUrl);
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             const img = new window.Image();
 
             img.onload = () => {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx?.drawImage(img, 0, 0);
+                let w = img.width;
+                let h = img.height;
+                if (maxWidth > 0 && w > maxWidth) {
+                    h = Math.round((h * maxWidth) / w);
+                    w = maxWidth;
+                }
+                canvas.width = w;
+                canvas.height = h;
+                if (ctx) {
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+                    if (outputFormat === 'image/jpeg') {
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(0, 0, w, h);
+                    }
+                    ctx.drawImage(img, 0, 0, w, h);
+                }
 
+                const mime = outputFormat;
+                const q = mime === 'image/png' ? undefined : quality / 100;
                 canvas.toBlob(
                     (blob) => {
                         if (blob) {
                             setCompressedSize(blob.size);
                             const url = URL.createObjectURL(blob);
                             setCompressedUrl(url);
-                            toast.success(`Compressed! Saved ${formatSize(originalSize - blob.size)}`);
+                            const saved = originalSize - blob.size;
+                            toast.success(
+                                saved > 0
+                                    ? `Compressed! Saved ${formatSize(saved)}`
+                                    : 'Done — try lower quality or max width for smaller files',
+                            );
+                        } else {
+                            toast.error('Compression failed for this format');
                         }
                         setCompressing(false);
                     },
-                    'image/jpeg',
-                    quality / 100
+                    mime,
+                    q,
                 );
             };
+            img.onerror = () => {
+                toast.error('Could not load image');
+                setCompressing(false);
+            };
             img.src = preview;
-        } catch (error) {
+        } catch {
             toast.error('Failed to compress image');
             setCompressing(false);
         }
@@ -86,9 +132,16 @@ export default function ImageCompressorClient() {
 
     const downloadCompressed = () => {
         if (!compressedUrl) return;
+        const ext =
+            outputFormat === 'image/png'
+                ? 'png'
+                : outputFormat === 'image/webp'
+                  ? 'webp'
+                  : 'jpg';
+        const base = (image?.name || 'image').replace(/\.[^.]+$/, '');
         const a = document.createElement('a');
         a.href = compressedUrl;
-        a.download = `compressed-${image?.name || 'image.jpg'}`;
+        a.download = `compressed-${base}.${ext}`;
         a.click();
     };
 
@@ -141,56 +194,115 @@ export default function ImageCompressorClient() {
                         {!image ? (
                             <div
                                 onClick={() => fileInputRef.current?.click()}
-                                className="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl p-10 text-center cursor-pointer hover:border-primary/50 transition-all"
+                                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                                onDragLeave={() => setDragOver(false)}
+                                onDrop={(e) => {
+                                    e.preventDefault();
+                                    setDragOver(false);
+                                    handleFileSelect(e.dataTransfer.files);
+                                }}
+                                className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all ${
+                                    dragOver
+                                        ? 'border-primary bg-primary/5 scale-[1.01]'
+                                        : 'border-slate-200 dark:border-slate-700 hover:border-primary/50'
+                                }`}
                             >
                                 <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
                                 <p className="text-lg font-semibold text-foreground mb-2">Drop image here or click to upload</p>
-                                <p className="text-sm text-muted-foreground">JPG, PNG, WebP supported</p>
+                                <p className="text-sm text-muted-foreground">JPG, PNG, WebP · processed in your browser · free forever</p>
                             </div>
                         ) : (
                             <div className="space-y-6">
                                 <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
                                     <img src={preview} alt="Preview" className="h-16 w-16 object-cover rounded-lg" />
-                                    <div className="flex-1">
+                                    <div className="flex-1 min-w-0">
                                         <p className="font-medium text-foreground truncate">{image.name}</p>
-                                        <p className="text-sm text-muted-foreground">Original: {formatSize(originalSize)}</p>
+                                        <p className="text-sm text-muted-foreground">
+                                            Original: {formatSize(originalSize)}
+                                            {dims ? ` · ${dims.w}×${dims.h}px` : ''}
+                                        </p>
                                     </div>
-                                    <Button variant="ghost" size="icon" onClick={() => { setImage(null); setPreview(''); setCompressedUrl(''); }} className="text-red-500">
+                                    <Button variant="ghost" size="icon" onClick={() => {
+                                        if (compressedUrl) URL.revokeObjectURL(compressedUrl);
+                                        setImage(null); setPreview(''); setCompressedUrl(''); setDims(null);
+                                    }} className="text-red-500">
                                         <Trash2 className="h-5 w-5" />
                                     </Button>
                                 </div>
 
-                                <div className="space-y-3">
-                                    <div className="flex items-center justify-between">
-                                        <label className="font-medium text-foreground">Quality: {quality}%</label>
-                                        <span className="text-sm text-muted-foreground">{quality < 50 ? 'Low' : quality < 80 ? 'Medium' : 'High'}</span>
+                                <div className="grid sm:grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium text-foreground">Output format</label>
+                                        <select
+                                            value={outputFormat}
+                                            onChange={(e) => setOutputFormat(e.target.value as typeof outputFormat)}
+                                            className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 text-sm"
+                                        >
+                                            <option value="image/jpeg">JPG (best for photos)</option>
+                                            <option value="image/webp">WebP (smaller, modern)</option>
+                                            <option value="image/png">PNG (lossless / transparency)</option>
+                                        </select>
                                     </div>
-                                    <input
-                                        type="range"
-                                        min="10"
-                                        max="100"
-                                        value={quality}
-                                        onChange={(e) => setQuality(parseInt(e.target.value))}
-                                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
-                                    />
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium text-foreground">Max width (optional)</label>
+                                        <select
+                                            value={maxWidth}
+                                            onChange={(e) => setMaxWidth(parseInt(e.target.value, 10))}
+                                            className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 text-sm"
+                                        >
+                                            <option value={0}>Keep original size</option>
+                                            <option value={1920}>1920px (Full HD)</option>
+                                            <option value={1280}>1280px</option>
+                                            <option value={800}>800px (blog)</option>
+                                            <option value={400}>400px (thumbnail)</option>
+                                        </select>
+                                    </div>
                                 </div>
+
+                                {outputFormat !== 'image/png' && (
+                                    <div className="space-y-3">
+                                        <div className="flex items-center justify-between">
+                                            <label className="font-medium text-foreground">Quality: {quality}%</label>
+                                            <span className="text-sm text-muted-foreground">{quality < 50 ? 'Smaller file' : quality < 80 ? 'Balanced' : 'High quality'}</span>
+                                        </div>
+                                        <input
+                                            type="range"
+                                            min="10"
+                                            max="100"
+                                            value={quality}
+                                            onChange={(e) => setQuality(parseInt(e.target.value))}
+                                            className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
+                                        />
+                                    </div>
+                                )}
 
                                 <Button onClick={compressImage} disabled={compressing} className="w-full h-14 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold rounded-2xl shadow-xl shadow-orange-500/30">
                                     {compressing ? <><Loader2 className="h-5 w-5 animate-spin mr-2" /> Compressing...</> : <><Zap className="h-5 w-5 mr-2" /> Compress Image</>}
                                 </Button>
 
                                 {compressedUrl && (
-                                    <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
-                                        <div className="flex items-center justify-between mb-3">
+                                    <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800 space-y-3">
+                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                             <div>
-                                                <p className="font-bold text-green-700 dark:text-green-400">Compressed!</p>
+                                                <p className="font-bold text-green-700 dark:text-green-400">Ready to download</p>
                                                 <p className="text-sm text-green-600 dark:text-green-500">
-                                                    {formatSize(compressedSize)} ({reduction}% smaller)
+                                                    {formatSize(originalSize)} → {formatSize(compressedSize)}
+                                                    {reduction > 0 ? ` (${reduction}% smaller)` : reduction < 0 ? ' (larger — try JPG/WebP or lower quality)' : ''}
                                                 </p>
                                             </div>
                                             <Button onClick={downloadCompressed} className="bg-green-600 hover:bg-green-700">
                                                 <Download className="h-4 w-4 mr-2" /> Download
                                             </Button>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <p className="text-xs text-muted-foreground mb-1">Original</p>
+                                                <img src={preview} alt="Original" className="w-full h-28 object-contain rounded-lg bg-white/50" />
+                                            </div>
+                                            <div>
+                                                <p className="text-xs text-muted-foreground mb-1">Compressed</p>
+                                                <img src={compressedUrl} alt="Compressed preview" className="w-full h-28 object-contain rounded-lg bg-white/50" />
+                                            </div>
                                         </div>
                                     </div>
                                 )}

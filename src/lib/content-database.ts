@@ -10,7 +10,7 @@ export const toolFAQs: Record<string, FAQItem[]> = {
     'homework-solver': [
         {
             question: "Is the AI homework solver really free?",
-            answer: "Yes! Our AI homework solver is 100% free to use with no hidden costs, subscriptions, or signup required. Use it as much as you need.",
+            answer: "Yes — free to start with no credit card required. Guests get a free daily AI allowance without sign-up; a free account adds more daily uses. Optional Pro unlocks unlimited AI access. PDF/image tools stay unlimited in your browser.",
             category: "pricing"
         },
         {

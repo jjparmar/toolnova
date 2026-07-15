@@ -100,7 +100,7 @@ export default function AboutPage() {
         <p>
           We started with three tools — a text summarizer, a grammar fixer, and a PDF
           merger — and built from there based directly on user requests. Today, ToolNova
-          offers 46+ tools across writing, study, career, image and PDF processing, and
+          offers 47+ tools across writing, study, career, image and PDF processing, and
           general productivity. Every single one is free to use with no account required.
           Our team of software engineers, UX designers, and domain experts continues to
           expand and refine the platform every week.
@@ -184,7 +184,7 @@ export default function AboutPage() {
                 initials: "ET",
                 name: "ToolNova Engineering Team",
                 role: "Product & Software Development",
-                desc: "Our engineering team builds and maintains all 46+ tools on the platform. Engineers specialise in AI/ML integration, browser-based file processing, and full-stack web development. Every tool is tested end-to-end before release and monitored for quality regressions.",
+                desc: "Our engineering team builds and maintains all 47+ tools on the platform. Engineers specialise in AI/ML integration, browser-based file processing, and full-stack web development. Every tool is tested end-to-end before release and monitored for quality regressions.",
               },
               {
                 initials: "EC",
@@ -224,13 +224,26 @@ export default function AboutPage() {
             We currently serve display advertising through{" "}
             <strong>Google AdSense</strong>. If you are interested in direct advertising
             opportunities, sponsorships, or editorial partnerships, please contact us.
+            Full details are on our{" "}
+            <Link href="/advertising" className="text-primary hover:underline font-medium">
+              Advertising Disclosure
+            </Link>
+            .
           </p>
-          <a
-            href="mailto:support@toolnovahub.com"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors"
-          >
-            Contact us about advertising
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/advertising"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors"
+            >
+              Advertising disclosure
+            </Link>
+            <a
+              href="mailto:support@toolnovahub.com?subject=Advertising%20inquiry"
+              className="inline-flex items-center gap-2 px-5 py-2.5 border border-primary text-primary rounded-xl text-sm font-semibold hover:bg-primary/5 transition-colors"
+            >
+              Contact about advertising
+            </a>
+          </div>
         </div>
 
         <h2 className="mt-16 mb-8 text-2xl font-bold text-center">

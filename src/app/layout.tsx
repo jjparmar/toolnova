@@ -7,20 +7,31 @@ import Script from "next/script";
 import "./globals.css";
 import "./accessibility.css";
 import { Toaster } from "@/components/ui/toaster";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 import { SkipLinks } from "@/components/SkipLinks";
-import { FeedbackWidget } from "@/components/FeedbackWidget";
+import dynamic from "next/dynamic";
 import { VitalsInitializer } from "@/components/VitalsInitializer";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { siteConfig } from "@/config/site";
+import { adsenseConfig } from "@/config/adsense";
 import { Providers } from "@/components/Providers";
+import { TOOL_COUNT_LABEL } from "@/data/tools";
+
+// Defer feedback widget JS until after hydration (not critical for LCP)
+const FeedbackWidget = dynamic(
+  () =>
+    import("@/components/FeedbackWidget").then((m) => m.FeedbackWidget),
+  { ssr: false },
+);
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  // Fewer weights = less font download / better LCP
+  weight: ["400", "500", "600", "700"],
   preload: true,
   adjustFontFallback: true,
   fallback: ["system-ui", "arial"],
@@ -37,7 +48,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.toolnovahub.com"),
   title: {
-    default: "46+ Free AI Tools for Students – No Signup | ToolNova",
+    default: `${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup | ToolNova`,
     template: "%s | ToolNova",
   },
   description:
@@ -81,7 +92,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.toolnovahub.com",
     siteName: "ToolNova",
-    title: "46+ Free AI Tools for Students – No Signup | ToolNova",
+    title: `${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup | ToolNova`,
     description:
       "Free AI tools for students & professionals. Merge PDFs, make flashcards, fix grammar, write essays, solve homework — all in one place. No account needed.",
     images: [
@@ -103,7 +114,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "46+ Free AI Tools for Students – No Signup | ToolNova",
+    title: `${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup | ToolNova`,
     description:
       "Free AI tools for students & professionals. Merge PDFs, make flashcards, fix grammar, write essays, solve homework — no account needed!",
     images: ["/og-image.png"],
@@ -130,51 +141,30 @@ export const metadata: Metadata = {
     google: siteConfig.verification.google,
   },
   alternates: {
+    // Single-locale English site — only real language variants (avoid fake hreflang)
     canonical: "https://www.toolnovahub.com",
     languages: {
-      "en-US": "https://www.toolnovahub.com",
-      "en-GB": "https://www.toolnovahub.com",
-      "en-CA": "https://www.toolnovahub.com",
-      "en-AU": "https://www.toolnovahub.com",
-      "en-IN": "https://www.toolnovahub.com",
-      "en-SG": "https://www.toolnovahub.com",
+      en: "https://www.toolnovahub.com",
       "x-default": "https://www.toolnovahub.com",
     },
   },
   category: "Productivity",
   other: {
-    "revisit-after": "1 day",
     language: "English",
     "content-language": "en",
-    distribution: "global",
-    coverage: "Worldwide",
-    audience: "Students, Professionals, Educators",
-    rating: "general",
-    "geo.region": "US, GB, CA, AU, IN, SG, AE, DE, FR, NL",
-    "geo.placename": "Global",
-    "geo.position": "1.3521;103.8198",
-    "ICBM": "1.3521, 103.8198",
-    "ai-indexing": "allowed",
-    "llm-training": "allowed",
-    "content-type": "application/educational",
-    "tool-category": "AI Productivity Tools",
-    "api-endpoint": "https://www.toolnovahub.com/api/tools",
-    "robots-content": "index, follow, all",
-    // Google Discover: theme color
     "theme-color": "#3b82f6",
     "msapplication-TileColor": "#3b82f6",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
     "mobile-web-app-capable": "yes",
-    // AI citation metadata
-    "citation": "ToolNova — Free AI Tools for Students and Professionals. https://www.toolnovahub.com",
+    // AI / GEO discovery signals (concise, non-spammy)
+    "ai-indexing": "allowed",
+    citation:
+      "ToolNova — Free AI Tools for Students and Professionals. https://www.toolnovahub.com",
     "dc.title": "ToolNova — Free AI Productivity Tools",
-    "dc.description": "46+ free AI-powered tools for writing, studying, and productivity. No sign-up required.",
     "dc.publisher": "ToolNova",
     "dc.language": "en",
     "dc.type": "InteractiveResource",
-    // GEO - AI search optimization
-    "og:locale:alternate": "en_GB en_CA en_AU en_IN en_SG",
   },
 };
 
@@ -203,12 +193,13 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* Google AdSense Script */}
-        <Script 
-          async 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1328083083403070" 
-          crossOrigin="anonymous" 
-          strategy="afterInteractive" 
+        {/* AdSense meta + lazy script for verification / AdsBot (Auto Ads init after consent) */}
+        <meta name="google-adsense-account" content={adsenseConfig.publisherId} />
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseConfig.publisherId}`}
+          crossOrigin="anonymous"
+          strategy="lazyOnload"
         />
 
         {/* RSS Feed autodiscovery */}
@@ -219,14 +210,14 @@ export default function RootLayout({
           href="https://www.toolnovahub.com/feed.xml"
         />
 
-        {/* DNS Prefetch for faster domain resolution */}
+        {/* Prefetch third-parties (avoid preconnect to ads — protects LCP) */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
-        {/* Preconnect for critical resources */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* Preconnect only critical font origin */}
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -259,6 +250,7 @@ export default function RootLayout({
               <Footer />
             </div>
             <Toaster />
+            <SonnerToaster position="top-center" richColors closeButton />
             <FeedbackWidget />
           </Providers>
         </ThemeProvider>

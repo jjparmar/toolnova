@@ -48,7 +48,7 @@ import { trackToolUse } from "@/lib/usage-tracker";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Lock, LogIn } from "lucide-react";
+import { LogIn } from "lucide-react";
 import { AIResultFormatter } from "@/components/AIResultFormatter";
 import { TopBannerAd, BottomBoxAd } from "@/components/ads/AdUnit";
 
@@ -119,6 +119,9 @@ export function ToolLayout({
     router.push("/login");
   };
 
+  // Guests can use AI tools without sign-up (daily free allowance).
+  // Sign-in unlocks another free daily allowance + history; Pro is unlimited.
+
   // Initialize options with defaults - only once on mount
   useEffect(() => {
     if (optionsInitialized.current) return;
@@ -171,19 +174,23 @@ export function ToolLayout({
             ? promptTemplate(input, options)
             : promptTemplate.replace("{input}", input);
 
-        console.log("Frontend: Sending request to /api/ai", {
-          promptLength: prompt.length,
-        });
-
         const res = await fetch("/api/ai", {
           method: "POST",
           body: JSON.stringify({ prompt, systemPrompt, toolSlug }),
           headers: { "Content-Type": "application/json" },
         });
-        const data = await res.json();
-        console.log("Frontend: Received API response", data);
+        const data = await res.json().catch(() => ({}));
 
-        if (data.error) throw new Error(data.error);
+        if (!res.ok || data.error) {
+          throw new Error(
+            typeof data.error === "string"
+              ? data.error
+              : "Generation failed. Please try again.",
+          );
+        }
+        if (!data.result || typeof data.result !== "string") {
+          throw new Error("Empty response from AI. Please try again.");
+        }
         output = data.result;
       }
 
@@ -207,17 +214,26 @@ export function ToolLayout({
         });
       }, 100);
     } catch (error) {
-      toast.error("Generation failed. Please try again.");
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Generation failed. Please try again.";
+      toast.error(message);
+      setResult(`❌ ${message}`);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(result);
-    setCopied(true);
-    toast.success("Copied to clipboard!");
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(result);
+      setCopied(true);
+      toast.success("Copied to clipboard!");
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error("Could not copy — try selecting the text manually");
+    }
   };
 
   const handleDownload = () => {
@@ -300,12 +316,12 @@ export function ToolLayout({
   const getShareText = () => {
     const truncated =
       result.length > 250 ? result.substring(0, 250) + "..." : result;
-    return `${truncated}\n\n✨ Generated with ToolNova - https://toolnova.ai`;
+    return `${truncated}\n\n✨ Generated with ToolNova - https://www.toolnovahub.com`;
   };
 
   const handleSocialShare = (platform: string) => {
     const text = encodeURIComponent(getShareText());
-    const url = encodeURIComponent("https://toolnova.ai");
+    const url = encodeURIComponent("https://www.toolnovahub.com");
 
     const shareUrls: Record<string, string> = {
       whatsapp: `https://wa.me/?text=${text}`,
@@ -344,6 +360,20 @@ export function ToolLayout({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Top Banner Ad */}
         <TopBannerAd />
+
+        {!isNonAITool && (
+          <div className="mb-6 rounded-xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm text-muted-foreground">
+            <strong className="text-foreground">Free to start</strong> — no
+            sign-up required. Free daily AI uses included;{" "}
+            <Link
+              href="/pricing"
+              className="text-primary font-medium underline underline-offset-2 hover:no-underline"
+            >
+              Pro unlocks unlimited AI
+            </Link>
+            . We do not sell your prompts.
+          </div>
+        )}
 
         {/* Top Actions */}
         <div className="flex items-center justify-between mb-8">
@@ -510,31 +540,21 @@ export function ToolLayout({
             </div>
 
             <div className="relative group">
+              {/* Optional soft CTA for guests — tools work without sign-in */}
               {!isNonAITool && !loading && !authLoading && !user && (
-                <div className="absolute inset-x-4 bottom-4 z-20">
-                  <div className="glass-panel p-6 rounded-2xl border border-white/20 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 animate-slide-up">
-                    <div className="flex items-center gap-4">
-                      <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
-                        <Lock className="h-6 w-6 text-primary" />
-                      </div>
-                      <div className="text-left">
-                        <h4 className="font-black text-slate-900 dark:text-white">
-                          AI Capabilities Locked
-                        </h4>
-                        <p className="text-sm text-slate-500 dark:text-slate-400">
-                          Sign in for free to access our high-performance AI
-                          models.
-                        </p>
-                      </div>
-                    </div>
-                    <Button
-                      onClick={handleLoginRedirect}
-                      size="lg"
-                      className="shrink-0 h-12 px-8 font-black rounded-xl bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/20"
-                    >
-                      Sign In to Unlock
-                    </Button>
-                  </div>
+                <div className="mb-3 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm">
+                  <p className="text-slate-600 dark:text-slate-300">
+                    Free to use without an account. Sign in for more daily uses and saved history.
+                  </p>
+                  <Button
+                    onClick={handleLoginRedirect}
+                    variant="outline"
+                    size="sm"
+                    className="shrink-0 rounded-xl font-semibold"
+                  >
+                    <LogIn className="h-3.5 w-3.5 mr-1.5" />
+                    Sign in free
+                  </Button>
                 </div>
               )}
 
@@ -542,7 +562,6 @@ export function ToolLayout({
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={placeholder}
-                disabled={!isNonAITool && !user}
                 className="w-full min-h-[220px] md:min-h-[280px] resize-none p-8 rounded-[1.8rem] bg-slate-50 dark:bg-slate-800/40 border-slate-100 dark:border-slate-800/60 text-slate-900 dark:text-white text-lg focus:ring-4 focus:ring-primary/10 focus:border-primary/50 transition-all font-medium placeholder:text-slate-400 placeholder:font-normal leading-relaxed"
               />
             </div>

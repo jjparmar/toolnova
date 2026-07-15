@@ -16,9 +16,40 @@ import { Button } from "@/components/ui/button";
 import { QuickAnswerBox } from "@/components/aeo/QuickAnswerBox";
 import { FAQAccordion } from "@/components/aeo/FAQAccordion";
 import { getHomepageAEO } from "@/lib/global-aeo-content";
-import { motion } from "framer-motion";
 import { MultiplexAd, BetweenSectionsAd } from "@/components/ads/AdUnit";
-import { TOOL_COUNT } from "@/data/tools";
+import { TOOL_COUNT, TOOL_COUNT_LABEL } from "@/data/tools";
+
+// Lightweight motion stubs (avoids shipping framer-motion on homepage for better TTI/LCP)
+const motion = {
+  div: ({
+    children,
+    className,
+    // accept motion props without failing when motion is stubbed
+    ..._rest
+  }: {
+    children?: React.ReactNode;
+    className?: string;
+    [key: string]: unknown;
+  }) => <div className={className}>{children}</div>,
+  h1: ({
+    children,
+    className,
+    ..._rest
+  }: {
+    children?: React.ReactNode;
+    className?: string;
+    [key: string]: unknown;
+  }) => <h1 className={className}>{children}</h1>,
+  p: ({
+    children,
+    className,
+    ..._rest
+  }: {
+    children?: React.ReactNode;
+    className?: string;
+    [key: string]: unknown;
+  }) => <p className={className}>{children}</p>,
+};
 
 export function HomeDashboard() {
   const aeoContent = getHomepageAEO();
@@ -59,7 +90,7 @@ export function HomeDashboard() {
                 transition={{ duration: 0.5 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white/90 text-sm font-medium mb-8"
               >
-                <Sparkles className="h-4 w-4" /> 100% free · No sign-up required
+                <Sparkles className="h-4 w-4" /> Free to start · No sign-up required
               </motion.div>
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
@@ -81,7 +112,7 @@ export function HomeDashboard() {
                 A professional suite of{" "}
                 <strong>free AI writing, study, and productivity tools</strong>.
                 Merge PDFs, generate flashcards, fix grammar, and write essays
-                instantly with AI. No sign-up required.
+                instantly with AI. Free to start — no sign-up required.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -89,9 +120,9 @@ export function HomeDashboard() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
               >
-                <Link href="/tools">
+                <Link href="/tools/homework-solver">
                   <Button className="h-14 px-8 rounded-xl bg-white text-primary hover:bg-blue-50 font-bold text-base transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 flex items-center justify-center gap-2 group">
-                    Get Started Free
+                    Try a tool free
                     <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
@@ -101,7 +132,7 @@ export function HomeDashboard() {
                     className="h-14 px-8 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white/20 font-semibold text-base transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2"
                   >
                     <Grid2X2 className="h-5 w-5" />
-                    Browse Tools
+                    Browse all tools
                   </Button>
                 </Link>
               </motion.div>
@@ -127,7 +158,7 @@ export function HomeDashboard() {
                   $0
                 </div>
                 <div className="text-blue-200 text-sm font-medium">
-                  Always Free
+                  Free to Start
                 </div>
               </div>
               <div className="text-center md:text-right p-4 rounded-2xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors">
@@ -454,6 +485,47 @@ export function HomeDashboard() {
         </div>
       </section>
 
+      {/* Trust / how free tools are funded — AdSense transparency */}
+      <section className="py-12 bg-white dark:bg-background border-y border-slate-100 dark:border-slate-800">
+        <div className="container mx-auto px-6 max-w-[1000px]">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/50 p-6 md:p-8">
+            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
+              How ToolNova stays free
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Hosting and AI infrastructure cost money. We keep tools free to
+              start by offering optional{" "}
+              <Link href="/pricing" className="text-primary hover:underline font-medium">
+                ToolNova Pro
+              </Link>{" "}
+              for unlimited AI, and by showing clearly labeled display ads when
+              approved. Ads never control our editorial standards. Details:{" "}
+              <Link
+                href="/advertising"
+                className="text-primary hover:underline font-medium"
+              >
+                Advertising disclosure
+              </Link>
+              .
+            </p>
+            <ul className="grid sm:grid-cols-3 gap-3 text-sm text-muted-foreground">
+              <li className="rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 px-4 py-3">
+                <strong className="text-foreground block mb-1">No account wall</strong>
+                Start any tool without signing up
+              </li>
+              <li className="rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 px-4 py-3">
+                <strong className="text-foreground block mb-1">Browser privacy</strong>
+                PDF &amp; image tools process locally when possible
+              </li>
+              <li className="rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 px-4 py-3">
+                <strong className="text-foreground block mb-1">Honest limits</strong>
+                Free daily AI allowance; Pro is optional
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* About ToolNova & E-E-A-T Section for AdSense/SEO */}
       <section className="py-24 bg-slate-50 dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
         <div className="container mx-auto px-6 max-w-[1000px] prose prose-slate dark:prose-invert prose-lg">
@@ -478,7 +550,7 @@ export function HomeDashboard() {
               of research PDFs, a digital marketer needing rapid image
               compression without quality degradation, or an educator seeking to
               generate interactive learning materials like active-recall
-              flashcards, our growing suite of over 46 specialized
+              flashcards, our growing suite of {TOOL_COUNT_LABEL} specialized
               micro-applications is engineered to save you hours of
               administrative labor. By leveraging state-of-the-art Artificial
               Intelligence and optimized processing algorithms, we transform
@@ -553,8 +625,9 @@ export function HomeDashboard() {
             workflow?
           </h2>
           <p className="text-slate-300 text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
-            Start using {TOOL_COUNT} free AI tools to write better, study
-            smarter, and get more done — no sign-up required.
+            Start using {TOOL_COUNT_LABEL} free tools to write better, study
+            smarter, and get more done — no sign-up required. PDF/image tools
+            run unlimited in your browser; AI tools include free daily use.
           </p>
           <Link href="/tools">
             <Button className="h-16 px-12 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-lg transition-all shadow-2xl hover:shadow-primary/30 hover:scale-105">

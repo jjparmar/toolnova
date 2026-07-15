@@ -91,6 +91,16 @@ export default function StudyToolsPage() {
                 </p>
             </section>
 
+            <section className="mx-auto max-w-4xl px-6 pb-10">
+                <h2 className="text-xl font-semibold mb-3">Study guides from the blog</h2>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li><Link href="/blog/homework-solver-best-practices" className="underline underline-offset-4 hover:text-primary">Homework solver best practices</Link></li>
+                    <li><Link href="/blog/build-exam-revision-system-30-minutes" className="underline underline-offset-4 hover:text-primary">Build an exam revision system in 30 minutes</Link></li>
+                    <li><Link href="/blog/flashcards-vs-notes-for-retention" className="underline underline-offset-4 hover:text-primary">Flashcards vs notes for retention</Link></li>
+                    <li><Link href="/blog/ai-writing-workflow-students" className="underline underline-offset-4 hover:text-primary">Ethical AI writing workflow for students</Link></li>
+                </ul>
+            </section>
+
             <section className="mx-auto max-w-[1200px] px-6 pb-12">
                 <h2 className="text-xl font-semibold mb-3">Explore more categories</h2>
                 <div className="flex flex-wrap gap-3 text-sm">

@@ -4,6 +4,7 @@
 
 import { Metadata } from "next";
 import { siteConfig, getFullUrl } from "@/config/site";
+import { TOOL_COUNT_LABEL } from "@/data/tools";
 
 interface SEOConfig {
   title: string;
@@ -41,26 +42,34 @@ export function generateMetadata(config: SEOConfig): Metadata {
     category,
   } = config;
 
-  const fullTitle = title.includes(SITE_NAME)
-    ? title
-    : `${title} | ${SITE_NAME}`;
+  // Root layout uses template "%s | ToolNova" — pass bare title to avoid double suffix
+  const bareTitle = title
+    .replace(new RegExp(`\\s*[|–-]\\s*${SITE_NAME}\\s*$`, "i"), "")
+    .trim();
+  const socialTitle = bareTitle.includes(SITE_NAME)
+    ? bareTitle
+    : `${bareTitle} | ${SITE_NAME}`;
   const url = canonical || BASE_URL;
 
   return {
-    title: fullTitle,
+    title: bareTitle,
     description,
-    keywords: keywords.join(", "),
+    keywords: keywords.length ? keywords : undefined,
     authors: author ? [{ name: author }] : undefined,
     category,
 
     // Canonical URL
     alternates: {
       canonical: url,
+      languages: {
+        en: url,
+        "x-default": url,
+      },
     },
 
     // Open Graph (Facebook, LinkedIn, etc.)
     openGraph: {
-      title: fullTitle,
+      title: socialTitle,
       description,
       url,
       siteName: SITE_NAME,
@@ -69,7 +78,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: title,
+          alt: bareTitle,
         },
       ],
       locale: "en_US",
@@ -81,7 +90,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
     // Twitter Card
     twitter: {
       card: twitterCard,
-      title: fullTitle,
+      title: socialTitle,
       description,
       images: [ogImage],
       creator: siteConfig.twitterHandle,
@@ -121,7 +130,7 @@ export function generateToolMetadata(
   keywords: string[],
 ): Metadata {
   return generateMetadata({
-    title: `${toolName} Free Online – No Signup Required | ${SITE_NAME}`,
+    title: `${toolName} Free Online – No Signup Required`,
     description: `${description}. Free, fast, and accurate. No account or signup required. Try it instantly in your browser.`,
     keywords: [
       ...keywords,
@@ -170,7 +179,7 @@ export function generateBlogMetadata(
  */
 export function getHomepageMetadata(): Metadata {
   return generateMetadata({
-    title: "46+ Free AI Tools for Students – No Signup | ToolNova",
+    title: `${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup`,
     description:
       "Free AI tools for students & professionals. Merge PDFs, make flashcards, fix grammar, write essays, solve homework — all in one place. No account needed. Try now!",
     keywords: [

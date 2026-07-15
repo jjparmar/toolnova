@@ -62,7 +62,7 @@ const recommendations = [
     priority: "high",
     category: "Content",
     title: "Add More FAQ Content",
-    description: "Expand FAQ schemas to all 46+ tools. Currently only 15 tools have FAQ data.",
+    description: "Expand FAQ schemas to all 47+ tools. Currently only 15 tools have FAQ data.",
     impact: "Higher chance of featured snippets and People Also Ask rankings",
   },
   {

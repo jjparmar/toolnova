@@ -1,116 +1,155 @@
 /**
  * AdSense Configuration
- * Update these values with your actual AdSense publisher ID and ad unit IDs
+ * Publisher ID matches public/ads.txt and layout meta/script client.
+ *
+ * Setup after AdSense approval:
+ * 1. Create Display ad units in AdSense (names below)
+ * 2. Copy each numeric slot ID into .env (digits only, no ca-pub-)
+ * 3. Redeploy so NEXT_PUBLIC_* vars are baked into the client bundle
+ * 4. Auto Ads still work if slots are empty
  */
+
+const DEFAULT_PUBLISHER_ID = "ca-pub-1328083083403070";
+
+function resolvePublisherId(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_ADSENSE_ID?.trim();
+  if (fromEnv && !fromEnv.includes("XXXXXXXX") && fromEnv.startsWith("ca-pub-")) {
+    return fromEnv;
+  }
+  return DEFAULT_PUBLISHER_ID;
+}
+
+/** Digits-only slot IDs from AdSense unit settings */
+function slot(envKey: string): string {
+  const v = process.env[envKey]?.trim() || "";
+  return /^\d+$/.test(v) ? v : "";
+}
 
 export const adsenseConfig = {
-    // Your AdSense Publisher ID (format: ca-pub-XXXXXXXXXXXXXXXX)
-    // Read from environment variable or use placeholder
-    publisherId: process.env.NEXT_PUBLIC_ADSENSE_ID || 'ca-pub-XXXXXXXXXXXXXXXX',
+  publisherId: resolvePublisherId(),
+  enabled: !resolvePublisherId().includes("XXXXXXXX"),
 
-    // Enable/Disable ads globally
-    enabled: process.env.NEXT_PUBLIC_ADSENSE_ID ? true : false, // Disabled if ID not configured
+  /**
+   * Manual units — empty string = don't render (Auto Ads can still fill).
+   * Env var names match .env.example
+   */
+  adUnits: {
+    homeHero: slot("NEXT_PUBLIC_ADSENSE_SLOT_HOME_HERO"),
+    homeFooter: slot("NEXT_PUBLIC_ADSENSE_SLOT_HOME_FOOTER"),
 
-    // Ad Units by Placement
-    adUnits: {
-        // Homepage
-        homeHero: 'XXXXXXXXXX',
-        homeFooter: 'XXXXXXXXXX',
+    toolTopBanner: slot("NEXT_PUBLIC_ADSENSE_SLOT_TOOL_TOP"),
+    toolSidebar: slot("NEXT_PUBLIC_ADSENSE_SLOT_TOOL_SIDEBAR"),
+    toolInContent: slot("NEXT_PUBLIC_ADSENSE_SLOT_TOOL_INCONTENT"),
+    toolBottomBox: slot("NEXT_PUBLIC_ADSENSE_SLOT_TOOL_BOTTOM"),
 
-        // Tool Pages
-        toolTopBanner: 'XXXXXXXXXX',
-        toolSidebar: 'XXXXXXXXXX',
-        toolInContent: 'XXXXXXXXXX',
-        toolBottomBox: 'XXXXXXXXXX',
+    blogSidebar: slot("NEXT_PUBLIC_ADSENSE_SLOT_BLOG_SIDEBAR"),
+    blogInContent: slot("NEXT_PUBLIC_ADSENSE_SLOT_BLOG_INCONTENT"),
+    blogBottomBox: slot("NEXT_PUBLIC_ADSENSE_SLOT_BLOG_BOTTOM"),
 
-        // Blog
-        blogSidebar: 'XXXXXXXXXX',
-        blogInContent: 'XXXXXXXXXX',
-        blogBottomBox: 'XXXXXXXXXX',
+    mobileAnchor: slot("NEXT_PUBLIC_ADSENSE_SLOT_MOBILE_ANCHOR"),
+    mobileInFeed: slot("NEXT_PUBLIC_ADSENSE_SLOT_MOBILE_INFEED"),
+  },
 
-        // Mobile
-        mobileAnchor: 'XXXXXXXXXX',
-        mobileInFeed: 'XXXXXXXXXX',
+  formats: {
+    displayBanner: {
+      desktop: "728x90",
+      mobile: "320x50",
     },
+    rectangle: "300x250",
+    largeRectangle: "336x280",
+    skyscraper: "160x600",
+    wideSkyscraper: "300x600",
+    leaderboard: "728x90",
+    mobileLeaderboard: "320x50",
+  },
 
-    // Ad Formats
-    formats: {
-        displayBanner: {
-            desktop: '728x90',
-            mobile: '320x50',
-        },
-        rectangle: '300x250',
-        largeRectangle: '336x280',
-        skyscraper: '160x600',
-        wideSkyscraper: '300x600',
-        leaderboard: '728x90',
-        mobileLeaderboard: '320x50',
-    },
+  testMode: process.env.NEXT_PUBLIC_ADSENSE_TEST === "true",
 
-    // Test Mode (use test ads)
-    testMode: true, // Set to false in production
+  density: {
+    homepage: "medium",
+    toolPages: "medium",
+    blogPages: "medium",
+  },
 
-    // Tier 1 Countries Targeting (for revenue optimization)
-    tier1Countries: ['US', 'GB', 'CA', 'AU', 'DE', 'FR', 'NL', 'SE', 'NO', 'DK'],
+  autoAds: {
+    enabled: process.env.NEXT_PUBLIC_ADSENSE_AUTO_ADS !== "false",
+    anchorAds: true,
+    inPageAds: true,
+    matchedContent: true,
+  },
 
-    // Ad Density Settings (balance between UX and revenue)
-    density: {
-        homepage: 'medium', // low, medium, high
-        toolPages: 'high',
-        blogPages: 'high',
-    },
-
-    // Auto Ads Settings
-    autoAds: {
-        enabled: true, // Enable Google Auto Ads
-        anchorAds: true, // Enable anchor/sticky ads on mobile
-        inPageAds: true, // Enable automatic in-page ads
-        matchedContent: true, // Enable matched content recommendations
-    },
+  policy: {
+    labelAds: true,
+    minContentBeforeFirstAd: true,
+    noEmptyPlaceholders: true,
+  },
 };
 
-/**
- * Get AdSense script URL
- */
+/** How many manual slots are configured (for health checks / dashboard). */
+export function countConfiguredAdSlots(): number {
+  return Object.values(adsenseConfig.adUnits).filter((s) => /^\d+$/.test(s))
+    .length;
+}
+
+export function listConfiguredAdSlots(): string[] {
+  return Object.entries(adsenseConfig.adUnits)
+    .filter(([, id]) => /^\d+$/.test(id))
+    .map(([name]) => name);
+}
+
 export function getAdsenseScriptUrl(): string {
-    return `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseConfig.publisherId}`;
+  return `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseConfig.publisherId}`;
+}
+
+export function hasAdConsent(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return localStorage.getItem("cookie_consent") === "accepted";
+  } catch {
+    return false;
+  }
 }
 
 /**
- * Check if ads should be shown based on environment
+ * Manual ad units only after consent (+ real pub + not hidden in dev).
  */
 export function shouldShowAds(): boolean {
-    if (!adsenseConfig.enabled) return false;
-    if (typeof window === 'undefined') return false;
+  if (!adsenseConfig.enabled) return false;
+  if (typeof window === "undefined") return false;
 
-    // Don't show ads in development unless explicitly enabled
-    if (process.env.NODE_ENV === 'development' && !adsenseConfig.testMode) {
-        return false;
-    }
+  if (process.env.NODE_ENV === "development" && !adsenseConfig.testMode) {
+    return false;
+  }
 
-    return true;
+  if (!hasAdConsent()) return false;
+
+  return true;
 }
 
 /**
- * Initialize AdSense Auto Ads
+ * Initialize AdSense Auto Ads once after consent.
  */
 export function initializeAutoAds(): void {
-    if (!adsenseConfig.autoAds.enabled || !shouldShowAds()) return;
+  if (!adsenseConfig.autoAds.enabled || !shouldShowAds()) return;
 
-    try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: adsenseConfig.publisherId,
-            enable_page_level_ads: true,
-            overlays: { bottom: adsenseConfig.autoAds.anchorAds },
-        });
-    } catch (error) {
-        console.error('Failed to initialize Auto Ads:', error);
-    }
+  try {
+    const w = window as Window & { __tnAutoAdsInit?: boolean };
+    if (w.__tnAutoAdsInit) return;
+    w.__tnAutoAdsInit = true;
+
+    (window.adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: adsenseConfig.publisherId,
+      enable_page_level_ads: true,
+      overlays: { bottom: adsenseConfig.autoAds.anchorAds },
+    });
+  } catch (error) {
+    console.error("Failed to initialize Auto Ads:", error);
+  }
 }
 
-// Type declaration for window.adsbygoogle
 declare global {
-    interface Window {
-        adsbygoogle: any[];
-    }
+  interface Window {
+    adsbygoogle: any[];
+    __tnAutoAdsInit?: boolean;
+  }
 }

@@ -109,41 +109,32 @@ const generatePrompt = (input: string, options?: Record<string, any>) => {
     advanced: "Advanced level - complex concepts requiring deep comprehension",
   };
 
-  let prompt = `Create ${cardCount} flashcards about: ${input}
+  return `Create exactly ${cardCount} high-quality flashcards for studying this topic:
 
-📚 Requirements:
-- Topic: ${input}
-- Number of Cards: ${cardCount}
+TOPIC / SOURCE MATERIAL:
+${input}
+
+REQUIREMENTS:
+- Number of cards: exactly ${cardCount}
 - Style: ${styleInstructions[style]}
 - Difficulty: ${difficultyInstructions[difficulty]}
+- Each card must test a distinct fact or concept (no near-duplicates)
+- Front: short prompt/question/term (1 line preferred)
+- Back: complete, accurate answer (1–4 lines)
 
-🎯 Format (IMPORTANT - Use this EXACT structure):
+OUTPUT FORMAT (use exactly, Markdown):
 
-Card 1:
-Front: [Write the front of the card here - keep it concise]
-Back: [Write the back of the card here - provide complete information]
-${includeMemoryTips ? "Memory Tip: [Provide a mnemonic or memory technique]" : ""}
-${includeExamples ? "Example: [Provide a practical example]" : ""}
+### Card 1
+**Front:** ...
+**Back:** ...
+${includeMemoryTips ? "**Memory tip:** short mnemonic or association\n" : ""}${includeExamples ? "**Example:** one concrete example\n" : ""}
+### Card 2
+**Front:** ...
+**Back:** ...
+${includeMemoryTips ? "**Memory tip:** ...\n" : ""}${includeExamples ? "**Example:** ...\n" : ""}
+(continue through Card ${cardCount})
 
-Card 2:
-Front: [Write the front of the card here]
-Back: [Write the back of the card here]
-${includeMemoryTips ? "Memory Tip: [Provide a mnemonic or memory technique]" : ""}
-${includeExamples ? "Example: [Provide a practical example]" : ""}
-
-[Continue for all ${cardCount} cards]
-
-Important Guidelines:
-- Create exactly ${cardCount} cards
-- Keep Front concise (1-2 lines maximum)
-- Make Back informative and complete
-- Ensure cards test understanding
-- Cover different aspects of the topic
-${includeMemoryTips ? "- Provide creative memory tips (mnemonics, associations, visualizations)" : ""}
-${includeExamples ? "- Include practical, real-world examples" : ""}
-- Number each card clearly (Card 1, Card 2, etc.)`;
-
-  return prompt;
+Do not add an introduction or conclusion. Output only the cards.`;
 };
 
 
@@ -283,6 +274,7 @@ export default function FlashcardMakerClient() {
     >
       <EnhancedToolLayout
         toolSlug="flashcard-maker"
+        systemPrompt={systemPrompt}
         toolName="AI Flashcard Maker"
         placeholder={`📚 Enter the topic you need flashcards for...
 

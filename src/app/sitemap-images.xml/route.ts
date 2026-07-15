@@ -23,7 +23,7 @@ export async function GET() {
     <image:image>
       <image:loc>${baseUrl}/og-image.png</image:loc>
       <image:title>ToolNova - Free AI Tools for Students &amp; Professionals</image:title>
-      <image:caption>46+ free AI-powered tools for writing, study, PDF, and productivity. No sign-up required.</image:caption>
+      <image:caption>47+ free AI-powered tools for writing, study, PDF, and productivity. No sign-up required.</image:caption>
     </image:image>
   </url>`);
 

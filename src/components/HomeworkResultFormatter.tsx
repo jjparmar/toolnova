@@ -37,7 +37,20 @@ export function HomeworkResultFormatter({ result }: HomeworkResultFormatterProps
     };
 
     const handleExport = () => {
-        toast.info("PDF Export simulation - Feature coming soon!");
+        try {
+            const blob = new Blob([result], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `homework-solution-${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            toast.success("Solution downloaded as text file");
+        } catch {
+            toast.error("Could not download — try copy instead");
+        }
     };
 
     return (

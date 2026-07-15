@@ -89,7 +89,7 @@ export function PremiumToolWrapper({
   const breadcrumbSchema = getBreadcrumbSchema(breadcrumbs);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-slate-100 text-slate-900 transition-colors duration-500">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-slate-100 dark:from-[#0f1419] dark:via-background dark:to-[#0f1419] text-slate-900 dark:text-slate-100 transition-colors duration-500">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: schemaToJsonLd(breadcrumbSchema) }}
@@ -99,7 +99,7 @@ export function PremiumToolWrapper({
         <div className="mx-auto max-w-7xl px-6">
           <button
             onClick={() => router.push("/tools")}
-            className="mb-8 inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50"
+            className="mb-8 inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm transition-all hover:bg-slate-50 dark:hover:bg-slate-800"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to All Tools
@@ -110,8 +110,8 @@ export function PremiumToolWrapper({
       <section className="relative z-10 overflow-hidden pb-16">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-col items-center text-center">
-            <div className="mb-10 inline-flex items-center rounded-2xl border border-slate-200 bg-white/80 px-4 py-2 shadow-sm">
-              <span className="text-xs font-black uppercase tracking-widest text-slate-500">
+            <div className="mb-10 inline-flex items-center rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 px-4 py-2 shadow-sm">
+              <span className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
                 {badge}
               </span>
             </div>
@@ -119,16 +119,16 @@ export function PremiumToolWrapper({
             <div className="relative mb-8">
               <div className="absolute -inset-x-20 -top-10 bottom-0 bg-gradient-to-r from-indigo-500/15 via-purple-500/15 to-pink-500/15 opacity-60 blur-3xl" />
               <h1 className="relative text-5xl font-black leading-[1.1] tracking-tight md:text-7xl">
-                <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
                   {toolName}
                 </span>
               </h1>
             </div>
 
-            <p className="mx-auto mb-4 max-w-4xl text-xl font-medium leading-relaxed text-slate-600 md:text-2xl">
+            <p className="mx-auto mb-4 max-w-4xl text-xl font-medium leading-relaxed text-slate-600 dark:text-slate-300 md:text-2xl">
               {tagline}
             </p>
-            <p className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-slate-500">
+            <p className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-slate-500 dark:text-slate-400">
               {description}
             </p>
           </div>

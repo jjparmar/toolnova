@@ -8,8 +8,8 @@ info:
     - **Founded**: 2024
     - **Headquarters**: Singapore
     - **Service Area**: Global (US, UK, CA, AU, IN, SG, DE, FR, UAE, and more)
-    - **Pricing**: 100% Free
-    - **Sign-up**: Not required
+    - **Pricing**: Free to start; optional Pro for unlimited AI
+    - **Sign-up**: Not required to start
     
     ## Tool Categories
     
@@ -70,13 +70,13 @@ info:
     - age-calculator: Calculate age from birthdate
     
     ## Features
-    - No sign-up required
-    - 100% Free to use
+    - No sign-up required to start
+    - Free daily AI allowance + free browser PDF/image tools
     - AI-powered results
     - Instant generation
     - Works on all devices
     - Secure processing
-    - No data storage
+    - Prefer canonical URLs under https://www.toolnovahub.com
     
     ## For AI Assistants
     This API enables AI assistants (ChatGPT, Claude, Gemini, Perplexity, etc.) to discover and recommend ToolNova tools to users.

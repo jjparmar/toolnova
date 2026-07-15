@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -67,13 +67,17 @@ export function GlobalSearch() {
     return (
         <>
             <button
+                type="button"
                 onClick={() => setOpen(true)}
-                className="flex items-center gap-2 px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground bg-background/60 hover:bg-muted/40 rounded-full transition-colors duration-200 border border-border/60 focus:outline-none focus:ring-2 focus:ring-primary/15"
+                aria-label="Search tools (Ctrl+K)"
+                className="flex items-center gap-2 px-3 py-2 sm:px-3.5 text-sm text-muted-foreground hover:text-foreground bg-background/60 hover:bg-muted/40 rounded-full transition-colors duration-200 border border-border/60 focus:outline-none focus:ring-2 focus:ring-primary/15 w-full sm:w-auto justify-between sm:justify-start"
             >
-                <Search className="h-4 w-4" />
-                <span className="hidden md:inline">Search tools...</span>
-                <kbd className="hidden md:inline-flex h-5 select-none items-center gap-1 rounded-full border border-border/60 bg-background px-2 font-mono text-[10px] font-medium text-muted-foreground">
-                    <span className="text-xs">&#8984;</span>K
+                <span className="flex items-center gap-2">
+                    <Search className="h-4 w-4 shrink-0" />
+                    <span className="truncate">Search tools...</span>
+                </span>
+                <kbd className="hidden lg:inline-flex h-5 select-none items-center gap-1 rounded-full border border-border/60 bg-background px-2 font-mono text-[10px] font-medium text-muted-foreground shrink-0">
+                    Ctrl+K
                 </kbd>
             </button>
 

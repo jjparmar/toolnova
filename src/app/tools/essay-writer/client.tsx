@@ -363,6 +363,7 @@ export default function EssayWriterClient() {
     >
       <EnhancedToolLayout
         toolSlug="essay-writer"
+        systemPrompt={systemPrompt}
         toolName="AI Essay Writer"
         placeholder={`📝 Enter your essay topic or thesis statement...
 

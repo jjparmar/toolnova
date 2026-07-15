@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap,
   Pencil,
@@ -28,6 +27,7 @@ import {
   Youtube,
   ShieldAlert,
 } from "lucide-react";
+import { TOOL_COUNT_LABEL } from "@/data/tools";
 
 // Tool data with categories
 const ALL_TOOLS = [
@@ -282,12 +282,23 @@ const ALL_TOOLS = [
     name: "Split PDF",
     slug: "split-pdf",
     category: "Image & PDF Tools",
-    description: "Extract pages or split large PDFs",
+    description: "Extract pages, pick pages, or download all as ZIP",
     icon: ImageIcon,
     color: "text-orange-500",
     gradient: "from-orange-500 to-amber-600",
     isNew: false,
     isPopular: false,
+  },
+  {
+    name: "Reorder PDF",
+    slug: "reorder-pdf",
+    category: "Image & PDF Tools",
+    description: "Drag page thumbnails to rearrange order",
+    icon: ImageIcon,
+    color: "text-indigo-500",
+    gradient: "from-indigo-500 to-blue-600",
+    isNew: true,
+    isPopular: true,
   },
   {
     name: "Image to PDF",
@@ -332,6 +343,28 @@ const ALL_TOOLS = [
     gradient: "from-teal-500 to-green-600",
     isNew: false,
     isPopular: false,
+  },
+  {
+    name: "Crop Image",
+    slug: "image-crop",
+    category: "Image & PDF Tools",
+    description: "Drag to select any region and crop free — aspect presets included",
+    icon: ImageIcon,
+    color: "text-violet-500",
+    gradient: "from-violet-500 to-fuchsia-600",
+    isNew: true,
+    isPopular: true,
+  },
+  {
+    name: "Image Resizer",
+    slug: "resize-image",
+    category: "Image & PDF Tools",
+    description: "Resize images by exact pixels or percentage without quality loss",
+    icon: ImageIcon,
+    color: "text-purple-500",
+    gradient: "from-purple-500 to-violet-600",
+    isNew: false,
+    isPopular: true,
   },
 
   // Utility Tools
@@ -596,8 +629,8 @@ const categories = [
 ];
 
 const heroStats = [
-  { icon: Zap, value: "46+", label: "AI Tools" },
-  { icon: Globe, value: "100%", label: "Free Forever" },
+  { icon: Zap, value: TOOL_COUNT_LABEL, label: "AI Tools" },
+  { icon: Globe, value: "100%", label: "Free to Start" },
   { icon: ShieldCheck, value: "No", label: "Sign-up" },
   { icon: Clock, value: "<10s", label: "Results" },
 ];
@@ -811,31 +844,10 @@ export function ToolsClient() {
             </h2>
           </div>
 
-          <motion.div 
-            layout
-            initial="hidden"
-            animate="show"
-            variants={{
-              hidden: { opacity: 0 },
-              show: {
-                opacity: 1,
-                transition: { staggerChildren: 0.05 }
-              }
-            }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-24"
-          >
-            <AnimatePresence>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-24">
               {filteredTools.length > 0 ? (
                 filteredTools.map((tool) => (
-                  <motion.div
-                    key={tool.slug}
-                    layout
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                    className="h-full"
-                  >
+                  <div key={tool.slug} className="h-full">
                     <Link
                       href={`/tools/${tool.slug}`}
                       className="group glass-card hover-float block h-full"
@@ -870,7 +882,7 @@ export function ToolsClient() {
                         <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </Link>
-                  </motion.div>
+                  </div>
                 ))
               ) : (
               <div className="col-span-full text-center py-24">
@@ -894,8 +906,7 @@ export function ToolsClient() {
                 </button>
               </div>
             )}
-            </AnimatePresence>
-          </motion.div>
+          </div>
         </div>
 
         {/* Categories Section */}

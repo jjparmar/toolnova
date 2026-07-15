@@ -642,7 +642,7 @@ export const toolAEOContent: Record<string, ToolAEOContent> = {
         faqs: [
             {
                 question: 'How many flashcards can I create?',
-                answer: 'You can create unlimited flashcards! Generate as many study sets as you need for different subjects, chapters, or topics. There are no restrictions on the number of cards or sets.',
+                answer: 'You can generate multiple flashcard sets within your free daily AI allowance. Create a free account for more daily uses, or upgrade to Pro for unlimited AI generation. Edit and reorganize cards freely after they are created.',
             },
             {
                 question: 'Can I edit the generated flashcards?',

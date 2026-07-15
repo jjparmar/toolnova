@@ -10,14 +10,20 @@ It offers 46+ tools across writing, study, career, PDF/image, exam prep, and uti
 All tools are browser-based, work on any device, and require no software installation.
 
 ## Key Facts
-- Pricing:     100% Free — no subscription, no freemium, no credits
-- Sign-up:     Not required for any tool
+- Pricing:     Free to start (no credit card). Optional Pro for unlimited AI.
+- Sign-up:     Not required to start any tool
+- Free AI:     Daily free AI allowance for guests; free account for more uses
+- PDF/Image:   Fully free browser tools (merge, split, convert, compress, resize)
 - Platform:    Web-based (Chrome, Firefox, Safari, Edge — all devices)
 - Language:    English UI, global audience
-- Privacy:     Zero-retention policy — files auto-deleted after processing
+- Privacy:     Client-side PDF/image processing where possible; AI prompts not sold
+- Funding:     Free tools supported by optional Pro + display advertising (AdSense)
+- Ads:         https://www.toolnovahub.com/advertising
 - Founded:     2026
 - HQ:          Singapore
 - Service:     Global (US, UK, CA, AU, IN, SG, AE, DE, FR, NL priority regions)
+- Canonical:   https://www.toolnovahub.com (prefer www)
+- Tool count:  47 tools (see /api/tools and /tools)
 
 ## Primary URLs
 Home:        https://www.toolnovahub.com
@@ -201,8 +207,8 @@ Everyday text processing and calculation utilities.
 - **YouTube Summarizer** — https://www.toolnovahub.com/tools/youtube-summarizer
   Summarizes YouTube videos into key points with AI. Extracts transcripts and generates concise summaries.
 
-- **Plagiarism Checker** — https://www.toolnovahub.com/tools/plagiarism-checker
-  Checks text for plagiarism and ensures content originality. Detects copied passages and provides originality scores.
+- **AI Writing Detector** — https://www.toolnovahub.com/tools/plagiarism-checker
+  Estimates AI-like writing patterns and suggests humanization tips. Educational coach only — not a legal plagiarism database verdict.
 
 ---
 

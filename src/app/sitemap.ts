@@ -4,22 +4,23 @@ import { getAllAuthors } from "@/data/authors";
 import { getAllToolSlugs } from "@/data/tools";
 import { siteConfig } from "@/config/site";
 
-// Force dynamic generation so sitemap always reflects latest content
-export const dynamic = "force-dynamic";
+// Revalidate daily — fresher than static, cheaper than force-dynamic
+export const revalidate = 86400;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
-  const currentDate = new Date().toISOString();
+  // Stable lastmod for tools (avoid rewriting every request with "now")
+  const toolsLastMod = "2026-07-15";
 
   // Real last-modified dates for static pages
   // Update these when you actually change a page's content
-  const HOMEPAGE_MODIFIED = "2026-06-27";
-  const TOOLS_MODIFIED = "2026-06-27";
-  const BLOG_MODIFIED = "2026-06-27";
-  const ABOUT_MODIFIED = "2026-06-01";
-  const CONTACT_MODIFIED = "2026-06-01";
-  const PRICING_MODIFIED = "2026-06-15";
-  const LEGAL_MODIFIED = "2026-05-01";
+  const HOMEPAGE_MODIFIED = "2026-07-15";
+  const TOOLS_MODIFIED = "2026-07-15";
+  const BLOG_MODIFIED = "2026-07-15";
+  const ABOUT_MODIFIED = "2026-07-15";
+  const CONTACT_MODIFIED = "2026-07-15";
+  const PRICING_MODIFIED = "2026-07-15";
+  const LEGAL_MODIFIED = "2026-07-15";
 
   // Get all blog posts
   const blogPosts = getAllBlogPosts();
@@ -90,6 +91,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
     {
+      url: `${baseUrl}/advertising`,
+      lastModified: "2026-07-15",
+      changeFrequency: "yearly" as const,
+      priority: 0.35,
+    },
+    {
+      url: `${baseUrl}/editorial-policy`,
+      lastModified: LEGAL_MODIFIED,
+      changeFrequency: "yearly" as const,
+      priority: 0.35,
+    },
+    {
       url: `${baseUrl}/refund`,
       lastModified: LEGAL_MODIFIED,
       changeFrequency: "yearly" as const,
@@ -125,7 +138,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "career-tools",
   ].map((category) => ({
     url: `${baseUrl}/tools/${category}`,
-    lastModified: currentDate,
+    lastModified: toolsLastMod,
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
@@ -133,7 +146,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // ── Individual tool pages (derived from the data source of truth) ────
   const toolUrls: MetadataRoute.Sitemap = getAllToolSlugs().map((slug) => ({
     url: `${baseUrl}/tools/${slug}`,
-    lastModified: currentDate,
+    lastModified: toolsLastMod,
     changeFrequency: "weekly" as const,
     priority: 0.85,
   }));
@@ -141,7 +154,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // ── Author profile pages ──────────────────────────────────────────────
   const authorUrls: MetadataRoute.Sitemap = allAuthors.map((author) => ({
     url: `${baseUrl}/author/${author.slug}`,
-    lastModified: currentDate,
+    lastModified: ABOUT_MODIFIED,
     changeFrequency: "monthly" as const,
     priority: 0.5,
   }));
@@ -153,7 +166,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ? new Date(post.dateModified).toISOString()
       : post.date
         ? new Date(post.date).toISOString()
-        : currentDate,
+        : toolsLastMod,
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));

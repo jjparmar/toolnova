@@ -4,6 +4,7 @@
  */
 
 import { LucideIcon } from 'lucide-react';
+import { TOOL_COUNT_LABEL } from '@/data/tools';
 
 export interface GlobalAEOContent {
     quickAnswer: {
@@ -19,20 +20,20 @@ export interface GlobalAEOContent {
 export const homepageAEO: GlobalAEOContent = {
     quickAnswer: {
         question: 'What is ToolNova?',
-        answer: 'ToolNova is a free online platform offering 46+ AI-powered tools for students, professionals, and content creators. It includes PDF tools (merge, split, compress), image editors, AI writing assistants (essay writer, paraphraser, grammar checker), study aids (flashcard maker, homework solver), and productivity tools—all completely free with no account or sign-up required.',
+        answer: `ToolNova is a free online platform offering ${TOOL_COUNT_LABEL} AI-powered tools for students, professionals, and content creators. It includes PDF tools (merge, split), image editors, AI writing assistants (essay writer, paraphraser, grammar checker), study aids (flashcard maker, homework solver, YouTube summarizer), and productivity tools. No account is required to start; free daily AI use is included and Pro is optional for unlimited AI.`,
     },
     faqs: [
         {
             question: 'Is ToolNova really free?',
-            answer: 'Yes, ToolNova is 100% free to use. All 46+ tools are available without any subscription, payment, or sign-up. There are no hidden fees, watermarks, or file limits. You can use any tool as many times as you need at no cost.',
+            answer: 'Yes. All tools are free to start with no credit card required. PDF and image tools run fully in your browser with no account. AI writing and study tools include a free daily allowance without sign-up; a free account adds more daily uses and history, and Pro unlocks unlimited AI access.',
         },
         {
             question: 'Do I need to create an account to use ToolNova?',
-            answer: 'No account is required. You can start using any ToolNova tool immediately by visiting the tool page—no email, no sign-up, no password needed. Tools work directly in your browser without creating an account.',
+            answer: 'No. You can use every tool without creating an account. Guests get a free daily AI allowance; PDF/image utilities work with no limits in the browser. Sign-up is optional if you want more free AI uses, saved history, or a Pro plan.',
         },
         {
             question: 'What types of tools does ToolNova offer?',
-            answer: 'ToolNova offers 6 main categories: Study Tools (homework solver, flashcard maker, notes generator, quiz generator), Writing Tools (essay writer, paraphraser, grammar checker, email writer), Exam Prep (vocabulary builder, synonym finder), PDF Tools (merge, split, compress), Image Tools (resize, convert, compress), and Career Tools (resume bullets, cover letter writer, interview prep).',
+            answer: 'ToolNova offers 6 main categories: Study Tools (homework solver, flashcard maker, notes generator, quiz generator, YouTube summarizer), Writing Tools (essay writer, paraphraser, grammar checker, plagiarism checker), Exam Prep (vocabulary builder, synonym finder), PDF Tools (merge, split, image to PDF), Image Tools (resize, convert, compress), and Career Tools (resume bullets, cover letter writer, interview prep).',
         },
         {
             question: 'Are the ToolNova tools AI-powered?',
@@ -48,7 +49,7 @@ export const homepageAEO: GlobalAEOContent = {
         },
         {
             question: 'How many tools does ToolNova have?',
-            answer: 'ToolNova currently offers 46+ free AI tools across 6 categories: writing, study, exam prep, PDF & image, career, and utility. New tools are added regularly based on user requests.',
+            answer: `ToolNova currently offers ${TOOL_COUNT_LABEL} free AI tools across 6 categories: writing, study, exam prep, PDF & image, career, and utility. New tools are added regularly based on user requests.`,
         },
     ],
 };
@@ -118,7 +119,7 @@ export const categoryAEO: Record<string, GlobalAEOContent> = {
         faqs: [
             {
                 question: 'What PDF tools are available?',
-                answer: 'We offer Merge PDF, Split PDF, Compress PDF, and Image to PDF converter. All tools are free with no file size limits or watermarks.',
+                answer: 'We offer Merge PDF, Split PDF, Image to PDF, Image Compressor, Image Resizer, and format converters (JPG/PNG). All tools are free with no watermarks.',
             },
             {
                 question: 'What image tools are available?',
@@ -149,16 +150,20 @@ export const categoryAEO: Record<string, GlobalAEOContent> = {
     'career-tools': {
         quickAnswer: {
             question: 'What are ToolNova career tools?',
-            answer: 'ToolNova career tools help with job applications and professional development. They include cover letter writer, interview question generator, resume bullet points, goal planner, and productivity tools—all free resources to advance your career and ace job interviews.',
+            answer: 'ToolNova career tools help with job applications and professional development: resume bullets, cover letter writer, LinkedIn optimizer, interview generator, bio generator, goal planner, timetable, and to-do lists. Free to start with no account required for basic use.',
         },
         faqs: [
             {
                 question: 'What career tools are available?',
-                answer: 'We offer 6 career tools: Cover Letter Writer, Interview Generator, Resume Bullets, Goal Planner, Todo List Generator, and Revision Planner. These tools help with job applications and professional productivity.',
+                answer: 'Resume Bullets, Cover Letter Writer, LinkedIn Optimizer, Interview Generator, Bio Generator, Goal Planner, Timetable Generator, and To-Do List Generator. Use them as a stack from resume → LinkedIn → applications → interview practice.',
             },
             {
                 question: 'Can the cover letter writer customize for different jobs?',
-                answer: 'Yes! The Cover Letter Writer creates tailored cover letters based on the job description and your experience. It adapts the tone and content for different industries and positions.',
+                answer: 'Yes. Paste the job description and your experience to generate a tailored draft, then edit tone and facts so the letter is accurate and personal.',
+            },
+            {
+                question: 'Are AI career tools free?',
+                answer: 'Yes — free daily AI use is included without sign-up. PDF/image tools stay unlimited in the browser. Optional Pro unlocks unlimited AI generations.',
             },
         ],
     },

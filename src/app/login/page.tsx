@@ -113,7 +113,7 @@ export default function LoginPage() {
                                 Welcome to ToolNova
                             </h2>
                             <p className="text-muted-foreground">
-                                Sign in to access your AI tools
+                                Sign in for more free AI uses, history, and Pro upgrades. Tools also work without an account.
                             </p>
                         </div>
 

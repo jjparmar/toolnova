@@ -2,24 +2,33 @@ import { getAllBlogPosts } from "@/data/blog";
 import { siteConfig } from "@/config/site";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 1800;
 
+/**
+ * Google News sitemaps must only include articles published in the last 48 hours.
+ * Older posts must NOT appear here (they stay in the main sitemap).
+ */
 export async function GET() {
   const posts = getAllBlogPosts();
   const baseUrl = siteConfig.url;
+  const cutoff = Date.now() - 48 * 60 * 60 * 1000;
 
-  // Google News Sitemaps should only contain URLs published in the last 2 days (48 hours).
-  // For the sake of this site, we include the latest 100 posts to ensure it populates in the Search Console.
-  // The actual news bots will filter by date.
   const recentPosts = posts
+    .filter((post) => {
+      if (!post.date) return false;
+      const t = new Date(post.date).getTime();
+      return !Number.isNaN(t) && t >= cutoff;
+    })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 100);
+    .slice(0, 1000);
 
   const newsItems = recentPosts
     .map((post) => {
       const postUrl = `${baseUrl}/blog/${post.slug}`;
-      const pubDate = post.date
-        ? new Date(post.date).toISOString()
-        : new Date().toISOString();
+      const pubDate = new Date(post.date).toISOString();
+      const safeTitle = String(post.title)
+        .replace(/]]>/g, "]] >")
+        .replace(/&/g, "&amp;");
 
       return `
   <url>
@@ -30,7 +39,7 @@ export async function GET() {
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>${pubDate}</news:publication_date>
-      <news:title><![CDATA[${post.title}]]></news:title>
+      <news:title><![CDATA[${safeTitle}]]></news:title>
     </news:news>
   </url>`;
     })
@@ -46,7 +55,7 @@ export async function GET() {
     status: 200,
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "s-maxage=1800, stale-while-revalidate",
+      "Cache-Control": "public, s-maxage=1800, stale-while-revalidate=3600",
     },
   });
 }

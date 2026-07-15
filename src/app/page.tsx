@@ -76,7 +76,7 @@ export default function Home() {
     "@type": "WebPage",
     "@id": `${siteConfig.url}/#webpage`,
     name: "Free AI Tools for Students \u0026 Professionals | ToolNova",
-    description: "46+ free AI-powered tools for writing, studying, and productivity. No sign-up required.",
+    description: "Free AI-powered tools for writing, studying, and productivity. No sign-up required.",
     url: siteConfig.url,
     speakable: {
       "@type": "SpeakableSpecification",

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-const LAST_UPDATED = "June 14, 2026";
+const LAST_UPDATED = "July 15, 2026";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | ToolNova",
@@ -102,6 +102,15 @@ export default function PrivacyPage() {
             functions, preferences, analytics, fraud prevention, and advertising.
             You can accept or decline non-essential cookies through our cookie
             consent notice and can also manage cookies in your browser settings.
+            See also our{" "}
+            <a href="/advertising" className="text-primary hover:underline">
+              Advertising Disclosure
+            </a>{" "}
+            and{" "}
+            <a href="/cookie-policy" className="text-primary hover:underline">
+              Cookie Policy
+            </a>
+            .
           </p>
           <p className="mt-4">
             <strong>Google AdSense:</strong> ToolNova participates in the Google

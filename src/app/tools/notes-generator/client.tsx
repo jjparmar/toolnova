@@ -315,6 +315,7 @@ export default function NotesGeneratorClient() {
     >
       <EnhancedToolLayout
         toolSlug="notes-generator"
+        systemPrompt={systemPrompt}
         toolName="AI Notes Generator"
         placeholder={`📚 Enter the topic you need notes for...
 

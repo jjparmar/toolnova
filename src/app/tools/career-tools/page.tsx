@@ -21,12 +21,14 @@ export const metadata = {
 };
 
 const tools = [
-    { name: 'Cover Letter Writer', slug: 'cover-letter-writer', description: 'Generate professional cover letters', icon: 'FileText', badge: 'Popular', badgeColor: 'bg-amber-500' },
-    { name: 'Interview Generator', slug: 'interview-generator', description: 'Practice with interview questions', icon: 'User' },
-    { name: 'Goal Planner', slug: 'goal-planner', description: 'Break down goals into actionable steps', icon: 'Target', badge: 'Top Rated', badgeColor: 'bg-yellow-500' },
+    { name: 'Resume Bullets', slug: 'resume-bullets', description: 'Turn duties into achievement-focused bullets', icon: 'FileText', badge: 'Popular', badgeColor: 'bg-amber-500' },
+    { name: 'Cover Letter Writer', slug: 'cover-letter-writer', description: 'Generate professional cover letters', icon: 'FileText', badge: 'Top Rated', badgeColor: 'bg-yellow-500' },
+    { name: 'LinkedIn Optimizer', slug: 'linkedin-optimizer', description: 'Improve headline, About, and experience', icon: 'Linkedin' },
+    { name: 'Interview Generator', slug: 'interview-generator', description: 'Practice with role-specific questions', icon: 'User' },
+    { name: 'Bio Generator', slug: 'bio-generator', description: 'Write bios for LinkedIn, sites, and events', icon: 'User' },
+    { name: 'Goal Planner', slug: 'goal-planner', description: 'Break down goals into actionable steps', icon: 'Target' },
     { name: 'Timetable Generator', slug: 'timetable-generator', description: 'Create structured weekly schedules', icon: 'Calendar' },
     { name: 'To-Do List Generator', slug: 'todo-list-generator', description: 'Turn goals into organized task lists', icon: 'CheckSquare' },
-    { name: 'Resume Bullets', slug: 'resume-bullets', description: 'Generate impactful resume bullet points', icon: 'FileText' },
 ];
 
 export default function CareerToolsPage() {
@@ -86,6 +88,36 @@ export default function CareerToolsPage() {
                 </p>
             </section>
 
+            <section className="mx-auto max-w-4xl px-6 pb-10 not-prose">
+                <h2 className="text-2xl font-bold mb-4">Job-search workflow (free stack)</h2>
+                <ol className="list-decimal pl-5 space-y-2 text-muted-foreground text-sm md:text-base">
+                    <li>Rewrite experience with <Link href="/tools/resume-bullets" className="text-primary underline underline-offset-4">Resume Bullets</Link></li>
+                    <li>Align profile with <Link href="/tools/linkedin-optimizer" className="text-primary underline underline-offset-4">LinkedIn Optimizer</Link></li>
+                    <li>Draft applications with <Link href="/tools/cover-letter-writer" className="text-primary underline underline-offset-4">Cover Letter Writer</Link></li>
+                    <li>Practice answers with <Link href="/tools/interview-generator" className="text-primary underline underline-offset-4">Interview Generator</Link></li>
+                    <li>Stay organized with <Link href="/tools/goal-planner" className="text-primary underline underline-offset-4">Goal Planner</Link> + <Link href="/tools/todo-list-generator" className="text-primary underline underline-offset-4">To-Do List</Link></li>
+                </ol>
+                <h3 className="text-lg font-semibold mt-8 mb-3">Career guides</h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li><Link href="/blog/resume-bullets-that-get-interviews" className="underline underline-offset-4 hover:text-primary">Resume bullets that get interviews</Link></li>
+                    <li><Link href="/blog/linkedin-headline-about-formula" className="underline underline-offset-4 hover:text-primary">LinkedIn headline + About formula</Link></li>
+                </ul>
+            </section>
+
+            {aeoContent.faqs?.length > 0 && (
+                <section className="mx-auto max-w-3xl px-6 pb-16">
+                    <h2 className="text-2xl font-bold mb-6 text-center">Career tools FAQ</h2>
+                    <div className="space-y-4">
+                        {aeoContent.faqs.map((f, i) => (
+                            <div key={i} className="rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-900">
+                                <h3 className="font-semibold mb-2">{f.question}</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed">{f.answer}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
             <section className="mx-auto max-w-[1200px] px-6 pb-12">
                 <h2 className="text-xl font-semibold mb-3">Explore more categories</h2>
                 <div className="flex flex-wrap gap-3 text-sm">
@@ -93,6 +125,7 @@ export default function CareerToolsPage() {
                     <Link href="/tools/writing-tools" className="underline underline-offset-4">Writing tools</Link>
                     <Link href="/tools/study-tools" className="underline underline-offset-4">Study tools</Link>
                     <Link href="/tools/image-pdf-tools" className="underline underline-offset-4">Image & PDF tools</Link>
+                    <Link href="/tools/utility-tools" className="underline underline-offset-4">Utility tools</Link>
                     <Link href="/tools/career-tools" className="underline underline-offset-4">Career tools</Link>
                     <Link href="/blog" className="underline underline-offset-4">Blog</Link>
                 </div>

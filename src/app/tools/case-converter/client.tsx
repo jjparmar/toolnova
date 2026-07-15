@@ -1,23 +1,13 @@
 "use client";
 
-import EnhancedToolLayout from "@/components/EnhancedToolLayout";
-import { PremiumToolWrapper } from "@/components/PremiumToolWrapper";
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { Copy, Check, Trash2, Type } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/FAQSection";
-import {
-  Type,
-  Zap,
-  ArrowUpDown,
-  Users,
-  Star,
-  Clock,
-  FileText,
-  Hash,
-  Sparkles,
-  AlignLeft,
-} from "lucide-react";
 
-// Non-AI Handler Function
-function caseConverterHandler(input: string): string {
+function convertAll(input: string) {
   const uppercase = input.toUpperCase();
   const lowercase = input.toLowerCase();
   const titleCase = input
@@ -42,6 +32,7 @@ function caseConverterHandler(input: string): string {
     .toLowerCase()
     .replace(/[^a-zA-Z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+  const constantCase = snakeCase.toUpperCase();
   const alternatingCase = input
     .split("")
     .map((char, i) => (i % 2 === 0 ? char.toLowerCase() : char.toUpperCase()))
@@ -53,210 +44,147 @@ function caseConverterHandler(input: string): string {
     )
     .join("");
 
-  return `📝 **Case Conversion Results**
-
-**UPPERCASE:**
-${uppercase}
-
-**lowercase:**
-${lowercase}
-
-**Title Case:**
-${titleCase}
-
-**Sentence case:**
-${sentenceCase}
-
-**camelCase:**
-${camelCase}
-
-**PascalCase:**
-${pascalCase}
-
-**snake_case:**
-${snakeCase}
-
-**kebab-case:**
-${kebabCase}
-
-**aLtErNaTiNg CaSe:**
-${alternatingCase}
-
-**iNVERSE cASE:**
-${inverseCase}
-
----
-
-💡 **Usage Tips:**
-- Use UPPERCASE for emphasis or headings
-- Use Title Case for titles and headlines
-- Use camelCase for JavaScript variables
-- Use PascalCase for class names
-- Use snake_case for Python variables
-- Use kebab-case for URLs and CSS classes`;
+  return [
+    { id: "upper", label: "UPPERCASE", value: uppercase },
+    { id: "lower", label: "lowercase", value: lowercase },
+    { id: "title", label: "Title Case", value: titleCase },
+    { id: "sentence", label: "Sentence case", value: sentenceCase },
+    { id: "camel", label: "camelCase", value: camelCase },
+    { id: "pascal", label: "PascalCase", value: pascalCase },
+    { id: "snake", label: "snake_case", value: snakeCase },
+    { id: "kebab", label: "kebab-case", value: kebabCase },
+    { id: "constant", label: "CONSTANT_CASE", value: constantCase },
+    { id: "alt", label: "aLtErNaTiNg", value: alternatingCase },
+    { id: "inverse", label: "iNVERSE cASE", value: inverseCase },
+  ];
 }
 
-
-const features = [
-  {
-    icon: Type,
-    title: "10 Case Styles",
-    description:
-      "Convert to uppercase, lowercase, title case, sentence case, camelCase, PascalCase, snake_case, kebab-case, and more",
-    gradient: "from-blue-500 to-indigo-600",
-    bgLight: "bg-blue-50",
-  },
-  {
-    icon: Zap,
-    title: "Instant Conversion",
-    description:
-      "All case conversions happen instantly - see all formats at once with a single click",
-    gradient: "from-purple-500 to-pink-600",
-    bgLight: "bg-purple-50",
-  },
-  {
-    icon: Sparkles,
-    title: "Programming Friendly",
-    description:
-      "Includes camelCase, PascalCase, snake_case, and kebab-case for developers and programmers",
-    gradient: "from-green-500 to-emerald-600",
-    bgLight: "bg-green-50",
-  },
-];
-
-const howItWorks = [
-  {
-    step: 1,
-    title: "Paste Text",
-    desc: "Add the text you want to convert",
-    icon: FileText,
-    color: "from-blue-500 to-indigo-600",
-  },
-  {
-    step: 2,
-    title: "Convert",
-    desc: "Click to see all case styles instantly",
-    icon: ArrowUpDown,
-    color: "from-purple-500 to-pink-600",
-  },
-  {
-    step: 3,
-    title: "Copy & Use",
-    desc: "Copy the format you need with one click",
-    icon: Zap,
-    color: "from-green-500 to-emerald-600",
-  },
-];
-
-const relatedTools = [
-  {
-    name: "Character Counter",
-    slug: "character-counter",
-    icon: Hash,
-    color: "text-blue-600",
-  },
-  {
-    name: "Word Counter",
-    slug: "word-counter",
-    icon: FileText,
-    color: "text-purple-600",
-  },
-  {
-    name: "Text Simplifier",
-    slug: "text-simplifier",
-    icon: AlignLeft,
-    color: "text-green-600",
-  },
-  {
-    name: "Grammar Fix",
-    slug: "grammar-fix",
-    icon: Sparkles,
-    color: "text-orange-600",
-  },
-];
-
-const faqs = [
-  {
-    question: "What case styles are available?",
-    answer:
-      "We offer 10 case styles: UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, aLtErNaTiNg CaSe, and iNVERSE cASE. Each serves different purposes.",
-    category: "Features",
-  },
-  {
-    question: "When should I use camelCase vs PascalCase?",
-    answer:
-      "Use camelCase for variables and functions in JavaScript (myVariable). Use PascalCase for class names and components (MyComponent). It's a programming convention.",
-    category: "Usage",
-  },
-  {
-    question: "What's the difference between snake_case and kebab-case?",
-    answer:
-      "snake_case uses underscores (my_variable) and is common in Python. kebab-case uses hyphens (my-variable) and is used in URLs and CSS class names.",
-    category: "Usage",
-  },
-  {
-    question: "Does it preserve numbers and special characters?",
-    answer:
-      "Yes! Numbers are preserved in all conversions. Special characters are handled appropriately for each case style (removed in camelCase/PascalCase, converted to separators in snake_case/kebab-case).",
-    category: "Technical",
-  },
-  {
-    question: "Can I convert multiple paragraphs at once?",
-    answer:
-      "Yes, you can paste text of any length including multiple paragraphs. All text will be converted to your chosen case format.",
-    category: "Usage",
-  },
-  {
-    question: "Is this useful for SEO?",
-    answer:
-      "Yes! Title Case is perfect for page titles and headlines. kebab-case is ideal for URL slugs. Both are important for SEO best practices.",
-    category: "SEO",
-  },
-];
-
 export default function CaseConverterClient() {
+  const [text, setText] = useState("");
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const results = useMemo(() => (text ? convertAll(text) : []), [text]);
+
+  const copy = async (id: string, value: string) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopiedId(id);
+      toast.success("Copied");
+      setTimeout(() => setCopiedId(null), 1500);
+    } catch {
+      toast.error("Could not copy");
+    }
+  };
+
   return (
-    <PremiumToolWrapper
-      toolName="Case Converter"
-      toolSlug="case-converter"
-      tagline="Convert text to any case format instantly"
-      description="Transform text between 10 different case styles including UPPERCASE, lowercase, Title Case, camelCase, snake_case, and more. Perfect for developers, writers, and content creators."
-      badge="Utility Tool"
-      category="Utility Tools"
-      categorySlug="utility-tools"
-      features={features}
-      howItWorks={howItWorks}
-      relatedTools={relatedTools}
-      ctaTitle="Convert Your Text Now"
-      ctaDescription="Perfect for programming, content creation, and formatting"
-      ctaIcon={Type}
-    >
-      <EnhancedToolLayout
-        toolSlug="case-converter"
-        toolName="Case Converter"
-        placeholder={`📝 Paste or type your text here...
-
-Examples:
-• "hello world" → "Hello World" (Title Case)
-• "My Variable Name" → "myVariableName" (camelCase)
-• "Some Text Here" → "some_text_here" (snake_case)
-• "Blog Post Title" → "blog-post-title" (kebab-case)
-• "convert this text" → "CONVERT THIS TEXT" (UPPERCASE)
-
-Try any text and see all 10 case formats instantly!`}
-        promptTemplate={(input) => input}
-        inputRows={8}
-        isNonAITool={true}
-        nonAIHandler={caseConverterHandler}
-        resultLabel="🔄 Converted Cases"
-        generateButtonText="🔄 Convert Cases"
-        inputLabel="📝 Your Text"
-        showAdvancedOptions={false}
-        maxHistoryItems={5}
-      />
-      <div className="px-6 pb-6">
-        <FAQSection faqs={faqs} />
+    <div className="w-full max-w-5xl mx-auto px-4 py-8 space-y-8">
+      <div className="text-center space-y-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 text-xs font-semibold">
+          <Type className="h-3.5 w-3.5" />
+          Free · Instant · 100% browser-side
+        </div>
+        <h1 className="text-3xl md:text-4xl font-black tracking-tight">
+          Case Converter
+        </h1>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Convert text to UPPERCASE, Title Case, camelCase, snake_case, kebab-case,
+          and more — live as you type. No sign-up.
+        </p>
       </div>
-    </PremiumToolWrapper>
+
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl overflow-hidden">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/50">
+          <span className="text-sm font-semibold">Your text</span>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => setText("")}
+            disabled={!text}
+            className="text-red-600"
+          >
+            <Trash2 className="h-4 w-4 mr-1" />
+            Clear
+          </Button>
+        </div>
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Type or paste any text… all cases update instantly."
+          className="w-full min-h-[160px] p-5 text-base leading-relaxed bg-transparent outline-none resize-y"
+          aria-label="Text to convert"
+        />
+      </div>
+
+      {results.length > 0 && (
+        <div className="grid sm:grid-cols-2 gap-4">
+          {results.map((r) => (
+            <div
+              key={r.id}
+              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 flex flex-col gap-2"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                  {r.label}
+                </span>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => copy(r.id, r.value)}
+                  className="h-8"
+                >
+                  {copiedId === r.id ? (
+                    <Check className="h-3.5 w-3.5" />
+                  ) : (
+                    <Copy className="h-3.5 w-3.5" />
+                  )}
+                </Button>
+              </div>
+              <p className="text-sm font-medium break-words whitespace-pre-wrap text-foreground min-h-[2.5rem]">
+                {r.value || "—"}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="text-sm">
+        <h2 className="font-bold mb-2">Related tools</h2>
+        <div className="flex flex-wrap gap-3 text-muted-foreground">
+          <Link href="/tools/word-counter" className="underline underline-offset-4 hover:text-primary">
+            Word Counter
+          </Link>
+          <Link href="/tools/character-counter" className="underline underline-offset-4 hover:text-primary">
+            Character Counter
+          </Link>
+          <Link href="/tools/text-simplifier" className="underline underline-offset-4 hover:text-primary">
+            Text Simplifier
+          </Link>
+        </div>
+      </div>
+
+      <FAQSection
+        faqs={[
+          {
+            question: "Does case conversion upload my text?",
+            answer:
+              "No. Conversion runs entirely in your browser. Nothing is sent to ToolNova servers.",
+            category: "Privacy",
+          },
+          {
+            question: "Which case should I use for code?",
+            answer:
+              "JavaScript often uses camelCase for variables and PascalCase for components. Python prefers snake_case. URLs and CSS often use kebab-case.",
+            category: "Usage",
+          },
+          {
+            question: "Is Title Case perfect for every language?",
+            answer:
+              "Title Case rules vary by style guide and language. Review output for small words (a, of, the) if you follow a strict house style.",
+            category: "Usage",
+          },
+        ]}
+      />
+    </div>
   );
 }

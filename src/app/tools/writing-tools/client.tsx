@@ -16,6 +16,7 @@ import {
     Search,
     Zap,
     Star,
+    Shield,
 } from 'lucide-react';
 
 const iconMap: Record<string, any> = {
@@ -27,6 +28,7 @@ const iconMap: Record<string, any> = {
     MessageSquare,
     UserCircle,
     Instagram,
+    Shield,
 };
 
 interface Tool {

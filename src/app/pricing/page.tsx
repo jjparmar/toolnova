@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import PricingClient from "./PricingClient";
+import { TOOL_COUNT_LABEL } from "@/data/tools";
 
 export const metadata: Metadata = {
-  title: "Pricing Plans – Free & Pro AI Tools | ToolNova",
-  description:
-    "Explore ToolNova's pricing plans. Use 46+ AI tools completely free, or upgrade to Pro for unlimited access, premium AI models, and an ad-free experience. 7-day money-back guarantee.",
+  title: "Pricing – Free & Pro AI Tools | ToolNova",
+  description: `Use ${TOOL_COUNT_LABEL} ToolNova tools free to start. PDF & image tools unlimited in-browser. Upgrade to Pro for unlimited AI, premium models, and ad-free use. 7-day money-back.`,
   keywords: [
     "ToolNova pricing",
     "AI tools free plan",
@@ -17,9 +17,8 @@ export const metadata: Metadata = {
     canonical: "https://www.toolnovahub.com/pricing",
   },
   openGraph: {
-    title: "Pricing Plans – Free & Pro AI Tools | ToolNova",
-    description:
-      "Free forever plan with 46+ tools, or upgrade to Pro for unlimited access and premium AI models. 7-day money-back guarantee.",
+    title: "Pricing – Free & Pro | ToolNova",
+    description: `Free to start with ${TOOL_COUNT_LABEL} tools. Pro unlocks unlimited AI and an ad-free experience.`,
     url: "https://www.toolnovahub.com/pricing",
     type: "website",
     images: [
@@ -33,9 +32,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pricing – Free & Pro Plans | ToolNova",
-    description:
-      "Free plan includes 46+ AI tools. Upgrade to Pro for unlimited access and premium models.",
+    title: "Pricing – Free & Pro | ToolNova",
+    description: `Free plan to start. Pro for unlimited AI. ${TOOL_COUNT_LABEL} tools.`,
     images: ["https://www.toolnovahub.com/og-image.png"],
     creator: "@toolnovahub",
   },
@@ -49,14 +47,14 @@ const pricingSchema = {
       "@id": "https://www.toolnovahub.com/pricing#webpage",
       url: "https://www.toolnovahub.com/pricing",
       name: "ToolNova Pricing Plans",
-      description: "Free and Pro pricing plans for ToolNova AI tools platform.",
+      description: `Free and Pro pricing for ToolNova — ${TOOL_COUNT_LABEL} AI and browser tools.`,
       isPartOf: { "@id": "https://www.toolnovahub.com/#website" },
     },
     {
       "@type": "Product",
       name: "ToolNova Pro",
       description:
-        "Unlimited access to all 46+ AI tools with premium models, ad-free experience, and priority support.",
+        "Unlimited AI generations, premium models, ad-free experience, and priority support for ToolNova tools.",
       brand: {
         "@type": "Brand",
         name: "ToolNova",
@@ -65,9 +63,18 @@ const pricingSchema = {
       offers: [
         {
           "@type": "Offer",
-          name: "Monthly Plan",
+          name: "Pro Monthly",
           priceCurrency: "USD",
-          price: "9.99",
+          price: "2.99",
+          priceValidUntil: "2027-12-31",
+          availability: "https://schema.org/InStock",
+          url: "https://www.toolnovahub.com/pricing",
+        },
+        {
+          "@type": "Offer",
+          name: "Pro Yearly",
+          priceCurrency: "USD",
+          price: "29.99",
           priceValidUntil: "2027-12-31",
           availability: "https://schema.org/InStock",
           url: "https://www.toolnovahub.com/pricing",

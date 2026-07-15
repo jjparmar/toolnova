@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { School, Mail, Twitter, Github, Linkedin } from "lucide-react";
+import Image from "next/image";
+import { Mail, Twitter, Github, Linkedin } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { TOOL_COUNT } from "@/data/tools";
+import { TOOL_COUNT, TOOL_COUNT_LABEL } from "@/data/tools";
 
 const writingTools = [
   { name: "Grammar Checker", href: "/tools/grammar-fix" },
@@ -36,20 +37,26 @@ export function Footer() {
           {/* Brand & Description */}
           <div className="col-span-2 md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary to-blue-600 text-white shadow-lg shadow-primary/25">
-                <School className="h-6 w-6" />
+              <div className="relative h-10 w-10 overflow-hidden rounded-xl shadow-lg shadow-primary/25">
+                <Image
+                  src="/logo.webp"
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="h-full w-full object-cover"
+                />
               </div>
               <span className="text-xl font-bold text-foreground tracking-tight">
                 ToolNova
               </span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-4">
-              {TOOL_COUNT} free AI-powered tools for students and
+              {TOOL_COUNT_LABEL} free AI-powered tools for students and
               professionals. Write better, study smarter, and get more done —
               no sign-up required.
             </p>
             <p className="text-muted-foreground text-xs mb-6">
-              100% free · No sign-up required · Browser-based privacy · Based
+              Free to start · No sign-up required · Browser-based privacy · Based
               in Singapore, serving users globally
             </p>
             <div className="flex gap-3">
@@ -245,6 +252,14 @@ export function Footer() {
               </li>
               <li>
                 <Link
+                  href="/advertising"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                >
+                  Advertising Disclosure
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/refund"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
@@ -311,6 +326,18 @@ export function Footer() {
                 className="text-muted-foreground hover:text-primary transition-colors text-sm"
               >
                 Editorial Policy
+              </Link>
+              <Link
+                href="/advertising"
+                className="text-muted-foreground hover:text-primary transition-colors text-sm"
+              >
+                Advertising
+              </Link>
+              <Link
+                href="/pricing"
+                className="text-muted-foreground hover:text-primary transition-colors text-sm"
+              >
+                Pricing
               </Link>
               <Link
                 href="/about"

@@ -28,6 +28,10 @@ export default function ImageToPDFClient() {
     const [loading, setLoading] = useState(false);
     const [converting, setConverting] = useState(false);
     const [dragOver, setDragOver] = useState(false);
+    /** original = one page per image at pixel size; a4/letter = fit on page */
+    const [pageMode, setPageMode] = useState<'original' | 'a4' | 'letter'>('original');
+    const [margin, setMargin] = useState(36); // PDF points (~0.5")
+    const [jpegQuality, setJpegQuality] = useState(0.92);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileSelect = async (selectedFiles: FileList | null) => {
@@ -65,13 +69,22 @@ export default function ImageToPDFClient() {
         setImages(prev => prev.filter(img => img.id !== id));
     };
 
+    const moveImage = (index: number, dir: -1 | 1) => {
+        setImages((prev) => {
+            const next = [...prev];
+            const j = index + dir;
+            if (j < 0 || j >= next.length) return prev;
+            [next[index], next[j]] = [next[j], next[index]];
+            return next;
+        });
+    };
+
     const convertToPDF = async () => {
         if (images.length === 0) return;
         setConverting(true);
 
         try {
             const pdfDoc = await PDFDocument.create();
-
             for (const img of images) {
                 const imgBytes = await img.file.arrayBuffer();
                 let embeddedImg;
@@ -81,19 +94,48 @@ export default function ImageToPDFClient() {
                 } else if (img.file.type === 'image/jpeg' || img.file.type === 'image/jpg') {
                     embeddedImg = await pdfDoc.embedJpg(imgBytes);
                 } else {
-                    const dataUrl = await convertToJpegDataUrl(img.file);
+                    const dataUrl = await convertToJpegDataUrl(img.file, jpegQuality);
                     const base64 = dataUrl.split(',')[1];
                     const jpgBytes = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
                     embeddedImg = await pdfDoc.embedJpg(jpgBytes);
                 }
 
-                const page = pdfDoc.addPage([embeddedImg.width, embeddedImg.height]);
-                page.drawImage(embeddedImg, {
-                    x: 0,
-                    y: 0,
-                    width: embeddedImg.width,
-                    height: embeddedImg.height,
-                });
+                const imgW = embeddedImg.width;
+                const imgH = embeddedImg.height;
+
+                if (pageMode === 'original') {
+                    const page = pdfDoc.addPage([imgW, imgH]);
+                    page.drawImage(embeddedImg, {
+                        x: 0,
+                        y: 0,
+                        width: imgW,
+                        height: imgH,
+                    });
+                } else {
+                    const box =
+                        pageMode === 'a4'
+                            ? { w: 595.28, h: 841.89 }
+                            : { w: 612, h: 792 };
+                    // Auto-orient: landscape if image is wider
+                    let pageW = box.w;
+                    let pageH = box.h;
+                    if (imgW > imgH && pageW < pageH) {
+                        pageW = box.h;
+                        pageH = box.w;
+                    }
+                    const maxW = Math.max(1, pageW - margin * 2);
+                    const maxH = Math.max(1, pageH - margin * 2);
+                    const scale = Math.min(maxW / imgW, maxH / imgH);
+                    const drawW = imgW * scale;
+                    const drawH = imgH * scale;
+                    const page = pdfDoc.addPage([pageW, pageH]);
+                    page.drawImage(embeddedImg, {
+                        x: (pageW - drawW) / 2,
+                        y: (pageH - drawH) / 2,
+                        width: drawW,
+                        height: drawH,
+                    });
+                }
             }
 
             const pdfBytes = await pdfDoc.save();
@@ -104,22 +146,22 @@ export default function ImageToPDFClient() {
 
             const a = document.createElement('a');
             a.href = url;
-            a.download = `images-to-pdf-${Date.now()}.pdf`;
+            a.download = `images-to-pdf-${images.length}p-${Date.now()}.pdf`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
 
-            toast.success('PDF created successfully!');
+            toast.success(`PDF created with ${images.length} page(s)!`);
         } catch (error) {
-            toast.error('Failed to create PDF. Please try again.');
+            toast.error('Failed to create PDF. Try JPG/PNG images.');
             console.error('Convert error:', error);
         } finally {
             setConverting(false);
         }
     };
 
-    const convertToJpegDataUrl = (file: File): Promise<string> => {
+    const convertToJpegDataUrl = (file: File, quality: number): Promise<string> => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -129,8 +171,14 @@ export default function ImageToPDFClient() {
                     canvas.width = img.width;
                     canvas.height = img.height;
                     const ctx = canvas.getContext('2d');
-                    ctx?.drawImage(img, 0, 0);
-                    resolve(canvas.toDataURL('image/jpeg', 0.9));
+                    if (ctx) {
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, 0, 0);
+                    }
+                    resolve(canvas.toDataURL('image/jpeg', quality));
                 };
                 img.onerror = reject;
                 img.src = e.target?.result as string;
@@ -210,10 +258,34 @@ export default function ImageToPDFClient() {
                                 </div>
 
                                 <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
-                                    {images.map((img) => (
+                                    {images.map((img, index) => (
                                         <div key={img.id} className="relative group">
                                             <img src={img.preview} alt={img.name} className="w-full h-20 object-cover rounded-lg" />
+                                            <span className="absolute bottom-1 left-1 text-[10px] font-bold bg-black/60 text-white px-1.5 py-0.5 rounded">
+                                                {index + 1}
+                                            </span>
+                                            <div className="absolute top-1 left-1 flex flex-col gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => moveImage(index, -1)}
+                                                    className="bg-white/90 text-slate-800 rounded px-1 text-xs font-bold disabled:opacity-30"
+                                                    disabled={index === 0}
+                                                    title="Move earlier"
+                                                >
+                                                    ↑
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => moveImage(index, 1)}
+                                                    className="bg-white/90 text-slate-800 rounded px-1 text-xs font-bold disabled:opacity-30"
+                                                    disabled={index === images.length - 1}
+                                                    title="Move later"
+                                                >
+                                                    ↓
+                                                </button>
+                                            </div>
                                             <button
+                                                type="button"
                                                 onClick={() => removeImage(img.id)}
                                                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                                             >
@@ -221,6 +293,52 @@ export default function ImageToPDFClient() {
                                             </button>
                                         </div>
                                     ))}
+                                </div>
+                                <p className="text-xs text-muted-foreground">
+                                    Hover a thumbnail to reorder pages (↑ ↓) before converting.
+                                </p>
+
+                                <div className="grid sm:grid-cols-2 gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                                    <label className="text-sm space-y-1 block">
+                                        <span className="font-medium">Page size</span>
+                                        <select
+                                            value={pageMode}
+                                            onChange={(e) => setPageMode(e.target.value as typeof pageMode)}
+                                            className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3"
+                                        >
+                                            <option value="original">Original (1 image = 1 page, full size)</option>
+                                            <option value="a4">Fit on A4</option>
+                                            <option value="letter">Fit on US Letter</option>
+                                        </select>
+                                    </label>
+                                    <label className="text-sm space-y-1 block">
+                                        <span className="font-medium">
+                                            Margin (when fitting page): {margin} pt
+                                        </span>
+                                        <input
+                                            type="range"
+                                            min={0}
+                                            max={72}
+                                            value={margin}
+                                            disabled={pageMode === 'original'}
+                                            onChange={(e) => setMargin(parseInt(e.target.value, 10))}
+                                            className="w-full"
+                                        />
+                                    </label>
+                                    <label className="text-sm space-y-1 block sm:col-span-2">
+                                        <span className="font-medium">
+                                            Quality for non-JPG/PNG sources: {Math.round(jpegQuality * 100)}%
+                                        </span>
+                                        <input
+                                            type="range"
+                                            min={0.5}
+                                            max={1}
+                                            step={0.01}
+                                            value={jpegQuality}
+                                            onChange={(e) => setJpegQuality(parseFloat(e.target.value))}
+                                            className="w-full"
+                                        />
+                                    </label>
                                 </div>
 
                                 <Button onClick={convertToPDF} disabled={converting} className="w-full h-14 bg-gradient-to-r from-green-500 to-blue-500 text-white font-bold rounded-2xl shadow-xl shadow-green-500/30">

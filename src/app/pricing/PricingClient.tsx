@@ -6,606 +6,477 @@ declare global {
   }
 }
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import {
   Check,
-  Star,
-  Zap,
-  Shield,
+  ChevronDown,
   Crown,
   Sparkles,
-  X,
-  ChevronDown,
-  CreditCard,
-  Users,
-  Clock,
-  Rocket,
-  Heart,
+  Shield,
+  Zap,
+  FileText,
+  Infinity,
 } from "lucide-react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-  useSpring,
-  useMotionValue,
-  useMotionTemplate,
-} from "framer-motion";
 import { cn } from "@/lib/utils";
+import { DAILY_FREE_LIMIT } from "@/lib/limits";
+import { TOOL_COUNT_LABEL } from "@/data/tools";
+import { toast } from "sonner";
+
+const MONTHLY_PRICE = 2.99;
+const YEARLY_PRICE = 29.99;
+const YEARLY_MONTHLY_EQ = (YEARLY_PRICE / 12).toFixed(2);
+const YEARLY_SAVE_PCT = Math.round(
+  (1 - YEARLY_PRICE / (MONTHLY_PRICE * 12)) * 100,
+);
+
+const freeFeatures = [
+  `${TOOL_COUNT_LABEL} tools free to start`,
+  `${DAILY_FREE_LIMIT} free AI generations / day (guest)`,
+  "Free account for another daily AI allowance + history",
+  "Unlimited browser PDF & image tools",
+  "No credit card to start",
+];
+
+const proFeatures = [
+  "Unlimited AI generations",
+  "Premium model (higher quality)",
+  "Priority processing",
+  "Ad-free experience",
+  "Priority support",
+  "Everything in Free",
+];
+
+const comparisonRows = [
+  {
+    feature: "Tool catalog",
+    free: `${TOOL_COUNT_LABEL} tools`,
+    pro: `${TOOL_COUNT_LABEL} tools`,
+  },
+  {
+    feature: "AI generations",
+    free: `${DAILY_FREE_LIMIT}/day free tier`,
+    pro: "Unlimited",
+  },
+  {
+    feature: "AI model",
+    free: "Standard (fast)",
+    pro: "Premium (higher quality)",
+  },
+  {
+    feature: "PDF / image tools",
+    free: "Unlimited in browser",
+    freeOk: true,
+    pro: "Unlimited in browser",
+  },
+  { feature: "Ads", free: "May show ads", pro: "Ad-free" },
+  { feature: "Support", free: "Email / contact form", pro: "Priority support" },
+];
 
 const faqs = [
   {
-    q: "Can I cancel my subscription anytime?",
-    a: "Absolutely! You can cancel your subscription at any time from your account settings. No questions asked, no hidden fees.",
+    q: "Can I cancel anytime?",
+    a: "Yes. Cancel from your account when available; you keep Pro until the current billing period ends. No hidden cancellation fees.",
   },
   {
-    q: "What payment methods are accepted?",
-    a: "We accept all major credit/debit cards, UPI, net banking, and popular wallets through Razorpay — India's most trusted payment gateway.",
+    q: "What payment methods work?",
+    a: "Payments are processed by Razorpay (cards, UPI, net banking, and wallets where available).",
   },
   {
-    q: "Do I get a refund if I cancel?",
-    a: "We offer a 7-day money-back guarantee. If you're not satisfied within the first 7 days, we'll refund your payment in full.",
+    q: "Is there a refund?",
+    a: "We offer a 7-day money-back guarantee if Pro is not a fit. See our Refund Policy for details.",
   },
   {
-    q: "What happens when my subscription ends?",
-    a: "You'll be downgraded to the Free plan automatically. All your data remains safe, and you can upgrade again anytime.",
+    q: "What happens when Pro ends?",
+    a: "You return to the Free plan. PDF/image tools stay free; AI tools return to the free daily allowance. Your account and history stay intact.",
   },
   {
-    q: "Is my data safe with ToolNova?",
-    a: "Your privacy is our priority. We don't store your generated content, and all communications are encrypted with industry-standard SSL.",
+    q: "Is Free really usable?",
+    a: `Yes. Every tool is free to open. Browser PDF/image utilities have no AI limits. AI tools include ${DAILY_FREE_LIMIT} free uses per day without sign-up; a free account can unlock more daily uses.`,
+  },
+  {
+    q: "Do you store my documents?",
+    a: "We prioritize privacy. PDF/image tools process in your browser when possible. AI prompts are processed to fulfill your request and are not sold. See Privacy Policy for full details.",
   },
 ];
-
-const testimonials = [
-  {
-    name: "Aarav S.",
-    role: "Engineering Student",
-    text: "ToolNova Pro saved me hours on assignments. The AI quality is incredible!",
-    avatar: "A",
-  },
-  {
-    name: "Priya M.",
-    role: "Content Creator",
-    text: "Worth every rupee. The premium models produce content that's indistinguishable from human writing.",
-    avatar: "P",
-  },
-  {
-    name: "Rahul K.",
-    role: "MBA Student",
-    text: "The ad-free experience alone is worth it. Plus the speed is 10x faster on Pro!",
-    avatar: "R",
-  },
-  {
-    name: "Sneha G.",
-    role: "Digital Marketer",
-    text: "I use the copy generation tools daily. It paid for itself in the first week.",
-    avatar: "S",
-  },
-  {
-    name: "Vikram R.",
-    role: "Freelance Write",
-    text: "The formatting options in Pro are a lifesaver. Highly recommended.",
-    avatar: "V",
-  },
-  {
-    name: "Ananya P.",
-    role: "Researcher",
-    text: "Access to Claude Opus through this interface is much cheaper than a direct sub.",
-    avatar: "A",
-  },
-];
-
-const comparisonFeatures = [
-  {
-    feature: "AI Tools Access",
-    free: "Basic with limited access",
-    pro: "Premium unlimited",
-  },
-  {
-    feature: "AI Model",
-    free: "GPT 5",
-    pro: "GPT 5.2, Claude Opus 4.6, Gemini 3 Pro",
-  },
-  { feature: "Daily Generations", free: "5/day", pro: "Unlimited" },
-  {
-    feature: "Processing Speed",
-    free: "Standard",
-    pro: "Priority (10x faster)",
-  },
-  { feature: "Image Generation", free: "Basic", pro: "4K HD" },
-  { feature: "Ads", free: "Yes", pro: "Ad-free" },
-  { feature: "Export Options", free: "PDF/PNG", pro: "All formats" },
-  { feature: "Support", free: "Community", pro: "Priority 24/7" },
-];
-
-function TiltCard({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [5, -5]);
-  const rotateY = useTransform(x, [-100, 100], [-5, 5]);
-
-  return (
-    <motion.div
-      style={{ rotateX, rotateY, perspective: 1000 }}
-      className={cn(
-        "relative transition-all duration-200 ease-linear",
-        className,
-      )}
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        x.set(e.clientX - centerX);
-        y.set(e.clientY - centerY);
-      }}
-      onMouseLeave={() => {
-        x.set(0);
-        y.set(0);
-      }}
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 export default function PricingClient() {
   const [isYearly, setIsYearly] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
 
-  // Mouse follower logic
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
-
-  const loadScript = () => {
-    return new Promise((resolve) => {
+  const loadScript = () =>
+    new Promise<boolean>((resolve) => {
+      if (typeof window !== "undefined" && window.Razorpay) {
+        resolve(true);
+        return;
+      }
       const script = document.createElement("script");
       script.src = "https://checkout.razorpay.com/v1/checkout.js";
       script.onload = () => resolve(true);
       script.onerror = () => resolve(false);
       document.body.appendChild(script);
     });
-  };
 
   const startSubscription = async (planId: string) => {
     if (!session) {
-      router.push("/login");
+      toast.info("Sign in to upgrade to Pro");
+      router.push("/login?callbackUrl=/pricing");
       return;
     }
 
-    const resScript = await loadScript();
-    if (!resScript) {
-      alert("Razorpay SDK failed to load. Are you online?");
-      return;
-    }
-
+    setLoading(true);
     try {
+      const resScript = await loadScript();
+      if (!resScript) {
+        toast.error("Payment SDK failed to load. Check your connection.");
+        return;
+      }
+
       const res = await fetch("/api/create-subscription", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ planId }),
       });
 
-      const sub = await res.json();
-      if (!sub.id) {
-        alert("Could not create subscription. Please try again.");
+      const sub = await res.json().catch(() => ({}));
+      if (!res.ok || !sub.id) {
+        toast.error(
+          typeof sub?.error === "string"
+            ? sub.error
+            : "Could not start subscription. Try again.",
+        );
         return;
       }
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         subscription_id: sub.id,
-        name: "Tool Nova Hub",
-        description: "Pro Access Subscription",
+        name: "ToolNova",
+        description: isYearly ? "Pro yearly" : "Pro monthly",
+        prefill: {
+          email: session.user?.email || undefined,
+          name: session.user?.name || undefined,
+        },
         handler: async function (response: any) {
-          const verifyRes = await fetch("/api/verify-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(response),
-          });
-          const verifyData = await verifyRes.json();
-          if (verifyData.success || verifyRes.ok) {
-            alert("Subscription Started 🎉");
-          } else {
-            alert(
-              "Subscription verification pending. It will be active shortly.",
-            );
+          try {
+            const verifyRes = await fetch("/api/verify-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(response),
+            });
+            const verifyData = await verifyRes.json().catch(() => ({}));
+            if (verifyData.success || verifyRes.ok) {
+              toast.success("Welcome to Pro! Unlimited AI is unlocked.");
+              router.push("/dashboard");
+            } else {
+              toast.message(
+                "Payment received — Pro will activate shortly after verification.",
+              );
+            }
+          } catch {
+            toast.message("Payment submitted. Refresh dashboard in a minute.");
           }
         },
-        theme: { color: "#6366f1" },
+        theme: { color: "#135bec" },
       };
 
       const rzp = new window.Razorpay(options);
       rzp.open();
     } catch (error) {
       console.error("Subscription Error:", error);
-      alert("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
+  const proPrice = isYearly ? YEARLY_PRICE : MONTHLY_PRICE;
+  const proPeriod = isYearly ? "year" : "month";
+
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#050505] pt-24 pb-20 relative overflow-hidden selection:bg-primary/20">
-      {/* Dynamic Mouse Background */}
-      <motion.div
-        className="pointer-events-none fixed inset-0 z-0 opacity-40 dark:opacity-20"
-        style={{
-          background: useMotionTemplate`
-                        radial-gradient(600px circle at ${mouseX}px ${mouseY}px, rgba(99, 102, 241, 0.15), transparent 80%)
-                    `,
-        }}
-      />
-
-      {/* Ambient Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] rounded-full bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-transparent blur-[120px] animate-pulse" />
-        <div
-          className="absolute bottom-[-15%] left-[-15%] w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-blue-600/10 via-cyan-500/5 to-transparent blur-[140px] animate-pulse"
-          style={{ animationDelay: "2s" }}
-        />
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Hero Section */}
-        <div className="text-center max-w-4xl mx-auto mb-20 transform perspective-1000">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, rotateX: 20 }}
-            animate={{ opacity: 1, scale: 1, rotateX: 0 }}
-            transition={{ duration: 0.8, type: "spring" }}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/50 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl shadow-black/5 mb-8"
-          >
-            <Crown className="h-4 w-4 text-amber-500 fill-amber-500" />
-            <span className="text-sm font-bold bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
-              Unlock Premium Power
-            </span>
-            <Sparkles className="h-4 w-4 text-amber-500" />
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.8 }}
-            className="text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-[0.9]"
-          >
-            <span className="text-foreground drop-shadow-sm">Limitless</span>
-            <br />
-            <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent pb-4 inline-block drop-shadow-2xl">
-              Possibilities
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-xl md:text-2xl text-muted-foreground/80 leading-relaxed max-w-2xl mx-auto mb-12 font-medium"
-          >
-            Join the elite community of{" "}
-            <span className="text-foreground font-bold underline decoration-indigo-500/30">
-              10,000+ creators
-            </span>{" "}
-            leveraging our most advanced AI models.
-          </motion.p>
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#0f1419] dark:to-background pb-20">
+      <div className="container mx-auto px-6 pt-16 md:pt-24 max-w-6xl">
+        {/* Hero */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
+            <Crown className="h-4 w-4" />
+            Simple pricing
+          </div>
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight mb-4">
+            Free to start.{" "}
+            <span className="text-primary">Pro when you need unlimited AI.</span>
+          </h1>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            Use {TOOL_COUNT_LABEL} tools without a credit card. Browser PDF &amp;
+            image tools stay unlimited. Upgrade only if you want unlimited AI
+            generations and an ad-free workspace.
+          </p>
         </div>
 
-        {/* Toggle */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3 }}
-          className="flex flex-col items-center mb-24"
-        >
-          <div className="relative p-1.5 bg-muted/40 backdrop-blur-xl rounded-full border border-white/10 shadow-2xl">
+        {/* Billing toggle */}
+        <div className="flex justify-center mb-12">
+          <div
+            className="inline-flex p-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
+            role="group"
+            aria-label="Billing period"
+          >
             <button
+              type="button"
               onClick={() => setIsYearly(false)}
               className={cn(
-                "px-10 py-3.5 rounded-full text-base font-bold transition-all duration-300 relative z-10",
+                "px-6 py-2.5 rounded-full text-sm font-bold transition-all",
                 !isYearly
-                  ? "text-white"
-                  : "text-muted-foreground hover:text-foreground",
+                  ? "bg-white dark:bg-slate-900 text-foreground shadow-sm"
+                  : "text-muted-foreground",
               )}
             >
               Monthly
             </button>
             <button
+              type="button"
               onClick={() => setIsYearly(true)}
               className={cn(
-                "px-10 py-3.5 rounded-full text-base font-bold transition-all duration-300 relative z-10",
+                "px-6 py-2.5 rounded-full text-sm font-bold transition-all",
                 isYearly
-                  ? "text-white"
-                  : "text-muted-foreground hover:text-foreground",
+                  ? "bg-white dark:bg-slate-900 text-foreground shadow-sm"
+                  : "text-muted-foreground",
               )}
             >
               Yearly
+              <span className="ml-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                Save {YEARLY_SAVE_PCT}%
+              </span>
             </button>
-            <motion.div
-              layout
-              className="absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full shadow-lg shadow-indigo-500/30"
-              style={{ left: isYearly ? "calc(50% + 3px)" : "6px" }}
-              transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            />
           </div>
-        </motion.div>
+        </div>
 
-        {/* Pricing Cards with 3D Tilt */}
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 max-w-6xl mx-auto mb-32 px-4">
-          {/* Free Plan */}
-          <TiltCard className="group">
-            <div className="h-full bg-white/60 dark:bg-gray-900/60 backdrop-blur-2xl rounded-[2.5rem] p-10 border border-white/20 dark:border-white/5 shadow-xl transition-all duration-500 group-hover:shadow-2xl group-hover:border-indigo-500/20">
-              <div className="flex justify-between items-start mb-10">
-                <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-2xl group-hover:scale-110 transition-transform duration-500">
-                  <Users className="h-8 w-8 text-gray-600 dark:text-gray-300" />
-                </div>
-                <div className="px-4 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
-                  <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    Starter
-                  </span>
-                </div>
-              </div>
-
-              <h3 className="text-4xl font-bold mb-2">Free</h3>
-              <p className="text-muted-foreground mb-8">
-                Essential tools for casual users
-              </p>
-
-              <div className="flex items-baseline mb-10">
-                <span className="text-6xl font-black text-foreground tracking-tighter">
-                  $0
-                </span>
-                <span className="text-xl text-muted-foreground font-medium ml-2">
-                  /mo
-                </span>
-              </div>
-
-              <Button
-                variant="outline"
-                className="w-full h-16 rounded-2xl text-lg font-bold border-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all mb-10"
-                onClick={() => router.push("/tools")}
-              >
-                Get Started
-              </Button>
-
-              <div className="space-y-4">
-                {comparisonFeatures.slice(0, 5).map((f, i) => (
-                  <div key={i} className="flex items-center gap-4 group/item">
-                    <div className="h-6 w-6 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-                      <Check className="h-3.5 w-3.5 text-gray-500" />
-                    </div>
-                    <span className="text-muted-foreground font-medium group-hover/item:text-foreground transition-colors">
-                      {f.free}
-                    </span>
-                  </div>
-                ))}
-              </div>
+        {/* Plans */}
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto mb-16">
+          {/* Free */}
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 shadow-sm flex flex-col">
+            <div className="flex items-center gap-2 mb-2">
+              <FileText className="h-5 w-5 text-muted-foreground" />
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Free forever
+              </span>
             </div>
-          </TiltCard>
-
-          {/* Pro Plan */}
-          <TiltCard className="group relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-[2.6rem] opacity-70 blur-lg group-hover:opacity-100 group-hover:blur-xl transition-all duration-500 animate-pulse" />
-            <div className="relative h-full bg-[#0a0a0c] rounded-[2.5rem] p-10 border border-white/10 overflow-hidden">
-              {/* Glass Glare */}
-              <div className="absolute -top-[200px] -right-[200px] w-[500px] h-[500px] bg-indigo-600/20 blur-[150px] rounded-full pointer-events-none" />
-              <div className="absolute -bottom-[200px] -left-[200px] w-[500px] h-[500px] bg-purple-600/20 blur-[150px] rounded-full pointer-events-none" />
-
-              <div className="relative z-10 flex flex-col h-full">
-                <div className="flex justify-between items-start mb-10">
-                  <div className="p-4 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl shadow-lg shadow-indigo-500/30 group-hover:scale-110 transition-transform duration-500">
-                    <Crown className="h-8 w-8 text-white" />
-                  </div>
-                  <div className="px-5 py-2 rounded-full bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 shadow-inner shadow-indigo-500/10">
-                    <span className="text-xs font-black text-indigo-400 uppercase tracking-widest">
-                      MOST POPULAR
-                    </span>
-                  </div>
-                </div>
-
-                <h3 className="text-4xl font-bold text-white mb-2">
-                  Pro Access
-                </h3>
-                <p className="text-gray-400 mb-8">
-                  Ultimate power for power users
-                </p>
-
-                <div className="flex items-baseline mb-2">
-                  <span className="text-6xl font-black text-white tracking-tighter">
-                    ${isYearly ? "29.99" : "2.99"}
-                  </span>
-                  <span className="text-xl text-gray-500 font-medium ml-2">
-                    /{isYearly ? "year" : "month"}
-                  </span>
-                </div>
-                {isYearly && (
-                  <p className="text-emerald-400 text-sm font-bold mb-8 animate-pulse">
-                    Save 20% with annual billing
-                  </p>
-                )}
-                {!isYearly && <div className="mb-8 h-5" />}
-
-                <Button
-                  className="w-full h-16 rounded-2xl text-lg font-bold bg-white text-black hover:bg-white/90 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-white/5 mb-10"
-                  onClick={() =>
-                    startSubscription(
-                      isYearly ? "plan_SEPrpn71jkiE0u" : "plan_SEPqtQNsEaZpDB",
-                    )
-                  }
-                >
-                  Upgrade Now
-                </Button>
-
-                <div className="space-y-4">
-                  {comparisonFeatures.map((f, i) => (
-                    <div key={i} className="flex items-center gap-4 group/item">
-                      <div className="h-6 w-6 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0">
-                        <Check
-                          className="h-3.5 w-3.5 text-indigo-400"
-                          strokeWidth={3}
-                        />
-                      </div>
-                      <span className="text-gray-300 font-medium group-hover/item:text-white transition-colors">
-                        {f.pro}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <h2 className="text-2xl font-black mb-1">Free</h2>
+            <p className="text-muted-foreground text-sm mb-6">
+              Perfect for students and light use
+            </p>
+            <div className="flex items-baseline gap-1 mb-6">
+              <span className="text-5xl font-black">$0</span>
+              <span className="text-muted-foreground">/mo</span>
             </div>
-          </TiltCard>
-        </div>
-
-        {/* Infinite Marquee Testimonials */}
-        <div className="mb-32 overflow-hidden py-10 relative">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-50 dark:from-[#050505] to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-50 dark:from-[#050505] to-transparent z-10" />
-
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">
-              Loved by 10,000+ Creators
-            </h2>
-            <p className="text-muted-foreground">
-              Don't just take our word for it
-            </p>
-          </div>
-
-          <div className="flex gap-8 w-max animate-marquee hover:[animation-play-state:paused]">
-            {[...testimonials, ...testimonials, ...testimonials].map((t, i) => (
-              <div
-                key={i}
-                className="w-[350px] p-8 rounded-3xl bg-white dark:bg-white/5 border border-black/5 dark:border-white/5 shadow-lg backdrop-blur-sm"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <p className="font-bold text-foreground">{t.name}</p>
-                    <p className="text-xs text-muted-foreground">{t.role}</p>
-                  </div>
-                </div>
-                <div className="flex gap-1 mb-3">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <Star
-                      key={s}
-                      className="h-4 w-4 fill-amber-400 text-amber-400"
-                    />
-                  ))}
-                </div>
-                <p className="text-muted-foreground/90 italic leading-relaxed">
-                  "{t.text}"
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* FAQ Section */}
-        <div className="max-w-3xl mx-auto mb-32">
-          <h2 className="text-4xl font-bold text-center mb-12">
-            Frequently Asked Questions
-          </h2>
-          <div className="grid gap-4">
-            {faqs.map((faq, i) => (
-              <motion.div
-                key={i}
-                initial={false}
-                className={cn(
-                  "border rounded-2xl overflow-hidden transition-all duration-300",
-                  openFaq === i
-                    ? "bg-white/50 dark:bg-white/5 border-indigo-500/50 shadow-lg"
-                    : "bg-transparent border-black/5 dark:border-white/5 hover:bg-white/30 dark:hover:bg-white/5",
-                )}
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="flex items-center justify-between w-full p-6 text-left"
-                >
-                  <span className="text-lg font-bold">{faq.q}</span>
-                  <ChevronDown
-                    className={cn(
-                      "h-5 w-5 transition-transform duration-300",
-                      openFaq === i && "rotate-180 text-indigo-500",
-                    )}
-                  />
-                </button>
-                <AnimatePresence>
-                  {openFaq === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <div className="px-6 pb-6 text-muted-foreground leading-relaxed">
-                        {faq.a}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Final CTA */}
-        <div className="relative rounded-[3rem] overflow-hidden p-12 md:p-24 text-center bg-[#0a0a0c]">
-          <div className="absolute inset-0 bg-pattern-noise opacity-20" />
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-indigo-500/20 to-transparent pointer-events-none" />
-
-          <div className="relative z-10 max-w-3xl mx-auto">
-            <Rocket className="h-16 w-16 text-white mx-auto mb-8 animate-bounce" />
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tight">
-              Ready to launch?
-            </h2>
-            <p className="text-xl text-gray-400 mb-12 leading-relaxed">
-              Join the growing community of creators who are scaling their
-              productivity with ToolNova Pro.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button
-                onClick={() =>
-                  startSubscription(
-                    isYearly ? "plan_SEPrpn71jkiE0u" : "plan_SEPqtQNsEaZpDB",
-                  )
-                }
-                className="h-16 px-12 rounded-2xl text-xl font-bold bg-white text-black hover:bg-gray-100 hover:scale-[1.05] transition-all shadow-2xl"
-              >
-                Get Instant Access
-              </Button>
-            </div>
-            <p className="mt-8 text-sm text-gray-500">
-              7-day money-back guarantee • Cancel details in 1-click
-            </p>
-          </div>
-        </div>
-
-        {/* Support Link */}
-        <div className="mt-12 text-center">
-          <p className="text-sm text-muted-foreground">
-            Have questions?{" "}
-            <a
-              href="/contact"
-              className="text-primary hover:underline font-medium"
+            <Button
+              variant="outline"
+              className="w-full h-12 rounded-xl font-bold mb-8"
+              onClick={() => router.push("/tools")}
             >
-              Contact our support team
-            </a>
+              Start free — no card
+            </Button>
+            <ul className="space-y-3 flex-1">
+              {freeFeatures.map((f) => (
+                <li key={f} className="flex gap-3 text-sm">
+                  <Check className="h-5 w-5 text-emerald-600 shrink-0" />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Pro */}
+          <div className="rounded-3xl border-2 border-primary bg-white dark:bg-slate-900 p-8 shadow-xl shadow-primary/10 flex flex-col relative overflow-hidden">
+            <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary text-white text-[10px] font-black uppercase tracking-wider">
+              Best value
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <Crown className="h-5 w-5 text-primary" />
+              <span className="text-xs font-bold uppercase tracking-wider text-primary">
+                Pro
+              </span>
+            </div>
+            <h2 className="text-2xl font-black mb-1">Pro</h2>
+            <p className="text-muted-foreground text-sm mb-6">
+              For daily AI power users
+            </p>
+            <div className="flex items-baseline gap-1 mb-1">
+              <span className="text-5xl font-black">${proPrice}</span>
+              <span className="text-muted-foreground">/{proPeriod}</span>
+            </div>
+            {isYearly ? (
+              <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium mb-6">
+                ≈ ${YEARLY_MONTHLY_EQ}/mo · save {YEARLY_SAVE_PCT}% vs monthly
+              </p>
+            ) : (
+              <p className="text-sm text-muted-foreground mb-6">
+                Cancel anytime · 7-day money-back
+              </p>
+            )}
+            <Button
+              className="w-full h-12 rounded-xl font-bold mb-8 bg-primary hover:bg-primary/90"
+              disabled={loading}
+              onClick={() =>
+                startSubscription(
+                  isYearly ? "plan_SEPrpn71jkiE0u" : "plan_SEPqtQNsEaZpDB",
+                )
+              }
+            >
+              {loading ? (
+                "Opening checkout…"
+              ) : (
+                <>
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  {session ? "Upgrade to Pro" : "Sign in & upgrade"}
+                </>
+              )}
+            </Button>
+            <ul className="space-y-3 flex-1">
+              {proFeatures.map((f) => (
+                <li key={f} className="flex gap-3 text-sm">
+                  <Check className="h-5 w-5 text-primary shrink-0" />
+                  <span className="font-medium">{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Trust strip */}
+        <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto mb-20">
+          {[
+            {
+              icon: Shield,
+              title: "Privacy-minded",
+              desc: "Browser PDF/image tools when possible",
+            },
+            {
+              icon: Zap,
+              title: "No card for Free",
+              desc: "Try tools before you ever pay",
+            },
+            {
+              icon: Infinity,
+              title: "Clear limits",
+              desc: `Free AI: ${DAILY_FREE_LIMIT}/day · Pro: unlimited`,
+            },
+          ].map((item) => (
+            <div
+              key={item.title}
+              className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 text-center"
+            >
+              <item.icon className="h-6 w-6 mx-auto mb-2 text-primary" />
+              <p className="font-bold text-sm">{item.title}</p>
+              <p className="text-xs text-muted-foreground mt-1">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Comparison table */}
+        <div className="max-w-3xl mx-auto mb-20">
+          <h2 className="text-2xl font-bold text-center mb-6">
+            Free vs Pro at a glance
+          </h2>
+          <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+            <table className="w-full text-sm">
+              <thead className="bg-slate-50 dark:bg-slate-900">
+                <tr>
+                  <th className="text-left p-4 font-semibold">Feature</th>
+                  <th className="text-left p-4 font-semibold">Free</th>
+                  <th className="text-left p-4 font-semibold text-primary">
+                    Pro
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonRows.map((row) => (
+                  <tr
+                    key={row.feature}
+                    className="border-t border-slate-100 dark:border-slate-800"
+                  >
+                    <td className="p-4 font-medium">{row.feature}</td>
+                    <td className="p-4 text-muted-foreground">{row.free}</td>
+                    <td className="p-4 font-medium">{row.pro}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* FAQ */}
+        <div className="max-w-2xl mx-auto mb-16">
+          <h2 className="text-2xl font-bold text-center mb-8">
+            Pricing FAQ
+          </h2>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => {
+              const open = openFaq === i;
+              return (
+                <div
+                  key={faq.q}
+                  className={cn(
+                    "rounded-2xl border transition-colors",
+                    open
+                      ? "border-primary/40 bg-primary/5"
+                      : "border-slate-200 dark:border-slate-800",
+                  )}
+                >
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between gap-4 p-5 text-left font-semibold"
+                    onClick={() => setOpenFaq(open ? null : i)}
+                    aria-expanded={open}
+                  >
+                    {faq.q}
+                    <ChevronDown
+                      className={cn(
+                        "h-5 w-5 shrink-0 transition-transform",
+                        open && "rotate-180 text-primary",
+                      )}
+                    />
+                  </button>
+                  {open && (
+                    <p className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed">
+                      {faq.a}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Footer links */}
+        <div className="text-center text-sm text-muted-foreground space-y-2">
+          <p>
+            <Link href="/refund" className="underline underline-offset-4 hover:text-primary">
+              Refund policy
+            </Link>
+            {" · "}
+            <Link href="/terms" className="underline underline-offset-4 hover:text-primary">
+              Terms
+            </Link>
+            {" · "}
+            <Link href="/privacy" className="underline underline-offset-4 hover:text-primary">
+              Privacy
+            </Link>
+            {" · "}
+            <Link href="/advertising" className="underline underline-offset-4 hover:text-primary">
+              How Free is funded
+            </Link>
+          </p>
+          <p>
+            Questions?{" "}
+            <Link href="/contact" className="text-primary font-medium hover:underline">
+              Contact support
+            </Link>
           </p>
         </div>
       </div>

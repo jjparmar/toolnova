@@ -9,6 +9,7 @@ interface UsageData {
     limit: number;
     remaining: number;
     isPremium: boolean;
+    isGuest?: boolean;
 }
 
 export function UsageCounter() {
@@ -47,13 +48,23 @@ export function UsageCounter() {
         );
     }
 
-    // Free users see remaining count
-    const percentage = ((usage.limit - usage.remaining) / usage.limit) * 100;
+    // Free users / guests see remaining count
+    const percentage =
+        usage.limit > 0
+            ? ((usage.limit - usage.remaining) / usage.limit) * 100
+            : 0;
     const isLow = usage.remaining <= 2;
     const isOut = usage.remaining === 0;
+    const title = isOut
+        ? usage.isGuest
+            ? "Free daily AI limit reached — create an account for more"
+            : "Daily AI limit reached — upgrade for unlimited"
+        : usage.isGuest
+            ? "Guest free AI uses left today (create account for more)"
+            : "Free AI uses left today";
 
     return (
-        <Link href="/pricing" title="Daily AI prompts remaining">
+        <Link href={isOut || usage.isGuest ? "/pricing" : "/dashboard"} title={title}>
             <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 cursor-pointer hover:scale-105 ${isOut
                     ? 'bg-red-500/10 border-red-500/30 hover:border-red-500/50'
                     : isLow
@@ -74,7 +85,7 @@ export function UsageCounter() {
                     <div
                         className={`h-full rounded-full transition-all duration-500 ${isOut ? 'bg-red-500' : isLow ? 'bg-amber-500' : 'bg-primary'
                             }`}
-                        style={{ width: `${100 - percentage}%` }}
+                        style={{ width: `${Math.max(0, Math.min(100, 100 - percentage))}%` }}
                     />
                 </div>
             </div>

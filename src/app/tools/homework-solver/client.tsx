@@ -19,21 +19,23 @@ import {
   Award,
 } from "lucide-react";
 
-const systemPrompt = `You are a patient, encouraging tutor helping students learn step-by-step.
+const systemPrompt = `You are a patient, accurate tutor helping students learn step-by-step.
 
 OUTPUT RULES:
-- Use the exact structure requested in the user prompt (with emoji section labels: 🎯, 📝, ✅, 💡, etc.)
-- Do NOT use a generic FINAL ANSWER/WORKING/QUICK CHECK format
-- Output can be as long as needed to properly explain the solution (ignore any line limits)
-- Use clear formatting with blank lines between sections
+- Use the exact structure requested in the user prompt (section labels as specified)
+- Do NOT use a generic FINAL ANSWER/WORKING/QUICK CHECK template
+- Be as long as needed for a correct explanation
+- Use clear Markdown headings and numbered steps
 - Number each step clearly (Step 1, Step 2, etc.)
 - Explain WHY each step works, not just HOW
+- Double-check math/logic before answering; show intermediate work
 
 TEACHING APPROACH:
-- Use warm, encouraging language
-- Break down complex problems into simple steps
-- Include verification and practice problems when requested
-- Keep explanations clear and accessible for the specified grade level`;
+- Warm and encouraging, never condescending
+- Break complex problems into simple steps
+- Include verification and practice when requested
+- Match language to the specified grade level
+- If the problem is ambiguous, state assumptions briefly`;
 
 const toolOptions = [
   {
@@ -384,8 +386,21 @@ export default function HomeworkSolverClient() {
       ctaDescription="Get detailed homework help in seconds with AI-powered explanations"
       ctaIcon={Brain}
     >
+      <div className="mx-6 mb-4 rounded-xl border border-amber-200 dark:border-amber-900/50 bg-amber-50/80 dark:bg-amber-950/30 px-4 py-3 text-sm text-amber-950 dark:text-amber-100">
+        <strong className="font-semibold">Learn, don&apos;t just copy.</strong>{" "}
+        Use step-by-step explanations to understand the method. Follow your
+        school&apos;s academic integrity policy — submitting AI answers as your
+        own work may violate course rules.{" "}
+        <a
+          href="/blog/homework-solver-best-practices"
+          className="underline font-medium hover:no-underline"
+        >
+          Best practices guide →
+        </a>
+      </div>
       <EnhancedToolLayout
         toolSlug="homework-solver"
+        systemPrompt={systemPrompt}
         toolName="AI Homework Solver"
         placeholder={`✍️ Enter your homework question here...
 

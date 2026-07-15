@@ -1,36 +1,93 @@
-"use strict";
 "use client";
 
 import EnhancedToolLayout from "@/components/EnhancedToolLayout";
-import { Youtube } from "lucide-react";
 
 export default function YoutubeSummarizerClient() {
   const fetchAndSummarize = async (input: string) => {
-    // 1. Fetch transcript from our new internal API
-    const res = await fetch('/api/youtube/transcript', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url: input })
-    });
-    
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.error || 'Failed to fetch transcript');
+    const url = input.trim();
+    if (!url) {
+      throw new Error("Please paste a YouTube video URL.");
     }
 
-    const { text } = await res.json();
-    
-    // 2. We now have the transcript, we send it to the AI for summarization
-    const prompt = `Please provide a highly structured and comprehensive summary of the following YouTube video transcript.\n\nTranscript: ${text.substring(0, 30000)}`;
-    
+    // 1. Fetch transcript from internal API
+    const res = await fetch("/api/youtube/transcript", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url }),
+    });
+
+    const errorData = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(
+        typeof errorData?.error === "string"
+          ? errorData.error
+          : "Failed to fetch video transcript. Try a public video with captions.",
+      );
+    }
+
+    const text = errorData?.text;
+    if (!text || typeof text !== "string") {
+      throw new Error(
+        "No transcript available for this video. Try one with captions enabled.",
+      );
+    }
+
+    // 2. Summarize transcript via AI (counts toward daily free allowance)
+    const prompt = `Summarize this YouTube transcript for a student/professional who did not watch the video.
+
+## Required Markdown structure
+### Overview
+2–4 sentences on what the video is about.
+
+### Key points
+- 6–12 bullet points of the main ideas (accurate to the transcript)
+- Preserve important names, numbers, steps, and claims
+
+### Outline
+Numbered high-level sections of the talk (if the content supports it).
+
+### Takeaways
+3–5 practical conclusions or actions.
+
+### Who this is for
+One short line on the ideal audience.
+
+Rules:
+- Do not invent timestamps unless clearly present in the text
+- Do not invent facts not in the transcript
+- No "Here is a summary" intro — start with ### Overview
+
+## Transcript
+${text.substring(0, 28000)}`;
+
     const aiRes = await fetch("/api/ai", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt, toolSlug: "youtube-summarizer" }),
+      body: JSON.stringify({
+        prompt,
+        toolSlug: "youtube-summarizer",
+        systemPrompt:
+          "You are an expert lecture summarizer. Produce accurate, structured Markdown summaries from transcripts. Never invent content not supported by the transcript. Be complete and useful.",
+      }),
     });
 
-    if (!aiRes.ok) throw new Error("Generation failed");
-    const data = await aiRes.json();
+    const data = await aiRes.json().catch(() => ({}));
+    if (!aiRes.ok) {
+      throw new Error(
+        typeof data?.error === "string"
+          ? data.error
+          : "AI summarization failed. Please try again.",
+      );
+    }
+    if (!data?.result || typeof data.result !== "string") {
+      throw new Error("Empty summary from AI. Please try again.");
+    }
+
+    // Refresh header usage counter (this path uses isNonAITool wrapper)
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("ai-usage-updated"));
+    }
+
     return data.result;
   };
 
@@ -39,9 +96,8 @@ export default function YoutubeSummarizerClient() {
       toolSlug="youtube-summarizer"
       toolName="YouTube Video Summarizer"
       placeholder="Paste a YouTube video link here (e.g., https://www.youtube.com/watch?v=...)"
-      promptTemplate={fetchAndSummarize as any}
       isNonAITool={true}
-      nonAIHandler={fetchAndSummarize as any}
+      nonAIHandler={fetchAndSummarize}
       options={[]}
     />
   );

@@ -113,58 +113,50 @@ const generatePrompt = (input: string, options?: Record<string, any>) => {
       "Include a variety of question types covering concepts, facts, and applications.",
   };
 
-  let prompt = `Generate ${questionCount} multiple-choice questions (MCQs) about: ${input}
+  let prompt = `Generate exactly ${questionCount} high-quality multiple-choice questions about:
 
-📝 Requirements:
-- Topic: ${input}
-- Number of Questions: ${questionCount}
+TOPIC / MATERIAL:
+${input}
+
+SPECS:
 - Difficulty: ${difficultyInstructions[difficulty]}
-- Question Type: ${typeInstructions[questionType]}
+- Focus: ${typeInstructions[questionType]}
+- Exactly 4 options (A–D) per question
+- Exactly one correct answer
+- Plausible distractors (not silly or obviously wrong)
+- Clear, unambiguous stems (no "all of the above" / "none of the above")
+- Cover different aspects; no duplicate questions
 
-🎯 Format (IMPORTANT - Use this EXACT structure):
+OUTPUT FORMAT (Markdown):
 
-Question 1: [Write the question here]
-A) [First option]
-B) [Second option]
-C) [Third option]
-D) [Fourth option]
+### Question 1
+[Question stem]
+A) ...
+B) ...
+C) ...
+D) ...
 
-Question 2: [Write the question here]
-A) [First option]
-B) [Second option]
-C) [Third option]
-D) [Fourth option]
-
-[Continue for all ${questionCount} questions]
-
+### Question 2
+...
+(continue through Question ${questionCount})
 `;
 
   if (includeAnswers) {
     prompt += `
-📋 ANSWER KEY:
-[After all questions, provide answers in this format:]
-1. A
-2. C
-3. B
-[etc.]
+---
+### Answer key
+1. [Letter] — one-line reason
+2. [Letter] — one-line reason
+(for every question)
 `;
-  }
-
-  if (includeExplanations) {
+  } else if (includeExplanations) {
     prompt += `
-💡 EXPLANATIONS:
-[Briefly explain why each correct answer is right]
+After all questions, add brief explanations for each correct answer.
 `;
   }
 
   prompt += `
-Important Guidelines:
-- Create exactly ${questionCount} questions
-- Make all options plausible but only ONE correct
-- Ensure questions are clear and unambiguous
-- Avoid trick questions or confusing wording
-- Cover different aspects of the topic
-- Make distractors reasonable but clearly incorrect`;
+Output only the quiz content—no intro paragraph.`;
 
   return prompt;
 };
@@ -306,6 +298,7 @@ export default function MCQGeneratorClient() {
     >
       <EnhancedToolLayout
         toolSlug="mcq-generator"
+        systemPrompt={systemPrompt}
         toolName="MCQ Generator"
         placeholder={`📚 Enter the topic you need MCQs for...
 

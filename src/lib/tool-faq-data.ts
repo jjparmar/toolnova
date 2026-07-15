@@ -149,7 +149,7 @@ export const toolFAQData: Record<string, FAQItem[]> = {
     },
     {
       question: "How many MCQs can I generate at once?",
-      answer: "You can generate as many MCQs as you need. Simply specify the number when using ToolNova's MCQ generator. Generate unlimited questions for free.",
+      answer: "Specify how many questions you want when generating. Free daily AI use is included; free accounts get more daily uses, and Pro unlocks unlimited generation.",
     },
   ],
   "notes-generator": [

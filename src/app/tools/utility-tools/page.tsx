@@ -21,12 +21,13 @@ export const metadata = {
 };
 
 const tools = [
-    { name: 'Word Counter', slug: 'word-counter', description: 'Count words, characters, sentences & paragraphs', icon: 'Hash', badge: 'Popular', badgeColor: 'bg-cyan-500' },
-    { name: 'Character Counter', slug: 'character-counter', description: 'Count characters with social media limits', icon: 'Type' },
-    { name: 'Case Converter', slug: 'case-converter', description: 'Convert text to different cases', icon: 'AlignLeft' },
+    { name: 'Word Counter', slug: 'word-counter', description: 'Live word, character & reading-time stats', icon: 'Hash', badge: 'Popular', badgeColor: 'bg-cyan-500' },
+    { name: 'Character Counter', slug: 'character-counter', description: 'Character counts with platform limits', icon: 'Type' },
+    { name: 'Case Converter', slug: 'case-converter', description: 'UPPER, title, camel, snake, kebab & more', icon: 'AlignLeft', badge: 'Fast', badgeColor: 'bg-teal-500' },
     { name: 'Text Summarizer', slug: 'text-summarizer', description: 'Summarize long texts into key points', icon: 'FileText', badge: 'Top Rated', badgeColor: 'bg-blue-500' },
     { name: 'Text Simplifier', slug: 'text-simplifier', description: 'Simplify complex text for easy reading', icon: 'AlignLeft' },
-    { name: 'Age Calculator', slug: 'age-calculator', description: 'Calculate age from date of birth', icon: 'Calculator' },
+    { name: 'Age Calculator', slug: 'age-calculator', description: 'Calculate exact age from date of birth', icon: 'Calculator' },
+    { name: 'YouTube Summarizer', slug: 'youtube-summarizer', description: 'Summarize videos from a YouTube URL', icon: 'FileText' },
 ];
 
 export default function UtilityToolsPage() {
@@ -86,6 +87,62 @@ export default function UtilityToolsPage() {
                 </p>
             </section>
 
+            <section className="mx-auto max-w-4xl px-6 pb-10 not-prose">
+                <h2 className="text-2xl font-bold mb-4">Which utility should I use?</h2>
+                <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+                    <table className="w-full text-sm text-left">
+                        <thead className="bg-slate-50 dark:bg-slate-900">
+                            <tr>
+                                <th className="p-3 font-semibold">Need</th>
+                                <th className="p-3 font-semibold">Tool</th>
+                            </tr>
+                        </thead>
+                        <tbody className="text-muted-foreground">
+                            <tr className="border-t border-slate-100 dark:border-slate-800">
+                                <td className="p-3">Essay / blog length &amp; reading time</td>
+                                <td className="p-3"><Link href="/tools/word-counter" className="text-primary underline underline-offset-4">Word Counter</Link></td>
+                            </tr>
+                            <tr className="border-t border-slate-100 dark:border-slate-800">
+                                <td className="p-3">Social captions / SEO title length</td>
+                                <td className="p-3"><Link href="/tools/character-counter" className="text-primary underline underline-offset-4">Character Counter</Link></td>
+                            </tr>
+                            <tr className="border-t border-slate-100 dark:border-slate-800">
+                                <td className="p-3">Title Case / snake_case / camelCase</td>
+                                <td className="p-3"><Link href="/tools/case-converter" className="text-primary underline underline-offset-4">Case Converter</Link></td>
+                            </tr>
+                            <tr className="border-t border-slate-100 dark:border-slate-800">
+                                <td className="p-3">Long article → key points</td>
+                                <td className="p-3"><Link href="/tools/text-summarizer" className="text-primary underline underline-offset-4">Text Summarizer</Link></td>
+                            </tr>
+                            <tr className="border-t border-slate-100 dark:border-slate-800">
+                                <td className="p-3">Hard jargon → plain English</td>
+                                <td className="p-3"><Link href="/tools/text-simplifier" className="text-primary underline underline-offset-4">Text Simplifier</Link></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p className="text-sm text-muted-foreground mt-4">
+                    Related guides:{" "}
+                    <Link href="/blog/summarize-long-articles-fast" className="underline underline-offset-4 hover:text-primary">Summarize long articles</Link>
+                    {" · "}
+                    <Link href="/blog/compress-images-for-web-speed" className="underline underline-offset-4 hover:text-primary">Compress images for speed</Link>
+                </p>
+            </section>
+
+            {aeoContent.faqs?.length > 0 && (
+                <section className="mx-auto max-w-3xl px-6 pb-16">
+                    <h2 className="text-2xl font-bold mb-6 text-center">Utility tools FAQ</h2>
+                    <div className="space-y-4">
+                        {aeoContent.faqs.map((f, i) => (
+                            <div key={i} className="rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-900">
+                                <h3 className="font-semibold mb-2">{f.question}</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed">{f.answer}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
             <section className="mx-auto max-w-[1200px] px-6 pb-12">
                 <h2 className="text-xl font-semibold mb-3">Explore more categories</h2>
                 <div className="flex flex-wrap gap-3 text-sm">
@@ -93,6 +150,7 @@ export default function UtilityToolsPage() {
                     <Link href="/tools/writing-tools" className="underline underline-offset-4">Writing tools</Link>
                     <Link href="/tools/study-tools" className="underline underline-offset-4">Study tools</Link>
                     <Link href="/tools/image-pdf-tools" className="underline underline-offset-4">Image & PDF tools</Link>
+                    <Link href="/tools/utility-tools" className="underline underline-offset-4">Utility tools</Link>
                     <Link href="/tools/career-tools" className="underline underline-offset-4">Career tools</Link>
                     <Link href="/blog" className="underline underline-offset-4">Blog</Link>
                 </div>

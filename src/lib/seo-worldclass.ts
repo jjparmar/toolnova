@@ -54,7 +54,7 @@ export const TOOL_FAQS: Record<string, ToolFAQ[]> = {
     },
     {
       question: "Is ToolNova paraphraser free?",
-      answer: "Yes, ToolNova offers a completely free paraphrasing tool with no sign-up required. Get unlimited paraphrases instantly.",
+      answer: "Yes, ToolNova offers a free paraphrasing tool with no sign-up required to start. Use the free daily allowance, or create a free account for more uses.",
     },
     {
       question: "What is the best free paraphrasing tool?",
@@ -990,10 +990,11 @@ export function generateEntityData() {
     "@type": "Thing",
     "@id": `${siteConfig.url}/#main-entity`,
     name: "ToolNova",
-    description: "A comprehensive free AI tools platform offering 46+ utilities for students and professionals covering writing, studying, PDF tools, career development, and productivity",
+    // toolCount kept in sync with src/data/tools.ts TOOL_COUNT_LABEL (avoid circular import)
+    description: "A comprehensive free AI tools platform offering 47+ utilities for students and professionals covering writing, studying, PDF tools, career development, and productivity",
     url: siteConfig.url,
     additionalProperty: [
-      { "@type": "PropertyValue", name: "toolCount", value: "46+" },
+      { "@type": "PropertyValue", name: "toolCount", value: "47+" },
       { "@type": "PropertyValue", name: "pricing", value: "Free" },
       { "@type": "PropertyValue", name: "signUpRequired", value: "No" },
       { "@type": "PropertyValue", name: "platform", value: "Web" },
@@ -1073,7 +1074,7 @@ export function generateDatasetSchema() {
     "@context": "https://schema.org",
     "@type": "Dataset",
     name: "ToolNova AI Tools Catalog",
-    description: "Comprehensive catalog of 46+ free AI-powered tools for productivity, education, and content creation",
+    description: "Comprehensive catalog of 47+ free AI-powered tools for productivity, education, and content creation",
     url: siteConfig.url,
     license: "https://creativecommons.org/licenses/by/4.0/",
     creator: {
@@ -1123,7 +1124,7 @@ export function generateSoftwareSourceCodeSchema() {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
     name: "ToolNova Platform",
-    description: "Web-based platform providing 44 free AI-powered tools",
+    description: "Web-based platform providing 47+ free AI-powered tools",
     codeRepository: siteConfig.links.github,
     programmingLanguage: "TypeScript",
     runtimePlatform: "Next.js",
@@ -1203,7 +1204,7 @@ export function generateAllToolsItemListSchema() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "ToolNova AI Tools",
-    description: "Complete list of 44 free AI-powered tools for productivity and education",
+    description: "Complete list of 47+ free AI-powered tools for productivity and education",
     numberOfItems: allTools.length,
     itemListElement: allTools.map((tool, index) => ({
       "@type": "ListItem",

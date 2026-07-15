@@ -7,12 +7,12 @@ const TOOL_CATEGORIES = {
   writing: {
     name: "Writing Tools",
     description: "AI-powered writing assistants for content creation, editing, and improvement",
-    tools: ["text-summarizer", "paraphraser", "grammar-fix", "essay-writer", "email-writer", "speech-writer", "caption-generator", "story-generator", "paragraph-generator", "text-simplifier"],
+    tools: ["text-summarizer", "paraphraser", "grammar-fix", "essay-writer", "email-writer", "speech-writer", "caption-generator", "story-generator", "paragraph-generator", "text-simplifier", "plagiarism-checker"],
   },
   study: {
     name: "Study Tools",
     description: "Educational tools for students to learn, practice, and prepare for exams",
-    tools: ["homework-solver", "notes-generator", "flashcard-maker", "quiz-generator", "mcq-generator", "concept-explainer", "chapter-summary", "doubt-solver", "diagram-explainer", "formula-generator", "timetable-generator", "revision-planner", "goal-planner", "todo-list-generator"],
+    tools: ["homework-solver", "notes-generator", "flashcard-maker", "quiz-generator", "mcq-generator", "concept-explainer", "chapter-summary", "doubt-solver", "diagram-explainer", "formula-generator", "timetable-generator", "revision-planner", "goal-planner", "todo-list-generator", "youtube-summarizer"],
   },
   language: {
     name: "Language Tools",
@@ -27,7 +27,7 @@ const TOOL_CATEGORIES = {
   "pdf-image": {
     name: "PDF & Image Tools",
     description: "Tools for PDF manipulation and image processing",
-    tools: ["merge-pdf", "split-pdf", "image-to-pdf", "image-compressor", "jpg-to-png", "png-to-jpg"],
+    tools: ["merge-pdf", "split-pdf", "image-to-pdf", "image-compressor", "jpg-to-png", "png-to-jpg", "resize-image"],
   },
   utility: {
     name: "Utility Tools",
@@ -81,7 +81,7 @@ export async function GET(request: Request) {
       "@context": "https://schema.org",
       "@type": "ItemList",
       name: "ToolNova AI Tools",
-      description: "Complete catalog of 50+ free AI-powered tools",
+      description: "Complete catalog of free AI-powered tools on ToolNova",
       numberOfItems: filteredTools.length,
       itemListElement: filteredTools.map((tool, index) => ({
         "@type": "ListItem",

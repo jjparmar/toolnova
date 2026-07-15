@@ -13,6 +13,7 @@ import {
     Search,
     Zap,
     Star,
+    Linkedin,
 } from 'lucide-react';
 
 const iconMap: Record<string, any> = {
@@ -21,6 +22,7 @@ const iconMap: Record<string, any> = {
     Target,
     Calendar,
     CheckSquare,
+    Linkedin,
 };
 
 interface Tool {

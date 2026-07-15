@@ -20,17 +20,16 @@ import {
 const systemPrompt = `You are an expert text summarization assistant.
 
 OUTPUT RULES:
-- Create clear, concise summaries that capture the main points
-- Preserve the original meaning and key information
-- Use proper formatting and structure
-- Make summaries easy to read and understand
-- Focus on the most important information
+- Capture main claims, key facts, numbers, names, and conclusions accurately
+- Never invent details not present in the source
+- Match the requested length and style (paragraphs, bullets, etc.)
+- Prefer clean Markdown when using bullets or sections
+- No preamble like "Here is a summary" — start with the summary itself
 
 QUALITY STANDARDS:
-- Accurate representation of original content
-- Logical flow and organization
-- Appropriate length based on requirements
-- Clear and professional language`;
+- Faithful to the source meaning
+- Logical order (most important first when appropriate)
+- Clear, professional language`;
 
 const toolOptions = [
   {
@@ -335,6 +334,7 @@ export default function TextSummarizerClient() {
     >
       <EnhancedToolLayout
         toolSlug="text-summarizer"
+        systemPrompt={systemPrompt}
         toolName="AI Text Summarizer"
         placeholder={`📝 Paste or type the text you want to summarize...
 

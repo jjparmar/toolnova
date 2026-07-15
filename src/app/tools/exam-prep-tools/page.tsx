@@ -47,6 +47,20 @@ export default function ExamPrepToolsPage() {
                 <ExamPrepToolsClient tools={tools} />
             </div>
 
+            <section className="mx-auto max-w-4xl px-6 mt-12 not-prose">
+                <h2 className="text-xl font-bold mb-3">Exam prep loop</h2>
+                <p className="text-sm text-muted-foreground mb-4">
+                    Learn words with <Link href="/tools/vocabulary-builder" className="text-primary underline underline-offset-4">Vocabulary Builder</Link>,
+                    expand range with <Link href="/tools/synonym-finder" className="text-primary underline underline-offset-4">Synonym Finder</Link>,
+                    then lock memory with <Link href="/tools/flashcard-maker" className="text-primary underline underline-offset-4">Flashcard Maker</Link> and
+                    a self-test via <Link href="/tools/quiz-generator" className="text-primary underline underline-offset-4">Quiz Generator</Link>.
+                </p>
+                <ul className="text-sm text-muted-foreground space-y-2">
+                    <li><Link href="/blog/build-exam-revision-system-30-minutes" className="underline underline-offset-4 hover:text-primary">Build an exam revision system in 30 minutes</Link></li>
+                    <li><Link href="/blog/flashcards-vs-notes-for-retention" className="underline underline-offset-4 hover:text-primary">Flashcards vs notes for retention</Link></li>
+                </ul>
+            </section>
+
             {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
             <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-slate-200/60 dark:border-slate-800/60 pt-16 prose prose-slate dark:prose-invert prose-lg">
                 <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">

@@ -1,250 +1,297 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Upload, Download, Trash2, Image as ImageIcon, Loader2, ArrowLeft, Shield, Zap, Sparkles, Layers, Star, FileText, ArrowRight } from 'lucide-react';
-import { toast } from 'sonner';
-import Link from 'next/link';
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import {
+  Upload,
+  Download,
+  Trash2,
+  Image as ImageIcon,
+  Loader2,
+  ArrowLeft,
+  Shield,
+  Zap,
+  Sparkles,
+} from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import {
+  baseName,
+  downloadBlob,
+  formatBytes,
+  imageToBlob,
+  readFileAsDataURL,
+} from "@/lib/image-client";
 
-const relatedTools = [
-    { name: 'PNG to JPG', slug: 'png-to-jpg', icon: ImageIcon, color: 'from-amber-500 to-orange-500' },
-    { name: 'Image Compressor', slug: 'image-compressor', icon: Zap, color: 'from-orange-500 to-red-500' },
-    { name: 'Image to PDF', slug: 'image-to-pdf', icon: FileText, color: 'from-green-500 to-teal-500' },
-    { name: 'Merge PDF', slug: 'merge-pdf', icon: Layers, color: 'from-red-500 to-orange-500' },
+const related = [
+  { name: "PNG to JPG", href: "/tools/png-to-jpg" },
+  { name: "Crop Image", href: "/tools/image-crop" },
+  { name: "Image Compressor", href: "/tools/image-compressor" },
+  { name: "Image to PDF", href: "/tools/image-to-pdf" },
 ];
 
+type Item = {
+  id: string;
+  file: File;
+  preview: string;
+  resultUrl?: string;
+  resultSize?: number;
+  dims?: { w: number; h: number };
+};
+
 export default function JPGtoPNGClient() {
-    const router = useRouter();
-    const [image, setImage] = useState<File | null>(null);
-    const [preview, setPreview] = useState<string>('');
-    const [converting, setConverting] = useState(false);
-    const [convertedUrl, setConvertedUrl] = useState('');
-    const fileInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [items, setItems] = useState<Item[]>([]);
+  const [busy, setBusy] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
 
-    const handleFileSelect = (files: FileList | null) => {
-        if (!files || files.length === 0) return;
-        const file = files[0];
-        if (!file.type.startsWith('image/')) {
-            toast.error('Please select an image file');
-            return;
-        }
-        setImage(file);
-        setConvertedUrl('');
-        const reader = new FileReader();
-        reader.onload = (e) => setPreview(e.target?.result as string);
-        reader.readAsDataURL(file);
-    };
-
-    const convertToPNG = async () => {
-        if (!image) return;
-        setConverting(true);
-
-        try {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            const img = new window.Image();
-
-            img.onload = () => {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx?.drawImage(img, 0, 0);
-
-                canvas.toBlob(
-                    (blob) => {
-                        if (blob) {
-                            const url = URL.createObjectURL(blob);
-                            setConvertedUrl(url);
-                            toast.success('Converted to PNG!');
-                        }
-                        setConverting(false);
-                    },
-                    'image/png'
-                );
-            };
-            img.src = preview;
-        } catch (error) {
-            toast.error('Failed to convert image');
-            setConverting(false);
-        }
-    };
-
-    const downloadConverted = () => {
-        if (!convertedUrl) return;
-        const a = document.createElement('a');
-        a.href = convertedUrl;
-        a.download = `${image?.name.replace(/\.[^/.]+$/, '')}.png`;
-        a.click();
-    };
-
-    return (
-        <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#0f1419] dark:via-background dark:to-[#0f1419]">
-            {/* Animated Background */}
-            <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-                <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-            </div>
-
-            <div className="max-w-[1000px] mx-auto px-4 sm:px-6 py-10">
-                {/* Back Button */}
-                <button
-                    onClick={() => router.back()}
-                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
-                >
-                    <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                    <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back</span>
-                </button>
-
-                <div className="flex flex-wrap gap-2 mb-6 justify-center">
-                    <Link href="/" className="text-muted-foreground text-sm font-medium hover:text-primary transition-colors">Home</Link>
-                    <span className="text-muted-foreground/50 text-sm">/</span>
-                    <Link href="/tools" className="text-muted-foreground text-sm font-medium hover:text-primary transition-colors">Tools</Link>
-                    <span className="text-muted-foreground/50 text-sm">/</span>
-                    <Link href="/tools/image-pdf-tools" className="text-muted-foreground text-sm font-medium hover:text-primary transition-colors">Image & PDF Tools</Link>
-                    <span className="text-muted-foreground/50 text-sm">/</span>
-                    <span className="text-primary text-sm font-semibold">JPG to PNG</span>
-                </div>
-
-                <div className="text-center mb-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 text-cyan-600 dark:text-cyan-400 text-sm font-semibold mb-5">
-                        <ArrowRight className="h-4 w-4" />
-                        Free Converter
-                    </div>
-                    <h1 className="text-foreground text-4xl md:text-5xl font-black tracking-tight mb-4">JPG to PNG Converter</h1>
-                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Convert JPG/JPEG images to PNG format with transparency support</p>
-                </div>
-
-                <div className="bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden">
-                    <div className="p-6 md:p-8">
-                        <input type="file" ref={fileInputRef} onChange={(e) => handleFileSelect(e.target.files)} accept="image/jpeg,image/jpg" className="hidden" />
-
-                        {!image ? (
-                            <div
-                                onClick={() => fileInputRef.current?.click()}
-                                className="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl p-10 text-center cursor-pointer hover:border-primary/50 transition-all"
-                            >
-                                <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                                <p className="text-lg font-semibold text-foreground mb-2">Drop JPG image here or click to upload</p>
-                                <p className="text-sm text-muted-foreground">Select a JPG/JPEG file to convert</p>
-                            </div>
-                        ) : (
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
-                                    <img src={preview} alt="Preview" className="h-16 w-16 object-cover rounded-lg" />
-                                    <div className="flex-1">
-                                        <p className="font-medium text-foreground truncate">{image.name}</p>
-                                        <p className="text-sm text-muted-foreground">Ready to convert</p>
-                                    </div>
-                                    <Button variant="ghost" size="icon" onClick={() => { setImage(null); setPreview(''); setConvertedUrl(''); }} className="text-red-500">
-                                        <Trash2 className="h-5 w-5" />
-                                    </Button>
-                                </div>
-
-                                <Button onClick={convertToPNG} disabled={converting} className="w-full h-14 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold rounded-2xl shadow-xl shadow-cyan-500/30">
-                                    {converting ? <><Loader2 className="h-5 w-5 animate-spin mr-2" /> Converting...</> : <><Sparkles className="h-5 w-5 mr-2" /> Convert to PNG</>}
-                                </Button>
-
-                                {convertedUrl && (
-                                    <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
-                                        <div className="flex items-center justify-between">
-                                            <div>
-                                                <p className="font-bold text-green-700 dark:text-green-400">Converted!</p>
-                                                <p className="text-sm text-green-600 dark:text-green-500">PNG file ready to download</p>
-                                            </div>
-                                            <Button onClick={downloadConverted} className="bg-green-600 hover:bg-green-700">
-                                                <Download className="h-4 w-4 mr-2" /> Download PNG
-                                            </Button>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        )}
-                    </div>
-                </div>
-
-                {/* How It Works */}
-                <div className="mt-12">
-                    <h2 className="text-xl font-bold text-foreground text-center mb-8">How It Works</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {[
-                            { step: 1, title: 'Upload JPG', desc: 'Select your image', icon: Upload, color: 'from-cyan-500 to-blue-600' },
-                            { step: 2, title: 'Convert', desc: 'Click convert', icon: Sparkles, color: 'from-blue-500 to-indigo-600' },
-                            { step: 3, title: 'Download', desc: 'Get PNG file', icon: Download, color: 'from-green-500 to-emerald-600' },
-                        ].map((item) => (
-                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
-                                <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg`}>
-                                    <item.icon className="h-7 w-7 text-white" />
-                                </div>
-                                <div className="text-xs font-bold text-muted-foreground mb-1">STEP {item.step}</div>
-                                <h3 className="font-bold text-foreground mb-1">{item.title}</h3>
-                                <p className="text-sm text-muted-foreground">{item.desc}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Features */}
-                <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50/50 dark:from-green-900/20 dark:to-emerald-900/10 border border-green-100 dark:border-green-800/30">
-                        <Shield className="h-8 w-8 text-green-600 mb-3" />
-                        <h3 className="font-bold text-foreground mb-2">100% Private</h3>
-                        <p className="text-sm text-muted-foreground">Processed locally in browser</p>
-                    </div>
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-50 to-blue-50/50 dark:from-cyan-900/20 dark:to-blue-900/10 border border-cyan-100 dark:border-cyan-800/30">
-                        <ImageIcon className="h-8 w-8 text-cyan-600 mb-3" />
-                        <h3 className="font-bold text-foreground mb-2">Transparency</h3>
-                        <p className="text-sm text-muted-foreground">PNG supports transparent backgrounds</p>
-                    </div>
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/10 border border-purple-100 dark:border-purple-800/30">
-                        <Zap className="h-8 w-8 text-purple-600 mb-3" />
-                        <h3 className="font-bold text-foreground mb-2">Lossless Quality</h3>
-                        <p className="text-sm text-muted-foreground">PNG preserves image quality</p>
-                    </div>
-                </div>
-
-                {/* Testimonial */}
-                <div className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-indigo-500/5 border border-cyan-200/50 dark:border-cyan-800/30">
-                    <div className="flex flex-col items-center text-center">
-                        <div className="flex gap-1 mb-4">
-                            {[...Array(5)].map((_, i) => (
-                                <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
-                            ))}
-                        </div>
-                        <p className="text-lg italic text-foreground/80 max-w-2xl mb-4">
-                            "Perfect for converting product photos to PNG with transparent backgrounds!"
-                        </p>
-                        <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-bold">
-                                A
-                            </div>
-                            <div className="text-left">
-                                <p className="font-semibold text-foreground">Alex Chen</p>
-                                <p className="text-sm text-muted-foreground">E-commerce Seller</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Related Tools */}
-                <div className="mt-12">
-                    <h2 className="text-xl font-bold text-foreground text-center mb-6">Related Tools</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {relatedTools.map((tool) => (
-                            <Link
-                                key={tool.slug}
-                                href={`/tools/${tool.slug}`}
-                                className="group p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all text-center"
-                            >
-                                <div className={`h-10 w-10 mx-auto rounded-xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                                    <tool.icon className="h-5 w-5 text-white" />
-                                </div>
-                                <p className="font-medium text-sm text-foreground">{tool.name}</p>
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
+  const addFiles = async (list: FileList | null) => {
+    if (!list?.length) return;
+    const files = Array.from(list).filter(
+      (f) =>
+        f.type.startsWith("image/") ||
+        /\.(jpe?g|png|webp|bmp|gif)$/i.test(f.name),
     );
+    if (!files.length) {
+      toast.error("Please select image files");
+      return;
+    }
+    const next: Item[] = [];
+    for (const file of files) {
+      try {
+        const preview = await readFileAsDataURL(file);
+        const img = new window.Image();
+        await new Promise<void>((res, rej) => {
+          img.onload = () => res();
+          img.onerror = () => rej();
+          img.src = preview;
+        });
+        next.push({
+          id: `${Date.now()}-${Math.random()}`,
+          file,
+          preview,
+          dims: { w: img.naturalWidth, h: img.naturalHeight },
+        });
+      } catch {
+        toast.error(`Could not load ${file.name}`);
+      }
+    }
+    setItems((prev) => [...prev, ...next]);
+    toast.success(`Added ${next.length} image(s)`);
+  };
+
+  const convertOne = async (item: Item): Promise<Item> => {
+    const { blob, width, height } = await imageToBlob(item.preview, {
+      mime: "image/png",
+    });
+    if (item.resultUrl) URL.revokeObjectURL(item.resultUrl);
+    return {
+      ...item,
+      resultUrl: URL.createObjectURL(blob),
+      resultSize: blob.size,
+      dims: { w: width, h: height },
+    };
+  };
+
+  const convertAll = async () => {
+    if (!items.length) return;
+    setBusy(true);
+    try {
+      const out: Item[] = [];
+      for (const item of items) {
+        out.push(await convertOne(item));
+      }
+      setItems(out);
+      toast.success(`Converted ${out.length} image(s) to PNG`);
+    } catch {
+      toast.error("Conversion failed");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const downloadOne = async (item: Item) => {
+    let url = item.resultUrl;
+    let size = item.resultSize;
+    if (!url) {
+      const updated = await convertOne(item);
+      url = updated.resultUrl!;
+      size = updated.resultSize;
+      setItems((prev) =>
+        prev.map((p) => (p.id === item.id ? updated : p)),
+      );
+    }
+    const res = await fetch(url);
+    const blob = await res.blob();
+    downloadBlob(blob, `${baseName(item.file.name)}.png`);
+    void size;
+  };
+
+  const downloadAll = async () => {
+    setBusy(true);
+    try {
+      for (const item of items) {
+        await downloadOne(item);
+      }
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const clear = () => {
+    items.forEach((i) => i.resultUrl && URL.revokeObjectURL(i.resultUrl));
+    setItems([]);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#0f1419] dark:to-background">
+      <div className="max-w-[1000px] mx-auto px-4 py-10">
+        <button
+          type="button"
+          onClick={() => router.back()}
+          className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary"
+        >
+          <ArrowLeft className="h-4 w-4" /> Back
+        </button>
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-black mb-2">JPG to PNG Converter</h1>
+          <p className="text-muted-foreground">
+            Convert images to PNG with full quality. Batch support · private browser processing.
+          </p>
+        </div>
+
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 md:p-8 shadow-xl space-y-6">
+          <input
+            ref={inputRef}
+            type="file"
+            accept="image/*,.jpg,.jpeg,.png,.webp"
+            multiple
+            className="hidden"
+            onChange={(e) => addFiles(e.target.files)}
+          />
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={() => inputRef.current?.click()}
+            onKeyDown={(e) => e.key === "Enter" && inputRef.current?.click()}
+            onDragOver={(e) => {
+              e.preventDefault();
+              setDragOver(true);
+            }}
+            onDragLeave={() => setDragOver(false)}
+            onDrop={(e) => {
+              e.preventDefault();
+              setDragOver(false);
+              addFiles(e.dataTransfer.files);
+            }}
+            className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer ${
+              dragOver ? "border-primary bg-primary/5" : "border-slate-200 dark:border-slate-700"
+            }`}
+          >
+            <Upload className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
+            <p className="font-semibold">Drop images or click to upload</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              JPG, PNG, WebP · multiple files OK
+            </p>
+          </div>
+
+          {items.length > 0 && (
+            <>
+              <div className="flex flex-wrap gap-2 justify-between items-center">
+                <p className="font-bold text-sm">{items.length} file(s)</p>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" onClick={clear} className="text-red-600">
+                    <Trash2 className="h-4 w-4 mr-1" /> Clear
+                  </Button>
+                  <Button size="sm" onClick={convertAll} disabled={busy}>
+                    {busy ? (
+                      <Loader2 className="h-4 w-4 animate-spin mr-1" />
+                    ) : (
+                      <Sparkles className="h-4 w-4 mr-1" />
+                    )}
+                    Convert all to PNG
+                  </Button>
+                  <Button size="sm" variant="secondary" onClick={downloadAll} disabled={busy}>
+                    <Download className="h-4 w-4 mr-1" /> Download all
+                  </Button>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                {items.map((item) => (
+                  <div
+                    key={item.id}
+                    className="rounded-2xl border border-slate-100 dark:border-slate-800 p-4 grid md:grid-cols-[1fr_1fr_auto] gap-4 items-center"
+                  >
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-1">Original</p>
+                      <img
+                        src={item.preview}
+                        alt=""
+                        className="h-28 w-full object-contain rounded-lg bg-slate-50 dark:bg-slate-800"
+                      />
+                      <p className="text-xs mt-1 truncate">
+                        {item.file.name} · {formatBytes(item.file.size)}
+                        {item.dims ? ` · ${item.dims.w}×${item.dims.h}` : ""}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-1">PNG result</p>
+                      {item.resultUrl ? (
+                        <img
+                          src={item.resultUrl}
+                          alt=""
+                          className="h-28 w-full object-contain rounded-lg bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHJlY3Qgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI2VlZSIvPjxyZWN0IHg9IjgiIHk9IjgiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIGZpbGw9IiNlZWUiLz48L3N2Zz4=')] bg-slate-50 dark:bg-slate-800"
+                        />
+                      ) : (
+                        <div className="h-28 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-xs text-muted-foreground">
+                          Convert to preview
+                        </div>
+                      )}
+                      {item.resultSize != null && (
+                        <p className="text-xs mt-1 text-emerald-600">
+                          PNG · {formatBytes(item.resultSize)}
+                        </p>
+                      )}
+                    </div>
+                    <Button
+                      type="button"
+                      onClick={() => downloadOne(item)}
+                      disabled={busy}
+                      className="w-full md:w-auto"
+                    >
+                      <Download className="h-4 w-4 mr-1" /> PNG
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+
+        <div className="mt-10 grid sm:grid-cols-3 gap-4">
+          {[
+            { icon: Shield, t: "Private", d: "Never leaves your browser" },
+            { icon: ImageIcon, t: "Full quality", d: "Lossless PNG export" },
+            { icon: Zap, t: "Batch ready", d: "Convert many images at once" },
+          ].map((x) => (
+            <div key={x.t} className="rounded-2xl border p-4">
+              <x.icon className="h-5 w-5 text-primary mb-2" />
+              <p className="font-bold text-sm">{x.t}</p>
+              <p className="text-xs text-muted-foreground">{x.d}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3 text-sm">
+          {related.map((r) => (
+            <Link key={r.href} href={r.href} className="underline underline-offset-4 hover:text-primary">
+              {r.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }

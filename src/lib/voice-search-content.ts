@@ -27,7 +27,7 @@ export const voiceSearchAnswers: Record<string, VoiceSearchAnswer> = {
     },
     'is-toolnova-free': {
         question: 'Is ToolNova free?',
-        answer: 'Yes, ToolNova is completely free to use. All tools are accessible without sign-up, subscriptions, or hidden fees. You can use unlimited tools with no restrictions on usage.',
+        answer: 'Yes, ToolNova is free to use. All tools are available without sign-up to get started. PDF and image tools run in your browser with no limits; AI tools include a free daily allowance, with optional free accounts and Pro for higher limits.',
         speakable: true,
         category: 'general',
     },

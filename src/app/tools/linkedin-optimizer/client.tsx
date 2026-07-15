@@ -414,6 +414,16 @@ export default function LinkedInOptimizerClient() {
       howItWorks={howItWorks}
       relatedTools={relatedTools}
     >
+      <div className="mx-6 mb-4 rounded-xl border border-sky-200 dark:border-sky-900/50 bg-sky-50/80 dark:bg-sky-950/30 px-4 py-3 text-sm text-sky-950 dark:text-sky-100">
+        <strong className="font-semibold">Headline tip:</strong> Role | who you
+        help | proof/outcome. Keep voice human — AI drafts, you personalize.{" "}
+        <a
+          href="/blog/linkedin-headline-about-formula"
+          className="underline font-medium hover:no-underline"
+        >
+          Headline + About formula →
+        </a>
+      </div>
       <EnhancedToolLayout
         toolSlug="linkedin-optimizer"
         toolName="LinkedIn Profile Optimizer"

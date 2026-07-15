@@ -25,6 +25,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { toast } from "sonner";
 
 interface ToolOption {
   id: string;
@@ -91,6 +92,7 @@ export default function EnhancedToolLayout({
   showAdvancedOptions = true,
   inputLabel = "📝 Your Input",
   supportedFormats = ["text", "markdown"],
+  systemPrompt,
 }: EnhancedToolLayoutProps) {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
@@ -166,15 +168,29 @@ export default function EnhancedToolLayout({
         const response = await fetch("/api/ai", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt, toolSlug }),
+          body: JSON.stringify({ prompt, systemPrompt, toolSlug }),
         });
 
-        if (!response.ok) throw new Error("Generation failed");
-        const data = await response.json();
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          const msg =
+            typeof data?.error === "string"
+              ? data.error
+              : "Generation failed. Please try again.";
+          throw new Error(msg);
+        }
+        if (!data?.result || typeof data.result !== "string") {
+          throw new Error("Empty response from AI. Please try again.");
+        }
         result = data.result;
       }
 
       setOutput(result);
+
+      // Notify usage counter (header) for guest + signed-in free tiers
+      if (!isNonAITool) {
+        window.dispatchEvent(new Event("ai-usage-updated"));
+      }
 
       // Add to history
       const newHistoryItem: HistoryItem = {
@@ -196,16 +212,26 @@ export default function EnhancedToolLayout({
       );
     } catch (error) {
       console.error("Error generating result:", error);
-      setOutput("❌ An error occurred. Please try again.");
+      const message =
+        error instanceof Error
+          ? error.message
+          : "An error occurred. Please try again.";
+      setOutput(`❌ ${message}`);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(output);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(output);
+      setCopied(true);
+      toast.success("Copied to clipboard");
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error("Could not copy — try selecting the text manually");
+    }
   }, [output]);
 
   const handleDownload = useCallback(() => {
@@ -263,22 +289,41 @@ export default function EnhancedToolLayout({
       {/* Back Button */}
       <button
         onClick={() => router.push("/tools")}
-        className="mb-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-sm transition-all hover:shadow-md group"
+        className="mb-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-200 dark:border-slate-700 dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold text-sm transition-all hover:shadow-md group"
       >
         <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
         Back to All Tools
       </button>
 
+      {/* Honest free-tier note (AdSense trust + UX) */}
+      {!isNonAITool && (
+        <div className="mb-4 rounded-xl border border-indigo-100 dark:border-indigo-900/50 bg-indigo-50/80 dark:bg-indigo-950/30 px-4 py-3 text-sm text-slate-700 dark:text-slate-300">
+          <strong className="font-semibold text-indigo-800 dark:text-indigo-300">
+            Free to start
+          </strong>
+          {" — "}
+          no sign-up required. Free daily AI uses included;{" "}
+          <button
+            type="button"
+            onClick={() => router.push("/pricing")}
+            className="text-indigo-700 dark:text-indigo-300 font-medium underline underline-offset-2 hover:no-underline"
+          >
+            Pro unlocks unlimited AI
+          </button>
+          . Your text is processed for this session and not sold.
+        </div>
+      )}
+
       {/* Main Tool Card */}
-      <div className="relative rounded-3xl border border-slate-200 bg-white/90 backdrop-blur-sm shadow-2xl overflow-hidden">
+      <div className="relative rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-2xl overflow-hidden">
         {/* Gradient Border Effect */}
 
         {/* Header Actions */}
-        <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-slate-50/50">
+        <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800">
               <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
-              <span className="text-xs font-bold text-indigo-700 uppercase tracking-wide">
+              <span className="text-xs font-bold text-indigo-700 dark:text-indigo-300 uppercase tracking-wide">
                 {loading ? "Processing..." : "Ready"}
               </span>
             </div>

@@ -28,6 +28,8 @@ const tools = [
     { name: 'Email Writer', slug: 'email-writer', description: 'Draft professional emails instantly', icon: 'Mail', badge: 'Top Rated', badgeColor: 'bg-pink-500' },
     { name: 'Grammar Fix', slug: 'grammar-fix', description: 'Fix grammar and improve writing quality', icon: 'Edit3' },
     { name: 'Paraphraser', slug: 'paraphraser', description: 'Rewrite text while keeping the meaning', icon: 'MessageSquare' },
+    { name: 'Text Summarizer', slug: 'text-summarizer', description: 'Condense long articles into clear summaries', icon: 'FileText' },
+    { name: 'AI Writing Detector', slug: 'plagiarism-checker', description: 'Spot AI-like patterns and improve originality', icon: 'Shield' },
     { name: 'Resume Bullets', slug: 'resume-bullets', description: 'Generate impactful resume bullet points', icon: 'FileText' },
     { name: 'Bio Generator', slug: 'bio-generator', description: 'Create social media bios instantly', icon: 'UserCircle' },
     { name: 'Caption Generator', slug: 'caption-generator', description: 'Generate catchy social media captions', icon: 'Instagram' },
@@ -88,6 +90,16 @@ export default function WritingToolsPage() {
                 <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
                     One of the most valuable aspects of AI writing assistance is its ability to bypass writer's block. When stuck on a sentence or paragraph, running it through a Paraphraser or a Grammar Fix tool can provide new perspectives and alternative sentence structures. This allows writers to keep their momentum. Furthermore, text summarizers can quickly compress long reference articles, allowing writers to digest information faster during the research phase. Using AI as a multi-functional editing suite transforms the writing pipeline from a frustrating bottleneck into a smooth, structured workflow.
                 </p>
+            </section>
+
+            <section className="mx-auto max-w-4xl px-6 pb-10">
+                <h2 className="text-xl font-semibold mb-3">Writing guides</h2>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li><Link href="/blog/grammar-checker-vs-human-editing" className="underline underline-offset-4 hover:text-primary">Grammar checker vs human editing</Link></li>
+                    <li><Link href="/blog/paraphrasing-vs-rewriting-for-assignments" className="underline underline-offset-4 hover:text-primary">Paraphrasing vs rewriting for assignments</Link></li>
+                    <li><Link href="/blog/summarize-long-articles-fast" className="underline underline-offset-4 hover:text-primary">Summarize long articles fast</Link></li>
+                    <li><Link href="/blog/ai-writing-workflow-students" className="underline underline-offset-4 hover:text-primary">Ethical AI writing workflow for students</Link></li>
+                </ul>
             </section>
 
             <section className="mx-auto max-w-[1200px] px-6 pb-12">

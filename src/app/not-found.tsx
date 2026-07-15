@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import { TOOL_COUNT_LABEL } from "@/data/tools";
 
 export const metadata: Metadata = {
   title: "Page Not Found | ToolNova",
   description:
-    "The page you're looking for doesn't exist. Explore 44 free AI-powered tools for students and professionals at ToolNova.",
+    "The page you're looking for doesn't exist. Explore free AI-powered tools for students and professionals at ToolNova.",
   robots: {
     index: false,
     follow: true,
@@ -22,7 +23,7 @@ const popularTools = [
 
 export default function NotFound() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-slate-50 to-white px-6 py-24">
+    <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-slate-50 to-white dark:from-[#0f1419] dark:to-background px-6 py-24">
       <div className="max-w-2xl w-full text-center">
         {/* 404 Visual */}
         <div className="mb-8">
@@ -37,7 +38,8 @@ export default function NotFound() {
         </h1>
         <p className="text-muted-foreground text-lg mb-10 max-w-md mx-auto leading-relaxed">
           Sorry, we couldn&apos;t find the page you&apos;re looking for. It may
-          have been moved or no longer exists.
+          have been moved or no longer exists. Explore {TOOL_COUNT_LABEL} free
+          AI tools instead.
         </p>
 
         {/* Primary Actions */}
@@ -64,7 +66,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/tools"
-            className="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-8 bg-white border border-slate-200 text-foreground text-sm font-bold shadow-sm hover:bg-slate-50 hover:-translate-y-0.5 transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-foreground text-sm font-bold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 hover:-translate-y-0.5 transition-all duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +89,7 @@ export default function NotFound() {
         </div>
 
         {/* Popular Tools Section */}
-        <div className="text-left bg-slate-50 rounded-2xl border border-slate-100 p-8">
+        <div className="text-left bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-slate-100 dark:border-slate-800 p-8">
           <h2 className="text-lg font-bold text-foreground mb-1">
             Popular Tools You Might Like
           </h2>
@@ -99,7 +101,7 @@ export default function NotFound() {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-100 hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
+                className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800 hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
               >
                 <span className="text-xl" role="img" aria-hidden="true">
                   {tool.emoji}

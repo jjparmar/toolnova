@@ -81,7 +81,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Does it work for long essays?", answer: "Yes, you can paraphrase entire paragraphs and essays. We recommend processing 500-800 words at a time for the best results and the highest contextual accuracy." },
             { question: "Can the paraphraser improve my writing style?", answer: "Definitely. By seeing how our AI restructures your sentences, you can learn more effective ways to communicate complex ideas and expand your active vocabulary." },
             { question: "Is it better than just using a thesaurus?", answer: "Yes, because our AI understands 'context'. A thesaurus just gives synonyms, but our tool knows which synonym fits the current sentence grammatically and semantically." },
-            { question: "Is the paraphrasing tool free to use?", answer: "ToolNova's paraphraser is 100% free. There are no hidden fees or paywalls for our standard, fluency, and creative writing modes." }
+            { question: "Is the paraphrasing tool free to use?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "grammar-fix": {
@@ -137,7 +137,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can it generate citations?", answer: "The current version generates general text. We recommend using a dedicated citation manager to add accurate APA, MLA, or Chicago style citations to the final draft." },
             { question: "How long can the essays be?", answer: "You can generate essays ranging from 500 to 2,500 words by selecting the 'Long Form' option in the settings." },
             { question: "Can I choose the point of view?", answer: "Yes, you can specify if the essay should be written in the first person (I), second person (you), or third person (it/they) in the advanced settings." },
-            { question: "Is the tool completely free?", answer: "Yes, ToolNova's Essay Writer is free to use. We believe in providing accessible educational assistance to students worldwide." }
+            { question: "Is the tool completely free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "merge-pdf": {
@@ -296,15 +296,63 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Is there a limit on how many images I can compress?", answer: "No. You can compress as many images as you need in a single session, completely free." }
         ]
     },
+    "reorder-pdf": {
+        slug: "reorder-pdf",
+        name: "Reorder PDF Pages",
+        tagline: "Drag thumbnails to rearrange pages",
+        description: "Reorder pages in a PDF with visual thumbnails. Drag and drop, reverse, or reset order, then download a new file. Fully private browser processing — no upload, no watermark.",
+        category: "PDF Tools",
+        howItWorks: [
+            { step: 1, title: "Upload PDF", desc: "Drop a PDF to generate page thumbnails." },
+            { step: 2, title: "Reorder", desc: "Drag pages or use arrows until the sequence is correct." },
+            { step: 3, title: "Download", desc: "Save the reordered PDF instantly." }
+        ],
+        benefits: [
+            { title: "Visual thumbnails", desc: "See each page while reordering." },
+            { title: "Drag and drop", desc: "Natural rearrange with reset/reverse helpers." },
+            { title: "Full quality", desc: "Pages are copied, not re-compressed as images." },
+            { title: "Private & free", desc: "No account, no server upload." }
+        ],
+        faqs: [
+            { question: "Can I reverse page order?", answer: "Yes. Use the Reverse button, then download." },
+            { question: "Are thumbnails full quality?", answer: "Thumbnails are previews only. The download uses original PDF page data." },
+            { question: "Is reordering free?", answer: "Yes — unlimited and private in your browser." }
+        ]
+    },
+    "image-crop": {
+        slug: "image-crop",
+        name: "Crop Image",
+        tagline: "Select any region and crop free",
+        description: "Crop any part of an image with an interactive selection box. Drag to choose the area, lock aspect ratios like 1:1 or 16:9, and download PNG, JPG, or WebP. Runs fully in your browser with no upload and no watermark.",
+        category: "Image Tools",
+        howItWorks: [
+            { step: 1, title: "Upload Image", desc: "Drop a JPG, PNG, or WebP file into the crop tool." },
+            { step: 2, title: "Select Region", desc: "Drag the crop box and resize with corner handles. Optionally lock an aspect ratio." },
+            { step: 3, title: "Apply Crop", desc: "Preview the cropped result at exact pixel dimensions." },
+            { step: 4, title: "Download", desc: "Save the crop as PNG, JPG, or WebP instantly." }
+        ],
+        benefits: [
+            { title: "Visual selection", desc: "Pick the exact area with drag handles—not just blind pixel numbers." },
+            { title: "Aspect presets", desc: "1:1, 4:3, 16:9, 9:16 and freeform for any use case." },
+            { title: "Private", desc: "Cropping never leaves your device." },
+            { title: "Free", desc: "Unlimited crops, no account, no watermarks." }
+        ],
+        faqs: [
+            { question: "How do I select part of an image to crop?", answer: "Upload the image, then drag the blue selection box over the area you want. Use corner and edge handles to refine the size, or type X/Y/width/height values." },
+            { question: "Can I crop to Instagram size?", answer: "Yes. Choose the 1:1 aspect preset for square posts, or 9:16 for stories, then adjust the position." },
+            { question: "Is the crop tool free?", answer: "Yes. Completely free with unlimited use in your browser." },
+            { question: "Do you upload my photos?", answer: "No. Processing is 100% client-side." }
+        ]
+    },
     "resize-image": {
         slug: "resize-image",
         name: "Image Resizer",
         tagline: "Resize images to exact dimensions",
-        description: "Resize JPG, PNG, WebP, and other images to exact pixel dimensions or percentages. Perfect for social media profiles, website banners, and printing. Keep aspect ratio or stretch to fit your needs without losing quality.",
+        description: "Resize JPG, PNG, WebP, and other images to exact pixel dimensions or percentages. Perfect for social media profiles, website banners, and printing. Keep aspect ratio or stretch to fit your needs without losing quality. Need to cut a region first? Use Crop Image.",
         category: "Image Tools",
         howItWorks: [
             { step: 1, title: "Upload Image", desc: "Select or drag and drop the image you want to resize." },
-            { step: 2, title: "Set Dimensions", desc: "Enter the exact width and height in pixels, or choose a percentage." },
+            { step: 2, title: "Set Dimensions", desc: "Enter the exact width and height in pixels, pick a preset, or choose a percentage." },
             { step: 3, title: "Adjust Settings", desc: "Choose whether to maintain the aspect ratio to prevent stretching." },
             { step: 4, title: "Download", desc: "Download your newly resized image instantly." }
         ],
@@ -345,7 +393,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can I generate bios for different platforms?", answer: "Yes. The tool optimizes length and tone for LinkedIn (300 words), Twitter (160 characters), Instagram (150 characters), and full-length website bios." },
             { question: "Is the generated bio unique?", answer: "Yes. Each bio is generated fresh based on your specific inputs, ensuring originality and relevance to your personal brand." },
             { question: "Can I edit the generated bio?", answer: "Absolutely. The generated bio is a strong starting point—customize it to add personal touches and ensure accuracy." },
-            { question: "Is this tool free?", answer: "Yes, the AI Bio Generator is completely free to use with no limits on the number of bios you can generate." }
+            { question: "Is this tool free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "caption-generator": {
@@ -371,7 +419,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Does it include hashtags?", answer: "Yes. Each generated caption includes relevant hashtags optimized for the selected platform's best practices and current trends." },
             { question: "Can I specify the tone of the caption?", answer: "Yes. Choose from options like Professional, Funny, Inspirational, Casual, or Bold to match your brand voice." },
             { question: "How many captions can I generate?", answer: "There is no limit. Generate as many caption variations as you need until you find the perfect one." },
-            { question: "Is the caption generator free?", answer: "Yes, completely free with unlimited generations and no sign-up required." }
+            { question: "Is the caption generator free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "email-writer": {
@@ -397,7 +445,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Does it generate subject lines?", answer: "Yes. Every generated email includes an optimized subject line designed to maximize open rates." },
             { question: "Can I customize the tone?", answer: "Yes. Choose from Formal, Friendly, Persuasive, or Urgent tones to match the situation and recipient." },
             { question: "Is the email content unique?", answer: "Yes. Each email is generated fresh based on your specific inputs, ensuring it's tailored to your situation." },
-            { question: "Is the AI Email Writer free?", answer: "Yes, completely free with unlimited email generation and no account required." }
+            { question: "Is the AI Email Writer free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "speech-writer": {
@@ -423,7 +471,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can I specify the speech length?", answer: "Yes. Choose from 2-minute, 5-minute, 10-minute, or custom lengths. The AI adjusts content density accordingly." },
             { question: "Will the speech sound natural?", answer: "Yes. Our AI writes in a conversational, speech-friendly style designed to be spoken aloud, not just read." },
             { question: "Can I add personal stories?", answer: "The generated speech includes placeholder sections where you can insert personal anecdotes and specific details." },
-            { question: "Is the speech writer free?", answer: "Yes, completely free with no limits on the number of speeches you can generate." }
+            { question: "Is the speech writer free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "paragraph-generator": {
@@ -449,7 +497,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "What topics can it write about?", answer: "Virtually any topic—science, history, technology, business, literature, social issues, and more." },
             { question: "Can I control the paragraph length?", answer: "Yes. Choose short (3-4 sentences), medium (5-6 sentences), or long (7-10 sentences) paragraphs." },
             { question: "Is the content unique?", answer: "Yes. Each paragraph is generated fresh based on your specific topic and parameters." },
-            { question: "Is it free?", answer: "Yes, the paragraph generator is completely free with unlimited use." }
+            { question: "Is it free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "story-generator": {
@@ -475,7 +523,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can I provide my own characters?", answer: "Yes. Enter character names, traits, and relationships, and the AI will incorporate them into the story." },
             { question: "How long are the generated stories?", answer: "You can choose from flash fiction (300-500 words), short stories (1,000-2,000 words), or longer narratives." },
             { question: "Can I continue a story the AI started?", answer: "Yes. Copy the generated story and use it as a prompt to extend or continue the narrative." },
-            { question: "Is the story generator free?", answer: "Yes, completely free with unlimited story generation." }
+            { question: "Is the story generator free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "cover-letter-writer": {
@@ -501,7 +549,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Should I edit the generated cover letter?", answer: "Yes. While the AI creates a strong foundation, adding specific personal anecdotes and company-specific details makes the letter more authentic and compelling." },
             { question: "Does it work for all industries?", answer: "Yes. The tool generates cover letters for tech, finance, healthcare, education, marketing, engineering, and all other industries." },
             { question: "Can it write cover letters for internships?", answer: "Yes. Select 'Entry-Level' or 'Internship' as the experience level, and the AI adjusts the tone and emphasis accordingly." },
-            { question: "Is the cover letter writer free?", answer: "Yes, completely free with no limits on how many cover letters you can generate." }
+            { question: "Is the cover letter writer free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "flashcard-maker": {
@@ -527,7 +575,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can I edit the generated flashcards?", answer: "Yes. You can edit, delete, or add to any generated flashcard to perfectly match your study needs." },
             { question: "What subjects work best?", answer: "The tool works excellently for all subjects—sciences, history, languages, medicine, law, business, and more." },
             { question: "How many flashcards can I generate?", answer: "You can generate as many flashcards as you need. We recommend 20-30 cards per study session for optimal retention." },
-            { question: "Is the flashcard maker free?", answer: "Yes, completely free with unlimited flashcard generation." }
+            { question: "Is the flashcard maker free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "notes-generator": {
@@ -553,7 +601,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can I choose different note-taking formats?", answer: "Yes. We support bullet-point lists, outline format, Cornell method, and summarized paragraph styles." },
             { question: "How detailed are the generated notes?", answer: "You can control the detail level—choose concise for quick review or comprehensive for in-depth study." },
             { question: "Can I edit the notes after generation?", answer: "Yes. All generated notes are fully editable so you can add personal annotations or clarifications." },
-            { question: "Is the notes generator free?", answer: "Yes, completely free with no limits on note generation." }
+            { question: "Is the notes generator free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "mcq-generator": {
@@ -579,7 +627,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can I set the number of options per question?", answer: "Yes. Choose from 3, 4, or 5 answer options per question depending on your preference." },
             { question: "Does it provide answer explanations?", answer: "Yes. Each question includes the correct answer and an explanation of why it's right and why other options are incorrect." },
             { question: "What subjects can it generate questions for?", answer: "All subjects—science, math, history, literature, geography, computer science, medicine, and more." },
-            { question: "Is the MCQ generator free?", answer: "Yes, completely free with unlimited question generation." }
+            { question: "Is the MCQ generator free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "quiz-generator": {
@@ -631,7 +679,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "What subjects does it cover?", answer: "Math (algebra, calculus, statistics), science (physics, chemistry, biology), English, history, computer science, economics, and more." },
             { question: "Is it accurate?", answer: "Our AI provides high-quality solutions, but we recommend verifying important answers and using the tool as a learning aid, not a replacement for understanding." },
             { question: "Can I upload images of my homework?", answer: "Currently, you can type or paste your questions as text. We recommend clearly describing any diagrams or figures." },
-            { question: "Is the homework solver free?", answer: "Yes, completely free with unlimited problem solving." }
+            { question: "Is the homework solver free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "doubt-solver": {
@@ -657,7 +705,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can I ask follow-up questions?", answer: "Yes. If the initial explanation isn't clear enough, you can rephrase your question or ask for more detail on a specific part." },
             { question: "What subjects does it cover?", answer: "All academic subjects including mathematics, physics, chemistry, biology, history, geography, English, computer science, and more." },
             { question: "Is it suitable for competitive exam preparation?", answer: "Yes. Students preparing for SAT, GRE, GMAT, and other competitive exams use our doubt solver for concept clarification." },
-            { question: "Is the doubt solver free?", answer: "Yes, completely free with unlimited questions." }
+            { question: "Is the doubt solver free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "concept-explainer": {
@@ -683,7 +731,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can it explain at different levels?", answer: "Yes. Choose 'Explain like I'm 5' for the simplest version, 'High School' for moderate detail, or 'University' for comprehensive explanations." },
             { question: "Are the explanations accurate?", answer: "Our AI provides high-quality explanations based on established knowledge. For exam preparation, cross-reference with your textbook for curriculum-specific details." },
             { question: "Can I ask follow-up questions?", answer: "Yes. If any part of the explanation is unclear, ask for more detail on that specific aspect." },
-            { question: "Is the concept explainer free?", answer: "Yes, completely free with unlimited use." }
+            { question: "Is the concept explainer free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "chapter-summary": {
@@ -709,7 +757,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Will the summary cover all important points?", answer: "Our AI identifies and includes the most critical concepts, definitions, arguments, and conclusions from the source material." },
             { question: "Can I summarize multiple chapters at once?", answer: "For best results, summarize one chapter at a time. This ensures more detailed and accurate coverage of each chapter's content." },
             { question: "What types of content can I summarize?", answer: "Textbook chapters, research papers, articles, lecture notes, and any academic or educational text." },
-            { question: "Is the chapter summary tool free?", answer: "Yes, completely free with unlimited summaries." }
+            { question: "Is the chapter summary tool free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "revision-planner": {
@@ -735,7 +783,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can I add multiple exams?", answer: "Yes. Add all your exams with their dates and the planner creates an integrated study schedule that covers all subjects." },
             { question: "What if my plan needs to change?", answer: "You can adjust the plan anytime by updating your availability or progress. The AI will recalculate the schedule." },
             { question: "Does it account for breaks?", answer: "Yes. The plan includes regular breaks following the Pomodoro technique and rest days to prevent study burnout." },
-            { question: "Is the revision planner free?", answer: "Yes, completely free with no limits." }
+            { question: "Is the revision planner free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "timetable-generator": {
@@ -761,7 +809,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "How long are the study blocks?", answer: "Default study blocks are 45-60 minutes with 10-15 minute breaks, following the Pomodoro technique. You can customize these durations." },
             { question: "Can I exclude certain days?", answer: "Yes. Mark any days or time slots as unavailable and the timetable will work around your commitments." },
             { question: "Does it handle multiple subjects?", answer: "Yes. Add as many subjects as you need and the AI will distribute study time evenly based on your priorities." },
-            { question: "Is the timetable generator free?", answer: "Yes, completely free with unlimited timetable generation." }
+            { question: "Is the timetable generator free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "synonym-finder": {
@@ -787,7 +835,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can I provide context for better results?", answer: "Yes. Entering a full sentence helps the AI suggest synonyms that fit your specific context and intended meaning." },
             { question: "Does it show word definitions?", answer: "Yes. Each synonym includes a brief definition and example sentence so you can choose the most appropriate option." },
             { question: "Is it useful for academic writing?", answer: "Absolutely. It helps diversify vocabulary in essays and papers while maintaining appropriate academic tone." },
-            { question: "Is the synonym finder free?", answer: "Yes, completely free with unlimited lookups." }
+            { question: "Is the synonym finder free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "antonym-finder": {
@@ -813,7 +861,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Can it help with exam preparation?", answer: "Yes. Antonym questions are common in standardized tests (SAT, GRE, GMAT). Practice with our tool to improve your vocabulary skills." },
             { question: "Does it show different meanings?", answer: "Yes. For words with multiple meanings, antonyms are grouped by each definition so you find the right opposite." },
             { question: "Is it useful for creative writing?", answer: "Absolutely. Using antonyms effectively creates contrast, irony, and emphasis in creative and persuasive writing." },
-            { question: "Is the antonym finder free?", answer: "Yes, completely free with unlimited lookups." }
+            { question: "Is the antonym finder free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "one-word-substitution": {
@@ -839,7 +887,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Is this important for competitive exams?", answer: "Yes. One-word substitution questions appear frequently in SSC, Banking, UPSC, CAT, and other competitive exams." },
             { question: "Does it provide word etymology?", answer: "Yes. Understanding the Greek and Latin roots of words helps you deduce meanings of unfamiliar words in exams." },
             { question: "Can I use it for writing improvement?", answer: "Absolutely. Replacing long phrases with precise words makes your writing more concise and professional." },
-            { question: "Is the tool free?", answer: "Yes, completely free with unlimited lookups." }
+            { question: "Is the tool free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "idioms-phrases": {
@@ -865,7 +913,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Are these useful for competitive exams?", answer: "Yes. Idioms and phrases are commonly tested in SSC, Banking, UPSC, IELTS, TOEFL, and other competitive examinations." },
             { question: "Can I search for specific idioms?", answer: "Yes. Search by keyword, theme, or browse alphabetically to find the idiom you're looking for." },
             { question: "Does it explain the origin of idioms?", answer: "Yes. Many idioms include historical context and origin stories that help with memorization and deeper understanding." },
-            { question: "Is the tool free?", answer: "Yes, completely free with unlimited access." }
+            { question: "Is the tool free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "vocabulary-builder": {
@@ -891,7 +939,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Does it help with GRE/SAT vocabulary?", answer: "Yes. We have curated word lists specifically for GRE, SAT, IELTS, TOEFL, and other standardized tests." },
             { question: "How many words can I learn?", answer: "There is no limit. We recommend learning 5-10 new words daily for sustainable vocabulary growth." },
             { question: "Does it include pronunciation?", answer: "Yes. Each word includes phonetic transcription and usage notes to help with correct pronunciation." },
-            { question: "Is the vocabulary builder free?", answer: "Yes, completely free with unlimited access." }
+            { question: "Is the vocabulary builder free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "text-simplifier": {
@@ -917,7 +965,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "What types of text can I simplify?", answer: "Academic papers, legal documents, medical reports, technical documentation, news articles, and any text with complex language." },
             { question: "Can I choose the reading level?", answer: "Yes. Select from elementary (grade 3-5), middle school, high school, or general audience reading levels." },
             { question: "Is it useful for ESL learners?", answer: "Absolutely. ESL students and teachers frequently use text simplification to make English content more accessible." },
-            { question: "Is the text simplifier free?", answer: "Yes, completely free with unlimited use." }
+            { question: "Is the text simplifier free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "case-converter": {
@@ -1021,7 +1069,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Will it make my profile sound generic?", answer: "No. The AI uses your specific experience and achievements to create unique, personalized content that sounds authentic." },
             { question: "How long should a LinkedIn summary be?", answer: "We recommend 3-5 paragraphs (200-300 words) for maximum impact. The AI generates summaries within this optimal range." },
             { question: "Does it help with the headline?", answer: "Yes. We generate multiple headline options that go beyond your job title to include keywords and value propositions." },
-            { question: "Is the LinkedIn optimizer free?", answer: "Yes, completely free with unlimited profile optimizations." }
+            { question: "Is the LinkedIn optimizer free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "resume-bullets": {
@@ -1047,7 +1095,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Do I need to provide metrics?", answer: "If you have specific numbers (revenue, team size, percentages), include them. If not, the AI can help you estimate and frame your impact." },
             { question: "How many bullet points per job?", answer: "We recommend 3-6 bullet points per position, focusing on your most impactful achievements." },
             { question: "Does it work for all industries?", answer: "Yes. The tool generates relevant bullets for tech, finance, healthcare, marketing, engineering, education, and all other fields." },
-            { question: "Is the resume bullet generator free?", answer: "Yes, completely free with unlimited generation." }
+            { question: "Is the resume bullet generator free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "interview-generator": {
@@ -1073,7 +1121,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Does it provide sample answers?", answer: "Yes. Each question includes a model answer structured using the STAR method (Situation, Task, Action, Result)." },
             { question: "Can I prepare for specific companies?", answer: "Yes. Mention the company name and the AI will adjust questions to reflect that company's known interview style and values." },
             { question: "Does it cover technical interviews?", answer: "Yes. For technical roles, the tool generates relevant technical questions alongside behavioral ones." },
-            { question: "Is the interview generator free?", answer: "Yes, completely free with unlimited question generation." }
+            { question: "Is the interview generator free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "goal-planner": {
@@ -1099,7 +1147,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "How detailed is the plan?", answer: "The AI creates a comprehensive plan with specific milestones, daily actions, weekly checkpoints, and measurable success criteria." },
             { question: "Can I adjust the timeline?", answer: "Yes. Update your target date or time commitment and the AI will recalculate your plan accordingly." },
             { question: "Does it help with accountability?", answer: "Yes. The milestone structure and daily checkpoints create a built-in accountability system." },
-            { question: "Is the goal planner free?", answer: "Yes, completely free with no limits." }
+            { question: "Is the goal planner free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "todo-list-generator": {
@@ -1125,7 +1173,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Does it prioritize tasks?", answer: "Yes. Tasks are automatically ranked by importance and urgency, helping you focus on what matters most." },
             { question: "Can I customize the generated list?", answer: "Yes. Add, remove, reorder, or edit any tasks after generation." },
             { question: "Does it estimate time for each task?", answer: "Yes. Each task includes an estimated completion time to help you plan your day effectively." },
-            { question: "Is the to-do list generator free?", answer: "Yes, completely free with unlimited list generation." }
+            { question: "Is the to-do list generator free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "formula-generator": {
@@ -1151,7 +1199,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Does it work for Google Sheets?", answer: "Yes. You can choose between Excel and Google Sheets syntax, as some functions differ between platforms." },
             { question: "Will it explain the formula?", answer: "Yes. Every generated formula includes a plain-English explanation of how each part works." },
             { question: "Can it handle complex nested formulas?", answer: "Yes. The AI excels at nested IF statements, VLOOKUP within IFERROR, and other complex multi-function formulas." },
-            { question: "Is the formula generator free?", answer: "Yes, completely free with unlimited usage." }
+            { question: "Is the formula generator free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "diagram-explainer": {
@@ -1177,7 +1225,7 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Do I need to upload an image?", answer: "You can upload an image or describe the diagram in text. Both approaches generate detailed explanations." },
             { question: "How detailed is the explanation?", answer: "The AI identifies each component, explains relationships between elements, and describes the overall purpose and flow of the diagram." },
             { question: "Is it useful for exam preparation?", answer: "Yes. Many students use it to understand complex textbook diagrams in biology, physics, chemistry, and engineering." },
-            { question: "Is the diagram explainer free?", answer: "Yes, completely free with unlimited usage." }
+            { question: "Is the diagram explainer free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },
     "age-calculator": {
@@ -1206,7 +1254,62 @@ export const toolsData: Record<string, ToolData> = {
             { question: "Is the age calculator free?", answer: "Yes, completely free with unlimited calculations." }
         ]
     },
+    "plagiarism-checker": {
+        slug: "plagiarism-checker",
+        name: "AI Writing Detector",
+        tagline: "Detect AI writing patterns and improve originality",
+        description: "Scan essays and articles for AI-generated footprints, robotic phrasing, and generic structure. Get a clear originality assessment plus practical humanization tips so your writing sounds natural, authentic, and ready to submit.",
+        category: "Writing Tools",
+        howItWorks: [
+            { step: 1, title: "Paste Your Text", desc: "Paste the essay, article, or paragraph you want analyzed into the editor." },
+            { step: 2, title: "AI Pattern Scan", desc: "Our model checks for repetitive structure, low burstiness, common AI buzzwords, and derivative phrasing." },
+            { step: 3, title: "Review the Score", desc: "See an estimated AI-likelihood assessment with a detailed breakdown of what looks robotic." },
+            { step: 4, title: "Humanize & Improve", desc: "Follow actionable rewrite tips to make the text more natural and original." }
+        ],
+        benefits: [
+            { title: "AI Footprint Detection", desc: "Spot patterns typical of machine-generated writing before you submit." },
+            { title: "Actionable Feedback", desc: "Get specific rewrite suggestions instead of a vague score alone." },
+            { title: "Student-Friendly", desc: "Ideal for essays, reports, and assignments that need a human voice." },
+            { title: "Free & Private", desc: "No account required to start. Content is processed for your session, not sold." }
+        ],
+        faqs: [
+            { question: "Is this a traditional plagiarism database checker?", answer: "It focuses on AI-writing patterns and originality signals in the text you paste. For academic integrity, still cite sources and follow your institution’s policies." },
+            { question: "How accurate is the AI detection estimate?", answer: "It is an estimate based on stylistic patterns, not a legal proof of authorship. Use it as a writing coach to improve natural flow." },
+            { question: "What text length works best?", answer: "Paragraphs of at least 100–150 words give more reliable pattern analysis than very short snippets." },
+            { question: "Will it rewrite my essay for me?", answer: "It explains what looks robotic and how to humanize it. You stay in control of the final wording." },
+            { question: "Is the plagiarism checker free?", answer: "Yes. Free daily AI use is included; Pro is optional for higher limits and premium models." }
+        ]
+    },
+    "youtube-summarizer": {
+        slug: "youtube-summarizer",
+        name: "YouTube Video Summarizer",
+        tagline: "Summarize any YouTube video in minutes",
+        description: "Paste a YouTube URL to pull the transcript and get a clear, structured AI summary of the video. Perfect for lectures, tutorials, podcasts, and long-form content when you need key takeaways fast.",
+        category: "Study Tools",
+        howItWorks: [
+            { step: 1, title: "Paste Video URL", desc: "Copy the full YouTube link of the video you want summarized." },
+            { step: 2, title: "Fetch Transcript", desc: "We retrieve available captions/transcript text for that video." },
+            { step: 3, title: "AI Summary", desc: "The transcript is condensed into a structured overview with main points." },
+            { step: 4, title: "Study & Share", desc: "Copy or download the summary for notes, revision, or team updates." }
+        ],
+        benefits: [
+            { title: "Save Hours", desc: "Extract the core message of long videos without watching every minute." },
+            { title: "Study-Ready Format", desc: "Structured summaries work well as lecture notes and revision sheets." },
+            { title: "Works From URL", desc: "No downloads or extensions required—just paste the link." },
+            { title: "Free to Start", desc: "Use it without an account; free daily AI allowance included." }
+        ],
+        faqs: [
+            { question: "Does every YouTube video work?", answer: "Videos need available captions or a transcript. Private, restricted, or caption-less videos may not process." },
+            { question: "How long can the video be?", answer: "Longer videos are summarized from the available transcript (length limits may apply for performance)." },
+            { question: "Is the summary a replacement for watching?", answer: "It is a fast overview. For exams or critical decisions, verify important details in the original video." },
+            { question: "Do you store the video content?", answer: "Transcript text is processed to generate your summary for the session; we do not build a public archive of your URLs." },
+            { question: "Is the YouTube summarizer free?", answer: "Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
+        ]
+    },
 };
+
+/** Display string for marketing copy, e.g. "47+" — always derived from real catalog size. */
+export const TOOL_COUNT_LABEL = `${Object.keys(toolsData).length}+`;
 
 export function getToolData(slug: string): ToolData | null {
     const rawData = toolsData[slug];

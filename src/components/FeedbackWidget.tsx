@@ -22,7 +22,7 @@ export function FeedbackWidget() {
 
     useEffect(() => {
         // Check if user has submitted feedback recently
-        const lastSubmit = localStorage.getItem('aimultitools_last_feedback');
+        const lastSubmit = localStorage.getItem('toolnova_last_feedback');
         if (lastSubmit) {
             const daysSince = (Date.now() - parseInt(lastSubmit)) / (1000 * 60 * 60 * 24);
             if (daysSince < 1) {
@@ -46,7 +46,7 @@ export function FeedbackWidget() {
         };
 
         console.log('Feedback submitted:', feedbackData);
-        localStorage.setItem('aimultitools_last_feedback', Date.now().toString());
+        localStorage.setItem('toolnova_last_feedback', Date.now().toString());
 
         toast.success('Thank you for your feedback!');
         setIsOpen(false);

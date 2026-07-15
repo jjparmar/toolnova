@@ -35,9 +35,9 @@ interface PDFFile {
 
 const relatedTools = [
     { name: 'Split PDF', slug: 'split-pdf', icon: FileText, color: 'from-blue-500 to-purple-500' },
+    { name: 'Reorder PDF', slug: 'reorder-pdf', icon: Layers, color: 'from-indigo-500 to-blue-500' },
     { name: 'Image to PDF', slug: 'image-to-pdf', icon: Layers, color: 'from-green-500 to-teal-500' },
-    { name: 'Image Compressor', slug: 'image-compressor', icon: Zap, color: 'from-orange-500 to-red-500' },
-    { name: 'JPG to PNG', slug: 'jpg-to-png', icon: FileText, color: 'from-cyan-500 to-blue-500' },
+    { name: 'Crop Image', slug: 'image-crop', icon: Layers, color: 'from-violet-500 to-purple-500' },
 ];
 
 export default function MergePDFClient() {
@@ -46,6 +46,8 @@ export default function MergePDFClient() {
     const [loading, setLoading] = useState(false);
     const [merging, setMerging] = useState(false);
     const [dragOver, setDragOver] = useState(false);
+    const [outputName, setOutputName] = useState('merged-document');
+    const [lastUrl, setLastUrl] = useState<string>('');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const formatFileSize = (bytes: number): string => {
@@ -59,7 +61,10 @@ export default function MergePDFClient() {
     const processFile = async (file: File): Promise<PDFFile | null> => {
         try {
             const arrayBuffer = await file.arrayBuffer();
-            const pdfDoc = await PDFDocument.load(arrayBuffer);
+            // ignoreEncryption: many student PDFs are "secured" but still readable
+            const pdfDoc = await PDFDocument.load(arrayBuffer, {
+                ignoreEncryption: true,
+            });
             const pageCount = pdfDoc.getPageCount();
 
             return {
@@ -128,46 +133,66 @@ export default function MergePDFClient() {
     };
 
     const mergePDFs = async () => {
+        if (files.length < 1) {
+            toast.error('Please add at least one PDF file.');
+            return;
+        }
         if (files.length < 2) {
-            toast.error('Please add at least 2 PDF files to merge.');
+            toast.error('Add at least 2 PDFs to merge (or reorder a single file is not needed).');
             return;
         }
 
         setMerging(true);
         try {
+            if (lastUrl) URL.revokeObjectURL(lastUrl);
             const mergedPdf = await PDFDocument.create();
 
             for (const pdfFile of files) {
                 const arrayBuffer = await pdfFile.file.arrayBuffer();
-                const pdf = await PDFDocument.load(arrayBuffer);
+                const pdf = await PDFDocument.load(arrayBuffer, {
+                    ignoreEncryption: true,
+                });
                 const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
                 copiedPages.forEach(page => mergedPdf.addPage(page));
             }
 
-            const mergedPdfBytes = await mergedPdf.save();
+            // useObjectStreams: false improves compatibility with older readers
+            const mergedPdfBytes = await mergedPdf.save({ useObjectStreams: false });
             const pdfArrayBuffer = new ArrayBuffer(mergedPdfBytes.byteLength);
             new Uint8Array(pdfArrayBuffer).set(mergedPdfBytes);
             const blob = new Blob([pdfArrayBuffer], { type: 'application/pdf' });
             const url = URL.createObjectURL(blob);
+            setLastUrl(url);
 
+            const safeName = (outputName.trim() || 'merged-document').replace(/[^\w\-]+/g, '-');
             const a = document.createElement('a');
             a.href = url;
-            a.download = `merged-pdf-${Date.now()}.pdf`;
+            a.download = `${safeName}.pdf`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            URL.revokeObjectURL(url);
 
-            toast.success('PDFs merged successfully! Download started.');
+            toast.success(`Merged ${files.length} files · ${mergedPdf.getPageCount()} pages. Download started.`);
         } catch (error) {
-            toast.error('Failed to merge PDFs. Please try again.');
+            toast.error('Failed to merge PDFs. One file may be corrupted or password-locked.');
             console.error('Merge error:', error);
         } finally {
             setMerging(false);
         }
     };
 
+    const redownload = () => {
+        if (!lastUrl) return;
+        const safeName = (outputName.trim() || 'merged-document').replace(/[^\w\-]+/g, '-');
+        const a = document.createElement('a');
+        a.href = lastUrl;
+        a.download = `${safeName}.pdf`;
+        a.click();
+    };
+
     const totalPages = files.reduce((sum, f) => sum + f.pages, 0);
+    const totalBytes = files.reduce((sum, f) => sum + f.file.size, 0);
+    const totalSizeLabel = formatFileSize(totalBytes);
 
     return (
         <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#0f1419] dark:via-background dark:to-[#0f1419]">
@@ -208,8 +233,20 @@ export default function MergePDFClient() {
                     </div>
                     <h1 className="text-foreground text-4xl md:text-5xl font-black tracking-tight mb-4">Merge PDF Files</h1>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-                        Combine multiple PDF files into one document. Drag to reorder, then merge!
+                        Combine multiple PDF files into one document. Reorder files, then merge — 100% free, no watermarks.
                     </p>
+                    <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-medium text-muted-foreground">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-900">
+                            <Shield className="h-3.5 w-3.5" />
+                            Processed in your browser
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                            No upload to servers
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                            No account required
+                        </span>
+                    </div>
                 </div>
 
                 {/* Main Tool Card */}
@@ -251,7 +288,10 @@ export default function MergePDFClient() {
                                         Drop PDF files here or click to upload
                                     </p>
                                     <p className="text-sm text-muted-foreground">
-                                        Select multiple PDF files to merge them into one
+                                        Select 2+ PDFs · reorder with arrows · download one file
+                                    </p>
+                                    <p className="text-xs text-muted-foreground/80 mt-2">
+                                        Tip: large batches work best under ~100MB total device memory
                                     </p>
                                 </>
                             )}
@@ -266,7 +306,7 @@ export default function MergePDFClient() {
                                             {files.length} file{files.length > 1 ? 's' : ''} selected
                                         </span>
                                         <span className="text-xs text-muted-foreground bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-full">
-                                            {totalPages} total pages
+                                            {totalPages} pages · {totalSizeLabel}
                                         </span>
                                     </div>
                                     <Button
@@ -333,8 +373,23 @@ export default function MergePDFClient() {
                             </div>
                         )}
 
-                        {/* Merge Button */}
-                        <div className="mt-6">
+                        {/* Output name + Merge */}
+                        <div className="mt-6 space-y-3">
+                            {files.length > 0 && (
+                                <label className="block text-sm space-y-1">
+                                    <span className="font-medium text-foreground">Output filename</span>
+                                    <div className="flex items-center gap-2">
+                                        <input
+                                            type="text"
+                                            value={outputName}
+                                            onChange={(e) => setOutputName(e.target.value)}
+                                            className="flex-1 h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 text-sm"
+                                            placeholder="merged-document"
+                                        />
+                                        <span className="text-sm text-muted-foreground">.pdf</span>
+                                    </div>
+                                </label>
+                            )}
                             <Button
                                 onClick={mergePDFs}
                                 disabled={files.length < 2 || merging}
@@ -352,6 +407,16 @@ export default function MergePDFClient() {
                                     </>
                                 )}
                             </Button>
+                            {lastUrl && (
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    className="w-full h-11 rounded-xl"
+                                    onClick={redownload}
+                                >
+                                    <Download className="h-4 w-4 mr-2" /> Download again
+                                </Button>
+                            )}
                         </div>
 
                         {files.length > 0 && files.length < 2 && (

@@ -1,11 +1,12 @@
 // Site configuration for ToolNova - Single source of truth for all SEO/branding constants
+// Note: exact tool count lives in @/data/tools (TOOL_COUNT / TOOL_COUNT_LABEL).
 
 export const siteConfig = {
   // Core identity
   name: "ToolNova",
   tagline: "The Smartest Way to Study & Create",
   description:
-    "Access 46+ free AI-powered tools for students and professionals. Merge PDFs, create flashcards, fix grammar, write essays, solve homework. No sign-up required.",
+    "Access free AI-powered tools for students and professionals. Merge PDFs, create flashcards, fix grammar, write essays, solve homework. No sign-up required.",
 
   // Canonical domain - THE single source of truth for all URLs
   url: "https://www.toolnovahub.com",

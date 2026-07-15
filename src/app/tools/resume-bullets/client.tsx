@@ -343,6 +343,17 @@ export default function ResumeBulletsClient() {
 
       ctaIcon={Target}
     >
+      <div className="mx-6 mb-4 rounded-xl border border-amber-200 dark:border-amber-900/50 bg-amber-50/80 dark:bg-amber-950/30 px-4 py-3 text-sm text-amber-950 dark:text-amber-100">
+        <strong className="font-semibold">Impact formula:</strong> Action verb +
+        what you did + metric + result. Edit every AI line so it is true and
+        specific to you.{" "}
+        <a
+          href="/blog/resume-bullets-that-get-interviews"
+          className="underline font-medium hover:no-underline"
+        >
+          Full guide →
+        </a>
+      </div>
       <EnhancedToolLayout
         toolSlug="resume-bullets"
         toolName="Resume Bullet Generator"
