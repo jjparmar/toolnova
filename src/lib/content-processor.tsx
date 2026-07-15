@@ -152,7 +152,7 @@ export function processContent(content: string): React.ReactNode[] {
 
             if (blockquoteType === 'QUOTE') {
                 elements.push(
-                    <blockquote key={key} className="border-l-4 border-purple-500 bg-purple-50 p-6 my-8 rounded-r-xl text-slate-700 italic shadow-sm">
+                    <blockquote key={key} className="border-l-4 border-primary bg-primary/5 p-6 my-8 rounded-r-xl text-slate-700 italic shadow-sm">
                         {contentElements}
                     </blockquote>
                 );
@@ -174,8 +174,8 @@ export function processContent(content: string): React.ReactNode[] {
                         title = "Pro Tip";
                         break;
                     case 'IMPORTANT':
-                        styles = "bg-purple-50 border-purple-200 text-slate-700";
-                        icon = <FaBolt className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />;
+                        styles = "bg-primary/5 border-primary/20 text-slate-700";
+                        icon = <FaBolt className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />;
                         title = "Important";
                         break;
                     case 'WARNING':
@@ -329,7 +329,7 @@ export function processContent(content: string): React.ReactNode[] {
                     const alt = match[1];
                     const src = match[2];
                     nodes.push(
-                        <div key={key} className="my-10 relative rounded-2xl overflow-hidden shadow-xl shadow-purple-900/5">
+                        <div key={key} className="my-10 relative rounded-2xl overflow-hidden shadow-xl shadow-primary/5">
                             <NextImage
                                 src={src}
                                 alt={alt}
@@ -368,7 +368,7 @@ export function processContent(content: string): React.ReactNode[] {
                             <Link
                                 key={key}
                                 href={url}
-                                className="text-purple-600 hover:text-purple-700 font-medium underline underline-offset-2 transition-colors"
+                                className="text-primary hover:text-primary font-medium underline underline-offset-2 transition-colors"
                             >
                                 {label}
                             </Link>
@@ -382,7 +382,7 @@ export function processContent(content: string): React.ReactNode[] {
                             href={url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-purple-600 hover:text-purple-700 font-medium underline underline-offset-2 transition-colors"
+                            className="text-primary hover:text-primary font-medium underline underline-offset-2 transition-colors"
                         >
                             {label}
                         </a>
@@ -420,7 +420,7 @@ export function processContent(content: string): React.ReactNode[] {
                                 <Link
                                     key={`${key}-${keyword}`}
                                     href={url}
-                                    className="text-purple-600 hover:text-purple-700 font-medium border-b border-dotted border-purple-400 hover:border-solid transition-all"
+                                    className="text-primary hover:text-primary font-medium border-b border-dotted border-primary/40 hover:border-solid transition-all"
                                     title={`Try our ${keyword} tool`}
                                 >
                                     {match}
@@ -500,7 +500,7 @@ export function processContent(content: string): React.ReactNode[] {
             flushList(`list-${index}`);
             flushBlockquote(`quote-${index}`);
             elements.push(
-                <div key={index} className="my-10 relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl shadow-purple-900/10">
+                <div key={index} className="my-10 relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl shadow-primary/10">
                     <iframe
                         src={`https://www.youtube.com/embed/${ytMatch[1]}`}
                         title="YouTube video player"

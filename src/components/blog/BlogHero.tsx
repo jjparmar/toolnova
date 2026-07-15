@@ -75,7 +75,7 @@ export function BlogHero({ post }: BlogHeroProps) {
 
                     {/* Featured Image */}
                     <div className="relative">
-                        <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-white/10 shadow-2xl">
+                        <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-primary/25 to-sky-500/20 shadow-2xl">
                             {post.coverImage && post.coverImage !== '' ? (
                                 <Image
                                     src={post.coverImage}
@@ -91,8 +91,8 @@ export function BlogHero({ post }: BlogHeroProps) {
                             )}
                         </div>
                         {/* Decorative Elements */}
-                        <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl" />
-                        <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl" />
+                        <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-primary/20 blur-2xl" />
+                        <div className="absolute -bottom-4 -left-4 h-32 w-32 rounded-full bg-sky-500/20 blur-2xl" />
                     </div>
                 </div>
             </div>

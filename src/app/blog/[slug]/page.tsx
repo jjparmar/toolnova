@@ -332,7 +332,7 @@ export default async function BlogPostPage({
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-slate-500 hover:text-purple-600 text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-2 text-slate-500 hover:text-primary text-sm font-medium transition-colors"
             >
               <FaArrowLeft className="text-xs" />
               Back to Blog
@@ -378,7 +378,7 @@ export default async function BlogPostPage({
             <div className="lg:col-span-2">
               {/* Featured Image */}
               {post.coverImage && (
-                <div className="mb-10 relative rounded-2xl overflow-hidden shadow-xl shadow-purple-900/10">
+                <div className="mb-10 relative rounded-2xl overflow-hidden shadow-xl shadow-primary/10">
                   <NextImage
                     src={post.coverImage}
                     alt={post.imageAlt || post.title}
@@ -408,7 +408,7 @@ export default async function BlogPostPage({
                       {post.keywords.slice(0, 8).map((keyword) => (
                         <span
                           key={keyword}
-                          className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 text-sm font-medium hover:bg-purple-100 hover:text-purple-700 transition-colors cursor-pointer"
+                          className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer"
                         >
                           {keyword}
                         </span>
@@ -469,16 +469,16 @@ export default async function BlogPostPage({
                         className="group"
                       >
                         <article className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                          <span className="px-2.5 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold">
+                          <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
                             {relatedPost.category}
                           </span>
-                          <h3 className="text-lg font-bold text-slate-900 mt-4 group-hover:text-purple-700 transition-colors line-clamp-2">
+                          <h3 className="text-lg font-bold text-slate-900 mt-4 group-hover:text-primary transition-colors line-clamp-2">
                             {relatedPost.title}
                           </h3>
                           <p className="text-slate-600 text-sm mt-2 line-clamp-2">
                             {relatedPost.excerpt}
                           </p>
-                          <div className="mt-4 flex items-center gap-1 text-purple-600 text-sm font-medium">
+                          <div className="mt-4 flex items-center gap-1 text-primary text-sm font-medium">
                             Read more
                             <FaChevronRight className="text-xs" />
                           </div>
@@ -500,22 +500,22 @@ export default async function BlogPostPage({
         {/* CTA Section */}
         <section className="py-20 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-700 rounded-3xl p-10 md:p-14 text-center text-white relative overflow-hidden shadow-2xl shadow-purple-900/30">
+            <div className="bg-gradient-to-br from-primary to-blue-700 rounded-3xl p-10 md:p-14 text-center text-white relative overflow-hidden shadow-2xl shadow-primary/25">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-fuchsia-500/20 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative z-10">
-                <FaRocket className="text-4xl mb-6 mx-auto text-purple-200" />
+                <FaRocket className="text-4xl mb-6 mx-auto text-primary-foreground/70" />
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Ready to Level Up?
                 </h2>
-                <p className="text-purple-100 text-lg mb-8 max-w-2xl mx-auto">
+                <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
                   Try our free AI-powered tools and start saving time today. No
                   sign-up required.
                 </p>
                 <Link
                   href="/tools"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-purple-700 rounded-xl font-bold text-lg hover:bg-purple-50 transition-colors shadow-lg shadow-black/10"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary rounded-xl font-bold text-lg hover:bg-primary/5 transition-colors shadow-lg shadow-black/10"
                 >
                   Explore Free Tools
                   <FaChevronRight />

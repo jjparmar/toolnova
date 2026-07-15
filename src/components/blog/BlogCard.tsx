@@ -13,7 +13,7 @@ interface BlogCardProps {
 const categoryColors: Record<string, string> = {
     'AI Tools': 'bg-blue-500/10 text-blue-600 border-blue-500/20',
     'Productivity': 'bg-green-500/10 text-green-600 border-green-500/20',
-    'Content Creation': 'bg-purple-500/10 text-purple-600 border-purple-500/20',
+    'Content Creation': 'bg-primary/10 text-primary border-primary/20',
     'Business': 'bg-orange-500/10 text-orange-600 border-orange-500/20',
     'Education': 'bg-teal-500/10 text-teal-600 border-teal-500/20',
     'Technology': 'bg-indigo-500/10 text-indigo-600 border-indigo-500/20',
@@ -24,7 +24,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
 
     return (
         <Link href={`/blog/${post.slug}`} className="group">
-            <article className={`h-full bg-white rounded-2xl border border-slate-200/80 overflow-hidden transition-all duration-300 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 ${featured ? 'md:flex' : ''}`}>
+            <article className={`h-full overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 ${featured ? 'md:flex' : ''}`}>
                 {/* Image */}
                 <div className={`relative bg-gradient-to-br from-slate-100 to-slate-50 ${featured ? 'md:w-2/5 aspect-[4/3] md:aspect-auto' : 'aspect-[16/9]'}`}>
                     {post.coverImage && post.coverImage !== '' ? (

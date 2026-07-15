@@ -7,16 +7,16 @@ interface QuickAnswerProps {
 
 export default function QuickAnswer({ children }: QuickAnswerProps) {
     return (
-        <div className="quick-answer my-8 border-l-4 border-purple-600 bg-purple-50 rounded-r-xl p-6 shadow-sm">
-            <div className="flex items-center gap-3 mb-3">
-                <div className="bg-purple-600 p-1.5 rounded-full">
-                    <FaBolt className="w-4 h-4 text-white" />
+        <div className="quick-answer my-8 rounded-r-xl border-l-4 border-primary bg-primary/5 p-6 shadow-sm">
+            <div className="mb-3 flex items-center gap-3">
+                <div className="rounded-full bg-primary p-1.5">
+                    <FaBolt className="h-4 w-4 text-primary-foreground" />
                 </div>
-                <h3 className="font-bold text-lg text-slate-900 uppercase tracking-wide">
+                <h3 className="text-lg font-semibold uppercase tracking-wide text-foreground">
                     Quick Answer
                 </h3>
             </div>
-            <div className="text-slate-800 text-lg leading-relaxed font-medium">
+            <div className="text-lg font-medium leading-relaxed text-foreground/90">
                 {children}
             </div>
         </div>

@@ -30,26 +30,23 @@ const studyCareerTools = [
 
 export function Footer() {
   return (
-    <footer className="w-full mt-auto relative overflow-hidden">
-      {/* Gradient top border */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+    <footer className="relative mt-auto w-full overflow-hidden">
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/35 to-transparent" />
 
-      {/* Background */}
-      <div className="bg-muted/30 border-t border-border/60 relative">
-        {/* Subtle mesh bg */}
-        <div className="absolute inset-0 pointer-events-none"
+      <div className="relative border-t border-border bg-muted/25">
+        <div
+          className="pointer-events-none absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse at 10% 0%, hsl(var(--primary) / 0.04) 0%, transparent 50%), radial-gradient(ellipse at 90% 0%, hsl(198 90% 52% / 0.03) 0%, transparent 50%)',
+            background:
+              "radial-gradient(ellipse at 10% 0%, hsl(var(--primary) / 0.05) 0%, transparent 50%), radial-gradient(ellipse at 90% 0%, hsl(199 89% 48% / 0.04) 0%, transparent 50%)",
           }}
         />
 
-        <div className="mx-auto max-w-[1240px] px-6 py-16 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-12">
-
-            {/* Brand column */}
+        <div className="relative z-10 mx-auto max-w-[1120px] px-6 py-14 md:py-16">
+          <div className="mb-12 grid grid-cols-2 gap-10 md:grid-cols-5">
             <div className="col-span-2 md:col-span-2">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="relative h-9 w-9 overflow-hidden rounded-xl shadow-md shadow-primary/20 ring-1 ring-primary/15">
+              <div className="mb-5 flex items-center gap-3">
+                <div className="relative h-9 w-9 overflow-hidden rounded-lg shadow-sm ring-1 ring-border">
                   <Image
                     src="/logo.webp"
                     alt=""
@@ -58,8 +55,8 @@ export function Footer() {
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <span className="font-heading text-[1.1rem] font-extrabold text-foreground tracking-tight">
-                  Tool<span className="text-brand-gradient">Nova</span>
+                <span className="font-heading text-[1.125rem] font-semibold tracking-tight text-foreground">
+                  Tool<span className="text-primary">Nova</span>
                 </span>
               </div>
 
@@ -73,7 +70,6 @@ export function Footer() {
                 in Singapore
               </p>
 
-              {/* Social icons */}
               <div className="flex gap-2.5">
                 {[
                   { href: siteConfig.links.twitter, label: "Follow ToolNova on Twitter/X", Icon: Twitter },
@@ -87,7 +83,7 @@ export function Footer() {
                     target={href.startsWith("mailto") ? undefined : "_blank"}
                     rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                     aria-label={label}
-                    className="h-9 w-9 flex items-center justify-center rounded-xl bg-background border border-border text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 shadow-sm"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground shadow-sm transition-all duration-200 hover:border-primary hover:bg-primary hover:text-primary-foreground"
                   >
                     <Icon className="h-4 w-4" />
                   </a>
@@ -95,9 +91,8 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Writing Tools */}
             <div className="col-span-1">
-              <h4 className="font-heading text-foreground font-bold mb-5 text-xs uppercase tracking-widest">
+              <h4 className="font-heading mb-5 text-xs font-semibold uppercase tracking-wider text-foreground">
                 Writing Tools
               </h4>
               <ul className="space-y-2.5">
@@ -123,9 +118,8 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Study & Career */}
             <div className="col-span-1">
-              <h4 className="font-heading text-foreground font-bold mb-5 text-xs uppercase tracking-widest">
+              <h4 className="font-heading mb-5 text-xs font-semibold uppercase tracking-wider text-foreground">
                 Study &amp; Career
               </h4>
               <ul className="space-y-2.5">
@@ -151,9 +145,8 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Company + Legal */}
             <div className="col-span-2 md:col-span-1">
-              <h4 className="font-heading text-foreground font-bold mb-5 text-xs uppercase tracking-widest">
+              <h4 className="font-heading mb-5 text-xs font-semibold uppercase tracking-wider text-foreground">
                 Company
               </h4>
               <ul className="space-y-2.5 mb-8">
@@ -176,7 +169,7 @@ export function Footer() {
                 ))}
               </ul>
 
-              <h4 className="font-heading text-foreground font-bold mb-5 text-xs uppercase tracking-widest">
+              <h4 className="font-heading mb-5 text-xs font-semibold uppercase tracking-wider text-foreground">
                 Legal
               </h4>
               <ul className="space-y-2.5">

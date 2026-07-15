@@ -11,7 +11,7 @@ export default function BlogPostLoading() {
             {/* Article header skeleton */}
             <div className="py-12 bg-white">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="h-5 w-24 bg-purple-100 rounded-full mb-6" />
+                    <div className="h-5 w-24 bg-primary/10 rounded-full mb-6" />
                     <div className="h-10 w-3/4 bg-slate-200 rounded mb-4" />
                     <div className="h-6 w-full bg-slate-100 rounded mb-3" />
                     <div className="h-6 w-2/3 bg-slate-100 rounded mb-6" />

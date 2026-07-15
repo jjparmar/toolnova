@@ -16,37 +16,36 @@ const featuredTools = [
   {
     name: "Text Summarizer",
     slug: "text-summarizer",
-    icon: <FaFileAlt className="text-purple-500" />,
+    icon: <FaFileAlt className="text-primary" />,
   },
   {
     name: "Essay Writer",
     slug: "essay-writer",
-    icon: <FaPen className="text-blue-500" />,
+    icon: <FaPen className="text-sky-600" />,
   },
   {
     name: "Paraphraser",
     slug: "paraphraser",
-    icon: <FaBookOpen className="text-green-500" />,
+    icon: <FaBookOpen className="text-emerald-600" />,
   },
   {
     name: "Grammar Fix",
     slug: "grammar-fix",
-    icon: <FaRocket className="text-orange-500" />,
+    icon: <FaRocket className="text-amber-600" />,
   },
   {
     name: "Word Counter",
     slug: "word-counter",
-    icon: <FaCalculator className="text-indigo-500" />,
+    icon: <FaCalculator className="text-blue-600" />,
   },
 ];
 
 export default function BlogSidebar() {
   return (
-    <aside className="space-y-8 sticky top-24">
-      {/* Featured Tools */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-        <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
-          <FaRocket className="text-purple-600" />
+    <aside className="sticky top-24 space-y-8">
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <h3 className="font-heading mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+          <FaRocket className="text-primary" />
           Popular Tools
         </h3>
         <div className="space-y-3">
@@ -54,12 +53,12 @@ export default function BlogSidebar() {
             <Link
               key={tool.slug}
               href={`/tools/${tool.slug}`}
-              className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group"
+              className="group flex items-center gap-3 rounded-xl p-3 transition-colors hover:bg-muted"
             >
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center group-hover:bg-purple-100 transition-colors">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted transition-colors group-hover:bg-primary/10">
                 {tool.icon}
               </div>
-              <span className="text-slate-700 font-medium group-hover:text-purple-600 transition-colors">
+              <span className="font-medium text-foreground/80 transition-colors group-hover:text-primary">
                 {tool.name}
               </span>
             </Link>
@@ -67,7 +66,7 @@ export default function BlogSidebar() {
         </div>
         <Link
           href="/tools"
-          className="flex items-center justify-center gap-2 mt-4 py-3 px-4 bg-primary/10 text-primary rounded-xl font-bold hover:bg-primary/15 transition-colors"
+          className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-primary/10 px-4 py-3 font-semibold text-primary transition-colors hover:bg-primary/15"
         >
           View All Tools
           <FaArrowRight className="text-sm" />

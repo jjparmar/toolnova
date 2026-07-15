@@ -12,13 +12,13 @@ interface ExpertQuoteProps {
 export default function ExpertQuote({ quote, author, role, image }: ExpertQuoteProps) {
     return (
         <div className="expert-quote my-12 relative">
-            <div className="absolute top-0 left-6 -translate-y-1/2 bg-purple-600 text-white p-3 rounded-full shadow-lg">
-                <FaQuoteLeft className="w-5 h-5" />
+            <div className="absolute left-6 top-0 -translate-y-1/2 rounded-full bg-primary p-3 text-primary-foreground shadow-lg">
+                <FaQuoteLeft className="h-5 w-5" />
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-2xl p-8 pt-10 shadow-lg shadow-purple-900/5 relative">
-                <div className="absolute -top-4 -left-4 w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
-                    <span className="text-2xl text-purple-600 dark:text-purple-400 font-serif leading-none">&quot;</span>
+            <div className="relative rounded-2xl border border-border bg-card p-8 pt-10 shadow-lg shadow-primary/5">
+                <div className="absolute -left-4 -top-4 flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                    <span className="font-serif text-2xl leading-none text-primary">&quot;</span>
                 </div>
                 <blockquote className="text-xl text-slate-800 font-medium leading-relaxed italic mb-6">
                     {quote}
@@ -35,7 +35,7 @@ export default function ExpertQuote({ quote, author, role, image }: ExpertQuoteP
                             />
                         </div>
                     ) : (
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center text-white font-bold text-lg">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground">
                             {author.charAt(0)}
                         </div>
                     )}

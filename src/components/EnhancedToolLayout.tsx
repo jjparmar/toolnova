@@ -653,7 +653,7 @@ export default function EnhancedToolLayout({
                   type="button"
                   onClick={() => void handleGenerate()}
                   disabled={loading || !input.trim()}
-                  className="btn-premium flex-1 py-3.5 sm:py-4 px-6 rounded-2xl font-bold text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3 group"
+                  className="flex-1 py-3.5 sm:py-4 px-6 rounded-xl bg-primary text-primary-foreground font-semibold text-base sm:text-lg shadow-sm hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 group transition-colors"
                 >
                   {loading ? (
                     <>

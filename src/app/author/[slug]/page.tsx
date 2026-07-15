@@ -82,7 +82,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
                         <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">
                             {author.name}
                         </h1>
-                        <p className="text-xl text-purple-600 font-medium mb-6">
+                        <p className="text-xl text-primary font-medium mb-6">
                             {author.role}
                         </p>
                         <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mb-8">
@@ -96,7 +96,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
                     <h2 className="text-2xl font-bold text-slate-900 mb-6">Areas of Expertise</h2>
                     <div className="flex flex-wrap gap-3">
                         {author.specialties.map((specialty, i) => (
-                            <span key={i} className="px-5 py-2 rounded-full bg-purple-50 text-purple-700 font-medium border border-purple-100">
+                            <span key={i} className="px-5 py-2 rounded-full bg-primary/5 text-primary font-medium border border-primary/15">
                                 {specialty}
                             </span>
                         ))}
@@ -124,10 +124,10 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
                                             )}
                                         </div>
                                         <div className="p-6 flex-1 flex flex-col">
-                                            <div className="text-xs font-bold text-purple-600 mb-3 uppercase tracking-wider">
+                                            <div className="text-xs font-bold text-primary mb-3 uppercase tracking-wider">
                                                 {post.category}
                                             </div>
-                                            <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-purple-600 transition-colors line-clamp-2">
+                                            <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
                                                 {post.title}
                                             </h3>
                                             <p className="text-slate-600 text-sm line-clamp-3 mb-4 flex-1">

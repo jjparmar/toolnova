@@ -679,29 +679,21 @@ export function ToolsClient() {
   return (
     <div className="w-full min-h-screen bg-background">
       {/* Background Ornaments */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 surface-mesh" />
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/15 rounded-full blur-[120px]" />
-        <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-cyan-500/12 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[10%] left-[20%] w-[25%] h-[25%] bg-violet-500/10 rounded-full blur-[100px]" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-12 md:py-16">
+      <div className="relative z-10 mx-auto max-w-[1120px] px-6 py-12 md:py-14">
         {/* Hero Section */}
-        <div className="text-center mb-12 animate-slide-up">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold mb-6 border border-primary/25 shadow-[0_0_30px_-8px_hsl(var(--primary)/0.45)]">
-            <Sparkles className="h-4 w-4" />
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/8 text-primary text-sm font-semibold mb-5 border border-primary/15">
+            <Sparkles className="h-3.5 w-3.5" />
             <span>All tools · Free to open · No sign-up</span>
           </div>
 
-          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6">
-            <span className="text-brand-gradient">AI Tools</span>{" "}
-            <span className="text-foreground">Library</span>
+          <h1 className="font-heading text-3xl md:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground">
+            AI Tools Library
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            A premium catalog of AI and browser tools for students, writers, and
-            professionals — built for speed and clarity.
+          <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
+            Search writing, study, PDF, image, and career tools — built for speed
+            and clarity.
           </p>
 
           {/* Stats Bar */}
@@ -726,8 +718,7 @@ export function ToolsClient() {
           {/* Search Bar */}
           <div className="max-w-3xl mx-auto mb-12">
             <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary via-violet-500 to-cyan-500 rounded-2xl opacity-25 group-hover:opacity-50 transition duration-500 blur-lg" />
-              <div className="relative flex items-center bg-card/95 backdrop-blur-xl rounded-2xl border border-border shadow-xl shadow-primary/10 transition-all duration-300 focus-within:border-primary/50 focus-within:shadow-primary/20">
+              <div className="relative flex items-center bg-card rounded-xl border border-border shadow-sm transition-all focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/15">
                 <Search className="text-muted-foreground h-5 w-5 ml-5 mr-3 shrink-0 transition-colors group-focus-within:text-primary" />
                 <input
                   ref={searchRef}
@@ -772,9 +763,9 @@ export function ToolsClient() {
                 type="button"
                 key={cat.name}
                 onClick={() => setActiveCategory(cat.name)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${
                   activeCategory === cat.name
-                    ? `bg-gradient-to-r ${cat.gradient} text-white shadow-md`
+                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/25"
                     : "bg-card text-muted-foreground border border-border hover:text-foreground hover:border-primary/30"
                 }`}
               >
@@ -798,10 +789,10 @@ export function ToolsClient() {
         {!searchQuery && activeCategory === "All" && (
           <div className="mb-16 animate-fade-in">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center">
-                <Award className="h-4 w-4 text-white" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+                <Award className="h-4 w-4 text-primary-foreground" />
               </div>
-              <h2 className="font-heading text-2xl font-bold text-foreground">
+              <h2 className="font-heading text-2xl font-semibold text-foreground">
                 Popular Tools
               </h2>
             </div>

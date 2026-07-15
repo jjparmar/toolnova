@@ -33,12 +33,10 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen w-full flex flex-col lg:flex-row">
             {/* Left Panel - Branding */}
-            <div className="hidden lg:flex lg:w-1/2 relative bg-hero-premium overflow-hidden">
-                {/* Animated Background Elements */}
+            <div className="hidden lg:flex lg:w-1/2 relative bg-primary overflow-hidden">
                 <div className="absolute inset-0">
-                    <div className="absolute top-20 left-20 w-72 h-72 bg-primary/30 rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-20 right-20 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl"></div>
-                    <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-violet-400/15 rounded-full blur-3xl"></div>
+                    <div className="absolute top-20 left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-20 right-20 w-96 h-96 bg-sky-400/20 rounded-full blur-3xl"></div>
                 </div>
 
                 {/* Grid Pattern Overlay */}
@@ -52,12 +50,12 @@ export default function LoginPage() {
                         <div className="h-12 w-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform">
                             <Sparkles className="h-7 w-7 text-white" />
                         </div>
-                        <span className="text-2xl font-black tracking-tight">ToolNova</span>
+                        <span className="font-heading text-2xl font-semibold tracking-tight">ToolNova</span>
                     </Link>
 
-                    <h1 className="font-heading text-4xl lg:text-5xl font-bold leading-tight mb-6">
-                        Unlock the Power of
-                        <span className="block mt-2 text-brand-gradient">
+                    <h1 className="font-heading mb-6 text-4xl font-semibold leading-tight lg:text-5xl">
+                        Unlock the power of
+                        <span className="mt-2 block text-white">
                             ToolNova
                         </span>
                     </h1>

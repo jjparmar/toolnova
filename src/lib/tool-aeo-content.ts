@@ -79,7 +79,7 @@ export const toolAEOContent: Record<string, ToolAEOContent> = {
                 title: 'Choose Summary Length',
                 description: 'Select how detailed you want your summary to be - short, medium, or long.',
                 icon: Target,
-                color: 'bg-purple-600',
+                color: 'bg-primary',
             },
             {
                 step: 3,
@@ -160,7 +160,7 @@ export const toolAEOContent: Record<string, ToolAEOContent> = {
                 title: 'Select Mode',
                 description: 'Choose your preferred paraphrasing style - standard, creative, or formal.',
                 icon: Target,
-                color: 'bg-purple-600',
+                color: 'bg-primary',
             },
             {
                 step: 3,
@@ -237,7 +237,7 @@ export const toolAEOContent: Record<string, ToolAEOContent> = {
                 title: 'AI Analysis',
                 description: 'Our AI scans for grammar, spelling, and style errors instantly.',
                 icon: Brain,
-                color: 'bg-purple-600',
+                color: 'bg-primary',
             },
             {
                 step: 3,
@@ -314,7 +314,7 @@ export const toolAEOContent: Record<string, ToolAEOContent> = {
                 title: 'Choose Essay Type',
                 description: 'Select argumentative, persuasive, narrative, or expository.',
                 icon: Target,
-                color: 'bg-purple-600',
+                color: 'bg-primary',
             },
             {
                 step: 3,
@@ -391,7 +391,7 @@ export const toolAEOContent: Record<string, ToolAEOContent> = {
                 title: 'Select Subject',
                 description: 'Choose math, science, or the relevant subject area.',
                 icon: Target,
-                color: 'bg-purple-600',
+                color: 'bg-primary',
             },
             {
                 step: 3,
@@ -468,7 +468,7 @@ export const toolAEOContent: Record<string, ToolAEOContent> = {
                 title: 'Arrange Order',
                 description: 'Drag files to rearrange them in your desired sequence.',
                 icon: Target,
-                color: 'bg-purple-600',
+                color: 'bg-primary',
             },
             {
                 step: 3,
@@ -545,7 +545,7 @@ export const toolAEOContent: Record<string, ToolAEOContent> = {
                 title: 'Choose Pages',
                 description: 'Select specific pages or page ranges to extract.',
                 icon: Target,
-                color: 'bg-purple-600',
+                color: 'bg-primary',
             },
             {
                 step: 3,
@@ -622,7 +622,7 @@ export const toolAEOContent: Record<string, ToolAEOContent> = {
                 title: 'AI Generation',
                 description: 'AI analyzes content and creates question-answer pairs.',
                 icon: Brain,
-                color: 'bg-purple-600',
+                color: 'bg-primary',
             },
             {
                 step: 3,
@@ -700,7 +700,7 @@ export const toolAEOContent: Record<string, ToolAEOContent> = {
                 title: 'Customize Options',
                 description: 'Choose your preferred settings and options.',
                 icon: Target,
-                color: 'bg-purple-600',
+                color: 'bg-primary',
             },
             {
                 step: 3,

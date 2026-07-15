@@ -494,7 +494,7 @@ export function ToolLayout({
 
           {/* Input Area */}
           <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-2xl p-6 md:p-12 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-60"></div>
+            <div className="absolute top-0 left-0 h-1 w-full bg-primary/80"></div>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
               <div>
@@ -571,7 +571,7 @@ export function ToolLayout({
               <Button
                 onClick={handleGenerate}
                 disabled={loading || !input.trim()}
-                className="w-full h-16 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:scale-[1.01] active:scale-[0.99] transition-all text-white font-black rounded-2xl shadow-2xl shadow-indigo-500/30 flex items-center justify-center gap-4 text-xl disabled:opacity-50 disabled:grayscale group"
+                className="group flex h-14 w-full items-center justify-center gap-3 rounded-xl bg-primary text-lg font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/92 hover:shadow-xl hover:shadow-primary/30 disabled:opacity-50 disabled:grayscale"
               >
                 {loading ? (
                   <div className="flex items-center gap-3">
@@ -763,7 +763,7 @@ export function ToolLayout({
         <BottomBoxAd />
 
         {/* Pro Tips */}
-        <div className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-primary/5 via-blue-500/5 to-purple-500/5 border border-primary/10">
+        <div className="mt-10 rounded-2xl border border-primary/10 bg-primary/5 p-6">
           <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-primary" /> Pro Tips
           </h3>

@@ -27,7 +27,7 @@ export default function NotFound() {
       <div className="max-w-2xl w-full text-center">
         {/* 404 Visual */}
         <div className="mb-8">
-          <span className="font-heading text-8xl md:text-9xl font-extrabold text-brand-gradient select-none">
+          <span className="font-heading text-8xl md:text-9xl font-semibold text-primary select-none">
             404
           </span>
         </div>
@@ -46,7 +46,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
           <Link
             href="/"
-            className="btn-premium inline-flex items-center justify-center gap-2 rounded-xl h-12 px-8 text-sm font-bold"
+            className="inline-flex items-center justify-center gap-2 rounded-lg h-11 px-7 bg-primary text-primary-foreground text-sm font-semibold shadow-sm hover:bg-primary/90 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

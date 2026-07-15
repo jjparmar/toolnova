@@ -28,7 +28,6 @@ export function Header() {
   const loading = status === "loading";
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -38,12 +37,6 @@ export function Header() {
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "/" });
@@ -55,113 +48,87 @@ export function Header() {
   };
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
-        scrolled
-          ? "border-b border-border/60 bg-background/80 backdrop-blur-2xl shadow-sm shadow-foreground/[0.04]"
-          : "border-b border-transparent bg-background/60 backdrop-blur-xl"
-      )}
-    >
-      <div className="mx-auto flex h-[4.5rem] max-w-[1240px] items-center justify-between gap-4 px-4 sm:px-6">
+    <header className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/85 shadow-[0_1px_0_0_hsl(var(--border)/0.5)] backdrop-blur-xl supports-[backdrop-filter]:bg-background/75">
+      <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between gap-4 px-4 sm:px-6">
+        <Link
+          href="/"
+          className="group flex shrink-0 items-center gap-2.5"
+          aria-label="ToolNova home"
+        >
+          <div className="relative h-9 w-9 overflow-hidden rounded-lg shadow-sm ring-1 ring-border transition-shadow group-hover:ring-primary/25">
+            <Image
+              src="/logo.webp"
+              alt=""
+              width={36}
+              height={36}
+              className="h-full w-full object-cover"
+              priority
+            />
+          </div>
+          <span className="font-heading text-[1.125rem] font-semibold tracking-tight text-foreground">
+            Tool<span className="text-primary">Nova</span>
+          </span>
+        </Link>
 
-        {/* Logo */}
-        <div className="flex items-center gap-3 shrink-0">
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 group"
-            aria-label="ToolNova home"
-          >
-            <div className="relative h-9 w-9 overflow-hidden rounded-xl shadow-md shadow-primary/25 ring-1 ring-primary/20 group-hover:shadow-primary/40 group-hover:ring-primary/35 group-hover:scale-105 transition-all duration-300">
-              <Image
-                src="/logo.webp"
-                alt=""
-                width={36}
-                height={36}
-                className="h-full w-full object-cover"
-                priority
-              />
-            </div>
-            <span className="font-heading text-[1.15rem] font-extrabold leading-none tracking-tight text-foreground">
-              Tool<span className="text-brand-gradient">Nova</span>
-            </span>
-          </Link>
-        </div>
-
-        {/* Center nav */}
-        <div className="hidden md:flex items-center gap-1 flex-1 justify-center">
-          <nav
-            className="flex items-center gap-0.5 px-1.5 py-1.5 rounded-2xl bg-muted/70 border border-border/70 shadow-sm"
-            aria-label="Main navigation"
-          >
+        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3 min-w-0">
+          <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "relative text-sm font-semibold px-4 py-1.5 rounded-xl transition-all duration-200",
+                  "text-sm font-medium px-3 py-2 rounded-lg transition-colors",
                   isActive(link.href)
-                    ? "nav-pill-active"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background/80"
+                    ? "text-primary bg-primary/8"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 )}
                 aria-current={isActive(link.href) ? "page" : undefined}
               >
                 {link.label}
               </Link>
             ))}
-
             {!loading && !user && (
               <Link
                 href="/login"
                 className={cn(
-                  "relative text-sm font-semibold px-4 py-1.5 rounded-xl transition-all duration-200",
+                  "text-sm font-medium px-3 py-2 rounded-lg transition-colors",
                   isActive('/login')
-                    ? "nav-pill-active"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background/80"
+                    ? "text-primary bg-primary/8"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 )}
               >
                 Login
               </Link>
             )}
           </nav>
-        </div>
 
-        {/* Right side actions */}
-        <div className="flex items-center gap-2 shrink-0">
-          <div className="hidden sm:block">
+          <div className="hidden sm:block shrink-0">
             <GlobalSearch />
           </div>
 
           <div className="hidden md:flex items-center gap-2">
             {loading ? (
-              <div className="h-9 w-24 bg-muted rounded-xl animate-pulse" />
+              <div className="h-9 w-20 bg-muted rounded-lg animate-pulse" />
             ) : user ? (
-              <div className="flex items-center gap-2">
+              <>
                 <UsageCounter />
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-1.5 text-sm font-semibold text-foreground hover:text-primary transition-colors bg-muted/70 hover:bg-muted px-3 py-2 rounded-xl border border-border/70"
+                  className="flex items-center gap-1.5 text-sm font-medium text-foreground px-3 py-2 rounded-lg border border-border hover:bg-muted transition-colors"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   <span className="hidden lg:inline">Dashboard</span>
                 </Link>
-                <Button
-                  onClick={handleSignOut}
-                  variant="outline"
-                  className="h-9 px-4 rounded-xl text-sm font-semibold border-border/70"
-                >
+                <Button onClick={handleSignOut} variant="outline" size="sm">
                   Sign Out
                 </Button>
-              </div>
+              </>
             ) : (
               <Link href="/signup">
-                <button
-                  type="button"
-                  className="btn-premium flex items-center justify-center gap-1.5 overflow-hidden rounded-xl h-9 px-5 text-sm font-bold"
-                >
+                <Button size="sm" className="font-semibold gap-1.5">
                   <Sparkles className="h-3.5 w-3.5" />
-                  <span>Get Started</span>
-                </button>
+                  Get Started
+                </Button>
               </Link>
             )}
 
@@ -169,7 +136,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="flex items-center justify-center h-9 w-9 rounded-xl bg-muted/80 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors border border-border/60"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -179,9 +146,9 @@ export function Header() {
 
           <button
             type="button"
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors rounded-xl hover:bg-muted border border-transparent hover:border-border/60"
+            className="md:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-border text-foreground hover:bg-muted"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-menu"
           >

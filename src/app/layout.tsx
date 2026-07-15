@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/google-font-preconnect */
 import type { Metadata } from "next";
-import { Outfit, Syne, Geist_Mono } from "next/font/google";
+import { Manrope, Sora, Geist_Mono } from "next/font/google";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ConsentedScripts } from "@/components/ConsentedScripts";
 import Script from "next/script";
@@ -19,9 +19,9 @@ import { adsenseConfig } from "@/config/adsense";
 import { Providers } from "@/components/Providers";
 import { TOOL_COUNT_LABEL } from "@/data/tools";
 
-/** Clean geometric UI body — premium SaaS readability */
-const outfit = Outfit({
-  variable: "--font-outfit",
+/** Professional UI body — highly readable, modern SaaS standard */
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
@@ -30,12 +30,12 @@ const outfit = Outfit({
   fallback: ["system-ui", "arial"],
 });
 
-/** Distinctive display face for brand headlines */
-const syne = Syne({
-  variable: "--font-syne",
+/** Clean geometric headings — professional without being flashy */
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
   display: "swap",
-  weight: ["600", "700", "800"],
+  weight: ["500", "600", "700"],
   preload: true,
   adjustFontFallback: true,
   fallback: ["system-ui", "arial"],
@@ -156,8 +156,8 @@ export const metadata: Metadata = {
   other: {
     language: "English",
     "content-language": "en",
-    "theme-color": "#7c5cff",
-    "msapplication-TileColor": "#7c5cff",
+    "theme-color": "#2563eb",
+    "msapplication-TileColor": "#2563eb",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
     "mobile-web-app-capable": "yes",
@@ -229,15 +229,15 @@ export default function RootLayout({
         />
 
         {/* Theme Color — required for Google Discover & PWA */}
-        <meta name="theme-color" content="#7c5cff" />
-        <meta name="msapplication-TileColor" content="#7c5cff" />
+        <meta name="theme-color" content="#2563eb" />
+        <meta name="msapplication-TileColor" content="#2563eb" />
 
 
         {/* NOTE: Page-level JSON-LD schemas are injected by each page component.
             No global schema here to avoid duplicate JSON-LD across all pages. */}
       </head>
       <body
-        className={`${outfit.variable} ${syne.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${manrope.variable} ${sora.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"

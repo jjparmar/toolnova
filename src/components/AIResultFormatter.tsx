@@ -49,10 +49,10 @@ const sectionStyles: Record<string, {
         icon: Target
     },
     steps: {
-        bg: 'from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/20',
+        bg: 'from-blue-50 to-sky-50 dark:from-blue-950/30 dark:to-sky-950/20',
         border: 'border-blue-200 dark:border-blue-800/50',
-        text: 'from-blue-600 to-purple-600',
-        gradient: 'from-blue-500 to-purple-600',
+        text: 'from-blue-600 to-sky-600',
+        gradient: 'from-blue-500 to-sky-600',
         icon: BookOpen
     },
     formulas: {
@@ -70,10 +70,10 @@ const sectionStyles: Record<string, {
         icon: CheckCircle2
     },
     learning: {
-        bg: 'from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/20',
-        border: 'border-purple-200 dark:border-purple-800/50',
-        text: 'from-purple-600 to-pink-600',
-        gradient: 'from-purple-500 to-pink-600',
+        bg: 'from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20',
+        border: 'border-amber-200 dark:border-amber-800/50',
+        text: 'from-amber-600 to-orange-600',
+        gradient: 'from-amber-500 to-orange-600',
         icon: Lightbulb
     },
     practice: {
@@ -98,10 +98,10 @@ const sectionStyles: Record<string, {
         icon: FileText
     },
     conclusion: {
-        bg: 'from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/20',
-        border: 'border-violet-200 dark:border-violet-800/50',
-        text: 'from-violet-600 to-purple-600',
-        gradient: 'from-violet-500 to-purple-600',
+        bg: 'from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/20',
+        border: 'border-sky-200 dark:border-sky-800/50',
+        text: 'from-sky-600 to-blue-600',
+        gradient: 'from-sky-500 to-blue-600',
         icon: Star
     },
     questions: {

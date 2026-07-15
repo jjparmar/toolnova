@@ -112,18 +112,15 @@ export function PremiumToolWrapper({
       <section className="relative z-10 overflow-hidden pb-10 sm:pb-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex flex-col items-center text-center">
-            <div className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5">
-              <span className="text-xs font-bold uppercase tracking-widest text-primary">
+            <div className="mb-5 inline-flex items-center rounded-full border border-primary/15 bg-primary/8 px-3.5 py-1">
+              <span className="text-xs font-semibold uppercase tracking-wide text-primary">
                 {badge}
               </span>
             </div>
 
-            <div className="relative mb-5">
-              <div className="absolute -inset-x-16 -top-8 bottom-0 bg-gradient-to-r from-primary/20 via-violet-500/15 to-cyan-500/15 opacity-80 blur-3xl" />
-              <h1 className="relative font-heading text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.08] tracking-tight">
-                <span className="text-brand-gradient">
-                  {toolName}
-                </span>
+            <div className="relative mb-4">
+              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold leading-[1.15] tracking-tight text-foreground">
+                {toolName}
               </h1>
             </div>
 
@@ -172,7 +169,7 @@ export function PremiumToolWrapper({
       {features && features.length > 0 && (
         <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-20">
           <div className="mb-12 text-center">
-            <h2 className="font-heading mb-3 text-3xl sm:text-4xl font-bold text-foreground">
+            <h2 className="font-heading mb-3 text-3xl font-semibold text-foreground sm:text-4xl">
               Built for reliable results
             </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
@@ -186,11 +183,11 @@ export function PremiumToolWrapper({
                 className="h-full rounded-2xl border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg"
               >
                 <div
-                  className={`mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${feature.gradient ?? "from-primary to-teal-600"} shadow-md`}
+                  className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary"
                 >
-                  <feature.icon className="h-6 w-6 text-white" />
+                  <feature.icon className="h-6 w-6" />
                 </div>
-                <h3 className="font-heading mb-3 text-xl font-bold text-foreground">
+                <h3 className="font-heading mb-3 text-xl font-semibold text-foreground">
                   {feature.title}
                 </h3>
                 <p className="leading-relaxed text-muted-foreground">
@@ -262,25 +259,24 @@ export function PremiumToolWrapper({
 
       {ctaTitle && (
         <section className="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-20">
-          <div className="relative overflow-hidden rounded-3xl bg-hero-premium p-10 sm:p-16 text-center text-white shadow-2xl">
-            <div className="absolute inset-0 surface-mesh opacity-40" />
+          <div className="relative overflow-hidden rounded-2xl bg-primary p-10 sm:p-14 text-center text-primary-foreground shadow-lg">
             <div className="relative z-10">
-              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md">
-                <CtaIcon className="h-7 w-7" />
+              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/15">
+                <CtaIcon className="h-6 w-6" />
               </div>
-              <h3 className="font-heading mb-4 text-3xl sm:text-4xl font-extrabold tracking-tight">
+              <h3 className="font-heading mb-3 text-2xl sm:text-3xl font-semibold tracking-tight">
                 {ctaTitle}
               </h3>
               {ctaDescription && (
-                <p className="mx-auto mb-8 max-w-2xl text-base sm:text-lg text-white/80">
+                <p className="mx-auto mb-7 max-w-xl text-base text-primary-foreground/85">
                   {ctaDescription}
                 </p>
               )}
               <a
                 href="#tool-input"
-                className="btn-premium inline-flex items-center gap-3 rounded-2xl px-8 py-4 font-bold"
+                className="inline-flex items-center gap-2 rounded-lg bg-white text-primary px-6 py-3 font-semibold shadow-sm hover:bg-white/95 transition-colors"
               >
-                {ctaButtonText} <ArrowRight className="h-5 w-5" />
+                {ctaButtonText} <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </div>

@@ -70,8 +70,8 @@ const config: Config = {
   			'3xl': 'calc(var(--radius) + 12px)'
   		},
   		fontFamily: {
-			sans: ['var(--font-outfit)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-			heading: ['var(--font-syne)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+			sans: ['var(--font-manrope)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+			heading: ['var(--font-sora)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 			mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace']
 		},
   		fontSize: {
@@ -138,7 +138,7 @@ const config: Config = {
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
   			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-  			'mesh': 'radial-gradient(at 40% 20%, hsl(262 83% 68% / 0.2) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(199 89% 58% / 0.15) 0px, transparent 50%), radial-gradient(at 0% 50%, hsl(320 82% 68% / 0.12) 0px, transparent 50%)',
+  			'mesh': 'radial-gradient(at 40% 20%, hsl(221 83% 53% / 0.12) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(199 89% 58% / 0.1) 0px, transparent 50%), radial-gradient(at 0% 50%, hsl(221 70% 55% / 0.08) 0px, transparent 50%)',
   		},
   		spacing: {
   			'18': '4.5rem',
