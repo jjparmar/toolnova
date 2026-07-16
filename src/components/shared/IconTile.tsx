@@ -26,8 +26,8 @@ export function IconTile({
   size?: "sm" | "md" | "lg";
 }) {
   const sizes: Record<string, string> = {
-    sm: "h-10 w-10 rounded-[0.5rem]",
-    md: "h-12 w-12 rounded-[0.6rem]",
+    sm: "h-10 w-10 rounded-lg",
+    md: "h-12 w-12 rounded-xl",
     lg: "h-14 w-14 rounded-xl",
   };
   const iconSizes: Record<string, string> = {
@@ -39,7 +39,7 @@ export function IconTile({
   return (
     <div
       className={cn(
-        "flex shrink-0 items-center justify-center transition-all duration-300 group-hover:scale-110",
+        "flex shrink-0 items-center justify-center transition-all duration-300 group-hover:scale-105",
         sizes[size],
         gradient
           ? cn("bg-gradient-to-br text-white shadow-md shadow-primary/20 border-0", gradient)

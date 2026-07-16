@@ -374,9 +374,9 @@ export default function EnhancedToolLayout({
         </div>
       )}
 
-      <div className="relative rounded-2xl border border-border bg-card shadow-xl shadow-primary/5 overflow-hidden">
+      <div className="relative rounded-2xl border border-border/60 bg-card shadow-premium overflow-hidden">
         {/* Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 sm:p-4 border-b border-border bg-muted/40">
+        <div className="flex flex-wrap items-center justify-between gap-3 p-3 sm:p-4 border-b border-border/60 bg-muted/25">
           <div className="flex items-center gap-3 min-w-0">
             <div
               className={cn(
@@ -460,7 +460,7 @@ export default function EnhancedToolLayout({
 
         {/* Options */}
         {showOptions && resolvedToolOptions.length > 0 && (
-          <div className="p-4 sm:p-6 bg-muted/30 border-b border-border">
+          <div className="p-4 sm:p-6 bg-muted/15 border-b border-border/60">
             <div className="flex items-center gap-2 mb-4">
               <Wand2 className="h-4 w-4 text-primary" />
               <h3 className="text-sm font-bold text-foreground uppercase tracking-wide">
@@ -553,7 +553,7 @@ export default function EnhancedToolLayout({
 
         {/* History */}
         {showHistory && history.length > 0 && (
-          <div className="p-4 sm:p-6 bg-muted/20 border-b border-border">
+          <div className="p-4 sm:p-6 bg-muted/10 border-b border-border/60">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <History className="h-4 w-4 text-primary" />
@@ -602,7 +602,7 @@ export default function EnhancedToolLayout({
         )}
 
         {/* Tabs */}
-        <div className="flex border-b border-border bg-card">
+        <div className="flex border-b border-border/60 bg-card">
           <button
             type="button"
             onClick={() => setActiveTab("input")}
@@ -615,7 +615,7 @@ export default function EnhancedToolLayout({
           >
             {inputLabel}
             {activeTab === "input" && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-teal-500" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
             )}
           </button>
           <button
@@ -630,7 +630,7 @@ export default function EnhancedToolLayout({
           >
             {resultLabel}
             {activeTab === "output" && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-teal-500" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
             )}
           </button>
         </div>
@@ -653,7 +653,7 @@ export default function EnhancedToolLayout({
                   type="button"
                   onClick={() => void handleGenerate()}
                   disabled={loading || !input.trim()}
-                  className="flex-1 py-3.5 sm:py-4 px-6 rounded-xl bg-primary text-primary-foreground font-semibold text-base sm:text-lg shadow-sm hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 group transition-colors"
+                  className="flex-1 py-3.5 sm:py-4 px-6 rounded-xl bg-primary text-primary-foreground font-semibold text-base sm:text-lg shadow-sm shadow-primary/20 hover:bg-primary/90 hover:shadow-md hover:shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 group transition-all duration-300"
                 >
                   {loading ? (
                     <>

@@ -27,13 +27,13 @@ export default function NotFound() {
       <div className="max-w-2xl w-full text-center">
         {/* 404 Visual */}
         <div className="mb-8">
-          <span className="font-heading text-8xl md:text-9xl font-semibold text-primary select-none">
+          <span className="font-heading text-8xl md:text-9xl font-extrabold text-brand-gradient select-none">
             404
           </span>
         </div>
 
         {/* Heading */}
-        <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4 tracking-tight">
+        <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4 tracking-tight">
           Page Not Found
         </h1>
         <p className="text-muted-foreground text-lg mb-10 max-w-md mx-auto leading-relaxed">
@@ -46,7 +46,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 rounded-lg h-11 px-7 bg-primary text-primary-foreground text-sm font-semibold shadow-sm hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-7 bg-primary text-primary-foreground text-sm font-semibold shadow-sm shadow-primary/20 hover:bg-primary/90 hover:shadow-md hover:shadow-primary/25 transition-all duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +66,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/tools"
-            className="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-foreground text-sm font-bold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 hover:-translate-y-0.5 transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 rounded-xl h-12 px-8 bg-card border border-border text-foreground text-sm font-bold shadow-soft hover:bg-muted hover:-translate-y-0.5 transition-all duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -89,8 +89,8 @@ export default function NotFound() {
         </div>
 
         {/* Popular Tools Section */}
-        <div className="text-left bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-slate-100 dark:border-slate-800 p-8">
-          <h2 className="text-lg font-bold text-foreground mb-1">
+        <div className="text-left bg-muted/30 rounded-2xl border border-border/60 p-8">
+          <h2 className="font-heading text-lg font-bold text-foreground mb-1">
             Popular Tools You Might Like
           </h2>
           <p className="text-sm text-muted-foreground mb-6">
@@ -101,7 +101,7 @@ export default function NotFound() {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800 hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
+                className="flex items-center gap-3 p-3 rounded-xl bg-card border border-border/60 hover:border-primary/30 hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-200 group"
               >
                 <span className="text-xl" role="img" aria-hidden="true">
                   {tool.emoji}

@@ -19,7 +19,7 @@ export function ThemeToggle() {
             <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-lg"
+                className="rounded-xl"
                 disabled
             >
                 <Sun className="h-5 w-5" />
@@ -32,7 +32,7 @@ export function ThemeToggle() {
             variant="ghost"
             size="icon"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="rounded-lg hover:bg-accent/10 transition-colors duration-200"
+            className="rounded-xl hover:bg-muted transition-colors duration-200"
             title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
         >
             {theme === 'dark' ? (

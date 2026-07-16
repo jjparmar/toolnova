@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
     <div className="w-full min-h-[60vh] animate-pulse bg-background">
-      <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-teal-950 h-[280px] md:h-[360px]" />
+      <div className="bg-muted/30 border-b border-border/40 h-[280px] md:h-[360px]" />
       <div className="max-w-[1200px] mx-auto px-6 py-16">
         <div className="h-6 w-28 bg-muted rounded-full mx-auto mb-4" />
         <div className="h-10 w-56 bg-muted rounded-lg mx-auto mb-12" />

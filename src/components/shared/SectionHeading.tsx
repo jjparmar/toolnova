@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
  * Replaces the hand-rolled eyebrow + h2 + subtitle markup repeated across pages.
  *
  * - eyebrow: small uppercase primary label above the title
- * - title:   the section H2 (rendered with Sora via .font-heading)
+ * - title:   the section H2 (rendered with Plus Jakarta Sans via .font-heading)
  * - subtitle: optional supporting line
  * - align:   "center" (default) or "left"
  */
@@ -37,7 +37,7 @@ export function SectionHeading({
       {eyebrow && (
         <p
           className={cn(
-            "eyebrow mb-2",
+            "eyebrow mb-3",
             centered && "justify-center"
           )}
         >
@@ -46,7 +46,7 @@ export function SectionHeading({
       )}
       <Heading
         className={cn(
-          "font-heading text-3xl font-semibold tracking-tight text-foreground md:text-4xl",
+          "font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl",
           titleClassName
         )}
       >

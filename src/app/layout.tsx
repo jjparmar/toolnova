@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/google-font-preconnect */
 import type { Metadata } from "next";
-import { Manrope, Sora, Geist_Mono } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ConsentedScripts } from "@/components/ConsentedScripts";
 import Script from "next/script";
@@ -19,9 +19,9 @@ import { adsenseConfig } from "@/config/adsense";
 import { Providers } from "@/components/Providers";
 import { TOOL_COUNT_LABEL } from "@/data/tools";
 
-/** Professional UI body — highly readable, modern SaaS standard */
-const manrope = Manrope({
-  variable: "--font-manrope",
+/** Premium body — industry-standard UI readability */
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
@@ -30,12 +30,12 @@ const manrope = Manrope({
   fallback: ["system-ui", "arial"],
 });
 
-/** Clean geometric headings — professional without being flashy */
-const sora = Sora({
-  variable: "--font-sora",
+/** Geometric headings — tight, modern, premium */
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
   display: "swap",
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
   preload: true,
   adjustFontFallback: true,
   fallback: ["system-ui", "arial"],
@@ -237,7 +237,7 @@ export default function RootLayout({
             No global schema here to avoid duplicate JSON-LD across all pages. */}
       </head>
       <body
-        className={`${manrope.variable} ${sora.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${inter.variable} ${jakarta.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"

@@ -33,7 +33,7 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen w-full flex flex-col lg:flex-row">
             {/* Left Panel - Branding */}
-            <div className="hidden lg:flex lg:w-1/2 relative bg-primary overflow-hidden">
+            <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-brand overflow-hidden">
                 <div className="absolute inset-0">
                     <div className="absolute top-20 left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
                     <div className="absolute bottom-20 right-20 w-96 h-96 bg-sky-400/20 rounded-full blur-3xl"></div>
@@ -53,7 +53,7 @@ export default function LoginPage() {
                         <span className="font-heading text-2xl font-semibold tracking-tight">ToolNova</span>
                     </Link>
 
-                    <h1 className="font-heading mb-6 text-4xl font-semibold leading-tight lg:text-5xl">
+                    <h1 className="font-heading mb-6 text-4xl font-bold leading-tight lg:text-5xl">
                         Unlock the power of
                         <span className="mt-2 block text-white">
                             ToolNova
@@ -101,7 +101,7 @@ export default function LoginPage() {
                     {/* Mobile Logo */}
                     <div className="lg:hidden text-center mb-10">
                         <Link href="/" className="inline-flex items-center gap-3 group">
-                            <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl shadow-primary/30">
+                            <div className="h-12 w-12 rounded-2xl bg-gradient-brand flex items-center justify-center group-hover:scale-105 transition-transform shadow-xl shadow-primary/30">
                                 <Sparkles className="h-7 w-7 text-white" />
                             </div>
                             <span className="font-heading text-2xl font-bold tracking-tight text-foreground">
@@ -111,7 +111,7 @@ export default function LoginPage() {
                     </div>
 
                     {/* Card */}
-                    <div className="bg-card rounded-2xl shadow-xl shadow-primary/5 border border-border p-8 sm:p-10">
+                    <div className="bg-card rounded-2xl shadow-premium border border-border/60 p-8 sm:p-10">
                         <div className="text-center mb-8">
                             <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground mb-2">
                                 Welcome to ToolNova
@@ -125,7 +125,7 @@ export default function LoginPage() {
                         <Button
                             onClick={handleGoogleLogin}
                             disabled={loading}
-                            className="w-full h-14 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-foreground border-2 border-slate-200 dark:border-slate-700 hover:border-primary/50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 text-base font-semibold group"
+                            className="w-full h-14 bg-card hover:bg-muted text-foreground border-2 border-border hover:border-primary/50 rounded-2xl shadow-soft hover:shadow-elevated transition-all duration-300 flex items-center justify-center gap-3 text-base font-semibold group"
                         >
                             {loading ? (
                                 <div className="h-5 w-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div>
@@ -159,7 +159,7 @@ export default function LoginPage() {
                         {/* Divider */}
                         <div className="relative my-8">
                             <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-slate-200 dark:border-slate-700"></div>
+                                <div className="w-full border-t border-border"></div>
                             </div>
                             <div className="relative flex justify-center">
                                 <span className="bg-card px-4 text-sm text-muted-foreground">

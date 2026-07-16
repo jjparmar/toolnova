@@ -31,22 +31,26 @@ const studyCareerTools = [
 export function Footer() {
   return (
     <footer className="relative mt-auto w-full overflow-hidden">
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/35 to-transparent" />
+      {/* Premium gradient divider */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
 
-      <div className="relative border-t border-border bg-muted/25">
+      <div className="relative border-t border-border/50 bg-muted/15">
+        {/* Subtle ambient glow */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at 10% 0%, hsl(var(--primary) / 0.05) 0%, transparent 50%), radial-gradient(ellipse at 90% 0%, hsl(199 89% 48% / 0.04) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 10% 0%, hsl(var(--primary) / 0.04) 0%, transparent 50%), radial-gradient(ellipse at 90% 0%, hsl(192 95% 44% / 0.03) 0%, transparent 50%)",
           }}
         />
 
         <div className="relative z-10 mx-auto max-w-[1120px] px-6 py-14 md:py-16">
+          {/* Main link grid */}
           <div className="mb-12 grid grid-cols-2 gap-10 md:grid-cols-5">
+            {/* Brand column */}
             <div className="col-span-2 md:col-span-2">
               <div className="mb-5 flex items-center gap-3">
-                <div className="relative h-9 w-9 overflow-hidden rounded-lg shadow-sm ring-1 ring-border">
+                <div className="relative h-9 w-9 overflow-hidden rounded-xl shadow-soft ring-1 ring-border/60">
                   <Image
                     src="/logo.webp"
                     alt=""
@@ -55,8 +59,8 @@ export function Footer() {
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <span className="font-heading text-[1.125rem] font-semibold tracking-tight text-foreground">
-                  Tool<span className="text-primary">Nova</span>
+                <span className="font-heading text-[1.125rem] font-bold tracking-tight text-foreground">
+                  Tool<span className="text-brand-gradient">Nova</span>
                 </span>
               </div>
 
@@ -65,12 +69,13 @@ export function Footer() {
                 professionals. Write better, study smarter, and get more done —
                 no sign-up required.
               </p>
-              <p className="text-muted-foreground/70 text-xs mb-6 leading-relaxed max-w-[280px]">
+              <p className="text-muted-foreground/60 text-xs mb-6 leading-relaxed max-w-[280px]">
                 Free to start · No sign-up required · Browser-based privacy · Based
                 in Singapore
               </p>
 
-              <div className="flex gap-2.5">
+              {/* Social icons */}
+              <div className="flex gap-2">
                 {[
                   { href: siteConfig.links.twitter, label: "Follow ToolNova on Twitter/X", Icon: Twitter },
                   { href: siteConfig.links.github, label: "ToolNova on GitHub", Icon: Github },
@@ -83,7 +88,7 @@ export function Footer() {
                     target={href.startsWith("mailto") ? undefined : "_blank"}
                     rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                     aria-label={label}
-                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground shadow-sm transition-all duration-200 hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-border/60 bg-card/80 text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:bg-primary hover:text-primary-foreground hover:shadow-sm hover:shadow-primary/20"
                   >
                     <Icon className="h-4 w-4" />
                   </a>
@@ -91,6 +96,7 @@ export function Footer() {
               </div>
             </div>
 
+            {/* Writing Tools */}
             <div className="col-span-1">
               <h4 className="font-heading mb-5 text-xs font-semibold uppercase tracking-wider text-foreground">
                 Writing Tools
@@ -100,7 +106,7 @@ export function Footer() {
                   <li key={tool.href}>
                     <Link
                       href={tool.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm hover:translate-x-0.5 inline-block transition-transform duration-200"
+                      className="text-muted-foreground hover:text-foreground transition-all duration-200 text-sm hover:translate-x-0.5 inline-block"
                     >
                       {tool.name}
                     </Link>
@@ -118,6 +124,7 @@ export function Footer() {
               </ul>
             </div>
 
+            {/* Study & Career */}
             <div className="col-span-1">
               <h4 className="font-heading mb-5 text-xs font-semibold uppercase tracking-wider text-foreground">
                 Study &amp; Career
@@ -127,7 +134,7 @@ export function Footer() {
                   <li key={tool.href}>
                     <Link
                       href={tool.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm hover:translate-x-0.5 inline-block transition-transform duration-200"
+                      className="text-muted-foreground hover:text-foreground transition-all duration-200 text-sm hover:translate-x-0.5 inline-block"
                     >
                       {tool.name}
                     </Link>
@@ -145,6 +152,7 @@ export function Footer() {
               </ul>
             </div>
 
+            {/* Company & Legal */}
             <div className="col-span-2 md:col-span-1">
               <h4 className="font-heading mb-5 text-xs font-semibold uppercase tracking-wider text-foreground">
                 Company
@@ -161,7 +169,7 @@ export function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                      className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm"
                     >
                       {item.label}
                     </Link>
@@ -185,7 +193,7 @@ export function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                      className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm"
                     >
                       {item.label}
                     </Link>
@@ -195,9 +203,9 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Tool Categories */}
-          <div className="border-t border-border pt-8 pb-6">
-            <p className="text-[11px] font-bold text-muted-foreground/70 uppercase tracking-widest mb-4">
+          {/* Tool Categories strip */}
+          <div className="border-t border-border/60 pt-8 pb-6">
+            <p className="text-[11px] font-bold text-muted-foreground/60 uppercase tracking-widest mb-4">
               Tool Categories
             </p>
             <div className="flex flex-wrap gap-x-5 gap-y-2">
@@ -218,7 +226,7 @@ export function Footer() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-xs text-muted-foreground/70 hover:text-primary transition-colors"
+                  className="text-xs text-muted-foreground/60 hover:text-primary transition-colors duration-200"
                 >
                   {item.name}
                 </Link>
@@ -226,10 +234,10 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Bottom strip */}
-          <div className="border-t border-border pt-6">
+          {/* Bottom bar */}
+          <div className="border-t border-border/60 pt-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="text-muted-foreground/70 text-xs text-center md:text-left">
+              <div className="text-muted-foreground/60 text-xs text-center md:text-left">
                 © 2026 ToolNova. All rights reserved. · Free AI Tools for Students &amp; Professionals · Founded in Singapore
               </div>
               <div className="flex gap-5 flex-wrap justify-center">
@@ -246,7 +254,7 @@ export function Footer() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="text-muted-foreground/70 hover:text-primary transition-colors text-xs"
+                    className="text-muted-foreground/60 hover:text-primary transition-colors duration-200 text-xs"
                   >
                     {item.label}
                   </Link>

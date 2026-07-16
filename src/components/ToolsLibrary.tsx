@@ -209,7 +209,7 @@ export function ToolsLibrary() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search tools…"
-                        className="w-full h-13 pl-12 pr-12 rounded-2xl border border-border bg-card text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all shadow-sm text-[0.95rem]"
+                        className="w-full h-13 pl-12 pr-12 rounded-2xl border border-border/60 bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all shadow-soft text-[0.95rem]"
                         style={{ height: '3.25rem' }}
                         aria-label="Search tools library"
                     />
@@ -259,7 +259,7 @@ export function ToolsLibrary() {
                         <Link
                             key={tool.href}
                             href={tool.href}
-                            className="group relative flex flex-col rounded-2xl bg-card border border-border p-6 hover:shadow-xl hover:shadow-foreground/[0.06] hover:border-primary/30 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
+                            className="group relative flex flex-col rounded-2xl bg-card border border-border/60 p-6 hover:shadow-elevated hover:border-primary/30 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
                         >
                             {/* Top hover accent */}
                             <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${tool.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-400`} />
@@ -316,7 +316,7 @@ export function ToolsLibrary() {
                 {/* CTA */}
                 <div className="text-center mt-12">
                     <Link href="/tools">
-                        <Button className="h-12 px-8 rounded-2xl font-bold gap-2 shadow-md shadow-primary/20 hover:shadow-primary/35 transition-shadow">
+                        <Button className="h-12 px-8 rounded-xl font-bold gap-2 shadow-sm shadow-primary/20 hover:shadow-md hover:shadow-primary/25 transition-all duration-300">
                             View all {TOOL_COUNT_LABEL} tools
                             <ArrowRight className="h-4 w-4" />
                         </Button>

@@ -208,7 +208,7 @@ export default function PricingClient() {
             <Crown className="h-4 w-4" />
             Simple pricing
           </div>
-          <h1 className="font-heading mb-4 text-4xl font-semibold tracking-tight md:text-5xl">
+          <h1 className="font-heading mb-4 text-4xl font-bold tracking-tight md:text-5xl">
             Free to start.{" "}
             <span className="text-primary">Pro when you need unlimited AI.</span>
           </h1>
@@ -266,7 +266,7 @@ export default function PricingClient() {
                 Free forever
               </span>
             </div>
-            <h2 className="text-2xl font-black mb-1">Free</h2>
+            <h2 className="font-heading text-2xl font-black mb-1">Free</h2>
             <p className="text-muted-foreground text-sm mb-6">
               Perfect for students and light use
             </p>
@@ -302,7 +302,7 @@ export default function PricingClient() {
                 Pro
               </span>
             </div>
-            <h2 className="text-2xl font-black mb-1">Pro</h2>
+            <h2 className="font-heading text-2xl font-black mb-1">Pro</h2>
             <p className="text-muted-foreground text-sm mb-6">
               For daily AI power users
             </p>
@@ -320,7 +320,7 @@ export default function PricingClient() {
               </p>
             )}
             <Button
-              className="w-full h-12 rounded-xl font-bold mb-8 bg-primary hover:bg-primary/90"
+              className="w-full h-12 rounded-xl font-bold mb-8 bg-primary hover:bg-primary/90 shadow-sm shadow-primary/20 hover:shadow-md hover:shadow-primary/25 transition-all duration-300"
               disabled={loading}
               onClick={() =>
                 startSubscription(
@@ -372,7 +372,7 @@ export default function PricingClient() {
               className="surface-card-quiet p-5 text-center"
             >
               <item.icon className="h-6 w-6 mx-auto mb-2 text-primary" />
-              <p className="font-bold text-sm">{item.title}</p>
+              <p className="font-heading font-bold text-sm">{item.title}</p>
               <p className="text-xs text-muted-foreground mt-1">{item.desc}</p>
             </div>
           ))}
@@ -380,7 +380,7 @@ export default function PricingClient() {
 
         {/* Comparison table */}
         <div className="max-w-3xl mx-auto mb-20">
-          <h2 className="text-2xl font-bold text-center mb-6">
+          <h2 className="font-heading text-2xl font-bold text-center mb-6">
             Free vs Pro at a glance
           </h2>
           <div className="content-panel overflow-x-auto">
@@ -412,7 +412,7 @@ export default function PricingClient() {
 
         {/* FAQ */}
         <div className="max-w-2xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold text-center mb-8">
+          <h2 className="font-heading text-2xl font-bold text-center mb-8">
             Pricing FAQ
           </h2>
           <div className="space-y-3">

@@ -65,7 +65,7 @@ export default function TrendingToolsSection() {
     return (
         <section className="py-20 relative overflow-hidden">
             {/* Background decoration */}
-            <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background"></div>
+            <div className="absolute inset-0 bg-muted/15"></div>
 
             <div className="container px-4 md:px-6 lg:px-8 relative z-10">
                 <div className="text-center space-y-4 mb-16 animate-fade-in">
@@ -73,7 +73,7 @@ export default function TrendingToolsSection() {
                         <TrendingUp className="h-4 w-4" />
                         <span className="text-sm font-semibold">Trending This Week</span>
                     </div>
-                    <h2 className="font-heading text-3xl md:text-4xl font-bold">
+                    <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight">
                         Most Popular <span className="text-gradient">Tools</span>
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -86,14 +86,14 @@ export default function TrendingToolsSection() {
                     {trendingTools.map((tool, index) => (
                         <Link key={tool.name} href={tool.href}>
                             <Card
-                                className="glass-card h-full hover:shadow-premium-lg transition-all duration-300 hover:scale-105 hover:border-primary/50 cursor-pointer group animate-scale-in"
+                                className="glass-card h-full hover:shadow-elevated transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 cursor-pointer group animate-scale-in"
                                 style={{ animationDelay: `${index * 0.1}s` }}
                             >
                                 <CardHeader>
                                     <div className="flex items-start justify-between mb-2">
                                         <div className="flex-1">
                                             {tool.badge && (
-                                                <div className="inline-block px-2 py-1 bg-gradient-primary text-white text-xs font-bold rounded mb-2">
+                                                <div className="inline-block px-2.5 py-1 bg-gradient-brand text-white text-xs font-bold rounded-lg mb-2">
                                                     {tool.badge}
                                                 </div>
                                             )}
@@ -102,7 +102,7 @@ export default function TrendingToolsSection() {
                                             </CardTitle>
                                         </div>
                                         {tool.trend === 'hot' ? (
-                                            <Zap className="h-5 w-5 text-orange-500 fill-orange-500 animate-pulse" />
+                                            <Zap className="h-5 w-5 text-orange-500 fill-orange-500" />
                                         ) : (
                                             <TrendingUp className="h-5 w-5 text-success" />
                                         )}
@@ -114,7 +114,7 @@ export default function TrendingToolsSection() {
 
                                 <CardContent className="space-y-4">
                                     {/* Category Badge */}
-                                    <div className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-primary/10 text-primary text-xs">
+                                    <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-primary/10 text-primary text-xs font-medium">
                                         <Sparkles className="h-3 w-3" />
                                         {tool.category}
                                     </div>
@@ -135,7 +135,7 @@ export default function TrendingToolsSection() {
                     <Button
                         variant="outline"
                         size="lg"
-                        className="border-primary/30 hover:bg-primary/10"
+                        className="border-primary/30 hover:bg-primary/10 rounded-xl font-semibold"
                         asChild
                     >
                         <a href="#tools">

@@ -45,7 +45,7 @@ export default function AboutPage() {
     <div className="page-shell container mx-auto max-w-5xl px-6 py-20 md:py-24">
       {/* Hero */}
       <div className="text-center mb-20">
-        <h1 className="font-heading text-4xl md:text-6xl font-semibold mb-6 text-brand-gradient tracking-tight">
+        <h1 className="font-heading text-4xl md:text-6xl font-bold mb-6 text-brand-gradient tracking-tight">
           Democratizing AI for Everyone
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
@@ -78,10 +78,10 @@ export default function AboutPage() {
             key={i}
             className="surface-card p-8"
           >
-            <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center text-primary mb-6">
+            <div className="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center text-primary mb-6">
               <item.icon className="h-6 w-6" />
             </div>
-            <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+            <h3 className="font-heading text-xl font-bold mb-3">{item.title}</h3>
             <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
           </div>
         ))}
@@ -200,11 +200,11 @@ export default function AboutPage() {
               },
             ].map((member, i) => (
               <div key={i} className="flex gap-4 items-start">
-                <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-base font-bold text-primary flex-shrink-0">
+                <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-base font-bold text-primary flex-shrink-0">
                   {member.initials}
                 </div>
                 <div>
-                  <h3 className="font-bold text-base">{member.name}</h3>
+                  <h3 className="font-heading font-bold text-base">{member.name}</h3>
                   <p className="text-sm text-primary font-medium mb-1">{member.role}</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">{member.desc}</p>
                 </div>
@@ -233,7 +233,7 @@ export default function AboutPage() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/advertising"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold shadow-sm shadow-primary/20 hover:bg-primary/90 hover:shadow-md transition-all duration-300"
             >
               Advertising disclosure
             </Link>
