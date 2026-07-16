@@ -200,12 +200,11 @@ export default function MergePDFClient() {
     const totalSizeLabel = formatFileSize(totalBytes);
 
     return (
-        <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#0f1419] dark:via-background dark:to-[#0f1419]">
+        <div className="flex-1 w-full min-h-screen relative">
             {/* Animated Background */}
             <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-                <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[50%] rounded-full bg-rose-500/10 blur-[120px] mix-blend-screen animate-pulse-glow" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[50%] rounded-full bg-orange-500/10 blur-[120px] mix-blend-screen" style={{ animationDelay: '1s' }} />
             </div>
 
             <div className="max-w-[1000px] mx-auto px-4 sm:px-6 py-10">
@@ -241,22 +240,23 @@ export default function MergePDFClient() {
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
                         Combine multiple PDF files into one document. Reorder files, then merge — 100% free, no watermarks.
                     </p>
-                    <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-medium text-muted-foreground">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-900">
-                            <Shield className="h-3.5 w-3.5" />
+                    <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs font-medium text-muted-foreground">
+                        <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-card/60 backdrop-blur-md border border-border/60 shadow-glow-sm">
+                            <Shield className="h-3.5 w-3.5 text-primary" />
                             Processed in your browser
                         </span>
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                        <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-card/60 backdrop-blur-md border border-border/60 shadow-glow-sm">
                             No upload to servers
                         </span>
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                        <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-card/60 backdrop-blur-md border border-border/60 shadow-glow-sm">
                             No account required
                         </span>
                     </div>
                 </div>
 
                 {/* Main Tool Card */}
-                <div className="bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 overflow-hidden">
+                <div className="bg-card/40 backdrop-blur-3xl rounded-[2rem] shadow-premium-lg border border-border/60 overflow-hidden relative group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
                     {/* Upload Area */}
                     <div className="p-6 md:p-8">
@@ -278,7 +278,7 @@ export default function MergePDFClient() {
                                 border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all
                                 ${dragOver
                                     ? 'border-primary bg-primary/5 scale-[1.02]'
-                                    : 'border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                                    : 'border-border/60 hover:border-primary/50 hover:bg-muted/30 hover:shadow-glow-sm'
                                 }
                             `}
                         >
@@ -311,7 +311,7 @@ export default function MergePDFClient() {
                                         <span className="text-sm font-bold text-foreground">
                                             {files.length} file{files.length > 1 ? 's' : ''} selected
                                         </span>
-                                        <span className="text-xs text-muted-foreground bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-full">
+                                        <span className="text-xs text-muted-foreground bg-muted/50 border border-border/40 px-2 py-1 rounded-full">
                                             {totalPages} pages · {totalSizeLabel}
                                         </span>
                                     </div>
@@ -330,12 +330,12 @@ export default function MergePDFClient() {
                                     {files.map((file, index) => (
                                         <div
                                             key={file.id}
-                                            className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-700"
+                                            className="flex items-center gap-3 p-4 bg-background/40 backdrop-blur-sm rounded-xl border border-border/40 hover:border-primary/30 transition-colors"
                                         >
                                             <GripVertical className="h-5 w-5 text-muted-foreground" />
 
-                                            <div className="h-10 w-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                <FileText className="h-5 w-5 text-red-600 dark:text-red-400" />
+                                            <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                <FileText className="h-5 w-5 text-primary" />
                                             </div>
 
                                             <div className="flex-1 min-w-0">
@@ -389,7 +389,7 @@ export default function MergePDFClient() {
                                             type="text"
                                             value={outputName}
                                             onChange={(e) => setOutputName(e.target.value)}
-                                            className="flex-1 h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 text-sm"
+                                            className="flex-1 h-12 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all"
                                             placeholder="merged-document"
                                         />
                                         <span className="text-sm text-muted-foreground">.pdf</span>
@@ -399,7 +399,7 @@ export default function MergePDFClient() {
                             <Button
                                 onClick={mergePDFs}
                                 disabled={files.length < 2 || merging}
-                                className="w-full h-14 bg-gradient-to-r from-red-500 via-orange-500 to-amber-500 hover:from-red-600 hover:via-orange-600 hover:to-amber-600 text-white font-bold rounded-2xl shadow-xl shadow-red-500/30 hover:shadow-2xl hover:shadow-red-500/40 transition-all flex items-center justify-center gap-3 text-base disabled:opacity-50 disabled:cursor-not-allowed group"
+                                className="w-full h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-2xl shadow-glow-md hover:shadow-glow-lg transition-all flex items-center justify-center gap-3 text-base disabled:opacity-50 disabled:cursor-not-allowed group"
                             >
                                 {merging ? (
                                     <>
@@ -439,16 +439,16 @@ export default function MergePDFClient() {
                     <h2 className="text-xl font-bold text-foreground text-center mb-8">How It Works</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
-                            { step: 1, title: 'Upload PDFs', desc: 'Drop your PDF files', icon: Upload, color: 'from-red-500 to-orange-600' },
-                            { step: 2, title: 'Reorder', desc: 'Arrange the order', icon: GripVertical, color: 'from-orange-500 to-amber-600' },
-                            { step: 3, title: 'Download', desc: 'Get merged PDF', icon: Download, color: 'from-amber-500 to-yellow-600' },
+                            { step: 1, title: 'Upload PDFs', desc: 'Drop your PDF files', icon: Upload, color: 'from-rose-500 to-orange-500' },
+                            { step: 2, title: 'Reorder', desc: 'Arrange the order', icon: GripVertical, color: 'from-orange-500 to-amber-500' },
+                            { step: 3, title: 'Download', desc: 'Get merged PDF', icon: Download, color: 'from-amber-500 to-yellow-500' },
                         ].map((item) => (
                             <div key={item.step} className="relative">
-                                <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
-                                    <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg`}>
+                                <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-card/40 backdrop-blur-md border border-border/40 hover:border-primary/30 hover:shadow-glow-sm transition-all group">
+                                    <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
                                         <item.icon className="h-7 w-7 text-white" />
                                     </div>
-                                    <div className="text-xs font-bold text-muted-foreground mb-1">STEP {item.step}</div>
+                                    <div className="text-xs font-bold text-muted-foreground mb-1 uppercase tracking-wider">Step {item.step}</div>
                                     <h3 className="font-bold text-foreground mb-1">{item.title}</h3>
                                     <p className="text-sm text-muted-foreground">{item.desc}</p>
                                 </div>
@@ -459,27 +459,28 @@ export default function MergePDFClient() {
 
                 {/* Features Section */}
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50/50 dark:from-green-900/20 dark:to-emerald-900/10 border border-green-100 dark:border-green-800/30">
-                        <Shield className="h-8 w-8 text-green-600 dark:text-green-400 mb-3" />
+                    <div className="p-6 rounded-2xl bg-card/40 backdrop-blur-md border border-border/40 hover:border-emerald-500/30 transition-colors">
+                        <Shield className="h-8 w-8 text-emerald-500 mb-3" />
                         <h3 className="font-bold text-foreground mb-2">100% Private</h3>
                         <p className="text-sm text-muted-foreground">Files never leave your browser. Complete privacy guaranteed.</p>
                     </div>
 
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50/50 dark:from-blue-900/20 dark:to-indigo-900/10 border border-blue-100 dark:border-blue-800/30">
-                        <Sparkles className="h-8 w-8 text-blue-600 dark:text-blue-400 mb-3" />
+                    <div className="p-6 rounded-2xl bg-card/40 backdrop-blur-md border border-border/40 hover:border-blue-500/30 transition-colors">
+                        <Sparkles className="h-8 w-8 text-blue-500 mb-3" />
                         <h3 className="font-bold text-foreground mb-2">Drag & Reorder</h3>
                         <p className="text-sm text-muted-foreground">Easily rearrange your PDFs before merging.</p>
                     </div>
 
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/10 border border-purple-100 dark:border-purple-800/30">
-                        <Zap className="h-8 w-8 text-purple-600 dark:text-purple-400 mb-3" />
+                    <div className="p-6 rounded-2xl bg-card/40 backdrop-blur-md border border-border/40 hover:border-violet-500/30 transition-colors">
+                        <Zap className="h-8 w-8 text-violet-500 mb-3" />
                         <h3 className="font-bold text-foreground mb-2">Instant Download</h3>
                         <p className="text-sm text-muted-foreground">Get your merged PDF instantly. No waiting.</p>
                     </div>
                 </div>
 
                 {/* Testimonial */}
-                <div className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-red-500/5 via-orange-500/5 to-amber-500/5 border border-red-200/50 dark:border-red-800/30">
+                <div className="mt-12 p-8 rounded-[2rem] bg-card/30 backdrop-blur-md border border-border/40 relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="flex flex-col items-center text-center">
                         <div className="flex gap-1 mb-4">
                             {[...Array(5)].map((_, i) => (
@@ -509,10 +510,10 @@ export default function MergePDFClient() {
                             <Link
                                 key={tool.slug}
                                 href={`/tools/${tool.slug}`}
-                                className="group p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all text-center"
+                                className="group p-4 rounded-[1.5rem] bg-card/40 backdrop-blur-md border border-border/40 hover:border-primary/40 hover:shadow-glow-sm transition-all text-center"
                             >
-                                <div className={`h-10 w-10 mx-auto rounded-xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                                    <tool.icon className="h-5 w-5 text-white" />
+                                <div className={`h-12 w-12 mx-auto rounded-2xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md`}>
+                                    <tool.icon className="h-6 w-6 text-white" />
                                 </div>
                                 <p className="font-medium text-sm text-foreground">{tool.name}</p>
                             </Link>
@@ -521,14 +522,14 @@ export default function MergePDFClient() {
                 </div>
 
                 {/* Pro Tips */}
-                <div className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-red-500/5 via-orange-500/5 to-amber-500/5 border border-red-500/10">
+                <div className="mt-12 p-6 rounded-2xl bg-card/30 backdrop-blur-md border border-border/40">
                     <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
-                        <Sparkles className="h-4 w-4 text-red-500" /> Pro Tips
+                        <Sparkles className="h-4 w-4 text-primary" /> Pro Tips
                     </h3>
                     <ul className="space-y-2 text-sm text-muted-foreground">
-                        <li className="flex items-start gap-2"><span className="text-red-500">•</span>Use the arrow buttons to reorder files before merging</li>
-                        <li className="flex items-start gap-2"><span className="text-red-500">•</span>All processing happens in your browser – your files stay private</li>
-                        <li className="flex items-start gap-2"><span className="text-red-500">•</span>Works with password-protected PDFs if they're already unlocked</li>
+                        <li className="flex items-start gap-2"><span className="text-primary">•</span>Use the arrow buttons to reorder files before merging</li>
+                        <li className="flex items-start gap-2"><span className="text-primary">•</span>All processing happens in your browser – your files stay private</li>
+                        <li className="flex items-start gap-2"><span className="text-primary">•</span>Works with password-protected PDFs if they're already unlocked</li>
                     </ul>
                 </div>
 

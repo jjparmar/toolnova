@@ -169,7 +169,7 @@ export default function ResizeImageClient() {
                 {/* Back Button */}
                 <button
                     onClick={() => router.back()}
-                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
+                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
                 >
                     <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back</span>
@@ -194,7 +194,7 @@ export default function ResizeImageClient() {
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Resize images to exact pixel dimensions instantly in your browser.</p>
                 </div>
 
-                <div className="bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+                <div className="bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
                     <div className="p-6 md:p-8">
                         <input type="file" ref={fileInputRef} onChange={(e) => handleFileSelect(e.target.files)} accept="image/*" className="hidden" />
 
@@ -206,7 +206,7 @@ export default function ResizeImageClient() {
                                     e.preventDefault();
                                     handleFileSelect(e.dataTransfer.files);
                                 }}
-                                className="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl p-10 text-center cursor-pointer hover:border-primary/50 transition-all"
+                                className="border-2 border-dashed border-border/50 rounded-2xl p-10 text-center cursor-pointer hover:border-primary/50 transition-all"
                             >
                                 <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
                                 <p className="text-lg font-semibold text-foreground mb-2">Drop image here or click to upload</p>
@@ -230,7 +230,7 @@ export default function ResizeImageClient() {
                                     </button>
                                 </div>
                                 
-                                <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-4 flex justify-center max-h-[300px] overflow-hidden border border-slate-200 dark:border-slate-700">
+                                <div className="bg-muted/50 rounded-xl p-4 flex justify-center max-h-[300px] overflow-hidden border border-border/50">
                                     <img src={preview} alt="Preview" className="object-contain w-full h-full" />
                                 </div>
 
@@ -301,7 +301,7 @@ export default function ResizeImageClient() {
                                                         setTargetHeight(p.h);
                                                     }
                                                 }}
-                                                className="px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:border-primary/50"
+                                                className="px-3 py-1.5 rounded-full text-xs font-bold border border-border/50 bg-slate-50  hover:border-primary/50"
                                             >
                                                 {p.label}
                                             </button>
@@ -322,7 +322,7 @@ export default function ResizeImageClient() {
                                             type="number" 
                                             value={targetWidth} 
                                             onChange={(e) => handleWidthChange(e.target.value)}
-                                            className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary outline-none transition-all"
+                                            className="w-full p-3 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md focus:ring-2 focus:ring-primary outline-none transition-all"
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -331,7 +331,7 @@ export default function ResizeImageClient() {
                                             type="number" 
                                             value={targetHeight} 
                                             onChange={(e) => handleHeightChange(e.target.value)}
-                                            className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary outline-none transition-all"
+                                            className="w-full p-3 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md focus:ring-2 focus:ring-primary outline-none transition-all"
                                         />
                                     </div>
                                 </div>
@@ -385,7 +385,7 @@ export default function ResizeImageClient() {
                             { step: 2, title: 'Set Dimensions', desc: 'Enter width & height', icon: Maximize2, color: 'from-indigo-500 to-purple-600' },
                             { step: 3, title: 'Download', desc: 'Get resized file', icon: Download, color: 'from-green-500 to-emerald-600' },
                         ].map((item) => (
-                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 dark:bg-muted/50 border border-slate-100 ">
                                 <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg`}>
                                     <item.icon className="h-7 w-7 text-white" />
                                 </div>
@@ -447,7 +447,7 @@ export default function ResizeImageClient() {
                             <Link
                                 key={tool.slug}
                                 href={`/tools/${tool.slug}`}
-                                className="group p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all text-center"
+                                className="group p-4 rounded-xl bg-white/50 dark:bg-muted/50 border border-slate-100  hover:border-primary/50 hover:shadow-lg transition-all text-center"
                             >
                                 <div className={`h-10 w-10 mx-auto rounded-xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                                     <tool.icon className="h-5 w-5 text-white" />

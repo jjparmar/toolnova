@@ -54,39 +54,39 @@ export default function StudyToolsPage() {
             </div>
 
             {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
-            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-slate-200/60 dark:border-slate-800/60 pt-16 prose prose-slate dark:prose-invert prose-lg">
-                <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
+            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral dark:prose-invert prose-lg">
+                <h2 className="text-3xl font-extrabold text-foreground tracking-tight mb-6">
                     Active Recall, Spaced Repetition, and AI-Enhanced Learning Methodologies
                 </h2>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                     The landscape of modern education is moving rapidly away from passive reading and towards active, scientifically proven learning methods. Students are increasingly expected to master vast amounts of highly complex information in compressed timelines. Utilizing strategic learning methodologies like active recall and spaced repetition, supported by AI-driven study tools, allows students to dramatically increase comprehension, retention, and academic efficiency.
                 </p>
 
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                     The Science of Effective Learning: Beyond Passive Reading
                 </h3>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                     For decades, the default study habit for many students has been passive review: highlight text, re-read notes, and listen to lectures. Cognitive science research has repeatedly shown that these methods are highly inefficient for long-term memory retrieval. True comprehension occurs when the brain is forced to actively retrieve information. This cognitive strain strengthens neural pathways, ensuring that the knowledge remains accessible during exams and real-world application. AI study utilities, such as a Concept Explainer or a Doubt Solver, can instantly turn passive materials into active dialogue, prompting students to explain concepts in their own words or providing immediate feedback on difficult questions.
                 </p>
 
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                     Maximizing Retention with Flashcards and Conceptual Summaries
                 </h3>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                     Flashcards represent one of the most effective implementations of active recall. A Flashcard Maker allows students to convert dense textbook chapters and lecture notes into dynamic question-and-answer pairs. By integrating this with spaced repetition—the practice of reviewing information at increasing intervals—students target their cognitive weaknesses directly. Additionally, generating automated Chapter Summaries allows students to view the macro-structure of their coursework before diving into micro-details. This top-down conceptual approach helps the brain build cognitive schemas, making it easier to hook new facts onto existing frameworks.
                 </p>
 
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                     Structural Study Planning: Timetables and Revision Frameworks
                 </h3>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                     Mastering a syllabus requires systematic planning. Students often struggle with time management, leading to high levels of stress and last-minute cramming. AI-powered Revision Planners and Timetable Generators remove the cognitive overhead of planning. By analyzing the date of an exam, the volume of material, and the student's available daily hours, these tools generate structured, realistic study schedules. Breaking down a massive curriculum into bite-sized daily milestones helps reduce procrastination, ensures complete coverage of all topics, and leaves ample time for practice exams.
                 </p>
 
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                     Resolving Complex Academic Doubts with Contextual Explanations
                 </h3>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                     When students encounter complex problems outside the classroom, they often get stuck, leading to frustration and lost momentum. A Homework Solver or a specialized Formula Generator acts as a round-the-clock academic tutor. These tools do not simply output the final answer; instead, they focus on showing the logical flow and the reasoning behind each step. When a student understands *why* a particular mathematical formula or scientific principle is applied, they develop problem-solving intuition rather than simple rote memorization. This deeper comprehension is the key to mastering both standardized testing and advanced academic research.
                 </p>
             </section>

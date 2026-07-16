@@ -97,11 +97,11 @@ export function UtilityToolsClient({ tools }: UtilityToolsClientProps) {
             {/* Tools Grid */}
             {filteredTools.length === 0 ? (
                 <div className="text-center py-16">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 mb-4">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
                         <Search className="h-8 w-8 text-slate-400" />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">No tools found</h3>
-                    <p className="text-slate-600 dark:text-slate-400">Try adjusting your search terms</p>
+                    <h3 className="text-xl font-bold text-foreground mb-2">No tools found</h3>
+                    <p className="text-muted-foreground">Try adjusting your search terms</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -139,20 +139,20 @@ export function UtilityToolsClient({ tools }: UtilityToolsClientProps) {
                                             <Icon className="h-7 w-7" strokeWidth={2} />
                                         </div>
                                         <div className="flex-1">
-                                            <h3 className="text-slate-900 dark:text-white text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-600 group-hover:to-blue-600 transition-all">
+                                            <h3 className="text-foreground text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-600 group-hover:to-blue-600 transition-all">
                                                 {tool.name}
                                             </h3>
-                                            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                            <p className="text-muted-foreground text-sm leading-relaxed">
                                                 {tool.description}
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="mt-6 flex items-center justify-between">
-                                        <span className="text-xs text-slate-600 dark:text-slate-400 font-medium flex items-center gap-1">
+                                        <span className="text-xs text-muted-foreground font-medium flex items-center gap-1">
                                             <Zap className="h-3 w-3" /> Instant Results
                                         </span>
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-slate-800 text-cyan-600 shadow-lg group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-card/40 backdrop-blur-md text-cyan-600 shadow-lg group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
                                             <ArrowRight className="h-5 w-5" />
                                         </div>
                                     </div>

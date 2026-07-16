@@ -219,7 +219,7 @@ export default function ImageToPDFClient() {
                 {/* Back Button */}
                 <button
                     onClick={() => router.back()}
-                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
+                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
                 >
                     <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back</span>
@@ -244,7 +244,7 @@ export default function ImageToPDFClient() {
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Convert JPG, PNG images to PDF instantly</p>
                 </div>
 
-                <div className="bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+                <div className="bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
                     <div className="p-6 md:p-8">
                         <input type="file" ref={fileInputRef} onChange={(e) => handleFileSelect(e.target.files)} accept="image/*" multiple className="hidden" />
 
@@ -253,7 +253,7 @@ export default function ImageToPDFClient() {
                             onDrop={handleDrop}
                             onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
                             onDragLeave={() => setDragOver(false)}
-                            className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all ${dragOver ? 'border-primary bg-primary/5' : 'border-slate-200 dark:border-slate-700 hover:border-primary/50'}`}
+                            className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all ${dragOver ? 'border-primary bg-primary/5' : 'border-border/50 hover:border-primary/50'}`}
                         >
                             {loading ? (
                                 <Loader2 className="h-12 w-12 mx-auto text-primary animate-spin" />
@@ -286,7 +286,7 @@ export default function ImageToPDFClient() {
                                                 <button
                                                     type="button"
                                                     onClick={() => moveImage(index, -1)}
-                                                    className="bg-white/90 text-slate-800 rounded px-1 text-xs font-bold disabled:opacity-30"
+                                                    className="bg-white/90 text-muted-foreground rounded px-1 text-xs font-bold disabled:opacity-30"
                                                     disabled={index === 0}
                                                     title="Move earlier"
                                                 >
@@ -295,7 +295,7 @@ export default function ImageToPDFClient() {
                                                 <button
                                                     type="button"
                                                     onClick={() => moveImage(index, 1)}
-                                                    className="bg-white/90 text-slate-800 rounded px-1 text-xs font-bold disabled:opacity-30"
+                                                    className="bg-white/90 text-muted-foreground rounded px-1 text-xs font-bold disabled:opacity-30"
                                                     disabled={index === images.length - 1}
                                                     title="Move later"
                                                 >
@@ -316,13 +316,13 @@ export default function ImageToPDFClient() {
                                     Hover a thumbnail to reorder pages (↑ ↓) before converting.
                                 </p>
 
-                                <div className="grid sm:grid-cols-2 gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                                <div className="grid sm:grid-cols-2 gap-4 p-4 rounded-xl bg-muted/50 border border-slate-100 ">
                                     <label className="text-sm space-y-1 block">
                                         <span className="font-medium">Page size</span>
                                         <select
                                             value={pageMode}
                                             onChange={(e) => setPageMode(e.target.value as typeof pageMode)}
-                                            className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3"
+                                            className="w-full h-11 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md px-3"
                                         >
                                             <option value="original">Original (1 image = 1 page, full size)</option>
                                             <option value="a4">Fit on A4</option>
@@ -376,7 +376,7 @@ export default function ImageToPDFClient() {
                             { step: 2, title: 'Convert', desc: 'Click convert button', icon: Sparkles, color: 'from-blue-500 to-indigo-600' },
                             { step: 3, title: 'Download', desc: 'Get your PDF', icon: Download, color: 'from-purple-500 to-pink-600' },
                         ].map((item) => (
-                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 dark:bg-muted/50 border border-slate-100 ">
                                 <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg`}>
                                     <item.icon className="h-7 w-7 text-white" />
                                 </div>
@@ -438,7 +438,7 @@ export default function ImageToPDFClient() {
                             <Link
                                 key={tool.slug}
                                 href={`/tools/${tool.slug}`}
-                                className="group p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all text-center"
+                                className="group p-4 rounded-xl bg-white/50 dark:bg-muted/50 border border-slate-100  hover:border-primary/50 hover:shadow-lg transition-all text-center"
                             >
                                 <div className={`h-10 w-10 mx-auto rounded-xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                                     <tool.icon className="h-5 w-5 text-white" />

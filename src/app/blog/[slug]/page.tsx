@@ -328,7 +328,7 @@ export default async function BlogPostPage({
       />
       <div className="min-h-screen bg-slate-50">
         {/* Header with Back Link */}
-        <div className="py-6 bg-white border-b border-slate-200">
+        <div className="py-6 bg-white border-b border-border/40">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link
               href="/blog"
@@ -400,7 +400,7 @@ export default async function BlogPostPage({
 
                 {/* Keywords/Tags */}
                 {post.keywords?.length > 0 && (
-                  <div className="mt-12 pt-8 border-t border-slate-200">
+                  <div className="mt-12 pt-8 border-t border-border/40">
                     <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">
                       Related Topics
                     </h3>
@@ -408,7 +408,7 @@ export default async function BlogPostPage({
                       {post.keywords.slice(0, 8).map((keyword) => (
                         <span
                           key={keyword}
-                          className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer"
+                          className="px-3 py-1.5 rounded-full bg-muted text-muted-foreground text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer"
                         >
                           {keyword}
                         </span>
@@ -418,7 +418,7 @@ export default async function BlogPostPage({
                 )}
 
                 {/* Share Buttons */}
-                <div className="mt-10 pt-8 border-t border-slate-200">
+                <div className="mt-10 pt-8 border-t border-border/40">
                   <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">
                     Share this article
                   </h3>
@@ -434,7 +434,7 @@ export default async function BlogPostPage({
               {/* FAQ Section */}
               {post.faq?.length > 0 && (
                 <div className="mt-12 bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-slate-100">
-                  <h2 className="text-2xl font-bold text-slate-900 mb-8">
+                  <h2 className="text-2xl font-bold text-foreground mb-8">
                     Frequently Asked Questions
                   </h2>
                   <div className="space-y-6">
@@ -443,10 +443,10 @@ export default async function BlogPostPage({
                         key={index}
                         className="border-b border-slate-100 pb-6 last:border-0 last:pb-0"
                       >
-                        <h3 className="text-lg font-bold text-slate-900 mb-3">
+                        <h3 className="text-lg font-bold text-foreground mb-3">
                           {item.question}
                         </h3>
-                        <p className="text-slate-600 leading-relaxed">
+                        <p className="text-muted-foreground leading-relaxed">
                           {item.answer}
                         </p>
                       </div>
@@ -458,7 +458,7 @@ export default async function BlogPostPage({
               {/* Related Posts */}
               {relatedPosts.length > 0 && (
                 <div className="mt-12">
-                  <h2 className="text-2xl font-bold text-slate-900 mb-8">
+                  <h2 className="text-2xl font-bold text-foreground mb-8">
                     Related Articles
                   </h2>
                   <div className="grid md:grid-cols-2 gap-6">
@@ -472,10 +472,10 @@ export default async function BlogPostPage({
                           <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
                             {relatedPost.category}
                           </span>
-                          <h3 className="text-lg font-bold text-slate-900 mt-4 group-hover:text-primary transition-colors line-clamp-2">
+                          <h3 className="text-lg font-bold text-foreground mt-4 group-hover:text-primary transition-colors line-clamp-2">
                             {relatedPost.title}
                           </h3>
-                          <p className="text-slate-600 text-sm mt-2 line-clamp-2">
+                          <p className="text-muted-foreground text-sm mt-2 line-clamp-2">
                             {relatedPost.excerpt}
                           </p>
                           <div className="mt-4 flex items-center gap-1 text-primary text-sm font-medium">

@@ -10,7 +10,6 @@ import { useState, lazy, Suspense, useEffect } from 'react';
 import { useSession, signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 const MobileMenu = lazy(() => import('./MobileMenu'));
 
@@ -42,15 +41,15 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/70 backdrop-blur-2xl backdrop-saturate-150 supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between gap-4 px-4 sm:px-6">
+    <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none">
+      <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between gap-4 px-4 sm:px-6 pointer-events-auto bg-card/60 backdrop-blur-2xl backdrop-saturate-200 border border-border/50 rounded-full shadow-premium-lg">
         {/* Logo */}
         <Link
           href="/"
           className="group flex shrink-0 items-center gap-2.5"
           aria-label="ToolNova home"
         >
-          <div className="relative h-9 w-9 overflow-hidden rounded-xl shadow-soft ring-1 ring-border/60 transition-all duration-300 group-hover:ring-primary/30 group-hover:shadow-elevated">
+          <div className="relative h-9 w-9 overflow-hidden rounded-full shadow-soft ring-1 ring-border/60 transition-all duration-300 group-hover:ring-primary/30 group-hover:shadow-glow-sm">
             <Image
               src="/logo.webp"
               alt=""
@@ -65,18 +64,18 @@ export function Header() {
           </span>
         </Link>
 
-        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3 min-w-0">
-          {/* Desktop Nav — Pill Container */}
-          <nav className="hidden md:flex items-center bg-muted/40 rounded-xl p-1 gap-0.5" aria-label="Main navigation">
+        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-4 min-w-0">
+          {/* Desktop Nav — Integrated deeply */}
+          <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "px-3.5 py-1.5 text-sm font-medium rounded-lg transition-all duration-200",
+                  "px-4 py-2 text-sm font-medium rounded-full transition-all duration-300",
                   isActive(link.href)
-                    ? "bg-card text-foreground shadow-soft"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "bg-primary/10 text-primary shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 )}
                 aria-current={isActive(link.href) ? "page" : undefined}
               >
@@ -87,10 +86,10 @@ export function Header() {
               <Link
                 href="/login"
                 className={cn(
-                  "px-3.5 py-1.5 text-sm font-medium rounded-lg transition-all duration-200",
+                  "px-4 py-2 text-sm font-medium rounded-full transition-all duration-300",
                   isActive('/login')
-                    ? "bg-card text-foreground shadow-soft"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "bg-primary/10 text-primary shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 )}
               >
                 Login
@@ -106,18 +105,18 @@ export function Header() {
           {/* Auth Section */}
           <div className="hidden md:flex items-center gap-2">
             {loading ? (
-              <div className="h-9 w-20 bg-muted rounded-xl animate-pulse" />
+              <div className="h-9 w-20 bg-muted rounded-full animate-pulse" />
             ) : user ? (
               <>
                 <UsageCounter />
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-foreground rounded-xl border border-border hover:bg-muted hover:border-border/80 transition-all duration-200"
+                  className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-foreground rounded-full border border-border/50 hover:bg-muted hover:border-border transition-all duration-300"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   <span className="hidden lg:inline">Dashboard</span>
                 </Link>
-                <Button onClick={handleSignOut} variant="outline" size="sm" className="rounded-xl">
+                <Button onClick={handleSignOut} variant="outline" size="sm" className="rounded-full bg-transparent border-border/50">
                   Sign Out
                 </Button>
               </>
@@ -125,21 +124,19 @@ export function Header() {
               <Link href="/signup">
                 <Button
                   size="sm"
-                  className="relative overflow-hidden font-semibold gap-1.5 rounded-xl bg-primary hover:bg-primary/90 shadow-sm shadow-primary/20 transition-all duration-300 hover:shadow-md hover:shadow-primary/25"
+                  className="relative overflow-hidden font-semibold gap-1.5 rounded-full bg-primary hover:bg-primary/90 shadow-glow-sm transition-all duration-300 hover:shadow-glow-md"
                 >
                   <Sparkles className="h-3.5 w-3.5" />
                   Get Started
                 </Button>
               </Link>
             )}
-
-            <ThemeToggle />
           </div>
 
           {/* Mobile hamburger */}
           <button
             type="button"
-            className="md:hidden flex h-9 w-9 items-center justify-center rounded-xl border border-border text-foreground hover:bg-muted transition-colors duration-200"
+            className="md:hidden flex h-10 w-10 items-center justify-center rounded-full border border-border/50 text-foreground hover:bg-muted transition-colors duration-200"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
@@ -151,9 +148,11 @@ export function Header() {
       </div>
 
       {mobileMenuOpen && (
-        <Suspense fallback={null}>
-          <MobileMenu onClose={() => setMobileMenuOpen(false)} id="mobile-menu" />
-        </Suspense>
+        <div className="pointer-events-auto relative mt-2">
+          <Suspense fallback={null}>
+            <MobileMenu onClose={() => setMobileMenuOpen(false)} id="mobile-menu" />
+          </Suspense>
+        </div>
       )}
     </header>
   );

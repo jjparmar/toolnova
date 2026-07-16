@@ -144,7 +144,7 @@ export default function PNGtoJPGClient() {
           </p>
         </div>
 
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 md:p-8 shadow-xl space-y-6">
+        <div className="rounded-3xl border border-border/40 bg-card/40 backdrop-blur-md p-6 md:p-8 shadow-xl space-y-6">
           <input
             ref={inputRef}
             type="file"
@@ -166,7 +166,7 @@ export default function PNGtoJPGClient() {
               addFiles(e.dataTransfer.files);
             }}
             className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer ${
-              dragOver ? "border-primary bg-primary/5" : "border-slate-200 dark:border-slate-700"
+              dragOver ? "border-primary bg-primary/5" : "border-border/50"
             }`}
           >
             <Upload className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
@@ -238,7 +238,7 @@ export default function PNGtoJPGClient() {
                       <img
                         src={item.preview}
                         alt=""
-                        className="h-28 w-full object-contain rounded-lg bg-slate-50 dark:bg-slate-800"
+                        className="h-28 w-full object-contain rounded-lg bg-slate-50 "
                       />
                       <p className="text-xs mt-1 truncate">
                         {item.file.name} · {formatBytes(item.file.size)}
@@ -250,10 +250,10 @@ export default function PNGtoJPGClient() {
                         <img
                           src={item.resultUrl}
                           alt=""
-                          className="h-28 w-full object-contain rounded-lg bg-slate-50 dark:bg-slate-800"
+                          className="h-28 w-full object-contain rounded-lg bg-slate-50 "
                         />
                       ) : (
-                        <div className="h-28 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-xs text-muted-foreground">
+                        <div className="h-28 rounded-lg bg-slate-50  flex items-center justify-center text-xs text-muted-foreground">
                           Convert to preview
                         </div>
                       )}

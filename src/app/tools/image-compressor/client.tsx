@@ -163,7 +163,7 @@ export default function ImageCompressorClient() {
                 {/* Back Button */}
                 <button
                     onClick={() => router.back()}
-                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
+                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
                 >
                     <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back</span>
@@ -188,7 +188,7 @@ export default function ImageCompressorClient() {
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Reduce image file size while maintaining quality</p>
                 </div>
 
-                <div className="bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+                <div className="bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
                     <div className="p-6 md:p-8">
                         <input type="file" ref={fileInputRef} onChange={(e) => handleFileSelect(e.target.files)} accept="image/*" className="hidden" />
 
@@ -205,7 +205,7 @@ export default function ImageCompressorClient() {
                                 className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all ${
                                     dragOver
                                         ? 'border-primary bg-primary/5 scale-[1.01]'
-                                        : 'border-slate-200 dark:border-slate-700 hover:border-primary/50'
+                                        : 'border-border/50 hover:border-primary/50'
                                 }`}
                             >
                                 <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
@@ -214,7 +214,7 @@ export default function ImageCompressorClient() {
                             </div>
                         ) : (
                             <div className="space-y-6">
-                                <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+                                <div className="flex items-center gap-4 p-4 bg-muted/50 rounded-xl">
                                     <img src={preview} alt="Preview" className="h-16 w-16 object-cover rounded-lg" />
                                     <div className="flex-1 min-w-0">
                                         <p className="font-medium text-foreground truncate">{image.name}</p>
@@ -237,7 +237,7 @@ export default function ImageCompressorClient() {
                                         <select
                                             value={outputFormat}
                                             onChange={(e) => setOutputFormat(e.target.value as typeof outputFormat)}
-                                            className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 text-sm"
+                                            className="w-full h-11 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md px-3 text-sm"
                                         >
                                             <option value="image/jpeg">JPG (best for photos)</option>
                                             <option value="image/webp">WebP (smaller, modern)</option>
@@ -249,7 +249,7 @@ export default function ImageCompressorClient() {
                                         <select
                                             value={maxWidth}
                                             onChange={(e) => setMaxWidth(parseInt(e.target.value, 10))}
-                                            className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 text-sm"
+                                            className="w-full h-11 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md px-3 text-sm"
                                         >
                                             <option value={0}>Keep original size</option>
                                             <option value={1920}>1920px (Full HD)</option>
@@ -272,7 +272,7 @@ export default function ImageCompressorClient() {
                                             max="100"
                                             value={quality}
                                             onChange={(e) => setQuality(parseInt(e.target.value))}
-                                            className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
+                                            className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer "
                                         />
                                     </div>
                                 )}
@@ -321,7 +321,7 @@ export default function ImageCompressorClient() {
                             { step: 2, title: 'Set Quality', desc: 'Adjust compression', icon: Zap, color: 'from-amber-500 to-orange-600' },
                             { step: 3, title: 'Download', desc: 'Get smaller file', icon: Download, color: 'from-green-500 to-emerald-600' },
                         ].map((item) => (
-                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 dark:bg-muted/50 border border-slate-100 ">
                                 <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg`}>
                                     <item.icon className="h-7 w-7 text-white" />
                                 </div>
@@ -383,7 +383,7 @@ export default function ImageCompressorClient() {
                             <Link
                                 key={tool.slug}
                                 href={`/tools/${tool.slug}`}
-                                className="group p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all text-center"
+                                className="group p-4 rounded-xl bg-white/50 dark:bg-muted/50 border border-slate-100  hover:border-primary/50 hover:shadow-lg transition-all text-center"
                             >
                                 <div className={`h-10 w-10 mx-auto rounded-xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                                     <tool.icon className="h-5 w-5 text-white" />

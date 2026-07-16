@@ -51,39 +51,39 @@ export default function CareerToolsPage() {
             </div>
 
             {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
-            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-slate-200/60 dark:border-slate-800/60 pt-16 prose prose-slate dark:prose-invert prose-lg">
-                <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
+            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral dark:prose-invert prose-lg">
+                <h2 className="text-3xl font-extrabold text-foreground tracking-tight mb-6">
                     Navigating the Modern Job Market: ATS Optimization & Resume Strategy
                 </h2>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                     Securing a position in today’s highly competitive employment landscape requires a strategic approach to application materials. Most mid-to-large-size organizations filter applications using automated Applicant Tracking Systems (ATS) before a human hiring manager ever reviews them. To stand out and pass these initial filters, job seekers must optimize their resumes, customize cover letters, and prepare for interviews using data-driven, structured methods.
                 </p>
 
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                     Designing High-Impact Resume Bullet Points that Get Noticed
                 </h3>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                     A common mistake on resumes is listing job duties rather than concrete achievements. Hiring managers want to see the impact of your work. By using a Resume Bullets builder, candidates can transform passive descriptions into impact-oriented statements. For example, instead of writing "responsible for managing social media," write "engineered a social media strategy that increased user engagement by 40% over six months." Utilizing action verbs and quantifying results shows your direct value and aligns your resume with what recruiters are looking for.
                 </p>
 
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                     Crafting Personalized and Persuasive Cover Letters
                 </h3>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                     While a resume lists your historical achievements, a cover letter explains your future value. It tells your professional story and explains *why* you are interested in a specific role. However, writing a unique letter for every single job application can lead to application fatigue. Utilizing an AI Cover Letter Writer helps job seekers generate tailored drafts based on their experience and the specific job description. This draft can then be personalized, ensuring that the tone is professional and that key cultural values of the target company are highlighted.
                 </p>
 
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                     Simulation-Based Interview Preparation: Anticipating Key Questions
                 </h3>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                     Once your resume and cover letter successfully pass the screening process, the final challenge is the job interview. Interviews can be stressful, but preparation can build confidence. An Interview Generator helps job seekers practice by producing relevant, role-specific questions based on industry standards and job listings. Practicing your responses using structured frameworks—such as the STAR method (Situation, Task, Action, Result)—helps you provide concise, logical, and impactful answers that demonstrate your competency.
                 </p>
 
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                     Career Productivity: Goal Planning and Daily Actionable To-Do Lists
                 </h3>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                     The job application process is itself a project that requires organization and persistence. Managing applications, follow-ups, and interviews requires structured goal planning. A Goal Planner helps break down long-term objectives (like landing a software engineering job) into monthly, weekly, and daily tasks. Converting these goals into simple, actionable To-Do lists prevents cognitive overload. Keeping a structured timetable ensures that you dedicate consistent time each day to applications, skill development, and interview prep, maintaining momentum until you secure your desired role.
                 </p>
             </section>
@@ -109,7 +109,7 @@ export default function CareerToolsPage() {
                     <h2 className="text-2xl font-bold mb-6 text-center">Career tools FAQ</h2>
                     <div className="space-y-4">
                         {aeoContent.faqs.map((f, i) => (
-                            <div key={i} className="rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-900">
+                            <div key={i} className="rounded-xl border border-border/40 p-5 bg-card/40 backdrop-blur-md">
                                 <h3 className="font-semibold mb-2">{f.question}</h3>
                                 <p className="text-sm text-muted-foreground leading-relaxed">{f.answer}</p>
                             </div>

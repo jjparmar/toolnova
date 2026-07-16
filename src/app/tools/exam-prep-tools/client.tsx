@@ -58,7 +58,7 @@ export function ExamPrepToolsClient({ tools }: ExamPrepToolsClientProps) {
                     <h1 className="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-6 bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
                         Exam Prep Library
                     </h1>
-                    <p className="text-slate-600 dark:text-slate-400 text-lg max-w-3xl mx-auto leading-relaxed mb-8">
+                    <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed mb-8">
                         Master vocabulary, idioms, and language skills for competitive exams. All free, always.
                     </p>
 
@@ -66,7 +66,7 @@ export function ExamPrepToolsClient({ tools }: ExamPrepToolsClientProps) {
                     <div className="max-w-xl mx-auto">
                         <div className="relative group">
                             <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
-                            <div className="relative flex items-center bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+                            <div className="relative flex items-center bg-card/40 backdrop-blur-md rounded-2xl shadow-2xl border border-border/50 overflow-hidden">
                                 <Search className="text-slate-400 h-5 w-5 ml-5" />
                                 <input
                                     type="text"
@@ -84,10 +84,10 @@ export function ExamPrepToolsClient({ tools }: ExamPrepToolsClientProps) {
 
                     {/* Quick Features */}
                     <div className="flex flex-wrap justify-center gap-3 mt-8">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full text-sm font-medium text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/60 backdrop-blur-sm rounded-full text-sm font-medium text-muted-foreground border border-border/50">
                             <Zap className="h-4 w-4 text-yellow-500" /> Instant Results
                         </div>
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full text-sm font-medium text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/60 backdrop-blur-sm rounded-full text-sm font-medium text-muted-foreground border border-border/50">
                             <Star className="h-4 w-4 text-green-500" /> Exam Ready
                         </div>
                     </div>
@@ -97,11 +97,11 @@ export function ExamPrepToolsClient({ tools }: ExamPrepToolsClientProps) {
             {/* Tools Grid */}
             {filteredTools.length === 0 ? (
                 <div className="text-center py-16">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 mb-4">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
                         <Search className="h-8 w-8 text-slate-400" />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">No tools found</h3>
-                    <p className="text-slate-600 dark:text-slate-400">Try adjusting your search terms</p>
+                    <h3 className="text-xl font-bold text-foreground mb-2">No tools found</h3>
+                    <p className="text-muted-foreground">Try adjusting your search terms</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -139,20 +139,20 @@ export function ExamPrepToolsClient({ tools }: ExamPrepToolsClientProps) {
                                             <Icon className="h-7 w-7" strokeWidth={2} />
                                         </div>
                                         <div className="flex-1">
-                                            <h3 className="text-slate-900 dark:text-white text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-600 group-hover:to-emerald-600 transition-all">
+                                            <h3 className="text-foreground text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-600 group-hover:to-emerald-600 transition-all">
                                                 {tool.name}
                                             </h3>
-                                            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                            <p className="text-muted-foreground text-sm leading-relaxed">
                                                 {tool.description}
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="mt-6 flex items-center justify-between">
-                                        <span className="text-xs text-slate-600 dark:text-slate-400 font-medium flex items-center gap-1">
+                                        <span className="text-xs text-muted-foreground font-medium flex items-center gap-1">
                                             <Zap className="h-3 w-3" /> Instant Results
                                         </span>
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-slate-800 text-green-600 shadow-lg group-hover:bg-gradient-to-r group-hover:from-green-500 group-hover:to-emerald-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-card/40 backdrop-blur-md text-green-600 shadow-lg group-hover:bg-gradient-to-r group-hover:from-green-500 group-hover:to-emerald-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
                                             <ArrowRight className="h-5 w-5" />
                                         </div>
                                     </div>

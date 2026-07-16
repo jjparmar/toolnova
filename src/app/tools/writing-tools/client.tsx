@@ -68,7 +68,7 @@ export function WritingToolsClient({ tools }: WritingToolsClientProps) {
                     <h1 className="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-6 bg-gradient-to-r from-primary via-teal-600 to-cyan-600 bg-clip-text text-transparent">
                         Writing Tools Library
                     </h1>
-                    <p className="text-slate-600 dark:text-slate-400 text-lg max-w-3xl mx-auto leading-relaxed mb-8">
+                    <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed mb-8">
                         Create amazing content with AI-powered writing assistants for essays, emails, and more. All free, always.
                     </p>
 
@@ -76,7 +76,7 @@ export function WritingToolsClient({ tools }: WritingToolsClientProps) {
                     <div className="max-w-xl mx-auto">
                         <div className="relative group">
                             <div className="absolute inset-0 bg-gradient-to-r from-primary to-teal-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
-                            <div className="relative flex items-center bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+                            <div className="relative flex items-center bg-card/40 backdrop-blur-md rounded-2xl shadow-2xl border border-border/50 overflow-hidden">
                                 <Search className="text-slate-400 h-5 w-5 ml-5" />
                                 <input
                                     type="text"
@@ -94,10 +94,10 @@ export function WritingToolsClient({ tools }: WritingToolsClientProps) {
 
                     {/* Quick Features */}
                     <div className="flex flex-wrap justify-center gap-3 mt-8">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full text-sm font-medium text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/60 backdrop-blur-sm rounded-full text-sm font-medium text-muted-foreground border border-border/50">
                             <Zap className="h-4 w-4 text-yellow-500" /> Instant Results
                         </div>
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full text-sm font-medium text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-background/60 backdrop-blur-sm rounded-full text-sm font-medium text-muted-foreground border border-border/50">
                             <Star className="h-4 w-4 text-primary" /> Writer Favorite
                         </div>
                     </div>
@@ -107,11 +107,11 @@ export function WritingToolsClient({ tools }: WritingToolsClientProps) {
             {/* Tools Grid */}
             {filteredTools.length === 0 ? (
                 <div className="text-center py-16">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 mb-4">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
                         <Search className="h-8 w-8 text-slate-400" />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">No tools found</h3>
-                    <p className="text-slate-600 dark:text-slate-400">Try adjusting your search terms</p>
+                    <h3 className="text-xl font-bold text-foreground mb-2">No tools found</h3>
+                    <p className="text-muted-foreground">Try adjusting your search terms</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -149,20 +149,20 @@ export function WritingToolsClient({ tools }: WritingToolsClientProps) {
                                             <Icon className="h-7 w-7" strokeWidth={2} />
                                         </div>
                                         <div className="flex-1">
-                                            <h3 className="text-slate-900 dark:text-white text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 transition-all">
+                                            <h3 className="text-foreground text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 transition-all">
                                                 {tool.name}
                                             </h3>
-                                            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                            <p className="text-muted-foreground text-sm leading-relaxed">
                                                 {tool.description}
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="mt-6 flex items-center justify-between">
-                                        <span className="text-xs text-slate-600 dark:text-slate-400 font-medium flex items-center gap-1">
+                                        <span className="text-xs text-muted-foreground font-medium flex items-center gap-1">
                                             <Zap className="h-3 w-3" /> Instant Results
                                         </span>
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-slate-800 text-purple-600 shadow-lg group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-card/40 backdrop-blur-md text-purple-600 shadow-lg group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
                                             <ArrowRight className="h-5 w-5" />
                                         </div>
                                     </div>

@@ -161,7 +161,12 @@ export default function ReorderPdfClient() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#0f1419] dark:to-background">
+    <div className="flex-1 w-full min-h-screen relative">
+      {/* Animated Background */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[50%] rounded-full bg-indigo-500/10 blur-[120px] mix-blend-screen animate-pulse-glow" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[50%] rounded-full bg-blue-500/10 blur-[120px] mix-blend-screen" style={{ animationDelay: '1s' }} />
+      </div>
       <div className="max-w-[1100px] mx-auto px-4 py-10">
         <button
           type="button"
@@ -171,18 +176,19 @@ export default function ReorderPdfClient() {
           <ArrowLeft className="h-4 w-4" /> Back to Image & PDF
         </button>
 
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold mb-3">
-            <GripVertical className="h-3.5 w-3.5" /> Free · Private · Thumbnails
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-500/10 to-blue-500/10 text-indigo-400 text-sm font-semibold mb-5">
+            <GripVertical className="h-4 w-4" /> Free · Private · Thumbnails
           </div>
-          <h1 className="font-heading text-4xl font-bold mb-2">Reorder PDF Pages</h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <h1 className="text-foreground text-4xl md:text-5xl font-black tracking-tight mb-4">Reorder PDF Pages</h1>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
             See each page as a thumbnail, drag to reorder, then download a new
             PDF. All processing stays in your browser.
           </p>
         </div>
 
-        <div className="rounded-3xl border bg-white dark:bg-slate-900 shadow-xl p-6 md:p-8 space-y-6">
+        <div className="bg-card/40 backdrop-blur-3xl rounded-[2rem] shadow-premium-lg border border-border/60 overflow-hidden relative group p-6 md:p-8 space-y-6">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
           <input
             ref={inputRef}
             type="file"
@@ -205,10 +211,10 @@ export default function ReorderPdfClient() {
                 const f = e.dataTransfer.files?.[0];
                 if (f) loadFile(f);
               }}
-              className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer ${
+              className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all relative z-10 ${
                 dragOver
-                  ? "border-primary bg-primary/5"
-                  : "border-slate-200 dark:border-slate-700"
+                  ? "border-primary bg-primary/5 scale-[1.02]"
+                  : "border-border/60 hover:border-primary/50 hover:bg-muted/30 hover:shadow-glow-sm"
               }`}
             >
               {loading ? (
@@ -236,17 +242,17 @@ export default function ReorderPdfClient() {
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  <Button type="button" variant="outline" size="sm" onClick={resetOrder}>
+                  <Button type="button" variant="outline" size="sm" onClick={resetOrder} className="bg-background/50 border-border/50 hover:border-primary/50 transition-colors">
                     <RotateCcw className="h-4 w-4 mr-1" /> Reset
                   </Button>
-                  <Button type="button" variant="outline" size="sm" onClick={reverseOrder}>
+                  <Button type="button" variant="outline" size="sm" onClick={reverseOrder} className="bg-background/50 border-border/50 hover:border-primary/50 transition-colors">
                     Reverse
                   </Button>
                   <Button
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="text-red-600"
+                    className="text-red-500 hover:text-red-400 hover:bg-red-950/30"
                     onClick={clear}
                   >
                     <Trash2 className="h-4 w-4 mr-1" /> Remove
@@ -254,16 +260,16 @@ export default function ReorderPdfClient() {
                 </div>
               </div>
 
-              <label className="block text-sm space-y-1 max-w-md">
+              <label className="block text-sm space-y-1 max-w-md relative z-10">
                 <span className="font-medium">Output filename</span>
                 <div className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    value={outputName}
-                    onChange={(e) => setOutputName(e.target.value)}
-                    className="flex-1 h-11 rounded-xl border px-3 text-sm"
-                  />
-                  <span className="text-muted-foreground text-sm">.pdf</span>
+                    <input
+                      type="text"
+                      value={outputName}
+                      onChange={(e) => setOutputName(e.target.value)}
+                      className="flex-1 h-12 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm px-4 text-sm focus:outline-none focus:ring-1 focus:ring-primary/40 transition-all"
+                    />
+                    <span className="text-muted-foreground text-sm">.pdf</span>
                 </div>
               </label>
 
@@ -281,17 +287,17 @@ export default function ReorderPdfClient() {
                       onDragStart={() => onDragStart(index)}
                       onDragOver={(e) => e.preventDefault()}
                       onDrop={() => onDrop(index)}
-                      className="relative rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 p-2 cursor-grab active:cursor-grabbing hover:border-primary/50 transition-colors"
+                      className="relative rounded-xl border border-border/40 bg-background/40 backdrop-blur-sm p-2 cursor-grab active:cursor-grabbing hover:border-primary/50 transition-colors z-10"
                     >
                       <div className="absolute top-1 left-1 z-10 flex items-center gap-1">
-                        <span className="text-[10px] font-black bg-primary text-white px-1.5 py-0.5 rounded">
+                        <span className="text-[10px] font-black bg-primary text-primary-foreground px-1.5 py-0.5 rounded shadow-sm">
                           {index + 1}
                         </span>
-                        <span className="text-[10px] font-medium bg-black/50 text-white px-1 py-0.5 rounded">
+                        <span className="text-[10px] font-medium bg-black/70 backdrop-blur-md text-white px-1.5 py-0.5 rounded shadow-sm">
                           was {page.sourceIndex + 1}
                         </span>
                       </div>
-                      <div className="aspect-[3/4] rounded-lg overflow-hidden bg-white dark:bg-slate-900 flex items-center justify-center">
+                      <div className="aspect-[3/4] rounded-lg overflow-hidden bg-background flex items-center justify-center">
                         {page.thumb ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
@@ -307,7 +313,7 @@ export default function ReorderPdfClient() {
                       <div className="flex justify-center gap-1 mt-2">
                         <button
                           type="button"
-                          className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-30"
+                          className="p-1 rounded hover:bg-muted disabled:opacity-30 transition-colors"
                           disabled={index === 0}
                           onClick={() => move(index, -1)}
                           aria-label="Move earlier"
@@ -317,7 +323,7 @@ export default function ReorderPdfClient() {
                         <GripVertical className="h-4 w-4 text-muted-foreground mt-1" />
                         <button
                           type="button"
-                          className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-30"
+                          className="p-1 rounded hover:bg-muted disabled:opacity-30 transition-colors"
                           disabled={index === pages.length - 1}
                           onClick={() => move(index, 1)}
                           aria-label="Move later"
@@ -331,7 +337,7 @@ export default function ReorderPdfClient() {
               )}
 
               <Button
-                className="w-full h-14 rounded-2xl font-bold text-base"
+                className="w-full h-14 rounded-2xl font-bold text-base relative z-10 bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow-md hover:shadow-glow-lg transition-all"
                 onClick={save}
                 disabled={saving || pages.length === 0}
               >
@@ -367,10 +373,10 @@ export default function ReorderPdfClient() {
               d: "Output keeps full page quality",
             },
           ].map((x) => (
-            <div key={x.t} className="rounded-2xl border p-4">
-              <x.icon className="h-5 w-5 text-primary mb-2" />
-              <p className="font-bold text-sm">{x.t}</p>
-              <p className="text-xs text-muted-foreground">{x.d}</p>
+            <div key={x.t} className="rounded-2xl bg-card/40 backdrop-blur-md border border-border/40 p-5 hover:border-primary/30 transition-colors">
+              <x.icon className="h-6 w-6 text-primary mb-3" />
+              <p className="font-bold text-foreground mb-1">{x.t}</p>
+              <p className="text-sm text-muted-foreground">{x.d}</p>
             </div>
           ))}
         </div>

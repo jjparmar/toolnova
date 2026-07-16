@@ -252,7 +252,7 @@ export default function ImageCropClient() {
         <button
           type="button"
           onClick={() => router.back()}
-          className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-sm font-medium"
+          className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-background/60 border border-border/50 text-sm font-medium"
         >
           <ArrowLeft className="h-4 w-4" /> Back
         </button>
@@ -289,7 +289,7 @@ export default function ImageCropClient() {
           </p>
         </div>
 
-        <div className="bg-white/90 dark:bg-[#1a1f2e]/90 rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+        <div className="bg-white/90 dark:bg-[#1a1f2e]/90 rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
           <div className="p-6 md:p-8 space-y-6">
             <input
               ref={fileInputRef}
@@ -315,7 +315,7 @@ export default function ImageCropClient() {
                 className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${
                   dragOver
                     ? "border-primary bg-primary/5"
-                    : "border-slate-200 dark:border-slate-700 hover:border-primary/50"
+                    : "border-border/50 hover:border-primary/50"
                 }`}
               >
                 <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
@@ -402,7 +402,7 @@ export default function ImageCropClient() {
                         className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${
                           aspectId === a.id
                             ? "bg-primary text-white border-primary"
-                            : "bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700"
+                            : "bg-slate-50  border-border/50"
                         }`}
                       >
                         {a.label}
@@ -436,7 +436,7 @@ export default function ImageCropClient() {
                         type="number"
                         value={crop[key]}
                         onChange={(e) => updateField(key, e.target.value)}
-                        className="w-full h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 text-sm"
+                        className="w-full h-10 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md px-3 text-sm"
                       />
                     </label>
                   ))}
@@ -452,7 +452,7 @@ export default function ImageCropClient() {
                           e.target.value as typeof outputFormat,
                         )
                       }
-                      className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3"
+                      className="w-full h-11 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md px-3"
                     >
                       <option value="image/png">PNG</option>
                       <option value="image/jpeg">JPG</option>
@@ -522,7 +522,7 @@ export default function ImageCropClient() {
           ].map((f) => (
             <div
               key={f.title}
-              className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5"
+              className="rounded-2xl border border-border/40 p-5"
             >
               <f.icon className="h-6 w-6 text-primary mb-2" />
               <p className="font-bold text-sm">{f.title}</p>

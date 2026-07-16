@@ -346,12 +346,15 @@ export default function EnhancedToolLayout({
     : 0;
 
   return (
-    <div className="w-full">
+    <div className="w-full relative">
+      {/* Soft Glow behind the tool */}
+      <div className="absolute -inset-8 rounded-[3rem] bg-gradient-to-tr from-primary/10 via-transparent to-cyan-500/10 blur-3xl opacity-50 pointer-events-none" />
+
       {!nestedInPremiumShell && (
         <button
           type="button"
           onClick={() => router.push("/tools")}
-          className="mb-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-card border border-border hover:bg-muted text-foreground font-semibold text-sm transition-all hover:shadow-sm group"
+          className="relative z-10 mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-card/60 backdrop-blur-md border border-border/50 hover:bg-muted/50 text-foreground font-semibold text-sm transition-all hover:shadow-glow-sm hover:border-primary/30 group"
         >
           <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
           Back to All Tools
@@ -359,33 +362,50 @@ export default function EnhancedToolLayout({
       )}
 
       {freeNote && (
-        <div className="mb-4 rounded-xl border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-foreground/90">
-          <strong className="font-semibold text-primary">Free to start</strong>
-          {" — "}
-          no sign-up required. Free daily AI uses included;{" "}
-          <button
-            type="button"
-            onClick={() => router.push("/pricing")}
-            className="text-primary font-medium underline underline-offset-2 hover:no-underline"
-          >
-            Pro unlocks unlimited AI
-          </button>
-          . Your text is processed for this session and not sold.
+        <div className="relative z-10 mb-6 rounded-xl border border-primary/20 bg-primary/5 backdrop-blur-md px-5 py-4 text-sm text-foreground/90 shadow-sm flex items-start gap-3">
+          <Sparkles className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+          <div>
+            <strong className="font-semibold text-primary tracking-wide uppercase text-xs">Free to start</strong>
+            {" — "}
+            no sign-up required. Free daily AI uses included;{" "}
+            <button
+              type="button"
+              onClick={() => router.push("/pricing")}
+              className="text-primary font-medium underline underline-offset-4 hover:no-underline hover:text-primary/80 transition-colors"
+            >
+              Pro unlocks unlimited AI
+            </button>
+            . Your text is processed for this session and not sold.
+          </div>
         </div>
       )}
 
-      <div className="relative rounded-2xl border border-border/60 bg-card shadow-premium overflow-hidden">
-        {/* Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 sm:p-4 border-b border-border/60 bg-muted/25">
+      <div className="relative z-20 rounded-[2rem] border border-border/60 bg-card/40 backdrop-blur-3xl shadow-premium-lg overflow-hidden flex flex-col group">
+        {/* Hover Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+        {/* Mac-like Browser Chrome Header */}
+        <div className="flex items-center justify-between border-b border-border/40 bg-muted/20 px-6 py-4">
+          <div className="flex items-center gap-4">
+            <div className="flex gap-1.5">
+              <span className="h-3 w-3 rounded-full bg-red-500/80 shadow-[0_0_10px_rgba(239,68,68,0.4)]" />
+              <span className="h-3 w-3 rounded-full bg-amber-500/80 shadow-[0_0_10px_rgba(245,158,11,0.4)]" />
+              <span className="h-3 w-3 rounded-full bg-emerald-500/80 shadow-[0_0_10px_rgba(16,185,129,0.4)]" />
+            </div>
+            <div className="hidden sm:flex items-center justify-center rounded-md bg-background/50 px-3 py-1 text-xs text-muted-foreground border border-border/30 backdrop-blur-sm shadow-inner">
+              toolnova.com/tools/{toolSlug}
+            </div>
+          </div>
+          
           <div className="flex items-center gap-3 min-w-0">
             <div
               className={cn(
-                "flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-bold uppercase tracking-wide",
+                "flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] font-bold uppercase tracking-wider backdrop-blur-md",
                 loading
-                  ? "bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-200"
+                  ? "bg-amber-500/10 border-amber-500/20 text-amber-500 shadow-glow-sm shadow-amber-500/20"
                   : error
-                    ? "bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-800 text-red-700 dark:text-red-300"
-                    : "bg-primary/10 border-primary/20 text-primary",
+                    ? "bg-red-500/10 border-red-500/20 text-red-500 shadow-glow-sm shadow-red-500/20"
+                    : "bg-primary/10 border-primary/20 text-primary shadow-glow-sm shadow-primary/20",
               )}
             >
               <div
@@ -402,59 +422,60 @@ export default function EnhancedToolLayout({
             </div>
 
             {showWordCount && charCount > 0 && (
-              <div className="text-xs text-muted-foreground font-medium truncate">
+              <div className="hidden md:block text-xs text-muted-foreground font-medium truncate bg-background/50 px-3 py-1.5 rounded-full border border-border/30 backdrop-blur-sm">
                 {wordCount} words · {charCount.toLocaleString()} chars
               </div>
             )}
-          </div>
 
-          <div className="flex items-center gap-1.5">
-            {history.length > 0 && (
+            <div className="h-6 w-px bg-border/50 mx-1 hidden sm:block" />
+            <div className="flex items-center gap-1">
+              {history.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setShowHistory(!showHistory)}
+                  className={cn(
+                    "relative p-2 rounded-xl transition-all",
+                    showHistory
+                      ? "bg-primary/20 text-primary shadow-glow-sm"
+                      : "hover:bg-muted text-muted-foreground hover:text-foreground",
+                  )}
+                  title="View history"
+                  aria-label="View history"
+                >
+                  <History className="h-4 w-4" />
+                  <span className="absolute -top-1 -right-1 min-w-4 h-4 px-0.5 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center shadow-md">
+                    {history.length}
+                  </span>
+                </button>
+              )}
+
+              {resolvedToolOptions.length > 0 && showAdvancedOptions && (
+                <button
+                  type="button"
+                  onClick={() => setShowOptions(!showOptions)}
+                  className={cn(
+                    "p-2 rounded-xl transition-all",
+                    showOptions
+                      ? "bg-primary/20 text-primary shadow-glow-sm"
+                      : "hover:bg-muted text-muted-foreground hover:text-foreground",
+                  )}
+                  title="Options"
+                  aria-label="Toggle options"
+                >
+                  <Settings className="h-4 w-4" />
+                </button>
+              )}
+
               <button
                 type="button"
-                onClick={() => setShowHistory(!showHistory)}
-                className={cn(
-                  "relative p-2 rounded-xl transition-all",
-                  showHistory
-                    ? "bg-primary/15 text-primary"
-                    : "hover:bg-muted text-muted-foreground hover:text-foreground",
-                )}
-                title="View history"
-                aria-label="View history"
+                onClick={handleReset}
+                className="p-2 rounded-xl hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
+                title="Reset"
+                aria-label="Reset"
               >
-                <History className="h-4 w-4" />
-                <span className="absolute -top-1 -right-1 min-w-4 h-4 px-0.5 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center">
-                  {history.length}
-                </span>
+                <RefreshCw className="h-4 w-4" />
               </button>
-            )}
-
-            {resolvedToolOptions.length > 0 && showAdvancedOptions && (
-              <button
-                type="button"
-                onClick={() => setShowOptions(!showOptions)}
-                className={cn(
-                  "p-2 rounded-xl transition-all",
-                  showOptions
-                    ? "bg-primary/15 text-primary"
-                    : "hover:bg-muted text-muted-foreground hover:text-foreground",
-                )}
-                title="Options"
-                aria-label="Toggle options"
-              >
-                <Settings className="h-4 w-4" />
-              </button>
-            )}
-
-            <button
-              type="button"
-              onClick={handleReset}
-              className="p-2 rounded-xl hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
-              title="Reset"
-              aria-label="Reset"
-            >
-              <RefreshCw className="h-4 w-4" />
-            </button>
+            </div>
           </div>
         </div>
 
@@ -602,12 +623,12 @@ export default function EnhancedToolLayout({
         )}
 
         {/* Tabs */}
-        <div className="flex border-b border-border/60 bg-card">
+        <div className="flex border-b border-border/40 bg-card/50 backdrop-blur-md">
           <button
             type="button"
             onClick={() => setActiveTab("input")}
             className={cn(
-              "flex-1 px-4 sm:px-6 py-3.5 text-sm font-bold transition-all relative",
+              "flex-1 px-4 sm:px-6 py-4 text-sm font-bold transition-all relative overflow-hidden",
               activeTab === "input"
                 ? "text-primary bg-primary/5"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
@@ -615,14 +636,14 @@ export default function EnhancedToolLayout({
           >
             {inputLabel}
             {activeTab === "input" && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary shadow-[0_0_8px_rgba(var(--primary),0.8)]" />
             )}
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("output")}
             className={cn(
-              "flex-1 px-4 sm:px-6 py-3.5 text-sm font-bold transition-all relative",
+              "flex-1 px-4 sm:px-6 py-4 text-sm font-bold transition-all relative overflow-hidden",
               activeTab === "output"
                 ? "text-primary bg-primary/5"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
@@ -630,7 +651,7 @@ export default function EnhancedToolLayout({
           >
             {resultLabel}
             {activeTab === "output" && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary shadow-[0_0_8px_rgba(var(--primary),0.8)]" />
             )}
           </button>
         </div>
@@ -645,7 +666,7 @@ export default function EnhancedToolLayout({
                 onKeyDown={onKeyDown}
                 placeholder={placeholder}
                 rows={inputRows}
-                className="w-full px-4 sm:px-5 py-4 rounded-2xl border-2 border-border focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none text-foreground placeholder:text-muted-foreground/60 bg-background resize-y transition-all leading-relaxed min-h-[280px] sm:min-h-[360px]"
+                className="w-full px-5 py-5 rounded-2xl border border-border/50 bg-background/50 backdrop-blur-sm text-foreground focus:border-primary/50 focus:ring-4 focus:ring-primary/10 focus:bg-background outline-none placeholder:text-muted-foreground/60 resize-y transition-all leading-relaxed min-h-[280px] sm:min-h-[360px] shadow-inner"
               />
 
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
@@ -653,7 +674,7 @@ export default function EnhancedToolLayout({
                   type="button"
                   onClick={() => void handleGenerate()}
                   disabled={loading || !input.trim()}
-                  className="flex-1 py-3.5 sm:py-4 px-6 rounded-xl bg-primary text-primary-foreground font-semibold text-base sm:text-lg shadow-sm shadow-primary/20 hover:bg-primary/90 hover:shadow-md hover:shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 group transition-all duration-300"
+                  className="flex-1 py-4 px-6 rounded-2xl bg-primary text-primary-foreground font-bold text-lg shadow-glow-md hover:shadow-glow-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 group transition-all duration-300"
                 >
                   {loading ? (
                     <>
@@ -662,7 +683,7 @@ export default function EnhancedToolLayout({
                     </>
                   ) : (
                     <>
-                      <Sparkles className="h-5 w-5 group-hover:rotate-12 transition-transform" />
+                      <Sparkles className="h-6 w-6 group-hover:rotate-12 group-hover:scale-110 transition-transform" />
                       {generateButtonText}
                     </>
                   )}
