@@ -60,7 +60,7 @@ export function Header() {
             />
           </div>
           <span className="font-heading text-[1.125rem] font-semibold tracking-tight text-foreground">
-            Tool<span className="text-brand-gradient">Nova</span>
+            Tool<span className="text-primary">Nova</span>
           </span>
         </Link>
 

@@ -28,30 +28,22 @@ export function CTASection({
   return (
     <section className={cn("py-16 md:py-20", className)}>
       <div className="mx-auto max-w-[1120px] px-6">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-primary px-6 py-14 text-center text-primary-foreground shadow-premium-lg md:px-12 md:py-16">
-          {/* Decorative glow + mesh */}
+        <div className="relative overflow-hidden rounded-2xl bg-primary px-6 py-14 text-center text-primary-foreground md:px-12 md:py-16">
+          {/* Minimal decorative element */}
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/15 blur-3xl"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -bottom-20 -left-10 h-64 w-64 rounded-full bg-[hsl(199_89%_48%)]/30 blur-3xl"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-[0.15]"
+            className="pointer-events-none absolute inset-0 opacity-[0.03]"
             style={{
               backgroundImage:
                 "radial-gradient(currentColor 1px, transparent 1px)",
-              backgroundSize: "22px 22px",
+              backgroundSize: "32px 32px",
               color: "white",
             }}
           />
 
           <div className="relative z-10">
             {Icon && (
-              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm">
+              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm">
                 <Icon className="h-6 w-6" />
               </div>
             )}

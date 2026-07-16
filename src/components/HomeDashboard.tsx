@@ -91,20 +91,20 @@ export function HomeDashboard() {
 
   return (
     <div className="w-full">
-      {/* Hero — premium split layout */}
-      <section className="relative overflow-hidden border-b border-border bg-gradient-mesh">
+      {/* Hero — premium minimal layout */}
+      <section className="relative overflow-hidden border-b border-border bg-background">
         <div
-          className="pointer-events-none absolute inset-0 opacity-30"
+          className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              "radial-gradient(hsl(var(--foreground) / 0.04) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
+              "radial-gradient(hsl(var(--foreground) / 0.03) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
           }}
         />
         <div className="relative mx-auto max-w-[1120px] px-6 py-14 md:py-20 lg:py-24">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div className="text-center lg:text-left">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/8 px-3.5 py-1.5 text-sm font-semibold text-primary">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-sm font-semibold text-primary shadow-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-40" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
@@ -114,7 +114,7 @@ export function HomeDashboard() {
 
               <h1 className="font-heading speakable text-4xl font-semibold leading-[1.12] tracking-tight text-foreground sm:text-5xl md:text-[3.15rem] mb-5">
                 Free AI tools for{" "}
-                <span className="text-brand-gradient">students &amp; professionals</span>
+                <span className="text-primary">students &amp; professionals</span>
               </h1>
 
               <p className="hero-description mx-auto mb-8 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl lg:mx-0">

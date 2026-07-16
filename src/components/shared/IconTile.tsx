@@ -3,17 +3,13 @@ import type { LucideIcon } from "lucide-react";
 
 /**
  * IconTile — the standard icon container used across cards & sections.
- * `tone` selects a soft tinted background driven by design tokens,
- * so colors stay consistent in light & dark mode.
- *
- * For tool/category cards that want vivid per-tool gradients,
- * pass `gradient` (e.g. "from-rose-500 to-orange-500") instead of a tone.
+ * Clean, minimalist aesthetic for the premium UI.
  */
 const TONES: Record<string, string> = {
-  primary: "bg-primary/10 text-primary",
-  success: "bg-success/10 text-success",
-  warning: "bg-warning/15 text-warning-foreground",
-  muted: "bg-muted text-muted-foreground",
+  primary: "bg-primary/10 text-primary border-primary/20",
+  success: "bg-success/10 text-success border-success/20",
+  warning: "bg-warning/10 text-warning-foreground border-warning/20",
+  muted: "bg-muted text-foreground border-border",
 };
 
 export function IconTile({
@@ -30,23 +26,26 @@ export function IconTile({
   size?: "sm" | "md" | "lg";
 }) {
   const sizes: Record<string, string> = {
-    sm: "h-10 w-10 rounded-xl",
-    md: "h-12 w-12 rounded-xl",
-    lg: "h-14 w-14 rounded-2xl",
+    sm: "h-10 w-10 rounded-[0.5rem]",
+    md: "h-12 w-12 rounded-[0.6rem]",
+    lg: "h-14 w-14 rounded-xl",
   };
   const iconSizes: Record<string, string> = {
     sm: "h-5 w-5",
     md: "h-6 w-6",
     lg: "h-7 w-7",
   };
+  
+  // We intentionally ignore the `gradient` prop in the new minimalist theme
+  // and force a clean bordered look.
+  const appliedTone = gradient ? "primary" : tone;
+  
   return (
     <div
       className={cn(
-        "flex shrink-0 items-center justify-center transition-transform duration-300 group-hover:scale-105",
+        "flex shrink-0 items-center justify-center border transition-all duration-300 group-hover:scale-105 group-hover:bg-background group-hover:shadow-sm",
         sizes[size],
-        gradient
-          ? cn("bg-gradient-to-br text-white shadow-lg", gradient)
-          : TONES[tone],
+        TONES[appliedTone],
         className
       )}
     >
