@@ -44,11 +44,11 @@ export function Header() {
     <header className="sticky top-0 z-40 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border h-16">
       <div className="flex h-full items-center justify-between px-4 md:px-8">
         
-        {/* Mobile Logo & Hamburger */}
-        <div className="flex items-center gap-2 md:hidden">
+        {/* Left Area: Hamburger (Mobile), Logo, and Desktop Nav */}
+        <div className="flex items-center gap-4">
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-md border border-border/50 text-foreground hover:bg-muted transition-colors duration-200"
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-border/50 text-foreground hover:bg-muted transition-colors duration-200 md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
@@ -63,24 +63,13 @@ export function Header() {
             <div className="relative h-8 w-8 overflow-hidden rounded bg-primary text-primary-foreground flex items-center justify-center font-bold">
               T
             </div>
-            <span className="font-heading text-lg font-bold tracking-tight text-foreground">
+            <span className="font-heading text-lg font-bold tracking-tight text-foreground hidden sm:block">
               Tool<span className="text-primary">Nova</span>
             </span>
           </Link>
-        </div>
-
-        {/* Desktop Left Area (Empty on desktop, but pushes search to right) */}
-        <div className="hidden md:flex flex-1" />
-
-        <div className="flex items-center justify-end gap-3 min-w-0">
-          
-          {/* Search */}
-          <div className="hidden sm:block shrink-0 w-64">
-            <GlobalSearch />
-          </div>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1 mr-2" aria-label="Main navigation">
+          <nav className="hidden md:flex items-center gap-1 ml-6" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -97,6 +86,15 @@ export function Header() {
               </Link>
             ))}
           </nav>
+        </div>
+
+        {/* Right Area: Search & Auth */}
+        <div className="flex items-center justify-end gap-3 min-w-0 flex-1">
+          
+          {/* Search */}
+          <div className="hidden sm:block shrink-0 w-48 lg:w-64">
+            <GlobalSearch />
+          </div>
 
           {/* Auth Section */}
           <div className="hidden md:flex items-center gap-2">

@@ -173,7 +173,6 @@ export const metadata: Metadata = {
 };
 
 
-import { Sidebar } from "@/components/Sidebar";
 
 export default function RootLayout({
   children,
@@ -250,13 +249,10 @@ export default function RootLayout({
           <Providers>
             <VitalsInitializer />
             <SkipLinks />
-            <div className="flex min-h-screen">
-              <Sidebar />
-              <div className="flex flex-col flex-1 min-w-0">
-                <Header />
-                <main className="site-main flex-1">{children}</main>
-                <Footer />
-              </div>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="site-main flex-1">{children}</main>
+              <Footer />
             </div>
             <Toaster />
             <SonnerToaster position="top-center" richColors closeButton />
