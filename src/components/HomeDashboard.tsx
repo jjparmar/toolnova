@@ -92,8 +92,11 @@ export function HomeDashboard() {
 
   return (
     <div className="w-full">
-      {/* ─── Hero ─── Clean, structured, DeepAI-like Hero */}
-      <section className="relative overflow-hidden pt-20 pb-16 md:pt-32 md:pb-24 border-b border-border/40 bg-background">
+      {/* ─── Hero ─── Vibrant Premium Hero */}
+      <section className="relative overflow-hidden pt-24 pb-20 md:pt-36 md:pb-32 border-b border-border/40 bg-background">
+        {/* Soft Electric Blue Top Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
+        
         <div className="relative z-10 mx-auto max-w-[1200px] px-6 text-center">
           <div className="animate-fade-in flex flex-col items-center">
             <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border bg-muted/50 px-5 py-2 text-sm font-semibold text-foreground">
@@ -101,9 +104,9 @@ export function HomeDashboard() {
               <span>Next-Gen AI Toolkit for Students & Pros</span>
             </div>
 
-            <h1 className="font-heading mx-auto mb-6 max-w-4xl text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl leading-[1.1]">
+            <h1 className="font-heading mx-auto mb-6 max-w-4xl text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl md:text-7xl leading-[1.1]">
               Work smarter with{" "}
-              <span className="text-primary">AI superpowers.</span>
+              <span className="bg-gradient-to-r from-primary via-blue-500 to-cyan-400 bg-clip-text text-transparent">AI superpowers.</span>
             </h1>
 
             <p className="mx-auto mb-10 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
@@ -113,14 +116,14 @@ export function HomeDashboard() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
               <Link href="/tools/homework-solver" className="w-full sm:w-auto">
-                <Button size="lg" className="h-14 w-full sm:w-auto px-8 rounded-md text-base font-semibold shadow-sm transition-all duration-300">
+                <Button size="lg" className="h-14 w-full sm:w-auto px-8 rounded-full text-base font-semibold shadow-[0_0_20px_-5px_rgba(var(--primary),0.4)] hover:shadow-[0_0_30px_-5px_rgba(var(--primary),0.6)] hover:-translate-y-0.5 transition-all duration-300">
                   Try a tool free
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/tools" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="h-14 w-full sm:w-auto px-8 rounded-md text-base font-semibold transition-all hover:bg-muted">
-                  <Grid2X2 className="mr-2 h-5 w-5" />
+                <Button variant="outline" size="lg" className="h-14 w-full sm:w-auto px-8 rounded-full text-base font-semibold transition-all hover:bg-muted border-border hover:border-primary/30">
+                  <Grid2X2 className="mr-2 h-5 w-5 text-muted-foreground" />
                   Browse library
                 </Button>
               </Link>
@@ -129,14 +132,19 @@ export function HomeDashboard() {
         </div>
       </section>
 
-      {/* ─── Bento Box Preview & Stats ─── Flat & Clean */}
-      <section className="relative z-20 -mt-8 md:-mt-12 mb-20 px-6">
+      {/* ─── Bento Box Preview & Stats ─── */}
+      <section className="relative z-20 -mt-10 md:-mt-16 mb-24 px-6">
         <div className="mx-auto max-w-[1000px] grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Main App Window Preview (Spans 2 columns) */}
-          <div className="md:col-span-2 rounded-xl border border-border bg-card shadow-sm overflow-hidden flex flex-col relative group">
+          <div className="md:col-span-2 rounded-2xl border border-border/80 bg-card/60 backdrop-blur-xl shadow-premium overflow-hidden flex flex-col relative group transition-all duration-500 hover:shadow-premium-lg">
              {/* Simple Header */}
-             <div className="flex items-center gap-2 border-b border-border bg-muted/30 px-6 py-4">
-                <div className="mx-auto flex items-center justify-center rounded bg-background px-4 py-1.5 text-xs text-muted-foreground border border-border font-mono">
+             <div className="flex items-center gap-2 border-b border-border/40 bg-muted/40 px-6 py-4">
+                <div className="flex gap-1.5 mr-2">
+                  <div className="h-3 w-3 rounded-full bg-border" />
+                  <div className="h-3 w-3 rounded-full bg-border" />
+                  <div className="h-3 w-3 rounded-full bg-border" />
+                </div>
+                <div className="mx-auto flex items-center justify-center rounded-md bg-background px-4 py-1.5 text-xs text-muted-foreground border border-border/50 font-mono shadow-sm">
                   toolnova.com/dashboard
                 </div>
              </div>
@@ -159,17 +167,18 @@ export function HomeDashboard() {
 
           {/* Stats Column */}
           <div className="grid grid-rows-3 gap-6">
-            <div className="rounded-xl border border-border bg-card p-6 flex flex-col justify-center items-center text-center shadow-sm">
-              <p className="text-4xl font-black font-heading text-foreground mb-1">{TOOL_COUNT}+</p>
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Premium Tools</p>
+            <div className="rounded-2xl border border-border bg-card p-6 flex flex-col justify-center items-center text-center shadow-premium-sm transition-all hover:-translate-y-1 hover:shadow-premium group">
+              <p className="text-4xl font-black font-heading text-foreground mb-1 group-hover:scale-110 transition-transform">{TOOL_COUNT}+</p>
+              <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Premium Tools</p>
             </div>
-            <div className="rounded-xl border border-border bg-card p-6 flex flex-col justify-center items-center text-center shadow-sm">
-              <p className="text-4xl font-black font-heading text-primary mb-1">$0</p>
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Forever Free</p>
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 flex flex-col justify-center items-center text-center shadow-premium-sm transition-all hover:-translate-y-1 hover:shadow-premium group relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <p className="text-4xl font-black font-heading text-primary mb-1 relative z-10 group-hover:scale-110 transition-transform">$0</p>
+              <p className="text-xs font-bold text-primary/80 uppercase tracking-widest relative z-10">Forever Free</p>
             </div>
-            <div className="rounded-xl border border-border bg-card p-6 flex flex-col justify-center items-center text-center shadow-sm">
-              <ShieldCheck className="h-10 w-10 text-primary mb-2" />
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Total Privacy</p>
+            <div className="rounded-2xl border border-border bg-card p-6 flex flex-col justify-center items-center text-center shadow-premium-sm transition-all hover:-translate-y-1 hover:shadow-premium group">
+              <ShieldCheck className="h-10 w-10 text-primary mb-2 group-hover:scale-110 transition-transform" />
+              <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Total Privacy</p>
             </div>
           </div>
         </div>
