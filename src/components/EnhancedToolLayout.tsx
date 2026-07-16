@@ -347,22 +347,19 @@ export default function EnhancedToolLayout({
 
   return (
     <div className="w-full relative">
-      {/* Soft Glow behind the tool */}
-      <div className="absolute -inset-8 rounded-[3rem] bg-gradient-to-tr from-primary/10 via-transparent to-cyan-500/10 blur-3xl opacity-50 pointer-events-none" />
-
       {!nestedInPremiumShell && (
         <button
           type="button"
           onClick={() => router.push("/tools")}
-          className="relative z-10 mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-card/60 backdrop-blur-md border border-border/50 hover:bg-muted/50 text-foreground font-semibold text-sm transition-all hover:shadow-glow-sm hover:border-primary/30 group"
+          className="relative z-10 mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-card border border-border hover:bg-muted text-foreground font-medium text-sm transition-all"
         >
-          <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft className="h-4 w-4 transition-transform" />
           Back to All Tools
         </button>
       )}
 
       {freeNote && (
-        <div className="relative z-10 mb-6 rounded-xl border border-primary/20 bg-primary/5 backdrop-blur-md px-5 py-4 text-sm text-foreground/90 shadow-sm flex items-start gap-3">
+        <div className="relative z-10 mb-6 rounded-md border border-border bg-muted/50 px-5 py-4 text-sm text-foreground/90 shadow-sm flex items-start gap-3">
           <Sparkles className="h-5 w-5 text-primary shrink-0 mt-0.5" />
           <div>
             <strong className="font-semibold text-primary tracking-wide uppercase text-xs">Free to start</strong>
@@ -380,19 +377,12 @@ export default function EnhancedToolLayout({
         </div>
       )}
 
-      <div className="relative z-20 rounded-[2rem] border border-border/60 bg-card/40 backdrop-blur-3xl shadow-premium-lg overflow-hidden flex flex-col group">
-        {/* Hover Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
-        {/* Mac-like Browser Chrome Header */}
-        <div className="flex items-center justify-between border-b border-border/40 bg-muted/20 px-6 py-4">
+      <div className="relative z-20 rounded-xl border border-border bg-card shadow-sm overflow-hidden flex flex-col group">
+        
+        {/* Simple Header */}
+        <div className="flex items-center justify-between border-b border-border bg-muted/30 px-6 py-4">
           <div className="flex items-center gap-4">
-            <div className="flex gap-1.5">
-              <span className="h-3 w-3 rounded-full bg-red-500/80 shadow-[0_0_10px_rgba(239,68,68,0.4)]" />
-              <span className="h-3 w-3 rounded-full bg-amber-500/80 shadow-[0_0_10px_rgba(245,158,11,0.4)]" />
-              <span className="h-3 w-3 rounded-full bg-emerald-500/80 shadow-[0_0_10px_rgba(16,185,129,0.4)]" />
-            </div>
-            <div className="hidden sm:flex items-center justify-center rounded-md bg-background/50 px-3 py-1 text-xs text-muted-foreground border border-border/30 backdrop-blur-sm shadow-inner">
+            <div className="hidden sm:flex items-center justify-center rounded bg-background px-4 py-1.5 text-xs text-muted-foreground border border-border font-mono">
               toolnova.com/tools/{toolSlug}
             </div>
           </div>
@@ -400,12 +390,12 @@ export default function EnhancedToolLayout({
           <div className="flex items-center gap-3 min-w-0">
             <div
               className={cn(
-                "flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] font-bold uppercase tracking-wider backdrop-blur-md",
+                "flex items-center gap-2 px-3 py-1.5 rounded-md border text-[10px] font-bold uppercase tracking-wider bg-background",
                 loading
-                  ? "bg-amber-500/10 border-amber-500/20 text-amber-500 shadow-glow-sm shadow-amber-500/20"
+                  ? "border-amber-500 text-amber-500"
                   : error
-                    ? "bg-red-500/10 border-red-500/20 text-red-500 shadow-glow-sm shadow-red-500/20"
-                    : "bg-primary/10 border-primary/20 text-primary shadow-glow-sm shadow-primary/20",
+                    ? "border-red-500 text-red-500"
+                    : "border-primary text-primary",
               )}
             >
               <div
@@ -623,20 +613,20 @@ export default function EnhancedToolLayout({
         )}
 
         {/* Tabs */}
-        <div className="flex border-b border-border/40 bg-card/50 backdrop-blur-md">
+        <div className="flex border-b border-border bg-card">
           <button
             type="button"
             onClick={() => setActiveTab("input")}
             className={cn(
               "flex-1 px-4 sm:px-6 py-4 text-sm font-bold transition-all relative overflow-hidden",
               activeTab === "input"
-                ? "text-primary bg-primary/5"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
+                ? "text-primary bg-muted/50"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/30",
             )}
           >
             {inputLabel}
             {activeTab === "input" && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary shadow-[0_0_8px_rgba(var(--primary),0.8)]" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
             )}
           </button>
           <button
@@ -645,13 +635,13 @@ export default function EnhancedToolLayout({
             className={cn(
               "flex-1 px-4 sm:px-6 py-4 text-sm font-bold transition-all relative overflow-hidden",
               activeTab === "output"
-                ? "text-primary bg-primary/5"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
+                ? "text-primary bg-muted/50"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/30",
             )}
           >
             {resultLabel}
             {activeTab === "output" && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary shadow-[0_0_8px_rgba(var(--primary),0.8)]" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
             )}
           </button>
         </div>
@@ -666,7 +656,7 @@ export default function EnhancedToolLayout({
                 onKeyDown={onKeyDown}
                 placeholder={placeholder}
                 rows={inputRows}
-                className="w-full px-5 py-5 rounded-2xl border border-border/50 bg-background/50 backdrop-blur-sm text-foreground focus:border-primary/50 focus:ring-4 focus:ring-primary/10 focus:bg-background outline-none placeholder:text-muted-foreground/60 resize-y transition-all leading-relaxed min-h-[280px] sm:min-h-[360px] shadow-inner"
+                className="w-full px-5 py-5 rounded-lg border border-border bg-background text-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary outline-none placeholder:text-muted-foreground/60 resize-y transition-all min-h-[280px] sm:min-h-[360px]"
               />
 
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
@@ -674,7 +664,7 @@ export default function EnhancedToolLayout({
                   type="button"
                   onClick={() => void handleGenerate()}
                   disabled={loading || !input.trim()}
-                  className="flex-1 py-4 px-6 rounded-2xl bg-primary text-primary-foreground font-bold text-lg shadow-glow-md hover:shadow-glow-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 group transition-all duration-300"
+                  className="flex-1 py-4 px-6 rounded-md bg-primary text-primary-foreground font-bold text-lg shadow-sm hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 transition-all duration-300"
                 >
                   {loading ? (
                     <>
@@ -683,7 +673,7 @@ export default function EnhancedToolLayout({
                     </>
                   ) : (
                     <>
-                      <Sparkles className="h-6 w-6 group-hover:rotate-12 group-hover:scale-110 transition-transform" />
+                      <Sparkles className="h-6 w-6" />
                       {generateButtonText}
                     </>
                   )}

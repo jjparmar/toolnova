@@ -92,27 +92,18 @@ export function HomeDashboard() {
 
   return (
     <div className="w-full">
-      {/* ─── Hero ─── Massive Glowing typography & Aurora background */}
-      <section className="relative overflow-hidden pt-28 pb-20 md:pt-40 md:pb-32 border-b border-border/40">
-        {/* Deep Starlight Aurora */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[70%] rounded-full bg-primary/20 blur-[120px] mix-blend-screen animate-pulse-glow" />
-          <div className="absolute top-[10%] right-[-10%] w-[40%] h-[60%] rounded-full bg-cyan-500/15 blur-[120px] mix-blend-screen" />
-          <div className="absolute bottom-[-10%] left-[20%] w-[60%] h-[50%] rounded-full bg-violet-600/20 blur-[150px] mix-blend-screen" />
-        </div>
-        
-        <div className="pointer-events-none absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
-
+      {/* ─── Hero ─── Clean, structured, DeepAI-like Hero */}
+      <section className="relative overflow-hidden pt-20 pb-16 md:pt-32 md:pb-24 border-b border-border/40 bg-background">
         <div className="relative z-10 mx-auto max-w-[1200px] px-6 text-center">
           <div className="animate-fade-in flex flex-col items-center">
-            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-primary/30 bg-primary/10 px-5 py-2 text-sm font-semibold text-primary shadow-glow-sm backdrop-blur-md">
-              <Sparkles className="h-4 w-4" />
+            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border bg-muted/50 px-5 py-2 text-sm font-semibold text-foreground">
+              <Sparkles className="h-4 w-4 text-primary" />
               <span>Next-Gen AI Toolkit for Students & Pros</span>
             </div>
 
-            <h1 className="font-heading mx-auto mb-6 max-w-4xl text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl md:text-[5rem] leading-[1.05]">
+            <h1 className="font-heading mx-auto mb-6 max-w-4xl text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl leading-[1.1]">
               Work smarter with{" "}
-              <span className="text-brand-gradient">AI superpowers.</span>
+              <span className="text-primary">AI superpowers.</span>
             </h1>
 
             <p className="mx-auto mb-10 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
@@ -122,13 +113,13 @@ export function HomeDashboard() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
               <Link href="/tools/homework-solver" className="w-full sm:w-auto">
-                <Button size="lg" className="h-14 w-full sm:w-auto px-8 rounded-full text-base font-semibold shadow-glow-md hover:shadow-glow-lg transition-all duration-300">
+                <Button size="lg" className="h-14 w-full sm:w-auto px-8 rounded-md text-base font-semibold shadow-sm transition-all duration-300">
                   Try a tool free
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/tools" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="h-14 w-full sm:w-auto px-8 rounded-full text-base font-semibold border-border/50 bg-card/30 backdrop-blur-sm hover:bg-muted/50">
+                <Button variant="outline" size="lg" className="h-14 w-full sm:w-auto px-8 rounded-md text-base font-semibold transition-all hover:bg-muted">
                   <Grid2X2 className="mr-2 h-5 w-5" />
                   Browse library
                 </Button>
@@ -138,30 +129,23 @@ export function HomeDashboard() {
         </div>
       </section>
 
-      {/* ─── Bento Box Preview & Stats ─── */}
-      <section className="relative z-20 -mt-12 md:-mt-20 mb-20 px-6">
+      {/* ─── Bento Box Preview & Stats ─── Flat & Clean */}
+      <section className="relative z-20 -mt-8 md:-mt-12 mb-20 px-6">
         <div className="mx-auto max-w-[1000px] grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Main App Window Preview (Spans 2 columns) */}
-          <div className="md:col-span-2 rounded-[2rem] border border-border/60 bg-card/40 backdrop-blur-3xl shadow-premium-lg overflow-hidden flex flex-col relative group">
-             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-             
-             {/* Mac-like Header */}
-             <div className="flex items-center gap-2 border-b border-border/40 bg-muted/20 px-6 py-4">
-                <div className="flex gap-1.5">
-                  <span className="h-3 w-3 rounded-full bg-red-500/80 shadow-[0_0_10px_rgba(239,68,68,0.4)]" />
-                  <span className="h-3 w-3 rounded-full bg-amber-500/80 shadow-[0_0_10px_rgba(245,158,11,0.4)]" />
-                  <span className="h-3 w-3 rounded-full bg-emerald-500/80 shadow-[0_0_10px_rgba(16,185,129,0.4)]" />
-                </div>
-                <div className="mx-auto flex items-center justify-center rounded-md bg-background/50 px-3 py-1 text-xs text-muted-foreground border border-border/30 backdrop-blur-sm">
+          <div className="md:col-span-2 rounded-xl border border-border bg-card shadow-sm overflow-hidden flex flex-col relative group">
+             {/* Simple Header */}
+             <div className="flex items-center gap-2 border-b border-border bg-muted/30 px-6 py-4">
+                <div className="mx-auto flex items-center justify-center rounded bg-background px-4 py-1.5 text-xs text-muted-foreground border border-border font-mono">
                   toolnova.com/dashboard
                 </div>
              </div>
 
              {/* App Content */}
-             <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+             <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-background">
                {previewTools.map((tool) => (
-                 <div key={tool.name} className="flex items-center gap-4 rounded-2xl border border-border/40 bg-background/50 p-4 transition-all hover:bg-muted/50 hover:border-primary/30 hover:shadow-glow-sm cursor-pointer">
-                   <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${tool.color}`}>
+                 <div key={tool.name} className="flex items-center gap-4 rounded-lg border border-border bg-card p-4 transition-all hover:border-primary/50 cursor-pointer">
+                   <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-md ${tool.color}`}>
                      <tool.icon className="h-6 w-6" />
                    </div>
                    <div>
@@ -175,20 +159,17 @@ export function HomeDashboard() {
 
           {/* Stats Column */}
           <div className="grid grid-rows-3 gap-6">
-            <div className="rounded-[2rem] border border-border/60 bg-card/40 backdrop-blur-3xl p-6 flex flex-col justify-center items-center text-center shadow-premium relative overflow-hidden group">
-              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="rounded-xl border border-border bg-card p-6 flex flex-col justify-center items-center text-center shadow-sm">
               <p className="text-4xl font-black font-heading text-foreground mb-1">{TOOL_COUNT}+</p>
-              <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Premium Tools</p>
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Premium Tools</p>
             </div>
-            <div className="rounded-[2rem] border border-border/60 bg-card/40 backdrop-blur-3xl p-6 flex flex-col justify-center items-center text-center shadow-premium relative overflow-hidden group">
-               <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <p className="text-4xl font-black font-heading text-emerald-400 mb-1">$0</p>
-              <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Forever Free</p>
+            <div className="rounded-xl border border-border bg-card p-6 flex flex-col justify-center items-center text-center shadow-sm">
+              <p className="text-4xl font-black font-heading text-primary mb-1">$0</p>
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Forever Free</p>
             </div>
-            <div className="rounded-[2rem] border border-border/60 bg-card/40 backdrop-blur-3xl p-6 flex flex-col justify-center items-center text-center shadow-premium relative overflow-hidden group">
-               <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <ShieldCheck className="h-10 w-10 text-cyan-400 mb-2" />
-              <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Total Privacy</p>
+            <div className="rounded-xl border border-border bg-card p-6 flex flex-col justify-center items-center text-center shadow-sm">
+              <ShieldCheck className="h-10 w-10 text-primary mb-2" />
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Total Privacy</p>
             </div>
           </div>
         </div>
@@ -212,11 +193,10 @@ export function HomeDashboard() {
       </section>
 
       {/* ─── Featured tools ─── */}
-      <section id="tools" className="relative py-24">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-primary/5 blur-[100px] pointer-events-none" />
+      <section id="tools" className="relative py-24 bg-background">
         <div className="container relative mx-auto max-w-[1120px] px-6">
           <div className="mb-16 text-center">
-             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">Start with these tools</h2>
+             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4 text-foreground">Start with these tools</h2>
              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Fast, focused utilities people use every day to get ahead.</p>
           </div>
 
@@ -248,22 +228,22 @@ export function HomeDashboard() {
       </section>
 
       {/* ─── Bento Why Us & Categories ─── */}
-      <section className="border-t border-border/40 bg-muted/10 py-24">
+      <section className="border-t border-border bg-muted/30 py-24">
         <div className="container mx-auto max-w-[1120px] px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
              
              {/* Left side: Why ToolNova */}
              <div className="lg:col-span-5 space-y-6">
                 <div>
-                   <div className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/30 px-3 py-1 mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                   <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground shadow-sm">
                      Why ToolNova
                    </div>
                    <h2 className="font-heading text-3xl font-bold mb-8 text-foreground leading-tight">Built for real work,<br/>designed for speed.</h2>
                 </div>
                 
                 {whyUsFeatures.map((f) => (
-                  <div key={f.title} className="flex gap-4 p-5 rounded-2xl border border-border/40 bg-card/40 backdrop-blur-sm hover:border-primary/30 transition-colors">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div key={f.title} className="flex gap-4 p-5 rounded-xl border border-border bg-card hover:border-primary/50 transition-colors shadow-sm">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                       <f.icon className="h-6 w-6" />
                     </div>
                     <div>
@@ -278,11 +258,10 @@ export function HomeDashboard() {
              <div className="lg:col-span-7">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
                   {categories.map((cat, idx) => (
-                    <Link key={cat.href} href={cat.href} className={`group relative overflow-hidden rounded-3xl border border-border/40 bg-card p-8 transition-all hover:border-primary/50 hover:shadow-glow-sm flex flex-col justify-between ${idx === 0 || idx === 3 ? 'sm:col-span-2' : ''}`}>
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <Link key={cat.href} href={cat.href} className={`group relative overflow-hidden rounded-xl border border-border bg-card p-8 transition-all hover:border-primary/50 shadow-sm flex flex-col justify-between ${idx === 0 || idx === 3 ? 'sm:col-span-2' : ''}`}>
                       <div>
                         <div className="flex items-center justify-between mb-4">
-                           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-muted/50 text-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                           <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-muted text-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                              <cat.icon className="h-6 w-6" />
                            </div>
                            <ChevronRight className="h-6 w-6 text-muted-foreground/30 group-hover:text-primary transition-colors transform group-hover:translate-x-1" />

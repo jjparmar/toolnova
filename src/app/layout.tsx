@@ -173,6 +173,8 @@ export const metadata: Metadata = {
 };
 
 
+import { Sidebar } from "@/components/Sidebar";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -241,17 +243,20 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
-          forcedTheme="dark"
+          defaultTheme="light"
+          forcedTheme="light"
           disableTransitionOnChange
         >
           <Providers>
             <VitalsInitializer />
             <SkipLinks />
-            <div className="flex min-h-screen flex-col">
-              <Header />
-              <main className="site-main flex-1">{children}</main>
-              <Footer />
+            <div className="flex min-h-screen">
+              <Sidebar />
+              <div className="flex flex-col flex-1 min-w-0">
+                <Header />
+                <main className="site-main flex-1">{children}</main>
+                <Footer />
+              </div>
             </div>
             <Toaster />
             <SonnerToaster position="top-center" richColors closeButton />
