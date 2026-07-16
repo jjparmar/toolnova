@@ -1,5 +1,5 @@
-import React from "react";
-import { FaCheck, FaTimes } from "react-icons/fa";
+import React from"react";
+import { FaCheck, FaTimes } from"react-icons/fa";
 
 interface ProsConsProps {
     pros: string[];

@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import Link from"next/link";
+import { ChevronRight } from"lucide-react";
+import type { LucideIcon } from"lucide-react";
+import { cn } from"@/lib/utils";
 
 /**
- * CategoryCard — horizontal "explore by category" tile.
+ * CategoryCard — horizontal"explore by category" tile.
  * Icon tile on the left, title + description on the right, arrow on hover.
  */
 export function CategoryCard({
@@ -25,8 +25,7 @@ export function CategoryCard({
   return (
     <Link
       href={href}
-      className={cn(
-        "surface-card group flex items-start gap-3 p-4 hover:-translate-y-0.5",
+      className={cn("surface-card group flex items-start gap-3 p-4 hover:-translate-y-0.5",
         className
       )}
     >
@@ -38,7 +37,7 @@ export function CategoryCard({
           <h3 className="font-heading font-semibold text-foreground transition-colors group-hover:text-primary">
             {title}
           </h3>
-          {typeof count !== "undefined" && (
+          {typeof count !=="undefined" && (
             <span className="text-xs font-semibold text-muted-foreground">
               {count}
             </span>

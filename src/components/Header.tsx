@@ -7,9 +7,9 @@ import { UsageCounter } from '@/components/UsageCounter';
 import { GlobalSearch } from '@/components/GlobalSearch';
 import { Menu, X, Sparkles, LayoutDashboard } from 'lucide-react';
 import { useState, lazy, Suspense, useEffect } from 'react';
-import { useSession, signOut } from "next-auth/react";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { useSession, signOut } from"next-auth/react";
+import { usePathname } from"next/navigation";
+import { cn } from"@/lib/utils";
 
 const MobileMenu = lazy(() => import('./MobileMenu'));
 
@@ -24,7 +24,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: session, status } = useSession();
   const user = session?.user;
-  const loading = status === "loading";
+  const loading = status ==="loading";
   const pathname = usePathname();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function Header() {
   }, [pathname]);
 
   const handleSignOut = async () => {
-    await signOut({ callbackUrl: "/" });
+    await signOut({ callbackUrl:"/" });
   };
 
   const isActive = (href: string) => {
@@ -74,13 +74,12 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={cn(
-                  "px-3 py-1.5 text-sm font-medium rounded-md transition-colors",
+                className={cn("px-3 py-1.5 text-sm font-medium rounded-md transition-colors",
                   isActive(link.href)
-                    ? "bg-muted text-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    ?"bg-muted text-foreground"
+                    :"text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 )}
-                aria-current={isActive(link.href) ? "page" : undefined}
+                aria-current={isActive(link.href) ?"page" : undefined}
               >
                 {link.label}
               </Link>

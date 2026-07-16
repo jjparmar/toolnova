@@ -1,5 +1,5 @@
-import React from "react";
-import { FaCheckCircle, FaListUl } from "react-icons/fa";
+import React from"react";
+import { FaCheckCircle, FaListUl } from"react-icons/fa";
 
 interface KeyTakeawaysProps {
     points: string[];

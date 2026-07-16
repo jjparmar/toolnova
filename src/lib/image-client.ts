@@ -10,11 +10,11 @@ export function isImageFile(file: File): boolean {
 }
 
 export function formatBytes(bytes: number): string {
-  if (!bytes || bytes <= 0) return "0 B";
+  if (!bytes || bytes <= 0) return"0 B";
   const k = 1024;
-  const sizes = ["B", "KB", "MB", "GB"];
+  const sizes = ["B","KB","MB","GB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
+  return`${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
 }
 
 export function downloadBlob(blob: Blob, filename: string) {
@@ -80,18 +80,18 @@ export async function imageToBlob(
   if (!ctx) throw new Error("Canvas not supported");
 
   ctx.imageSmoothingEnabled = true;
-  ctx.imageSmoothingQuality = "high";
+  ctx.imageSmoothingQuality ="high";
 
-  const mime = opts.mime || "image/png";
-  if (opts.fill || mime === "image/jpeg") {
-    ctx.fillStyle = opts.fill || "#ffffff";
+  const mime = opts.mime ||"image/png";
+  if (opts.fill || mime ==="image/jpeg") {
+    ctx.fillStyle = opts.fill ||"#ffffff";
     ctx.fillRect(0, 0, width, height);
   }
 
   ctx.drawImage(img, sx, sy, sw, sh, 0, 0, width, height);
 
   const quality =
-    mime === "image/png" ? undefined : (opts.quality ?? 0.92);
+    mime ==="image/png" ? undefined : (opts.quality ?? 0.92);
 
   const blob = await new Promise<Blob | null>((resolve) =>
     canvas.toBlob(resolve, mime, quality),
@@ -101,7 +101,7 @@ export async function imageToBlob(
 }
 
 export function baseName(filename: string): string {
-  return filename.replace(/\.[^.]+$/, "") || "image";
+  return filename.replace(/\.[^.]+$/,"") ||"image";
 }
 
 export type RotateDeg = 0 | 90 | 180 | 270;
@@ -130,7 +130,7 @@ export async function transformImageSrc(
   if (!ctx) throw new Error("Canvas not supported");
 
   ctx.imageSmoothingEnabled = true;
-  ctx.imageSmoothingQuality = "high";
+  ctx.imageSmoothingQuality ="high";
   ctx.translate(width / 2, height / 2);
   ctx.rotate((rotate * Math.PI) / 180);
   ctx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
@@ -154,7 +154,7 @@ export async function buildZipBlob(
     for (const f of files) {
       zip.file(f.name, f.data);
     }
-    return await zip.generateAsync({ type: "blob" });
+    return await zip.generateAsync({ type:"blob" });
   } catch {
     // Fallback: single-file passthrough not possible for multi; throw
     throw new Error("ZIP library failed to load");
@@ -162,10 +162,10 @@ export async function buildZipBlob(
 }
 
 export function extForMime(mime: string): string {
-  if (mime === "image/jpeg") return "jpg";
-  if (mime === "image/webp") return "webp";
-  if (mime === "image/png") return "png";
-  return "bin";
+  if (mime ==="image/jpeg") return"jpg";
+  if (mime ==="image/webp") return"webp";
+  if (mime ==="image/png") return"png";
+  return"bin";
 }
 
 /** A4 points at 72 DPI (PDF) */

@@ -1,6 +1,6 @@
-import React from "react";
-import NextImage from "next/image";
-import { FaQuoteLeft } from "react-icons/fa";
+import React from"react";
+import NextImage from"next/image";
+import { FaQuoteLeft } from"react-icons/fa";
 
 interface ExpertQuoteProps {
     quote: string;

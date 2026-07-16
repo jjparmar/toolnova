@@ -1,33 +1,33 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { ChevronRight, Home } from "lucide-react";
-import { getBreadcrumbSchema, schemaToJsonLd } from "@/lib/schema";
-import { siteConfig } from "@/config/site";
+import { usePathname } from"next/navigation";
+import Link from"next/link";
+import { ChevronRight, Home } from"lucide-react";
+import { getBreadcrumbSchema, schemaToJsonLd } from"@/lib/schema";
+import { siteConfig } from"@/config/site";
 
 export function Breadcrumbs() {
   const pathname = usePathname();
 
   // Don't show on home page
-  if (pathname === "/") return null;
+  if (pathname ==="/") return null;
 
   const segments = pathname.split("/").filter(Boolean);
 
   const breadcrumbs = segments.map((segment, index) => {
-    const url = `/${segments.slice(0, index + 1).join("/")}`;
+    const url =`/${segments.slice(0, index + 1).join("/")}`;
     const name = segment
-      .replace(/-/g, " ")
+      .replace(/-/g,"")
       .replace(/\b\w/g, (char) => char.toUpperCase());
 
     return { name, url };
   });
 
   const schema = getBreadcrumbSchema([
-    { name: "Home", url: siteConfig.url },
+    { name:"Home", url: siteConfig.url },
     ...breadcrumbs.map((b) => ({
       name: b.name,
-      url: `${siteConfig.url}${b.url}`,
+      url:`${siteConfig.url}${b.url}`,
     })),
   ]);
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { useState, useEffect, useRef } from"react";
+import { Button } from"@/components/ui/button";
+import { Textarea } from"@/components/ui/textarea";
 import {
   Sparkles,
   Copy,
@@ -23,40 +23,40 @@ import {
   Upload,
   Volume2,
   VolumeX,
-} from "lucide-react";
+} from"lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from"@/components/ui/dropdown-menu";
 import {
   FaWhatsapp,
   FaTwitter,
   FaFacebook,
   FaTelegram,
   FaLinkedin,
-} from "react-icons/fa";
-import { toast } from "sonner";
+} from"react-icons/fa";
+import { toast } from"sonner";
 import {
   GenerationHistoryItem,
   saveToHistory,
   getToolHistory,
   clearToolHistory,
-} from "@/lib/storage";
-import { trackToolUse } from "@/lib/usage-tracker";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { LogIn } from "lucide-react";
-import { AIResultFormatter } from "@/components/AIResultFormatter";
-import { TopBannerAd, BottomBoxAd } from "@/components/ads/AdUnit";
+} from"@/lib/storage";
+import { trackToolUse } from"@/lib/usage-tracker";
+import Link from"next/link";
+import { useRouter } from"next/navigation";
+import { useSession } from"next-auth/react";
+import { LogIn } from"lucide-react";
+import { AIResultFormatter } from"@/components/AIResultFormatter";
+import { TopBannerAd, BottomBoxAd } from"@/components/ads/AdUnit";
 
 // Tool options interface
 export interface ToolOption {
   id: string;
   label: string;
-  type: "select" | "toggle" | "slider";
+  type:"select" |"toggle" |"slider";
   options?: { value: string; label: string }[];
   defaultValue: string | boolean | number;
 }
@@ -90,7 +90,7 @@ export function ToolLayout({
   nonAIHandler,
   toolSlug,
   toolOptions = [],
-  resultLabel = "Generated Result",
+  resultLabel ="Generated Result",
   generateButtonText,
   customResultRenderer,
 }: ToolLayoutProps) {
@@ -112,7 +112,7 @@ export function ToolLayout({
   // Auth state
   const { data: session, status } = useSession();
   const user = session?.user;
-  const authLoading = status === "loading";
+  const authLoading = status ==="loading";
   const router = useRouter();
 
   const handleLoginRedirect = () => {
@@ -165,30 +165,30 @@ export function ToolLayout({
     if (toolSlug) trackToolUse(toolSlug);
 
     try {
-      let output = "";
+      let output ="";
       if (isNonAITool && nonAIHandler) {
         output = nonAIHandler(input, options);
       } else {
         const prompt =
-          typeof promptTemplate === "function"
+          typeof promptTemplate ==="function"
             ? promptTemplate(input, options)
             : promptTemplate.replace("{input}", input);
 
         const res = await fetch("/api/ai", {
-          method: "POST",
+          method:"POST",
           body: JSON.stringify({ prompt, systemPrompt, toolSlug }),
-          headers: { "Content-Type": "application/json" },
+          headers: {"Content-Type":"application/json" },
         });
         const data = await res.json().catch(() => ({}));
 
         if (!res.ok || data.error) {
           throw new Error(
-            typeof data.error === "string"
+            typeof data.error ==="string"
               ? data.error
-              : "Generation failed. Please try again.",
+              :"Generation failed. Please try again.",
           );
         }
-        if (!data.result || typeof data.result !== "string") {
+        if (!data.result || typeof data.result !=="string") {
           throw new Error("Empty response from AI. Please try again.");
         }
         output = data.result;
@@ -209,15 +209,15 @@ export function ToolLayout({
 
       setTimeout(() => {
         resultRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
+          behavior:"smooth",
+          block:"start",
         });
       }, 100);
     } catch (error) {
       const message =
         error instanceof Error
           ? error.message
-          : "Generation failed. Please try again.";
+          :"Generation failed. Please try again.";
       toast.error(message);
       setResult(`❌ ${message}`);
     } finally {
@@ -237,11 +237,11 @@ export function ToolLayout({
   };
 
   const handleDownload = () => {
-    const blob = new Blob([result], { type: "text/plain" });
+    const blob = new Blob([result], { type:"text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${toolSlug || "result"}-${Date.now()}.txt`;
+    a.download =`${toolSlug ||"result"}-${Date.now()}.txt`;
     a.click();
     URL.revokeObjectURL(url);
     toast.success("Downloaded!");
@@ -262,7 +262,7 @@ export function ToolLayout({
     const file = event.target.files?.[0];
     if (!file) return;
 
-    const isTextFile = file.type === "text/plain" || file.name.endsWith(".txt");
+    const isTextFile = file.type ==="text/plain" || file.name.endsWith(".txt");
     const isImageFile = file.type.startsWith("image/");
 
     if (isTextFile) {
@@ -275,11 +275,9 @@ export function ToolLayout({
       reader.readAsText(file);
     } else if (isImageFile) {
       // For images, add the filename as a description placeholder
-      setInput(
-        `[Image uploaded: ${file.name}]\n\nDescribe what you see in this image or diagram...`,
+      setInput(`[Image uploaded: ${file.name}]\n\nDescribe what you see in this image or diagram...`,
       );
-      toast.success(
-        `Image "${file.name}" selected. Please describe the image content.`,
+      toast.success(`Image"${file.name}" selected. Please describe the image content.`,
       );
     } else {
       toast.error("Please upload a .txt file or an image file");
@@ -287,7 +285,7 @@ export function ToolLayout({
 
     // Reset file input
     if (fileInputRef.current) {
-      fileInputRef.current.value = "";
+      fileInputRef.current.value ="";
     }
   };
 
@@ -315,8 +313,8 @@ export function ToolLayout({
   // Social share handlers
   const getShareText = () => {
     const truncated =
-      result.length > 250 ? result.substring(0, 250) + "..." : result;
-    return `${truncated}\n\n✨ Generated with ToolNova - https://www.toolnovahub.com`;
+      result.length > 250 ? result.substring(0, 250) +"..." : result;
+    return`${truncated}\n\n✨ Generated with ToolNova - https://www.toolnovahub.com`;
   };
 
   const handleSocialShare = (platform: string) => {
@@ -324,16 +322,16 @@ export function ToolLayout({
     const url = encodeURIComponent("https://www.toolnovahub.com");
 
     const shareUrls: Record<string, string> = {
-      whatsapp: `https://wa.me/?text=${text}`,
-      twitter: `https://twitter.com/intent/tweet?text=${text}`,
-      facebook: `https://www.facebook.com/sharer/sharer.php?quote=${text}`,
-      telegram: `https://t.me/share/url?url=${url}&text=${text}`,
-      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+      whatsapp:`https://wa.me/?text=${text}`,
+      twitter:`https://twitter.com/intent/tweet?text=${text}`,
+      facebook:`https://www.facebook.com/sharer/sharer.php?quote=${text}`,
+      telegram:`https://t.me/share/url?url=${url}&text=${text}`,
+      linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
     };
 
     const shareUrl = shareUrls[platform];
     if (shareUrl) {
-      window.open(shareUrl, "_blank", "width=600,height=400");
+      window.open(shareUrl,"_blank","width=600,height=400");
     }
     setShowShareMenu(false);
   };
@@ -353,10 +351,10 @@ export function ToolLayout({
   };
 
   const buttonText =
-    generateButtonText || (isNonAITool ? "Process Now" : "Generate with AI");
+    generateButtonText || (isNonAITool ?"Process Now" :"Generate with AI");
 
   return (
-    <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#0f1419] dark:via-background dark:to-[#0f1419]">
+    <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Top Banner Ad */}
         <TopBannerAd />
@@ -364,7 +362,7 @@ export function ToolLayout({
         {!isNonAITool && (
           <div className="mb-6 rounded-xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm text-muted-foreground">
             <strong className="text-foreground">Free to start</strong> — no
-            sign-up required. Free daily AI uses included;{" "}
+            sign-up required. Free daily AI uses included;{""}
             <Link
               href="/pricing"
               className="text-primary font-medium underline underline-offset-2 hover:no-underline"
@@ -420,17 +418,17 @@ export function ToolLayout({
         <div className="space-y-12 mt-4">
           {/* Options Section */}
           {toolOptions.length > 0 && (
-            <div className="glass-panel rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden mb-8">
+            <div className="glass-panel rounded-3xl border border-slate-200 shadow-sm overflow-hidden mb-8">
               <button
                 onClick={() => setShowOptions(!showOptions)}
-                className="w-full px-8 py-5 flex items-center justify-between text-sm font-black text-slate-900 dark:text-white hover:bg-white/50 dark:hover:bg-slate-800/30 transition-colors uppercase tracking-widest"
+                className="w-full px-8 py-5 flex items-center justify-between text-sm font-black text-slate-900 hover:bg-white/50 :bg-slate-800/30 transition-colors uppercase tracking-widest"
               >
                 <div className="flex items-center gap-3">
                   <Settings2 className="h-5 w-5 text-primary" />
                   Tool Customization
                 </div>
                 <div className="flex items-center gap-2 text-slate-400 font-bold">
-                  {showOptions ? "Collapse" : "Expand"}
+                  {showOptions ?"Collapse" :"Expand"}
                   {showOptions ? (
                     <ChevronUp className="h-4 w-4" />
                   ) : (
@@ -446,14 +444,14 @@ export function ToolLayout({
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">
                         {opt.label}
                       </label>
-                      {opt.type === "select" && opt.options && (
+                      {opt.type ==="select" && opt.options && (
                         <div className="relative group">
                           <select
                             value={options[opt.id] || opt.defaultValue}
                             onChange={(e) =>
                               handleOptionChange(opt.id, e.target.value)
                             }
-                            className="w-full h-12 px-4 pr-10 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-sm font-bold focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer"
+                            className="w-full h-12 px-4 pr-10 rounded-2xl bg-white border border-slate-200 text-slate-900 text-sm font-bold focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer"
                           >
                             {opt.options.map((o) => (
                               <option key={o.value} value={o.value}>
@@ -464,23 +462,23 @@ export function ToolLayout({
                           <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
                         </div>
                       )}
-                      {opt.type === "toggle" && (
+                      {opt.type ==="toggle" && (
                         <button
                           onClick={() =>
                             handleOptionChange(opt.id, !options[opt.id])
                           }
                           className={`h-12 px-6 rounded-2xl border font-bold text-sm transition-all flex items-center justify-between ${
                             options[opt.id]
-                              ? "bg-primary text-white border-primary shadow-lg shadow-primary/20"
-                              : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:border-primary"
+                              ?"bg-primary text-white border-primary shadow-lg shadow-primary/20"
+                              :"bg-white text-slate-600 border-slate-200 hover:border-primary"
                           }`}
                         >
-                          {options[opt.id] ? "Enabled" : "Disabled"}
+                          {options[opt.id] ?"Enabled" :"Disabled"}
                           <div
-                            className={`w-8 h-4 rounded-full relative transition-colors ${options[opt.id] ? "bg-white/20" : "bg-slate-200 dark:bg-slate-800"}`}
+                            className={`w-8 h-4 rounded-full relative transition-colors ${options[opt.id] ?"bg-white/20" :"bg-slate-200"}`}
                           >
                             <div
-                              className={`absolute top-0.5 w-3 h-3 rounded-full bg-white transition-all ${options[opt.id] ? "left-4.5" : "left-0.5"}`}
+                              className={`absolute top-0.5 w-3 h-3 rounded-full bg-white transition-all ${options[opt.id] ?"left-4.5" :"left-0.5"}`}
                             ></div>
                           </div>
                         </button>
@@ -493,12 +491,12 @@ export function ToolLayout({
           )}
 
           {/* Input Area */}
-          <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-2xl p-6 md:p-12 relative overflow-hidden">
+          <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl p-6 md:p-12 relative overflow-hidden">
             <div className="absolute top-0 left-0 h-1 w-full bg-primary/80"></div>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
               <div>
-                <label className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-3">
+                <label className="text-xl font-black text-slate-900 flex items-center gap-3">
                   <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center">
                     <FileText className="h-4 w-4 text-primary" />
                   </div>
@@ -515,7 +513,7 @@ export function ToolLayout({
                 <Button
                   variant="outline"
                   size="sm"
-                  className="rounded-xl border-slate-200 dark:border-slate-800 font-bold text-xs h-10 hover:bg-slate-50 dark:hover:bg-slate-800"
+                  className="rounded-xl border-slate-200 font-bold text-xs h-10 hover:bg-slate-50 :bg-slate-800"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <Upload className="h-3.5 w-3.5 mr-2" /> Import
@@ -523,7 +521,7 @@ export function ToolLayout({
                 <Button
                   variant="outline"
                   size="sm"
-                  className="rounded-xl border-slate-200 dark:border-slate-800 font-bold text-xs h-10 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 hover:border-red-200"
+                  className="rounded-xl border-slate-200 font-bold text-xs h-10 hover:bg-red-50 :bg-red-900/20 hover:text-red-500 hover:border-red-200"
                   onClick={() => setInput("")}
                   disabled={!input}
                 >
@@ -543,7 +541,7 @@ export function ToolLayout({
               {/* Optional soft CTA for guests — tools work without sign-in */}
               {!isNonAITool && !loading && !authLoading && !user && (
                 <div className="mb-3 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm">
-                  <p className="text-slate-600 dark:text-slate-300">
+                  <p className="text-slate-600">
                     Free to use without an account. Sign in for more daily uses and saved history.
                   </p>
                   <Button
@@ -562,7 +560,7 @@ export function ToolLayout({
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={placeholder}
-                className="w-full min-h-[220px] md:min-h-[280px] resize-none p-8 rounded-[1.8rem] bg-slate-50 dark:bg-slate-800/40 border-slate-100 dark:border-slate-800/60 text-slate-900 dark:text-white text-lg focus:ring-4 focus:ring-primary/10 focus:border-primary/50 transition-all font-medium placeholder:text-slate-400 placeholder:font-normal leading-relaxed"
+                className="w-full min-h-[220px] md:min-h-[280px] resize-none p-8 rounded-[1.8rem] bg-slate-50 border-slate-100 text-slate-900 text-lg focus:ring-4 focus:ring-primary/10 focus:border-primary/50 transition-all font-medium placeholder:text-slate-400 placeholder:font-normal leading-relaxed"
               />
             </div>
 
@@ -576,7 +574,7 @@ export function ToolLayout({
                 {loading ? (
                   <div className="flex items-center gap-3">
                     <div className="h-6 w-6 border-3 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    <span>{isNonAITool ? "Processing..." : "Thinking..."}</span>
+                    <span>{isNonAITool ?"Processing..." :"Thinking..."}</span>
                   </div>
                 ) : (
                   <>
@@ -599,7 +597,7 @@ export function ToolLayout({
           {result && (
             <div
               ref={resultRef}
-              className="mt-20 p-8 md:p-14 rounded-[3rem] bg-white dark:bg-slate-900 border border-indigo-100 dark:border-indigo-900/30 shadow-2xl animate-in font-enter fade-in slide-in-from-bottom-8 duration-700 relative overflow-hidden"
+              className="mt-20 p-8 md:p-14 rounded-[3rem] bg-white border border-indigo-100 shadow-2xl animate-in font-enter fade-in slide-in-from-bottom-8 duration-700 relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -609,13 +607,13 @@ export function ToolLayout({
                     <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
                       <Check className="h-6 w-6 text-green-500" />
                     </div>
-                    <label className="text-2xl font-black text-slate-900 dark:text-white">
+                    <label className="text-2xl font-black text-slate-900">
                       {resultLabel}
                     </label>
                   </div>
                   {processingTime > 0 && (
                     <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-13">
-                      Processing complete in{" "}
+                      Processing complete in{""}
                       {(processingTime / 1000).toFixed(2)}s
                     </div>
                   )}
@@ -625,7 +623,7 @@ export function ToolLayout({
                   <Button
                     variant="outline"
                     size="lg"
-                    className="h-12 px-6 gap-3 rounded-[1.2rem] border-slate-200 dark:border-slate-800 font-black text-sm hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900 transition-all overflow-hidden relative"
+                    className="h-12 px-6 gap-3 rounded-[1.2rem] border-slate-200 font-black text-sm hover:bg-slate-900 hover:text-white :bg-white :text-slate-900 transition-all overflow-hidden relative"
                     onClick={handleCopy}
                   >
                     {copied ? (
@@ -633,7 +631,7 @@ export function ToolLayout({
                     ) : (
                       <Copy className="h-4 w-4" />
                     )}
-                    {copied ? "Copied" : "Copy Result"}
+                    {copied ?"Copied" :"Copy Result"}
                   </Button>
 
                   <DropdownMenu>
@@ -641,7 +639,7 @@ export function ToolLayout({
                       <Button
                         variant="outline"
                         size="lg"
-                        className="h-12 px-6 gap-3 rounded-[1.2rem] border-slate-200 dark:border-slate-800 font-black text-sm hover:bg-blue-600 hover:text-white transition-all"
+                        className="h-12 px-6 gap-3 rounded-[1.2rem] border-slate-200 font-black text-sm hover:bg-blue-600 hover:text-white transition-all"
                       >
                         <Share2 className="h-4 w-4" />
                         Export
@@ -650,7 +648,7 @@ export function ToolLayout({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                       align="end"
-                      className="w-56 p-2 rounded-2xl border-slate-200 dark:border-slate-800"
+                      className="w-56 p-2 rounded-2xl border-slate-200"
                     >
                       <DropdownMenuItem
                         onClick={handleDownload}
@@ -668,21 +666,21 @@ export function ToolLayout({
                         ) : (
                           <Volume2 className="h-4 w-4 mr-3 text-orange-500" />
                         )}
-                        {isSpeaking ? "Stop Dictation" : "Read Out Loud"}
+                        {isSpeaking ?"Stop Dictation" :"Read Out Loud"}
                       </DropdownMenuItem>
-                      <div className="h-px bg-slate-100 dark:bg-slate-800 my-2"></div>
+                      <div className="h-px bg-slate-100 my-2"></div>
                       <DropdownMenuItem
                         onClick={() => handleSocialShare("whatsapp")}
                         className="cursor-pointer rounded-xl h-11 font-bold"
                       >
-                        <FaWhatsapp className="h-4 w-4 mr-3 text-green-500" />{" "}
+                        <FaWhatsapp className="h-4 w-4 mr-3 text-green-500" />{""}
                         WhatsApp
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => handleSocialShare("twitter")}
                         className="cursor-pointer rounded-xl h-11 font-bold"
                       >
-                        <FaTwitter className="h-4 w-4 mr-3 text-blue-400" />{" "}
+                        <FaTwitter className="h-4 w-4 mr-3 text-blue-400" />{""}
                         Twitter / X
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -690,12 +688,12 @@ export function ToolLayout({
                 </div>
               </div>
 
-              <div className="bg-slate-50 dark:bg-slate-800/30 rounded-[2rem] p-8 md:p-12 border border-slate-100 dark:border-slate-800/60 relative z-10">
+              <div className="bg-slate-50 rounded-[2rem] p-8 md:p-12 border border-slate-100 relative z-10">
                 {customResultRenderer ? (
                   customResultRenderer(result)
                 ) : isNonAITool ? (
-                  <div className="prose prose-slate prose-lg dark:prose-invert max-w-none">
-                    <p className="whitespace-pre-wrap leading-relaxed text-slate-800 dark:text-slate-200 text-lg m-0">
+                  <div className="prose prose-slate prose-lg max-w-none">
+                    <p className="whitespace-pre-wrap leading-relaxed text-slate-800 text-lg m-0">
                       {result}
                     </p>
                   </div>
@@ -724,15 +722,15 @@ export function ToolLayout({
             </button>
 
             {showHistory && (
-              <div className="mt-4 bg-white dark:bg-[#1a1f2e] rounded-2xl border border-slate-100 dark:border-slate-800 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
-                <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
+              <div className="mt-4 bg-white rounded-2xl border border-slate-100 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
+                <div className="flex items-center justify-between p-4 border-b border-slate-100">
                   <span className="text-sm font-semibold text-foreground">
                     Recent Generations
                   </span>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="h-8 text-xs text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
+                    className="h-8 text-xs text-red-500 hover:text-red-600 hover:bg-red-50 :bg-red-900/20"
                     onClick={handleClearHistory}
                   >
                     <Trash2 className="h-3.5 w-3.5 mr-1" /> Clear All
@@ -743,7 +741,7 @@ export function ToolLayout({
                     <button
                       key={index}
                       onClick={() => handleLoadFromHistory(item)}
-                      className="w-full p-4 text-left border-b border-slate-50 dark:border-slate-800 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                      className="w-full p-4 text-left border-b border-slate-50 last:border-0 hover:bg-slate-50 :bg-slate-800/50 transition-colors"
                     >
                       <div className="text-sm text-foreground font-medium line-clamp-1">
                         {item.input}

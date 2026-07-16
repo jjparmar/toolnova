@@ -69,7 +69,7 @@ export default function TrendingToolsSection() {
 
             <div className="container px-4 md:px-6 lg:px-8 relative z-10">
                 <div className="text-center space-y-4 mb-16 animate-fade-in">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400 mb-4">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 text-orange-600 mb-4">
                         <TrendingUp className="h-4 w-4" />
                         <span className="text-sm font-semibold">Trending This Week</span>
                     </div>
@@ -87,7 +87,7 @@ export default function TrendingToolsSection() {
                         <Link key={tool.name} href={tool.href}>
                             <Card
                                 className="glass-card h-full hover:shadow-elevated transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 cursor-pointer group animate-scale-in"
-                                style={{ animationDelay: `${index * 0.1}s` }}
+                                style={{ animationDelay:`${index * 0.1}s` }}
                             >
                                 <CardHeader>
                                     <div className="flex items-start justify-between mb-2">

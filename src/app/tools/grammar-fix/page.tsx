@@ -1,55 +1,47 @@
-import { Metadata } from "next";
-import Link from "next/link";
+import { Metadata } from"next";
+import Link from"next/link";
 import {
   getToolSchema,
   getHowToSchema,
   getFAQSchema,
   schemaToJsonLd,
-} from "@/lib/schema";
-import { getToolData } from "@/data/tools";
-import { getOptimizedToolMetadata } from "@/lib/tool-metadata";
-import { RelatedTools } from "@/components/RelatedTools";
-import GrammarFixClient from "./client";
-import { ToolRichContent } from "@/components/ToolRichContent";
+} from"@/lib/schema";
+import { getToolData } from"@/data/tools";
+import { getOptimizedToolMetadata } from"@/lib/tool-metadata";
+import { RelatedTools } from"@/components/RelatedTools";
+import GrammarFixClient from"./client";
+import { ToolRichContent } from"@/components/ToolRichContent";
 
 const toolMeta = getOptimizedToolMetadata("grammar-fix");
 
 export const metadata: Metadata = {
   title:
-    toolMeta?.title || "AI Grammar Fix – Fix Grammar Errors Free | ToolNova",
+    toolMeta?.title ||"AI Grammar Fix – Fix Grammar Errors Free | ToolNova",
   description:
-    toolMeta?.description ||
-    "Fix grammar, spelling, and punctuation errors instantly with our free AI grammar checker. Perfect for essays, emails, and documents. Professional results, fast.",
-  keywords: toolMeta?.keywords || [
-    "AI grammar fix",
-    "grammar checker",
-    "spelling correction",
-    "punctuation fix",
-    "proofreading tool",
+    toolMeta?.description ||"Fix grammar, spelling, and punctuation errors instantly with our free AI grammar checker. Perfect for essays, emails, and documents. Professional results, fast.",
+  keywords: toolMeta?.keywords || ["AI grammar fix","grammar checker","spelling correction","punctuation fix","proofreading tool",
   ],
-  alternates: { canonical: "https://www.toolnovahub.com/tools/grammar-fix" },
+  alternates: { canonical:"https://www.toolnovahub.com/tools/grammar-fix" },
   openGraph: {
     title:
-      toolMeta?.title || "AI Grammar Fix – Fix Grammar Errors Free | ToolNova",
+      toolMeta?.title ||"AI Grammar Fix – Fix Grammar Errors Free | ToolNova",
     description:
-      toolMeta?.description ||
-      "Fix grammar, spelling, and punctuation errors instantly with our free AI grammar checker.",
-    url: "https://www.toolnovahub.com/tools/grammar-fix",
-    type: "website",
+      toolMeta?.description ||"Fix grammar, spelling, and punctuation errors instantly with our free AI grammar checker.",
+    url:"https://www.toolnovahub.com/tools/grammar-fix",
+    type:"website",
     images: [
       {
-        url: "https://www.toolnovahub.com/og-image.png",
+        url:"https://www.toolnovahub.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "AI Grammar Checker – ToolNova",
+        alt:"AI Grammar Checker – ToolNova",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "AI Grammar Fix Free | ToolNova",
-    description:
-      "Fix grammar and spelling instantly for essays, emails, and documents.",
+    card:"summary_large_image",
+    title:"AI Grammar Fix Free | ToolNova",
+    description:"Fix grammar and spelling instantly for essays, emails, and documents.",
   },
 };
 
@@ -60,17 +52,15 @@ export default function GrammarFixPage() {
 
   const toolSchema = getToolSchema(
     toolData.name,
-    toolData.description,
-    "https://www.toolnovahub.com/tools/grammar-fix",
+    toolData.description,"https://www.toolnovahub.com/tools/grammar-fix",
   );
 
-  const howToSchema = getHowToSchema(
-    `How to use ${toolData.name}`,
+  const howToSchema = getHowToSchema(`How to use ${toolData.name}`,
     toolData.description,
     toolData.howItWorks.map((step) => ({
       name: step.title,
       text: step.desc,
-      url: `https://www.toolnovahub.com/tools/grammar-fix#step-${step.step}`,
+      url:`https://www.toolnovahub.com/tools/grammar-fix#step-${step.step}`,
     })),
   );
 

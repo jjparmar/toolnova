@@ -62,14 +62,14 @@ export default function MergePDFClient() {
     const processFile = async (file: File): Promise<PDFFile | null> => {
         try {
             const arrayBuffer = await file.arrayBuffer();
-            // ignoreEncryption: many student PDFs are "secured" but still readable
+            // ignoreEncryption: many student PDFs are"secured" but still readable
             const pdfDoc = await PDFDocument.load(arrayBuffer, {
                 ignoreEncryption: true,
             });
             const pageCount = pdfDoc.getPageCount();
 
             return {
-                id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                id:`${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
                 file,
                 name: file.name,
                 pages: pageCount,
@@ -172,7 +172,7 @@ export default function MergePDFClient() {
             const safeName = (outputName.trim() || 'merged-document').replace(/[^\w\-]+/g, '-');
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${safeName}.pdf`;
+            a.download =`${safeName}.pdf`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -191,7 +191,7 @@ export default function MergePDFClient() {
         const safeName = (outputName.trim() || 'merged-document').replace(/[^\w\-]+/g, '-');
         const a = document.createElement('a');
         a.href = lastUrl;
-        a.download = `${safeName}.pdf`;
+        a.download =`${safeName}.pdf`;
         a.click();
     };
 
@@ -232,7 +232,7 @@ export default function MergePDFClient() {
 
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-500/10 to-orange-500/10 text-red-600 dark:text-red-400 text-sm font-semibold mb-5">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-500/10 to-orange-500/10 text-red-600 text-sm font-semibold mb-5">
                         <Sparkles className="h-4 w-4" />
                         Free PDF Tool
                     </div>
@@ -279,8 +279,7 @@ export default function MergePDFClient() {
                                 ${dragOver
                                     ? 'border-primary bg-primary/5 scale-[1.02]'
                                     : 'border-border/60 hover:border-primary/50 hover:bg-muted/30 hover:shadow-glow-sm'
-                                }
-                            `}
+                                }`}
                         >
                             {loading ? (
                                 <div className="flex flex-col items-center gap-3">
@@ -319,7 +318,7 @@ export default function MergePDFClient() {
                                         variant="ghost"
                                         size="sm"
                                         onClick={clearAll}
-                                        className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
+                                        className="text-red-500 hover:text-red-600 hover:bg-red-50 :bg-red-900/20"
                                     >
                                         <Trash2 className="h-4 w-4 mr-1" />
                                         Clear All
@@ -368,7 +367,7 @@ export default function MergePDFClient() {
                                                     variant="ghost"
                                                     size="icon"
                                                     onClick={() => removeFile(file.id)}
-                                                    className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
+                                                    className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50 :bg-red-900/20"
                                                 >
                                                     <Trash2 className="h-4 w-4" />
                                                 </Button>
@@ -426,7 +425,7 @@ export default function MergePDFClient() {
                         </div>
 
                         {files.length > 0 && files.length < 2 && (
-                            <div className="mt-4 flex items-center justify-center gap-2 text-amber-600 dark:text-amber-400">
+                            <div className="mt-4 flex items-center justify-center gap-2 text-amber-600">
                                 <AlertCircle className="h-4 w-4" />
                                 <span className="text-sm">Add at least 2 PDF files to merge</span>
                             </div>
@@ -487,8 +486,7 @@ export default function MergePDFClient() {
                                 <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
                             ))}
                         </div>
-                        <p className="text-lg italic text-foreground/80 max-w-2xl mb-4">
-                            "This PDF merger is incredibly fast and easy to use. I combine reports weekly and this tool saves me so much time!"
+                        <p className="text-lg italic text-foreground/80 max-w-2xl mb-4">"This PDF merger is incredibly fast and easy to use. I combine reports weekly and this tool saves me so much time!"
                         </p>
                         <div className="flex items-center gap-3">
                             <div className="h-10 w-10 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-white font-bold">

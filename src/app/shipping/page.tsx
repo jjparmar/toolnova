@@ -1,11 +1,10 @@
-import { Metadata } from "next";
+import { Metadata } from"next";
 
-const LAST_UPDATED = "June 14, 2026";
+const LAST_UPDATED ="June 14, 2026";
 
 export const metadata: Metadata = {
-    title: "Shipping & Delivery Policy | ToolNova",
-    description:
-        "Shipping and Delivery Policy for ToolNova. As a digital SaaS platform, we do not ship physical products.",
+    title:"Shipping & Delivery Policy | ToolNova",
+    description:"Shipping and Delivery Policy for ToolNova. As a digital SaaS platform, we do not ship physical products.",
     robots: {
         index: false,
         follow: true,
@@ -14,13 +13,13 @@ export const metadata: Metadata = {
 
 export default function ShippingPage() {
     return (
-        <div className="container mx-auto px-6 py-24 max-w-4xl text-slate-800 dark:text-slate-200">
+        <div className="container mx-auto px-6 py-24 max-w-4xl text-slate-800">
             <h1 className="text-4xl font-bold mb-8">Shipping & Delivery Policy</h1>
             <p className="text-sm text-muted-foreground mb-8">
                 Last Updated: {LAST_UPDATED}
             </p>
 
-            <div className="prose dark:prose-invert max-w-none space-y-6">
+            <div className="prose max-w-none space-y-6">
                 <section>
                     <h2 className="text-2xl font-semibold mb-4">1. Digital Products</h2>
                     <p>

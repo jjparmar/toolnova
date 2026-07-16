@@ -51,7 +51,7 @@ export function ArticleHeader({
             </p>
 
             {/* Author & Meta Info */}
-            <div className="flex flex-wrap items-center gap-6 py-4 border-y border-slate-200 dark:border-slate-800">
+            <div className="flex flex-wrap items-center gap-6 py-4 border-y border-slate-200">
                 {/* Author */}
                 <Link
                     href={`/author/${author.slug}`}

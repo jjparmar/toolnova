@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { Mail, MapPin, CheckCircle, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { siteConfig } from "@/config/site";
-import { toast } from "sonner";
+import { useState } from"react";
+import { Mail, MapPin, CheckCircle, ExternalLink } from"lucide-react";
+import { Button } from"@/components/ui/button";
+import { Input } from"@/components/ui/input";
+import { Textarea } from"@/components/ui/textarea";
+import { siteConfig } from"@/config/site";
+import { toast } from"sonner";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -17,12 +17,12 @@ export function ContactForm() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    const firstName = String(data.get("firstName") || "").trim();
-    const lastName = String(data.get("lastName") || "").trim();
-    const email = String(data.get("email") || "").trim();
+    const firstName = String(data.get("firstName") ||"").trim();
+    const lastName = String(data.get("lastName") ||"").trim();
+    const email = String(data.get("email") ||"").trim();
     const subject =
-      String(data.get("subject") || "").trim() || "ToolNova support request";
-    const message = String(data.get("message") || "").trim();
+      String(data.get("subject") ||"").trim() ||"ToolNova support request";
+    const message = String(data.get("message") ||"").trim();
 
     if (!firstName || !email || !message) {
       toast.error("Please fill in name, email, and message");
@@ -34,15 +34,10 @@ export function ContactForm() {
     }
 
     const body = [
-      message,
-      "",
-      "---",
-      `Name: ${firstName}${lastName ? ` ${lastName}` : ""}`,
-      `Email: ${email}`,
-      `Source: ${siteConfig.url}/contact`,
+      message,"","---",`Name: ${firstName}${lastName ?` ${lastName}` :""}`,`Email: ${email}`,`Source: ${siteConfig.url}/contact`,
     ].join("\n");
 
-    const mailto = `mailto:${siteConfig.author.email}?subject=${encodeURIComponent(
+    const mailto =`mailto:${siteConfig.author.email}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;
 
@@ -110,12 +105,12 @@ export function ContactForm() {
           <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-center gap-4">
             <CheckCircle className="h-16 w-16 text-green-500" />
             <h3 className="text-2xl font-bold text-foreground">
-              {openedMail ? "Email client opened" : "Ready to send"}
+              {openedMail ?"Email client opened" :"Ready to send"}
             </h3>
             <p className="text-muted-foreground max-w-sm">
               {openedMail
-                ? "Your email app should open with a prefilled message. Hit send there — we typically reply within 24 hours."
-                : "If your email app did not open, email us directly and we will reply within 24 hours."}
+                ?"Your email app should open with a prefilled message. Hit send there — we typically reply within 24 hours."
+                :"If your email app did not open, email us directly and we will reply within 24 hours."}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 mt-2">
               <Button variant="outline" onClick={() => setSubmitted(false)}>
@@ -195,7 +190,7 @@ export function ContactForm() {
               Open email to send
             </Button>
             <p className="text-xs text-muted-foreground text-center">
-              Opens your email app with a prefilled message to{" "}
+              Opens your email app with a prefilled message to{""}
               {siteConfig.author.email}. No account required.
             </p>
           </form>

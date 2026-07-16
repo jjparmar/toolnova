@@ -3,7 +3,7 @@
  * Optimized for global reach, AI search engines, and Google Discover
  */
 
-import { siteConfig, getFullUrl } from "@/config/site";
+import { siteConfig, getFullUrl } from"@/config/site";
 
 // ============================================
 // TYPE DEFINITIONS
@@ -15,8 +15,8 @@ export interface SEOAdvancedConfig {
   keywords?: string[];
   canonical?: string;
   ogImage?: string;
-  ogType?: "website" | "article" | "product" | "software";
-  twitterCard?: "summary" | "summary_large_image";
+  ogType?:"website" |"article" |"product" |"software";
+  twitterCard?:"summary" |"summary_large_image";
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
@@ -61,101 +61,45 @@ export interface BreadcrumbItem {
 // Target regions for global reach
 export const TARGET_REGIONS = {
   // Tier 1 Countries (High CPC, priority)
-  USA: { code: "US", currency: "USD", language: "en-US" },
-  UK: { code: "GB", currency: "GBP", language: "en-GB" },
-  CANADA: { code: "CA", currency: "CAD", language: "en-CA" },
-  AUSTRALIA: { code: "AU", currency: "AUD", language: "en-AU" },
+  USA: { code:"US", currency:"USD", language:"en-US" },
+  UK: { code:"GB", currency:"GBP", language:"en-GB" },
+  CANADA: { code:"CA", currency:"CAD", language:"en-CA" },
+  AUSTRALIA: { code:"AU", currency:"AUD", language:"en-AU" },
   // Emerging Markets
-  INDIA: { code: "IN", currency: "INR", language: "en-IN" },
-  SINGAPORE: { code: "SG", currency: "SGD", language: "en-SG" },
-  UAE: { code: "AE", currency: "AED", language: "en-AE" },
-  GERMANY: { code: "DE", currency: "EUR", language: "de-DE" },
-  FRANCE: { code: "FR", currency: "EUR", language: "fr-FR" },
-  NETHERLANDS: { code: "NL", currency: "EUR", language: "nl-NL" },
+  INDIA: { code:"IN", currency:"INR", language:"en-IN" },
+  SINGAPORE: { code:"SG", currency:"SGD", language:"en-SG" },
+  UAE: { code:"AE", currency:"AED", language:"en-AE" },
+  GERMANY: { code:"DE", currency:"EUR", language:"de-DE" },
+  FRANCE: { code:"FR", currency:"EUR", language:"fr-FR" },
+  NETHERLANDS: { code:"NL", currency:"EUR", language:"nl-NL" },
 } as const;
 
 // AI Search Engine User Agents for robots.txt
 export const AI_SEARCH_AGENTS = [
-  // OpenAI / ChatGPT
-  "GPTBot",
-  "ChatGPT-User",
-  // Google AI
-  "Google-Extended",
-  // Common Crawl (used by many AI models)
-  "CCBot",
-  // Perplexity
-  "PerplexityBot",
-  // Anthropic / Claude
-  "ClaudeBot",
-  "Claude-Web",
-  "Anthropic-AI",
-  // Diffbot
-  "Diffbot",
-  // ByteDance / TikTok
-  "Bytespider",
-  // Cohere
-  "cohere-ai",
-  // Facebook / Meta
-  "FacebookBot",
-  // Apple
-  "Applebot",
-  // Amazon
-  "Amazonbot",
-  // You.com
-  "YouBot",
-  // Neeva
-  "Neevabot",
+  // OpenAI / ChatGPT"GPTBot","ChatGPT-User",
+  // Google AI"Google-Extended",
+  // Common Crawl (used by many AI models)"CCBot",
+  // Perplexity"PerplexityBot",
+  // Anthropic / Claude"ClaudeBot","Claude-Web","Anthropic-AI",
+  // Diffbot"Diffbot",
+  // ByteDance / TikTok"Bytespider",
+  // Cohere"cohere-ai",
+  // Facebook / Meta"FacebookBot",
+  // Apple"Applebot",
+  // Amazon"Amazonbot",
+  // You.com"YouBot",
+  // Neeva"Neevabot",
 ] as const;
 
 // High-value keywords by category for AEO
 export const AEO_KEYWORDS = {
-  education: [
-    "how to study effectively",
-    "best study methods",
-    "homework help online",
-    "essay writing tips",
-    "exam preparation guide",
-    "learn faster techniques",
-    "note taking strategies",
-    "flashcard study method",
-    "test taking strategies",
-    "academic success tips",
+  education: ["how to study effectively","best study methods","homework help online","essay writing tips","exam preparation guide","learn faster techniques","note taking strategies","flashcard study method","test taking strategies","academic success tips",
   ],
-  writing: [
-    "how to write an essay",
-    "improve writing skills",
-    "grammar check online",
-    "paraphrase text correctly",
-    "write professional emails",
-    "content writing tips",
-    "academic writing guide",
-    "creative writing help",
-    "business writing tips",
-    "proofreading techniques",
+  writing: ["how to write an essay","improve writing skills","grammar check online","paraphrase text correctly","write professional emails","content writing tips","academic writing guide","creative writing help","business writing tips","proofreading techniques",
   ],
-  productivity: [
-    "time management tips",
-    "study schedule maker",
-    "goal setting guide",
-    "productivity hacks",
-    "work smarter not harder",
-    "task prioritization",
-    "daily planning tips",
-    "focus techniques",
-    "procrastination help",
-    "efficient workflow",
+  productivity: ["time management tips","study schedule maker","goal setting guide","productivity hacks","work smarter not harder","task prioritization","daily planning tips","focus techniques","procrastination help","efficient workflow",
   ],
-  career: [
-    "resume writing tips",
-    "cover letter guide",
-    "interview preparation",
-    "job application help",
-    "career advice",
-    "professional bio examples",
-    "linkedin profile tips",
-    "job search strategies",
-    "salary negotiation tips",
-    "career development plan",
+  career: ["resume writing tips","cover letter guide","interview preparation","job application help","career advice","professional bio examples","linkedin profile tips","job search strategies","salary negotiation tips","career development plan",
   ],
 } as const;
 
@@ -169,61 +113,47 @@ export const AEO_KEYWORDS = {
  * Generate WebSite Schema with enhanced search action
  */
 export function generateWebSiteSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${siteConfig.url}/#website`,
+  return {"@context":"https://schema.org","@type":"WebSite","@id":`${siteConfig.url}/#website`,
     name: siteConfig.name,
-    alternateName: "ToolNovaHub",
+    alternateName:"ToolNovaHub",
     url: siteConfig.url,
     description: siteConfig.description,
-    inLanguage: ["en-US", "en-GB", "en-CA", "en-AU", "en-IN"],
-    publisher: {
-      "@id": `${siteConfig.url}/#organization`,
+    inLanguage: ["en-US","en-GB","en-CA","en-AU","en-IN"],
+    publisher: {"@id":`${siteConfig.url}/#organization`,
     },
     // Enhanced search action for AI
     potentialAction: [
-      {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: `${siteConfig.url}/search?q={search_term_string}`,
-        },
-        "query-input": "required name=search_term_string",
+      {"@type":"SearchAction",
+        target: {"@type":"EntryPoint",
+          urlTemplate:`${siteConfig.url}/search?q={search_term_string}`,
+        },"query-input":"required name=search_term_string",
       },
       // Action for AI assistants
-      {
-        "@type": "Action",
-        "@id": `${siteConfig.url}/#tool-action`,
-        name: "Use ToolNova Tools",
-        description: "Access AI-powered tools for writing, studying, and productivity",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: `${siteConfig.url}/tools/{tool_slug}`,
+      {"@type":"Action","@id":`${siteConfig.url}/#tool-action`,
+        name:"Use ToolNova Tools",
+        description:"Access AI-powered tools for writing, studying, and productivity",
+        target: {"@type":"EntryPoint",
+          urlTemplate:`${siteConfig.url}/tools/{tool_slug}`,
         },
       },
     ],
     // Navigation structure for AI
     hasPart: [
-      {
-        "@type": "WebPage",
-        name: "All Tools",
-        url: `${siteConfig.url}/tools`,
+      {"@type":"WebPage",
+        name:"All Tools",
+        url:`${siteConfig.url}/tools`,
       },
-      {
-        "@type": "WebPage",
-        name: "Blog",
-        url: `${siteConfig.url}/blog`,
+      {"@type":"WebPage",
+        name:"Blog",
+        url:`${siteConfig.url}/blog`,
       },
-      {
-        "@type": "WebPage",
-        name: "Writing Tools",
-        url: `${siteConfig.url}/tools/writing-tools`,
+      {"@type":"WebPage",
+        name:"Writing Tools",
+        url:`${siteConfig.url}/tools/writing-tools`,
       },
-      {
-        "@type": "WebPage",
-        name: "Study Tools",
-        url: `${siteConfig.url}/tools/study-tools`,
+      {"@type":"WebPage",
+        name:"Study Tools",
+        url:`${siteConfig.url}/tools/study-tools`,
       },
     ],
   };
@@ -233,45 +163,31 @@ export function generateWebSiteSchema() {
  * Generate SoftwareApplication Schema for AI Discovery
  */
 export function generateSoftwareApplicationSchema(toolSlug?: string, toolName?: string) {
-  const baseSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+  const baseSchema = {"@context":"https://schema.org","@type":"SoftwareApplication",
     name: toolName || siteConfig.name,
-    applicationCategory: "EducationalApplication, ProductivityApplication",
-    operatingSystem: "Web Browser",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-      priceValidUntil: "2027-12-31",
-      availability: "https://schema.org/InStock",
+    applicationCategory:"EducationalApplication, ProductivityApplication",
+    operatingSystem:"Web Browser",
+    offers: {"@type":"Offer",
+      price:"0",
+      priceCurrency:"USD",
+      priceValidUntil:"2027-12-31",
+      availability:"https://schema.org/InStock",
     },
     description: siteConfig.description,
     url: toolSlug ? getFullUrl(`/tools/${toolSlug}`) : siteConfig.url,
-    author: {
-      "@id": `${siteConfig.url}/#organization`,
+    author: {"@id":`${siteConfig.url}/#organization`,
     },
-    publisher: {
-      "@id": `${siteConfig.url}/#organization`,
+    publisher: {"@id":`${siteConfig.url}/#organization`,
     },
     // Features for AI discovery
-    featureList: [
-      "AI-powered text processing",
-      "PDF manipulation",
-      "Grammar checking",
-      "Essay writing assistance",
-      "Study tools",
-      "Flashcard generation",
-      "Quiz creation",
-      "No sign-up required",
-      "Free to use",
+    featureList: ["AI-powered text processing","PDF manipulation","Grammar checking","Essay writing assistance","Study tools","Flashcard generation","Quiz creation","No sign-up required","Free to use",
     ],
     // Platform compatibility
-    availableOnDevice: ["Desktop", "Mobile", "Tablet"],
-    browserRequirements: "Requires JavaScript. Requires HTML5.",
+    availableOnDevice: ["Desktop","Mobile","Tablet"],
+    browserRequirements:"Requires JavaScript. Requires HTML5.",
     // Memory and storage
-    memoryRequirements: "No local storage required",
-    storageRequirements: "Cloud-based",
+    memoryRequirements:"No local storage required",
+    storageRequirements:"Cloud-based",
   };
 
   return baseSchema;
@@ -281,14 +197,10 @@ export function generateSoftwareApplicationSchema(toolSlug?: string, toolName?: 
  * Generate FAQPage Schema for AEO
  */
 export function generateFAQSchema(faqItems: FAQItem[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqItems.map((item) => ({
-      "@type": "Question",
+  return {"@context":"https://schema.org","@type":"FAQPage",
+    mainEntity: faqItems.map((item) => ({"@type":"Question",
       name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
+      acceptedAnswer: {"@type":"Answer",
         text: item.answer,
       },
     })),
@@ -305,15 +217,12 @@ export function generateHowToSchema(
   totalTime?: string,
   toolSlug?: string
 ) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
+  return {"@context":"https://schema.org","@type":"HowTo",
     name,
     description,
     url: toolSlug ? getFullUrl(`/tools/${toolSlug}`) : undefined,
     totalTime,
-    step: steps.map((step, index) => ({
-      "@type": "HowToStep",
+    step: steps.map((step, index) => ({"@type":"HowToStep",
       position: index + 1,
       name: step.name,
       text: step.text,
@@ -322,9 +231,8 @@ export function generateHowToSchema(
     })),
     // Tool required
     tool: [
-      {
-        "@type": "HowToTool",
-        name: "ToolNova AI Tools",
+      {"@type":"HowToTool",
+        name:"ToolNova AI Tools",
       },
     ],
   };
@@ -334,11 +242,8 @@ export function generateHowToSchema(
  * Generate BreadcrumbList Schema
  */
 export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
+  return {"@context":"https://schema.org","@type":"BreadcrumbList",
+    itemListElement: items.map((item, index) => ({"@type":"ListItem",
       position: index + 1,
       name: item.name,
       item: item.url,
@@ -350,13 +255,9 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
  * Generate SpeakableSpecification for voice search
  */
 export function generateSpeakableSchema(content: string, url: string) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "SpeakableSpecification",
-    cssSelector: [".speakable-content", ".tool-description", ".hero-text"],
-    xpath: [
-      "/html/head/title",
-      "/html/head/meta[@name='description']/@content",
+  return {"@context":"https://schema.org","@type":"SpeakableSpecification",
+    cssSelector: [".speakable-content",".tool-description",".hero-text"],
+    xpath: ["/html/head/title","/html/head/meta[@name='description']/@content",
     ],
     // Text content for voice assistants
     text: content.substring(0, 200),
@@ -373,54 +274,46 @@ export function generateArticleSchema(
   url: string,
   publishedDate: string,
   modifiedDate: string,
-  author: string = "ToolNova Team",
+  author: string ="ToolNova Team",
   image?: string,
   isNewsArticle: boolean = false
 ) {
-  const baseSchema = {
-    "@context": "https://schema.org",
-    "@type": isNewsArticle ? "NewsArticle" : "Article",
+  const baseSchema = {"@context":"https://schema.org","@type": isNewsArticle ?"NewsArticle" :"Article",
     headline: title,
     description,
     url,
     datePublished: publishedDate,
     dateModified: modifiedDate,
-    author: {
-      "@type": "Person",
+    author: {"@type":"Person",
       name: author,
-      url: `${siteConfig.url}/about`,
+      url:`${siteConfig.url}/about`,
     },
-    publisher: {
-      "@id": `${siteConfig.url}/#organization`,
+    publisher: {"@id":`${siteConfig.url}/#organization`,
     },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": url,
+    mainEntityOfPage: {"@type":"WebPage","@id": url,
     },
     image: image || siteConfig.ogImage,
     // For Google Discover
     isAccessibleForFree: true,
-    isPartOf: {
-      "@type": "CreativeWork",
-      name: "ToolNova Blog",
-      url: `${siteConfig.url}/blog`,
+    isPartOf: {"@type":"CreativeWork",
+      name:"ToolNova Blog",
+      url:`${siteConfig.url}/blog`,
     },
     // Keywords for discover
     keywords: [],
     // Article section
-    articleSection: "Education",
+    articleSection:"Education",
     // Word count (approximate)
-    wordCount: description.split(" ").length,
+    wordCount: description.split("").length,
   };
 
   if (isNewsArticle) {
     return {
       ...baseSchema,
       // News-specific fields
-      dateline: "Singapore",
+      dateline:"Singapore",
       copyrightYear: new Date().getFullYear(),
-      copyrightHolder: {
-        "@id": `${siteConfig.url}/#organization`,
+      copyrightHolder: {"@id":`${siteConfig.url}/#organization`,
       },
     };
   }
@@ -437,40 +330,33 @@ export function generateProductSchema(
   url: string,
   category: string
 ) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Product",
+  return {"@context":"https://schema.org","@type":"Product",
     name,
     description,
     url,
     category,
-    brand: {
-      "@type": "Brand",
-      name: "ToolNova",
+    brand: {"@type":"Brand",
+      name:"ToolNova",
     },
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      priceValidUntil: "2027-12-31",
+    offers: {"@type":"Offer",
+      price:"0",
+      priceCurrency:"USD",
+      availability:"https://schema.org/InStock",
+      priceValidUntil:"2027-12-31",
     },
     // Features
     additionalProperty: [
-      {
-        "@type": "PropertyValue",
-        name: "Pricing",
-        value: "Free",
+      {"@type":"PropertyValue",
+        name:"Pricing",
+        value:"Free",
       },
-      {
-        "@type": "PropertyValue",
-        name: "Platform",
-        value: "Web",
+      {"@type":"PropertyValue",
+        name:"Platform",
+        value:"Web",
       },
-      {
-        "@type": "PropertyValue",
-        name: "AI-Powered",
-        value: "Yes",
+      {"@type":"PropertyValue",
+        name:"AI-Powered",
+        value:"Yes",
       },
     ],
   };
@@ -485,35 +371,27 @@ export function generateWebPageSchema(
   url: string,
   breadcrumbs?: BreadcrumbItem[]
 ) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": `${url}/#webpage`,
+  return {"@context":"https://schema.org","@type":"WebPage","@id":`${url}/#webpage`,
     name: title,
     description,
     url,
-    isPartOf: {
-      "@id": `${siteConfig.url}/#website`,
+    isPartOf: {"@id":`${siteConfig.url}/#website`,
     },
-    inLanguage: "en-US",
-    about: {
-      "@type": "Thing",
-      name: "AI Tools",
-      description: "Free AI-powered tools for productivity and education",
+    inLanguage:"en-US",
+    about: {"@type":"Thing",
+      name:"AI Tools",
+      description:"Free AI-powered tools for productivity and education",
     },
     // Breadcrumbs
     ...(breadcrumbs && { breadcrumb: generateBreadcrumbSchema(breadcrumbs) }),
     // Author/Publisher
-    author: {
-      "@id": `${siteConfig.url}/#organization`,
+    author: {"@id":`${siteConfig.url}/#organization`,
     },
-    publisher: {
-      "@id": `${siteConfig.url}/#organization`,
+    publisher: {"@id":`${siteConfig.url}/#organization`,
     },
     // For AI search
-    mainContentOfPage: {
-      "@type": "WebPageElement",
-      name: "Main Content",
+    mainContentOfPage: {"@type":"WebPageElement",
+      name:"Main Content",
     },
   };
 }
@@ -527,23 +405,11 @@ export function generateDiscoverMetaTags(
   image?: string
 ) {
   return {
-    // Required for Discover
-    "format-detection": "telephone=no",
-    // Image requirements (1200px minimum width)
-    "og:image:width": "1200",
-    "og:image:height": "630",
-    "twitter:image": image || siteConfig.ogImage,
-    // Article specific
-    "article:published_time": new Date().toISOString(),
-    "article:modified_time": new Date().toISOString(),
-    "article:author": "ToolNova Editorial Team",
-    "article:section": "Education",
-    // Swipeable for mobile
-    "mobile-web-app-capable": "yes",
-    // Theme color
-    "theme-color": "#2563eb",
-    "msapplication-navbutton-color": "#2563eb",
-    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    // Required for Discover"format-detection":"telephone=no",
+    // Image requirements (1200px minimum width)"og:image:width":"1200","og:image:height":"630","twitter:image": image || siteConfig.ogImage,
+    // Article specific"article:published_time": new Date().toISOString(),"article:modified_time": new Date().toISOString(),"article:author":"ToolNova Editorial Team","article:section":"Education",
+    // Swipeable for mobile"mobile-web-app-capable":"yes",
+    // Theme color"theme-color":"#2563eb","msapplication-navbutton-color":"#2563eb","apple-mobile-web-app-status-bar-style":"black-translucent",
   };
 }
 
@@ -572,9 +438,9 @@ export function generateToolPageSchemas(
   // Breadcrumbs
   schemas.push(
     generateBreadcrumbSchema([
-      { name: "Home", url: siteConfig.url },
-      { name: "Tools", url: `${siteConfig.url}/tools` },
-      { name: toolCategory, url: `${siteConfig.url}/tools/${toolCategory.toLowerCase().replace(/\s+/g, "-")}` },
+      { name:"Home", url: siteConfig.url },
+      { name:"Tools", url:`${siteConfig.url}/tools` },
+      { name: toolCategory, url:`${siteConfig.url}/tools/${toolCategory.toLowerCase().replace(/\s+/g,"-")}` },
       { name: toolName, url },
     ])
   );
@@ -587,11 +453,9 @@ export function generateToolPageSchemas(
   // HowTo if provided
   if (howToSteps && howToSteps.length > 0) {
     schemas.push(
-      generateHowToSchema(
-        `How to use ${toolName}`,
+      generateHowToSchema(`How to use ${toolName}`,
         toolDescription,
-        howToSteps,
-        "PT5M", // 5 minutes
+        howToSteps,"PT5M", // 5 minutes
         toolSlug
       )
     );
@@ -636,8 +500,8 @@ export function generateBlogPageSchemas(
   // Breadcrumbs
   schemas.push(
     generateBreadcrumbSchema([
-      { name: "Home", url: siteConfig.url },
-      { name: "Blog", url: `${siteConfig.url}/blog` },
+      { name:"Home", url: siteConfig.url },
+      { name:"Blog", url:`${siteConfig.url}/blog` },
       { name: title, url },
     ])
   );
@@ -652,7 +516,7 @@ export function generateBlogPageSchemas(
 /**
  * Generate canonical URL with trailing slash handling
  */
-export function generateCanonicalUrl(path: string = ""): string {
+export function generateCanonicalUrl(path: string =""): string {
   return getFullUrl(path);
 }
 
@@ -663,8 +527,8 @@ export function generateOptimizedTitle(
   baseTitle: string,
   includeYear: boolean = true
 ): string {
-  const year = includeYear ? ` ${new Date().getFullYear()}` : "";
-  return `${baseTitle}${year} | ${siteConfig.name}`;
+  const year = includeYear ?` ${new Date().getFullYear()}` :"";
+  return`${baseTitle}${year} | ${siteConfig.name}`;
 }
 
 /**
@@ -674,11 +538,11 @@ export function generateOptimizedDescription(
   baseDescription: string,
   includeCTA: boolean = true
 ): string {
-  const cta = includeCTA ? " Free, no sign-up required. Try now!" : "";
+  const cta = includeCTA ?" Free, no sign-up required. Try now!" :"";
   const combined = baseDescription + cta;
   // Ensure 150-160 characters
   if (combined.length > 160) {
-    return combined.substring(0, 157) + "...";
+    return combined.substring(0, 157) +"...";
   }
   return combined;
 }
@@ -695,7 +559,7 @@ export function generateOptimizedKeywords(
   // Add year for freshness
   enhancedKeywords.push(`${baseKeywords[0]} ${new Date().getFullYear()}`);
 
-  // Add "free" variants
+  // Add"free" variants
   baseKeywords.forEach((keyword) => {
     if (!keyword.toLowerCase().includes("free")) {
       enhancedKeywords.push(`free ${keyword.toLowerCase()}`);
@@ -719,9 +583,7 @@ export function combineSchemas(schemas: object[]): string {
     return JSON.stringify(schemas[0]);
   }
   // For multiple schemas, use @graph
-  return JSON.stringify({
-    "@context": "https://schema.org",
-    "@graph": schemas,
+  return JSON.stringify({"@context":"https://schema.org","@graph": schemas,
   });
 }
 
@@ -745,13 +607,13 @@ export function generateRSSItem(
     enclosure: image
       ? {
         url: image,
-        type: "image/png",
-        length: "0",
+        type:"image/png",
+        length:"0",
       }
       : undefined,
-    category: category || "Education",
+    category: category ||"Education",
     source: siteConfig.name,
-    author: "ToolNova Team",
+    author:"ToolNova Team",
   };
 }
 

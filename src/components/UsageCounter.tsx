@@ -43,7 +43,7 @@ export function UsageCounter() {
         return (
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border border-amber-500/20">
                 <Crown className="h-3.5 w-3.5 text-amber-500" />
-                <span className="text-xs font-bold text-amber-600 dark:text-amber-400">PRO</span>
+                <span className="text-xs font-bold text-amber-600">PRO</span>
             </div>
         );
     }
@@ -57,14 +57,14 @@ export function UsageCounter() {
     const isOut = usage.remaining === 0;
     const title = isOut
         ? usage.isGuest
-            ? "Free daily AI limit reached — create an account for more"
-            : "Daily AI limit reached — upgrade for unlimited"
+            ?"Free daily AI limit reached — create an account for more"
+            :"Daily AI limit reached — upgrade for unlimited"
         : usage.isGuest
-            ? "Guest free AI uses left today (create account for more)"
-            : "Free AI uses left today";
+            ?"Guest free AI uses left today (create account for more)"
+            :"Free AI uses left today";
 
     return (
-        <Link href={isOut || usage.isGuest ? "/pricing" : "/dashboard"} title={title}>
+        <Link href={isOut || usage.isGuest ?"/pricing" :"/dashboard"} title={title}>
             <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 cursor-pointer hover:scale-105 ${isOut
                     ? 'bg-red-500/10 border-red-500/30 hover:border-red-500/50'
                     : isLow
@@ -76,16 +76,16 @@ export function UsageCounter() {
                 ) : (
                     <Zap className={`h-3.5 w-3.5 ${isLow ? 'text-amber-500' : 'text-primary'}`} />
                 )}
-                <span className={`text-xs font-bold ${isOut ? 'text-red-600 dark:text-red-400' : isLow ? 'text-amber-600 dark:text-amber-400' : 'text-primary'
+                <span className={`text-xs font-bold ${isOut ? 'text-red-600 ' : isLow ? 'text-amber-600 ' : 'text-primary'
                     }`}>
                     {usage.remaining}/{usage.limit}
                 </span>
                 {/* Mini progress bar */}
-                <div className="w-8 h-1.5 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <div className="w-8 h-1.5 rounded-full bg-slate-200 overflow-hidden">
                     <div
                         className={`h-full rounded-full transition-all duration-500 ${isOut ? 'bg-red-500' : isLow ? 'bg-amber-500' : 'bg-primary'
                             }`}
-                        style={{ width: `${Math.max(0, Math.min(100, 100 - percentage))}%` }}
+                        style={{ width:`${Math.max(0, Math.min(100, 100 - percentage))}%` }}
                     />
                 </div>
             </div>

@@ -1,13 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { Sparkles, Search, Sun, Moon } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { GlobalSearch } from "@/components/GlobalSearch";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import Link from"next/link";
+import { Sparkles, Search, Sun, Moon } from"lucide-react";
+import { useSession } from"next-auth/react";
+import { useTheme } from"next-themes";
+import { useEffect, useState } from"react";
+import { GlobalSearch } from"@/components/GlobalSearch";
+import { usePathname } from"next/navigation";
+import { cn } from"@/lib/utils";
 
 interface MobileMenuProps {
   onClose: () => void;
@@ -15,18 +15,18 @@ interface MobileMenuProps {
 }
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/tools", label: "Tools" },
-  { href: "/blog", label: "Blog" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href:"/", label:"Home" },
+  { href:"/tools", label:"Tools" },
+  { href:"/blog", label:"Blog" },
+  { href:"/pricing", label:"Pricing" },
+  { href:"/about", label:"About" },
+  { href:"/contact", label:"Contact" },
 ] as const;
 
 export default function MobileMenu({ onClose, id }: MobileMenuProps) {
   const { data: session, status } = useSession();
   const user = session?.user;
-  const loading = status === "loading";
+  const loading = status ==="loading";
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
@@ -37,7 +37,7 @@ export default function MobileMenu({ onClose, id }: MobileMenuProps) {
 
   useEffect(() => {
     const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow ="hidden";
     return () => {
       document.body.style.overflow = prev;
     };
@@ -45,14 +45,14 @@ export default function MobileMenu({ onClose, id }: MobileMenuProps) {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key ==="Escape") onClose();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
   const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
+    if (href ==="/") return pathname ==="/";
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
@@ -74,11 +74,10 @@ export default function MobileMenu({ onClose, id }: MobileMenuProps) {
             key={link.href}
             href={link.href}
             onClick={onClose}
-            className={cn(
-              "font-medium py-3 px-4 rounded-xl transition-colors",
+            className={cn("font-medium py-3 px-4 rounded-xl transition-colors",
               isActive(link.href)
-                ? "bg-primary/10 text-primary"
-                : "text-foreground hover:bg-muted"
+                ?"bg-primary/10 text-primary"
+                :"text-foreground hover:bg-muted"
             )}
           >
             {link.label}
@@ -109,17 +108,17 @@ export default function MobileMenu({ onClose, id }: MobileMenuProps) {
           {mounted && (
             <button
               type="button"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={() => setTheme(theme ==="dark" ?"light" :"dark")}
               className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-muted text-sm font-medium text-foreground"
               aria-label="Toggle theme"
             >
               <span className="flex items-center gap-2">
-                {theme === "dark" ? (
+                {theme ==="dark" ? (
                   <Sun className="h-4 w-4" />
                 ) : (
                   <Moon className="h-4 w-4" />
                 )}
-                {theme === "dark" ? "Light mode" : "Dark mode"}
+                {theme ==="dark" ?"Light mode" :"Dark mode"}
               </span>
             </button>
           )}
@@ -137,14 +136,14 @@ export default function MobileMenu({ onClose, id }: MobileMenuProps) {
 
           <p className="text-xs text-muted-foreground text-center px-2 flex items-center justify-center gap-1.5">
             <Search className="h-3 w-3" />
-            Press{" "}
+            Press{""}
             <kbd className="px-1.5 py-0.5 rounded bg-muted font-mono text-[10px]">
               Ctrl
             </kbd>
             +
             <kbd className="px-1.5 py-0.5 rounded bg-muted font-mono text-[10px]">
               K
-            </kbd>{" "}
+            </kbd>{""}
             to search
           </p>
         </div>

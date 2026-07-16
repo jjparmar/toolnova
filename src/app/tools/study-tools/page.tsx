@@ -54,7 +54,7 @@ export default function StudyToolsPage() {
             </div>
 
             {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
-            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral dark:prose-invert prose-lg">
+            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral prose-lg">
                 <h2 className="text-3xl font-extrabold text-foreground tracking-tight mb-6">
                     Active Recall, Spaced Repetition, and AI-Enhanced Learning Methodologies
                 </h2>

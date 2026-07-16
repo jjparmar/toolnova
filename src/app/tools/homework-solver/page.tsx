@@ -40,13 +40,12 @@ export default function HomeworkSolverPage() {
         'https://www.toolnovahub.com/tools/homework-solver'
     );
 
-    const howToSchema = getHowToSchema(
-        `How to Solve Homework Step by Step for Free`,
+    const howToSchema = getHowToSchema(`How to Solve Homework Step by Step for Free`,
         toolData.description,
         toolData.howItWorks.map(step => ({
             name: step.title,
             text: step.desc,
-            url: `https://www.toolnovahub.com/tools/homework-solver#step-${step.step}`
+            url:`https://www.toolnovahub.com/tools/homework-solver#step-${step.step}`
         }))
     );
 

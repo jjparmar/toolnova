@@ -42,120 +42,120 @@ const sectionStyles: Record<string, {
     icon: React.ElementType;
 }> = {
     answer: {
-        bg: 'from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/20',
-        border: 'border-green-300 dark:border-green-700/50',
+        bg: 'from-green-50 to-emerald-50 ',
+        border: 'border-green-300 ',
         text: 'from-green-600 to-emerald-600',
         gradient: 'from-green-500 to-emerald-600',
         icon: Target
     },
     steps: {
-        bg: 'from-blue-50 to-sky-50 dark:from-blue-950/30 dark:to-sky-950/20',
-        border: 'border-blue-200 dark:border-blue-800/50',
+        bg: 'from-blue-50 to-sky-50 ',
+        border: 'border-blue-200 ',
         text: 'from-blue-600 to-sky-600',
         gradient: 'from-blue-500 to-sky-600',
         icon: BookOpen
     },
     formulas: {
-        bg: 'from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/20',
-        border: 'border-orange-200 dark:border-orange-800/50',
+        bg: 'from-orange-50 to-amber-50 ',
+        border: 'border-orange-200 ',
         text: 'from-orange-600 to-amber-600',
         gradient: 'from-orange-500 to-amber-600',
         icon: Calculator
     },
     verification: {
-        bg: 'from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/20',
-        border: 'border-teal-200 dark:border-teal-800/50',
+        bg: 'from-teal-50 to-cyan-50 ',
+        border: 'border-teal-200 ',
         text: 'from-teal-600 to-cyan-600',
         gradient: 'from-teal-500 to-cyan-600',
         icon: CheckCircle2
     },
     learning: {
-        bg: 'from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20',
-        border: 'border-amber-200 dark:border-amber-800/50',
+        bg: 'from-amber-50 to-orange-50 ',
+        border: 'border-amber-200 ',
         text: 'from-amber-600 to-orange-600',
         gradient: 'from-amber-500 to-orange-600',
         icon: Lightbulb
     },
     practice: {
-        bg: 'from-pink-50 to-rose-50 dark:from-pink-950/30 dark:to-rose-950/20',
-        border: 'border-pink-200 dark:border-pink-800/50',
+        bg: 'from-pink-50 to-rose-50 ',
+        border: 'border-pink-200 ',
         text: 'from-pink-600 to-rose-600',
         gradient: 'from-pink-500 to-rose-600',
         icon: Dumbbell
     },
     introduction: {
-        bg: 'from-indigo-50 to-blue-50 dark:from-indigo-950/30 dark:to-blue-950/20',
-        border: 'border-indigo-200 dark:border-indigo-800/50',
+        bg: 'from-indigo-50 to-blue-50 ',
+        border: 'border-indigo-200 ',
         text: 'from-indigo-600 to-blue-600',
         gradient: 'from-indigo-500 to-blue-600',
         icon: Sparkles
     },
     body: {
-        bg: 'from-slate-50 to-gray-50 dark:from-slate-950/30 dark:to-gray-950/20',
-        border: 'border-slate-200 dark:border-slate-800/50',
+        bg: 'from-slate-50 to-gray-50 ',
+        border: 'border-slate-200 ',
         text: 'from-slate-600 to-gray-600',
         gradient: 'from-slate-500 to-gray-600',
         icon: FileText
     },
     conclusion: {
-        bg: 'from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/20',
-        border: 'border-sky-200 dark:border-sky-800/50',
+        bg: 'from-sky-50 to-blue-50 ',
+        border: 'border-sky-200 ',
         text: 'from-sky-600 to-blue-600',
         gradient: 'from-sky-500 to-blue-600',
         icon: Star
     },
     questions: {
-        bg: 'from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/20',
-        border: 'border-blue-200 dark:border-blue-800/50',
+        bg: 'from-blue-50 to-indigo-50 ',
+        border: 'border-blue-200 ',
         text: 'from-blue-600 to-indigo-600',
         gradient: 'from-blue-500 to-indigo-600',
         icon: HelpCircle
     },
     answers: {
-        bg: 'from-green-50 to-teal-50 dark:from-green-950/30 dark:to-teal-950/20',
-        border: 'border-green-200 dark:border-green-800/50',
+        bg: 'from-green-50 to-teal-50 ',
+        border: 'border-green-200 ',
         text: 'from-green-600 to-teal-600',
         gradient: 'from-green-500 to-teal-600',
         icon: ListChecks
     },
     tips: {
-        bg: 'from-amber-50 to-yellow-50 dark:from-amber-950/30 dark:to-yellow-950/20',
-        border: 'border-amber-200 dark:border-amber-800/50',
+        bg: 'from-amber-50 to-yellow-50 ',
+        border: 'border-amber-200 ',
         text: 'from-amber-600 to-yellow-600',
         gradient: 'from-amber-500 to-yellow-600',
         icon: Zap
     },
     notes: {
-        bg: 'from-cyan-50 to-sky-50 dark:from-cyan-950/30 dark:to-sky-950/20',
-        border: 'border-cyan-200 dark:border-cyan-800/50',
+        bg: 'from-cyan-50 to-sky-50 ',
+        border: 'border-cyan-200 ',
         text: 'from-cyan-600 to-sky-600',
         gradient: 'from-cyan-500 to-sky-600',
         icon: ClipboardList
     },
     summary: {
-        bg: 'from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/20',
-        border: 'border-emerald-200 dark:border-emerald-800/50',
+        bg: 'from-emerald-50 to-green-50 ',
+        border: 'border-emerald-200 ',
         text: 'from-emerald-600 to-green-600',
         gradient: 'from-emerald-500 to-green-600',
         icon: Brain
     },
     'key-terms': {
-        bg: 'from-rose-50 to-pink-50 dark:from-rose-950/30 dark:to-pink-950/20',
-        border: 'border-rose-200 dark:border-rose-800/50',
+        bg: 'from-rose-50 to-pink-50 ',
+        border: 'border-rose-200 ',
         text: 'from-rose-600 to-pink-600',
         gradient: 'from-rose-500 to-pink-600',
         icon: BookOpen
     },
     content: {
-        bg: 'from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/20',
-        border: 'border-blue-200 dark:border-blue-800/50',
+        bg: 'from-blue-50 to-indigo-50 ',
+        border: 'border-blue-200 ',
         text: 'from-blue-600 to-indigo-600',
         gradient: 'from-blue-500 to-indigo-600',
         icon: Pen
     },
     text: {
-        bg: 'from-gray-50 to-slate-50 dark:from-gray-950/30 dark:to-slate-950/20',
-        border: 'border-gray-200 dark:border-gray-800/50',
+        bg: 'from-gray-50 to-slate-50 ',
+        border: 'border-gray-200 ',
         text: 'from-gray-600 to-slate-600',
         gradient: 'from-gray-500 to-slate-600',
         icon: FileText
@@ -168,7 +168,7 @@ export function AIResultFormatter({ result, toolType = 'generic' }: AIResultForm
     // If no sections were detected, show the result as a styled content block
     if (sections.length === 0 || (sections.length === 1 && sections[0].type === 'text')) {
         return (
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/20 border-2 border-blue-200 dark:border-blue-800/50 p-6 shadow-lg">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 p-6 shadow-lg">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-blue-400/15 rounded-full blur-3xl"></div>
                 <div className="relative">
                     <div className="flex items-center gap-3 mb-4">
@@ -179,8 +179,8 @@ export function AIResultFormatter({ result, toolType = 'generic' }: AIResultForm
                             ✨ Result
                         </h3>
                     </div>
-                    <div className="bg-white/70 dark:bg-blue-900/30 rounded-xl p-5 border border-blue-200 dark:border-blue-800">
-                        <p className="text-base text-blue-900 dark:text-blue-100 whitespace-pre-wrap leading-relaxed">
+                    <div className="bg-white/70 rounded-xl p-5 border border-blue-200">
+                        <p className="text-base text-blue-900 whitespace-pre-wrap leading-relaxed">
                             {result}
                         </p>
                     </div>
@@ -213,7 +213,7 @@ export function AIResultFormatter({ result, toolType = 'generic' }: AIResultForm
                                     </h3>
                                     {isAnswer && <CheckCircle2 className="w-6 h-6 text-green-500" />}
                                 </div>
-                                <div className={`bg-white/70 dark:bg-black/20 rounded-xl ${isAnswer ? 'p-5' : 'p-4'} border border-current/10`}>
+                                <div className={`bg-white/70 rounded-xl ${isAnswer ? 'p-5' : 'p-4'} border border-current/10`}>
                                     <p className={`${isAnswer ? 'text-2xl md:text-3xl font-black' : 'text-base'} whitespace-pre-wrap leading-relaxed`}>
                                         {section.content}
                                     </p>

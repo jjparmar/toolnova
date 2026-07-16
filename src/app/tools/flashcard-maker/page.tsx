@@ -40,13 +40,12 @@ export default function FlashcardMakerPage() {
         'https://www.toolnovahub.com/tools/flashcard-maker'
     );
 
-    const howToSchema = getHowToSchema(
-        `How to Make Flashcards from Notes Automatically`,
+    const howToSchema = getHowToSchema(`How to Make Flashcards from Notes Automatically`,
         toolData.description,
         toolData.howItWorks.map(step => ({
             name: step.title,
             text: step.desc,
-            url: `https://www.toolnovahub.com/tools/flashcard-maker#step-${step.step}`
+            url:`https://www.toolnovahub.com/tools/flashcard-maker#step-${step.step}`
         }))
     );
 

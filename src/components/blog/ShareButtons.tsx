@@ -1,7 +1,7 @@
 "use client";
 
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaLink, FaCheck } from "react-icons/fa";
-import { useState } from "react";
+import { FaFacebookF, FaTwitter, FaLinkedinIn, FaLink, FaCheck } from"react-icons/fa";
+import { useState } from"react";
 
 interface ShareButtonsProps {
     url: string;

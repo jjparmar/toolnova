@@ -1,14 +1,14 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { toast } from "sonner";
-import { Sparkles, Shield, Zap, ArrowRight, Check } from "lucide-react";
-import Link from "next/link";
-import { DAILY_FREE_LIMIT } from "@/lib/limits";
-import { TOOL_COUNT_LABEL } from "@/data/tools";
-import { getClientCallbackUrl } from "@/lib/auth-callback";
+import { signIn } from"next-auth/react";
+import { Button } from"@/components/ui/button";
+import { useState } from"react";
+import { toast } from"sonner";
+import { Sparkles, Shield, Zap, ArrowRight, Check } from"lucide-react";
+import Link from"next/link";
+import { DAILY_FREE_LIMIT } from"@/lib/limits";
+import { TOOL_COUNT_LABEL } from"@/data/tools";
+import { getClientCallbackUrl } from"@/lib/auth-callback";
 
 export default function SignupPage() {
     const [loading, setLoading] = useState(false);
@@ -25,9 +25,9 @@ export default function SignupPage() {
     };
 
     const benefits = [
-        { icon: Zap, text: `${DAILY_FREE_LIMIT} free AI generations daily` },
-        { icon: Shield, text: "Your data stays private" },
-        { icon: Sparkles, text: `Access ${TOOL_COUNT_LABEL} tools` },
+        { icon: Zap, text:`${DAILY_FREE_LIMIT} free AI generations daily` },
+        { icon: Shield, text:"Your data stays private" },
+        { icon: Sparkles, text:`Access ${TOOL_COUNT_LABEL} tools` },
     ];
 
     return (
@@ -170,14 +170,11 @@ export default function SignupPage() {
 
                         {/* Benefits List */}
                         <div className="space-y-3">
-                            {[
-                                "No credit card required",
-                                "Instant access to free tools",
-                                "Safe & Secure"
+                            {["No credit card required","Instant access to free tools","Safe & Secure"
                             ].map((text, index) => (
                                 <div key={index} className="flex items-center gap-3 text-sm text-muted-foreground">
-                                    <div className="h-5 w-5 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
-                                        <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
+                                    <div className="h-5 w-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                        <Check className="h-3 w-3 text-green-600" />
                                     </div>
                                     <span>{text}</span>
                                 </div>
@@ -188,7 +185,7 @@ export default function SignupPage() {
                     {/* Login Link */}
                     <div className="mt-8 text-center">
                         <p className="text-sm text-muted-foreground">
-                            Already have an account?{" "}
+                            Already have an account?{""}
                             <Link href="/login" className="text-primary hover:underline font-bold">
                                 Sign in
                             </Link>
@@ -198,9 +195,9 @@ export default function SignupPage() {
                     {/* Footer */}
                     <div className="mt-6 text-center">
                         <p className="text-xs text-muted-foreground/60">
-                            By joining, you agree to our{" "}
+                            By joining, you agree to our{""}
                             <Link href="/terms" className="hover:underline">Terms</Link>
-                            {" "}and{" "}
+                            {""}and{""}
                             <Link href="/privacy" className="hover:underline">Privacy Policy</Link>
                         </p>
                     </div>

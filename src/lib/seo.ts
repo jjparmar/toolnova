@@ -2,9 +2,9 @@
  * SEO Metadata utilities for optimal search engine and social media performance
  */
 
-import { Metadata } from "next";
-import { siteConfig, getFullUrl } from "@/config/site";
-import { TOOL_COUNT_LABEL } from "@/data/tools";
+import { Metadata } from"next";
+import { siteConfig, getFullUrl } from"@/config/site";
+import { TOOL_COUNT_LABEL } from"@/data/tools";
 
 interface SEOConfig {
   title: string;
@@ -12,8 +12,8 @@ interface SEOConfig {
   keywords?: string[];
   canonical?: string;
   ogImage?: string;
-  ogType?: "website" | "article";
-  twitterCard?: "summary" | "summary_large_image";
+  ogType?:"website" |"article";
+  twitterCard?:"summary" |"summary_large_image";
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
@@ -34,21 +34,21 @@ export function generateMetadata(config: SEOConfig): Metadata {
     keywords = [],
     canonical,
     ogImage = DEFAULT_OG_IMAGE,
-    ogType = "website",
-    twitterCard = "summary_large_image",
+    ogType ="website",
+    twitterCard ="summary_large_image",
     publishedTime,
     modifiedTime,
     author,
     category,
   } = config;
 
-  // Root layout uses template "%s | ToolNova" — pass bare title to avoid double suffix
+  // Root layout uses template"%s | ToolNova" — pass bare title to avoid double suffix
   const bareTitle = title
-    .replace(new RegExp(`\\s*[|–-]\\s*${SITE_NAME}\\s*$`, "i"), "")
+    .replace(new RegExp(`\\s*[|–-]\\s*${SITE_NAME}\\s*$`,"i"),"")
     .trim();
   const socialTitle = bareTitle.includes(SITE_NAME)
     ? bareTitle
-    : `${bareTitle} | ${SITE_NAME}`;
+    :`${bareTitle} | ${SITE_NAME}`;
   const url = canonical || BASE_URL;
 
   return {
@@ -62,8 +62,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
     alternates: {
       canonical: url,
       languages: {
-        en: url,
-        "x-default": url,
+        en: url,"x-default": url,
       },
     },
 
@@ -81,7 +80,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
           alt: bareTitle,
         },
       ],
-      locale: "en_US",
+      locale:"en_US",
       type: ogType,
       ...(publishedTime && { publishedTime }),
       ...(modifiedTime && { modifiedTime }),
@@ -102,19 +101,14 @@ export function generateMetadata(config: SEOConfig): Metadata {
       follow: true,
       googleBot: {
         index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
+        follow: true,"max-video-preview": -1,"max-image-preview":"large","max-snippet": -1,
       },
     },
 
     // Verification tags — pulled from siteConfig to avoid overwriting root layout
     verification: {
       google: siteConfig.verification.google,
-      other: {
-        "msvalidate.01": siteConfig.verification.bing,
-        "yandex-verification": siteConfig.verification.yandex,
+      other: {"msvalidate.01": siteConfig.verification.bing,"yandex-verification": siteConfig.verification.yandex,
       },
     },
   };
@@ -130,20 +124,14 @@ export function generateToolMetadata(
   keywords: string[],
 ): Metadata {
   return generateMetadata({
-    title: `${toolName} Free Online – No Signup Required`,
-    description: `${description}. Free, fast, and accurate. No account or signup required. Try it instantly in your browser.`,
+    title:`${toolName} Free Online – No Signup Required`,
+    description:`${description}. Free, fast, and accurate. No account or signup required. Try it instantly in your browser.`,
     keywords: [
-      ...keywords,
-      `free ${toolName.toLowerCase()} no signup`,
-      `${toolName.toLowerCase()} online free`,
-      "free online tool no login",
-      "AI tool for students",
-      "free study tool",
-      "ToolNova",
+      ...keywords,`free ${toolName.toLowerCase()} no signup`,`${toolName.toLowerCase()} online free`,"free online tool no login","AI tool for students","free study tool","ToolNova",
     ],
     canonical: getFullUrl(`/tools/${toolSlug}`),
     ogImage: DEFAULT_OG_IMAGE,
-    category: "Education",
+    category:"Education",
   });
 }
 
@@ -157,8 +145,8 @@ export function generateBlogMetadata(
   keywords: string[],
   publishedDate: string,
   modifiedDate: string,
-  author: string = "ToolNova Team",
-  category: string = "Education",
+  author: string ="ToolNova Team",
+  category: string ="Education",
 ): Metadata {
   return generateMetadata({
     title,
@@ -166,7 +154,7 @@ export function generateBlogMetadata(
     keywords,
     canonical: getFullUrl(`/blog/${slug}`),
     ogImage: DEFAULT_OG_IMAGE,
-    ogType: "article",
+    ogType:"article",
     publishedTime: publishedDate,
     modifiedTime: modifiedDate,
     author,
@@ -179,23 +167,9 @@ export function generateBlogMetadata(
  */
 export function getHomepageMetadata(): Metadata {
   return generateMetadata({
-    title: `${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup`,
-    description:
-      "Free AI tools for students & professionals. Merge PDFs, make flashcards, fix grammar, write essays, solve homework — all in one place. No account needed. Try now!",
-    keywords: [
-      "free AI tools for students no signup",
-      "solve homework step by step free",
-      "make flashcards from notes free",
-      "fix grammar in essay free",
-      "merge PDF online free no watermark",
-      "paraphrase essay without plagiarism free",
-      "summarize article free online",
-      "free essay writer for high school",
-      "AI study tools for college students",
-      "free quiz generator from notes",
-      "compress image without quality loss free",
-      "free AI writing tools no login",
-      "ToolNova",
+    title:`${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup`,
+    description:"Free AI tools for students & professionals. Merge PDFs, make flashcards, fix grammar, write essays, solve homework — all in one place. No account needed. Try now!",
+    keywords: ["free AI tools for students no signup","solve homework step by step free","make flashcards from notes free","fix grammar in essay free","merge PDF online free no watermark","paraphrase essay without plagiarism free","summarize article free online","free essay writer for high school","AI study tools for college students","free quiz generator from notes","compress image without quality loss free","free AI writing tools no login","ToolNova",
     ],
     canonical: BASE_URL,
     ogImage: DEFAULT_OG_IMAGE,
@@ -213,34 +187,13 @@ export function generateJSONLD(schema: object): string {
  * Common keywords for different tool categories
  */
 export const KEYWORD_SETS = {
-  aiStudy: [
-    "AI study tools",
-    "homework solver",
-    "study helper",
-    "AI tutor",
-    "exam prep",
-    "study notes",
+  aiStudy: ["AI study tools","homework solver","study helper","AI tutor","exam prep","study notes",
   ],
-  writing: [
-    "AI writing",
-    "essay writer",
-    "paraphraser",
-    "grammar checker",
-    "content writer",
-    "AI editor",
+  writing: ["AI writing","essay writer","paraphraser","grammar checker","content writer","AI editor",
   ],
-  creative: [
-    "AI story generator",
-    "creative writing",
-    "content generator",
-    "AI creativity",
+  creative: ["AI story generator","creative writing","content generator","AI creativity",
   ],
-  utility: [
-    "text tools",
-    "word counter",
-    "case converter",
-    "text utilities",
-    "online tools",
+  utility: ["text tools","word counter","case converter","text utilities","online tools",
   ],
 };
 
@@ -248,23 +201,9 @@ export const KEYWORD_SETS = {
  * High-value, high-CPC keywords for SEO targeting
  */
 export const HIGH_VALUE_KEYWORDS = [
-  // Education (High CPC: $5-15)
-  "online tutoring",
-  "homework help",
-  "test prep",
-  "study guide",
-  "essay writing service",
+  // Education (High CPC: $5-15)"online tutoring","homework help","test prep","study guide","essay writing service",
 
-  // AI/Technology (High CPC: $10-30)
-  "AI essay writer",
-  "AI homework solver",
-  "AI study assistant",
-  "machine learning tools",
+  // AI/Technology (High CPC: $10-30)"AI essay writer","AI homework solver","AI study assistant","machine learning tools",
 
-  // Student Tools (Medium-High CPC: $3-8)
-  "free essay writer",
-  "plagiarism free paraphraser",
-  "grammar checker free",
-  "citation generator",
-  "note taking app",
+  // Student Tools (Medium-High CPC: $3-8)"free essay writer","plagiarism free paraphraser","grammar checker free","citation generator","note taking app",
 ];

@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
+import { useMemo, useState } from"react";
+import Link from"next/link";
 import {
   FileText,
   Hash,
@@ -13,22 +13,22 @@ import {
   Check,
   Trash2,
   ClipboardPaste,
-} from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { FAQSection } from "@/components/FAQSection";
-import { toolFAQs } from "@/lib/content-database";
+} from"lucide-react";
+import { toast } from"sonner";
+import { Button } from"@/components/ui/button";
+import { FAQSection } from"@/components/FAQSection";
+import { toolFAQs } from"@/lib/content-database";
 import {
   countParagraphs,
   countSentences,
   countWords,
   graphemeLength,
-} from "@/lib/text-utils";
+} from"@/lib/text-utils";
 
 function analyze(text: string) {
   const words = countWords(text);
   const characters = graphemeLength(text);
-  const charactersNoSpaces = graphemeLength(text.replace(/\s+/g, ""));
+  const charactersNoSpaces = graphemeLength(text.replace(/\s+/g,""));
   const utf16Length = text.length;
   const sentenceCount = countSentences(text);
   const paragraphCount = countParagraphs(text);
@@ -44,18 +44,16 @@ function analyze(text: string) {
   const avgWordLen =
     words.length > 0
       ? (charactersNoSpaces / words.length).toFixed(1)
-      : "0";
+      :"0";
   const safeSentences = Math.max(1, sentenceCount);
   const safeParagraphs = Math.max(1, paragraphCount);
 
-  const stop = new Set(
-    "the a an and or but in on at to for of is are was were be been being it this that with as by from your you we they he she i".split(
-      " ",
+  const stop = new Set("the a an and or but in on at to for of is are was were be been being it this that with as by from your you we they he she i".split("",
     ),
   );
   const freq = new Map<string, number>();
   for (const w of words) {
-    const k = w.toLowerCase().replace(/[^a-z0-9'-]/gi, "");
+    const k = w.toLowerCase().replace(/[^a-z0-9'-]/gi,"");
     if (!k || stop.has(k) || k.length < 3) continue;
     freq.set(k, (freq.get(k) || 0) + 1);
   }
@@ -64,11 +62,11 @@ function analyze(text: string) {
     .slice(0, 8);
 
   const platforms = [
-    { name: "X / Twitter", limit: 280 },
-    { name: "Instagram caption", limit: 2200 },
-    { name: "LinkedIn post", limit: 3000 },
-    { name: "Meta description", limit: 160 },
-    { name: "Google title ~", limit: 60 },
+    { name:"X / Twitter", limit: 280 },
+    { name:"Instagram caption", limit: 2200 },
+    { name:"LinkedIn post", limit: 3000 },
+    { name:"Meta description", limit: 160 },
+    { name:"Google title ~", limit: 60 },
   ];
 
   return {
@@ -82,20 +80,20 @@ function analyze(text: string) {
     readingTime,
     speakingTime,
     avgWordLen,
-    avgSentence: words.length ? (words.length / safeSentences).toFixed(1) : "0",
+    avgSentence: words.length ? (words.length / safeSentences).toFixed(1) :"0",
     avgParagraph: words.length
       ? (words.length / safeParagraphs).toFixed(1)
-      : "0",
+      :"0",
     topWords,
     platforms,
   };
 }
 
 const relatedTools = [
-  { name: "Character Counter", slug: "character-counter" },
-  { name: "Case Converter", slug: "case-converter" },
-  { name: "Text Summarizer", slug: "text-summarizer" },
-  { name: "Paraphraser", slug: "paraphraser" },
+  { name:"Character Counter", slug:"character-counter" },
+  { name:"Case Converter", slug:"case-converter" },
+  { name:"Text Summarizer", slug:"text-summarizer" },
+  { name:"Paraphraser", slug:"paraphraser" },
 ];
 
 export default function WordCounterClient() {
@@ -104,7 +102,7 @@ export default function WordCounterClient() {
   const stats = useMemo(() => analyze(text), [text]);
 
   const copyStats = async () => {
-    const report = `Words: ${stats.words}
+    const report =`Words: ${stats.words}
 Characters (graphemes): ${stats.characters}
 Characters (no spaces): ${stats.charactersNoSpaces}
 UTF-16 length: ${stats.utf16Length}
@@ -138,36 +136,36 @@ Speaking time: ~${stats.speakingTime} min`;
   };
 
   const statCards = [
-    { label: "Words", value: stats.words, icon: FileText, color: "text-primary" },
+    { label:"Words", value: stats.words, icon: FileText, color:"text-primary" },
     {
-      label: "Characters",
+      label:"Characters",
       value: stats.characters,
       icon: Hash,
-      color: "text-teal-600",
+      color:"text-teal-600",
     },
     {
-      label: "No spaces",
+      label:"No spaces",
       value: stats.charactersNoSpaces,
       icon: Type,
-      color: "text-cyan-600",
+      color:"text-cyan-600",
     },
     {
-      label: "Sentences",
+      label:"Sentences",
       value: stats.sentenceCount,
       icon: Target,
-      color: "text-emerald-600",
+      color:"text-emerald-600",
     },
     {
-      label: "Paragraphs",
+      label:"Paragraphs",
       value: stats.paragraphCount,
       icon: BarChart2,
-      color: "text-amber-600",
+      color:"text-amber-600",
     },
     {
-      label: "Read time",
-      value: `${stats.readingTime}m`,
+      label:"Read time",
+      value:`${stats.readingTime}m`,
       icon: Clock,
-      color: "text-rose-600",
+      color:"text-rose-600",
     },
   ];
 
@@ -254,19 +252,19 @@ Speaking time: ~${stats.speakingTime} min`;
             <h2 className="font-heading font-bold text-lg mb-4">Writing metrics</h2>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                Avg. sentence length:{" "}
+                Avg. sentence length:{""}
                 <strong className="text-foreground">{stats.avgSentence} words</strong>
               </li>
               <li>
-                Avg. paragraph length:{" "}
+                Avg. paragraph length:{""}
                 <strong className="text-foreground">{stats.avgParagraph} words</strong>
               </li>
               <li>
-                Avg. word length:{" "}
+                Avg. word length:{""}
                 <strong className="text-foreground">{stats.avgWordLen} chars</strong>
               </li>
               <li>
-                Speaking time (~130 wpm):{" "}
+                Speaking time (~130 wpm):{""}
                 <strong className="text-foreground">~{stats.speakingTime} min</strong>
               </li>
               <li>
@@ -274,9 +272,9 @@ Speaking time: ~${stats.speakingTime} min`;
               </li>
               {stats.utf16Length !== stats.characters && (
                 <li className="text-xs pt-1">
-                  UTF-16 length (JS .length):{" "}
+                  UTF-16 length (JS .length):{""}
                   <strong className="text-foreground">{stats.utf16Length}</strong>
-                  {" · "}Characters use grapheme clusters when supported (better for emoji).
+                  {" ·"}Characters use grapheme clusters when supported (better for emoji).
                 </li>
               )}
             </ul>
@@ -298,8 +296,8 @@ Speaking time: ~${stats.speakingTime} min`;
                       <span
                         className={
                           over
-                            ? "text-red-600 font-semibold"
-                            : "text-foreground font-medium"
+                            ?"text-red-600 font-semibold"
+                            :"text-foreground font-medium"
                         }
                       >
                         {stats.characters}/{p.limit}
@@ -307,8 +305,8 @@ Speaking time: ~${stats.speakingTime} min`;
                     </div>
                     <div className="h-1.5 rounded-full bg-muted overflow-hidden">
                       <div
-                        className={`h-full rounded-full ${over ? "bg-red-500" : "bg-primary"}`}
-                        style={{ width: `${pct}%` }}
+                        className={`h-full rounded-full ${over ?"bg-red-500" :"bg-primary"}`}
+                        style={{ width:`${pct}%` }}
                       />
                     </div>
                   </li>
@@ -326,7 +324,7 @@ Speaking time: ~${stats.speakingTime} min`;
                     key={w}
                     className="px-3 py-1.5 rounded-full bg-muted text-sm font-medium"
                   >
-                    {w}{" "}
+                    {w}{""}
                     <span className="text-muted-foreground">×{n}</span>
                   </span>
                 ))}
@@ -355,22 +353,19 @@ Speaking time: ~${stats.speakingTime} min`;
         faqs={
           toolFAQs["word-counter"] || [
             {
-              question: "Is the word counter accurate?",
-              answer:
-                "Yes. It uses standard whitespace tokenization for words. Character counts prefer grapheme clusters (better for emoji) when your browser supports Intl.Segmenter.",
-              category: "Usage",
+              question:"Is the word counter accurate?",
+              answer:"Yes. It uses standard whitespace tokenization for words. Character counts prefer grapheme clusters (better for emoji) when your browser supports Intl.Segmenter.",
+              category:"Usage",
             },
             {
-              question: "Is my text stored?",
-              answer:
-                "No. Counting runs entirely in your browser. Nothing is uploaded to ToolNova servers.",
-              category: "Privacy",
+              question:"Is my text stored?",
+              answer:"No. Counting runs entirely in your browser. Nothing is uploaded to ToolNova servers.",
+              category:"Privacy",
             },
             {
-              question: "What reading speed is used?",
-              answer:
-                "About 200 words per minute for reading and 130 for speaking—common adult averages.",
-              category: "Features",
+              question:"What reading speed is used?",
+              answer:"About 200 words per minute for reading and 130 for speaking—common adult averages.",
+              category:"Features",
             },
           ]
         }

@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useRef, useState } from"react";
+import { useRouter } from"next/navigation";
+import Link from"next/link";
 import {
   Upload,
   Download,
@@ -15,20 +15,20 @@ import {
   GripVertical,
   Shield,
   RotateCcw,
-} from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { PDFDocument } from "pdf-lib";
+} from"lucide-react";
+import { toast } from"sonner";
+import { Button } from"@/components/ui/button";
+import { PDFDocument } from"pdf-lib";
 import {
   downloadBytes,
   isPdfFile,
   renderPdfPageThumbnails,
-} from "@/lib/pdf-client";
+} from"@/lib/pdf-client";
 
 const related = [
-  { name: "Merge PDF", href: "/tools/merge-pdf" },
-  { name: "Split PDF", href: "/tools/split-pdf" },
-  { name: "Image to PDF", href: "/tools/image-to-pdf" },
+  { name:"Merge PDF", href:"/tools/merge-pdf" },
+  { name:"Split PDF", href:"/tools/split-pdf" },
+  { name:"Image to PDF", href:"/tools/image-to-pdf" },
 ];
 
 type PageItem = {
@@ -62,7 +62,7 @@ export default function ReorderPdfClient() {
       setPdfBytes(copy);
       setFile(f);
       setOutputName(
-        f.name.replace(/\.pdf$/i, "").replace(/[^\w\-]+/g, "-") + "-reordered",
+        f.name.replace(/\.pdf$/i,"").replace(/[^\w\-]+/g,"-") +"-reordered",
       );
 
       toast.message("Rendering page thumbnails…");
@@ -75,15 +75,14 @@ export default function ReorderPdfClient() {
       for (let i = 0; i < pageCount; i++) {
         items.push({
           sourceIndex: i,
-          thumb: thumbs[i] || "",
+          thumb: thumbs[i] ||"",
         });
       }
       setPages(items);
       toast.success(`Loaded ${pageCount} page(s) — drag to reorder`);
     } catch (e) {
       console.error(e);
-      toast.error(
-        "Could not load PDF for previews. File may be encrypted or unsupported.",
+      toast.error("Could not load PDF for previews. File may be encrypted or unsupported.",
       );
       setFile(null);
       setPdfBytes(null);
@@ -127,8 +126,8 @@ export default function ReorderPdfClient() {
       const copied = await out.copyPages(src, order);
       copied.forEach((p) => out.addPage(p));
       const bytes = await out.save({ useObjectStreams: false });
-      const name = (outputName.trim() || "reordered").replace(/[^\w\-]+/g, "-");
-      downloadBytes(bytes, `${name}.pdf`, "application/pdf");
+      const name = (outputName.trim() ||"reordered").replace(/[^\w\-]+/g,"-");
+      downloadBytes(bytes,`${name}.pdf`,"application/pdf");
       toast.success("Reordered PDF downloaded");
     } catch (e) {
       console.error(e);
@@ -213,8 +212,8 @@ export default function ReorderPdfClient() {
               }}
               className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all relative z-10 ${
                 dragOver
-                  ? "border-primary bg-primary/5 scale-[1.02]"
-                  : "border-border/60 hover:border-primary/50 hover:bg-muted/30 hover:shadow-glow-sm"
+                  ?"border-primary bg-primary/5 scale-[1.02]"
+                  :"border-border/60 hover:border-primary/50 hover:bg-muted/30 hover:shadow-glow-sm"
               }`}
             >
               {loading ? (
@@ -359,18 +358,18 @@ export default function ReorderPdfClient() {
           {[
             {
               icon: GripVertical,
-              t: "Drag & drop",
-              d: "Reorder pages visually with thumbnails",
+              t:"Drag & drop",
+              d:"Reorder pages visually with thumbnails",
             },
             {
               icon: Shield,
-              t: "Private",
-              d: "PDF never leaves your device",
+              t:"Private",
+              d:"PDF never leaves your device",
             },
             {
               icon: FileText,
-              t: "Exact pages",
-              d: "Output keeps full page quality",
+              t:"Exact pages",
+              d:"Output keeps full page quality",
             },
           ].map((x) => (
             <div key={x.t} className="rounded-2xl bg-card/40 backdrop-blur-md border border-border/40 p-5 hover:border-primary/30 transition-colors">

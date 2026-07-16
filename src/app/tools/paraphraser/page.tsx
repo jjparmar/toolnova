@@ -34,13 +34,12 @@ export default function ParaphraserPage() {
 
   const toolSchema = getToolSchema(toolData.name, toolData.description, 'https://www.toolnovahub.com/tools/paraphraser');
 
-  const howToSchema = getHowToSchema(
-    `How to use ${toolData.name}`,
+  const howToSchema = getHowToSchema(`How to use ${toolData.name}`,
     toolData.description,
     toolData.howItWorks.map(step => ({
       name: step.title,
       text: step.desc,
-      url: `https://www.toolnovahub.com/tools/paraphraser#step-${step.step}`
+      url:`https://www.toolnovahub.com/tools/paraphraser#step-${step.step}`
     }))
   );
 

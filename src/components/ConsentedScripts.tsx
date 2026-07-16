@@ -1,9 +1,9 @@
 "use client";
 
-import Script from "next/script";
-import { useEffect, useState } from "react";
-import { siteConfig } from "@/config/site";
-import { initializeAutoAds, shouldShowAds } from "@/config/adsense";
+import Script from"next/script";
+import { useEffect, useState } from"react";
+import { siteConfig } from"@/config/site";
+import { initializeAutoAds, shouldShowAds } from"@/config/adsense";
 
 /**
  * Loads GA + AdSense after cookie consent (Consent Mode v2).
@@ -15,7 +15,7 @@ export function ConsentedScripts() {
 
   useEffect(() => {
     const consent = localStorage.getItem("cookie_consent");
-    if (consent === "accepted") {
+    if (consent ==="accepted") {
       setConsented(true);
       grantConsent();
       tryInitAds();
@@ -25,7 +25,7 @@ export function ConsentedScripts() {
   useEffect(() => {
     const handler = () => {
       const consent = localStorage.getItem("cookie_consent");
-      if (consent === "accepted") {
+      if (consent ==="accepted") {
         setConsented(true);
         grantConsent();
         tryInitAds();
@@ -36,12 +36,12 @@ export function ConsentedScripts() {
   }, []);
 
   function grantConsent() {
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("consent", "update", {
-        ad_storage: "granted",
-        ad_user_data: "granted",
-        ad_personalization: "granted",
-        analytics_storage: "granted",
+    if (typeof window !=="undefined" && (window as any).gtag) {
+      (window as any).gtag("consent","update", {
+        ad_storage:"granted",
+        ad_user_data:"granted",
+        ad_personalization:"granted",
+        analytics_storage:"granted",
       });
     }
   }
@@ -80,8 +80,7 @@ export function ConsentedScripts() {
           gtag('config', '${siteConfig.googleAnalyticsId}', {
             anonymize_ip: true,
             send_page_view: true
-          });
-        `}
+          });`}
       </Script>
     </>
   );

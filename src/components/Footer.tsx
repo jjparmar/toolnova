@@ -1,31 +1,31 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { Mail, Twitter, Github, Linkedin, ArrowUpRight } from "lucide-react";
-import { siteConfig } from "@/config/site";
-import { TOOL_COUNT_LABEL } from "@/data/tools";
+import Link from"next/link";
+import Image from"next/image";
+import { Mail, Twitter, Github, Linkedin, ArrowUpRight } from"lucide-react";
+import { siteConfig } from"@/config/site";
+import { TOOL_COUNT_LABEL } from"@/data/tools";
 
 const writingTools = [
-  { name: "Grammar Checker", href: "/tools/grammar-fix" },
-  { name: "Essay Writer", href: "/tools/essay-writer" },
-  { name: "Paraphraser", href: "/tools/paraphraser" },
-  { name: "Text Summarizer", href: "/tools/text-summarizer" },
-  { name: "Email Writer", href: "/tools/email-writer" },
-  { name: "Caption Generator", href: "/tools/caption-generator" },
-  { name: "Story Generator", href: "/tools/story-generator" },
-  { name: "Speech Writer", href: "/tools/speech-writer" },
+  { name:"Grammar Checker", href:"/tools/grammar-fix" },
+  { name:"Essay Writer", href:"/tools/essay-writer" },
+  { name:"Paraphraser", href:"/tools/paraphraser" },
+  { name:"Text Summarizer", href:"/tools/text-summarizer" },
+  { name:"Email Writer", href:"/tools/email-writer" },
+  { name:"Caption Generator", href:"/tools/caption-generator" },
+  { name:"Story Generator", href:"/tools/story-generator" },
+  { name:"Speech Writer", href:"/tools/speech-writer" },
 ];
 
 const studyCareerTools = [
-  { name: "Homework Solver", href: "/tools/homework-solver" },
-  { name: "Flashcard Maker", href: "/tools/flashcard-maker" },
-  { name: "Quiz Generator", href: "/tools/quiz-generator" },
-  { name: "Notes Generator", href: "/tools/notes-generator" },
-  { name: "Resume Bullets", href: "/tools/resume-bullets" },
-  { name: "Cover Letter Writer", href: "/tools/cover-letter-writer" },
-  { name: "Merge PDF", href: "/tools/merge-pdf" },
-  { name: "Image Compressor", href: "/tools/image-compressor" },
+  { name:"Homework Solver", href:"/tools/homework-solver" },
+  { name:"Flashcard Maker", href:"/tools/flashcard-maker" },
+  { name:"Quiz Generator", href:"/tools/quiz-generator" },
+  { name:"Notes Generator", href:"/tools/notes-generator" },
+  { name:"Resume Bullets", href:"/tools/resume-bullets" },
+  { name:"Cover Letter Writer", href:"/tools/cover-letter-writer" },
+  { name:"Merge PDF", href:"/tools/merge-pdf" },
+  { name:"Image Compressor", href:"/tools/image-compressor" },
 ];
 
 export function Footer() {
@@ -39,8 +39,7 @@ export function Footer() {
         <div
           className="pointer-events-none absolute inset-0"
           style={{
-            background:
-              "radial-gradient(ellipse at 10% 0%, hsl(var(--primary) / 0.04) 0%, transparent 50%), radial-gradient(ellipse at 90% 0%, hsl(192 95% 44% / 0.03) 0%, transparent 50%)",
+            background:"radial-gradient(ellipse at 10% 0%, hsl(var(--primary) / 0.04) 0%, transparent 50%), radial-gradient(ellipse at 90% 0%, hsl(192 95% 44% / 0.03) 0%, transparent 50%)",
           }}
         />
 
@@ -77,16 +76,16 @@ export function Footer() {
               {/* Social icons */}
               <div className="flex gap-2">
                 {[
-                  { href: siteConfig.links.twitter, label: "Follow ToolNova on Twitter/X", Icon: Twitter },
-                  { href: siteConfig.links.github, label: "ToolNova on GitHub", Icon: Github },
-                  { href: siteConfig.links.linkedin, label: "ToolNova on LinkedIn", Icon: Linkedin },
-                  { href: `mailto:${siteConfig.author.email}`, label: "Email ToolNova support", Icon: Mail },
+                  { href: siteConfig.links.twitter, label:"Follow ToolNova on Twitter/X", Icon: Twitter },
+                  { href: siteConfig.links.github, label:"ToolNova on GitHub", Icon: Github },
+                  { href: siteConfig.links.linkedin, label:"ToolNova on LinkedIn", Icon: Linkedin },
+                  { href:`mailto:${siteConfig.author.email}`, label:"Email ToolNova support", Icon: Mail },
                 ].map(({ href, label, Icon }) => (
                   <a
                     key={href}
                     href={href}
-                    target={href.startsWith("mailto") ? undefined : "_blank"}
-                    rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                    target={href.startsWith("mailto") ? undefined :"_blank"}
+                    rel={href.startsWith("mailto") ? undefined :"noopener noreferrer"}
                     aria-label={label}
                     className="flex h-9 w-9 items-center justify-center rounded-xl border border-border/60 bg-card/80 text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:bg-primary hover:text-primary-foreground hover:shadow-sm hover:shadow-primary/20"
                   >
@@ -159,12 +158,12 @@ export function Footer() {
               </h4>
               <ul className="space-y-2.5 mb-8">
                 {[
-                  { href: "/", label: "Home" },
-                  { href: "/tools", label: "All Tools" },
-                  { href: "/blog", label: "Blog" },
-                  { href: "/pricing", label: "Pricing" },
-                  { href: "/about", label: "About Us" },
-                  { href: "/contact", label: "Contact" },
+                  { href:"/", label:"Home" },
+                  { href:"/tools", label:"All Tools" },
+                  { href:"/blog", label:"Blog" },
+                  { href:"/pricing", label:"Pricing" },
+                  { href:"/about", label:"About Us" },
+                  { href:"/contact", label:"Contact" },
                 ].map((item) => (
                   <li key={item.href}>
                     <Link
@@ -182,13 +181,13 @@ export function Footer() {
               </h4>
               <ul className="space-y-2.5">
                 {[
-                  { href: "/privacy", label: "Privacy Policy" },
-                  { href: "/terms", label: "Terms of Service" },
-                  { href: "/editorial-policy", label: "Editorial Policy" },
-                  { href: "/disclaimer", label: "Disclaimer" },
-                  { href: "/cookie-policy", label: "Cookie Policy" },
-                  { href: "/advertising", label: "Advertising Disclosure" },
-                  { href: "/refund", label: "Refund Policy" },
+                  { href:"/privacy", label:"Privacy Policy" },
+                  { href:"/terms", label:"Terms of Service" },
+                  { href:"/editorial-policy", label:"Editorial Policy" },
+                  { href:"/disclaimer", label:"Disclaimer" },
+                  { href:"/cookie-policy", label:"Cookie Policy" },
+                  { href:"/advertising", label:"Advertising Disclosure" },
+                  { href:"/refund", label:"Refund Policy" },
                 ].map((item) => (
                   <li key={item.href}>
                     <Link
@@ -210,18 +209,18 @@ export function Footer() {
             </p>
             <div className="flex flex-wrap gap-x-5 gap-y-2">
               {[
-                { name: "Writing Tools", href: "/tools/writing-tools" },
-                { name: "Study Tools", href: "/tools/study-tools" },
-                { name: "Exam Prep", href: "/tools/exam-prep-tools" },
-                { name: "Career Tools", href: "/tools/career-tools" },
-                { name: "Image & PDF", href: "/tools/image-pdf-tools" },
-                { name: "Utility Tools", href: "/tools/utility-tools" },
-                { name: "Word Counter", href: "/tools/word-counter" },
-                { name: "Age Calculator", href: "/tools/age-calculator" },
-                { name: "Case Converter", href: "/tools/case-converter" },
-                { name: "Vocabulary Builder", href: "/tools/vocabulary-builder" },
-                { name: "Synonym Finder", href: "/tools/synonym-finder" },
-                { name: "LinkedIn Optimizer", href: "/tools/linkedin-optimizer" },
+                { name:"Writing Tools", href:"/tools/writing-tools" },
+                { name:"Study Tools", href:"/tools/study-tools" },
+                { name:"Exam Prep", href:"/tools/exam-prep-tools" },
+                { name:"Career Tools", href:"/tools/career-tools" },
+                { name:"Image & PDF", href:"/tools/image-pdf-tools" },
+                { name:"Utility Tools", href:"/tools/utility-tools" },
+                { name:"Word Counter", href:"/tools/word-counter" },
+                { name:"Age Calculator", href:"/tools/age-calculator" },
+                { name:"Case Converter", href:"/tools/case-converter" },
+                { name:"Vocabulary Builder", href:"/tools/vocabulary-builder" },
+                { name:"Synonym Finder", href:"/tools/synonym-finder" },
+                { name:"LinkedIn Optimizer", href:"/tools/linkedin-optimizer" },
               ].map((item) => (
                 <Link
                   key={item.href}
@@ -242,14 +241,14 @@ export function Footer() {
               </div>
               <div className="flex gap-5 flex-wrap justify-center">
                 {[
-                  { href: "/privacy", label: "Privacy" },
-                  { href: "/terms", label: "Terms" },
-                  { href: "/editorial-policy", label: "Editorial" },
-                  { href: "/advertising", label: "Advertising" },
-                  { href: "/pricing", label: "Pricing" },
-                  { href: "/about", label: "About" },
-                  { href: "/sitemap-page", label: "Sitemap" },
-                  { href: "/contact", label: "Contact" },
+                  { href:"/privacy", label:"Privacy" },
+                  { href:"/terms", label:"Terms" },
+                  { href:"/editorial-policy", label:"Editorial" },
+                  { href:"/advertising", label:"Advertising" },
+                  { href:"/pricing", label:"Pricing" },
+                  { href:"/about", label:"About" },
+                  { href:"/sitemap-page", label:"Sitemap" },
+                  { href:"/contact", label:"Contact" },
                 ].map((item) => (
                   <Link
                     key={item.href}

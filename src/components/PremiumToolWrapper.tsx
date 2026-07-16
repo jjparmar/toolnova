@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
+import Link from"next/link";
+import { useRouter } from"next/navigation";
+import { ReactNode } from"react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -11,9 +11,9 @@ import {
   Shield,
   Sparkles,
   Zap,
-} from "lucide-react";
-import { getBreadcrumbSchema, schemaToJsonLd } from "@/lib/schema";
-import { ToolShellContext } from "@/components/ToolShellContext";
+} from"lucide-react";
+import { getBreadcrumbSchema, schemaToJsonLd } from"@/lib/schema";
+import { ToolShellContext } from"@/components/ToolShellContext";
 
 interface RelatedTool {
   name: string;
@@ -69,22 +69,22 @@ export function PremiumToolWrapper({
   toolSlug,
   tagline,
   description,
-  badge = "AI-Powered",
+  badge ="AI-Powered",
   subjectCards,
   features,
   howItWorks,
   relatedTools,
   ctaTitle,
   ctaDescription,
-  ctaButtonText = "Start Now",
+  ctaButtonText ="Start Now",
   ctaIcon: CtaIcon = Sparkles,
 }: PremiumToolWrapperProps) {
   const router = useRouter();
 
   const breadcrumbs = [
-    { name: "Home", url: "https://www.toolnovahub.com" },
-    { name: "Tools", url: "https://www.toolnovahub.com/tools" },
-    { name: toolName, url: `https://www.toolnovahub.com/tools/${toolSlug}` },
+    { name:"Home", url:"https://www.toolnovahub.com" },
+    { name:"Tools", url:"https://www.toolnovahub.com/tools" },
+    { name: toolName, url:`https://www.toolnovahub.com/tools/${toolSlug}` },
   ];
 
   const breadcrumbSchema = getBreadcrumbSchema(breadcrumbs);
@@ -287,27 +287,24 @@ export function PremiumToolWrapper({
 
 export const defaultFeatures: FeatureCard[] = [
   {
-    title: "AI-Powered",
-    description:
-      "Advanced AI technology delivers accurate, high-quality results every time.",
+    title:"AI-Powered",
+    description:"Advanced AI technology delivers accurate, high-quality results every time.",
     icon: Brain,
-    gradient: "from-primary to-teal-600",
-    bgLight: "from-teal-50 to-emerald-50",
+    gradient:"from-primary to-teal-600",
+    bgLight:"from-teal-50 to-emerald-50",
   },
   {
-    title: "Lightning Fast",
-    description:
-      "Get results in seconds, not hours. Save time for what matters most.",
+    title:"Lightning Fast",
+    description:"Get results in seconds, not hours. Save time for what matters most.",
     icon: Zap,
-    gradient: "from-amber-500 to-orange-600",
-    bgLight: "from-amber-50 to-orange-50",
+    gradient:"from-amber-500 to-orange-600",
+    bgLight:"from-amber-50 to-orange-50",
   },
   {
-    title: "Free & Private",
-    description:
-      "No sign-up required. Your data stays completely private and secure.",
+    title:"Free & Private",
+    description:"No sign-up required. Your data stays completely private and secure.",
     icon: Shield,
-    gradient: "from-emerald-500 to-teal-600",
-    bgLight: "from-emerald-50 to-teal-50",
+    gradient:"from-emerald-500 to-teal-600",
+    bgLight:"from-emerald-50 to-teal-50",
   },
 ];

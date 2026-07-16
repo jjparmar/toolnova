@@ -40,13 +40,12 @@ export default function MergePDFPage() {
         'https://www.toolnovahub.com/tools/merge-pdf'
     );
 
-    const howToSchema = getHowToSchema(
-        `How to Merge PDF Files Online Free`,
+    const howToSchema = getHowToSchema(`How to Merge PDF Files Online Free`,
         toolData.description,
         toolData.howItWorks.map(step => ({
             name: step.title,
             text: step.desc,
-            url: `https://www.toolnovahub.com/tools/merge-pdf#step-${step.step}`
+            url:`https://www.toolnovahub.com/tools/merge-pdf#step-${step.step}`
         }))
     );
 

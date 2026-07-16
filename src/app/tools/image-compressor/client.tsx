@@ -108,7 +108,7 @@ export default function ImageCompressorClient() {
                             const saved = originalSize - blob.size;
                             toast.success(
                                 saved > 0
-                                    ? `Compressed! Saved ${formatSize(saved)}`
+                                    ?`Compressed! Saved ${formatSize(saved)}`
                                     : 'Done — try lower quality or max width for smaller files',
                             );
                         } else {
@@ -142,7 +142,7 @@ export default function ImageCompressorClient() {
         const base = (image?.name || 'image').replace(/\.[^.]+$/, '');
         const a = document.createElement('a');
         a.href = compressedUrl;
-        a.download = `compressed-${base}.${ext}`;
+        a.download =`compressed-${base}.${ext}`;
         a.click();
     };
 
@@ -151,7 +151,7 @@ export default function ImageCompressorClient() {
         : 0;
 
     return (
-        <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#0f1419] dark:via-background dark:to-[#0f1419]">
+        <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
             {/* Animated Background */}
             <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -163,7 +163,7 @@ export default function ImageCompressorClient() {
                 {/* Back Button */}
                 <button
                     onClick={() => router.back()}
-                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
+                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-white :bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
                 >
                     <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back</span>
@@ -180,7 +180,7 @@ export default function ImageCompressorClient() {
                 </div>
 
                 <div className="text-center mb-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-orange-500/10 to-red-500/10 text-orange-600 dark:text-orange-400 text-sm font-semibold mb-5">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-orange-500/10 to-red-500/10 text-orange-600 text-sm font-semibold mb-5">
                         <Zap className="h-4 w-4" />
                         Free Compressor
                     </div>
@@ -188,7 +188,7 @@ export default function ImageCompressorClient() {
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Reduce image file size while maintaining quality</p>
                 </div>
 
-                <div className="bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
+                <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
                     <div className="p-6 md:p-8">
                         <input type="file" ref={fileInputRef} onChange={(e) => handleFileSelect(e.target.files)} accept="image/*" className="hidden" />
 
@@ -220,7 +220,7 @@ export default function ImageCompressorClient() {
                                         <p className="font-medium text-foreground truncate">{image.name}</p>
                                         <p className="text-sm text-muted-foreground">
                                             Original: {formatSize(originalSize)}
-                                            {dims ? ` · ${dims.w}×${dims.h}px` : ''}
+                                            {dims ?` · ${dims.w}×${dims.h}px` : ''}
                                         </p>
                                     </div>
                                     <Button variant="ghost" size="icon" onClick={() => {
@@ -272,7 +272,7 @@ export default function ImageCompressorClient() {
                                             max="100"
                                             value={quality}
                                             onChange={(e) => setQuality(parseInt(e.target.value))}
-                                            className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer "
+                                            className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
                                         />
                                     </div>
                                 )}
@@ -282,13 +282,13 @@ export default function ImageCompressorClient() {
                                 </Button>
 
                                 {compressedUrl && (
-                                    <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800 space-y-3">
+                                    <div className="p-4 bg-green-50 rounded-xl border border-green-200 space-y-3">
                                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                             <div>
-                                                <p className="font-bold text-green-700 dark:text-green-400">Ready to download</p>
-                                                <p className="text-sm text-green-600 dark:text-green-500">
+                                                <p className="font-bold text-green-700">Ready to download</p>
+                                                <p className="text-sm text-green-600">
                                                     {formatSize(originalSize)} → {formatSize(compressedSize)}
-                                                    {reduction > 0 ? ` (${reduction}% smaller)` : reduction < 0 ? ' (larger — try JPG/WebP or lower quality)' : ''}
+                                                    {reduction > 0 ?` (${reduction}% smaller)` : reduction < 0 ? ' (larger — try JPG/WebP or lower quality)' : ''}
                                                 </p>
                                             </div>
                                             <Button onClick={downloadCompressed} className="bg-green-600 hover:bg-green-700">
@@ -321,7 +321,7 @@ export default function ImageCompressorClient() {
                             { step: 2, title: 'Set Quality', desc: 'Adjust compression', icon: Zap, color: 'from-amber-500 to-orange-600' },
                             { step: 3, title: 'Download', desc: 'Get smaller file', icon: Download, color: 'from-green-500 to-emerald-600' },
                         ].map((item) => (
-                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 dark:bg-muted/50 border border-slate-100 ">
+                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 border border-slate-100">
                                 <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg`}>
                                     <item.icon className="h-7 w-7 text-white" />
                                 </div>
@@ -335,17 +335,17 @@ export default function ImageCompressorClient() {
 
                 {/* Features */}
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50/50 dark:from-green-900/20 dark:to-emerald-900/10 border border-green-100 dark:border-green-800/30">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50/50 border border-green-100">
                         <Shield className="h-8 w-8 text-green-600 mb-3" />
                         <h3 className="font-bold text-foreground mb-2">100% Private</h3>
                         <p className="text-sm text-muted-foreground">Processed locally in browser</p>
                     </div>
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-50 to-amber-50/50 dark:from-orange-900/20 dark:to-amber-900/10 border border-orange-100 dark:border-orange-800/30">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-50 to-amber-50/50 border border-orange-100">
                         <Zap className="h-8 w-8 text-orange-600 mb-3" />
                         <h3 className="font-bold text-foreground mb-2">Adjustable Quality</h3>
                         <p className="text-sm text-muted-foreground">Control compression level</p>
                     </div>
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/10 border border-purple-100 dark:border-purple-800/30">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50/50 border border-purple-100">
                         <Sparkles className="h-8 w-8 text-purple-600 mb-3" />
                         <h3 className="font-bold text-foreground mb-2">Instant Results</h3>
                         <p className="text-sm text-muted-foreground">See size reduction immediately</p>
@@ -353,15 +353,14 @@ export default function ImageCompressorClient() {
                 </div>
 
                 {/* Testimonial */}
-                <div className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-orange-500/5 via-red-500/5 to-amber-500/5 border border-orange-200/50 dark:border-orange-800/30">
+                <div className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-orange-500/5 via-red-500/5 to-amber-500/5 border border-orange-200/50">
                     <div className="flex flex-col items-center text-center">
                         <div className="flex gap-1 mb-4">
                             {[...Array(5)].map((_, i) => (
                                 <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
                             ))}
                         </div>
-                        <p className="text-lg italic text-foreground/80 max-w-2xl mb-4">
-                            "Reduced my website images by 60%! Page load speed improved dramatically."
+                        <p className="text-lg italic text-foreground/80 max-w-2xl mb-4">"Reduced my website images by 60%! Page load speed improved dramatically."
                         </p>
                         <div className="flex items-center gap-3">
                             <div className="h-10 w-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold">
@@ -383,7 +382,7 @@ export default function ImageCompressorClient() {
                             <Link
                                 key={tool.slug}
                                 href={`/tools/${tool.slug}`}
-                                className="group p-4 rounded-xl bg-white/50 dark:bg-muted/50 border border-slate-100  hover:border-primary/50 hover:shadow-lg transition-all text-center"
+                                className="group p-4 rounded-xl bg-white/50 border border-slate-100  hover:border-primary/50 hover:shadow-lg transition-all text-center"
                             >
                                 <div className={`h-10 w-10 mx-auto rounded-xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                                     <tool.icon className="h-5 w-5 text-white" />

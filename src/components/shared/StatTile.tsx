@@ -1,8 +1,8 @@
-import { cn } from "@/lib/utils";
+import { cn } from"@/lib/utils";
 
 /**
  * StatTile — the small stat card used in hero strips
- * (e.g. "49 Tools", "$0 To start", "Private").
+ * (e.g."49 Tools","$0 To start","Private").
  */
 export function StatTile({
   value,
@@ -15,8 +15,7 @@ export function StatTile({
 }) {
   return (
     <div
-      className={cn(
-        "rounded-2xl border border-border bg-card/90 px-3 py-3.5 shadow-premium-sm backdrop-blur-sm",
+      className={cn("rounded-2xl border border-border bg-card/90 px-3 py-3.5 shadow-premium-sm backdrop-blur-sm",
         className
       )}
     >

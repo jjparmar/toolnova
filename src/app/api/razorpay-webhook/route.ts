@@ -1,6 +1,6 @@
-import crypto from "crypto";
-import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import crypto from"crypto";
+import { NextRequest, NextResponse } from"next/server";
+import { db } from"@/lib/db";
 
 // Store processed event IDs for idempotency (in production, use a cache like Redis)
 const processedEvents = new Set<string>();
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
         if (!webhookSecret) {
             console.error("RAZORPAY_WEBHOOK_SECRET is not defined");
             return NextResponse.json(
-                { error: "Configuration error" },
+                { error:"Configuration error" },
                 { status: 500 }
             );
         }
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
         if (signature !== expectedSignature) {
             console.error("Invalid Webhook Signature");
             return NextResponse.json(
-                { error: "Invalid signature" },
+                { error:"Invalid signature" },
                 { status: 400 }
             );
         }
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
         // Idempotency check - prevent duplicate processing
         if (eventId && processedEvents.has(eventId)) {
             console.log(`⚠️ Duplicate webhook event detected: ${eventId}`);
-            return NextResponse.json({ status: "ok" }, { status: 200 });
+            return NextResponse.json({ status:"ok" }, { status: 200 });
         }
 
         if (eventId) {
@@ -57,13 +57,13 @@ export async function POST(req: NextRequest) {
 
         if (subId) {
             switch (eventName) {
-                case "subscription.activated":
-                case "subscription.charged": {
+                case"subscription.activated":
+                case"subscription.charged": {
                     const currentEnd = payload.subscription?.entity?.current_end;
                     await db.subscription.updateMany({
                         where: { razorpaySubscriptionId: subId },
                         data: {
-                            status: "active",
+                            status:"active",
                             ...(currentEnd && {
                                 currentPeriodEnd: new Date(currentEnd * 1000),
                             }),
@@ -72,26 +72,26 @@ export async function POST(req: NextRequest) {
                     console.log(`✅ Subscription ${subId} marked active`);
                     break;
                 }
-                case "subscription.cancelled":
-                case "subscription.completed":
-                case "subscription.expired": {
+                case"subscription.cancelled":
+                case"subscription.completed":
+                case"subscription.expired": {
                     await db.subscription.updateMany({
                         where: { razorpaySubscriptionId: subId },
-                        data: { status: "cancelled" },
+                        data: { status:"cancelled" },
                     });
                     console.log(`❌ Subscription ${subId} marked cancelled`);
                     break;
                 }
-                case "subscription.halted":
-                case "subscription.paused": {
+                case"subscription.halted":
+                case"subscription.paused": {
                     await db.subscription.updateMany({
                         where: { razorpaySubscriptionId: subId },
-                        data: { status: "halted" },
+                        data: { status:"halted" },
                     });
                     console.log(`⚠️ Subscription ${subId} halted`);
                     break;
                 }
-                case "payment.failed":
+                case"payment.failed":
                     console.error("⚠️ Payment failed for subscription:", subId);
                     // Optionally: update subscription status to failed
                     break;
@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
             }
         }
 
-        return NextResponse.json({ status: "ok" }, { status: 200 });
+        return NextResponse.json({ status:"ok" }, { status: 200 });
     } catch (error) {
         console.error("Razorpay Webhook Error:", {
             error: error instanceof Error ? error.message : error,
@@ -108,7 +108,7 @@ export async function POST(req: NextRequest) {
             timestamp: new Date().toISOString(),
         });
         return NextResponse.json(
-            { error: "Internal Server Error" },
+            { error:"Internal Server Error" },
             { status: 500 }
         );
     }

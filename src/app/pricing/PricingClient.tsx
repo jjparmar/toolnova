@@ -6,11 +6,11 @@ declare global {
   }
 }
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { useSession } from "next-auth/react";
+import { useState } from"react";
+import { useRouter } from"next/navigation";
+import Link from"next/link";
+import { Button } from"@/components/ui/button";
+import { useSession } from"next-auth/react";
 import {
   Check,
   ChevronDown,
@@ -20,11 +20,11 @@ import {
   Zap,
   FileText,
   Infinity,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import { DAILY_FREE_LIMIT } from "@/lib/limits";
-import { TOOL_COUNT_LABEL } from "@/data/tools";
-import { toast } from "sonner";
+} from"lucide-react";
+import { cn } from"@/lib/utils";
+import { DAILY_FREE_LIMIT } from"@/lib/limits";
+import { TOOL_COUNT_LABEL } from"@/data/tools";
+import { toast } from"sonner";
 
 const MONTHLY_PRICE = 2.99;
 const YEARLY_PRICE = 29.99;
@@ -33,73 +33,62 @@ const YEARLY_SAVE_PCT = Math.round(
   (1 - YEARLY_PRICE / (MONTHLY_PRICE * 12)) * 100,
 );
 
-const freeFeatures = [
-  `${TOOL_COUNT_LABEL} tools free to start`,
-  `${DAILY_FREE_LIMIT} free AI generations / day (guest)`,
-  "Free account for another daily AI allowance + history",
-  "Unlimited browser PDF & image tools",
-  "No credit card to start",
+const freeFeatures = [`${TOOL_COUNT_LABEL} tools free to start`,`${DAILY_FREE_LIMIT} free AI generations / day (guest)`,"Free account for another daily AI allowance + history","Unlimited browser PDF & image tools","No credit card to start",
 ];
 
-const proFeatures = [
-  "Unlimited AI generations",
-  "Premium model (higher quality)",
-  "Priority processing",
-  "Ad-free experience",
-  "Priority support",
-  "Everything in Free",
+const proFeatures = ["Unlimited AI generations","Premium model (higher quality)","Priority processing","Ad-free experience","Priority support","Everything in Free",
 ];
 
 const comparisonRows = [
   {
-    feature: "Tool catalog",
-    free: `${TOOL_COUNT_LABEL} tools`,
-    pro: `${TOOL_COUNT_LABEL} tools`,
+    feature:"Tool catalog",
+    free:`${TOOL_COUNT_LABEL} tools`,
+    pro:`${TOOL_COUNT_LABEL} tools`,
   },
   {
-    feature: "AI generations",
-    free: `${DAILY_FREE_LIMIT}/day free tier`,
-    pro: "Unlimited",
+    feature:"AI generations",
+    free:`${DAILY_FREE_LIMIT}/day free tier`,
+    pro:"Unlimited",
   },
   {
-    feature: "AI model",
-    free: "Standard (fast)",
-    pro: "Premium (higher quality)",
+    feature:"AI model",
+    free:"Standard (fast)",
+    pro:"Premium (higher quality)",
   },
   {
-    feature: "PDF / image tools",
-    free: "Unlimited in browser",
+    feature:"PDF / image tools",
+    free:"Unlimited in browser",
     freeOk: true,
-    pro: "Unlimited in browser",
+    pro:"Unlimited in browser",
   },
-  { feature: "Ads", free: "May show ads", pro: "Ad-free" },
-  { feature: "Support", free: "Email / contact form", pro: "Priority support" },
+  { feature:"Ads", free:"May show ads", pro:"Ad-free" },
+  { feature:"Support", free:"Email / contact form", pro:"Priority support" },
 ];
 
 const faqs = [
   {
-    q: "Can I cancel anytime?",
-    a: "Yes. Cancel from your account when available; you keep Pro until the current billing period ends. No hidden cancellation fees.",
+    q:"Can I cancel anytime?",
+    a:"Yes. Cancel from your account when available; you keep Pro until the current billing period ends. No hidden cancellation fees.",
   },
   {
-    q: "What payment methods work?",
-    a: "Payments are processed by Razorpay (cards, UPI, net banking, and wallets where available).",
+    q:"What payment methods work?",
+    a:"Payments are processed by Razorpay (cards, UPI, net banking, and wallets where available).",
   },
   {
-    q: "Is there a refund?",
-    a: "We offer a 7-day money-back guarantee if Pro is not a fit. See our Refund Policy for details.",
+    q:"Is there a refund?",
+    a:"We offer a 7-day money-back guarantee if Pro is not a fit. See our Refund Policy for details.",
   },
   {
-    q: "What happens when Pro ends?",
-    a: "You return to the Free plan. PDF/image tools stay free; AI tools return to the free daily allowance. Your account and history stay intact.",
+    q:"What happens when Pro ends?",
+    a:"You return to the Free plan. PDF/image tools stay free; AI tools return to the free daily allowance. Your account and history stay intact.",
   },
   {
-    q: "Is Free really usable?",
-    a: `Yes. Every tool is free to open. Browser PDF/image utilities have no AI limits. AI tools include ${DAILY_FREE_LIMIT} free uses per day without sign-up; a free account can unlock more daily uses.`,
+    q:"Is Free really usable?",
+    a:`Yes. Every tool is free to open. Browser PDF/image utilities have no AI limits. AI tools include ${DAILY_FREE_LIMIT} free uses per day without sign-up; a free account can unlock more daily uses.`,
   },
   {
-    q: "Do you store my documents?",
-    a: "We prioritize privacy. PDF/image tools process in your browser when possible. AI prompts are processed to fulfill your request and are not sold. See Privacy Policy for full details.",
+    q:"Do you store my documents?",
+    a:"We prioritize privacy. PDF/image tools process in your browser when possible. AI prompts are processed to fulfill your request and are not sold. See Privacy Policy for full details.",
   },
 ];
 
@@ -112,12 +101,12 @@ export default function PricingClient() {
 
   const loadScript = () =>
     new Promise<boolean>((resolve) => {
-      if (typeof window !== "undefined" && window.Razorpay) {
+      if (typeof window !=="undefined" && window.Razorpay) {
         resolve(true);
         return;
       }
       const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.src ="https://checkout.razorpay.com/v1/checkout.js";
       script.onload = () => resolve(true);
       script.onerror = () => resolve(false);
       document.body.appendChild(script);
@@ -139,17 +128,17 @@ export default function PricingClient() {
       }
 
       const res = await fetch("/api/create-subscription", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method:"POST",
+        headers: {"Content-Type":"application/json" },
         body: JSON.stringify({ planId }),
       });
 
       const sub = await res.json().catch(() => ({}));
       if (!res.ok || !sub.id) {
         toast.error(
-          typeof sub?.error === "string"
+          typeof sub?.error ==="string"
             ? sub.error
-            : "Could not start subscription. Try again.",
+            :"Could not start subscription. Try again.",
         );
         return;
       }
@@ -157,8 +146,8 @@ export default function PricingClient() {
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         subscription_id: sub.id,
-        name: "ToolNova",
-        description: isYearly ? "Pro yearly" : "Pro monthly",
+        name:"ToolNova",
+        description: isYearly ?"Pro yearly" :"Pro monthly",
         prefill: {
           email: session.user?.email || undefined,
           name: session.user?.name || undefined,
@@ -166,8 +155,8 @@ export default function PricingClient() {
         handler: async function (response: any) {
           try {
             const verifyRes = await fetch("/api/verify-payment", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
+              method:"POST",
+              headers: {"Content-Type":"application/json" },
               body: JSON.stringify(response),
             });
             const verifyData = await verifyRes.json().catch(() => ({}));
@@ -175,15 +164,14 @@ export default function PricingClient() {
               toast.success("Welcome to Pro! Unlimited AI is unlocked.");
               router.push("/dashboard");
             } else {
-              toast.message(
-                "Payment received — Pro will activate shortly after verification.",
+              toast.message("Payment received — Pro will activate shortly after verification.",
               );
             }
           } catch {
             toast.message("Payment submitted. Refresh dashboard in a minute.");
           }
         },
-        theme: { color: "#2563eb" },
+        theme: { color:"#2563eb" },
       };
 
       const rzp = new window.Razorpay(options);
@@ -197,7 +185,7 @@ export default function PricingClient() {
   };
 
   const proPrice = isYearly ? YEARLY_PRICE : MONTHLY_PRICE;
-  const proPeriod = isYearly ? "year" : "month";
+  const proPeriod = isYearly ?"year" :"month";
 
   return (
     <div className="page-shell min-h-screen overflow-hidden pb-20">
@@ -209,7 +197,7 @@ export default function PricingClient() {
             Simple pricing
           </div>
           <h1 className="font-heading mb-4 text-4xl font-bold tracking-tight md:text-5xl">
-            Free to start.{" "}
+            Free to start.{""}
             <span className="text-primary">Pro when you need unlimited AI.</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -229,11 +217,10 @@ export default function PricingClient() {
             <button
               type="button"
               onClick={() => setIsYearly(false)}
-              className={cn(
-                "px-6 py-2.5 rounded-full text-sm font-bold transition-all",
+              className={cn("px-6 py-2.5 rounded-full text-sm font-bold transition-all",
                 !isYearly
-                  ? "bg-card text-foreground shadow-premium-sm"
-                  : "text-muted-foreground",
+                  ?"bg-card text-foreground shadow-premium-sm"
+                  :"text-muted-foreground",
               )}
             >
               Monthly
@@ -241,15 +228,14 @@ export default function PricingClient() {
             <button
               type="button"
               onClick={() => setIsYearly(true)}
-              className={cn(
-                "px-6 py-2.5 rounded-full text-sm font-bold transition-all",
+              className={cn("px-6 py-2.5 rounded-full text-sm font-bold transition-all",
                 isYearly
-                  ? "bg-card text-foreground shadow-premium-sm"
-                  : "text-muted-foreground",
+                  ?"bg-card text-foreground shadow-premium-sm"
+                  :"text-muted-foreground",
               )}
             >
               Yearly
-              <span className="ml-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+              <span className="ml-2 text-xs font-semibold text-emerald-600">
                 Save {YEARLY_SAVE_PCT}%
               </span>
             </button>
@@ -311,7 +297,7 @@ export default function PricingClient() {
               <span className="text-muted-foreground">/{proPeriod}</span>
             </div>
             {isYearly ? (
-              <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium mb-6">
+              <p className="text-sm text-emerald-600 font-medium mb-6">
                 ≈ ${YEARLY_MONTHLY_EQ}/mo · save {YEARLY_SAVE_PCT}% vs monthly
               </p>
             ) : (
@@ -324,16 +310,15 @@ export default function PricingClient() {
               disabled={loading}
               onClick={() =>
                 startSubscription(
-                  isYearly ? "plan_SEPrpn71jkiE0u" : "plan_SEPqtQNsEaZpDB",
+                  isYearly ?"plan_SEPrpn71jkiE0u" :"plan_SEPqtQNsEaZpDB",
                 )
               }
             >
-              {loading ? (
-                "Opening checkout…"
+              {loading ? ("Opening checkout…"
               ) : (
                 <>
                   <Sparkles className="h-4 w-4 mr-2" />
-                  {session ? "Upgrade to Pro" : "Sign in & upgrade"}
+                  {session ?"Upgrade to Pro" :"Sign in & upgrade"}
                 </>
               )}
             </Button>
@@ -353,18 +338,18 @@ export default function PricingClient() {
           {[
             {
               icon: Shield,
-              title: "Privacy-minded",
-              desc: "Browser PDF/image tools when possible",
+              title:"Privacy-minded",
+              desc:"Browser PDF/image tools when possible",
             },
             {
               icon: Zap,
-              title: "No card for Free",
-              desc: "Try tools before you ever pay",
+              title:"No card for Free",
+              desc:"Try tools before you ever pay",
             },
             {
               icon: Infinity,
-              title: "Clear limits",
-              desc: `Free AI: ${DAILY_FREE_LIMIT}/day · Pro: unlimited`,
+              title:"Clear limits",
+              desc:`Free AI: ${DAILY_FREE_LIMIT}/day · Pro: unlimited`,
             },
           ].map((item) => (
             <div
@@ -421,11 +406,10 @@ export default function PricingClient() {
               return (
                 <div
                   key={faq.q}
-                  className={cn(
-                    "rounded-2xl border transition-colors",
+                  className={cn("rounded-2xl border transition-colors",
                     open
-                      ? "border-primary/40 bg-primary/5"
-                      : "border-border bg-card/70",
+                      ?"border-primary/40 bg-primary/5"
+                      :"border-border bg-card/70",
                   )}
                 >
                   <button
@@ -436,9 +420,8 @@ export default function PricingClient() {
                   >
                     {faq.q}
                     <ChevronDown
-                      className={cn(
-                        "h-5 w-5 shrink-0 transition-transform",
-                        open && "rotate-180 text-primary",
+                      className={cn("h-5 w-5 shrink-0 transition-transform",
+                        open &&"rotate-180 text-primary",
                       )}
                     />
                   </button>
@@ -459,21 +442,21 @@ export default function PricingClient() {
             <Link href="/refund" className="underline underline-offset-4 hover:text-primary">
               Refund policy
             </Link>
-            {" · "}
+            {" ·"}
             <Link href="/terms" className="underline underline-offset-4 hover:text-primary">
               Terms
             </Link>
-            {" · "}
+            {" ·"}
             <Link href="/privacy" className="underline underline-offset-4 hover:text-primary">
               Privacy
             </Link>
-            {" · "}
+            {" ·"}
             <Link href="/advertising" className="underline underline-offset-4 hover:text-primary">
               How Free is funded
             </Link>
           </p>
           <p>
-            Questions?{" "}
+            Questions?{""}
             <Link href="/contact" className="text-primary font-medium hover:underline">
               Contact support
             </Link>

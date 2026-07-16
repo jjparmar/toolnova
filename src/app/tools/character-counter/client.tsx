@@ -1,26 +1,26 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
-import { Copy, Check, Trash2, Hash, ClipboardPaste } from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { FAQSection } from "@/components/FAQSection";
-import { countWords, graphemeLength } from "@/lib/text-utils";
+import { useMemo, useState } from"react";
+import Link from"next/link";
+import { Copy, Check, Trash2, Hash, ClipboardPaste } from"lucide-react";
+import { toast } from"sonner";
+import { Button } from"@/components/ui/button";
+import { FAQSection } from"@/components/FAQSection";
+import { countWords, graphemeLength } from"@/lib/text-utils";
 
 const PLATFORMS = [
-  { name: "X / Twitter post", limit: 280 },
-  { name: "Instagram caption", limit: 2200 },
-  { name: "LinkedIn post", limit: 3000 },
-  { name: "TikTok caption", limit: 2200 },
-  { name: "Meta description", limit: 160 },
-  { name: "SEO title (approx)", limit: 60 },
-  { name: "SMS segment", limit: 160 },
+  { name:"X / Twitter post", limit: 280 },
+  { name:"Instagram caption", limit: 2200 },
+  { name:"LinkedIn post", limit: 3000 },
+  { name:"TikTok caption", limit: 2200 },
+  { name:"Meta description", limit: 160 },
+  { name:"SEO title (approx)", limit: 60 },
+  { name:"SMS segment", limit: 160 },
 ] as const;
 
 function analyze(text: string) {
   const total = graphemeLength(text);
-  const noSpaces = graphemeLength(text.replace(/\s+/g, ""));
+  const noSpaces = graphemeLength(text.replace(/\s+/g,""));
   const words = countWords(text).length;
   const lines = text.length ? text.split("\n").length : 0;
   const utf16 = text.length;
@@ -33,7 +33,7 @@ export default function CharacterCounterClient() {
   const stats = useMemo(() => analyze(text), [text]);
 
   const copyStats = async () => {
-    const msg = `Characters: ${stats.total}\nNo spaces: ${stats.noSpaces}\nWords: ${stats.words}\nLines: ${stats.lines}\nUTF-16 length: ${stats.utf16}`;
+    const msg =`Characters: ${stats.total}\nNo spaces: ${stats.noSpaces}\nWords: ${stats.words}\nLines: ${stats.lines}\nUTF-16 length: ${stats.utf16}`;
     try {
       await navigator.clipboard.writeText(msg);
       setCopied(true);
@@ -76,10 +76,10 @@ export default function CharacterCounterClient() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { label: "Characters", value: stats.total },
-          { label: "No spaces", value: stats.noSpaces },
-          { label: "Words", value: stats.words },
-          { label: "Lines", value: stats.lines },
+          { label:"Characters", value: stats.total },
+          { label:"No spaces", value: stats.noSpaces },
+          { label:"Words", value: stats.words },
+          { label:"Lines", value: stats.lines },
         ].map((s) => (
           <div
             key={s.label}
@@ -147,8 +147,8 @@ export default function CharacterCounterClient() {
                   <span
                     className={
                       over
-                        ? "text-red-600 font-semibold shrink-0"
-                        : "font-medium shrink-0"
+                        ?"text-red-600 font-semibold shrink-0"
+                        :"font-medium shrink-0"
                     }
                   >
                     {stats.total}/{p.limit}
@@ -166,8 +166,8 @@ export default function CharacterCounterClient() {
                 </div>
                 <div className="h-1.5 rounded-full bg-muted overflow-hidden">
                   <div
-                    className={`h-full rounded-full ${over ? "bg-red-500" : pct > 90 ? "bg-amber-500" : "bg-primary"}`}
-                    style={{ width: `${pct}%` }}
+                    className={`h-full rounded-full ${over ?"bg-red-500" : pct > 90 ?"bg-amber-500" :"bg-primary"}`}
+                    style={{ width:`${pct}%` }}
                   />
                 </div>
               </li>
@@ -198,22 +198,19 @@ export default function CharacterCounterClient() {
       <FAQSection
         faqs={[
           {
-            question: "Are social limits exact?",
-            answer:
-              "Limits are common published caps. Some platforms count emoji or links differently. Always preview in the app before posting.",
-            category: "Usage",
+            question:"Are social limits exact?",
+            answer:"Limits are common published caps. Some platforms count emoji or links differently. Always preview in the app before posting.",
+            category:"Usage",
           },
           {
-            question: "Is text stored?",
-            answer:
-              "No. Counting runs in your browser only. Refreshing the page clears the text.",
-            category: "Privacy",
+            question:"Is text stored?",
+            answer:"No. Counting runs in your browser only. Refreshing the page clears the text.",
+            category:"Privacy",
           },
           {
-            question: "How are emoji counted?",
-            answer:
-              "When your browser supports Intl.Segmenter, each emoji/grapheme cluster counts as 1 character. Otherwise we fall back to Unicode code points.",
-            category: "Features",
+            question:"How are emoji counted?",
+            answer:"When your browser supports Intl.Segmenter, each emoji/grapheme cluster counts as 1 character. Otherwise we fall back to Unicode code points.",
+            category:"Features",
           },
         ]}
       />

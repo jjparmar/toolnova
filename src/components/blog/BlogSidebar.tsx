@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from"next/link";
 import {
   FaArrowRight,
   FaBookOpen,
@@ -8,34 +8,34 @@ import {
   FaPen,
   FaCalculator,
   FaFileAlt,
-} from "react-icons/fa";
-import { SidebarAd } from "@/components/ads/AdUnit";
+} from"react-icons/fa";
+import { SidebarAd } from"@/components/ads/AdUnit";
 
 // Featured tools to display in sidebar
 const featuredTools = [
   {
-    name: "Text Summarizer",
-    slug: "text-summarizer",
+    name:"Text Summarizer",
+    slug:"text-summarizer",
     icon: <FaFileAlt className="text-primary" />,
   },
   {
-    name: "Essay Writer",
-    slug: "essay-writer",
+    name:"Essay Writer",
+    slug:"essay-writer",
     icon: <FaPen className="text-sky-600" />,
   },
   {
-    name: "Paraphraser",
-    slug: "paraphraser",
+    name:"Paraphraser",
+    slug:"paraphraser",
     icon: <FaBookOpen className="text-emerald-600" />,
   },
   {
-    name: "Grammar Fix",
-    slug: "grammar-fix",
+    name:"Grammar Fix",
+    slug:"grammar-fix",
     icon: <FaRocket className="text-amber-600" />,
   },
   {
-    name: "Word Counter",
-    slug: "word-counter",
+    name:"Word Counter",
+    slug:"word-counter",
     icon: <FaCalculator className="text-blue-600" />,
   },
 ];

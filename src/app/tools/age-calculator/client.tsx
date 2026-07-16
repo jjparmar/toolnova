@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
+import { useMemo, useState } from"react";
+import Link from"next/link";
 import {
   Calendar,
   Cake,
@@ -12,70 +12,70 @@ import {
   ArrowLeft,
   Sparkles,
   PartyPopper,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { FAQSection } from "@/components/FAQSection";
-import { toolFAQs } from "@/lib/content-database";
+} from"lucide-react";
+import { Button } from"@/components/ui/button";
+import { FAQSection } from"@/components/FAQSection";
+import { toolFAQs } from"@/lib/content-database";
 import {
   calculateAge,
   parseFlexibleDate,
   type AgeBreakdown,
-} from "@/lib/text-utils";
+} from"@/lib/text-utils";
 
 const relatedTools = [
   {
-    name: "Word Counter",
-    slug: "word-counter",
+    name:"Word Counter",
+    slug:"word-counter",
     icon: BarChart2,
-    color: "text-primary",
+    color:"text-primary",
   },
   {
-    name: "Case Converter",
-    slug: "case-converter",
+    name:"Case Converter",
+    slug:"case-converter",
     icon: Clock,
-    color: "text-teal-600",
+    color:"text-teal-600",
   },
   {
-    name: "Timetable Generator",
-    slug: "timetable-generator",
+    name:"Timetable Generator",
+    slug:"timetable-generator",
     icon: CalendarDays,
-    color: "text-emerald-600",
+    color:"text-emerald-600",
   },
   {
-    name: "Goal Planner",
-    slug: "goal-planner",
+    name:"Goal Planner",
+    slug:"goal-planner",
     icon: Gift,
-    color: "text-amber-600",
+    color:"text-amber-600",
   },
 ];
 
 const howItWorks = [
   {
     step: 1,
-    title: "Pick your date",
-    desc: "Use the date picker or type YYYY-MM-DD",
+    title:"Pick your date",
+    desc:"Use the date picker or type YYYY-MM-DD",
     icon: Calendar,
   },
   {
     step: 2,
-    title: "Calculate",
-    desc: "Get age in years, months, and days",
+    title:"Calculate",
+    desc:"Get age in years, months, and days",
     icon: Clock,
   },
   {
     step: 3,
-    title: "See stats",
-    desc: "Days lived and next birthday countdown",
+    title:"See stats",
+    desc:"Days lived and next birthday countdown",
     icon: Cake,
   },
 ];
 
 function formatLong(d: Date) {
   return d.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+    weekday:"long",
+    year:"numeric",
+    month:"long",
+    day:"numeric",
   });
 }
 
@@ -89,8 +89,7 @@ export default function AgeCalculatorClient() {
     const birth = parseFlexibleDate(dateValue);
     if (!birth) {
       setResult(null);
-      setError(
-        "Please pick a date with the calendar, or enter YYYY-MM-DD (e.g. 2000-01-15). Slash dates work when unambiguous.",
+      setError("Please pick a date with the calendar, or enter YYYY-MM-DD (e.g. 2000-01-15). Slash dates work when unambiguous.",
       );
       return;
     }
@@ -148,7 +147,7 @@ export default function AgeCalculatorClient() {
                 setError(null);
               }}
               onKeyDown={(e) => {
-                if (e.key === "Enter") handleCalculate();
+                if (e.key ==="Enter") handleCalculate();
               }}
               className="w-full h-12 px-4 rounded-xl border border-border bg-background text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
             />
@@ -169,7 +168,7 @@ export default function AgeCalculatorClient() {
           </Button>
 
           {error && (
-            <div className="rounded-xl border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/30 px-4 py-3 text-sm text-red-700 dark:text-red-300">
+            <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
               {error}
             </div>
           )}
@@ -185,9 +184,9 @@ export default function AgeCalculatorClient() {
 
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { label: "Years", value: result.years },
-                  { label: "Months", value: result.months },
-                  { label: "Days", value: result.days },
+                  { label:"Years", value: result.years },
+                  { label:"Months", value: result.months },
+                  { label:"Days", value: result.days },
                 ].map((s) => (
                   <div
                     key={s.label}
@@ -205,33 +204,33 @@ export default function AgeCalculatorClient() {
 
               <div className="rounded-xl border border-border bg-muted/30 p-4 space-y-2 text-sm">
                 <p>
-                  <span className="text-muted-foreground">Total days lived:</span>{" "}
+                  <span className="text-muted-foreground">Total days lived:</span>{""}
                   <strong className="tabular-nums">
                     {result.totalDays.toLocaleString()}
                   </strong>
                 </p>
                 <p>
-                  <span className="text-muted-foreground">Total weeks:</span>{" "}
+                  <span className="text-muted-foreground">Total weeks:</span>{""}
                   <strong className="tabular-nums">
                     {result.totalWeeks.toLocaleString()}
                   </strong>
                 </p>
                 <p>
-                  <span className="text-muted-foreground">Total months:</span>{" "}
+                  <span className="text-muted-foreground">Total months:</span>{""}
                   <strong className="tabular-nums">{result.totalMonths}</strong>
                 </p>
                 <p>
-                  <span className="text-muted-foreground">Next birthday:</span>{" "}
+                  <span className="text-muted-foreground">Next birthday:</span>{""}
                   <strong>{formatLong(result.nextBirthday)}</strong>
                 </p>
                 <p>
-                  <span className="text-muted-foreground">Days until birthday:</span>{" "}
+                  <span className="text-muted-foreground">Days until birthday:</span>{""}
                   <strong className="tabular-nums text-primary">
-                    {result.isBirthdayToday ? "Today!" : result.daysToNextBirthday}
+                    {result.isBirthdayToday ?"Today!" : result.daysToNextBirthday}
                   </strong>
                 </p>
                 <p className="text-xs text-muted-foreground pt-2 border-t border-border">
-                  Birth date: {formatLong(result.birthDate)} · Calculated on{" "}
+                  Birth date: {formatLong(result.birthDate)} · Calculated on{""}
                   {formatLong(result.calculatedOn)}
                 </p>
               </div>

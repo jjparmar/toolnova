@@ -3,8 +3,8 @@
  * Implements AEO, GEO, and Google Discover optimization
  */
 
-import Script from "next/script";
-import { siteConfig, getFullUrl } from "@/config/site";
+import Script from"next/script";
+import { siteConfig, getFullUrl } from"@/config/site";
 import {
   generateToolPageSchemas,
   combineSchemas,
@@ -17,8 +17,8 @@ import {
   type FAQItem,
   type HowToStep,
   type BreadcrumbItem,
-} from "@/lib/seo-advanced";
-import { getToolFAQ } from "@/lib/tool-faq-data";
+} from"@/lib/seo-advanced";
+import { getToolFAQ } from"@/lib/tool-faq-data";
 
 interface ToolSEOProps {
   toolSlug: string;
@@ -58,13 +58,11 @@ export function ToolSEO({
   );
 
   // Combine schemas into @graph
-  const combinedSchema = {
-    "@context": "https://schema.org",
-    "@graph": schemas,
+  const combinedSchema = {"@context":"https://schema.org","@graph": schemas,
   };
 
   // Generate speakable content for voice search
-  const speakableContent = `${toolName} is a free AI-powered tool on ToolNova. ${toolDescription} No sign-up required. Visit ${url} to use it now.`;
+  const speakableContent =`${toolName} is a free AI-powered tool on ToolNova. ${toolDescription} No sign-up required. Visit ${url} to use it now.`;
 
   return (
     <>
@@ -82,11 +80,9 @@ export function ToolSEO({
         id={`speakable-schema-${toolSlug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SpeakableSpecification",
-            cssSelector: [".tool-description", ".hero-text", ".speakable-content"],
-            xpath: ["/html/head/title", "/html/head/meta[@name='description']/@content"],
+          __html: JSON.stringify({"@context":"https://schema.org","@type":"SpeakableSpecification",
+            cssSelector: [".tool-description",".hero-text",".speakable-content"],
+            xpath: ["/html/head/title","/html/head/meta[@name='description']/@content"],
           }),
         }}
       />
@@ -138,11 +134,11 @@ export function ToolHowToSchema({
 }) {
   return (
     <Script
-      id={`howto-schema-${toolSlug || name.toLowerCase().replace(/\s+/g, "-")}`}
+      id={`howto-schema-${toolSlug || name.toLowerCase().replace(/\s+/g,"-")}`}
       type="application/ld+json"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(
-          generateHowToSchema(name, description, steps, "PT5M", toolSlug)
+          generateHowToSchema(name, description, steps,"PT5M", toolSlug)
         ),
       }}
     />
@@ -174,7 +170,7 @@ export function ToolBreadcrumbSchema({
  */
 export function SpeakableContent({
   children,
-  className = "",
+  className ="",
 }: {
   children: React.ReactNode;
   className?: string;
@@ -191,17 +187,17 @@ export function SpeakableContent({
  */
 export const toolBreadcrumbs = {
   home: (url: string): BreadcrumbItem[] => [
-    { name: "Home", url: siteConfig.url },
+    { name:"Home", url: siteConfig.url },
   ],
   
   tools: (): BreadcrumbItem[] => [
-    { name: "Home", url: siteConfig.url },
-    { name: "Tools", url: `${siteConfig.url}/tools` },
+    { name:"Home", url: siteConfig.url },
+    { name:"Tools", url:`${siteConfig.url}/tools` },
   ],
   
   tool: (name: string, slug: string): BreadcrumbItem[] => [
-    { name: "Home", url: siteConfig.url },
-    { name: "Tools", url: `${siteConfig.url}/tools` },
+    { name:"Home", url: siteConfig.url },
+    { name:"Tools", url:`${siteConfig.url}/tools` },
     { name, url: getFullUrl(`/tools/${slug}`) },
   ],
   
@@ -211,20 +207,20 @@ export const toolBreadcrumbs = {
     toolName: string,
     toolSlug: string
   ): BreadcrumbItem[] => [
-    { name: "Home", url: siteConfig.url },
-    { name: "Tools", url: `${siteConfig.url}/tools` },
+    { name:"Home", url: siteConfig.url },
+    { name:"Tools", url:`${siteConfig.url}/tools` },
     { name: categoryName, url: getFullUrl(`/tools/${categorySlug}`) },
     { name: toolName, url: getFullUrl(`/tools/${toolSlug}`) },
   ],
   
   blog: (): BreadcrumbItem[] => [
-    { name: "Home", url: siteConfig.url },
-    { name: "Blog", url: `${siteConfig.url}/blog` },
+    { name:"Home", url: siteConfig.url },
+    { name:"Blog", url:`${siteConfig.url}/blog` },
   ],
   
   blogPost: (title: string, slug: string): BreadcrumbItem[] => [
-    { name: "Home", url: siteConfig.url },
-    { name: "Blog", url: `${siteConfig.url}/blog` },
+    { name:"Home", url: siteConfig.url },
+    { name:"Blog", url:`${siteConfig.url}/blog` },
     { name: title, url: getFullUrl(`/blog/${slug}`) },
   ],
 };
@@ -234,20 +230,20 @@ export const toolBreadcrumbs = {
  */
 export const defaultToolHowToSteps: HowToStep[] = [
   {
-    name: "Enter Your Content",
-    text: "Paste or type your content into the input field above. The tool accepts text, documents, or URLs depending on the tool type.",
+    name:"Enter Your Content",
+    text:"Paste or type your content into the input field above. The tool accepts text, documents, or URLs depending on the tool type.",
   },
   {
-    name: "Configure Options",
-    text: "Adjust any available options such as output length, style, or format to customize your results.",
+    name:"Configure Options",
+    text:"Adjust any available options such as output length, style, or format to customize your results.",
   },
   {
-    name: "Generate Results",
-    text: "Click the 'Generate' button to process your input with AI. Results typically appear within seconds.",
+    name:"Generate Results",
+    text:"Click the 'Generate' button to process your input with AI. Results typically appear within seconds.",
   },
   {
-    name: "Copy or Download",
-    text: "Use the copy button to copy results to clipboard, or download as a file for offline use.",
+    name:"Copy or Download",
+    text:"Use the copy button to copy results to clipboard, or download as a file for offline use.",
   },
 ];
 

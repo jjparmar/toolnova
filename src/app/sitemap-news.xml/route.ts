@@ -1,7 +1,7 @@
-import { getAllBlogPosts } from "@/data/blog";
-import { siteConfig } from "@/config/site";
+import { getAllBlogPosts } from"@/data/blog";
+import { siteConfig } from"@/config/site";
 
-export const dynamic = "force-dynamic";
+export const dynamic ="force-dynamic";
 export const revalidate = 1800;
 
 /**
@@ -24,13 +24,13 @@ export async function GET() {
 
   const newsItems = recentPosts
     .map((post) => {
-      const postUrl = `${baseUrl}/blog/${post.slug}`;
+      const postUrl =`${baseUrl}/blog/${post.slug}`;
       const pubDate = new Date(post.date).toISOString();
       const safeTitle = String(post.title)
-        .replace(/]]>/g, "]] >")
-        .replace(/&/g, "&amp;");
+        .replace(/]]>/g,"]] >")
+        .replace(/&/g,"&amp;");
 
-      return `
+      return`
   <url>
     <loc>${postUrl}</loc>
     <news:news>
@@ -45,7 +45,7 @@ export async function GET() {
     })
     .join("");
 
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+  const sitemap =`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   ${newsItems}
@@ -53,9 +53,7 @@ export async function GET() {
 
   return new Response(sitemap.trim(), {
     status: 200,
-    headers: {
-      "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, s-maxage=1800, stale-while-revalidate=3600",
+    headers: {"Content-Type":"application/xml; charset=utf-8","Cache-Control":"public, s-maxage=1800, stale-while-revalidate=3600",
     },
   });
 }

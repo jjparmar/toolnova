@@ -1,9 +1,9 @@
-import { NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import { db } from "@/lib/db";
+import { NextAuthOptions } from"next-auth";
+import GoogleProvider from"next-auth/providers/google";
+import { db } from"@/lib/db";
 
 export const authOptions: NextAuthOptions = {
-    // NOTE: Removed PrismaAdapter — it was causing `error=Callback` because
+    // NOTE: Removed PrismaAdapter — it was causing`error=Callback` because
     // the adapter tries to write to MySQL during OAuth and fails silently.
     // User records are created via upsert in API routes instead.
     providers: [
@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
     session: {
-        strategy: "jwt",
+        strategy:"jwt",
         maxAge: 2 * 60 * 60, // 2 hours
     },
     callbacks: {
@@ -47,22 +47,22 @@ export const authOptions: NextAuthOptions = {
             return true;
         },
         async redirect({ url, baseUrl }) {
-            const canonicalBase = (process.env.NEXTAUTH_URL || baseUrl).replace(/\/$/, "");
+            const canonicalBase = (process.env.NEXTAUTH_URL || baseUrl).replace(/\/$/,"");
 
             // Relative URLs
             if (url.startsWith("/")) {
-                return `${canonicalBase}${url}`;
+                return`${canonicalBase}${url}`;
             }
 
             // URLs on our domain (handles www vs non-www)
             try {
                 const parsedUrl = new URL(url);
                 if (
-                    parsedUrl.hostname === "toolnovahub.com" ||
-                    parsedUrl.hostname === "www.toolnovahub.com"
+                    parsedUrl.hostname ==="toolnovahub.com" ||
+                    parsedUrl.hostname ==="www.toolnovahub.com"
                 ) {
-                    parsedUrl.protocol = "https:";
-                    parsedUrl.hostname = "www.toolnovahub.com";
+                    parsedUrl.protocol ="https:";
+                    parsedUrl.hostname ="www.toolnovahub.com";
                     return parsedUrl.toString();
                 }
             } catch {
@@ -95,7 +95,7 @@ export const authOptions: NextAuthOptions = {
     },
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
-        signIn: "/login",
+        signIn:"/login",
     },
-    debug: process.env.NODE_ENV === "development",
+    debug: process.env.NODE_ENV ==="development",
 };

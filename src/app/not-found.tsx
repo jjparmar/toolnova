@@ -1,11 +1,10 @@
-import Link from "next/link";
-import { Metadata } from "next";
-import { TOOL_COUNT_LABEL } from "@/data/tools";
+import Link from"next/link";
+import { Metadata } from"next";
+import { TOOL_COUNT_LABEL } from"@/data/tools";
 
 export const metadata: Metadata = {
-  title: "Page Not Found | ToolNova",
-  description:
-    "The page you're looking for doesn't exist. Explore free AI-powered tools for students and professionals at ToolNova.",
+  title:"Page Not Found | ToolNova",
+  description:"The page you're looking for doesn't exist. Explore free AI-powered tools for students and professionals at ToolNova.",
   robots: {
     index: false,
     follow: true,
@@ -13,12 +12,12 @@ export const metadata: Metadata = {
 };
 
 const popularTools = [
-  { name: "Essay Writer", href: "/tools/essay-writer", emoji: "✍️" },
-  { name: "Homework Solver", href: "/tools/homework-solver", emoji: "📚" },
-  { name: "Grammar Fix", href: "/tools/grammar-fix", emoji: "✅" },
-  { name: "Flashcard Maker", href: "/tools/flashcard-maker", emoji: "🃏" },
-  { name: "Merge PDF", href: "/tools/merge-pdf", emoji: "📄" },
-  { name: "Paraphraser", href: "/tools/paraphraser", emoji: "🔄" },
+  { name:"Essay Writer", href:"/tools/essay-writer", emoji:"✍️" },
+  { name:"Homework Solver", href:"/tools/homework-solver", emoji:"📚" },
+  { name:"Grammar Fix", href:"/tools/grammar-fix", emoji:"✅" },
+  { name:"Flashcard Maker", href:"/tools/flashcard-maker", emoji:"🃏" },
+  { name:"Merge PDF", href:"/tools/merge-pdf", emoji:"📄" },
+  { name:"Paraphraser", href:"/tools/paraphraser", emoji:"🔄" },
 ];
 
 export default function NotFound() {
@@ -130,7 +129,7 @@ export default function NotFound() {
 
         {/* Help Text */}
         <p className="text-sm text-muted-foreground mt-8">
-          Need help?{" "}
+          Need help?{""}
           <Link
             href="/contact"
             className="text-primary hover:underline font-medium"

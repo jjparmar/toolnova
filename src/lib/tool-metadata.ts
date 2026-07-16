@@ -4,7 +4,7 @@
  * - Avoid year in title (makes content feel stale post-year)
  * - Target specific, conversational queries instead of broad keywords
  * - Under 60 chars for title, 150-160 chars for description
- * - Include trust signals: "no watermark", "no signup", "free"
+ * - Include trust signals:"no watermark","no signup","free"
  */
 
 interface ToolMetadata {

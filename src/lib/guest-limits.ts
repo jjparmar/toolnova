@@ -4,19 +4,18 @@
  * protecting against basic abuse. Authenticated users use DB history instead.
  */
 
-import { createHmac, timingSafeEqual } from "crypto";
-import { cookies } from "next/headers";
-import type { NextResponse } from "next/server";
-import { DAILY_FREE_LIMIT } from "@/lib/limits";
+import { createHmac, timingSafeEqual } from"crypto";
+import { cookies } from"next/headers";
+import type { NextResponse } from"next/server";
+import { DAILY_FREE_LIMIT } from"@/lib/limits";
 
-export const GUEST_COOKIE_NAME = "tn_guest_ai";
+export const GUEST_COOKIE_NAME ="tn_guest_ai";
 const MAX_AGE_SECONDS = 60 * 60 * 24 * 2; // 2 days
 
 function getSecret(): string {
   return (
     process.env.NEXTAUTH_SECRET ||
-    process.env.GUEST_LIMIT_SECRET ||
-    "toolnova-guest-limit-dev-secret"
+    process.env.GUEST_LIMIT_SECRET ||"toolnova-guest-limit-dev-secret"
   );
 }
 
@@ -54,7 +53,7 @@ function parseGuestCookie(raw: string | undefined): { date: string; count: numbe
     return { date: todayKey(), count: 0 };
   }
 
-  const payload = `${date}.${countStr}`;
+  const payload =`${date}.${countStr}`;
   const expected = sign(payload);
   if (!safeEqual(sig, expected)) {
     return { date: todayKey(), count: 0 };
@@ -69,8 +68,8 @@ function parseGuestCookie(raw: string | undefined): { date: string; count: numbe
 }
 
 function encodeGuestCookie(date: string, count: number): string {
-  const payload = `${date}.${count}`;
-  return `${payload}.${sign(payload)}`;
+  const payload =`${date}.${count}`;
+  return`${payload}.${sign(payload)}`;
 }
 
 /**
@@ -127,9 +126,9 @@ export function applyGuestCookie(
 ): void {
   response.cookies.set(GUEST_COOKIE_NAME, cookieValue, {
     httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
+    sameSite:"lax",
+    secure: process.env.NODE_ENV ==="production",
+    path:"/",
     maxAge: MAX_AGE_SECONDS,
   });
 }

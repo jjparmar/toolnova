@@ -41,7 +41,7 @@ export function ToolsLibrary() {
                 category: 'PDF & Image',
                 href: '/tools/merge-pdf',
                 badge: 'Top Rated',
-                badgeVariant: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20',
+                badgeVariant: 'bg-rose-500/10 text-rose-600 border border-rose-500/20',
             },
             {
                 title: 'Split PDF',
@@ -61,7 +61,7 @@ export function ToolsLibrary() {
                 category: 'PDF & Image',
                 href: '/tools/image-compressor',
                 badge: 'Popular',
-                badgeVariant: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20',
+                badgeVariant: 'bg-amber-500/10 text-amber-600 border border-amber-500/20',
             },
             {
                 title: 'Image Resizer',
@@ -72,7 +72,7 @@ export function ToolsLibrary() {
                 category: 'PDF & Image',
                 href: '/tools/resize-image',
                 badge: 'Trending',
-                badgeVariant: 'bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20',
+                badgeVariant: 'bg-violet-500/10 text-violet-600 border border-violet-500/20',
             },
             {
                 title: 'Flashcard Maker',
@@ -83,7 +83,7 @@ export function ToolsLibrary() {
                 category: 'Study',
                 href: '/tools/flashcard-maker',
                 badge: 'Student Pick',
-                badgeVariant: 'bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20',
+                badgeVariant: 'bg-teal-500/10 text-teal-600 border border-teal-500/20',
             },
             {
                 title: 'Homework Solver',
@@ -94,7 +94,7 @@ export function ToolsLibrary() {
                 category: 'Study',
                 href: '/tools/homework-solver',
                 badge: 'Popular',
-                badgeVariant: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20',
+                badgeVariant: 'bg-blue-500/10 text-blue-600 border border-blue-500/20',
             },
             {
                 title: 'YouTube Summarizer',
@@ -105,7 +105,7 @@ export function ToolsLibrary() {
                 category: 'Study',
                 href: '/tools/youtube-summarizer',
                 badge: 'New',
-                badgeVariant: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20',
+                badgeVariant: 'bg-emerald-500/10 text-emerald-600 border border-emerald-500/20',
             },
             {
                 title: 'Essay Writer',
@@ -134,7 +134,7 @@ export function ToolsLibrary() {
                 category: 'Writing',
                 href: '/tools/plagiarism-checker',
                 badge: 'New',
-                badgeVariant: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20',
+                badgeVariant: 'bg-emerald-500/10 text-emerald-600 border border-emerald-500/20',
             },
             {
                 title: 'Cover Letter Writer',
@@ -259,10 +259,10 @@ export function ToolsLibrary() {
                         <Link
                             key={tool.href}
                             href={tool.href}
-                            className="group relative flex flex-col rounded-2xl bg-card border border-border/60 p-6 hover:shadow-elevated hover:border-primary/30 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
+                            className="group relative flex flex-col rounded-2xl bg-card border border-border/60 p-6 shadow-premium-sm hover:shadow-premium hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                         >
                             {/* Top hover accent */}
-                            <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${tool.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-400`} />
+                            <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${tool.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
                             {/* Badge */}
                             {tool.badge && (
@@ -313,10 +313,9 @@ export function ToolsLibrary() {
                     </div>
                 )}
 
-                {/* CTA */}
                 <div className="text-center mt-12">
                     <Link href="/tools">
-                        <Button className="h-12 px-8 rounded-xl font-bold gap-2 shadow-sm shadow-primary/20 hover:shadow-md hover:shadow-primary/25 transition-all duration-300">
+                        <Button className="h-14 px-8 rounded-full font-bold gap-2 shadow-[0_0_20px_-5px_rgba(var(--primary),0.4)] hover:shadow-[0_0_30px_-5px_rgba(var(--primary),0.6)] hover:-translate-y-0.5 transition-all duration-300">
                             View all {TOOL_COUNT_LABEL} tools
                             <ArrowRight className="h-4 w-4" />
                         </Button>

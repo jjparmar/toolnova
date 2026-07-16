@@ -1,59 +1,16 @@
-import Link from "next/link";
-import type { ReactNode } from "react";
-import NextImage from "next/image";
-import { FaInfoCircle, FaLightbulb, FaExclamationTriangle, FaBolt } from "react-icons/fa";
+import Link from"next/link";
+import type { ReactNode } from"react";
+import NextImage from"next/image";
+import { FaInfoCircle, FaLightbulb, FaExclamationTriangle, FaBolt } from"react-icons/fa";
 
 // AEO Components
-import QuickAnswer from "@/components/blog/aeo/QuickAnswer";
-import KeyTakeaways from "@/components/blog/aeo/KeyTakeaways";
-import ProsCons from "@/components/blog/aeo/ProsCons";
-import ExpertQuote from "@/components/blog/aeo/ExpertQuote";
+import QuickAnswer from"@/components/blog/aeo/QuickAnswer";
+import KeyTakeaways from"@/components/blog/aeo/KeyTakeaways";
+import ProsCons from"@/components/blog/aeo/ProsCons";
+import ExpertQuote from"@/components/blog/aeo/ExpertQuote";
 
 // Tool slugs for auto-linking
-const toolSlugs = [
-    "text-summarizer",
-    "paraphraser",
-    "grammar-fix",
-    "essay-writer",
-    "notes-generator",
-    "flashcard-maker",
-    "homework-solver",
-    "chapter-summary",
-    "concept-explainer",
-    "quiz-generator",
-    "mcq-generator",
-    "doubt-solver",
-    "vocabulary-builder",
-    "synonym-finder",
-    "antonym-finder",
-    "idioms-phrases",
-    "one-word-substitution",
-    "paragraph-generator",
-    "story-generator",
-    "speech-writer",
-    "email-writer",
-    "bio-generator",
-    "caption-generator",
-    "cover-letter-writer",
-    "resume-bullets",
-    "interview-generator",
-    "timetable-generator",
-    "revision-planner",
-    "goal-planner",
-    "todo-list-generator",
-    "formula-generator",
-    "diagram-explainer",
-    "text-simplifier",
-    "merge-pdf",
-    "split-pdf",
-    "image-to-pdf",
-    "image-compressor",
-    "jpg-to-png",
-    "png-to-jpg",
-    "word-counter",
-    "character-counter",
-    "case-converter",
-    "age-calculator",
+const toolSlugs = ["text-summarizer","paraphraser","grammar-fix","essay-writer","notes-generator","flashcard-maker","homework-solver","chapter-summary","concept-explainer","quiz-generator","mcq-generator","doubt-solver","vocabulary-builder","synonym-finder","antonym-finder","idioms-phrases","one-word-substitution","paragraph-generator","story-generator","speech-writer","email-writer","bio-generator","caption-generator","cover-letter-writer","resume-bullets","interview-generator","timetable-generator","revision-planner","goal-planner","todo-list-generator","formula-generator","diagram-explainer","text-simplifier","merge-pdf","split-pdf","image-to-pdf","image-compressor","jpg-to-png","png-to-jpg","word-counter","character-counter","case-converter","age-calculator",
 ];
 
 // Map of keywords to tool URLs
@@ -63,41 +20,11 @@ const keywordMap: Record<string, string> = {};
 toolSlugs.forEach((slug) => {
     // Convert slug to readable name
     const name = slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-    keywordMap[name.toLowerCase()] = `/tools/${slug}`;
+    keywordMap[name.toLowerCase()] =`/tools/${slug}`;
 });
 
 // Manual keywords for common variations
-const manualKeywords: Record<string, string> = {
-    "ai summarizer": "/tools/text-summarizer",
-    "ai text summarizer": "/tools/text-summarizer",
-    "summarize documents": "/tools/text-summarizer",
-    "ai paraphrasing tool": "/tools/paraphraser",
-    "paraphrasing tool": "/tools/paraphraser",
-    "rewrite text": "/tools/paraphraser",
-    "grammar checker": "/tools/grammar-fix",
-    "fix grammar": "/tools/grammar-fix",
-    "ai essay writer": "/tools/essay-writer",
-    "write essays": "/tools/essay-writer",
-    "ai notes": "/tools/notes-generator",
-    "study notes": "/tools/notes-generator",
-    "create flashcards": "/tools/flashcard-maker",
-    "ai flashcards": "/tools/flashcard-maker",
-    "solve homework": "/tools/homework-solver",
-    "ai homework help": "/tools/homework-solver",
-    "summarize chapters": "/tools/chapter-summary",
-    "explain concepts": "/tools/concept-explainer",
-    "generate quiz": "/tools/quiz-generator",
-    "create quizzes": "/tools/quiz-generator",
-    "mcq questions": "/tools/mcq-generator",
-    "find synonyms": "/tools/synonym-finder",
-    "find antonyms": "/tools/antonym-finder",
-    "merge pdfs": "/tools/merge-pdf",
-    "combine pdf": "/tools/merge-pdf",
-    "split pdfs": "/tools/split-pdf",
-    "compress images": "/tools/image-compressor",
-    "convert to pdf": "/tools/image-to-pdf",
-    "count words": "/tools/word-counter",
-    "count characters": "/tools/character-counter",
+const manualKeywords: Record<string, string> = {"ai summarizer":"/tools/text-summarizer","ai text summarizer":"/tools/text-summarizer","summarize documents":"/tools/text-summarizer","ai paraphrasing tool":"/tools/paraphraser","paraphrasing tool":"/tools/paraphraser","rewrite text":"/tools/paraphraser","grammar checker":"/tools/grammar-fix","fix grammar":"/tools/grammar-fix","ai essay writer":"/tools/essay-writer","write essays":"/tools/essay-writer","ai notes":"/tools/notes-generator","study notes":"/tools/notes-generator","create flashcards":"/tools/flashcard-maker","ai flashcards":"/tools/flashcard-maker","solve homework":"/tools/homework-solver","ai homework help":"/tools/homework-solver","summarize chapters":"/tools/chapter-summary","explain concepts":"/tools/concept-explainer","generate quiz":"/tools/quiz-generator","create quizzes":"/tools/quiz-generator","mcq questions":"/tools/mcq-generator","find synonyms":"/tools/synonym-finder","find antonyms":"/tools/antonym-finder","merge pdfs":"/tools/merge-pdf","combine pdf":"/tools/merge-pdf","split pdfs":"/tools/split-pdf","compress images":"/tools/image-compressor","convert to pdf":"/tools/image-to-pdf","count words":"/tools/word-counter","count characters":"/tools/character-counter",
 };
 
 Object.assign(keywordMap, manualKeywords);
@@ -133,7 +60,7 @@ export function processContent(content: string): React.ReactNode[] {
             elements.push(
                 <ListTag key={key} className={`space-y-2 my-6 ${listType === 'ol' ? 'list-decimal' : 'list-disc'} pl-6 text-slate-700`}>
                     {listItems.map((item, i) => (
-                        <li key={i} className="leading-relaxed pl-2">{parseInlineMarkdown(item, `li-${key}-${i}`, true)}</li>
+                        <li key={i} className="leading-relaxed pl-2">{parseInlineMarkdown(item,`li-${key}-${i}`, true)}</li>
                     ))}
                 </ListTag>
             );
@@ -146,7 +73,7 @@ export function processContent(content: string): React.ReactNode[] {
         if (blockquoteItems.length > 0 && blockquoteType) {
             const contentElements = blockquoteItems.map((item, i) => (
                 <p key={i} className={`leading-relaxed ${i > 0 ? 'mt-3' : ''}`}>
-                    {parseInlineMarkdown(item, `bq-${key}-${i}`, true)}
+                    {parseInlineMarkdown(item,`bq-${key}-${i}`, true)}
                 </p>
             ));
 
@@ -158,35 +85,35 @@ export function processContent(content: string): React.ReactNode[] {
                 );
             } else {
                 // Alert styles
-                let styles = "";
+                let styles ="";
                 let icon: ReactNode = null;
-                let title: string = "";
+                let title: string ="";
 
                 switch (blockquoteType) {
                     case 'NOTE':
-                        styles = "bg-blue-50 border-blue-200 text-slate-700";
+                        styles ="bg-blue-50 border-blue-200 text-slate-700";
                         icon = <FaInfoCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />;
-                        title = "Note";
+                        title ="Note";
                         break;
                     case 'TIP':
-                        styles = "bg-emerald-50 border-emerald-200 text-slate-700";
+                        styles ="bg-emerald-50 border-emerald-200 text-slate-700";
                         icon = <FaLightbulb className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />;
-                        title = "Pro Tip";
+                        title ="Pro Tip";
                         break;
                     case 'IMPORTANT':
-                        styles = "bg-primary/5 border-primary/20 text-slate-700";
+                        styles ="bg-primary/5 border-primary/20 text-slate-700";
                         icon = <FaBolt className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />;
-                        title = "Important";
+                        title ="Important";
                         break;
                     case 'WARNING':
-                        styles = "bg-amber-50 border-amber-200 text-slate-800";
+                        styles ="bg-amber-50 border-amber-200 text-slate-800";
                         icon = <FaExclamationTriangle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />;
-                        title = "Warning";
+                        title ="Warning";
                         break;
                     case 'CAUTION':
-                        styles = "bg-red-50 border-red-200 text-slate-800";
+                        styles ="bg-red-50 border-red-200 text-slate-800";
                         icon = <FaExclamationTriangle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />;
-                        title = "Caution";
+                        title ="Caution";
                         break;
                 }
 
@@ -217,7 +144,7 @@ export function processContent(content: string): React.ReactNode[] {
                     elements.push(
                         <QuickAnswer key={key}>
                             {aeoLines.map((line, i) => (
-                                <p key={i} className={i > 0 ? "mt-2" : ""}>{parseInlineMarkdown(line, `qa-${key}-${i}`, true)}</p>
+                                <p key={i} className={i > 0 ?"mt-2" :""}>{parseInlineMarkdown(line,`qa-${key}-${i}`, true)}</p>
                             ))}
                         </QuickAnswer>
                     );
@@ -255,9 +182,9 @@ export function processContent(content: string): React.ReactNode[] {
                     elements.push(
                         <ExpertQuote
                             key={key}
-                            quote={props.quote || ""}
-                            author={props.author || ""}
-                            role={props.role || ""}
+                            quote={props.quote ||""}
+                            author={props.author ||""}
+                            role={props.role ||""}
                             image={props.image}
                         />
                     );
@@ -295,7 +222,7 @@ export function processContent(content: string): React.ReactNode[] {
                                     <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
                                         {row.map((cell, j) => (
                                             <td key={j} className="px-4 py-3 text-slate-600 border-b border-slate-100">
-                                                {parseInlineMarkdown(cell, `td-${key}-${i}-${j}`, false)}
+                                                {parseInlineMarkdown(cell,`td-${key}-${i}-${j}`, false)}
                                             </td>
                                         ))}
                                     </tr>
@@ -320,7 +247,7 @@ export function processContent(content: string): React.ReactNode[] {
         const nodes: React.ReactNode[] = [];
 
         parts.forEach((part, i) => {
-            const key = `${keyPrefix}-${i}`;
+            const key =`${keyPrefix}-${i}`;
 
             // Image: ![alt](url)
             if (part.startsWith('![') && part.includes('](') && part.endsWith(')')) {
@@ -349,7 +276,7 @@ export function processContent(content: string): React.ReactNode[] {
                 const innerText = part.slice(2, -2);
                 nodes.push(
                     <strong key={key} className="font-bold text-slate-900">
-                        {parseInlineMarkdown(innerText, `${key}-bold`, false)}
+                        {parseInlineMarkdown(innerText,`${key}-bold`, false)}
                     </strong>
                 );
                 return;
@@ -590,7 +517,7 @@ export function processContent(content: string): React.ReactNode[] {
             flushList(`list-${index}`);
             elements.push(
                 <p key={index} className="font-bold text-slate-900 text-lg my-6">
-                    {parseInlineMarkdown(trimmedLine.replace(/\*\*/g, ''), `p-${index}`, false)}
+                    {parseInlineMarkdown(trimmedLine.replace(/\*\*/g, ''),`p-${index}`, false)}
                 </p>
             );
 
@@ -602,7 +529,7 @@ export function processContent(content: string): React.ReactNode[] {
         flushList(`list-${index}`);
         elements.push(
             <p key={index} className="text-slate-600 outline-none my-5 leading-8 text-[1.1rem]">
-                {parseInlineMarkdown(trimmedLine, `p-${index}`, true)}
+                {parseInlineMarkdown(trimmedLine,`p-${index}`, true)}
             </p>
         );
 

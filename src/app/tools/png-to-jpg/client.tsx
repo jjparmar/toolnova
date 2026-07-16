@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useRef, useState } from"react";
+import { useRouter } from"next/navigation";
+import Link from"next/link";
 import {
   Upload,
   Download,
@@ -13,9 +13,9 @@ import {
   Shield,
   Zap,
   Sparkles,
-} from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
+} from"lucide-react";
+import { toast } from"sonner";
+import { Button } from"@/components/ui/button";
 import {
   baseName,
   downloadBlob,
@@ -23,13 +23,13 @@ import {
   imageToBlob,
   isImageFile,
   readFileAsDataURL,
-} from "@/lib/image-client";
+} from"@/lib/image-client";
 
 const related = [
-  { name: "JPG to PNG", href: "/tools/jpg-to-png" },
-  { name: "Crop Image", href: "/tools/image-crop" },
-  { name: "Image Compressor", href: "/tools/image-compressor" },
-  { name: "Resize Image", href: "/tools/resize-image" },
+  { name:"JPG to PNG", href:"/tools/jpg-to-png" },
+  { name:"Crop Image", href:"/tools/image-crop" },
+  { name:"Image Compressor", href:"/tools/image-compressor" },
+  { name:"Resize Image", href:"/tools/resize-image" },
 ];
 
 type Item = {
@@ -68,7 +68,7 @@ export default function PNGtoJPGClient() {
           img.src = preview;
         });
         next.push({
-          id: `${Date.now()}-${Math.random()}`,
+          id:`${Date.now()}-${Math.random()}`,
           file,
           preview,
           dims: { w: img.naturalWidth, h: img.naturalHeight },
@@ -83,7 +83,7 @@ export default function PNGtoJPGClient() {
 
   const convertOne = async (item: Item): Promise<Item> => {
     const { blob, width, height } = await imageToBlob(item.preview, {
-      mime: "image/jpeg",
+      mime:"image/jpeg",
       quality: quality / 100,
       fill: bg,
     });
@@ -119,7 +119,7 @@ export default function PNGtoJPGClient() {
       setItems((prev) => prev.map((p) => (p.id === item.id ? updated : p)));
     }
     const blob = await (await fetch(url)).blob();
-    downloadBlob(blob, `${baseName(item.file.name)}.jpg`);
+    downloadBlob(blob,`${baseName(item.file.name)}.jpg`);
   };
 
   const clear = () => {
@@ -128,7 +128,7 @@ export default function PNGtoJPGClient() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#0f1419] dark:to-background">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-[1000px] mx-auto px-4 py-10">
         <button
           type="button"
@@ -166,7 +166,7 @@ export default function PNGtoJPGClient() {
               addFiles(e.dataTransfer.files);
             }}
             className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer ${
-              dragOver ? "border-primary bg-primary/5" : "border-border/50"
+              dragOver ?"border-primary bg-primary/5" :"border-border/50"
             }`}
           >
             <Upload className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
@@ -238,7 +238,7 @@ export default function PNGtoJPGClient() {
                       <img
                         src={item.preview}
                         alt=""
-                        className="h-28 w-full object-contain rounded-lg bg-slate-50 "
+                        className="h-28 w-full object-contain rounded-lg bg-slate-50"
                       />
                       <p className="text-xs mt-1 truncate">
                         {item.file.name} · {formatBytes(item.file.size)}
@@ -250,7 +250,7 @@ export default function PNGtoJPGClient() {
                         <img
                           src={item.resultUrl}
                           alt=""
-                          className="h-28 w-full object-contain rounded-lg bg-slate-50 "
+                          className="h-28 w-full object-contain rounded-lg bg-slate-50"
                         />
                       ) : (
                         <div className="h-28 rounded-lg bg-slate-50  flex items-center justify-center text-xs text-muted-foreground">
@@ -261,8 +261,8 @@ export default function PNGtoJPGClient() {
                         <p className="text-xs mt-1 text-emerald-600">
                           JPG · {formatBytes(item.resultSize)} (
                           {item.file.size
-                            ? `${Math.round((1 - item.resultSize / item.file.size) * 100)}% vs original`
-                            : ""}
+                            ?`${Math.round((1 - item.resultSize / item.file.size) * 100)}% vs original`
+                            :""}
                           )
                         </p>
                       )}
@@ -279,9 +279,9 @@ export default function PNGtoJPGClient() {
 
         <div className="mt-10 grid sm:grid-cols-3 gap-4">
           {[
-            { icon: Shield, t: "Private", d: "Browser-only conversion" },
-            { icon: ImageIcon, t: "Transparency handled", d: "Pick fill color for clear PNGs" },
-            { icon: Zap, t: "Quality slider", d: "Balance size vs clarity" },
+            { icon: Shield, t:"Private", d:"Browser-only conversion" },
+            { icon: ImageIcon, t:"Transparency handled", d:"Pick fill color for clear PNGs" },
+            { icon: Zap, t:"Quality slider", d:"Balance size vs clarity" },
           ].map((x) => (
             <div key={x.t} className="rounded-2xl border p-4">
               <x.icon className="h-5 w-5 text-primary mb-2" />

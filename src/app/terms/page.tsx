@@ -1,33 +1,32 @@
-import { Metadata } from "next";
+import { Metadata } from"next";
 
-const LAST_UPDATED = "June 14, 2026";
+const LAST_UPDATED ="June 14, 2026";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | ToolNova",
-  description:
-    "Terms of Service for ToolNova. Read our rules, regulations, and usage policies for all AI-powered tools.",
+  title:"Terms of Service | ToolNova",
+  description:"Terms of Service for ToolNova. Read our rules, regulations, and usage policies for all AI-powered tools.",
   alternates: {
-    canonical: "https://www.toolnovahub.com/terms",
+    canonical:"https://www.toolnovahub.com/terms",
   },
   openGraph: {
-    title: "Terms of Service | ToolNova",
-    description: "Read ToolNova's terms of service, rules, and usage policies.",
-    url: "https://www.toolnovahub.com/terms",
-    type: "website",
+    title:"Terms of Service | ToolNova",
+    description:"Read ToolNova's terms of service, rules, and usage policies.",
+    url:"https://www.toolnovahub.com/terms",
+    type:"website",
     images: [
       {
-        url: "https://www.toolnovahub.com/og-image.png",
+        url:"https://www.toolnovahub.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ToolNova Terms of Service",
+        alt:"ToolNova Terms of Service",
       },
     ],
   },
   twitter: {
-    card: "summary",
-    title: "Terms of Service | ToolNova",
-    description: "Read ToolNova's terms of service, rules, and usage policies.",
-    creator: "@toolnovahub",
+    card:"summary",
+    title:"Terms of Service | ToolNova",
+    description:"Read ToolNova's terms of service, rules, and usage policies.",
+    creator:"@toolnovahub",
   },
   robots: {
     index: true,
@@ -37,22 +36,22 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="container mx-auto px-6 py-24 max-w-4xl text-slate-800 dark:text-slate-200">
+    <div className="container mx-auto px-6 py-24 max-w-4xl text-slate-800">
       <h1 className="text-4xl font-bold mb-8">Terms of Service</h1>
       <p className="text-sm text-muted-foreground mb-8">
         Last Updated: {LAST_UPDATED}
       </p>
 
-      <div className="prose dark:prose-invert max-w-none space-y-6">
+      <div className="prose max-w-none space-y-6">
         <section>
           <h2 className="text-2xl font-semibold mb-4">1. Agreement to Terms</h2>
           <p>
             These Terms of Service constitute a legally binding agreement made
             between you, whether personally or on behalf of an entity ("you")
-            and ToolNova ("we," "us" or "our"), concerning your access to and
+            and ToolNova ("we,""us" or"our"), concerning your access to and
             use of the ToolNova website as well as any other media form, media
             channel, mobile website or mobile application related, linked, or
-            otherwise connected thereto (collectively, the "Site").
+            otherwise connected thereto (collectively, the"Site").
           </p>
         </section>
 
@@ -64,8 +63,8 @@ export default function TermsPage() {
             Unless otherwise indicated, the Site is our proprietary property and
             all source code, databases, functionality, software, website
             designs, audio, video, text, photographs, and graphics on the Site
-            (collectively, the "Content") and the trademarks, service marks, and
-            logos contained therein (the "Marks") are owned or controlled by us
+            (collectively, the"Content") and the trademarks, service marks, and
+            logos contained therein (the"Marks") are owned or controlled by us
             or licensed to us, and are protected by copyright and trademark laws
             and various other intellectual property rights.
           </p>

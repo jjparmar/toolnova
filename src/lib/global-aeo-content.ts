@@ -20,7 +20,7 @@ export interface GlobalAEOContent {
 export const homepageAEO: GlobalAEOContent = {
     quickAnswer: {
         question: 'What is ToolNova?',
-        answer: `ToolNova is a free online platform offering ${TOOL_COUNT_LABEL} AI-powered tools for students, professionals, and content creators. It includes PDF tools (merge, split), image editors, AI writing assistants (essay writer, paraphraser, grammar checker), study aids (flashcard maker, homework solver, YouTube summarizer), and productivity tools. No account is required to start; free daily AI use is included and Pro is optional for unlimited AI.`,
+        answer:`ToolNova is a free online platform offering ${TOOL_COUNT_LABEL} AI-powered tools for students, professionals, and content creators. It includes PDF tools (merge, split), image editors, AI writing assistants (essay writer, paraphraser, grammar checker), study aids (flashcard maker, homework solver, YouTube summarizer), and productivity tools. No account is required to start; free daily AI use is included and Pro is optional for unlimited AI.`,
     },
     faqs: [
         {
@@ -49,7 +49,7 @@ export const homepageAEO: GlobalAEOContent = {
         },
         {
             question: 'How many tools does ToolNova have?',
-            answer: `ToolNova currently offers ${TOOL_COUNT_LABEL} free AI tools across 6 categories: writing, study, exam prep, PDF & image, career, and utility. New tools are added regularly based on user requests.`,
+            answer:`ToolNova currently offers ${TOOL_COUNT_LABEL} free AI tools across 6 categories: writing, study, exam prep, PDF & image, career, and utility. New tools are added regularly based on user requests.`,
         },
     ],
 };

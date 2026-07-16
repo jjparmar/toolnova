@@ -50,12 +50,12 @@ export function CareerToolsClient({ tools }: CareerToolsClientProps) {
         <>
             {/* Hero Section */}
             <div className="relative overflow-hidden mb-12">
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-amber-950/20 dark:via-yellow-950/20 dark:to-orange-950/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50"></div>
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl animate-pulse"></div>
                 <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
                 
                 <div className="relative text-center py-16 px-6">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-sm font-semibold mb-6 backdrop-blur-sm">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border border-amber-500/20 text-amber-600 text-sm font-semibold mb-6 backdrop-blur-sm">
                         <Briefcase className="h-4 w-4" />
                         {tools.length} Career & Productivity Tools
                     </div>
@@ -118,11 +118,11 @@ export function CareerToolsClient({ tools }: CareerToolsClientProps) {
                                 className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl`}
                                 style={{
                                     background: 'linear-gradient(135deg, from-amber-50 0%, to-yellow-50/50 100%)',
-                                    animationDelay: `${index * 50}ms`
+                                    animationDelay:`${index * 50}ms`
                                 }}
                             >
                                 {/* Glassmorphism overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/10 dark:from-slate-800/40 dark:to-slate-900/10 backdrop-blur-sm"></div>
+                                <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/10 backdrop-blur-sm"></div>
                                 
                                 {/* Animated gradient border */}
                                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>

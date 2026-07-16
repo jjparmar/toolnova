@@ -1,8 +1,8 @@
 "use client";
 
-import EnhancedToolLayout from "@/components/EnhancedToolLayout";
-import { PremiumToolWrapper } from "@/components/PremiumToolWrapper";
-import { FAQSection } from "@/components/FAQSection";
+import EnhancedToolLayout from"@/components/EnhancedToolLayout";
+import { PremiumToolWrapper } from"@/components/PremiumToolWrapper";
+import { FAQSection } from"@/components/FAQSection";
 import {
   RefreshCw,
   Pencil,
@@ -16,9 +16,9 @@ import {
   Lightbulb,
   MessageSquare,
   BookOpen,
-} from "lucide-react";
+} from"lucide-react";
 
-const systemPrompt = `You are an expert paraphrasing assistant.
+const systemPrompt =`You are an expert paraphrasing assistant.
 
 OUTPUT RULES:
 - Rewrite while preserving 100% of the original meaning
@@ -35,71 +35,61 @@ QUALITY STANDARDS:
 
 const toolOptions = [
   {
-    id: "mode",
-    label: "Paraphrase Mode",
-    type: "select" as const,
+    id:"mode",
+    label:"Paraphrase Mode",
+    type:"select" as const,
     options: [
-      { value: "standard", label: "📝 Standard" },
-      { value: "formal", label: "👔 More Formal" },
-      { value: "casual", label: "😊 More Casual" },
-      { value: "shorter", label: "⚡ Shorter/Concise" },
-      { value: "longer", label: "📚 Longer/Detailed" },
-      { value: "creative", label: "✨ Creative" },
-      { value: "academic", label: "🎓 Academic" },
+      { value:"standard", label:"📝 Standard" },
+      { value:"formal", label:"👔 More Formal" },
+      { value:"casual", label:"😊 More Casual" },
+      { value:"shorter", label:"⚡ Shorter/Concise" },
+      { value:"longer", label:"📚 Longer/Detailed" },
+      { value:"creative", label:"✨ Creative" },
+      { value:"academic", label:"🎓 Academic" },
     ],
-    defaultValue: "standard",
+    defaultValue:"standard",
   },
   {
-    id: "strength",
-    label: "Paraphrase Strength",
-    type: "select" as const,
+    id:"strength",
+    label:"Paraphrase Strength",
+    type:"select" as const,
     options: [
-      { value: "light", label: "📋 Light (Similar structure)" },
-      { value: "medium", label: "📝 Medium (Balanced)" },
-      { value: "heavy", label: "🔄 Heavy (Complete rewrite)" },
+      { value:"light", label:"📋 Light (Similar structure)" },
+      { value:"medium", label:"📝 Medium (Balanced)" },
+      { value:"heavy", label:"🔄 Heavy (Complete rewrite)" },
     ],
-    defaultValue: "medium",
+    defaultValue:"medium",
   },
   {
-    id: "preserveKeywords",
-    label: "Preserve Key Terms",
-    type: "toggle" as const,
+    id:"preserveKeywords",
+    label:"Preserve Key Terms",
+    type:"toggle" as const,
     defaultValue: false,
   },
 ];
 
 const generatePrompt = (input: string, options?: Record<string, any>) => {
-  const mode = options?.mode || "standard";
-  const strength = options?.strength || "medium";
+  const mode = options?.mode ||"standard";
+  const strength = options?.strength ||"medium";
   const preserveKeywords = options?.preserveKeywords ?? false;
 
   const modeInstructions: Record<string, string> = {
-    standard:
-      "Paraphrase in a neutral, balanced style suitable for general use.",
-    formal:
-      "Paraphrase using formal, professional language. Use sophisticated vocabulary and formal sentence structures.",
-    casual:
-      "Paraphrase in a casual, conversational style. Use everyday language and a friendly tone.",
-    shorter:
-      "Paraphrase to make it more concise. Remove unnecessary words while keeping all key information.",
-    longer:
-      "Paraphrase to make it more detailed. Add explanations and elaborations while maintaining the core message.",
-    creative:
-      "Paraphrase with creative flair. Use vivid language, interesting metaphors, and engaging expressions.",
-    academic:
-      "Paraphrase in an academic style. Use formal language, precise terminology, and scholarly tone suitable for research papers.",
+    standard:"Paraphrase in a neutral, balanced style suitable for general use.",
+    formal:"Paraphrase using formal, professional language. Use sophisticated vocabulary and formal sentence structures.",
+    casual:"Paraphrase in a casual, conversational style. Use everyday language and a friendly tone.",
+    shorter:"Paraphrase to make it more concise. Remove unnecessary words while keeping all key information.",
+    longer:"Paraphrase to make it more detailed. Add explanations and elaborations while maintaining the core message.",
+    creative:"Paraphrase with creative flair. Use vivid language, interesting metaphors, and engaging expressions.",
+    academic:"Paraphrase in an academic style. Use formal language, precise terminology, and scholarly tone suitable for research papers.",
   };
 
   const strengthInstructions: Record<string, string> = {
-    light:
-      "Make light changes - replace some words with synonyms but keep similar sentence structures.",
-    medium:
-      "Make moderate changes - use different vocabulary and vary sentence structures while clearly conveying the same meaning.",
-    heavy:
-      "Make extensive changes - completely restructure sentences, use entirely different wording, but preserve all original meaning.",
+    light:"Make light changes - replace some words with synonyms but keep similar sentence structures.",
+    medium:"Make moderate changes - use different vocabulary and vary sentence structures while clearly conveying the same meaning.",
+    heavy:"Make extensive changes - completely restructure sentences, use entirely different wording, but preserve all original meaning.",
   };
 
-  let prompt = `# Role & Task
+  let prompt =`# Role & Task
 You are an expert writer and language specialist. Your task is to paraphrase the given text while preserving its exact meaning.
 
 # Original Text
@@ -108,7 +98,7 @@ ${input}
 # Paraphrasing Requirements
 - **Style Mode**: ${mode} - ${modeInstructions[mode]}
 - **Paraphrase Strength**: ${strength} - ${strengthInstructions[strength]}
-- **Keyword Preservation**: ${preserveKeywords ? "Keep technical terms, proper nouns, specific keywords, and specialized terminology unchanged" : "You may change all words and phrases as needed for natural paraphrasing"}
+- **Keyword Preservation**: ${preserveKeywords ?"Keep technical terms, proper nouns, specific keywords, and specialized terminology unchanged" :"You may change all words and phrases as needed for natural paraphrasing"}
 
 # Paraphrasing Guidelines
 1. **Meaning Preservation**: Retain 100% of the original meaning - don't add or remove information
@@ -117,8 +107,8 @@ ${input}
 4. **Grammar & Style**: Maintain proper grammar, punctuation, and the specified style
 5. **Tone Consistency**: Keep the same overall tone and intent as the original
 6. **Vocabulary Variety**: Use diverse vocabulary appropriate for the ${mode} mode
-${strength === "heavy" ? "7. **Extensive Changes**: Completely rewrite sentences while preserving meaning\n8. **Fresh Perspective**: Approach the content from a different structural angle" : ""}
-${strength === "light" ? "7. **Subtle Changes**: Make minimal but effective modifications\n8. **Structure Similarity**: Maintain similar sentence flow with different words" : ""}
+${strength ==="heavy" ?"7. **Extensive Changes**: Completely rewrite sentences while preserving meaning\n8. **Fresh Perspective**: Approach the content from a different structural angle" :""}
+${strength ==="light" ?"7. **Subtle Changes**: Make minimal but effective modifications\n8. **Structure Similarity**: Maintain similar sentence flow with different words" :""}
 
 # Quality Standards
 Before finalizing, verify:
@@ -128,7 +118,7 @@ Before finalizing, verify:
 - ✓ Grammar and punctuation are correct
 - ✓ Sentence structures are appropriately varied
 - ✓ Vocabulary matches the ${mode} mode
-${preserveKeywords ? "- ✓ Technical terms and keywords remain unchanged" : ""}
+${preserveKeywords ?"- ✓ Technical terms and keywords remain unchanged" :""}
 - ✓ Length is similar to original (unless mode is 'shorter' or 'longer')
 
 # Output Format
@@ -143,117 +133,108 @@ Now paraphrase the text following these instructions precisely.`;
 const features = [
   {
     icon: Zap,
-    title: "Multiple Modes",
-    description:
-      "Choose from 7 paraphrase modes including formal, casual, academic, creative, and more to fit any writing style",
-    gradient: "from-blue-500 to-indigo-600",
-    bgLight: "bg-blue-50",
+    title:"Multiple Modes",
+    description:"Choose from 7 paraphrase modes including formal, casual, academic, creative, and more to fit any writing style",
+    gradient:"from-blue-500 to-indigo-600",
+    bgLight:"bg-blue-50",
   },
   {
     icon: Target,
-    title: "Adjustable Strength",
-    description:
-      "Control how much the text changes - from light synonym replacements to complete rewrites",
-    gradient: "from-purple-500 to-pink-600",
-    bgLight: "bg-purple-50",
+    title:"Adjustable Strength",
+    description:"Control how much the text changes - from light synonym replacements to complete rewrites",
+    gradient:"from-purple-500 to-pink-600",
+    bgLight:"bg-purple-50",
   },
   {
     icon: Sparkles,
-    title: "Plagiarism-Free",
-    description:
-      "Generate unique, original text that preserves meaning while ensuring your content is completely unique",
-    gradient: "from-green-500 to-emerald-600",
-    bgLight: "bg-green-50",
+    title:"Plagiarism-Free",
+    description:"Generate unique, original text that preserves meaning while ensuring your content is completely unique",
+    gradient:"from-green-500 to-emerald-600",
+    bgLight:"bg-green-50",
   },
 ];
 
 const howItWorks = [
   {
     step: 1,
-    title: "Paste Your Text",
-    desc: "Add the text you want to paraphrase",
+    title:"Paste Your Text",
+    desc:"Add the text you want to paraphrase",
     icon: FileText,
-    color: "from-blue-500 to-indigo-600",
+    color:"from-blue-500 to-indigo-600",
   },
   {
     step: 2,
-    title: "Choose Settings",
-    desc: "Select mode and paraphrase strength",
+    title:"Choose Settings",
+    desc:"Select mode and paraphrase strength",
     icon: Target,
-    color: "from-purple-500 to-pink-600",
+    color:"from-purple-500 to-pink-600",
   },
   {
     step: 3,
-    title: "Get New Version",
-    desc: "Receive unique, rewritten text instantly",
+    title:"Get New Version",
+    desc:"Receive unique, rewritten text instantly",
     icon: RefreshCw,
-    color: "from-green-500 to-emerald-600",
+    color:"from-green-500 to-emerald-600",
   },
 ];
 
 const relatedTools = [
   {
-    name: "Grammar Fix",
-    slug: "grammar-fix",
+    name:"Grammar Fix",
+    slug:"grammar-fix",
     icon: Pencil,
-    color: "text-blue-600",
+    color:"text-blue-600",
   },
   {
-    name: "Text Simplifier",
-    slug: "text-simplifier",
+    name:"Text Simplifier",
+    slug:"text-simplifier",
     icon: Lightbulb,
-    color: "text-purple-600",
+    color:"text-purple-600",
   },
   {
-    name: "Text Summarizer",
-    slug: "text-summarizer",
+    name:"Text Summarizer",
+    slug:"text-summarizer",
     icon: BookOpen,
-    color: "text-green-600",
+    color:"text-green-600",
   },
   {
-    name: "Essay Writer",
-    slug: "essay-writer",
+    name:"Essay Writer",
+    slug:"essay-writer",
     icon: FileText,
-    color: "text-orange-600",
+    color:"text-orange-600",
   },
 ];
 
 const faqs = [
   {
-    question: "Will the paraphrased text have the same meaning?",
-    answer:
-      "Yes! Our AI is specifically trained to preserve the original meaning while completely changing the wording and structure. The core message and intent remain intact.",
-    category: "Accuracy",
+    question:"Will the paraphrased text have the same meaning?",
+    answer:"Yes! Our AI is specifically trained to preserve the original meaning while completely changing the wording and structure. The core message and intent remain intact.",
+    category:"Accuracy",
   },
   {
-    question: "Is the paraphrased content plagiarism-free?",
-    answer:
-      "Yes, the output is designed to be unique and original. However, for academic work, we recommend running it through a plagiarism checker and citing sources appropriately.",
-    category: "Usage",
+    question:"Is the paraphrased content plagiarism-free?",
+    answer:"Yes, the output is designed to be unique and original. However, for academic work, we recommend running it through a plagiarism checker and citing sources appropriately.",
+    category:"Usage",
   },
   {
-    question: "What's the difference between paraphrase strengths?",
-    answer:
-      "Light makes minimal changes (similar structure, different words). Medium balances new vocabulary with restructured sentences. Heavy completely rewrites with extensive changes while keeping meaning.",
-    category: "Features",
+    question:"What's the difference between paraphrase strengths?",
+    answer:"Light makes minimal changes (similar structure, different words). Medium balances new vocabulary with restructured sentences. Heavy completely rewrites with extensive changes while keeping meaning.",
+    category:"Features",
   },
   {
-    question: "Can I paraphrase technical or academic content?",
-    answer:
-      "Absolutely! Use the 'Academic' mode and enable 'Preserve Key Terms' to keep technical terminology, names, and specific keywords unchanged while paraphrasing the rest.",
-    category: "Usage",
+    question:"Can I paraphrase technical or academic content?",
+    answer:"Absolutely! Use the 'Academic' mode and enable 'Preserve Key Terms' to keep technical terminology, names, and specific keywords unchanged while paraphrasing the rest.",
+    category:"Usage",
   },
   {
-    question: "How is this different from just using synonyms?",
-    answer:
-      "Unlike simple synonym replacement, our tool restructures entire sentences, changes word order, combines or splits ideas, and ensures natural flow - not just word swapping.",
-    category: "Features",
+    question:"How is this different from just using synonyms?",
+    answer:"Unlike simple synonym replacement, our tool restructures entire sentences, changes word order, combines or splits ideas, and ensures natural flow - not just word swapping.",
+    category:"Features",
   },
   {
-    question: "Can I use this for my essays or articles?",
-    answer:
-      "Yes, but use it responsibly. It's great for rephrasing your own work, avoiding self-plagiarism, or getting inspiration. Always ensure the final content represents your own understanding.",
-    category: "Ethics",
+    question:"Can I use this for my essays or articles?",
+    answer:"Yes, but use it responsibly. It's great for rephrasing your own work, avoiding self-plagiarism, or getting inspiration. Always ensure the final content represents your own understanding.",
+    category:"Ethics",
   },
 ];
 
@@ -274,10 +255,10 @@ export default function ParaphraserClient() {
       ctaDescription="Get unique, plagiarism-free text in seconds"
       ctaIcon={RefreshCw}
     >
-      <div className="mx-6 mb-4 rounded-xl border border-sky-200 dark:border-sky-900/50 bg-sky-50/80 dark:bg-sky-950/30 px-4 py-3 text-sm text-sky-950 dark:text-sky-100">
+      <div className="mx-6 mb-4 rounded-xl border border-sky-200 bg-sky-50/80 px-4 py-3 text-sm text-sky-950">
         <strong className="font-semibold">Use responsibly.</strong> Paraphrasing
         is great for clarity and your own drafts. Always cite sources for ideas
-        that are not yours, and follow academic integrity rules.{" "}
+        that are not yours, and follow academic integrity rules.{""}
         <a
           href="/blog/paraphrasing-vs-rewriting-for-assignments"
           className="underline font-medium hover:no-underline"
@@ -292,9 +273,9 @@ export default function ParaphraserClient() {
         placeholder={`📝 Paste or type your text here...
 
 Examples:
-• "Artificial intelligence has transformed modern technology, making machines capable of learning and adapting."
-• "The research demonstrates that regular exercise significantly improves cardiovascular health."
-• "Our company's mission is to deliver innovative solutions that empower businesses."
+•"Artificial intelligence has transformed modern technology, making machines capable of learning and adapting."
+•"The research demonstrates that regular exercise significantly improves cardiovascular health."
+•"Our company's mission is to deliver innovative solutions that empower businesses."
 
 The tool will rewrite it in a fresh, unique way while keeping the same meaning!`}
         promptTemplate={generatePrompt}

@@ -22,7 +22,7 @@ interface FAQAccordionProps {
  */
 export function FAQAccordion({
     faqs,
-    title = "Frequently Asked Questions",
+    title ="Frequently Asked Questions",
     className = ''
 }: FAQAccordionProps) {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -53,7 +53,7 @@ export function FAQAccordion({
                                 key={index}
                                 className="surface-card-quiet overflow-hidden transition-all duration-200 data-[open=true]:border-primary/30 data-[open=true]:shadow-premium-sm"
                                 data-open={isOpen}
-                                data-speakable={isOpen ? "true" : undefined}
+                                data-speakable={isOpen ?"true" : undefined}
                             >
                                 <button
                                     onClick={() => toggleFAQ(index)}

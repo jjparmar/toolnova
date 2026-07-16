@@ -15,7 +15,7 @@ interface BestPracticesGuideProps {
     title?: string;
 }
 
-export function BestPracticesGuide({ practices, title = "Best Practices & Tips" }: BestPracticesGuideProps) {
+export function BestPracticesGuide({ practices, title ="Best Practices & Tips" }: BestPracticesGuideProps) {
     const dos = practices.filter(p => p.type === 'do');
     const donts = practices.filter(p => p.type === 'dont');
     const tips = practices.filter(p => p.type === 'tip');

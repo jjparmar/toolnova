@@ -48,7 +48,7 @@ export default function ImageToPDFClient() {
 
         const newImages: ImageFile[] = await Promise.all(
             imageFiles.map(async (file) => ({
-                id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                id:`${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
                 file,
                 name: file.name,
                 preview: URL.createObjectURL(file),
@@ -164,7 +164,7 @@ export default function ImageToPDFClient() {
 
             const a = document.createElement('a');
             a.href = url;
-            a.download = `images-to-pdf-${images.length}p-${Date.now()}.pdf`;
+            a.download =`images-to-pdf-${images.length}p-${Date.now()}.pdf`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -207,7 +207,7 @@ export default function ImageToPDFClient() {
     };
 
     return (
-        <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#0f1419] dark:via-background dark:to-[#0f1419]">
+        <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
             {/* Animated Background */}
             <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -219,7 +219,7 @@ export default function ImageToPDFClient() {
                 {/* Back Button */}
                 <button
                     onClick={() => router.back()}
-                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
+                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-white :bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
                 >
                     <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back</span>
@@ -236,7 +236,7 @@ export default function ImageToPDFClient() {
                 </div>
 
                 <div className="text-center mb-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-blue-500/10 text-green-600 dark:text-green-400 text-sm font-semibold mb-5">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-blue-500/10 text-green-600 text-sm font-semibold mb-5">
                         <ImageIcon className="h-4 w-4" />
                         Free Converter
                     </div>
@@ -244,7 +244,7 @@ export default function ImageToPDFClient() {
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Convert JPG, PNG images to PDF instantly</p>
                 </div>
 
-                <div className="bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
+                <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
                     <div className="p-6 md:p-8">
                         <input type="file" ref={fileInputRef} onChange={(e) => handleFileSelect(e.target.files)} accept="image/*" multiple className="hidden" />
 
@@ -316,7 +316,7 @@ export default function ImageToPDFClient() {
                                     Hover a thumbnail to reorder pages (↑ ↓) before converting.
                                 </p>
 
-                                <div className="grid sm:grid-cols-2 gap-4 p-4 rounded-xl bg-muted/50 border border-slate-100 ">
+                                <div className="grid sm:grid-cols-2 gap-4 p-4 rounded-xl bg-muted/50 border border-slate-100">
                                     <label className="text-sm space-y-1 block">
                                         <span className="font-medium">Page size</span>
                                         <select
@@ -376,7 +376,7 @@ export default function ImageToPDFClient() {
                             { step: 2, title: 'Convert', desc: 'Click convert button', icon: Sparkles, color: 'from-blue-500 to-indigo-600' },
                             { step: 3, title: 'Download', desc: 'Get your PDF', icon: Download, color: 'from-purple-500 to-pink-600' },
                         ].map((item) => (
-                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 dark:bg-muted/50 border border-slate-100 ">
+                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 border border-slate-100">
                                 <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg`}>
                                     <item.icon className="h-7 w-7 text-white" />
                                 </div>
@@ -390,17 +390,17 @@ export default function ImageToPDFClient() {
 
                 {/* Features */}
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50/50 dark:from-green-900/20 dark:to-emerald-900/10 border border-green-100 dark:border-green-800/30">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50/50 border border-green-100">
                         <Shield className="h-8 w-8 text-green-600 mb-3" />
                         <h3 className="font-bold text-foreground mb-2">100% Private</h3>
                         <p className="text-sm text-muted-foreground">Processed locally in your browser</p>
                     </div>
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50/50 dark:from-blue-900/20 dark:to-indigo-900/10 border border-blue-100 dark:border-blue-800/30">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50/50 border border-blue-100">
                         <ImageIcon className="h-8 w-8 text-blue-600 mb-3" />
                         <h3 className="font-bold text-foreground mb-2">Multiple Images</h3>
                         <p className="text-sm text-muted-foreground">Combine multiple images into one PDF</p>
                     </div>
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/10 border border-purple-100 dark:border-purple-800/30">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50/50 border border-purple-100">
                         <FileText className="h-8 w-8 text-purple-600 mb-3" />
                         <h3 className="font-bold text-foreground mb-2">High Quality</h3>
                         <p className="text-sm text-muted-foreground">Maintains original image quality</p>
@@ -408,15 +408,14 @@ export default function ImageToPDFClient() {
                 </div>
 
                 {/* Testimonial */}
-                <div className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-green-500/5 via-blue-500/5 to-teal-500/5 border border-green-200/50 dark:border-green-800/30">
+                <div className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-green-500/5 via-blue-500/5 to-teal-500/5 border border-green-200/50">
                     <div className="flex flex-col items-center text-center">
                         <div className="flex gap-1 mb-4">
                             {[...Array(5)].map((_, i) => (
                                 <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
                             ))}
                         </div>
-                        <p className="text-lg italic text-foreground/80 max-w-2xl mb-4">
-                            "Perfect for creating photo albums! Simple, fast, and the quality is excellent."
+                        <p className="text-lg italic text-foreground/80 max-w-2xl mb-4">"Perfect for creating photo albums! Simple, fast, and the quality is excellent."
                         </p>
                         <div className="flex items-center gap-3">
                             <div className="h-10 w-10 rounded-full bg-gradient-to-br from-green-500 to-blue-500 flex items-center justify-center text-white font-bold">
@@ -438,7 +437,7 @@ export default function ImageToPDFClient() {
                             <Link
                                 key={tool.slug}
                                 href={`/tools/${tool.slug}`}
-                                className="group p-4 rounded-xl bg-white/50 dark:bg-muted/50 border border-slate-100  hover:border-primary/50 hover:shadow-lg transition-all text-center"
+                                className="group p-4 rounded-xl bg-white/50 border border-slate-100  hover:border-primary/50 hover:shadow-lg transition-all text-center"
                             >
                                 <div className={`h-10 w-10 mx-auto rounded-xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                                     <tool.icon className="h-5 w-5 text-white" />

@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { adsenseConfig, shouldShowAds } from "@/config/adsense";
+import { useEffect, useRef } from"react";
+import { adsenseConfig, shouldShowAds } from"@/config/adsense";
 
 export interface AdUnitProps {
   slot: string;
-  format?: "auto" | "rectangle" | "vertical" | "horizontal";
+  format?:"auto" |"rectangle" |"vertical" |"horizontal";
   fullWidthResponsive?: boolean;
   className?: string;
   style?: React.CSSProperties;
@@ -19,9 +19,9 @@ export interface AdUnitProps {
  */
 export function AdUnit({
   slot,
-  format = "auto",
+  format ="auto",
   fullWidthResponsive = true,
-  className = "",
+  className ="",
   style = {},
 }: AdUnitProps) {
   const pushed = useRef(false);
@@ -35,7 +35,7 @@ export function AdUnit({
     let attempts = 0;
     const tryPush = () => {
       try {
-        if (typeof window === "undefined") return;
+        if (typeof window ==="undefined") return;
         window.adsbygoogle = window.adsbygoogle || [];
         window.adsbygoogle.push({});
         pushed.current = true;
@@ -62,7 +62,7 @@ export function AdUnit({
     >
       <ins
         className="adsbygoogle"
-        style={{ display: "block", ...style }}
+        style={{ display:"block", ...style }}
         data-ad-client={adsenseConfig.publisherId}
         data-ad-slot={slot}
         data-ad-format={format}
@@ -72,7 +72,7 @@ export function AdUnit({
   );
 }
 
-function AdLabel({ className = "" }: { className?: string }) {
+function AdLabel({ className ="" }: { className?: string }) {
   return (
     <p
       className={`text-[10px] uppercase tracking-wider text-muted-foreground/70 text-center mb-1.5 ${className}`}
@@ -94,7 +94,7 @@ function maybeAd(
 /**
  * In-Article Ad Unit (Native format)
  */
-export function InArticleAd({ className = "" }: { className?: string }) {
+export function InArticleAd({ className ="" }: { className?: string }) {
   return (
     maybeAd(
       adsenseConfig.adUnits.toolInContent,
@@ -114,7 +114,7 @@ export function InArticleAd({ className = "" }: { className?: string }) {
 /**
  * Sidebar Ad Unit (Sticky on desktop)
  */
-export function SidebarAd({ className = "" }: { className?: string }) {
+export function SidebarAd({ className ="" }: { className?: string }) {
   return (
     maybeAd(
       adsenseConfig.adUnits.toolSidebar,
@@ -124,7 +124,7 @@ export function SidebarAd({ className = "" }: { className?: string }) {
           slot={adsenseConfig.adUnits.toolSidebar}
           format="vertical"
           fullWidthResponsive={false}
-          style={{ minHeight: "600px", minWidth: "300px" }}
+          style={{ minHeight:"600px", minWidth:"300px" }}
         />
       </div>,
     ) ?? null
@@ -134,7 +134,7 @@ export function SidebarAd({ className = "" }: { className?: string }) {
 /**
  * Top Banner Ad (Above the fold)
  */
-export function TopBannerAd({ className = "" }: { className?: string }) {
+export function TopBannerAd({ className ="" }: { className?: string }) {
   const desktopSlot = adsenseConfig.adUnits.toolTopBanner;
   const mobileSlot = adsenseConfig.adUnits.mobileInFeed;
   const canDesktop = shouldShowAds() && /^\d+$/.test(desktopSlot);
@@ -151,7 +151,7 @@ export function TopBannerAd({ className = "" }: { className?: string }) {
             slot={desktopSlot}
             format="horizontal"
             fullWidthResponsive={true}
-            style={{ minHeight: "90px" }}
+            style={{ minHeight:"90px" }}
           />
         </div>
       )}
@@ -161,7 +161,7 @@ export function TopBannerAd({ className = "" }: { className?: string }) {
             slot={mobileSlot}
             format="auto"
             fullWidthResponsive={true}
-            style={{ minHeight: "50px" }}
+            style={{ minHeight:"50px" }}
           />
         </div>
       )}
@@ -172,7 +172,7 @@ export function TopBannerAd({ className = "" }: { className?: string }) {
 /**
  * Bottom Box Ad (After content)
  */
-export function BottomBoxAd({ className = "" }: { className?: string }) {
+export function BottomBoxAd({ className ="" }: { className?: string }) {
   return (
     maybeAd(
       adsenseConfig.adUnits.toolBottomBox,
@@ -182,7 +182,7 @@ export function BottomBoxAd({ className = "" }: { className?: string }) {
           slot={adsenseConfig.adUnits.toolBottomBox}
           format="rectangle"
           fullWidthResponsive={true}
-          style={{ minHeight: "250px" }}
+          style={{ minHeight:"250px" }}
           className="max-w-md mx-auto"
         />
       </div>,
@@ -193,7 +193,7 @@ export function BottomBoxAd({ className = "" }: { className?: string }) {
 /**
  * Multiplex Ad (Footer recommendations)
  */
-export function MultiplexAd({ className = "" }: { className?: string }) {
+export function MultiplexAd({ className ="" }: { className?: string }) {
   return (
     maybeAd(
       adsenseConfig.adUnits.homeFooter,
@@ -205,7 +205,7 @@ export function MultiplexAd({ className = "" }: { className?: string }) {
           slot={adsenseConfig.adUnits.homeFooter}
           format="auto"
           fullWidthResponsive={true}
-          style={{ minHeight: "300px" }}
+          style={{ minHeight:"300px" }}
         />
       </div>,
     ) ?? null
@@ -217,7 +217,7 @@ export function MultiplexAd({ className = "" }: { className?: string }) {
  * Renders only when a real slot + consent exist; otherwise null
  * (Auto Ads can still fill page-level inventory).
  */
-export function BetweenSectionsAd({ className = "" }: { className?: string }) {
+export function BetweenSectionsAd({ className ="" }: { className?: string }) {
   const slot = adsenseConfig.adUnits.toolInContent;
   if (!shouldShowAds() || !/^\d+$/.test(slot)) return null;
 

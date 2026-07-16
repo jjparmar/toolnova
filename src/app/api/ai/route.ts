@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
-import { runAI, MODEL_FREE, MODEL_PREMIUM } from "@/lib/ai";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { DAILY_FREE_LIMIT } from "@/lib/limits";
-import { db } from "@/lib/db";
-import { applyGuestCookie, evaluateGuestUsage } from "@/lib/guest-limits";
+import { NextRequest, NextResponse } from"next/server";
+import { runAI, MODEL_FREE, MODEL_PREMIUM } from"@/lib/ai";
+import { getServerSession } from"next-auth";
+import { authOptions } from"@/lib/auth";
+import { DAILY_FREE_LIMIT } from"@/lib/limits";
+import { db } from"@/lib/db";
+import { applyGuestCookie, evaluateGuestUsage } from"@/lib/guest-limits";
 
 const MAX_PROMPT_CHARS = 12000;
 const MAX_SYSTEM_PROMPT_CHARS = 4000;
@@ -15,16 +15,16 @@ export async function POST(req: NextRequest) {
     const {
       prompt,
       systemPrompt,
-      toolSlug = "unknown",
+      toolSlug ="unknown",
     }: {
       prompt?: unknown;
       systemPrompt?: unknown;
       toolSlug?: string;
     } = body;
 
-    if (!prompt || typeof prompt !== "string" || !prompt.trim()) {
+    if (!prompt || typeof prompt !=="string" || !prompt.trim()) {
       return NextResponse.json(
-        { error: "Prompt is required and must be a non-empty string" },
+        { error:"Prompt is required and must be a non-empty string" },
         { status: 400 },
       );
     }
@@ -32,14 +32,14 @@ export async function POST(req: NextRequest) {
     if (prompt.length > MAX_PROMPT_CHARS) {
       return NextResponse.json(
         {
-          error: `Prompt is too long. Please keep it under ${MAX_PROMPT_CHARS.toLocaleString()} characters.`,
+          error:`Prompt is too long. Please keep it under ${MAX_PROMPT_CHARS.toLocaleString()} characters.`,
         },
         { status: 400 },
       );
     }
 
     const safeSystemPrompt =
-      typeof systemPrompt === "string" && systemPrompt.trim()
+      typeof systemPrompt ==="string" && systemPrompt.trim()
         ? systemPrompt.slice(0, MAX_SYSTEM_PROMPT_CHARS)
         : undefined;
 
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
       const subscription = await db.subscription.findFirst({
         where: {
           userId: resolvedUserId,
-          status: "active",
+          status:"active",
         },
       });
       isPremium = !!subscription;
@@ -89,8 +89,8 @@ export async function POST(req: NextRequest) {
         if (currentCount >= DAILY_FREE_LIMIT) {
           return NextResponse.json(
             {
-              error: `Daily free limit reached (${DAILY_FREE_LIMIT} uses). Upgrade to Pro for unlimited access, or try again tomorrow.`,
-              code: "DAILY_LIMIT",
+              error:`Daily free limit reached (${DAILY_FREE_LIMIT} uses). Upgrade to Pro for unlimited access, or try again tomorrow.`,
+              code:"DAILY_LIMIT",
               remaining: 0,
               limit: DAILY_FREE_LIMIT,
             },
@@ -108,8 +108,8 @@ export async function POST(req: NextRequest) {
       if (!guest.allowed) {
         return NextResponse.json(
           {
-            error: `Daily free limit reached (${DAILY_FREE_LIMIT} uses without an account). Create a free account for another ${DAILY_FREE_LIMIT} uses/day, or upgrade to Pro for unlimited access.`,
-            code: "DAILY_LIMIT",
+            error:`Daily free limit reached (${DAILY_FREE_LIMIT} uses without an account). Create a free account for another ${DAILY_FREE_LIMIT} uses/day, or upgrade to Pro for unlimited access.`,
+            code:"DAILY_LIMIT",
             remaining: 0,
             limit: DAILY_FREE_LIMIT,
           },
@@ -121,13 +121,13 @@ export async function POST(req: NextRequest) {
     }
 
     const model = isPremium ? MODEL_PREMIUM : MODEL_FREE;
-    const slug = String(toolSlug || "unknown").slice(0, 120);
+    const slug = String(toolSlug ||"unknown").slice(0, 120);
     // Tool-aware system prompts + higher token limits for quality results
     const result = await runAI(prompt, safeSystemPrompt, model, slug);
 
     if (!result.success) {
       return NextResponse.json(
-        { error: result.error || "AI generation failed" },
+        { error: result.error ||"AI generation failed" },
         { status: 500 },
       );
     }
@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
               prompt: prompt.slice(0, 8000),
               systemPrompt: safeSystemPrompt?.slice(0, 1000),
             }),
-            response: result.content || "",
+            response: result.content ||"",
           },
         });
       } catch (historyError) {
@@ -166,7 +166,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error:"Internal server error" },
       { status: 500 },
     );
   }

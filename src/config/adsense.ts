@@ -9,7 +9,7 @@
  * 4. Auto Ads still work if slots are empty
  */
 
-const DEFAULT_PUBLISHER_ID = "ca-pub-1328083083403070";
+const DEFAULT_PUBLISHER_ID ="ca-pub-1328083083403070";
 
 function resolvePublisherId(): string {
   const fromEnv = process.env.NEXT_PUBLIC_ADSENSE_ID?.trim();
@@ -21,8 +21,8 @@ function resolvePublisherId(): string {
 
 /** Digits-only slot IDs from AdSense unit settings */
 function slot(envKey: string): string {
-  const v = process.env[envKey]?.trim() || "";
-  return /^\d+$/.test(v) ? v : "";
+  const v = process.env[envKey]?.trim() ||"";
+  return /^\d+$/.test(v) ? v :"";
 }
 
 export const adsenseConfig = {
@@ -52,27 +52,27 @@ export const adsenseConfig = {
 
   formats: {
     displayBanner: {
-      desktop: "728x90",
-      mobile: "320x50",
+      desktop:"728x90",
+      mobile:"320x50",
     },
-    rectangle: "300x250",
-    largeRectangle: "336x280",
-    skyscraper: "160x600",
-    wideSkyscraper: "300x600",
-    leaderboard: "728x90",
-    mobileLeaderboard: "320x50",
+    rectangle:"300x250",
+    largeRectangle:"336x280",
+    skyscraper:"160x600",
+    wideSkyscraper:"300x600",
+    leaderboard:"728x90",
+    mobileLeaderboard:"320x50",
   },
 
-  testMode: process.env.NEXT_PUBLIC_ADSENSE_TEST === "true",
+  testMode: process.env.NEXT_PUBLIC_ADSENSE_TEST ==="true",
 
   density: {
-    homepage: "medium",
-    toolPages: "medium",
-    blogPages: "medium",
+    homepage:"medium",
+    toolPages:"medium",
+    blogPages:"medium",
   },
 
   autoAds: {
-    enabled: process.env.NEXT_PUBLIC_ADSENSE_AUTO_ADS !== "false",
+    enabled: process.env.NEXT_PUBLIC_ADSENSE_AUTO_ADS !=="false",
     anchorAds: true,
     inPageAds: true,
     matchedContent: true,
@@ -98,13 +98,13 @@ export function listConfiguredAdSlots(): string[] {
 }
 
 export function getAdsenseScriptUrl(): string {
-  return `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseConfig.publisherId}`;
+  return`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseConfig.publisherId}`;
 }
 
 export function hasAdConsent(): boolean {
-  if (typeof window === "undefined") return false;
+  if (typeof window ==="undefined") return false;
   try {
-    return localStorage.getItem("cookie_consent") === "accepted";
+    return localStorage.getItem("cookie_consent") ==="accepted";
   } catch {
     return false;
   }
@@ -115,9 +115,9 @@ export function hasAdConsent(): boolean {
  */
 export function shouldShowAds(): boolean {
   if (!adsenseConfig.enabled) return false;
-  if (typeof window === "undefined") return false;
+  if (typeof window ==="undefined") return false;
 
-  if (process.env.NODE_ENV === "development" && !adsenseConfig.testMode) {
+  if (process.env.NODE_ENV ==="development" && !adsenseConfig.testMode) {
     return false;
   }
 

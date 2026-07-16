@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useCallback, useRef, useState } from"react";
+import { useRouter } from"next/navigation";
+import Link from"next/link";
 import {
   Upload,
   Download,
@@ -15,33 +15,33 @@ import {
   RotateCw,
   FlipHorizontal2,
   FlipVertical2,
-} from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
+} from"lucide-react";
+import { toast } from"sonner";
+import { Button } from"@/components/ui/button";
 import {
   InteractiveCropper,
   type CropRect,
-} from "@/components/image/InteractiveCropper";
+} from"@/components/image/InteractiveCropper";
 import {
   isImageFile,
   transformImageSrc,
   type RotateDeg,
-} from "@/lib/image-client";
+} from"@/lib/image-client";
 
 const relatedTools = [
-  { name: "Resize Image", slug: "resize-image" },
-  { name: "Image Compressor", slug: "image-compressor" },
-  { name: "Reorder PDF", slug: "reorder-pdf" },
-  { name: "Image to PDF", slug: "image-to-pdf" },
+  { name:"Resize Image", slug:"resize-image" },
+  { name:"Image Compressor", slug:"image-compressor" },
+  { name:"Reorder PDF", slug:"reorder-pdf" },
+  { name:"Image to PDF", slug:"image-to-pdf" },
 ];
 
 const ASPECTS: { id: string; label: string; ratio: number | null; icon?: React.ReactNode }[] = [
-  { id: "free", label: "Free", ratio: null },
-  { id: "1", label: "1:1", ratio: 1 },
-  { id: "4-3", label: "4:3", ratio: 4 / 3 },
-  { id: "16-9", label: "16:9", ratio: 16 / 9 },
-  { id: "3-2", label: "3:2", ratio: 3 / 2 },
-  { id: "9-16", label: "9:16", ratio: 9 / 16 },
+  { id:"free", label:"Free", ratio: null },
+  { id:"1", label:"1:1", ratio: 1 },
+  { id:"4-3", label:"4:3", ratio: 4 / 3 },
+  { id:"16-9", label:"16:9", ratio: 16 / 9 },
+  { id:"3-2", label:"3:2", ratio: 3 / 2 },
+  { id:"9-16", label:"9:16", ratio: 9 / 16 },
 ];
 
 export default function ImageCropClient() {
@@ -53,8 +53,7 @@ export default function ImageCropClient() {
   const [nh, setNh] = useState(0);
   const [crop, setCrop] = useState<CropRect>({ x: 0, y: 0, w: 100, h: 100 });
   const [aspectId, setAspectId] = useState("free");
-  const [outputFormat, setOutputFormat] = useState<"image/png" | "image/jpeg" | "image/webp">(
-    "image/png",
+  const [outputFormat, setOutputFormat] = useState<"image/png" |"image/jpeg" |"image/webp">("image/png",
   );
   const [resultUrl, setResultUrl] = useState("");
   const [busy, setBusy] = useState(false);
@@ -156,13 +155,13 @@ export default function ImageCropClient() {
     if (Number.isNaN(n)) return;
     setCrop((prev) => {
       const next = { ...prev, [key]: n };
-      if (key === "x") next.x = Math.max(0, Math.min(n, nw - prev.w));
-      if (key === "y") next.y = Math.max(0, Math.min(n, nh - prev.h));
-      if (key === "w") {
+      if (key ==="x") next.x = Math.max(0, Math.min(n, nw - prev.w));
+      if (key ==="y") next.y = Math.max(0, Math.min(n, nh - prev.h));
+      if (key ==="w") {
         next.w = Math.max(8, Math.min(n, nw - prev.x));
         if (aspectRatio) next.h = Math.round(next.w / aspectRatio);
       }
-      if (key === "h") {
+      if (key ==="h") {
         next.h = Math.max(8, Math.min(n, nh - prev.y));
         if (aspectRatio) next.w = Math.round(next.h * aspectRatio);
       }
@@ -189,9 +188,9 @@ export default function ImageCropClient() {
       const ctx = canvas.getContext("2d");
       if (!ctx) throw new Error("canvas");
       ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      if (outputFormat === "image/jpeg") {
-        ctx.fillStyle = "#ffffff";
+      ctx.imageSmoothingQuality ="high";
+      if (outputFormat ==="image/jpeg") {
+        ctx.fillStyle ="#ffffff";
         ctx.fillRect(0, 0, crop.w, crop.h);
       }
       ctx.drawImage(
@@ -209,7 +208,7 @@ export default function ImageCropClient() {
         canvas.toBlob(
           resolve,
           outputFormat,
-          outputFormat === "image/png" ? undefined : 0.92,
+          outputFormat ==="image/png" ? undefined : 0.92,
         ),
       );
       if (!blob) throw new Error("export failed");
@@ -225,15 +224,15 @@ export default function ImageCropClient() {
   const download = () => {
     if (!resultUrl) return;
     const ext =
-      outputFormat === "image/jpeg"
-        ? "jpg"
-        : outputFormat === "image/webp"
-          ? "webp"
-          : "png";
-    const base = (file?.name || "image").replace(/\.[^.]+$/, "");
+      outputFormat ==="image/jpeg"
+        ?"jpg"
+        : outputFormat ==="image/webp"
+          ?"webp"
+          :"png";
+    const base = (file?.name ||"image").replace(/\.[^.]+$/,"");
     const a = document.createElement("a");
     a.href = resultUrl;
-    a.download = `${base}-cropped-${crop.w}x${crop.h}.${ext}`;
+    a.download =`${base}-cropped-${crop.w}x${crop.h}.${ext}`;
     a.click();
   };
 
@@ -247,7 +246,7 @@ export default function ImageCropClient() {
   };
 
   return (
-    <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#0f1419] dark:via-background dark:to-[#0f1419]">
+    <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
       <div className="max-w-[1000px] mx-auto px-4 sm:px-6 py-10">
         <button
           type="button"
@@ -277,7 +276,7 @@ export default function ImageCropClient() {
         </div>
 
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 text-violet-600 dark:text-violet-400 text-sm font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 text-violet-600 text-sm font-semibold mb-4">
             <Crop className="h-4 w-4" /> Free · Private · Browser-only
           </div>
           <h1 className="text-4xl md:text-5xl font-black tracking-tight mb-3">
@@ -289,7 +288,7 @@ export default function ImageCropClient() {
           </p>
         </div>
 
-        <div className="bg-white/90 dark:bg-[#1a1f2e]/90 rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
+        <div className="bg-white/90 rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
           <div className="p-6 md:p-8 space-y-6">
             <input
               ref={fileInputRef}
@@ -314,8 +313,8 @@ export default function ImageCropClient() {
                 }}
                 className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${
                   dragOver
-                    ? "border-primary bg-primary/5"
-                    : "border-border/50 hover:border-primary/50"
+                    ?"border-primary bg-primary/5"
+                    :"border-border/50 hover:border-primary/50"
                 }`}
               >
                 <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
@@ -401,8 +400,8 @@ export default function ImageCropClient() {
                         onClick={() => setAspect(a.id)}
                         className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${
                           aspectId === a.id
-                            ? "bg-primary text-white border-primary"
-                            : "bg-slate-50  border-border/50"
+                            ?"bg-primary text-white border-primary"
+                            :"bg-slate-50  border-border/50"
                         }`}
                       >
                         {a.label}
@@ -424,10 +423,10 @@ export default function ImageCropClient() {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {(
                     [
-                      ["x", "X (px)"],
-                      ["y", "Y (px)"],
-                      ["w", "Width"],
-                      ["h", "Height"],
+                      ["x","X (px)"],
+                      ["y","Y (px)"],
+                      ["w","Width"],
+                      ["h","Height"],
                     ] as const
                   ).map(([key, label]) => (
                     <label key={key} className="text-xs font-medium space-y-1">
@@ -477,9 +476,9 @@ export default function ImageCropClient() {
                 </div>
 
                 {resultUrl && (
-                  <div className="rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/50 dark:bg-emerald-950/20 p-4 space-y-3">
+                  <div className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-4 space-y-3">
                     <div className="flex flex-wrap items-center justify-between gap-3">
-                      <p className="font-semibold text-emerald-800 dark:text-emerald-300">
+                      <p className="font-semibold text-emerald-800">
                         Cropped preview ({crop.w}×{crop.h})
                       </p>
                       <Button
@@ -506,18 +505,18 @@ export default function ImageCropClient() {
           {[
             {
               icon: Crop,
-              title: "Select any region",
-              desc: "Drag the box and use corner handles for precise crops",
+              title:"Select any region",
+              desc:"Drag the box and use corner handles for precise crops",
             },
             {
               icon: Square,
-              title: "Aspect presets",
-              desc: "1:1, 16:9, 9:16 and more for social & web",
+              title:"Aspect presets",
+              desc:"1:1, 16:9, 9:16 and more for social & web",
             },
             {
               icon: Shield,
-              title: "100% private",
-              desc: "Processed in your browser — images never upload",
+              title:"100% private",
+              desc:"Processed in your browser — images never upload",
             },
           ].map((f) => (
             <div

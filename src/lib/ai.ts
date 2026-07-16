@@ -1,12 +1,12 @@
-import OpenAI from "openai";
-import { getCachedResponse, cacheResponse } from "./cache";
+import OpenAI from"openai";
+import { getCachedResponse, cacheResponse } from"./cache";
 import {
   getGenerationParams,
   resolveSystemPrompt,
-} from "./tool-system-prompts";
+} from"./tool-system-prompts";
 
-export const MODEL_FREE = "gpt-4o-mini";
-export const MODEL_PREMIUM = "gpt-4o";
+export const MODEL_FREE ="gpt-4o-mini";
+export const MODEL_PREMIUM ="gpt-4o";
 
 interface AIResponse {
   success: boolean;
@@ -33,7 +33,7 @@ export async function runAI(
     );
 
     // Include model + system + tool so caches never mix formats across tools
-    const cacheKey = `${model}::${toolSlug || "na"}::${resolvedSystem}::${prompt}`;
+    const cacheKey =`${model}::${toolSlug ||"na"}::${resolvedSystem}::${prompt}`;
 
     const cached = await getCachedResponse(cacheKey);
     if (cached) {
@@ -53,10 +53,10 @@ export async function runAI(
       temperature,
       max_tokens,
       messages: [
-        { role: "system", content: resolvedSystem },
+        { role:"system", content: resolvedSystem },
         {
-          role: "user",
-          content: `${prompt.trim()}
+          role:"user",
+          content:`${prompt.trim()}
 
 ---
 Respond with the full useful result now. Match the requested format. Do not refuse reasonable educational or productivity requests.`,
@@ -69,14 +69,14 @@ Respond with the full useful result now. Match the requested format. Do not refu
     if (!responseContent || responseContent.trim().length === 0) {
       return {
         success: false,
-        error: "Empty response from AI",
+        error:"Empty response from AI",
       };
     }
 
     // Strip common low-quality wrappers models sometimes add
     responseContent = responseContent
-      .replace(/^```(?:markdown|md|text)?\s*/i, "")
-      .replace(/\s*```$/i, "")
+      .replace(/^```(?:markdown|md|text)?\s*/i,"")
+      .replace(/\s*```$/i,"")
       .trim();
 
     await cacheResponse(cacheKey, responseContent);
@@ -89,7 +89,7 @@ Respond with the full useful result now. Match the requested format. Do not refu
     console.error("AI Error:", error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : "AI generation failed",
+      error: error instanceof Error ? error.message :"AI generation failed",
     };
   }
 }
@@ -98,11 +98,9 @@ Respond with the full useful result now. Match the requested format. Do not refu
  * Lightweight prompt helpers (legacy / API consumers)
  */
 export const promptTemplates = {
-  homeworkSolver:
-    "Solve this problem with clear step-by-step reasoning and a final answer: {input}",
-  notesGenerator:
-    "Create structured study notes with headings and bullets on: {input}",
-  mcqGenerator: `Create 10 high-quality MCQs on: {input}. Format:
+  homeworkSolver:"Solve this problem with clear step-by-step reasoning and a final answer: {input}",
+  notesGenerator:"Create structured study notes with headings and bullets on: {input}",
+  mcqGenerator:`Create 10 high-quality MCQs on: {input}. Format:
 Q1. Question
 A) ...
 B) ...
@@ -110,28 +108,19 @@ C) ...
 D) ...
 Correct: A
 Explanation: ...`,
-  essayWriter:
-    "Write a well-structured essay on: {input}. Include introduction, body paragraphs, and conclusion.",
-  summarizer:
-    "Summarize this text clearly, preserving key facts and conclusions: {input}",
-  paraphraser:
-    "Paraphrase while keeping meaning identical and sounding natural: {input}",
-  grammarFix:
-    "Correct grammar, spelling, and clarity. Return the improved full text: {input}",
-  speechWriter:
-    "Write a speech on: {input}. Opening, main points, closing.",
-  emailWriter:
-    "Write a professional email about: {input}. Subject, greeting, body, closing.",
-  captionGenerator:
-    "Create 5 distinct social captions for: {input}.",
-  flashcards: `Create 10 flashcards from: {input}.
+  essayWriter:"Write a well-structured essay on: {input}. Include introduction, body paragraphs, and conclusion.",
+  summarizer:"Summarize this text clearly, preserving key facts and conclusions: {input}",
+  paraphraser:"Paraphrase while keeping meaning identical and sounding natural: {input}",
+  grammarFix:"Correct grammar, spelling, and clarity. Return the improved full text: {input}",
+  speechWriter:"Write a speech on: {input}. Opening, main points, closing.",
+  emailWriter:"Write a professional email about: {input}. Subject, greeting, body, closing.",
+  captionGenerator:"Create 5 distinct social captions for: {input}.",
+  flashcards:`Create 10 flashcards from: {input}.
 Format each as:
 ### Card N
 **Front:** ...
 **Back:** ...`,
-  quizGenerator:
-    "Create a practice quiz from: {input} with an answer key.",
-  storyGenerator: "Write a short engaging story about: {input}.",
-  resumeBullet:
-    "Write achievement-focused resume bullets for: {input}. Use action verbs and metrics when provided.",
+  quizGenerator:"Create a practice quiz from: {input} with an answer key.",
+  storyGenerator:"Write a short engaging story about: {input}.",
+  resumeBullet:"Write achievement-focused resume bullets for: {input}. Use action verbs and metrics when provided.",
 };

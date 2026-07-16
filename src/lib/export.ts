@@ -7,10 +7,10 @@
  */
 export function exportAsTxt(
   content: string,
-  filename: string = "result",
+  filename: string ="result",
 ): void {
-  const blob = new Blob([content], { type: "text/plain" });
-  downloadBlob(blob, `${filename}.txt`);
+  const blob = new Blob([content], { type:"text/plain" });
+  downloadBlob(blob,`${filename}.txt`);
 }
 
 /**
@@ -18,10 +18,10 @@ export function exportAsTxt(
  */
 export function exportAsMarkdown(
   content: string,
-  filename: string = "result",
+  filename: string ="result",
 ): void {
-  const blob = new Blob([content], { type: "text/markdown" });
-  downloadBlob(blob, `${filename}.md`);
+  const blob = new Blob([content], { type:"text/markdown" });
+  downloadBlob(blob,`${filename}.md`);
 }
 
 /**
@@ -30,12 +30,12 @@ export function exportAsMarkdown(
  */
 export async function exportAsPDF(
   content: string,
-  title: string = "AI Study Tools Result",
-  filename: string = "result",
+  title: string ="AI Study Tools Result",
+  filename: string ="result",
 ): Promise<void> {
   try {
     // Create a simple HTML structure for PDF
-    const htmlContent = `
+    const htmlContent =`
       <!DOCTYPE html>
       <html>
         <head>
@@ -80,14 +80,13 @@ export async function exportAsPDF(
             ${new Date().toLocaleString()}
           </div>
         </body>
-      </html>
-    `;
+      </html>`;
 
     // Use browser's print to PDF functionality
-    const blob = new Blob([htmlContent], { type: "text/html" });
+    const blob = new Blob([htmlContent], { type:"text/html" });
     const url = URL.createObjectURL(blob);
 
-    const printWindow = window.open(url, "_blank");
+    const printWindow = window.open(url,"_blank");
     if (printWindow) {
       printWindow.onload = () => {
         printWindow.print();
@@ -99,8 +98,7 @@ export async function exportAsPDF(
     }
   } catch (error) {
     console.error("PDF export failed:", error);
-    throw new Error(
-      "Failed to export as PDF. Please try downloading as TXT instead.",
+    throw new Error("Failed to export as PDF. Please try downloading as TXT instead.",
     );
   }
 }
@@ -111,11 +109,11 @@ export async function exportAsPDF(
  */
 export function exportAsDocx(
   content: string,
-  title: string = "AI Study Tools Result",
-  filename: string = "result",
+  title: string ="AI Study Tools Result",
+  filename: string ="result",
 ): void {
   // Simple DOCX structure (actually an XML that Word can open)
-  const docxContent = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  const docxContent =`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?mso-application progid="Word.Document"?>
 <w:wordDocument xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml">
   <w:body>
@@ -140,13 +138,12 @@ export function exportAsDocx(
     ${content
       .split("\n")
       .map(
-        (line) => `
+        (line) =>`
     <w:p>
       <w:r>
         <w:t>${escapeXml(line)}</w:t>
       </w:r>
-    </w:p>
-    `,
+    </w:p>`,
       )
       .join("")}
     <w:p>
@@ -182,22 +179,20 @@ export function exportAsDocx(
 </w:wordDocument>`;
 
   const blob = new Blob([docxContent], {
-    type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   });
-  downloadBlob(blob, `${filename}.docx`);
+  downloadBlob(blob,`${filename}.docx`);
 }
 
 /**
  * Copy content as HTML to clipboard
  */
 export async function copyAsHTML(content: string): Promise<void> {
-  const htmlContent = `<pre style="font-family: monospace; white-space: pre-wrap;">${escapeHtml(content)}</pre>`;
+  const htmlContent =`<pre style="font-family: monospace; white-space: pre-wrap;">${escapeHtml(content)}</pre>`;
 
   try {
     await navigator.clipboard.write([
-      new ClipboardItem({
-        "text/html": new Blob([htmlContent], { type: "text/html" }),
-        "text/plain": new Blob([content], { type: "text/plain" }),
+      new ClipboardItem({"text/html": new Blob([htmlContent], { type:"text/html" }),"text/plain": new Blob([content], { type:"text/plain" }),
       }),
     ]);
   } catch (error) {
@@ -225,11 +220,11 @@ function downloadBlob(blob: Blob, filename: string): void {
  */
 function escapeXml(unsafe: string): string {
   return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&apos;");
 }
 
 /**
@@ -237,20 +232,20 @@ function escapeXml(unsafe: string): string {
  */
 function escapeHtml(unsafe: string): string {
   return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
 /**
  * Format file size for display
  */
 export function formatFileSize(bytes: number): string {
-  if (bytes === 0) return "0 Bytes";
+  if (bytes === 0) return"0 Bytes";
   const k = 1024;
-  const sizes = ["Bytes", "KB", "MB"];
+  const sizes = ["Bytes","KB","MB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
+  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 +"" + sizes[i];
 }

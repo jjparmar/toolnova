@@ -7,8 +7,8 @@ import {
   useRef,
   type KeyboardEvent,
   type ReactNode,
-} from "react";
-import { useRouter } from "next/navigation";
+} from"react";
+import { useRouter } from"next/navigation";
 import {
   Copy,
   Download,
@@ -28,16 +28,16 @@ import {
   ArrowLeft,
   AlertCircle,
   Keyboard,
-} from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import { toast } from "sonner";
-import { cn } from "@/lib/utils";
-import { useToolShell } from "@/components/ToolShellContext";
+} from"lucide-react";
+import ReactMarkdown from"react-markdown";
+import { toast } from"sonner";
+import { cn } from"@/lib/utils";
+import { useToolShell } from"@/components/ToolShellContext";
 
 interface ToolOption {
   id: string;
   label: string;
-  type: "select" | "toggle" | "slider" | "text";
+  type:"select" |"toggle" |"slider" |"text";
   options?: readonly { value: string; label: string }[];
   defaultValue?: unknown;
   min?: number;
@@ -95,14 +95,14 @@ export default function EnhancedToolLayout({
   inputRows = 8,
   toolOptions = [],
   options: optionAlias,
-  resultLabel = "Result",
-  generateButtonText = "Generate",
+  resultLabel ="Result",
+  generateButtonText ="Generate",
   customResultRenderer,
   isNonAITool = false,
   nonAIHandler,
   maxHistoryItems = 8,
   showAdvancedOptions = true,
-  inputLabel = "Your input",
+  inputLabel ="Your input",
   showCopyButton = true,
   showDownloadButton = true,
   showWordCount = true,
@@ -119,10 +119,10 @@ export default function EnhancedToolLayout({
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [showHistory, setShowHistory] = useState(false);
   const [showOptions, setShowOptions] = useState(true);
-  const [activeTab, setActiveTab] = useState<"input" | "output">("input");
+  const [activeTab, setActiveTab] = useState<"input" |"output">("input");
   const [charCount, setCharCount] = useState(0);
   const [wordCount, setWordCount] = useState(0);
-  const [feedback, setFeedback] = useState<"up" | "down" | null>(null);
+  const [feedback, setFeedback] = useState<"up" |"down" | null>(null);
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { nestedInPremiumShell } = useToolShell();
@@ -148,8 +148,8 @@ export default function EnhancedToolLayout({
       setHistory(
         parsed.map((item: HistoryItem & { timestamp: string }) => ({
           ...item,
-          input: String(item.input ?? ""),
-          output: String(item.output ?? ""),
+          input: String(item.input ??""),
+          output: String(item.output ??""),
           timestamp: new Date(item.timestamp),
         })),
       );
@@ -170,7 +170,7 @@ export default function EnhancedToolLayout({
   const pushHistory = useCallback(
     (fullInput: string, fullOutput: string, opts: Record<string, unknown>) => {
       const newItem: HistoryItem = {
-        id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        id:`${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
         input: fullInput.slice(0, HISTORY_INPUT_MAX),
         output: fullOutput.slice(0, HISTORY_OUTPUT_MAX),
         timestamp: new Date(),
@@ -209,20 +209,20 @@ export default function EnhancedToolLayout({
 
         const prompt = resolvedPromptTemplate(input, options);
         const response = await fetch("/api/ai", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          method:"POST",
+          headers: {"Content-Type":"application/json" },
           body: JSON.stringify({ prompt, systemPrompt, toolSlug }),
         });
 
         const data = await response.json().catch(() => ({}));
         if (!response.ok) {
           const msg =
-            typeof data?.error === "string"
+            typeof data?.error ==="string"
               ? data.error
-              : "Generation failed. Please try again.";
+              :"Generation failed. Please try again.";
           throw new Error(msg);
         }
-        if (!data?.result || typeof data.result !== "string") {
+        if (!data?.result || typeof data.result !=="string") {
           throw new Error("Empty response from AI. Please try again.");
         }
         result = data.result.trim();
@@ -234,7 +234,7 @@ export default function EnhancedToolLayout({
       setOutput(result);
       setError(null);
 
-      if (!isNonAITool || toolSlug === "youtube-summarizer") {
+      if (!isNonAITool || toolSlug ==="youtube-summarizer") {
         window.dispatchEvent(new Event("ai-usage-updated"));
       }
 
@@ -244,7 +244,7 @@ export default function EnhancedToolLayout({
       const message =
         err instanceof Error
           ? err.message
-          : "An error occurred. Please try again.";
+          :"An error occurred. Please try again.";
       setError(message);
       setOutput("");
       toast.error(message);
@@ -267,11 +267,11 @@ export default function EnhancedToolLayout({
 
   const handleDownload = useCallback(() => {
     if (!output) return;
-    const blob = new Blob([output], { type: "text/plain;charset=utf-8" });
+    const blob = new Blob([output], { type:"text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${toolSlug}-result-${Date.now()}.txt`;
+    a.download =`${toolSlug}-result-${Date.now()}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -290,11 +290,11 @@ export default function EnhancedToolLayout({
 
   const loadHistoryItem = useCallback((item: HistoryItem) => {
     setInput(item.input);
-    setOutput(item.output || "");
+    setOutput(item.output ||"");
     setError(null);
     setOptions(item.options || {});
     setShowHistory(false);
-    setActiveTab(item.output ? "output" : "input");
+    setActiveTab(item.output ?"output" :"input");
     toast.success("History item loaded");
   }, []);
 
@@ -318,7 +318,7 @@ export default function EnhancedToolLayout({
     try {
       if (navigator.share && output) {
         await navigator.share({
-          title: `${toolName} · ToolNova`,
+          title:`${toolName} · ToolNova`,
           text: output.slice(0, 500),
           url: window.location.href,
         });
@@ -332,7 +332,7 @@ export default function EnhancedToolLayout({
   }, [output, toolName]);
 
   const onKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+    if ((e.ctrlKey || e.metaKey) && e.key ==="Enter") {
       e.preventDefault();
       void handleGenerate();
     }
@@ -363,8 +363,8 @@ export default function EnhancedToolLayout({
           <Sparkles className="h-5 w-5 text-primary shrink-0 mt-0.5" />
           <div>
             <strong className="font-semibold text-primary tracking-wide uppercase text-xs">Free to start</strong>
-            {" — "}
-            no sign-up required. Free daily AI uses included;{" "}
+            {" —"}
+            no sign-up required. Free daily AI uses included;{""}
             <button
               type="button"
               onClick={() => router.push("/pricing")}
@@ -377,7 +377,7 @@ export default function EnhancedToolLayout({
         </div>
       )}
 
-      <div className="relative z-20 rounded-xl border border-border bg-card shadow-sm overflow-hidden flex flex-col group">
+      <div className="relative z-20 rounded-2xl border border-border/80 bg-card shadow-premium overflow-hidden flex flex-col group">
         
         {/* Simple Header */}
         <div className="flex items-center justify-between border-b border-border bg-muted/30 px-6 py-4">
@@ -389,26 +389,24 @@ export default function EnhancedToolLayout({
           
           <div className="flex items-center gap-3 min-w-0">
             <div
-              className={cn(
-                "flex items-center gap-2 px-3 py-1.5 rounded-md border text-[10px] font-bold uppercase tracking-wider bg-background",
+              className={cn("flex items-center gap-2 px-3 py-1.5 rounded-md border text-[10px] font-bold uppercase tracking-wider bg-background",
                 loading
-                  ? "border-amber-500 text-amber-500"
+                  ?"border-amber-500 text-amber-500"
                   : error
-                    ? "border-red-500 text-red-500"
-                    : "border-primary text-primary",
+                    ?"border-red-500 text-red-500"
+                    :"border-primary text-primary",
               )}
             >
               <div
-                className={cn(
-                  "w-2 h-2 rounded-full",
+                className={cn("w-2 h-2 rounded-full",
                   loading
-                    ? "bg-amber-500 animate-pulse"
+                    ?"bg-amber-500 animate-pulse"
                     : error
-                      ? "bg-red-500"
-                      : "bg-primary",
+                      ?"bg-red-500"
+                      :"bg-primary",
                 )}
               />
-              {loading ? "Processing…" : error ? "Error" : "Ready"}
+              {loading ?"Processing…" : error ?"Error" :"Ready"}
             </div>
 
             {showWordCount && charCount > 0 && (
@@ -423,11 +421,10 @@ export default function EnhancedToolLayout({
                 <button
                   type="button"
                   onClick={() => setShowHistory(!showHistory)}
-                  className={cn(
-                    "relative p-2 rounded-xl transition-all",
+                  className={cn("relative p-2 rounded-xl transition-all",
                     showHistory
-                      ? "bg-primary/20 text-primary shadow-glow-sm"
-                      : "hover:bg-muted text-muted-foreground hover:text-foreground",
+                      ?"bg-primary/20 text-primary shadow-glow-sm"
+                      :"hover:bg-muted text-muted-foreground hover:text-foreground",
                   )}
                   title="View history"
                   aria-label="View history"
@@ -443,11 +440,10 @@ export default function EnhancedToolLayout({
                 <button
                   type="button"
                   onClick={() => setShowOptions(!showOptions)}
-                  className={cn(
-                    "p-2 rounded-xl transition-all",
+                  className={cn("p-2 rounded-xl transition-all",
                     showOptions
-                      ? "bg-primary/20 text-primary shadow-glow-sm"
-                      : "hover:bg-muted text-muted-foreground hover:text-foreground",
+                      ?"bg-primary/20 text-primary shadow-glow-sm"
+                      :"hover:bg-muted text-muted-foreground hover:text-foreground",
                   )}
                   title="Options"
                   aria-label="Toggle options"
@@ -484,9 +480,9 @@ export default function EnhancedToolLayout({
                   <label className="text-sm font-semibold text-foreground">
                     {option.label}
                   </label>
-                  {option.type === "select" && (
+                  {option.type ==="select" && (
                     <select
-                      value={String(options[option.id] ?? "")}
+                      value={String(options[option.id] ??"")}
                       onChange={(e) =>
                         setOptions({ ...options, [option.id]: e.target.value })
                       }
@@ -499,7 +495,7 @@ export default function EnhancedToolLayout({
                       ))}
                     </select>
                   )}
-                  {option.type === "toggle" && (
+                  {option.type ==="toggle" && (
                     <button
                       type="button"
                       onClick={() =>
@@ -508,21 +504,19 @@ export default function EnhancedToolLayout({
                           [option.id]: !options[option.id],
                         })
                       }
-                      className={cn(
-                        "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
-                        options[option.id] ? "bg-primary" : "bg-muted-foreground/30",
+                      className={cn("relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
+                        options[option.id] ?"bg-primary" :"bg-muted-foreground/30",
                       )}
                       aria-pressed={!!options[option.id]}
                     >
                       <span
-                        className={cn(
-                          "inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform",
-                          options[option.id] ? "translate-x-6" : "translate-x-1",
+                        className={cn("inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform",
+                          options[option.id] ?"translate-x-6" :"translate-x-1",
                         )}
                       />
                     </button>
                   )}
-                  {option.type === "slider" && (
+                  {option.type ==="slider" && (
                     <div className="space-y-1">
                       <input
                         type="range"
@@ -541,15 +535,15 @@ export default function EnhancedToolLayout({
                         className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
                       />
                       <div className="text-xs text-muted-foreground font-medium">
-                        Value:{" "}
+                        Value:{""}
                         {String(options[option.id] ?? option.defaultValue)}
                       </div>
                     </div>
                   )}
-                  {option.type === "text" && (
+                  {option.type ==="text" && (
                     <input
                       type="text"
-                      value={String(options[option.id] ?? "")}
+                      value={String(options[option.id] ??"")}
                       onChange={(e) =>
                         setOptions({ ...options, [option.id]: e.target.value })
                       }
@@ -592,13 +586,13 @@ export default function EnhancedToolLayout({
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex-1 min-w-0">
                       <p className="text-sm text-foreground font-medium truncate">
-                        {item.input || "(empty)"}
+                        {item.input ||"(empty)"}
                       </p>
                       <p className="text-xs text-muted-foreground mt-1 line-clamp-1">
                         {item.output
                           ? item.output.slice(0, 80) +
-                            (item.output.length > 80 ? "…" : "")
-                          : "No output"}
+                            (item.output.length > 80 ?"…" :"")
+                          :"No output"}
                       </p>
                       <p className="text-[11px] text-muted-foreground/80 mt-1">
                         {item.timestamp.toLocaleString()}
@@ -617,37 +611,35 @@ export default function EnhancedToolLayout({
           <button
             type="button"
             onClick={() => setActiveTab("input")}
-            className={cn(
-              "flex-1 px-4 sm:px-6 py-4 text-sm font-bold transition-all relative overflow-hidden",
-              activeTab === "input"
-                ? "text-primary bg-muted/50"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/30",
+            className={cn("flex-1 px-4 sm:px-6 py-4 text-sm font-bold transition-all relative overflow-hidden",
+              activeTab ==="input"
+                ?"text-primary bg-muted/50"
+                :"text-muted-foreground hover:text-foreground hover:bg-muted/30",
             )}
           >
             {inputLabel}
-            {activeTab === "input" && (
+            {activeTab ==="input" && (
               <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
             )}
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("output")}
-            className={cn(
-              "flex-1 px-4 sm:px-6 py-4 text-sm font-bold transition-all relative overflow-hidden",
-              activeTab === "output"
-                ? "text-primary bg-muted/50"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/30",
+            className={cn("flex-1 px-4 sm:px-6 py-4 text-sm font-bold transition-all relative overflow-hidden",
+              activeTab ==="output"
+                ?"text-primary bg-muted/50"
+                :"text-muted-foreground hover:text-foreground hover:bg-muted/30",
             )}
           >
             {resultLabel}
-            {activeTab === "output" && (
+            {activeTab ==="output" && (
               <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
             )}
           </button>
         </div>
 
         <div className="p-4 sm:p-6">
-          {activeTab === "input" ? (
+          {activeTab ==="input" ? (
             <div className="space-y-4">
               <textarea
                 ref={textareaRef}
@@ -664,7 +656,7 @@ export default function EnhancedToolLayout({
                   type="button"
                   onClick={() => void handleGenerate()}
                   disabled={loading || !input.trim()}
-                  className="flex-1 py-4 px-6 rounded-md bg-primary text-primary-foreground font-bold text-lg shadow-sm hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 transition-all duration-300"
+                  className="flex-1 py-4 px-6 rounded-full bg-primary text-primary-foreground font-bold text-lg shadow-[0_0_20px_-5px_rgba(var(--primary),0.4)] hover:shadow-[0_0_30px_-5px_rgba(var(--primary),0.6)] hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 transition-all duration-300"
                 >
                   {loading ? (
                     <>
@@ -681,14 +673,14 @@ export default function EnhancedToolLayout({
               </div>
               <p className="text-xs text-muted-foreground flex items-center gap-1.5 justify-center sm:justify-start">
                 <Keyboard className="h-3.5 w-3.5" />
-                Press{" "}
+                Press{""}
                 <kbd className="px-1.5 py-0.5 rounded bg-muted font-mono text-[10px] border border-border">
                   Ctrl
                 </kbd>
                 +
                 <kbd className="px-1.5 py-0.5 rounded bg-muted font-mono text-[10px] border border-border">
                   Enter
-                </kbd>{" "}
+                </kbd>{""}
                 to generate
               </p>
             </div>
@@ -709,8 +701,8 @@ export default function EnhancedToolLayout({
                 </div>
               ) : error ? (
                 <div className="flex flex-col items-center justify-center py-14 text-center space-y-4 px-4">
-                  <div className="w-14 h-14 rounded-2xl bg-red-50 dark:bg-red-950/40 flex items-center justify-center">
-                    <AlertCircle className="h-7 w-7 text-red-600 dark:text-red-400" />
+                  <div className="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center">
+                    <AlertCircle className="h-7 w-7 text-red-600" />
                   </div>
                   <div>
                     <p className="text-foreground font-semibold mb-2">
@@ -797,7 +789,7 @@ export default function EnhancedToolLayout({
 
                     {showWordCount && (
                       <span className="text-xs text-muted-foreground ml-auto font-medium">
-                        {outputWordCount} words · {output.length.toLocaleString()}{" "}
+                        {outputWordCount} words · {output.length.toLocaleString()}{""}
                         chars
                       </span>
                     )}
@@ -813,11 +805,10 @@ export default function EnhancedToolLayout({
                             setFeedback("up");
                             toast.success("Thanks for the feedback");
                           }}
-                          className={cn(
-                            "p-2 rounded-lg transition-all",
-                            feedback === "up"
-                              ? "bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600"
-                              : "bg-muted text-muted-foreground hover:text-emerald-600",
+                          className={cn("p-2 rounded-lg transition-all",
+                            feedback ==="up"
+                              ?"bg-emerald-100 text-emerald-600"
+                              :"bg-muted text-muted-foreground hover:text-emerald-600",
                           )}
                           aria-label="Thumbs up"
                         >
@@ -829,11 +820,10 @@ export default function EnhancedToolLayout({
                             setFeedback("down");
                             toast.message("Thanks — we’ll keep improving");
                           }}
-                          className={cn(
-                            "p-2 rounded-lg transition-all",
-                            feedback === "down"
-                              ? "bg-red-100 dark:bg-red-950/50 text-red-600"
-                              : "bg-muted text-muted-foreground hover:text-red-600",
+                          className={cn("p-2 rounded-lg transition-all",
+                            feedback ==="down"
+                              ?"bg-red-100 text-red-600"
+                              :"bg-muted text-muted-foreground hover:text-red-600",
                           )}
                           aria-label="Thumbs down"
                         >
@@ -843,7 +833,7 @@ export default function EnhancedToolLayout({
                     )}
                   </div>
 
-                  <div className="prose prose-slate dark:prose-invert max-w-none">
+                  <div className="prose prose-slate max-w-none">
                     {customResultRenderer ? (
                       customResultRenderer(output)
                     ) : (
@@ -897,7 +887,7 @@ export default function EnhancedToolLayout({
                             ),
                             code: ({ className, children, ...props }) => {
                               const isBlock =
-                                typeof className === "string" &&
+                                typeof className ==="string" &&
                                 className.includes("language-");
                               if (isBlock) {
                                 return (

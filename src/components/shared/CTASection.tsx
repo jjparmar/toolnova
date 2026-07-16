@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import Link from"next/link";
+import { ArrowRight } from"lucide-react";
+import type { LucideIcon } from"lucide-react";
+import { cn } from"@/lib/utils";
 
 /**
  * CTASection — the full-width call-to-action band that closes most pages.
@@ -14,7 +14,7 @@ export function CTASection({
   title,
   description,
   href,
-  buttonText = "Browse all tools",
+  buttonText ="Browse all tools",
   icon: Icon,
   className,
 }: {

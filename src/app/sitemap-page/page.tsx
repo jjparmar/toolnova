@@ -1,15 +1,14 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import { getAllTools, TOOL_COUNT } from "@/data/tools";
-import { getAllBlogPosts } from "@/data/blog";
-import { siteConfig } from "@/config/site";
+import { Metadata } from"next";
+import Link from"next/link";
+import { getAllTools, TOOL_COUNT } from"@/data/tools";
+import { getAllBlogPosts } from"@/data/blog";
+import { siteConfig } from"@/config/site";
 
 export const metadata: Metadata = {
-  title: "Sitemap - All Tools, Guides & Pages | ToolNova",
-  description:
-    "Browse the complete ToolNova sitemap: all AI tools by category, in-depth guides, and company pages in one place.",
+  title:"Sitemap - All Tools, Guides & Pages | ToolNova",
+  description:"Browse the complete ToolNova sitemap: all AI tools by category, in-depth guides, and company pages in one place.",
   alternates: {
-    canonical: "https://www.toolnovahub.com/sitemap-page",
+    canonical:"https://www.toolnovahub.com/sitemap-page",
   },
   robots: {
     index: true,
@@ -18,16 +17,7 @@ export const metadata: Metadata = {
 };
 
 // Map internal data categories to their category-hub slug + display name.
-const CATEGORY_HUBS: Record<string, { slug: string; name: string }> = {
-  "Writing Tools": { slug: "writing-tools", name: "Writing Tools" },
-  "Study Tools": { slug: "study-tools", name: "Study Tools" },
-  "Exam Prep": { slug: "exam-prep-tools", name: "Exam Prep Tools" },
-  "Exam Prep Tools": { slug: "exam-prep-tools", name: "Exam Prep Tools" },
-  "Career Tools": { slug: "career-tools", name: "Career Tools" },
-  "Utility Tools": { slug: "utility-tools", name: "Utility Tools" },
-  "Language Tools": { slug: "utility-tools", name: "Language Tools" },
-  "PDF Tools": { slug: "image-pdf-tools", name: "PDF & Image Tools" },
-  "Image Tools": { slug: "image-pdf-tools", name: "PDF & Image Tools" },
+const CATEGORY_HUBS: Record<string, { slug: string; name: string }> = {"Writing Tools": { slug:"writing-tools", name:"Writing Tools" },"Study Tools": { slug:"study-tools", name:"Study Tools" },"Exam Prep": { slug:"exam-prep-tools", name:"Exam Prep Tools" },"Exam Prep Tools": { slug:"exam-prep-tools", name:"Exam Prep Tools" },"Career Tools": { slug:"career-tools", name:"Career Tools" },"Utility Tools": { slug:"utility-tools", name:"Utility Tools" },"Language Tools": { slug:"utility-tools", name:"Language Tools" },"PDF Tools": { slug:"image-pdf-tools", name:"PDF & Image Tools" },"Image Tools": { slug:"image-pdf-tools", name:"PDF & Image Tools" },
 };
 
 export default function SitemapPage() {
@@ -41,7 +31,7 @@ export default function SitemapPage() {
   > = {};
   for (const { slug, data } of allTools) {
     const hub = CATEGORY_HUBS[data.category] ?? {
-      slug: "utility-tools",
+      slug:"utility-tools",
       name: data.category,
     };
     if (!toolsByCategory[hub.name]) toolsByCategory[hub.name] = [];
@@ -53,32 +43,32 @@ export default function SitemapPage() {
   }
 
   const companyPages = [
-    { name: "Home", href: "/" },
-    { name: "All Tools", href: "/tools" },
-    { name: "Blog", href: "/blog" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "About Us", href: "/about" },
-    { name: "Contact", href: "/contact" },
-    { name: "Search", href: "/search" },
+    { name:"Home", href:"/" },
+    { name:"All Tools", href:"/tools" },
+    { name:"Blog", href:"/blog" },
+    { name:"Pricing", href:"/pricing" },
+    { name:"About Us", href:"/about" },
+    { name:"Contact", href:"/contact" },
+    { name:"Search", href:"/search" },
   ];
 
   const legalPages = [
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Terms of Service", href: "/terms" },
-    { name: "Disclaimer", href: "/disclaimer" },
-    { name: "Cookie Policy", href: "/cookie-policy" },
-    { name: "Refund Policy", href: "/refund" },
+    { name:"Privacy Policy", href:"/privacy" },
+    { name:"Terms of Service", href:"/terms" },
+    { name:"Disclaimer", href:"/disclaimer" },
+    { name:"Cookie Policy", href:"/cookie-policy" },
+    { name:"Refund Policy", href:"/refund" },
   ];
 
   return (
-    <div className="min-h-screen bg-[#f8f9fb] dark:bg-[#0f1419]">
+    <div className="min-h-screen bg-[#f8f9fb]">
       <section className="bg-gradient-to-br from-primary via-blue-600 to-indigo-700 py-16">
         <div className="container mx-auto px-6 max-w-5xl text-center">
           <h1 className="text-4xl md:text-5xl font-black text-white mb-3">
             Sitemap
           </h1>
           <p className="text-blue-100 text-lg">
-            Explore every ToolNova tool, guide, and page — all {TOOL_COUNT}{" "}
+            Explore every ToolNova tool, guide, and page — all {TOOL_COUNT}{""}
             tools and {blogPosts.length} articles organized in one place.
           </p>
         </div>
@@ -96,7 +86,7 @@ export default function SitemapPage() {
                 <Link
                   key={page.href}
                   href={page.href}
-                  className="block bg-white dark:bg-[#1a1f2e] rounded-lg p-4 border border-slate-100 dark:border-slate-800 hover:border-primary/30 hover:shadow-md transition-all"
+                  className="block bg-white rounded-lg p-4 border border-slate-100 hover:border-primary/30 hover:shadow-md transition-all"
                 >
                   <span className="font-medium text-foreground hover:text-primary">
                     {page.name}
@@ -122,8 +112,8 @@ export default function SitemapPage() {
                       <Link
                         href={
                           hub
-                            ? `/tools/${hub.slug}`
-                            : "/tools"
+                            ?`/tools/${hub.slug}`
+                            :"/tools"
                         }
                         className="hover:underline"
                       >
@@ -135,7 +125,7 @@ export default function SitemapPage() {
                         <Link
                           key={tool.slug}
                           href={`/tools/${tool.slug}`}
-                          className="block bg-white dark:bg-[#1a1f2e] rounded-lg p-4 border border-slate-100 dark:border-slate-800 hover:border-primary/30 hover:shadow-md transition-all group"
+                          className="block bg-white rounded-lg p-4 border border-slate-100 hover:border-primary/30 hover:shadow-md transition-all group"
                         >
                           <span className="font-medium text-foreground group-hover:text-primary">
                             {tool.name}
@@ -162,7 +152,7 @@ export default function SitemapPage() {
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="block bg-white dark:bg-[#1a1f2e] rounded-lg p-4 border border-slate-100 dark:border-slate-800 hover:border-primary/30 hover:shadow-md transition-all group"
+                  className="block bg-white rounded-lg p-4 border border-slate-100 hover:border-primary/30 hover:shadow-md transition-all group"
                 >
                   <span className="font-medium text-foreground group-hover:text-primary line-clamp-2 block">
                     {post.title}
@@ -185,7 +175,7 @@ export default function SitemapPage() {
                 <Link
                   key={page.href}
                   href={page.href}
-                  className="block bg-white dark:bg-[#1a1f2e] rounded-lg p-4 border border-slate-100 dark:border-slate-800 hover:border-primary/30 hover:shadow-md transition-all"
+                  className="block bg-white rounded-lg p-4 border border-slate-100 hover:border-primary/30 hover:shadow-md transition-all"
                 >
                   <span className="font-medium text-foreground hover:text-primary">
                     {page.name}
@@ -196,9 +186,9 @@ export default function SitemapPage() {
           </div>
 
           {/* Machine sitemap */}
-          <div className="text-center pt-8 border-t border-slate-200 dark:border-slate-800">
+          <div className="text-center pt-8 border-t border-slate-200">
             <p className="text-sm text-muted-foreground">
-              Looking for the machine-readable sitemap for search engines?{" "}
+              Looking for the machine-readable sitemap for search engines?{""}
               <a
                 href={`${siteConfig.url}/sitemap.xml`}
                 className="text-primary hover:underline font-medium"

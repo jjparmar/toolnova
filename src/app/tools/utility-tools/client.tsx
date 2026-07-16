@@ -48,7 +48,7 @@ export function UtilityToolsClient({ tools }: UtilityToolsClientProps) {
         <>
             {/* Hero Section */}
             <div className="relative overflow-hidden mb-12">
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-50 via-emerald-50 to-cyan-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-cyan-950/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-50 via-emerald-50 to-cyan-50"></div>
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl"></div>
                 
@@ -114,11 +114,11 @@ export function UtilityToolsClient({ tools }: UtilityToolsClientProps) {
                                 className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl`}
                                 style={{
                                     background: 'linear-gradient(135deg, from-cyan-50 0%, to-blue-50/50 100%)',
-                                    animationDelay: `${index * 50}ms`
+                                    animationDelay:`${index * 50}ms`
                                 }}
                             >
                                 {/* Glassmorphism overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/10 dark:from-slate-800/40 dark:to-slate-900/10 backdrop-blur-sm"></div>
+                                <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/10 backdrop-blur-sm"></div>
                                 
                                 {/* Animated gradient border */}
                                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>

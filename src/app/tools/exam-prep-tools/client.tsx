@@ -46,12 +46,12 @@ export function ExamPrepToolsClient({ tools }: ExamPrepToolsClientProps) {
         <>
             {/* Hero Section */}
             <div className="relative overflow-hidden mb-12">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/20 dark:via-emerald-950/20 dark:to-teal-950/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50"></div>
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-400/10 rounded-full blur-3xl animate-pulse"></div>
                 <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
                 
                 <div className="relative text-center py-16 px-6">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 text-green-600 dark:text-green-400 text-sm font-semibold mb-6 backdrop-blur-sm">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 text-green-600 text-sm font-semibold mb-6 backdrop-blur-sm">
                         <BookOpen className="h-4 w-4" />
                         {tools.length} Exam Prep Tools
                     </div>
@@ -114,11 +114,11 @@ export function ExamPrepToolsClient({ tools }: ExamPrepToolsClientProps) {
                                 className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl`}
                                 style={{
                                     background: 'linear-gradient(135deg, from-green-50 0%, to-emerald-50/50 100%)',
-                                    animationDelay: `${index * 50}ms`
+                                    animationDelay:`${index * 50}ms`
                                 }}
                             >
                                 {/* Glassmorphism overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/10 dark:from-slate-800/40 dark:to-slate-900/10 backdrop-blur-sm"></div>
+                                <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/10 backdrop-blur-sm"></div>
                                 
                                 {/* Animated gradient border */}
                                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>

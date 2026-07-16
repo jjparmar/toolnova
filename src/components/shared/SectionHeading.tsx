@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from"@/lib/utils";
 
 /**
  * SectionHeading — the standard section title block used site-wide.
@@ -7,46 +7,44 @@ import { cn } from "@/lib/utils";
  * - eyebrow: small uppercase primary label above the title
  * - title:   the section H2 (rendered with Plus Jakarta Sans via .font-heading)
  * - subtitle: optional supporting line
- * - align:   "center" (default) or "left"
+ * - align:"center" (default) or"left"
  */
 export function SectionHeading({
   eyebrow,
   title,
   subtitle,
-  align = "center",
+  align ="center",
   className,
   titleClassName,
-  as: Heading = "h2",
+  as: Heading ="h2",
 }: {
   eyebrow?: React.ReactNode;
   title: React.ReactNode;
   subtitle?: React.ReactNode;
-  align?: "center" | "left";
+  align?:"center" |"left";
   className?: string;
   titleClassName?: string;
-  as?: "h1" | "h2" | "h3";
+  as?:"h1" |"h2" |"h3";
 }) {
-  const centered = align === "center";
+  const centered = align ==="center";
   return (
     <div
       className={cn(
-        centered ? "mx-auto mb-12 max-w-2xl text-center" : "mb-10 max-w-2xl",
+        centered ?"mx-auto mb-12 max-w-2xl text-center" :"mb-10 max-w-2xl",
         className
       )}
     >
       {eyebrow && (
         <p
-          className={cn(
-            "eyebrow mb-3",
-            centered && "justify-center"
+          className={cn("eyebrow mb-3",
+            centered &&"justify-center"
           )}
         >
           {eyebrow}
         </p>
       )}
       <Heading
-        className={cn(
-          "font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl",
+        className={cn("font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl",
           titleClassName
         )}
       >
@@ -54,9 +52,8 @@ export function SectionHeading({
       </Heading>
       {subtitle && (
         <p
-          className={cn(
-            "mt-3 text-base text-muted-foreground md:text-lg",
-            centered && "mx-auto max-w-xl"
+          className={cn("mt-3 text-base text-muted-foreground md:text-lg",
+            centered &&"mx-auto max-w-xl"
           )}
         >
           {subtitle}

@@ -40,13 +40,12 @@ export default function EssayWriterPage() {
     'https://www.toolnovahub.com/tools/essay-writer'
   );
 
-  const howToSchema = getHowToSchema(
-    `How to Write a Free Essay Online with AI`,
+  const howToSchema = getHowToSchema(`How to Write a Free Essay Online with AI`,
     toolData.description,
     toolData.howItWorks.map((step) => ({
       name: step.title,
       text: step.desc,
-      url: `https://www.toolnovahub.com/tools/essay-writer#step-${step.step}`,
+      url:`https://www.toolnovahub.com/tools/essay-writer#step-${step.step}`,
     }))
   );
 

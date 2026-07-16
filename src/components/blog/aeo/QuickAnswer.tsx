@@ -1,5 +1,5 @@
-import React from "react";
-import { FaBolt } from "react-icons/fa";
+import React from"react";
+import { FaBolt } from"react-icons/fa";
 
 interface QuickAnswerProps {
     children: React.ReactNode;

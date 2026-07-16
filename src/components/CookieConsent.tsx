@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
+import { useState, useEffect } from"react";
+import Link from"next/link";
+import { Button } from"@/components/ui/button";
+import { X } from"lucide-react";
 
 export function CookieConsent() {
     const [isVisible, setIsVisible] = useState(false);
@@ -17,13 +17,13 @@ export function CookieConsent() {
     }, []);
 
     const acceptCookies = () => {
-        localStorage.setItem("cookie_consent", "accepted");
-        if (typeof window !== "undefined" && (window as any).gtag) {
-            (window as any).gtag("consent", "update", {
-                ad_storage: "granted",
-                ad_user_data: "granted",
-                ad_personalization: "granted",
-                analytics_storage: "granted",
+        localStorage.setItem("cookie_consent","accepted");
+        if (typeof window !=="undefined" && (window as any).gtag) {
+            (window as any).gtag("consent","update", {
+                ad_storage:"granted",
+                ad_user_data:"granted",
+                ad_personalization:"granted",
+                analytics_storage:"granted",
             });
         }
         window.dispatchEvent(new Event("cookie-consent-changed"));
@@ -31,14 +31,14 @@ export function CookieConsent() {
     };
 
     const declineCookies = () => {
-        localStorage.setItem("cookie_consent", "declined");
+        localStorage.setItem("cookie_consent","declined");
         // Keep Consent Mode defaults (denied) for non-essential ads/analytics
-        if (typeof window !== "undefined" && (window as any).gtag) {
-            (window as any).gtag("consent", "update", {
-                ad_storage: "denied",
-                ad_user_data: "denied",
-                ad_personalization: "denied",
-                analytics_storage: "denied",
+        if (typeof window !=="undefined" && (window as any).gtag) {
+            (window as any).gtag("consent","update", {
+                ad_storage:"denied",
+                ad_user_data:"denied",
+                ad_personalization:"denied",
+                analytics_storage:"denied",
             });
         }
         window.dispatchEvent(new Event("cookie-consent-changed"));
@@ -47,7 +47,7 @@ export function CookieConsent() {
 
     const dismissConsent = () => {
         // Dismiss = essential only (same as decline for ads/analytics)
-        localStorage.setItem("cookie_consent", "declined");
+        localStorage.setItem("cookie_consent","declined");
         window.dispatchEvent(new Event("cookie-consent-changed"));
         setIsVisible(false);
     };
@@ -72,15 +72,15 @@ export function CookieConsent() {
                     >
                         We use essential cookies to run the site, and optional cookies for
                         analytics and personalized ads. You can accept or decline optional
-                        cookies anytime.{" "}
+                        cookies anytime.{""}
                         <Link href="/privacy" className="text-primary hover:underline">
                             Privacy Policy
                         </Link>
-                        {" · "}
+                        {" ·"}
                         <Link href="/cookie-policy" className="text-primary hover:underline">
                             Cookie Policy
                         </Link>
-                        {" · "}
+                        {" ·"}
                         <Link href="/advertising" className="text-primary hover:underline">
                             Advertising
                         </Link>

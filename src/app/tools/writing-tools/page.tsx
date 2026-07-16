@@ -55,7 +55,7 @@ export default function WritingToolsPage() {
             </div>
 
             {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
-            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral dark:prose-invert prose-lg">
+            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral prose-lg">
                 <h2 className="text-3xl font-extrabold text-foreground tracking-tight mb-6">
                     Ethical Writing and Copywriting in the Age of AI
                 </h2>
@@ -67,7 +67,7 @@ export default function WritingToolsPage() {
                     The Synergy of Human Creativity and Machine Intelligence
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                    At its core, AI-driven writing is a game of prompts and iterations. While machine learning models are exceptionally skilled at processing vast stores of lexical data, recognizing grammatical patterns, and generating coherent text, they lack personal experience, authentic emotion, and genuine strategic intent. This is where human writers are indispensable. A human writer provides the context, the emotional core, and the strategic direction that turns standard prose into compelling, persuasive communication. By utilizing AI writing assistants for brainstorming, drafting, and structuring, writers can offload the initial cognitive load of the "blank page," freeing up mental energy to refine the nuances of tone and audience connection.
+                    At its core, AI-driven writing is a game of prompts and iterations. While machine learning models are exceptionally skilled at processing vast stores of lexical data, recognizing grammatical patterns, and generating coherent text, they lack personal experience, authentic emotion, and genuine strategic intent. This is where human writers are indispensable. A human writer provides the context, the emotional core, and the strategic direction that turns standard prose into compelling, persuasive communication. By utilizing AI writing assistants for brainstorming, drafting, and structuring, writers can offload the initial cognitive load of the"blank page," freeing up mental energy to refine the nuances of tone and audience connection.
                 </p>
 
                 <h3 className="text-2xl font-bold text-foreground mb-4">

@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { YoutubeTranscript } from "youtube-transcript";
+import { NextRequest, NextResponse } from"next/server";
+import { YoutubeTranscript } from"youtube-transcript";
 
 function extractVideoId(input: string): string | null {
   const raw = input.trim();
@@ -9,10 +9,10 @@ function extractVideoId(input: string): string | null {
   if (/^[\w-]{11}$/.test(raw)) return raw;
 
   try {
-    const url = new URL(raw.startsWith("http") ? raw : `https://${raw}`);
-    const host = url.hostname.replace(/^www\./, "");
+    const url = new URL(raw.startsWith("http") ? raw :`https://${raw}`);
+    const host = url.hostname.replace(/^www\./,"");
 
-    if (host === "youtu.be") {
+    if (host ==="youtu.be") {
       const id = url.pathname.split("/").filter(Boolean)[0];
       return id && /^[\w-]{11}$/.test(id) ? id : null;
     }
@@ -25,7 +25,7 @@ function extractVideoId(input: string): string | null {
       // /embed/ID, /shorts/ID, /live/ID
       if (
         parts.length >= 2 &&
-        ["embed", "shorts", "live", "v"].includes(parts[0]) &&
+        ["embed","shorts","live","v"].includes(parts[0]) &&
         /^[\w-]{11}$/.test(parts[1])
       ) {
         return parts[1];
@@ -41,11 +41,11 @@ function extractVideoId(input: string): string | null {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}));
-    const url = typeof body?.url === "string" ? body.url : "";
+    const url = typeof body?.url ==="string" ? body.url :"";
 
     if (!url.trim()) {
       return NextResponse.json(
-        { error: "YouTube URL is required" },
+        { error:"YouTube URL is required" },
         { status: 400 },
       );
     }
@@ -54,8 +54,7 @@ export async function POST(req: NextRequest) {
     if (!videoId) {
       return NextResponse.json(
         {
-          error:
-            "Invalid YouTube URL. Paste a full link like https://www.youtube.com/watch?v=... or https://youtu.be/...",
+          error:"Invalid YouTube URL. Paste a full link like https://www.youtube.com/watch?v=... or https://youtu.be/...",
         },
         { status: 400 },
       );
@@ -64,15 +63,14 @@ export async function POST(req: NextRequest) {
     const transcript = await YoutubeTranscript.fetchTranscript(videoId);
     const text = transcript
       .map((t) => t.text)
-      .join(" ")
-      .replace(/\s+/g, " ")
+      .join("")
+      .replace(/\s+/g,"")
       .trim();
 
     if (!text) {
       return NextResponse.json(
         {
-          error:
-            "No captions found for this video. Try a public video with subtitles enabled.",
+          error:"No captions found for this video. Try a public video with subtitles enabled.",
         },
         { status: 422 },
       );
@@ -83,8 +81,7 @@ export async function POST(req: NextRequest) {
     console.error("YouTube Transcript Error:", error);
     return NextResponse.json(
       {
-        error:
-          "Failed to fetch transcript. The video might not have captions, is private/restricted, or is temporarily unavailable.",
+        error:"Failed to fetch transcript. The video might not have captions, is private/restricted, or is temporarily unavailable.",
       },
       { status: 500 },
     );

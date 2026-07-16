@@ -95,7 +95,7 @@ export default function SplitPDFClient() {
                         newPdf.addPage(page);
                         const pdfBytes = await newPdf.save({ useObjectStreams: false });
                         parts.push({
-                            name: `page-${String(i + 1).padStart(3, '0')}.pdf`,
+                            name:`page-${String(i + 1).padStart(3, '0')}.pdf`,
                             bytes: pdfBytes,
                         });
                     }
@@ -103,7 +103,7 @@ export default function SplitPDFClient() {
                     const url = URL.createObjectURL(zipBlob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = `${(file.name || 'document').replace(/\.pdf$/i, '')}-pages.zip`;
+                    a.download =`${(file.name || 'document').replace(/\.pdf$/i, '')}-pages.zip`;
                     a.click();
                     setTimeout(() => URL.revokeObjectURL(url), 3000);
                     toast.success(`ZIP ready with ${pageCount} page PDFs`);
@@ -113,7 +113,7 @@ export default function SplitPDFClient() {
                         const [page] = await newPdf.copyPages(pdfDoc, [i]);
                         newPdf.addPage(page);
                         const pdfBytes = await newPdf.save({ useObjectStreams: false });
-                        downloadPDF(pdfBytes, `page-${i + 1}.pdf`);
+                        downloadPDF(pdfBytes,`page-${i + 1}.pdf`);
                         if (pageCount > 1 && i < pageCount - 1) {
                             await new Promise((r) => setTimeout(r, 120));
                         }
@@ -135,7 +135,7 @@ export default function SplitPDFClient() {
                 pages.forEach(page => newPdf.addPage(page));
 
                 const pdfBytes = await newPdf.save({ useObjectStreams: false });
-                downloadPDF(pdfBytes, `pages-${rangeStart}-to-${rangeEnd}.pdf`);
+                downloadPDF(pdfBytes,`pages-${rangeStart}-to-${rangeEnd}.pdf`);
                 toast.success(`Extracted pages ${rangeStart} to ${rangeEnd}!`);
             } else if (splitMode === 'pages') {
                 const indices = [...selectedPages].sort((a, b) => a - b);
@@ -149,7 +149,7 @@ export default function SplitPDFClient() {
                 pages.forEach((page) => newPdf.addPage(page));
                 const pdfBytes = await newPdf.save({ useObjectStreams: false });
                 const label = indices.map((i) => i + 1).join('-');
-                downloadPDF(pdfBytes, `pages-${label}.pdf`);
+                downloadPDF(pdfBytes,`pages-${label}.pdf`);
                 toast.success(`Extracted ${indices.length} selected page(s)!`);
             }
         } catch (error) {
@@ -202,7 +202,7 @@ export default function SplitPDFClient() {
 
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 dark:text-blue-400 text-sm font-semibold mb-5">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 text-sm font-semibold mb-5">
                         <Scissors className="h-4 w-4" />
                         Free PDF Tool
                     </div>
@@ -303,7 +303,7 @@ export default function SplitPDFClient() {
                                             <span>
                                                 <strong>Download as ZIP</strong>
                                                 <span className="text-muted-foreground">
-                                                    {" "}
+                                                    {""}
                                                     (one archive with page-001.pdf, page-002.pdf, …) — recommended
                                                 </span>
                                             </span>
@@ -460,8 +460,7 @@ export default function SplitPDFClient() {
                                 <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
                             ))}
                         </div>
-                        <p className="text-lg italic text-foreground/80 max-w-2xl mb-4">
-                            "Perfect for extracting chapters from eBooks. Super fast and no watermarks!"
+                        <p className="text-lg italic text-foreground/80 max-w-2xl mb-4">"Perfect for extracting chapters from eBooks. Super fast and no watermarks!"
                         </p>
                         <div className="flex items-center gap-3">
                             <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold">

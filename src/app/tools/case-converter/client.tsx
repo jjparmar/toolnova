@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
-import { Copy, Check, Trash2, Type, ClipboardPaste } from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { FAQSection } from "@/components/FAQSection";
+import { useMemo, useState } from"react";
+import Link from"next/link";
+import { Copy, Check, Trash2, Type, ClipboardPaste } from"lucide-react";
+import { toast } from"sonner";
+import { Button } from"@/components/ui/button";
+import { FAQSection } from"@/components/FAQSection";
 import {
   toCamelCase,
   toKebabCase,
@@ -13,7 +13,7 @@ import {
   toSentenceCase,
   toSnakeCase,
   toTitleCase,
-} from "@/lib/text-utils";
+} from"@/lib/text-utils";
 
 function convertAll(input: string) {
   const uppercase = input.toUpperCase();
@@ -41,17 +41,17 @@ function convertAll(input: string) {
     .join("");
 
   return [
-    { id: "upper", label: "UPPERCASE", value: uppercase },
-    { id: "lower", label: "lowercase", value: lowercase },
-    { id: "title", label: "Title Case", value: titleCase },
-    { id: "sentence", label: "Sentence case", value: sentenceCase },
-    { id: "camel", label: "camelCase", value: camelCase },
-    { id: "pascal", label: "PascalCase", value: pascalCase },
-    { id: "snake", label: "snake_case", value: snakeCase },
-    { id: "kebab", label: "kebab-case", value: kebabCase },
-    { id: "constant", label: "CONSTANT_CASE", value: constantCase },
-    { id: "alt", label: "aLtErNaTiNg", value: alternatingCase },
-    { id: "inverse", label: "iNVERSE cASE", value: inverseCase },
+    { id:"upper", label:"UPPERCASE", value: uppercase },
+    { id:"lower", label:"lowercase", value: lowercase },
+    { id:"title", label:"Title Case", value: titleCase },
+    { id:"sentence", label:"Sentence case", value: sentenceCase },
+    { id:"camel", label:"camelCase", value: camelCase },
+    { id:"pascal", label:"PascalCase", value: pascalCase },
+    { id:"snake", label:"snake_case", value: snakeCase },
+    { id:"kebab", label:"kebab-case", value: kebabCase },
+    { id:"constant", label:"CONSTANT_CASE", value: constantCase },
+    { id:"alt", label:"aLtErNaTiNg", value: alternatingCase },
+    { id:"inverse", label:"iNVERSE cASE", value: inverseCase },
   ];
 }
 
@@ -158,7 +158,7 @@ export default function CaseConverterClient() {
                 </Button>
               </div>
               <p className="text-sm font-medium break-words whitespace-pre-wrap text-foreground min-h-[2.5rem] font-mono">
-                {r.value || "—"}
+                {r.value ||"—"}
               </p>
             </div>
           ))}
@@ -183,22 +183,19 @@ export default function CaseConverterClient() {
       <FAQSection
         faqs={[
           {
-            question: "Does case conversion upload my text?",
-            answer:
-              "No. Conversion runs entirely in your browser. Nothing is sent to ToolNova servers.",
-            category: "Privacy",
+            question:"Does case conversion upload my text?",
+            answer:"No. Conversion runs entirely in your browser. Nothing is sent to ToolNova servers.",
+            category:"Privacy",
           },
           {
-            question: "Which case should I use for code?",
-            answer:
-              "JavaScript often uses camelCase for variables and PascalCase for components. Python prefers snake_case. URLs and CSS often use kebab-case.",
-            category: "Usage",
+            question:"Which case should I use for code?",
+            answer:"JavaScript often uses camelCase for variables and PascalCase for components. Python prefers snake_case. URLs and CSS often use kebab-case.",
+            category:"Usage",
           },
           {
-            question: "Is Title Case perfect for every language?",
-            answer:
-              "Title Case follows common English small-word rules (a, of, the, …). Review output for house style or non-English text.",
-            category: "Usage",
+            question:"Is Title Case perfect for every language?",
+            answer:"Title Case follows common English small-word rules (a, of, the, …). Review output for house style or non-English text.",
+            category:"Usage",
           },
         ]}
       />

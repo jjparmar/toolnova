@@ -1,8 +1,8 @@
-import crypto from "crypto";
-import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import crypto from"crypto";
+import { NextRequest, NextResponse } from"next/server";
+import { db } from"@/lib/db";
+import { getServerSession } from"next-auth";
+import { authOptions } from"@/lib/auth";
 
 export async function POST(req: NextRequest) {
     try {
@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
             if (!webhookSecret) {
                 console.error("RAZORPAY_WEBHOOK_SECRET is not defined");
-                return NextResponse.json({ success: false, error: "Configuration error" }, { status: 500 });
+                return NextResponse.json({ success: false, error:"Configuration error" }, { status: 500 });
             }
 
             const expectedSignature = crypto
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
                 if (subId) {
                     await db.subscription.updateMany({
                         where: { razorpaySubscriptionId: subId },
-                        data: { status: eventName.includes("cancel") ? "cancelled" : "active" },
+                        data: { status: eventName.includes("cancel") ?"cancelled" :"active" },
                     });
                 }
 
@@ -59,13 +59,13 @@ export async function POST(req: NextRequest) {
         const secret = process.env.RAZORPAY_KEY_SECRET;
         if (!secret) {
             console.error("RAZORPAY_KEY_SECRET is not defined");
-            return NextResponse.json({ success: false, error: "Configuration error" }, { status: 500 });
+            return NextResponse.json({ success: false, error:"Configuration error" }, { status: 500 });
         }
 
         // Verify signature
         const signatureBase = razorpay_subscription_id
-            ? `${razorpay_payment_id}|${razorpay_subscription_id}`
-            : `${razorpay_order_id}|${razorpay_payment_id}`;
+            ?`${razorpay_payment_id}|${razorpay_subscription_id}`
+            :`${razorpay_order_id}|${razorpay_payment_id}`;
 
         const sign = crypto
             .createHmac("sha256", secret)
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
             .digest("hex");
 
         if (sign !== razorpay_signature) {
-            return NextResponse.json({ success: false, message: "Invalid signature" }, { status: 400 });
+            return NextResponse.json({ success: false, message:"Invalid signature" }, { status: 400 });
         }
 
         // Save subscription to DB if this is a subscription payment
@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
                             userId: userId,
                             razorpaySubscriptionId: razorpay_subscription_id,
                             planId: planId,
-                            status: "active",
+                            status:"active",
                         },
                     });
                     console.log("✅ Subscription saved to DB for user:", userId);
@@ -112,6 +112,6 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: true });
     } catch (error) {
         console.error("Razorpay Verification Error:", error);
-        return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+        return NextResponse.json({ success: false, error:"Internal server error" }, { status: 500 });
     }
 }

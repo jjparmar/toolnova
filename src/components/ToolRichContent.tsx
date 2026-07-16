@@ -28,7 +28,7 @@ const REVIEW_DATE = 'June 2026';
 const getAnswerSnippet = (title: string, description: string) => {
     // Keep it concise (40-70 words) and answer-shaped for AI/voice extraction.
     const trimmedDesc = description.trim();
-    return `The ${title} is a free online tool from ToolNova. ${trimmedDesc} No sign-up is required to start. Browser-based PDF/image tools are unlimited; AI tools include free daily use with optional Pro for higher limits.`;
+    return`The ${title} is a free online tool from ToolNova. ${trimmedDesc} No sign-up is required to start. Browser-based PDF/image tools are unlimited; AI tools include free daily use with optional Pro for higher limits.`;
 };
 
 export const ToolRichContent: React.FC<ToolRichContentProps> = ({
@@ -42,10 +42,7 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
 }) => {
     const answerSnippet = getAnswerSnippet(title, description);
 
-    const defaultTips = [
-        `Start with a clear, specific input — the more context you give the ${title}, the better your results will be.`,
-        `Review and edit the output before using it. AI tools provide an excellent starting point, but a final human review always improves quality.`,
-        `Use the output options (format, length, tone) to tailor results to your exact needs instead of accepting the default settings.`,
+    const defaultTips = [`Start with a clear, specific input — the more context you give the ${title}, the better your results will be.`,`Review and edit the output before using it. AI tools provide an excellent starting point, but a final human review always improves quality.`,`Use the output options (format, length, tone) to tailor results to your exact needs instead of accepting the default settings.`,
     ];
 
     const tips = expertTips && expertTips.length > 0 ? expertTips : defaultTips;

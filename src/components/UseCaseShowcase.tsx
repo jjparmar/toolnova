@@ -62,7 +62,7 @@ export function UseCaseShowcase({ cases, toolSlug }: UseCaseShowcaseProps) {
                                         <p className="text-sm font-semibold mb-2 text-muted-foreground">Result:</p>
                                         <div className="bg-primary/5 rounded-lg p-3 text-sm border border-primary/20">
                                             {useCase.output.length > 100
-                                                ? `${useCase.output.substring(0, 100)}...`
+                                                ?`${useCase.output.substring(0, 100)}...`
                                                 : useCase.output
                                             }
                                         </div>

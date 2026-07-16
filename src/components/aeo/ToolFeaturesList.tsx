@@ -21,13 +21,13 @@ interface ToolFeaturesListProps {
  */
 export function ToolFeaturesList({
     features,
-    title = "Key Features",
+    title ="Key Features",
     className = ''
 }: ToolFeaturesListProps) {
     return (
         <section className={`py-12 ${className}`}>
             <div className="max-w-6xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 dark:text-white mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-12">
                     {title}
                 </h2>
 
@@ -45,10 +45,10 @@ export function ToolFeaturesList({
                                         <Icon className="w-6 h-6 text-white" />
                                     </div>
                                     <div className="flex-1">
-                                        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                                        <h3 className="text-lg font-bold text-slate-900 mb-2">
                                             {feature.title}
                                         </h3>
-                                        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                        <p className="text-sm text-slate-600 leading-relaxed">
                                             {feature.description}
                                         </p>
                                     </div>
@@ -59,7 +59,7 @@ export function ToolFeaturesList({
                 </div>
 
                 {/* Feature Summary for Schema */}
-                <div className="mt-8 bg-gradient-to-r from-primary/8 to-teal-500/10 dark:from-primary/15 dark:to-teal-900/20 rounded-xl p-6 border border-primary/20 dark:border-primary/30">
+                <div className="mt-8 bg-gradient-to-r from-primary/8 to-teal-500/10 rounded-xl p-6 border border-primary/20">
                     <div className="flex items-center gap-2 mb-3">
                         <Check className="w-5 h-5 text-primary" />
                         <span className="font-semibold text-foreground">

@@ -1,42 +1,35 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import { Rocket, Heart, Shield, CheckCircle } from "lucide-react";
+import { Metadata } from"next";
+import Link from"next/link";
+import { Rocket, Heart, Shield, CheckCircle } from"lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Us - Our Mission & Team | ToolNova",
-  description:
-    "Learn about ToolNova's mission to democratize AI productivity tools. Meet the team behind free AI-powered tools for students and professionals.",
-  keywords: [
-    "about ToolNova",
-    "AI tools team",
-    "ToolNova mission",
-    "free AI tools company",
+  title:"About Us - Our Mission & Team | ToolNova",
+  description:"Learn about ToolNova's mission to democratize AI productivity tools. Meet the team behind free AI-powered tools for students and professionals.",
+  keywords: ["about ToolNova","AI tools team","ToolNova mission","free AI tools company",
   ],
   alternates: {
-    canonical: "https://www.toolnovahub.com/about",
+    canonical:"https://www.toolnovahub.com/about",
   },
   openGraph: {
-    title: "About Us - Our Mission & Team | ToolNova",
-    description:
-      "Learn about ToolNova's mission to democratize AI productivity tools for everyone.",
-    url: "https://www.toolnovahub.com/about",
-    type: "website",
+    title:"About Us - Our Mission & Team | ToolNova",
+    description:"Learn about ToolNova's mission to democratize AI productivity tools for everyone.",
+    url:"https://www.toolnovahub.com/about",
+    type:"website",
     images: [
       {
-        url: "https://www.toolnovahub.com/og-image.png",
+        url:"https://www.toolnovahub.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "About ToolNova - Free AI Tools Hub",
+        alt:"About ToolNova - Free AI Tools Hub",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "About Us | ToolNova",
-    description:
-      "Learn about ToolNova's mission to democratize AI productivity tools.",
+    card:"summary_large_image",
+    title:"About Us | ToolNova",
+    description:"Learn about ToolNova's mission to democratize AI productivity tools.",
     images: ["https://www.toolnovahub.com/og-image.png"],
-    creator: "@toolnovahub",
+    creator:"@toolnovahub",
   },
 };
 
@@ -60,18 +53,18 @@ export default function AboutPage() {
         {[
           {
             icon: Rocket,
-            title: "Our Mission",
-            desc: "To provide accessible, high-quality AI tools that simplify complex tasks and boost global productivity — with no paywalls, no subscriptions, and no sign-up barriers.",
+            title:"Our Mission",
+            desc:"To provide accessible, high-quality AI tools that simplify complex tasks and boost global productivity — with no paywalls, no subscriptions, and no sign-up barriers.",
           },
           {
             icon: Heart,
-            title: "Our Values",
-            desc: "We believe in radical transparency, privacy by design, and creating software that genuinely helps people accomplish more in less time.",
+            title:"Our Values",
+            desc:"We believe in radical transparency, privacy by design, and creating software that genuinely helps people accomplish more in less time.",
           },
           {
             icon: Shield,
-            title: "Privacy First",
-            desc: "Your data belongs to you. Files are processed securely and never retained on our servers. We will never use your content to train AI models.",
+            title:"Privacy First",
+            desc:"Your data belongs to you. Files are processed securely and never retained on our servers. We will never use your content to train AI models.",
           },
         ].map((item, i) => (
           <div
@@ -88,7 +81,7 @@ export default function AboutPage() {
       </div>
 
       {/* Story + Details */}
-      <div className="max-w-3xl mx-auto prose dark:prose-invert">
+      <div className="max-w-3xl mx-auto prose">
         <h2>Our Story</h2>
         <p>
           ToolNova was founded in 2026 in Singapore with a straightforward conviction:
@@ -110,7 +103,7 @@ export default function AboutPage() {
         <div className="content-panel p-8 not-prose mb-8">
           <p className="text-muted-foreground mb-6">
             We hold our content and tools to strict standards to ensure every user gets
-            genuine value. Our full editorial process is documented in our{" "}
+            genuine value. Our full editorial process is documented in our{""}
             <Link
               href="/editorial-policy"
               className="text-primary hover:underline font-medium"
@@ -181,22 +174,22 @@ export default function AboutPage() {
           <div className="space-y-6">
             {[
               {
-                initials: "ET",
-                name: "ToolNova Engineering Team",
-                role: "Product & Software Development",
-                desc: "Our engineering team builds and maintains all 47+ tools on the platform. Engineers specialise in AI/ML integration, browser-based file processing, and full-stack web development. Every tool is tested end-to-end before release and monitored for quality regressions.",
+                initials:"ET",
+                name:"ToolNova Engineering Team",
+                role:"Product & Software Development",
+                desc:"Our engineering team builds and maintains all 47+ tools on the platform. Engineers specialise in AI/ML integration, browser-based file processing, and full-stack web development. Every tool is tested end-to-end before release and monitored for quality regressions.",
               },
               {
-                initials: "EC",
-                name: "ToolNova Editorial Team",
-                role: "Content, Research & Quality",
-                desc: "Our editorial team includes certified educators, career coaches, and professional writers who research and produce all blog content and tool documentation. They are also responsible for fact-checking, content updates, and responding to user correction requests.",
+                initials:"EC",
+                name:"ToolNova Editorial Team",
+                role:"Content, Research & Quality",
+                desc:"Our editorial team includes certified educators, career coaches, and professional writers who research and produce all blog content and tool documentation. They are also responsible for fact-checking, content updates, and responding to user correction requests.",
               },
               {
-                initials: "DS",
-                name: "ToolNova Design & UX Team",
-                role: "User Experience & Interface Design",
-                desc: "Our design team ensures every tool is intuitive and accessible regardless of technical background. They conduct usability reviews, manage our design system, and work directly with users to improve workflows based on real feedback.",
+                initials:"DS",
+                name:"ToolNova Design & UX Team",
+                role:"User Experience & Interface Design",
+                desc:"Our design team ensures every tool is intuitive and accessible regardless of technical background. They conduct usability reviews, manage our design system, and work directly with users to improve workflows based on real feedback.",
               },
             ].map((member, i) => (
               <div key={i} className="flex gap-4 items-start">
@@ -221,10 +214,10 @@ export default function AboutPage() {
             users in the education and productivity market.
           </p>
           <p className="text-muted-foreground mb-4">
-            We currently serve display advertising through{" "}
+            We currently serve display advertising through{""}
             <strong>Google AdSense</strong>. If you are interested in direct advertising
             opportunities, sponsorships, or editorial partnerships, please contact us.
-            Full details are on our{" "}
+            Full details are on our{""}
             <Link href="/advertising" className="text-primary hover:underline font-medium">
               Advertising Disclosure
             </Link>
@@ -280,8 +273,8 @@ export default function AboutPage() {
           interfaces with intrusive popups, ToolNova puts users first. We offer a
           completely free tier because we believe world-class AI tools should be
           accessible to everyone — not just those who can afford a premium subscription.
-          Every tool we build starts with the question:{" "}
-          <em>&ldquo;Is this genuinely useful for a student at 11pm before an exam?&rdquo;</em>{" "}
+          Every tool we build starts with the question:{""}
+          <em>&ldquo;Is this genuinely useful for a student at 11pm before an exam?&rdquo;</em>{""}
           If the answer is yes, it gets built and stays free.
         </p>
       </div>

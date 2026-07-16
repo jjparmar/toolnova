@@ -102,7 +102,7 @@ export default function ImagePDFToolsPage() {
                 </div>
 
                 {/* Pillar content — SEO / AdSense depth */}
-                <section className="content-panel mt-20 max-w-4xl mx-auto prose prose-neutral dark:prose-invert prose-lg p-7 md:p-10">
+                <section className="content-panel mt-20 max-w-4xl mx-auto prose prose-neutral prose-lg p-7 md:p-10">
                     <h2>Free image &amp; PDF tools that run in your browser</h2>
                     <p>
                         ToolNova&apos;s image and PDF utilities are built for students and professionals who need
@@ -124,11 +124,11 @@ export default function ImagePDFToolsPage() {
                         <li><strong>PNG</strong> — screenshots, logos, and transparency</li>
                     </ul>
                     <p>
-                        Guides:{" "}
+                        Guides:{""}
                         <Link href="/blog/merge-pdf-without-losing-formatting">Merge without losing formatting</Link>
-                        {" · "}
+                        {" ·"}
                         <Link href="/blog/compress-images-for-web-speed">Compress images for web speed</Link>
-                        {" · "}
+                        {" ·"}
                         <Link href="/blog/jpg-png-pdf-workflow-guide">JPG / PNG / PDF workflow</Link>
                     </p>
                 </section>
@@ -147,15 +147,15 @@ export default function ImagePDFToolsPage() {
                     </section>
                 )}
 
-                <div className="mt-10 p-6 bg-green-50 dark:bg-green-900/10 rounded-2xl border border-green-200 dark:border-green-800">
-                    <p className="text-center text-green-700 dark:text-green-400 font-medium">
+                <div className="mt-10 p-6 bg-green-50 rounded-2xl border border-green-200">
+                    <p className="text-center text-green-700 font-medium">
                         🔒 All files are processed locally in your browser - nothing is uploaded to any server.
                     </p>
                 </div>
             </div>
 
             {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
-            <section className="content-panel mx-auto mt-12 max-w-4xl p-7 md:p-10 prose prose-neutral dark:prose-invert prose-lg">
+            <section className="content-panel mx-auto mt-12 max-w-4xl p-7 md:p-10 prose prose-neutral prose-lg">
                 <h2 className="text-3xl font-extrabold text-foreground tracking-tight mb-6">
                     Modern Document Management and Web Asset Optimization
                 </h2>

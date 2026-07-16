@@ -64,7 +64,7 @@ function SearchContent({
             const params = new URLSearchParams();
             if (q) params.set('q', q);
             const qs = params.toString();
-            router.replace(qs ? `/search?${qs}` : '/search', { scroll: false });
+            router.replace(qs ?`/search?${qs}` : '/search', { scroll: false });
         }, 300);
         return () => clearTimeout(t);
     }, [query, router]);
@@ -105,7 +105,7 @@ function SearchContent({
     const popularTools = tools.slice(0, 6);
 
     return (
-        <div className="min-h-screen bg-[#f8f9fb] dark:bg-[#0f1419]">
+        <div className="min-h-screen bg-[#f8f9fb]">
             {/* Search Header */}
             <section className="bg-gradient-to-br from-primary via-blue-600 to-indigo-700 py-16">
                 <div className="container mx-auto px-6 max-w-3xl text-center">
@@ -146,7 +146,7 @@ function SearchContent({
                                     <Link
                                         key={tool.slug}
                                         href={`/tools/${tool.slug}`}
-                                        className="group block bg-white dark:bg-[#1a1f2e] rounded-xl p-5 border border-slate-100 dark:border-slate-800 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                                        className="group block bg-white rounded-xl p-5 border border-slate-100 hover:shadow-lg hover:-translate-y-0.5 transition-all"
                                     >
                                         <div className="flex items-start gap-3">
                                             <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -196,7 +196,7 @@ function SearchContent({
                                     <Link
                                         key={tool.slug}
                                         href={`/tools/${tool.slug}`}
-                                        className="group block bg-white dark:bg-[#1a1f2e] rounded-xl p-5 border border-slate-100 dark:border-slate-800 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                                        className="group block bg-white rounded-xl p-5 border border-slate-100 hover:shadow-lg hover:-translate-y-0.5 transition-all"
                                     >
                                         <div className="flex items-start justify-between gap-3">
                                             <div className="flex items-start gap-3">
@@ -233,7 +233,7 @@ function SearchContent({
                                     <Link
                                         key={post.slug}
                                         href={`/blog/${post.slug}`}
-                                        className="group block bg-white dark:bg-[#1a1f2e] rounded-xl p-5 border border-slate-100 dark:border-slate-800 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                                        className="group block bg-white rounded-xl p-5 border border-slate-100 hover:shadow-lg hover:-translate-y-0.5 transition-all"
                                     >
                                         <div className="flex items-start justify-between gap-3">
                                             <div className="flex items-start gap-3">
@@ -270,7 +270,7 @@ function SearchContent({
 
 function SearchSkeleton() {
     return (
-        <div className="min-h-screen bg-[#f8f9fb] dark:bg-[#0f1419]">
+        <div className="min-h-screen bg-[#f8f9fb]">
             <div className="h-64 bg-gradient-to-br from-primary via-blue-600 to-indigo-700" />
             <div className="container mx-auto px-6 max-w-5xl py-12">
                 <div className="h-8 w-48 bg-muted rounded animate-pulse mb-6" />
@@ -278,7 +278,7 @@ function SearchSkeleton() {
                     {[1, 2, 3, 4].map((i) => (
                         <div
                             key={i}
-                            className="h-24 bg-white dark:bg-[#1a1f2e] rounded-xl animate-pulse"
+                            className="h-24 bg-white rounded-xl animate-pulse"
                         />
                     ))}
                 </div>

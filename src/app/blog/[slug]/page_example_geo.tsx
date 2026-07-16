@@ -47,8 +47,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     // Generate Article schema for GEO
     const articleSchema = getArticleSchema(
         post.title,
-        post.metaDescription,
-        `https://www.toolnovahub.com/blog/${post.slug}`,
+        post.metaDescription,`https://www.toolnovahub.com/blog/${post.slug}`,
         new Date(post.date).toISOString(),
         post.dateModified ? new Date(post.dateModified).toISOString() : new Date(post.date).toISOString(),
         post.author,
@@ -81,13 +80,13 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 )}
 
                 {/* Article Content */}
-                <div className="prose prose-lg dark:prose-invert max-w-none">
+                <div className="prose prose-lg max-w-none">
                     <div dangerouslySetInnerHTML={{ __html: post.content }} />
                 </div>
 
                 {/* FAQ Section */}
                 {post.faq && post.faq.length > 0 && (
-                    <div className="mt-16 p-8 bg-slate-50 dark:bg-slate-900 rounded-2xl">
+                    <div className="mt-16 p-8 bg-slate-50 rounded-2xl">
                         <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
                         <div className="space-y-6">
                             {post.faq.map((item, index) => (

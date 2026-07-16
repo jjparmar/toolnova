@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from"next/link";
 import {
   ArrowRight,
   Merge,
@@ -18,13 +18,13 @@ import {
   BookOpen,
   Pencil,
   ChevronRight
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { QuickAnswerBox } from "@/components/aeo/QuickAnswerBox";
-import { FAQAccordion } from "@/components/aeo/FAQAccordion";
-import { getHomepageAEO } from "@/lib/global-aeo-content";
-import { MultiplexAd, BetweenSectionsAd } from "@/components/ads/AdUnit";
-import { TOOL_COUNT, TOOL_COUNT_LABEL } from "@/data/tools";
+} from"lucide-react";
+import { Button } from"@/components/ui/button";
+import { QuickAnswerBox } from"@/components/aeo/QuickAnswerBox";
+import { FAQAccordion } from"@/components/aeo/FAQAccordion";
+import { getHomepageAEO } from"@/lib/global-aeo-content";
+import { MultiplexAd, BetweenSectionsAd } from"@/components/ads/AdUnit";
+import { TOOL_COUNT, TOOL_COUNT_LABEL } from"@/data/tools";
 import {
   SectionHeading,
   ToolCard,
@@ -32,59 +32,59 @@ import {
   CTASection,
   PremiumCard,
   StatTile,
-} from "@/components/shared";
+} from"@/components/shared";
 
 const featuredTools = [
   {
-    href: "/tools/merge-pdf",
+    href:"/tools/merge-pdf",
     icon: Merge,
-    title: "Merge PDF",
-    desc: "Combine PDFs in order and download one file — private, in-browser.",
-    badge: "Top pick",
-    badgeTone: "primary" as const,
-    gradient: "from-rose-500 to-orange-500",
-    glowColor: "shadow-rose-500/20",
+    title:"Merge PDF",
+    desc:"Combine PDFs in order and download one file — private, in-browser.",
+    badge:"Top pick",
+    badgeTone:"primary" as const,
+    gradient:"from-rose-500 to-orange-500",
+    glowColor:"shadow-rose-500/20",
   },
   {
-    href: "/tools/resize-image",
+    href:"/tools/resize-image",
     icon: ImageIcon,
-    title: "Image Resizer",
-    desc: "Resize by pixels or percent without quality loss.",
-    badge: "Popular",
-    badgeTone: "muted" as const,
-    gradient: "from-violet-500 to-cyan-500",
-    glowColor: "shadow-violet-500/20",
+    title:"Image Resizer",
+    desc:"Resize by pixels or percent without quality loss.",
+    badge:"Popular",
+    badgeTone:"muted" as const,
+    gradient:"from-violet-500 to-cyan-500",
+    glowColor:"shadow-violet-500/20",
   },
   {
-    href: "/tools/flashcard-maker",
+    href:"/tools/flashcard-maker",
     icon: Library,
-    title: "Flashcard Maker",
-    desc: "Create study cards from any topic for exam prep.",
-    badge: "Students",
-    badgeTone: "muted" as const,
-    gradient: "from-teal-500 to-cyan-500",
-    glowColor: "shadow-teal-500/20",
+    title:"Flashcard Maker",
+    desc:"Create study cards from any topic for exam prep.",
+    badge:"Students",
+    badgeTone:"muted" as const,
+    gradient:"from-teal-500 to-cyan-500",
+    glowColor:"shadow-teal-500/20",
   },
 ];
 
 const categories = [
-  { href: "/tools/writing-tools", icon: FileText, title: "Writing", desc: "Grammar, essays, paraphrase" },
-  { href: "/tools/study-tools", icon: GraduationCap, title: "Study", desc: "Flashcards, quizzes, notes" },
-  { href: "/tools/image-pdf-tools", icon: Layers, title: "PDF & Image", desc: "Merge, compress, convert" },
-  { href: "/tools/career-tools", icon: Briefcase, title: "Career", desc: "Resume, LinkedIn, letters" },
+  { href:"/tools/writing-tools", icon: FileText, title:"Writing", desc:"Grammar, essays, paraphrase" },
+  { href:"/tools/study-tools", icon: GraduationCap, title:"Study", desc:"Flashcards, quizzes, notes" },
+  { href:"/tools/image-pdf-tools", icon: Layers, title:"PDF & Image", desc:"Merge, compress, convert" },
+  { href:"/tools/career-tools", icon: Briefcase, title:"Career", desc:"Resume, LinkedIn, letters" },
 ];
 
 const previewTools = [
-  { icon: BookOpen, name: "Homework Solver", color: "text-blue-500 bg-blue-500/10" },
-  { icon: Pencil, name: "Grammar Checker", color: "text-emerald-500 bg-emerald-500/10" },
-  { icon: Merge, name: "Merge PDF", color: "text-rose-500 bg-rose-500/10" },
-  { icon: Sparkles, name: "Essay Writer", color: "text-primary bg-primary/10" },
+  { icon: BookOpen, name:"Homework Solver", color:"text-blue-500 bg-blue-500/10" },
+  { icon: Pencil, name:"Grammar Checker", color:"text-emerald-500 bg-emerald-500/10" },
+  { icon: Merge, name:"Merge PDF", color:"text-rose-500 bg-rose-500/10" },
+  { icon: Sparkles, name:"Essay Writer", color:"text-primary bg-primary/10" },
 ];
 
 const whyUsFeatures = [
-  { icon: Zap, title: "Instant Results", desc: "Optimized AI engines so you get high-quality results in seconds." },
-  { icon: ShieldCheck, title: "Absolute Privacy", desc: "Local processing for PDFs and images right in your browser." },
-  { icon: Sparkles, title: "Smarter Outputs", desc: "Tuned specifically for academic and professional excellence." },
+  { icon: Zap, title:"Instant Results", desc:"Optimized AI engines so you get high-quality results in seconds." },
+  { icon: ShieldCheck, title:"Absolute Privacy", desc:"Local processing for PDFs and images right in your browser." },
+  { icon: Sparkles, title:"Smarter Outputs", desc:"Tuned specifically for academic and professional excellence." },
 ];
 
 export function HomeDashboard() {
@@ -105,7 +105,7 @@ export function HomeDashboard() {
             </div>
 
             <h1 className="font-heading mx-auto mb-6 max-w-4xl text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl md:text-7xl leading-[1.1]">
-              Work smarter with{" "}
+              Work smarter with{""}
               <span className="bg-gradient-to-r from-primary via-blue-500 to-cyan-400 bg-clip-text text-transparent">AI superpowers.</span>
             </h1>
 
@@ -187,11 +187,7 @@ export function HomeDashboard() {
       {/* ─── Trust strip ─── */}
       <section className="border-y border-border/40 bg-muted/20 py-6">
         <div className="mx-auto flex max-w-[1120px] flex-wrap items-center justify-center gap-x-12 gap-y-4 px-6 text-sm font-semibold text-muted-foreground">
-          {[
-            "No account required",
-            "Browser-side PDF privacy",
-            "Clear free AI limits",
-            "Built for real study & work",
+          {["No account required","Browser-side PDF privacy","Clear free AI limits","Built for real study & work",
           ].map((item) => (
             <span key={item} className="inline-flex items-center gap-2">
               <Check className="h-5 w-5 text-primary" />

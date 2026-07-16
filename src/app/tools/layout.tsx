@@ -1,6 +1,6 @@
-import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { GlobalRelatedTools } from "@/components/GlobalRelatedTools";
-import { MultiplexAd } from "@/components/ads/AdUnit";
+import { Breadcrumbs } from"@/components/Breadcrumbs";
+import { GlobalRelatedTools } from"@/components/GlobalRelatedTools";
+import { MultiplexAd } from"@/components/ads/AdUnit";
 
 export default function ToolsLayout({
   children,
@@ -8,7 +8,7 @@ export default function ToolsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0f1419]">
+    <div className="min-h-screen bg-slate-50">
       <div className="container mx-auto px-4 md:px-6">
         <Breadcrumbs />
         {children}

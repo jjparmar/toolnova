@@ -50,7 +50,7 @@ export function GlobalSearch() {
 
     const tools = Object.entries(toolsData).map(([slug, tool]) => ({
         name: tool.name,
-        href: `/tools/${slug}`,
+        href:`/tools/${slug}`,
         description: tool.tagline || tool.description,
         category: tool.category,
         icon: categoryIcons[tool.category] || 'sparkles',

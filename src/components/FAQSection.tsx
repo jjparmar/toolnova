@@ -23,7 +23,7 @@ interface FAQSectionProps {
     showSearch?: boolean;
 }
 
-export function FAQSection({ faqs, title = "Frequently Asked Questions", showSearch = true }: FAQSectionProps) {
+export function FAQSection({ faqs, title ="Frequently Asked Questions", showSearch = true }: FAQSectionProps) {
     const [searchQuery, setSearchQuery] = useState('');
 
     // Filter FAQs based on search query

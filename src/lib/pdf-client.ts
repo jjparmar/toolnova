@@ -4,17 +4,17 @@
 
 /** Accept PDF by MIME or extension (some OSes leave type empty). */
 export function isPdfFile(file: File): boolean {
-  if (file.type === "application/pdf") return true;
+  if (file.type ==="application/pdf") return true;
   return /\.pdf$/i.test(file.name);
 }
 
 export async function loadPdfJs() {
   const pdfjs = await import("pdfjs-dist");
   // Pin worker to installed major.line — package requires Node 20-friendly 4.x
-  const version = (pdfjs as { version?: string }).version || "4.10.38";
+  const version = (pdfjs as { version?: string }).version ||"4.10.38";
   // Primary CDN + fallback (blocked CDNs break reorder thumbnails)
-  const primary = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
-  const fallback = `https://unpkg.com/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
+  const primary =`https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
+  const fallback =`https://unpkg.com/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
   if (!pdfjs.GlobalWorkerOptions.workerSrc) {
     pdfjs.GlobalWorkerOptions.workerSrc = primary;
   }
@@ -98,8 +98,8 @@ export async function zipPdfFiles(
     zip.file(f.name, f.bytes);
   }
   return zip.generateAsync({
-    type: "blob",
-    compression: "DEFLATE",
+    type:"blob",
+    compression:"DEFLATE",
     compressionOptions: { level: 6 },
   });
 }

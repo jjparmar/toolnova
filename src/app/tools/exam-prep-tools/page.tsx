@@ -62,7 +62,7 @@ export default function ExamPrepToolsPage() {
             </section>
 
             {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
-            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral dark:prose-invert prose-lg">
+            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral prose-lg">
                 <h2 className="text-3xl font-extrabold text-foreground tracking-tight mb-6">
                     Advanced Language Acquisition and Exam Preparation Strategies
                 </h2>
@@ -81,7 +81,7 @@ export default function ExamPrepToolsPage() {
                     The Power of Context: Synonyms, Antonyms, and Semantic Precision
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                    A common pitfall in writing sections of exams is the repetitive use of simple verbs and descriptors. To achieve high scores, essays must demonstrate lexical diversity. A Synonym Finder helps writers discover advanced alternatives to common words, elevating the tone of their arguments. Conversely, using an Antonym Finder helps clarify contrasting arguments by introducing precise counter-terms. Understanding the subtle differences between similar words is crucial; for example, "obstinate" and "resolute" both mean determined, but the former carries a negative connotation while the latter is positive. Semantic precision makes writing more persuasive and mature.
+                    A common pitfall in writing sections of exams is the repetitive use of simple verbs and descriptors. To achieve high scores, essays must demonstrate lexical diversity. A Synonym Finder helps writers discover advanced alternatives to common words, elevating the tone of their arguments. Conversely, using an Antonym Finder helps clarify contrasting arguments by introducing precise counter-terms. Understanding the subtle differences between similar words is crucial; for example,"obstinate" and"resolute" both mean determined, but the former carries a negative connotation while the latter is positive. Semantic precision makes writing more persuasive and mature.
                 </p>
 
                 <h3 className="text-2xl font-bold text-foreground mb-4">
@@ -95,7 +95,7 @@ export default function ExamPrepToolsPage() {
                     Structural Writing Mastery: One-Word Substitution
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                    Wordiness is a major source of points deduction in essay grading. High-scoring essays are concise and direct. Utilizing One Word Substitution tools helps writers condense verbose clauses into single, powerful words. For example, replacing "a person who is unable to pay their debts" with "insolvent" immediately makes the writing more professional and authoritative. Training the mind to recognize wordy patterns and substitute them with precise terms is a core skill for any competitive test-taker.
+                    Wordiness is a major source of points deduction in essay grading. High-scoring essays are concise and direct. Utilizing One Word Substitution tools helps writers condense verbose clauses into single, powerful words. For example, replacing"a person who is unable to pay their debts" with"insolvent" immediately makes the writing more professional and authoritative. Training the mind to recognize wordy patterns and substitute them with precise terms is a core skill for any competitive test-taker.
                 </p>
             </section>
 

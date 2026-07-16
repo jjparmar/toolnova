@@ -1,9 +1,9 @@
 "use client";
 
-import EnhancedToolLayout from "@/components/EnhancedToolLayout";
-import { PremiumToolWrapper } from "@/components/PremiumToolWrapper";
-import { FAQSection } from "@/components/FAQSection";
-import { ToolOption } from "@/components/ToolLayout";
+import EnhancedToolLayout from"@/components/EnhancedToolLayout";
+import { PremiumToolWrapper } from"@/components/PremiumToolWrapper";
+import { FAQSection } from"@/components/FAQSection";
+import { ToolOption } from"@/components/ToolLayout";
 import {
   User,
   Instagram,
@@ -17,84 +17,75 @@ import {
   Target,
   Hash,
   TrendingUp,
-} from "lucide-react";
+} from"lucide-react";
 
 const toolOptions = [
   {
-    id: "platform",
-    label: "Platform",
-    type: "select" as const,
+    id:"platform",
+    label:"Platform",
+    type:"select" as const,
     options: [
-      { value: "instagram", label: "📸 Instagram" },
-      { value: "twitter", label: "🐦 Twitter/X" },
-      { value: "linkedin", label: "💼 LinkedIn" },
-      { value: "tiktok", label: "🎵 TikTok" },
-      { value: "personal", label: "👤 Personal Website" },
+      { value:"instagram", label:"📸 Instagram" },
+      { value:"twitter", label:"🐦 Twitter/X" },
+      { value:"linkedin", label:"💼 LinkedIn" },
+      { value:"tiktok", label:"🎵 TikTok" },
+      { value:"personal", label:"👤 Personal Website" },
     ] as const,
-    defaultValue: "instagram",
+    defaultValue:"instagram",
   },
   {
-    id: "tone",
-    label: "Tone",
-    type: "select" as const,
+    id:"tone",
+    label:"Tone",
+    type:"select" as const,
     options: [
-      { value: "professional", label: "👔 Professional" },
-      { value: "casual", label: "😊 Casual & Fun" },
-      { value: "creative", label: "🎨 Creative" },
-      { value: "witty", label: "😄 Witty" },
+      { value:"professional", label:"👔 Professional" },
+      { value:"casual", label:"😊 Casual & Fun" },
+      { value:"creative", label:"🎨 Creative" },
+      { value:"witty", label:"😄 Witty" },
     ] as const,
-    defaultValue: "casual",
+    defaultValue:"casual",
   },
   {
-    id: "includeEmojis",
-    label: "Include Emojis",
-    type: "toggle" as const,
+    id:"includeEmojis",
+    label:"Include Emojis",
+    type:"toggle" as const,
     defaultValue: true,
   },
 ] as const;
 
 const generatePrompt = (input: string, options?: Record<string, any>) => {
-  const platform = options?.platform || "instagram";
-  const tone = options?.tone || "casual";
+  const platform = options?.platform ||"instagram";
+  const tone = options?.tone ||"casual";
   const includeEmojis = options?.includeEmojis !== false;
 
   const platformLimits: Record<string, string> = {
-    instagram: "150 characters maximum (Instagram bio limit)",
-    twitter: "160 characters maximum (Twitter/X bio limit)",
-    linkedin: "220 characters maximum (LinkedIn headline + intro)",
-    tiktok: "80 characters maximum (TikTok bio limit)",
-    personal: "180-220 characters (optimal website/portfolio length)",
+    instagram:"150 characters maximum (Instagram bio limit)",
+    twitter:"160 characters maximum (Twitter/X bio limit)",
+    linkedin:"220 characters maximum (LinkedIn headline + intro)",
+    tiktok:"80 characters maximum (TikTok bio limit)",
+    personal:"180-220 characters (optimal website/portfolio length)",
   };
 
   const platformStrategy: Record<string, string> = {
-    instagram:
-      "Visual platform culture - emphasize aesthetics, lifestyle, and personality. Include what you post about. Often uses line breaks and emojis. Can mention location or link.",
-    twitter:
-      "Concise expertise statement. Often includes: profession + specialty + personality trait. May reference what they tweet about. Hashtags rare in bios.",
-    linkedin:
-      "Professional headline format: [Role] | [Key Skills] | [Value Proposition]. Focus on expertise, achievements, and what you offer. Keyword-optimized for searches.",
-    tiktok:
-      "Ultra-short and attention-grabbing. Often just: content niche + personality/vibe. Gen Z friendly. Emojis common. Must hook immediately.",
-    personal:
-      "Comprehensive introduction for website/portfolio. Cover: who you are, what you do, unique value, and personality. Professional yet approachable.",
+    instagram:"Visual platform culture - emphasize aesthetics, lifestyle, and personality. Include what you post about. Often uses line breaks and emojis. Can mention location or link.",
+    twitter:"Concise expertise statement. Often includes: profession + specialty + personality trait. May reference what they tweet about. Hashtags rare in bios.",
+    linkedin:"Professional headline format: [Role] | [Key Skills] | [Value Proposition]. Focus on expertise, achievements, and what you offer. Keyword-optimized for searches.",
+    tiktok:"Ultra-short and attention-grabbing. Often just: content niche + personality/vibe. Gen Z friendly. Emojis common. Must hook immediately.",
+    personal:"Comprehensive introduction for website/portfolio. Cover: who you are, what you do, unique value, and personality. Professional yet approachable.",
   };
 
   const toneGuidelines: Record<string, string> = {
-    professional:
-      "Polished, credible, achievement-focused. Use industry terminology. Highlight expertise and value. No slang. Authoritative tone.",
-    casual:
-      "Friendly, approachable, relatable. Conversational language. Show personality. Can use contractions. Warm and authentic.",
-    creative:
-      "Unique phrasing, metaphors, wordplay. Stand out with creative descriptions. Show artistic personality. Imaginative language.",
-    witty:
-      "Clever humor, puns, self-aware jokes. Entertaining while informative. Don't try too hard. Personality shines through humor.",
+    professional:"Polished, credible, achievement-focused. Use industry terminology. Highlight expertise and value. No slang. Authoritative tone.",
+    casual:"Friendly, approachable, relatable. Conversational language. Show personality. Can use contractions. Warm and authentic.",
+    creative:"Unique phrasing, metaphors, wordplay. Stand out with creative descriptions. Show artistic personality. Imaginative language.",
+    witty:"Clever humor, puns, self-aware jokes. Entertaining while informative. Don't try too hard. Personality shines through humor.",
   };
 
   const emojiGuidance = includeEmojis
-    ? "Use 1-2 relevant emojis per bio to add visual interest and personality. Place strategically (not random). Match platform culture."
-    : "NO emojis - use words only. Create impact through language alone.";
+    ?"Use 1-2 relevant emojis per bio to add visual interest and personality. Place strategically (not random). Match platform culture."
+    :"NO emojis - use words only. Create impact through language alone.";
 
-  return `You are an expert social media strategist and personal branding specialist. Your task is to craft compelling, platform-optimized bios that capture attention and communicate identity effectively within strict character limits.
+  return`You are an expert social media strategist and personal branding specialist. Your task is to craft compelling, platform-optimized bios that capture attention and communicate identity effectively within strict character limits.
 
 ## YOUR TASK
 Create 3 distinct ${platform} bio options with a ${tone} tone, each optimized for maximum impact.
@@ -111,45 +102,45 @@ Create 3 distinct ${platform} bio options with a ${tone} tone, each optimized fo
 ### ${platform.toUpperCase()} Bio Best Practices:
 
 ${
-  platform === "instagram"
-    ? `- Hook formula: [Descriptor] | [What you do] | [Location/Interest]
+  platform ==="instagram"
+    ?`- Hook formula: [Descriptor] | [What you do] | [Location/Interest]
 - Visual appeal: Use line breaks (|) for readability
 - Personality first: Show who you are, not just credentials
-- CTA optional: "👇 Latest post" or "Link below 🔗"
+- CTA optional:"👇 Latest post" or"Link below 🔗"
 - Hashtags: Rarely used in Instagram bios (skip unless brand-specific)`
-    : ""
+    :""
 }${
-    platform === "twitter"
-      ? `- Formula: [Job Title] + [Specialty] + [Personality/Interest]
+    platform ==="twitter"
+      ?`- Formula: [Job Title] + [Specialty] + [Personality/Interest]
 - Keywords matter: Include searchable terms for your niche
 - Punchy and direct: Every word counts
 - Show expertise: What you know/do/create
 - Optional: Add location or affiliation at end`
-      : ""
+      :""
   }${
-    platform === "linkedin"
-      ? `- Headline format: [Role] at [Company] | [Skills] | [Value Prop]
+    platform ==="linkedin"
+      ?`- Headline format: [Role] at [Company] | [Skills] | [Value Prop]
 - SEO optimized: Include keywords people search for
 - Achievement focus: Numbers, results, expertise
 - Professional credibility: Certifications, specialties
 - Clear value: What you bring to connections/employers`
-      : ""
+      :""
   }${
-    platform === "tiktok"
-      ? `- Ultra-concise: Get to the point in 5-8 words
+    platform ==="tiktok"
+      ?`- Ultra-concise: Get to the point in 5-8 words
 - Content focus: What videos you make
 - Vibe check: Personality/aesthetic in few words
 - Gen Z language: Current, relatable, authentic
 - Emojis common: 1-2 relevant ones work well`
-      : ""
+      :""
   }${
-    platform === "personal"
-      ? `- Full introduction: Name, role, background, expertise
+    platform ==="personal"
+      ?`- Full introduction: Name, role, background, expertise
 - Unique value: What sets you apart
 - Personality: Professional yet personable
 - Current focus: What you're working on/passionate about
 - Optional CTA: Invite connection/collaboration`
-      : ""
+      :""
   }
 
 ## BIO WRITING FRAMEWORK
@@ -163,20 +154,20 @@ ${
 
 ### 2. CHARACTER OPTIMIZATION STRATEGY
 - Every word must earn its place
-- Cut filler words: "I am a", "passionate about", "lover of"
-- Use symbols for brevity: | for separation, + for "and"
+- Cut filler words:"I am a","passionate about","lover of"
+- Use symbols for brevity: | for separation, + for"and"
 - Abbreviations where clear: CEO, NYC, AI, UX
-- ${platform === "linkedin" ? "Vertical bars | separate key points efficiently" : platform === "instagram" ? "Line breaks (|) improve readability" : "Compact phrasing - no wasted characters"}
+- ${platform ==="linkedin" ?"Vertical bars | separate key points efficiently" : platform ==="instagram" ?"Line breaks (|) improve readability" :"Compact phrasing - no wasted characters"}
 
 ### 3. HOOK TECHNIQUES
-- Lead with strongest identity: "${tone === "professional" ? "Award-winning [Role]" : tone === "creative" ? "Creative [descriptor] crafting [specialty]" : tone === "witty" ? "Professional [role] by day, [funny trait] by night" : "Helping [audience] with [solution]"}"
+- Lead with strongest identity:"${tone ==="professional" ?"Award-winning [Role]" : tone ==="creative" ?"Creative [descriptor] crafting [specialty]" : tone ==="witty" ?"Professional [role] by day, [funny trait] by night" :"Helping [audience] with [solution]"}"
 - Use power words: Creator, Builder, Strategist, Expert, Founder
 - Make it searchable: Include keywords for discoverability
-- ${tone === "witty" ? "Open with clever hook or unexpected twist" : "Direct and clear about your value"}
+- ${tone ==="witty" ?"Open with clever hook or unexpected twist" :"Direct and clear about your value"}
 
 ### 4. TONE EXECUTION
 **${tone.toUpperCase()} TONE REQUIREMENTS**:
-${tone === "professional" ? "- Industry-standard terminology and credentials\n- Achievement-focused language\n- Authoritative without arrogance\n- Credibility markers (years, companies, results)" : ""}${tone === "casual" ? "- Conversational, friendly language\n- Show personality and authenticity\n- Relatable and approachable\n- Can use contractions and casual phrasing" : ""}${tone === "creative" ? "- Unique descriptions and metaphors\n- Artistic language and imagery\n- Stand out with creative phrasing\n- Show creative personality" : ""}${tone === "witty" ? "- Clever wordplay or humor\n- Self-aware and entertaining\n- Don't force jokes - be naturally funny\n- Balance wit with information" : ""}
+${tone ==="professional" ?"- Industry-standard terminology and credentials\n- Achievement-focused language\n- Authoritative without arrogance\n- Credibility markers (years, companies, results)" :""}${tone ==="casual" ?"- Conversational, friendly language\n- Show personality and authenticity\n- Relatable and approachable\n- Can use contractions and casual phrasing" :""}${tone ==="creative" ?"- Unique descriptions and metaphors\n- Artistic language and imagery\n- Stand out with creative phrasing\n- Show creative personality" :""}${tone ==="witty" ?"- Clever wordplay or humor\n- Self-aware and entertaining\n- Don't force jokes - be naturally funny\n- Balance wit with information" :""}
 
 ## QUALITY CHECKPOINTS (For Each Bio)
 
@@ -187,7 +178,7 @@ Before finalizing each option, verify:
 4. ✓ Clarity: Immediately clear who they are/what they do
 5. ✓ Memorable: Has hook or unique element
 6. ✓ Searchable: Includes relevant keywords
-7. ✓ Emojis: ${includeEmojis ? "1-2 relevant emojis used strategically" : "No emojis used"}
+7. ✓ Emojis: ${includeEmojis ?"1-2 relevant emojis used strategically" :"No emojis used"}
 8. ✓ No filler: Every word adds value
 9. ✓ Complete: Feels finished, not cut off
 10. ✓ Distinct: Different from other 2 options (varied structure/emphasis)
@@ -213,7 +204,7 @@ IMPORTANT:
 - Count characters carefully (including spaces and emojis)
 - Make each option distinctly different (varied structure, emphasis, or approach)
 - Do NOT include character counts, explanations, or commentary
-- Do NOT label with "Bio Option 1:" - use "**Option 1:**" format shown above
+- Do NOT label with"Bio Option 1:" - use"**Option 1:**" format shown above
 - Each bio should stand alone as a polished option
 
 Create 3 bios that nail the ${platform} ${tone} vibe:
@@ -230,105 +221,96 @@ Bio Option 3:
 const features = [
   {
     icon: Target,
-    title: "Platform-Optimized",
-    description:
-      "Bios tailored for Instagram, Twitter, LinkedIn, TikTok, and personal websites with proper character limits.",
+    title:"Platform-Optimized",
+    description:"Bios tailored for Instagram, Twitter, LinkedIn, TikTok, and personal websites with proper character limits.",
   },
   {
     icon: Sparkles,
-    title: "Multiple Options",
-    description:
-      "Get 3 different bio variations to choose from, each with a unique angle and style.",
+    title:"Multiple Options",
+    description:"Get 3 different bio variations to choose from, each with a unique angle and style.",
   },
   {
     icon: TrendingUp,
-    title: "Tone Variety",
-    description:
-      "Choose from professional, casual, creative, or witty tones to match your personal brand.",
+    title:"Tone Variety",
+    description:"Choose from professional, casual, creative, or witty tones to match your personal brand.",
   },
 ];
 
 const howItWorks = [
   {
     step: 1,
-    title: "Share Info",
-    desc: "Tell us about yourself or interests",
+    title:"Share Info",
+    desc:"Tell us about yourself or interests",
     icon: User,
-    color: "from-blue-500 to-indigo-600",
+    color:"from-blue-500 to-indigo-600",
   },
   {
     step: 2,
-    title: "Pick Platform",
-    desc: "Choose where you'll use it",
+    title:"Pick Platform",
+    desc:"Choose where you'll use it",
     icon: Instagram,
-    color: "from-purple-500 to-pink-600",
+    color:"from-purple-500 to-pink-600",
   },
   {
     step: 3,
-    title: "Get 3 Bios",
-    desc: "Pick your favorite option",
+    title:"Get 3 Bios",
+    desc:"Pick your favorite option",
     icon: Sparkles,
-    color: "from-green-500 to-emerald-600",
+    color:"from-green-500 to-emerald-600",
   },
 ];
 
 const faqs = [
   {
-    question: "What is the Bio Generator?",
-    answer:
-      "The Bio Generator is an AI-powered tool that creates engaging social media bios for various platforms. It generates 3 different bio options optimized for each platform's character limits and audience, helping you craft the perfect introduction for your profile.",
+    question:"What is the Bio Generator?",
+    answer:"The Bio Generator is an AI-powered tool that creates engaging social media bios for various platforms. It generates 3 different bio options optimized for each platform's character limits and audience, helping you craft the perfect introduction for your profile.",
   },
   {
-    question: "How many bios do I get?",
-    answer:
-      "You get 3 different bio options with each generation! This gives you multiple choices with different angles and styles, so you can pick the one that resonates most with your personal brand or combine elements from different options.",
+    question:"How many bios do I get?",
+    answer:"You get 3 different bio options with each generation! This gives you multiple choices with different angles and styles, so you can pick the one that resonates most with your personal brand or combine elements from different options.",
   },
   {
-    question: "What platforms are supported?",
-    answer:
-      "We support Instagram (150 chars), Twitter/X (160 chars), LinkedIn (220 chars), TikTok (80 chars), and Personal Websites (200 chars recommended). Each platform has unique character limits and style considerations that our AI takes into account.",
+    question:"What platforms are supported?",
+    answer:"We support Instagram (150 chars), Twitter/X (160 chars), LinkedIn (220 chars), TikTok (80 chars), and Personal Websites (200 chars recommended). Each platform has unique character limits and style considerations that our AI takes into account.",
   },
   {
-    question: "What character limits apply?",
-    answer:
-      "Bios are automatically optimized for each platform's specific limits: Instagram (150), Twitter (160), LinkedIn (220), TikTok (80), and Personal Website (200 recommended). The AI ensures your bio fits perfectly while conveying your message effectively.",
+    question:"What character limits apply?",
+    answer:"Bios are automatically optimized for each platform's specific limits: Instagram (150), Twitter (160), LinkedIn (220), TikTok (80), and Personal Website (200 recommended). The AI ensures your bio fits perfectly while conveying your message effectively.",
   },
   {
-    question: "Can I control the tone?",
-    answer:
-      "Yes! Choose from four tones: Professional (formal and business-like), Casual & Fun (friendly and approachable), Creative (artistic and unique), or Witty (clever and humorous). You can also toggle emoji usage on or off.",
+    question:"Can I control the tone?",
+    answer:"Yes! Choose from four tones: Professional (formal and business-like), Casual & Fun (friendly and approachable), Creative (artistic and unique), or Witty (clever and humorous). You can also toggle emoji usage on or off.",
   },
   {
-    question: "Is the Bio Generator free?",
-    answer:
-      "Yes! The Bio Generator is completely free to use. Create unlimited bios for any platform without any cost. Perfect for influencers, professionals, students, or anyone looking to improve their social media presence.",
+    question:"Is the Bio Generator free?",
+    answer:"Yes! The Bio Generator is completely free to use. Create unlimited bios for any platform without any cost. Perfect for influencers, professionals, students, or anyone looking to improve their social media presence.",
   },
 ];
 
 const relatedTools = [
   {
-    name: "Caption Generator",
-    slug: "caption-generator",
+    name:"Caption Generator",
+    slug:"caption-generator",
     icon: Instagram,
-    color: "text-pink-600",
+    color:"text-pink-600",
   },
   {
-    name: "Cover Letter",
-    slug: "cover-letter-writer",
+    name:"Cover Letter",
+    slug:"cover-letter-writer",
     icon: FileText,
-    color: "text-blue-600",
+    color:"text-blue-600",
   },
   {
-    name: "Resume Bullets",
-    slug: "resume-bullets",
+    name:"Resume Bullets",
+    slug:"resume-bullets",
     icon: Sparkles,
-    color: "text-purple-600",
+    color:"text-purple-600",
   },
   {
-    name: "Email Writer",
-    slug: "email-writer",
+    name:"Email Writer",
+    slug:"email-writer",
     icon: Twitter,
-    color: "text-green-600",
+    color:"text-green-600",
   },
 ];
 

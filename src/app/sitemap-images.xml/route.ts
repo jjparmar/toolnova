@@ -1,14 +1,14 @@
-import { NextResponse } from "next/server";
-import { getAllToolSlugs } from "@/data/tools";
-import { getAllBlogPosts } from "@/data/blog";
-import { siteConfig } from "@/config/site";
+import { NextResponse } from"next/server";
+import { getAllToolSlugs } from"@/data/tools";
+import { getAllBlogPosts } from"@/data/blog";
+import { siteConfig } from"@/config/site";
 
 /**
  * Image Sitemap — required for Google Discover image indexing
  * Generates a standard XML image sitemap with image:image entries
  * per Google's Image Sitemap guidelines.
  */
-export const dynamic = "force-dynamic";
+export const dynamic ="force-dynamic";
 
 export async function GET() {
   const baseUrl = siteConfig.url;
@@ -33,8 +33,8 @@ export async function GET() {
     <loc>${baseUrl}/tools/${slug}</loc>
     <image:image>
       <image:loc>${baseUrl}/og-image.png</image:loc>
-      <image:title>${slug.replace(/-/g, " ")} - Free AI Tool | ToolNova</image:title>
-      <image:caption>Use ${slug.replace(/-/g, " ")} free online at ToolNova. No sign-up required.</image:caption>
+      <image:title>${slug.replace(/-/g,"")} - Free AI Tool | ToolNova</image:title>
+      <image:caption>Use ${slug.replace(/-/g,"")} free online at ToolNova. No sign-up required.</image:caption>
     </image:image>
   </url>`);
   }
@@ -44,19 +44,19 @@ export async function GET() {
     if (post.coverImage) {
       const absoluteImageUrl = post.coverImage.startsWith("http")
         ? post.coverImage
-        : `${baseUrl}${post.coverImage}`;
+        :`${baseUrl}${post.coverImage}`;
       entries.push(`  <url>
     <loc>${baseUrl}/blog/${post.slug}</loc>
     <image:image>
       <image:loc>${absoluteImageUrl}</image:loc>
-      <image:title>${post.title.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</image:title>
-      <image:caption>${(post.excerpt || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</image:caption>
+      <image:title>${post.title.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}</image:title>
+      <image:caption>${(post.excerpt ||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}</image:caption>
     </image:image>
   </url>`);
     }
   }
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+  const xml =`<?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
@@ -65,9 +65,7 @@ ${entries.join("\n")}
 </urlset>`;
 
   return new NextResponse(xml, {
-    headers: {
-      "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+    headers: {"Content-Type":"application/xml; charset=utf-8","Cache-Control":"public, max-age=3600, stale-while-revalidate=86400",
     },
   });
 }

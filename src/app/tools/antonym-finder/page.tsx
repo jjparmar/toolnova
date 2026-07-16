@@ -38,13 +38,12 @@ export default function AntonymFinderPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaToJsonLd(toolSchema) }} />
             {toolData && (
                 <>
-                    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaToJsonLd(getHowToSchema(
-                        `How to use ${toolData.name}`,
+                    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaToJsonLd(getHowToSchema(`How to use ${toolData.name}`,
                         toolData.description,
                         toolData.howItWorks.map(step => ({
                             name: step.title,
                             text: step.desc,
-                            url: `https://www.toolnovahub.com/tools/antonym-finder#step-${step.step}`
+                            url:`https://www.toolnovahub.com/tools/antonym-finder#step-${step.step}`
                         }))
                     )) }} />
                     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaToJsonLd(getFAQSchema(toolData.faqs)) }} />

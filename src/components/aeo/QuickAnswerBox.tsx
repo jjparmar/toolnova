@@ -16,7 +16,7 @@ interface QuickAnswerBoxProps {
 export function QuickAnswerBox({ question, answer, className = '' }: QuickAnswerBoxProps) {
     return (
         <div
-            className={`quick-answer mb-8 rounded-2xl border border-primary/20 bg-primary/[0.04] p-6 md:p-8 dark:border-primary/25 dark:bg-primary/10 ${className}`}
+            className={`quick-answer mb-8 rounded-2xl border border-primary/20 bg-primary/[0.04] p-6 md:p-8 ${className}`}
             data-speakable="true"
         >
             <div className="flex items-start gap-4">

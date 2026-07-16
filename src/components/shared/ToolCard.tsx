@@ -1,11 +1,11 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { IconTile } from "./IconTile";
-import { Pill } from "./Pill";
+import Link from"next/link";
+import { ArrowRight } from"lucide-react";
+import type { LucideIcon } from"lucide-react";
+import { cn } from"@/lib/utils";
+import { IconTile } from"./IconTile";
+import { Pill } from"./Pill";
 
-export type ToolCardVariant = "featured" | "grid" | "related";
+export type ToolCardVariant ="featured" |"grid" |"related";
 
 export interface ToolCardProps {
   href: string;
@@ -13,11 +13,11 @@ export interface ToolCardProps {
   description?: string;
   icon: LucideIcon;
   badge?: string;
-  badgeTone?: "muted" | "primary" | "success" | "warning";
+  badgeTone?:"muted" |"primary" |"success" |"warning";
   variant?: ToolCardVariant;
   gradient?: string; 
   glowColor?: string; 
-  tone?: "primary" | "success" | "warning" | "muted";
+  tone?:"primary" |"success" |"warning" |"muted";
   className?: string;
 }
 
@@ -27,20 +27,19 @@ export function ToolCard({
   description,
   icon: Icon,
   badge,
-  badgeTone = "muted",
-  variant = "grid",
+  badgeTone ="muted",
+  variant ="grid",
   gradient,
   glowColor,
-  tone = "primary",
+  tone ="primary",
   className,
 }: ToolCardProps) {
   /* ---------- related: compact centered card ---------- */
-  if (variant === "related") {
+  if (variant ==="related") {
     return (
       <Link
         href={href}
-        className={cn(
-          "surface-card group flex flex-col items-center p-6 text-center hover:-translate-y-1.5",
+        className={cn("surface-card group flex flex-col items-center p-6 text-center hover:-translate-y-1.5",
           className
         )}
       >
@@ -62,20 +61,18 @@ export function ToolCard({
   }
 
   /* ---------- featured + grid: full card with footer ---------- */
-  const isGrid = variant === "grid";
+  const isGrid = variant ==="grid";
   return (
     <Link
       href={href}
-      className={cn(
-        "surface-card group relative flex flex-col overflow-hidden p-6 hover:-translate-y-1.5",
+      className={cn("surface-card group relative flex flex-col overflow-hidden p-6 hover:-translate-y-1.5",
         className
       )}
     >
       {/* Top hover accent bar */}
       {gradient && (
         <div
-          className={cn(
-            "absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+          className={cn("absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100",
             gradient
           )}
         />
@@ -98,9 +95,8 @@ export function ToolCard({
         size="md"
         gradient={gradient}
         tone={tone}
-        className={cn(
-          "mb-5 transition-shadow",
-          glowColor && `group-hover:${glowColor} group-hover:shadow-lg`
+        className={cn("mb-5 transition-shadow",
+          glowColor &&`group-hover:${glowColor} group-hover:shadow-lg`
         )}
       />
 

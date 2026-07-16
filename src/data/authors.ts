@@ -15,20 +15,15 @@ export interface Author {
 }
 
 export const EDITORIAL_AUTHOR: Author = {
-  slug: "editorial-team",
-  name: "ToolNova Editorial Team",
-  role: "Editorial Team",
-  bio: "ToolNova articles are written and reviewed by the ToolNova editorial team. We focus on practical, transparent guidance for AI tools, productivity workflows, study resources, and document utilities.",
-  image: "TN",
-  credentials: "ToolNova Editorial",
-  specialties: [
-    "AI Tools",
-    "Study Workflows",
-    "Writing Tools",
-    "PDF and Image Utilities",
-    "Productivity",
+  slug:"editorial-team",
+  name:"ToolNova Editorial Team",
+  role:"Editorial Team",
+  bio:"ToolNova articles are written and reviewed by the ToolNova editorial team. We focus on practical, transparent guidance for AI tools, productivity workflows, study resources, and document utilities.",
+  image:"TN",
+  credentials:"ToolNova Editorial",
+  specialties: ["AI Tools","Study Workflows","Writing Tools","PDF and Image Utilities","Productivity",
   ],
-  profileUrl: "https://www.toolnovahub.com/author/editorial-team",
+  profileUrl:"https://www.toolnovahub.com/author/editorial-team",
 };
 
 export const authors: Author[] = [EDITORIAL_AUTHOR];

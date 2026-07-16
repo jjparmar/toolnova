@@ -22,11 +22,11 @@ export default function StreakDisplay() {
     if (streak === 0) return null;
 
     const getMessage = () => {
-        if (streak >= 30) return "Unstoppable! 🔥";
-        if (streak >= 14) return "On fire! 🔥";
-        if (streak >= 7) return "Keep it up! 🔥";
-        if (streak >= 3) return "Great streak!";
-        return "You're getting started!";
+        if (streak >= 30) return"Unstoppable! 🔥";
+        if (streak >= 14) return"On fire! 🔥";
+        if (streak >= 7) return"Keep it up! 🔥";
+        if (streak >= 3) return"Great streak!";
+        return"You're getting started!";
     };
 
     return (
@@ -66,7 +66,7 @@ export default function StreakDisplay() {
                             <div
                                 className="h-full bg-gradient-to-r from-orange-500 to-red-500 transition-all duration-500"
                                 style={{
-                                    width: `${(streak / (streak < 7 ? 7 : streak < 14 ? 14 : 30)) * 100}%`,
+                                    width:`${(streak / (streak < 7 ? 7 : streak < 14 ? 14 : 30)) * 100}%`,
                                 }}
                             />
                         </div>

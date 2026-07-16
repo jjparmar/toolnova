@@ -1,9 +1,9 @@
 "use client";
 
-import EnhancedToolLayout from "@/components/EnhancedToolLayout";
-import { PremiumToolWrapper } from "@/components/PremiumToolWrapper";
-import { FAQSection } from "@/components/FAQSection";
-import { ToolOption } from "@/components/ToolLayout";
+import EnhancedToolLayout from"@/components/EnhancedToolLayout";
+import { PremiumToolWrapper } from"@/components/PremiumToolWrapper";
+import { FAQSection } from"@/components/FAQSection";
+import { ToolOption } from"@/components/ToolLayout";
 import {
   FileText,
   Pencil,
@@ -17,79 +17,72 @@ import {
   Type,
   Target,
   Sparkles,
-} from "lucide-react";
+} from"lucide-react";
 
 const toolOptions = [
   {
-    id: "type",
-    label: "Paragraph Type",
-    type: "select" as const,
+    id:"type",
+    label:"Paragraph Type",
+    type:"select" as const,
     options: [
-      { value: "general", label: "📝 General" },
-      { value: "introduction", label: "👋 Introduction" },
-      { value: "conclusion", label: "🎯 Conclusion" },
-      { value: "body", label: "📄 Body Paragraph" },
-      { value: "creative", label: "🎨 Creative" },
+      { value:"general", label:"📝 General" },
+      { value:"introduction", label:"👋 Introduction" },
+      { value:"conclusion", label:"🎯 Conclusion" },
+      { value:"body", label:"📄 Body Paragraph" },
+      { value:"creative", label:"🎨 Creative" },
     ] as const,
-    defaultValue: "general",
+    defaultValue:"general",
   },
   {
-    id: "length",
-    label: "Length",
-    type: "select" as const,
+    id:"length",
+    label:"Length",
+    type:"select" as const,
     options: [
-      { value: "short", label: "⚡ Short (3-4 sentences)" },
-      { value: "medium", label: "📝 Medium (5-7 sentences)" },
-      { value: "long", label: "📚 Long (8-10 sentences)" },
+      { value:"short", label:"⚡ Short (3-4 sentences)" },
+      { value:"medium", label:"📝 Medium (5-7 sentences)" },
+      { value:"long", label:"📚 Long (8-10 sentences)" },
     ] as const,
-    defaultValue: "medium",
+    defaultValue:"medium",
   },
   {
-    id: "tone",
-    label: "Tone",
-    type: "select" as const,
+    id:"tone",
+    label:"Tone",
+    type:"select" as const,
     options: [
-      { value: "formal", label: "👔 Formal" },
-      { value: "casual", label: "😊 Casual" },
-      { value: "academic", label: "🎓 Academic" },
+      { value:"formal", label:"👔 Formal" },
+      { value:"casual", label:"😊 Casual" },
+      { value:"academic", label:"🎓 Academic" },
     ] as const,
-    defaultValue: "formal",
+    defaultValue:"formal",
   },
 ] as const;
 
 const generatePrompt = (input: string, options?: Record<string, any>) => {
-  const type = options?.type || "general";
-  const length = options?.length || "medium";
-  const tone = options?.tone || "formal";
+  const type = options?.type ||"general";
+  const length = options?.length ||"medium";
+  const tone = options?.tone ||"formal";
 
   const lengthSentences: Record<string, string> = {
-    short: "3-4 sentences",
-    medium: "5-7 sentences",
-    long: "8-10 sentences",
+    short:"3-4 sentences",
+    medium:"5-7 sentences",
+    long:"8-10 sentences",
   };
 
   const typeInstructions: Record<string, string> = {
-    general:
-      "Write a clear, well-structured general paragraph that effectively develops the main idea with supporting details.",
-    introduction:
-      "Write an engaging introduction paragraph with a hook, background context, and a clear thesis statement that previews what follows.",
-    conclusion:
-      "Write a strong conclusion paragraph that synthesizes key points, reinforces the main argument, and provides closure or a call to action.",
-    body: "Write a detailed body paragraph with a clear topic sentence, 2-3 supporting points with evidence or examples, and a smooth transition to the next idea.",
-    creative:
-      "Write a creative, vivid paragraph that uses descriptive language, sensory details, figurative language, and engaging narrative techniques.",
+    general:"Write a clear, well-structured general paragraph that effectively develops the main idea with supporting details.",
+    introduction:"Write an engaging introduction paragraph with a hook, background context, and a clear thesis statement that previews what follows.",
+    conclusion:"Write a strong conclusion paragraph that synthesizes key points, reinforces the main argument, and provides closure or a call to action.",
+    body:"Write a detailed body paragraph with a clear topic sentence, 2-3 supporting points with evidence or examples, and a smooth transition to the next idea.",
+    creative:"Write a creative, vivid paragraph that uses descriptive language, sensory details, figurative language, and engaging narrative techniques.",
   };
 
   const toneGuidelines: Record<string, string> = {
-    formal:
-      "Use professional vocabulary, complete sentences, third-person perspective, and avoid contractions or colloquialisms.",
-    casual:
-      "Use conversational language, contractions, second-person 'you', and friendly tone as if speaking to a peer.",
-    academic:
-      "Use scholarly language, precise terminology, objective tone, evidence-based statements, and formal citation-ready structure.",
+    formal:"Use professional vocabulary, complete sentences, third-person perspective, and avoid contractions or colloquialisms.",
+    casual:"Use conversational language, contractions, second-person 'you', and friendly tone as if speaking to a peer.",
+    academic:"Use scholarly language, precise terminology, objective tone, evidence-based statements, and formal citation-ready structure.",
   };
 
-  return `You are an expert writing coach and paragraph construction specialist. Your task is to generate a well-crafted, cohesive paragraph that meets specific requirements.
+  return`You are an expert writing coach and paragraph construction specialist. Your task is to generate a well-crafted, cohesive paragraph that meets specific requirements.
 
 ## YOUR TASK
 Write a ${type} paragraph about the provided topic, following all specified guidelines for structure, tone, and length.
@@ -104,19 +97,19 @@ Write a ${type} paragraph about the provided topic, following all specified guid
 ### Opening (Topic Sentence)
 - Start with a strong, clear topic sentence that introduces the main idea
 - Make it engaging and directly address the topic
-- ${type === "introduction" ? "Include a hook (question, fact, quote, or anecdote)" : "Clearly state what this paragraph will discuss"}
+- ${type ==="introduction" ?"Include a hook (question, fact, quote, or anecdote)" :"Clearly state what this paragraph will discuss"}
 
 ### Development (Supporting Sentences)
 - Develop 2-3 supporting points that elaborate on the topic sentence
 - Use specific details, examples, or evidence
 - Ensure each sentence logically flows from the previous one
-- ${type === "body" ? "Include concrete evidence or examples to support claims" : "Maintain focus on the central theme"}
+- ${type ==="body" ?"Include concrete evidence or examples to support claims" :"Maintain focus on the central theme"}
 - Use transitions between ideas (Furthermore, Additionally, However, In contrast, For example)
 
 ### Conclusion (Closing Sentence)
-- ${type === "introduction" ? "End with a clear thesis statement" : type === "conclusion" ? "Provide a memorable final thought or call to action" : "End with a transitional or conclusive sentence"}
+- ${type ==="introduction" ?"End with a clear thesis statement" : type ==="conclusion" ?"Provide a memorable final thought or call to action" :"End with a transitional or conclusive sentence"}
 - Connect back to the main idea
-- ${type !== "conclusion" ? "Set up natural flow to what might come next" : "Leave reader with lasting impression"}
+- ${type !=="conclusion" ?"Set up natural flow to what might come next" :"Leave reader with lasting impression"}
 
 ## WRITING QUALITY STANDARDS
 
@@ -132,7 +125,7 @@ Write a ${type} paragraph about the provided topic, following all specified guid
 
 ### Tone Consistency
 - Maintain ${tone} tone throughout every sentence
-- ${tone === "academic" ? "Use scholarly vocabulary and precise terminology" : tone === "formal" ? "Use professional language, no slang" : "Use natural, conversational language"}
+- ${tone ==="academic" ?"Use scholarly vocabulary and precise terminology" : tone ==="formal" ?"Use professional language, no slang" :"Use natural, conversational language"}
 - Appropriate word choice for ${tone} writing
 
 ### Sentence Variety
@@ -150,7 +143,7 @@ Before finalizing, verify:
 5. ✓ Supporting details: 2-3 well-developed points
 6. ✓ Coherence: Smooth transitions between all ideas
 7. ✓ Unity: Every sentence relates to main idea
-8. ✓ Closing: ${type === "conclusion" ? "Memorable final thought" : "Strong transitional sentence"}
+8. ✓ Closing: ${type ==="conclusion" ?"Memorable final thought" :"Strong transitional sentence"}
 9. ✓ Grammar: No errors, proper punctuation
 10. ✓ Engagement: Interesting and well-written
 
@@ -161,7 +154,7 @@ ${input}
 Provide ONLY the paragraph itself. Do not include:
 - Titles or headings
 - Explanations or commentary
-- Labels like "Paragraph:" or "Topic sentence:"
+- Labels like"Paragraph:" or"Topic sentence:"
 - Bullet points or numbering
 
 Just write the complete, polished paragraph ready to use.`;
@@ -171,105 +164,96 @@ Just write the complete, polished paragraph ready to use.`;
 const features = [
   {
     icon: Target,
-    title: "Multiple Paragraph Types",
-    description:
-      "Create introductions, conclusions, body paragraphs, or general content for any writing project.",
+    title:"Multiple Paragraph Types",
+    description:"Create introductions, conclusions, body paragraphs, or general content for any writing project.",
   },
   {
     icon: Type,
-    title: "Flexible Tone Options",
-    description:
-      "Choose between formal, casual, or academic tones to match your audience and purpose.",
+    title:"Flexible Tone Options",
+    description:"Choose between formal, casual, or academic tones to match your audience and purpose.",
   },
   {
     icon: AlignLeft,
-    title: "Adjustable Length",
-    description:
-      "Control paragraph length from short and concise to long and detailed based on your needs.",
+    title:"Adjustable Length",
+    description:"Control paragraph length from short and concise to long and detailed based on your needs.",
   },
 ];
 
 const howItWorks = [
   {
     step: 1,
-    title: "Enter Topic",
-    desc: "Type your paragraph topic or idea",
+    title:"Enter Topic",
+    desc:"Type your paragraph topic or idea",
     icon: Lightbulb,
-    color: "from-blue-500 to-indigo-600",
+    color:"from-blue-500 to-indigo-600",
   },
   {
     step: 2,
-    title: "Choose Style",
-    desc: "Select type, length, and tone",
+    title:"Choose Style",
+    desc:"Select type, length, and tone",
     icon: AlignLeft,
-    color: "from-purple-500 to-pink-600",
+    color:"from-purple-500 to-pink-600",
   },
   {
     step: 3,
-    title: "Get Result",
-    desc: "Receive your polished paragraph",
+    title:"Get Result",
+    desc:"Receive your polished paragraph",
     icon: Pencil,
-    color: "from-green-500 to-emerald-600",
+    color:"from-green-500 to-emerald-600",
   },
 ];
 
 const faqs = [
   {
-    question: "What is the Paragraph Generator?",
-    answer:
-      "The Paragraph Generator is an AI-powered writing tool that creates well-structured, coherent paragraphs on any topic. It helps you overcome writer's block and produce professional-quality content quickly, whether you need introductions, conclusions, body paragraphs, or creative content.",
+    question:"What is the Paragraph Generator?",
+    answer:"The Paragraph Generator is an AI-powered writing tool that creates well-structured, coherent paragraphs on any topic. It helps you overcome writer's block and produce professional-quality content quickly, whether you need introductions, conclusions, body paragraphs, or creative content.",
   },
   {
-    question: "What paragraph types can I create?",
-    answer:
-      "You can create five types of paragraphs: General (all-purpose content), Introduction (engaging opening paragraphs), Conclusion (strong closing paragraphs), Body (detailed supporting paragraphs), and Creative (descriptive, vivid paragraphs). Each type is optimized for its specific purpose in writing.",
+    question:"What paragraph types can I create?",
+    answer:"You can create five types of paragraphs: General (all-purpose content), Introduction (engaging opening paragraphs), Conclusion (strong closing paragraphs), Body (detailed supporting paragraphs), and Creative (descriptive, vivid paragraphs). Each type is optimized for its specific purpose in writing.",
   },
   {
-    question: "What's the difference between the tones?",
-    answer:
-      "Formal tone is professional and suitable for business or academic writing. Casual tone is friendly and conversational, perfect for blogs or social media. Academic tone is scholarly and technical, ideal for research papers and educational content. Choose based on your audience and purpose.",
+    question:"What's the difference between the tones?",
+    answer:"Formal tone is professional and suitable for business or academic writing. Casual tone is friendly and conversational, perfect for blogs or social media. Academic tone is scholarly and technical, ideal for research papers and educational content. Choose based on your audience and purpose.",
   },
   {
-    question: "How do I choose the right length?",
-    answer:
-      "Short paragraphs (3-4 sentences) are great for quick points or web content. Medium paragraphs (5-7 sentences) work well for most writing needs, including essays and articles. Long paragraphs (8-10 sentences) are ideal when you need detailed explanations or comprehensive coverage of a topic.",
+    question:"How do I choose the right length?",
+    answer:"Short paragraphs (3-4 sentences) are great for quick points or web content. Medium paragraphs (5-7 sentences) work well for most writing needs, including essays and articles. Long paragraphs (8-10 sentences) are ideal when you need detailed explanations or comprehensive coverage of a topic.",
   },
   {
-    question: "Can I use this for essays and assignments?",
-    answer:
-      "Yes! The Paragraph Generator is perfect for essays, assignments, articles, and any writing project. Use it to craft introduction and conclusion paragraphs, or generate body paragraphs with supporting details. It's an excellent tool for overcoming writer's block and maintaining consistent quality throughout your work.",
+    question:"Can I use this for essays and assignments?",
+    answer:"Yes! The Paragraph Generator is perfect for essays, assignments, articles, and any writing project. Use it to craft introduction and conclusion paragraphs, or generate body paragraphs with supporting details. It's an excellent tool for overcoming writer's block and maintaining consistent quality throughout your work.",
   },
   {
-    question: "Is the Paragraph Generator free?",
-    answer:
-      "Yes! The Paragraph Generator is completely free to use. Generate unlimited paragraphs for essays, articles, creative writing, or any content needs without any cost. Perfect for students, writers, and content creators of all levels.",
+    question:"Is the Paragraph Generator free?",
+    answer:"Yes! The Paragraph Generator is completely free to use. Generate unlimited paragraphs for essays, articles, creative writing, or any content needs without any cost. Perfect for students, writers, and content creators of all levels.",
   },
 ];
 
 const relatedTools = [
   {
-    name: "Essay Writer",
-    slug: "essay-writer",
+    name:"Essay Writer",
+    slug:"essay-writer",
     icon: FileText,
-    color: "text-blue-600",
+    color:"text-blue-600",
   },
   {
-    name: "Paraphraser",
-    slug: "paraphraser",
+    name:"Paraphraser",
+    slug:"paraphraser",
     icon: MessageSquare,
-    color: "text-purple-600",
+    color:"text-purple-600",
   },
   {
-    name: "Grammar Fix",
-    slug: "grammar-fix",
+    name:"Grammar Fix",
+    slug:"grammar-fix",
     icon: Pencil,
-    color: "text-green-600",
+    color:"text-green-600",
   },
   {
-    name: "Story Generator",
-    slug: "story-generator",
+    name:"Story Generator",
+    slug:"story-generator",
     icon: BookOpen,
-    color: "text-orange-600",
+    color:"text-orange-600",
   },
 ];
 

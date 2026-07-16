@@ -1,26 +1,24 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import { CheckCircle, FileText, Users, ShieldCheck, RefreshCw, AlertTriangle } from "lucide-react";
+import { Metadata } from"next";
+import Link from"next/link";
+import { CheckCircle, FileText, Users, ShieldCheck, RefreshCw, AlertTriangle } from"lucide-react";
 
 export const metadata: Metadata = {
-  title: "Editorial Policy & Standards | ToolNova",
-  description:
-    "Learn how ToolNova's editorial team researches, writes, and maintains all blog content and AI tool documentation. Our commitment to accuracy, transparency, and user value.",
+  title:"Editorial Policy & Standards | ToolNova",
+  description:"Learn how ToolNova's editorial team researches, writes, and maintains all blog content and AI tool documentation. Our commitment to accuracy, transparency, and user value.",
   alternates: {
-    canonical: "https://www.toolnovahub.com/editorial-policy",
+    canonical:"https://www.toolnovahub.com/editorial-policy",
   },
   openGraph: {
-    title: "Editorial Policy & Standards | ToolNova",
-    description:
-      "ToolNova's standards for content accuracy, author expertise, tool testing, and editorial transparency.",
-    url: "https://www.toolnovahub.com/editorial-policy",
-    type: "website",
+    title:"Editorial Policy & Standards | ToolNova",
+    description:"ToolNova's standards for content accuracy, author expertise, tool testing, and editorial transparency.",
+    url:"https://www.toolnovahub.com/editorial-policy",
+    type:"website",
     images: [
       {
-        url: "https://www.toolnovahub.com/og-image.png",
+        url:"https://www.toolnovahub.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ToolNova Editorial Policy",
+        alt:"ToolNova Editorial Policy",
       },
     ],
   },
@@ -30,44 +28,38 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATED = "June 30, 2026";
+const LAST_UPDATED ="June 30, 2026";
 
 const standards = [
   {
     icon: FileText,
-    title: "Original Research & Writing",
-    description:
-      "All blog articles and tool guides published on ToolNova are written by our editorial team — never copied or spun from other sources. Each piece begins with primary research: reading multiple reputable sources, testing relevant tools hands-on, and synthesising findings into actionable guidance. We use AI writing assistants as a drafting aid only; every article is reviewed, fact-checked, and substantially rewritten by a human editor before publication.",
+    title:"Original Research & Writing",
+    description:"All blog articles and tool guides published on ToolNova are written by our editorial team — never copied or spun from other sources. Each piece begins with primary research: reading multiple reputable sources, testing relevant tools hands-on, and synthesising findings into actionable guidance. We use AI writing assistants as a drafting aid only; every article is reviewed, fact-checked, and substantially rewritten by a human editor before publication.",
   },
   {
     icon: Users,
-    title: "Author Expertise & Credentials",
-    description:
-      "Our contributors are subject-matter specialists: career coaches, certified educators, software engineers, and productivity researchers. Author profiles on each article include their name, role, and area of expertise. When an author makes claims about tools, platforms, or outcomes, those claims are backed by direct testing or cited from authoritative third-party sources. We do not publish articles by anonymous contributors on topics requiring specialist knowledge.",
+    title:"Author Expertise & Credentials",
+    description:"Our contributors are subject-matter specialists: career coaches, certified educators, software engineers, and productivity researchers. Author profiles on each article include their name, role, and area of expertise. When an author makes claims about tools, platforms, or outcomes, those claims are backed by direct testing or cited from authoritative third-party sources. We do not publish articles by anonymous contributors on topics requiring specialist knowledge.",
   },
   {
     icon: CheckCircle,
-    title: "Fact-Checking Process",
-    description:
-      "Before any article is published, a secondary editor verifies all factual claims, statistics, product pricing, and feature descriptions. Statistics are cited with links to the original research. Tool feature descriptions are verified against the tool's official documentation or direct testing. If a fact cannot be verified from at least two independent sources, it is removed or flagged with appropriate caveats.",
+    title:"Fact-Checking Process",
+    description:"Before any article is published, a secondary editor verifies all factual claims, statistics, product pricing, and feature descriptions. Statistics are cited with links to the original research. Tool feature descriptions are verified against the tool's official documentation or direct testing. If a fact cannot be verified from at least two independent sources, it is removed or flagged with appropriate caveats.",
   },
   {
     icon: ShieldCheck,
-    title: "AI Tool Testing Standards",
-    description:
-      "Every ToolNova tool is tested by at least two team members across different use-cases before it is made publicly available. We evaluate accuracy, output quality, privacy compliance, and real-world utility. Tools are re-tested after major model updates or user-reported issues. Our testing notes form the basis of the tool description, FAQ, and expert tips shown on each tool page.",
+    title:"AI Tool Testing Standards",
+    description:"Every ToolNova tool is tested by at least two team members across different use-cases before it is made publicly available. We evaluate accuracy, output quality, privacy compliance, and real-world utility. Tools are re-tested after major model updates or user-reported issues. Our testing notes form the basis of the tool description, FAQ, and expert tips shown on each tool page.",
   },
   {
     icon: RefreshCw,
-    title: "Content Updates & Accuracy",
-    description:
-      "The AI landscape changes rapidly. We maintain a content review schedule: core tool pages are reviewed every 90 days; blog articles covering fast-moving topics (AI, job market, software) are reviewed every 6 months. When outdated information is found, the article is updated and the 'Last Updated' date is revised. If a major factual error is discovered, we correct it within 48 hours and add a correction notice at the bottom of the article.",
+    title:"Content Updates & Accuracy",
+    description:"The AI landscape changes rapidly. We maintain a content review schedule: core tool pages are reviewed every 90 days; blog articles covering fast-moving topics (AI, job market, software) are reviewed every 6 months. When outdated information is found, the article is updated and the 'Last Updated' date is revised. If a major factual error is discovered, we correct it within 48 hours and add a correction notice at the bottom of the article.",
   },
   {
     icon: AlertTriangle,
-    title: "Corrections Policy",
-    description:
-      "We are committed to transparent error correction. If you find an inaccuracy in any article or tool description, please email us at support@toolnovahub.com with the URL and the specific error. We investigate all reports within 5 business days. Confirmed errors are corrected promptly and, if significant, noted with a dated correction notice appended to the article. We do not silently delete or rewrite content to cover mistakes.",
+    title:"Corrections Policy",
+    description:"We are committed to transparent error correction. If you find an inaccuracy in any article or tool description, please email us at support@toolnovahub.com with the URL and the specific error. We investigate all reports within 5 business days. Confirmed errors are corrected promptly and, if significant, noted with a dated correction notice appended to the article. We do not silently delete or rewrite content to cover mistakes.",
   },
 ];
 
@@ -94,7 +86,7 @@ export default function EditorialPolicyPage() {
       </div>
 
       {/* Who We Are */}
-      <section className="mb-16 p-8 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800">
+      <section className="mb-16 p-8 bg-slate-50 rounded-2xl border border-slate-100">
         <h2 className="text-2xl font-bold mb-4">Who Creates Content at ToolNova</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
           ToolNova was founded in 2026 in Singapore with the mission of making professional-grade 
@@ -122,7 +114,7 @@ export default function EditorialPolicyPage() {
           {standards.map((standard, i) => (
             <div
               key={i}
-              className="flex gap-6 p-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm"
+              className="flex gap-6 p-8 bg-white rounded-2xl border border-slate-100 shadow-sm"
             >
               <div className="flex-shrink-0">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
@@ -141,7 +133,7 @@ export default function EditorialPolicyPage() {
       </section>
 
       {/* Advertising Disclosure */}
-      <section className="mb-16 p-8 bg-amber-50 dark:bg-amber-950/20 rounded-2xl border border-amber-200 dark:border-amber-800">
+      <section className="mb-16 p-8 bg-amber-50 rounded-2xl border border-amber-200">
         <h2 className="text-2xl font-bold mb-4">Advertising &amp; Revenue Disclosure</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
           ToolNova is a free platform. We sustain operations primarily through display advertising 
@@ -152,7 +144,7 @@ export default function EditorialPolicyPage() {
         </p>
         <p className="text-muted-foreground leading-relaxed mb-4">
           We may also participate in affiliate programs in the future. If we ever do, 
-          any affiliate links will be clearly marked with "(affiliate link)" or a similar disclosure 
+          any affiliate links will be clearly marked with"(affiliate link)" or a similar disclosure 
           adjacent to the link. Affiliate relationships <strong>never influence our tool 
           recommendations or editorial verdicts</strong>.
         </p>
@@ -178,7 +170,7 @@ export default function EditorialPolicyPage() {
           </a>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-50 :bg-slate-700 transition-colors"
           >
             Contact Form
           </Link>

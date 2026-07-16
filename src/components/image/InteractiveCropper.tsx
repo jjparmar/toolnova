@@ -7,7 +7,7 @@ import {
   useState,
   type CSSProperties,
   type PointerEvent as ReactPointerEvent,
-} from "react";
+} from"react";
 
 export type CropRect = { x: number; y: number; w: number; h: number };
 
@@ -22,15 +22,15 @@ type Props = {
 };
 
 type DragMode =
-  | "move"
-  | "n"
-  | "s"
-  | "e"
-  | "w"
-  | "ne"
-  | "nw"
-  | "se"
-  | "sw"
+  |"move"
+  |"n"
+  |"s"
+  |"e"
+  |"w"
+  |"ne"
+  |"nw"
+  |"se"
+  |"sw"
   | null;
 
 function clamp(n: number, min: number, max: number) {
@@ -48,7 +48,7 @@ export function InteractiveCropper({
   value,
   onChange,
   aspectRatio = null,
-  className = "",
+  className ="",
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -94,7 +94,7 @@ export function InteractiveCropper({
     if (!aspectRatio || aspectRatio <= 0) return rect;
     let { x, y, w, h } = rect;
     // Keep width, derive height from aspect (except pure height edge drags)
-    if (mode === "n" || mode === "s") {
+    if (mode ==="n" || mode ==="s") {
       w = Math.round(h * aspectRatio);
     } else {
       h = Math.round(w / aspectRatio);
@@ -136,7 +136,7 @@ export function InteractiveCropper({
       const dy = (e.clientY - startY) * scaleY;
       let { x, y, w, h } = startRect;
 
-      if (mode === "move") {
+      if (mode ==="move") {
         x = clamp(Math.round(startRect.x + dx), 0, naturalWidth - w);
         y = clamp(Math.round(startRect.y + dy), 0, naturalHeight - h);
       } else {
@@ -195,36 +195,36 @@ export function InteractiveCropper({
   const box = toDisplay(value);
   const handles: { mode: DragMode; style: CSSProperties; cursor: string }[] =
     [
-      { mode: "nw", style: { left: -6, top: -6 }, cursor: "nwse-resize" },
-      { mode: "ne", style: { right: -6, top: -6 }, cursor: "nesw-resize" },
-      { mode: "sw", style: { left: -6, bottom: -6 }, cursor: "nesw-resize" },
-      { mode: "se", style: { right: -6, bottom: -6 }, cursor: "nwse-resize" },
+      { mode:"nw", style: { left: -6, top: -6 }, cursor:"nwse-resize" },
+      { mode:"ne", style: { right: -6, top: -6 }, cursor:"nesw-resize" },
+      { mode:"sw", style: { left: -6, bottom: -6 }, cursor:"nesw-resize" },
+      { mode:"se", style: { right: -6, bottom: -6 }, cursor:"nwse-resize" },
       {
-        mode: "n",
-        style: { left: "50%", top: -6, transform: "translateX(-50%)" },
-        cursor: "ns-resize",
+        mode:"n",
+        style: { left:"50%", top: -6, transform:"translateX(-50%)" },
+        cursor:"ns-resize",
       },
       {
-        mode: "s",
-        style: { left: "50%", bottom: -6, transform: "translateX(-50%)" },
-        cursor: "ns-resize",
+        mode:"s",
+        style: { left:"50%", bottom: -6, transform:"translateX(-50%)" },
+        cursor:"ns-resize",
       },
       {
-        mode: "w",
-        style: { top: "50%", left: -6, transform: "translateY(-50%)" },
-        cursor: "ew-resize",
+        mode:"w",
+        style: { top:"50%", left: -6, transform:"translateY(-50%)" },
+        cursor:"ew-resize",
       },
       {
-        mode: "e",
-        style: { top: "50%", right: -6, transform: "translateY(-50%)" },
-        cursor: "ew-resize",
+        mode:"e",
+        style: { top:"50%", right: -6, transform:"translateY(-50%)" },
+        cursor:"ew-resize",
       },
     ];
 
   return (
     <div
       ref={containerRef}
-      className={`relative w-full select-none touch-none bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden flex items-center justify-center min-h-[240px] ${className}`}
+      className={`relative w-full select-none touch-none bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center min-h-[240px] ${className}`}
     >
       <img
         ref={imgRef}
@@ -241,7 +241,7 @@ export function InteractiveCropper({
           <div
             className="pointer-events-none absolute inset-0"
             style={{
-              boxShadow: `inset ${box.left}px ${box.top}px 0 0 rgba(0,0,0,0.45),
+              boxShadow:`inset ${box.left}px ${box.top}px 0 0 rgba(0,0,0,0.45),
                 inset ${box.left + box.width - display.w - display.left}px ${box.top}px 0 0 rgba(0,0,0,0.45)`,
             }}
           />
@@ -297,9 +297,9 @@ export function InteractiveCropper({
               top: box.top,
               width: box.width,
               height: box.height,
-              cursor: "move",
+              cursor:"move",
             }}
-            onPointerDown={(e) => onPointerDown(e, "move")}
+            onPointerDown={(e) => onPointerDown(e,"move")}
           >
             {/* Rule of thirds guides */}
             <div className="absolute inset-0 pointer-events-none opacity-40">

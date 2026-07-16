@@ -3,7 +3,7 @@
  */
 export function safeCallbackUrl(
   raw: string | null | undefined,
-  fallback = "/dashboard",
+  fallback ="/dashboard",
 ): string {
   if (!raw) return fallback;
   // Relative site path only
@@ -14,8 +14,8 @@ export function safeCallbackUrl(
 }
 
 /** Read callbackUrl from the current browser URL (client-only). */
-export function getClientCallbackUrl(fallback = "/dashboard"): string {
-  if (typeof window === "undefined") return fallback;
+export function getClientCallbackUrl(fallback ="/dashboard"): string {
+  if (typeof window ==="undefined") return fallback;
   try {
     const params = new URLSearchParams(window.location.search);
     return safeCallbackUrl(params.get("callbackUrl"), fallback);

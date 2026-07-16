@@ -1,9 +1,9 @@
 "use client";
 
-import EnhancedToolLayout from "@/components/EnhancedToolLayout";
-import { PremiumToolWrapper } from "@/components/PremiumToolWrapper";
-import { FAQSection } from "@/components/FAQSection";
-import { HomeworkResultFormatter } from "@/components/HomeworkResultFormatter";
+import EnhancedToolLayout from"@/components/EnhancedToolLayout";
+import { PremiumToolWrapper } from"@/components/PremiumToolWrapper";
+import { FAQSection } from"@/components/FAQSection";
+import { HomeworkResultFormatter } from"@/components/HomeworkResultFormatter";
 import {
   BookOpen,
   Brain,
@@ -17,9 +17,9 @@ import {
   Zap,
   Lightbulb,
   Award,
-} from "lucide-react";
+} from"lucide-react";
 
-const systemPrompt = `You are a patient, accurate tutor helping students learn step-by-step.
+const systemPrompt =`You are a patient, accurate tutor helping students learn step-by-step.
 
 OUTPUT RULES:
 - Use the exact structure requested in the user prompt (section labels as specified)
@@ -39,101 +39,91 @@ TEACHING APPROACH:
 
 const toolOptions = [
   {
-    id: "subject",
-    label: "Subject Area",
-    type: "select" as const,
+    id:"subject",
+    label:"Subject Area",
+    type:"select" as const,
     options: [
-      { value: "math", label: "🔢 Mathematics" },
-      { value: "physics", label: "⚛️ Physics" },
-      { value: "chemistry", label: "🧪 Chemistry" },
-      { value: "biology", label: "🧬 Biology" },
-      { value: "history", label: "📜 History" },
-      { value: "english", label: "📖 English/Literature" },
-      { value: "programming", label: "💻 Programming" },
-      { value: "economics", label: "📊 Economics" },
-      { value: "geography", label: "🌍 Geography" },
-      { value: "general", label: "📚 General" },
+      { value:"math", label:"🔢 Mathematics" },
+      { value:"physics", label:"⚛️ Physics" },
+      { value:"chemistry", label:"🧪 Chemistry" },
+      { value:"biology", label:"🧬 Biology" },
+      { value:"history", label:"📜 History" },
+      { value:"english", label:"📖 English/Literature" },
+      { value:"programming", label:"💻 Programming" },
+      { value:"economics", label:"📊 Economics" },
+      { value:"geography", label:"🌍 Geography" },
+      { value:"general", label:"📚 General" },
     ],
-    defaultValue: "general",
+    defaultValue:"general",
   },
   {
-    id: "gradeLevel",
-    label: "Grade Level",
-    type: "select" as const,
+    id:"gradeLevel",
+    label:"Grade Level",
+    type:"select" as const,
     options: [
-      { value: "elementary", label: "🎒 Elementary School" },
-      { value: "middle", label: "📓 Middle School" },
-      { value: "high", label: "🎓 High School" },
-      { value: "college", label: "🏛️ College/University" },
+      { value:"elementary", label:"🎒 Elementary School" },
+      { value:"middle", label:"📓 Middle School" },
+      { value:"high", label:"🎓 High School" },
+      { value:"college", label:"🏛️ College/University" },
     ],
-    defaultValue: "high",
+    defaultValue:"high",
   },
   {
-    id: "explanation",
-    label: "Explanation Style",
-    type: "select" as const,
+    id:"explanation",
+    label:"Explanation Style",
+    type:"select" as const,
     options: [
-      { value: "detailed", label: "📝 Detailed Step-by-Step" },
-      { value: "concise", label: "⚡ Concise Answer" },
-      { value: "eli5", label: "🧒 Explain Like I'm 5" },
-      { value: "visual", label: "📊 With Visual Explanations" },
+      { value:"detailed", label:"📝 Detailed Step-by-Step" },
+      { value:"concise", label:"⚡ Concise Answer" },
+      { value:"eli5", label:"🧒 Explain Like I'm 5" },
+      { value:"visual", label:"📊 With Visual Explanations" },
     ],
-    defaultValue: "detailed",
+    defaultValue:"detailed",
   },
   {
-    id: "includeExamples",
-    label: "Include Practice Problems",
-    type: "toggle" as const,
+    id:"includeExamples",
+    label:"Include Practice Problems",
+    type:"toggle" as const,
     defaultValue: true,
   },
   {
-    id: "showFormulas",
-    label: "Show Relevant Formulas",
-    type: "toggle" as const,
+    id:"showFormulas",
+    label:"Show Relevant Formulas",
+    type:"toggle" as const,
     defaultValue: true,
   },
 ];
 
 const generatePrompt = (input: string, options?: Record<string, any>) => {
-  const subject = options?.subject || "general";
-  const gradeLevel = options?.gradeLevel || "high";
-  const explanation = options?.explanation || "detailed";
+  const subject = options?.subject ||"general";
+  const gradeLevel = options?.gradeLevel ||"high";
+  const explanation = options?.explanation ||"detailed";
   const includeExamples = options?.includeExamples ?? true;
   const showFormulas = options?.showFormulas ?? true;
 
   const gradeLevelContext: Record<string, string> = {
-    elementary:
-      "elementary school level (ages 6-11). Use simple, clear language with relatable examples and basic concepts",
-    middle:
-      "middle school level (ages 11-14). Use age-appropriate language with intermediate concepts and practical examples",
-    high: "high school level (ages 14-18). Use sophisticated language with advanced topics and detailed analytical thinking",
-    college:
-      "college/university level. Use academic language with in-depth analysis, complex problem-solving, and theoretical frameworks",
+    elementary:"elementary school level (ages 6-11). Use simple, clear language with relatable examples and basic concepts",
+    middle:"middle school level (ages 11-14). Use age-appropriate language with intermediate concepts and practical examples",
+    high:"high school level (ages 14-18). Use sophisticated language with advanced topics and detailed analytical thinking",
+    college:"college/university level. Use academic language with in-depth analysis, complex problem-solving, and theoretical frameworks",
   };
 
   const explanationStyles: Record<string, string> = {
-    detailed:
-      "Provide comprehensive step-by-step explanations with detailed reasoning, showing WHY each step is necessary",
-    concise:
-      "Give clear, direct solutions with essential steps only. Focus on efficiency while maintaining clarity",
-    eli5: "Explain in the simplest possible terms using analogies, metaphors, and everyday examples anyone can understand",
-    visual:
-      "Include detailed descriptions of visual representations, diagrams, charts, or illustrations to aid understanding",
+    detailed:"Provide comprehensive step-by-step explanations with detailed reasoning, showing WHY each step is necessary",
+    concise:"Give clear, direct solutions with essential steps only. Focus on efficiency while maintaining clarity",
+    eli5:"Explain in the simplest possible terms using analogies, metaphors, and everyday examples anyone can understand",
+    visual:"Include detailed descriptions of visual representations, diagrams, charts, or illustrations to aid understanding",
   };
 
   const subjectSpecifics: Record<string, string> = {
-    math: "Show all mathematical work clearly. Use proper notation. Explain the logic behind each calculation.",
-    science:
-      "Explain scientific concepts and principles. Connect theory to real-world applications.",
-    english:
-      "Analyze literary elements, provide textual evidence, and explain interpretations thoroughly.",
-    history:
-      "Provide historical context, explain cause-and-effect relationships, and analyze significance.",
-    general:
-      "Provide clear, logical explanations appropriate for the subject matter.",
+    math:"Show all mathematical work clearly. Use proper notation. Explain the logic behind each calculation.",
+    science:"Explain scientific concepts and principles. Connect theory to real-world applications.",
+    english:"Analyze literary elements, provide textual evidence, and explain interpretations thoroughly.",
+    history:"Provide historical context, explain cause-and-effect relationships, and analyze significance.",
+    general:"Provide clear, logical explanations appropriate for the subject matter.",
   };
 
-  let prompt = `# Role & Task
+  let prompt =`# Role & Task
 You are an expert tutor and educator. Your goal is to help a student understand and solve their homework problem while promoting genuine learning and comprehension.
 
 # Student Context
@@ -172,14 +162,13 @@ Break down the solution into clear, numbered steps:
 - Explain the reasoning behind each decision
 
 ${
-  explanation === "detailed"
-    ? `
+  explanation ==="detailed"
+    ?`
 **Note**: For each step, include:
 - The mathematical/logical operation performed
 - Why this operation is appropriate
-- How it connects to the overall solution strategy
-`
-    : ""
+- How it connects to the overall solution strategy`
+    :""
 }
 
 ## ✅ VERIFICATION
@@ -189,27 +178,25 @@ Show how to check if the answer is correct:
 - Check if the answer makes logical sense
 - Confirm units, signs, or formats are correct
 ${
-  showFormulas && ["math", "physics", "chemistry"].includes(subject)
-    ? `
+  showFormulas && ["math","physics","chemistry"].includes(subject)
+    ?`
 ## 📐 FORMULAS & CONCEPTS
 List and explain all formulas, equations, or key concepts used:
 - **Formula Name**: [Write the formula]
   - **What it means**: [Explanation]
   - **When to use it**: [Context]
-  - **Variables explained**: [Define each variable]
-`
-    : ""
+  - **Variables explained**: [Define each variable]`
+    :""
 }
 ${
   includeExamples
-    ? `
+    ?`
 ## 💡 PRACTICE PROBLEM
 Provide a similar problem for practice:
 - **Problem**: [Write a similar problem]
 - **Hint**: [Give a helpful hint]
-- **Expected approach**: [Brief outline of solution method]
-`
-    : ""
+- **Expected approach**: [Brief outline of solution method]`
+    :""
 }
 
 ## 🎓 KEY CONCEPTS EXPLAINED
@@ -225,8 +212,8 @@ Identify and explain the main concepts:
 3. **Use Appropriate Language**: Match vocabulary and complexity to ${gradeLevel} level
 4. **Connect to Prior Knowledge**: Reference concepts the student should already know
 5. **Encourage Critical Thinking**: Ask rhetorical questions that promote deeper understanding
-${gradeLevel === "elementary" ? "6. **Be Encouraging**: Use positive, supportive language that builds confidence" : ""}
-${gradeLevel === "college" ? "6. **Academic Rigor**: Include theoretical background and advanced analytical frameworks" : ""}
+${gradeLevel ==="elementary" ?"6. **Be Encouraging**: Use positive, supportive language that builds confidence" :""}
+${gradeLevel ==="college" ?"6. **Academic Rigor**: Include theoretical background and advanced analytical frameworks" :""}
 
 # Quality Standards
 Before finalizing, verify:
@@ -237,7 +224,7 @@ Before finalizing, verify:
 - ✓ Student can learn from this, not just copy it
 - ✓ Work is organized and easy to follow
 - ✓ Verification method is provided
-${includeExamples ? "- ✓ Practice problem is similar but not identical" : ""}
+${includeExamples ?"- ✓ Practice problem is similar but not identical" :""}
 
 # Special Instructions
 - Never just give the answer without explanation
@@ -255,117 +242,108 @@ Now provide the complete educational solution following this structure precisely
 const features = [
   {
     icon: Brain,
-    title: "Step-by-Step Solutions",
-    description:
-      "Get detailed explanations that help you understand the problem, not just the answer",
-    gradient: "from-blue-500 to-indigo-600",
-    bgLight: "bg-blue-50",
+    title:"Step-by-Step Solutions",
+    description:"Get detailed explanations that help you understand the problem, not just the answer",
+    gradient:"from-blue-500 to-indigo-600",
+    bgLight:"bg-blue-50",
   },
   {
     icon: Target,
-    title: "Multiple Subjects",
-    description:
-      "Support for Math, Science, History, English, Programming, and more subjects across all grade levels",
-    gradient: "from-purple-500 to-pink-600",
-    bgLight: "bg-purple-50",
+    title:"Multiple Subjects",
+    description:"Support for Math, Science, History, English, Programming, and more subjects across all grade levels",
+    gradient:"from-purple-500 to-pink-600",
+    bgLight:"bg-purple-50",
   },
   {
     icon: Lightbulb,
-    title: "Practice Problems",
-    description:
-      "Receive similar practice problems to reinforce your learning and build confidence",
-    gradient: "from-green-500 to-emerald-600",
-    bgLight: "bg-green-50",
+    title:"Practice Problems",
+    description:"Receive similar practice problems to reinforce your learning and build confidence",
+    gradient:"from-green-500 to-emerald-600",
+    bgLight:"bg-green-50",
   },
 ];
 
 const howItWorks = [
   {
     step: 1,
-    title: "Enter Your Problem",
-    desc: "Type or paste your homework question",
+    title:"Enter Your Problem",
+    desc:"Type or paste your homework question",
     icon: BookOpen,
-    color: "from-blue-500 to-indigo-600",
+    color:"from-blue-500 to-indigo-600",
   },
   {
     step: 2,
-    title: "Set Preferences",
-    desc: "Choose subject, grade level, and explanation style",
+    title:"Set Preferences",
+    desc:"Choose subject, grade level, and explanation style",
     icon: Target,
-    color: "from-purple-500 to-pink-600",
+    color:"from-purple-500 to-pink-600",
   },
   {
     step: 3,
-    title: "Get Solution",
-    desc: "Receive structured, verified step-by-step answer",
+    title:"Get Solution",
+    desc:"Receive structured, verified step-by-step answer",
     icon: Award,
-    color: "from-green-500 to-emerald-600",
+    color:"from-green-500 to-emerald-600",
   },
 ];
 
 const relatedTools = [
   {
-    name: "Notes Generator",
-    slug: "notes-generator",
+    name:"Notes Generator",
+    slug:"notes-generator",
     icon: BookOpen,
-    color: "text-blue-600",
+    color:"text-blue-600",
   },
   {
-    name: "MCQ Generator",
-    slug: "mcq-generator",
+    name:"MCQ Generator",
+    slug:"mcq-generator",
     icon: Target,
-    color: "text-purple-600",
+    color:"text-purple-600",
   },
   {
-    name: "Formula Generator",
-    slug: "formula-generator",
+    name:"Formula Generator",
+    slug:"formula-generator",
     icon: Calculator,
-    color: "text-green-600",
+    color:"text-green-600",
   },
   {
-    name: "Concept Explainer",
-    slug: "concept-explainer",
+    name:"Concept Explainer",
+    slug:"concept-explainer",
     icon: Lightbulb,
-    color: "text-orange-600",
+    color:"text-orange-600",
   },
 ];
 
 const faqs = [
   {
-    question: "How does the homework solver work?",
-    answer:
-      "Our AI analyzes your problem, breaks it down into steps, and provides detailed explanations. It focuses on teaching you the concept, not just giving you the answer.",
-    category: "Usage",
+    question:"How does the homework solver work?",
+    answer:"Our AI analyzes your problem, breaks it down into steps, and provides detailed explanations. It focuses on teaching you the concept, not just giving you the answer.",
+    category:"Usage",
   },
   {
-    question: "What subjects are supported?",
-    answer:
-      "We support Math, Physics, Chemistry, Biology, History, English/Literature, Programming, Economics, Geography, and general topics across all grade levels from elementary to college.",
-    category: "Features",
+    question:"What subjects are supported?",
+    answer:"We support Math, Physics, Chemistry, Biology, History, English/Literature, Programming, Economics, Geography, and general topics across all grade levels from elementary to college.",
+    category:"Features",
   },
   {
-    question: "Can I use this for exam preparation?",
-    answer:
-      "Yes! Enable 'Include Practice Problems' to get similar questions for practice. This helps you understand the concept and prepare for tests.",
-    category: "Usage",
+    question:"Can I use this for exam preparation?",
+    answer:"Yes! Enable 'Include Practice Problems' to get similar questions for practice. This helps you understand the concept and prepare for tests.",
+    category:"Usage",
   },
   {
-    question: "Is the solution always correct?",
-    answer:
-      "Our AI provides highly accurate solutions, but we recommend verifying important answers. Use the verification section to check your work and learn the problem-solving process.",
-    category: "Accuracy",
+    question:"Is the solution always correct?",
+    answer:"Our AI provides highly accurate solutions, but we recommend verifying important answers. Use the verification section to check your work and learn the problem-solving process.",
+    category:"Accuracy",
   },
   {
-    question: "Can I adjust the explanation level?",
-    answer:
-      "Absolutely! Choose from Detailed (comprehensive), Concise (quick), ELI5 (very simple), or Visual (with diagrams). Pick what works best for your learning style.",
-    category: "Features",
+    question:"Can I adjust the explanation level?",
+    answer:"Absolutely! Choose from Detailed (comprehensive), Concise (quick), ELI5 (very simple), or Visual (with diagrams). Pick what works best for your learning style.",
+    category:"Features",
   },
   {
-    question: "Will this help me learn or just give answers?",
-    answer:
-      "It's designed to teach! Each solution includes step-by-step explanations, verification methods, practice problems, and pro tips to help you truly understand the concept.",
-    category: "Learning",
+    question:"Will this help me learn or just give answers?",
+    answer:"It's designed to teach! Each solution includes step-by-step explanations, verification methods, practice problems, and pro tips to help you truly understand the concept.",
+    category:"Learning",
   },
 ];
 
@@ -386,11 +364,11 @@ export default function HomeworkSolverClient() {
       ctaDescription="Get detailed homework help in seconds with AI-powered explanations"
       ctaIcon={Brain}
     >
-      <div className="mx-6 mb-4 rounded-xl border border-amber-200 dark:border-amber-900/50 bg-amber-50/80 dark:bg-amber-950/30 px-4 py-3 text-sm text-amber-950 dark:text-amber-100">
-        <strong className="font-semibold">Learn, don&apos;t just copy.</strong>{" "}
+      <div className="mx-6 mb-4 rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-3 text-sm text-amber-950">
+        <strong className="font-semibold">Learn, don&apos;t just copy.</strong>{""}
         Use step-by-step explanations to understand the method. Follow your
         school&apos;s academic integrity policy — submitting AI answers as your
-        own work may violate course rules.{" "}
+        own work may violate course rules.{""}
         <a
           href="/blog/homework-solver-best-practices"
           className="underline font-medium hover:no-underline"

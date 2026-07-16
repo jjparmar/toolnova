@@ -51,7 +51,7 @@ export default function CareerToolsPage() {
             </div>
 
             {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
-            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral dark:prose-invert prose-lg">
+            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral prose-lg">
                 <h2 className="text-3xl font-extrabold text-foreground tracking-tight mb-6">
                     Navigating the Modern Job Market: ATS Optimization & Resume Strategy
                 </h2>
@@ -63,7 +63,7 @@ export default function CareerToolsPage() {
                     Designing High-Impact Resume Bullet Points that Get Noticed
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                    A common mistake on resumes is listing job duties rather than concrete achievements. Hiring managers want to see the impact of your work. By using a Resume Bullets builder, candidates can transform passive descriptions into impact-oriented statements. For example, instead of writing "responsible for managing social media," write "engineered a social media strategy that increased user engagement by 40% over six months." Utilizing action verbs and quantifying results shows your direct value and aligns your resume with what recruiters are looking for.
+                    A common mistake on resumes is listing job duties rather than concrete achievements. Hiring managers want to see the impact of your work. By using a Resume Bullets builder, candidates can transform passive descriptions into impact-oriented statements. For example, instead of writing"responsible for managing social media," write"engineered a social media strategy that increased user engagement by 40% over six months." Utilizing action verbs and quantifying results shows your direct value and aligns your resume with what recruiters are looking for.
                 </p>
 
                 <h3 className="text-2xl font-bold text-foreground mb-4">

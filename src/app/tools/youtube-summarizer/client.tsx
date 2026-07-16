@@ -1,6 +1,6 @@
 "use client";
 
-import EnhancedToolLayout from "@/components/EnhancedToolLayout";
+import EnhancedToolLayout from"@/components/EnhancedToolLayout";
 
 export default function YoutubeSummarizerClient() {
   const fetchAndSummarize = async (input: string) => {
@@ -11,29 +11,28 @@ export default function YoutubeSummarizerClient() {
 
     // 1. Fetch transcript from internal API
     const res = await fetch("/api/youtube/transcript", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method:"POST",
+      headers: {"Content-Type":"application/json" },
       body: JSON.stringify({ url }),
     });
 
     const errorData = await res.json().catch(() => ({}));
     if (!res.ok) {
       throw new Error(
-        typeof errorData?.error === "string"
+        typeof errorData?.error ==="string"
           ? errorData.error
-          : "Failed to fetch video transcript. Try a public video with captions.",
+          :"Failed to fetch video transcript. Try a public video with captions.",
       );
     }
 
     const text = errorData?.text;
-    if (!text || typeof text !== "string") {
-      throw new Error(
-        "No transcript available for this video. Try one with captions enabled.",
+    if (!text || typeof text !=="string") {
+      throw new Error("No transcript available for this video. Try one with captions enabled.",
       );
     }
 
     // 2. Summarize transcript via AI (counts toward daily free allowance)
-    const prompt = `Summarize this YouTube transcript for a student/professional who did not watch the video.
+    const prompt =`Summarize this YouTube transcript for a student/professional who did not watch the video.
 
 ## Required Markdown structure
 ### Overview
@@ -55,36 +54,35 @@ One short line on the ideal audience.
 Rules:
 - Do not invent timestamps unless clearly present in the text
 - Do not invent facts not in the transcript
-- No "Here is a summary" intro — start with ### Overview
+- No"Here is a summary" intro — start with ### Overview
 
 ## Transcript
 ${text.substring(0, 28000)}`;
 
     const aiRes = await fetch("/api/ai", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method:"POST",
+      headers: {"Content-Type":"application/json" },
       body: JSON.stringify({
         prompt,
-        toolSlug: "youtube-summarizer",
-        systemPrompt:
-          "You are an expert lecture summarizer. Produce accurate, structured Markdown summaries from transcripts. Never invent content not supported by the transcript. Be complete and useful.",
+        toolSlug:"youtube-summarizer",
+        systemPrompt:"You are an expert lecture summarizer. Produce accurate, structured Markdown summaries from transcripts. Never invent content not supported by the transcript. Be complete and useful.",
       }),
     });
 
     const data = await aiRes.json().catch(() => ({}));
     if (!aiRes.ok) {
       throw new Error(
-        typeof data?.error === "string"
+        typeof data?.error ==="string"
           ? data.error
-          : "AI summarization failed. Please try again.",
+          :"AI summarization failed. Please try again.",
       );
     }
-    if (!data?.result || typeof data.result !== "string") {
+    if (!data?.result || typeof data.result !=="string") {
       throw new Error("Empty summary from AI. Please try again.");
     }
 
     // Refresh header usage counter (this path uses isNonAITool wrapper)
-    if (typeof window !== "undefined") {
+    if (typeof window !=="undefined") {
       window.dispatchEvent(new Event("ai-usage-updated"));
     }
 

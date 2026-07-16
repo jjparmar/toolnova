@@ -1,10 +1,10 @@
 "use client";
 
-import Script from "next/script";
-import { siteConfig } from "@/config/site";
+import Script from"next/script";
+import { siteConfig } from"@/config/site";
 
 interface SemanticSEOProps {
-  type?: "website" | "article" | "tool" | "blog" | "category";
+  type?:"website" |"article" |"tool" |"blog" |"category";
   title?: string;
   description?: string;
   url?: string;
@@ -22,63 +22,52 @@ interface SemanticSEOProps {
  * Provides structured data optimized for AI search engines and voice search
  */
 export function SemanticSEO({
-  type = "website",
+  type ="website",
   title = siteConfig.name,
   description = siteConfig.description,
   url = siteConfig.url,
-  image = `${siteConfig.url}/logo.png`,
+  image =`${siteConfig.url}/logo.png`,
   keywords = [...siteConfig.keywords],
-  author = "ToolNova Team",
+  author ="ToolNova Team",
   datePublished,
   dateModified,
   category,
   speakableContent,
 }: SemanticSEOProps) {
-  const semanticMetaTags = {
-    "primary-topic": category || "AI Tools",
-    keywords: keywords.slice(0, 10).join(", "),
+  const semanticMetaTags = {"primary-topic": category ||"AI Tools",
+    keywords: keywords.slice(0, 10).join(","),
   };
 
   // Generate speakable specification for voice search
-  const speakableSchema = {
-    "@context": "https://schema.org",
-    "@type": "SpeakableSpecification",
-    cssSelector: [".speakable", ".hero-text", ".tool-description", "h1", "h2:first-of-type"],
-    xpath: [
-      "/html/head/title",
-      "/html/head/meta[@name='description']/@content",
-      "/html/body//h1",
+  const speakableSchema = {"@context":"https://schema.org","@type":"SpeakableSpecification",
+    cssSelector: [".speakable",".hero-text",".tool-description","h1","h2:first-of-type"],
+    xpath: ["/html/head/title","/html/head/meta[@name='description']/@content","/html/body//h1",
     ],
   };
 
   // Generate main entity schema
-  const mainEntitySchema = {
-    "@context": "https://schema.org",
-    "@type": type === "tool" ? "WebApplication" : type === "blog" ? "Article" : "WebPage",
+  const mainEntitySchema = {"@context":"https://schema.org","@type": type ==="tool" ?"WebApplication" : type ==="blog" ?"Article" :"WebPage",
     name: title,
     description,
     url,
     image,
-    ...(type === "blog" && {
-      author: {
-        "@type": "Organization",
-        name: "ToolNova Editorial Team",
+    ...(type ==="blog" && {
+      author: {"@type":"Organization",
+        name:"ToolNova Editorial Team",
       },
       datePublished: datePublished || new Date().toISOString(),
       dateModified: dateModified || new Date().toISOString(),
-      publisher: {
-        "@type": "Organization",
-        name: "ToolNova",
+      publisher: {"@type":"Organization",
+        name:"ToolNova",
         url: siteConfig.url,
       },
     }),
-    ...(type === "tool" && {
-      applicationCategory: "EducationalApplication",
-      operatingSystem: "Web Browser",
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
+    ...(type ==="tool" && {
+      applicationCategory:"EducationalApplication",
+      operatingSystem:"Web Browser",
+      offers: {"@type":"Offer",
+        price:"0",
+        priceCurrency:"USD",
       },
     }),
   };
@@ -90,7 +79,7 @@ export function SemanticSEO({
       ))}
 
       {/* Semantic content hints for AI */}
-      <meta name="about" content={keywords.slice(0, 5).join(", ")} />
+      <meta name="about" content={keywords.slice(0, 5).join(",")} />
       <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
       {/* Speakable Specification for Voice Search */}
@@ -127,13 +116,13 @@ export function SemanticSEO({
  */
 export function AEOContent({
   children,
-  as = "div",
+  as ="div",
   summary,
   keyPoints,
-  className = "",
+  className ="",
 }: {
   children: React.ReactNode;
-  as?: "div" | "section" | "article" | "aside";
+  as?:"div" |"section" |"article" |"aside";
   summary?: string;
   keyPoints?: string[];
   className?: string;
@@ -193,7 +182,7 @@ export function FeaturedSnippet({
         <ol className="list-decimal list-inside space-y-2">
           {steps.map((step) => (
             <li key={step.step} itemProp="step" itemScope itemType="https://schema.org/HowToStep">
-              <strong itemProp="name">{step.title}:</strong>{" "}
+              <strong itemProp="name">{step.title}:</strong>{""}
               <span itemProp="text">{step.description}</span>
             </li>
           ))}

@@ -13,21 +13,13 @@ interface FAQSectionProps {
     title?: string;
 }
 
-export function FAQSection({ faqs, title = "Frequently Asked Questions" }: FAQSectionProps) {
+export function FAQSection({ faqs, title ="Frequently Asked Questions" }: FAQSectionProps) {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     if (faqs.length === 0) return null;
 
     // Generate FAQ schema
-    const faqSchema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": faqs.map(faq => ({
-            "@type": "Question",
-            "name": faq.question,
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
+    const faqSchema = {"@context":"https://schema.org","@type":"FAQPage","mainEntity": faqs.map(faq => ({"@type":"Question","name": faq.question,"acceptedAnswer": {"@type":"Answer","text": faq.answer
             }
         }))
     };

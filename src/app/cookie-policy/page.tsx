@@ -1,25 +1,25 @@
 
-import { Metadata } from "next";
+import { Metadata } from"next";
 
-const LAST_UPDATED = "June 14, 2026";
+const LAST_UPDATED ="June 14, 2026";
 
 export const metadata: Metadata = {
-    title: "Cookie Policy | ToolNova",
-    description: "Detailed cookie policy for ToolNova. Learn how we use cookies to improve your experience and serve personalized advertisements.",
+    title:"Cookie Policy | ToolNova",
+    description:"Detailed cookie policy for ToolNova. Learn how we use cookies to improve your experience and serve personalized advertisements.",
     alternates: {
-        canonical: "https://www.toolnovahub.com/cookie-policy",
+        canonical:"https://www.toolnovahub.com/cookie-policy",
     },
 };
 
 export default function CookiePolicyPage() {
     return (
-        <div className="container mx-auto px-6 py-24 max-w-4xl text-slate-800 dark:text-slate-200">
+        <div className="container mx-auto px-6 py-24 max-w-4xl text-slate-800">
             <h1 className="text-4xl font-bold mb-8">Cookie Policy</h1>
             <p className="text-sm text-muted-foreground mb-12 italic">
                 Last Updated: {LAST_UPDATED}
             </p>
 
-            <div className="prose dark:prose-invert max-w-none space-y-10 leading-relaxed">
+            <div className="prose max-w-none space-y-10 leading-relaxed">
                 <section>
                     <h2 className="text-2xl font-bold">1. What are Cookies?</h2>
                     <p>
@@ -84,7 +84,7 @@ export default function CookiePolicyPage() {
                     </p>
                 </section>
 
-                <section className="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800">
+                <section className="bg-slate-50 p-8 rounded-2xl border border-slate-100">
                     <h2 className="text-xl font-bold mb-4">Contact for Cookie Related Inquiries</h2>
                     <p>
                         For any questions about our use of cookies, please contact

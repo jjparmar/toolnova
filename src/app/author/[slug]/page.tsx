@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
     }
 
     return {
-        title: `${author.name} | ToolNova`,
+        title:`${author.name} | ToolNova`,
         description: author.bio,
     };
 }

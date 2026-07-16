@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config/site";
+import { siteConfig } from"@/config/site";
 
 /**
  * Generate the dynamic OG image URL for a tool page.
@@ -7,8 +7,8 @@ import { siteConfig } from "@/config/site";
  * on the fly using Next.js ImageResponse.
  *
  * @example
- *   getToolOGImageUrl("Grammar Checker", "Fix grammar errors instantly.", "Writing");
- *   // => "https://www.toolnovahub.com/api/og?title=Grammar+Checker&description=Fix+grammar+errors+instantly.&category=Writing"
+ *   getToolOGImageUrl("Grammar Checker","Fix grammar errors instantly.","Writing");
+ *   // =>"https://www.toolnovahub.com/api/og?title=Grammar+Checker&description=Fix+grammar+errors+instantly.&category=Writing"
  */
 export function getToolOGImageUrl(
   title: string,
@@ -18,5 +18,5 @@ export function getToolOGImageUrl(
   const params = new URLSearchParams({ title });
   if (description) params.set("description", description);
   if (category) params.set("category", category);
-  return `${siteConfig.url}/api/og?${params.toString()}`;
+  return`${siteConfig.url}/api/og?${params.toString()}`;
 }

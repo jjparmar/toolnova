@@ -2,121 +2,91 @@
  * Schema.org structured data utilities for SEO/AEO/GEO optimization
  */
 
-export interface OrganizationSchema {
-  "@context": "https://schema.org";
-  "@type": "Organization";
+export interface OrganizationSchema {"@context":"https://schema.org";"@type":"Organization";
   name: string;
   url: string;
   logo: string;
   description: string;
   sameAs: string[];
-  contactPoint?: {
-    "@type": "ContactPoint";
+  contactPoint?: {"@type":"ContactPoint";
     email: string;
     contactType: string;
   };
 }
 
-export interface WebSiteSchema {
-  "@context": "https://schema.org";
-  "@type": "WebSite";
+export interface WebSiteSchema {"@context":"https://schema.org";"@type":"WebSite";
   name: string;
   url: string;
   description: string;
-  potentialAction: {
-    "@type": "SearchAction";
-    target: {
-      "@type": "EntryPoint";
+  potentialAction: {"@type":"SearchAction";
+    target: {"@type":"EntryPoint";
       urlTemplate: string;
-    };
-    "query-input": string;
+    };"query-input": string;
   };
 }
 
-export interface SoftwareApplicationSchema {
-  "@context": "https://schema.org";
-  "@type": "SoftwareApplication";
+export interface SoftwareApplicationSchema {"@context":"https://schema.org";"@type":"SoftwareApplication";
   name: string;
   description: string;
   url: string;
   applicationCategory: string;
-  offers: {
-    "@type": "Offer";
+  offers: {"@type":"Offer";
     price: string;
     priceCurrency: string;
   };
 }
 
-export interface FAQPageSchema {
-  "@context": "https://schema.org";
-  "@type": "FAQPage";
-  mainEntity: Array<{
-    "@type": "Question";
+export interface FAQPageSchema {"@context":"https://schema.org";"@type":"FAQPage";
+  mainEntity: Array<{"@type":"Question";
     name: string;
-    acceptedAnswer: {
-      "@type": "Answer";
+    acceptedAnswer: {"@type":"Answer";
       text: string;
     };
   }>;
 }
 
-export interface HowToSchema {
-  "@context": "https://schema.org";
-  "@type": "HowTo";
+export interface HowToSchema {"@context":"https://schema.org";"@type":"HowTo";
   name: string;
   description: string;
-  step: Array<{
-    "@type": "HowToStep";
+  step: Array<{"@type":"HowToStep";
     name: string;
     text: string;
     url?: string;
   }>;
 }
 
-export interface BreadcrumbListSchema {
-  "@context": "https://schema.org";
-  "@type": "BreadcrumbList";
-  itemListElement: Array<{
-    "@type": "ListItem";
+export interface BreadcrumbListSchema {"@context":"https://schema.org";"@type":"BreadcrumbList";
+  itemListElement: Array<{"@type":"ListItem";
     position: number;
     name: string;
     item: string;
   }>;
 }
 
-export interface ArticleSchema {
-  "@context": "https://schema.org";
-  "@type": "Article";
+export interface ArticleSchema {"@context":"https://schema.org";"@type":"Article";
   headline: string;
   description: string;
   image?: string;
   datePublished: string;
   dateModified: string;
-  author: {
-    "@type": "Person";
+  author: {"@type":"Person";
     name: string;
     url?: string;
     jobTitle?: string;
   };
-  publisher: {
-    "@type": "Organization";
+  publisher: {"@type":"Organization";
     name: string;
-    logo: {
-      "@type": "ImageObject";
+    logo: {"@type":"ImageObject";
       url: string;
     };
   };
-  mainEntityOfPage: {
-    "@type": "WebPage";
-    "@id": string;
+  mainEntityOfPage: {"@type":"WebPage";"@id": string;
   };
   wordCount?: number;
   articleBody?: string;
 }
 
-export interface PersonSchema {
-  "@context": "https://schema.org";
-  "@type": "Person";
+export interface PersonSchema {"@context":"https://schema.org";"@type":"Person";
   name: string;
   jobTitle: string;
   description: string;
@@ -129,23 +99,16 @@ export interface PersonSchema {
  * Generate Organization schema for the website
  */
 export function getOrganizationSchema(): OrganizationSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "ToolNova",
-    url: "https://www.toolnovahub.com",
-    logo: "https://www.toolnovahub.com/logo.png",
-    description:
-      "The ultimate hub for premium AI tools. Edit PDFs, optimize images, and boost productivity with ToolNova's advanced suite.",
-    sameAs: [
-      "https://twitter.com/toolnovahub",
-      "https://github.com/toolnovahub",
-      "https://linkedin.com/company/toolnovahub",
+  return {"@context":"https://schema.org","@type":"Organization",
+    name:"ToolNova",
+    url:"https://www.toolnovahub.com",
+    logo:"https://www.toolnovahub.com/logo.png",
+    description:"The ultimate hub for premium AI tools. Edit PDFs, optimize images, and boost productivity with ToolNova's advanced suite.",
+    sameAs: ["https://twitter.com/toolnovahub","https://github.com/toolnovahub","https://linkedin.com/company/toolnovahub",
     ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      email: "support@toolnovahub.com",
-      contactType: "Customer Service",
+    contactPoint: {"@type":"ContactPoint",
+      email:"support@toolnovahub.com",
+      contactType:"Customer Service",
     },
   };
 }
@@ -154,20 +117,14 @@ export function getOrganizationSchema(): OrganizationSchema {
  * Generate WebSite schema for search functionality
  */
 export function getWebSiteSchema(): WebSiteSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "ToolNova",
-    url: "https://www.toolnovahub.com",
-    description: "The ultimate hub for premium AI tools.",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate:
-          "https://www.toolnovahub.com/search?q={search_term_string}",
-      },
-      "query-input": "required name=search_term_string",
+  return {"@context":"https://schema.org","@type":"WebSite",
+    name:"ToolNova",
+    url:"https://www.toolnovahub.com",
+    description:"The ultimate hub for premium AI tools.",
+    potentialAction: {"@type":"SearchAction",
+      target: {"@type":"EntryPoint",
+        urlTemplate:"https://www.toolnovahub.com/search?q={search_term_string}",
+      },"query-input":"required name=search_term_string",
     },
   };
 }
@@ -181,18 +138,15 @@ export function getToolSchema(
   url: string,
   featureList?: string[]
 ): SoftwareApplicationSchema & { operatingSystem: string; featureList?: string[] } {
-  return {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+  return {"@context":"https://schema.org","@type":"SoftwareApplication",
     name: toolName,
     description,
     url,
-    applicationCategory: "ProductivityApplication",
-    operatingSystem: "Web Browser, Chrome, Firefox, Safari, Edge",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
+    applicationCategory:"ProductivityApplication",
+    operatingSystem:"Web Browser, Chrome, Firefox, Safari, Edge",
+    offers: {"@type":"Offer",
+      price:"0",
+      priceCurrency:"USD",
     },
     featureList: featureList,
   };
@@ -204,14 +158,10 @@ export function getToolSchema(
 export function getFAQSchema(
   faqs: Array<{ question: string; answer: string }>,
 ): FAQPageSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
+  return {"@context":"https://schema.org","@type":"FAQPage",
+    mainEntity: faqs.map((faq) => ({"@type":"Question",
       name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
+      acceptedAnswer: {"@type":"Answer",
         text: faq.answer,
       },
     })),
@@ -226,13 +176,10 @@ export function getHowToSchema(
   description: string,
   steps: Array<{ name: string; text: string; url?: string }>,
 ): HowToSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
+  return {"@context":"https://schema.org","@type":"HowTo",
     name: title,
     description,
-    step: steps.map((step) => ({
-      "@type": "HowToStep",
+    step: steps.map((step) => ({"@type":"HowToStep",
       name: step.name,
       text: step.text,
       url: step.url,
@@ -246,11 +193,8 @@ export function getHowToSchema(
 export function getBreadcrumbSchema(
   breadcrumbs: Array<{ name: string; url: string }>,
 ): BreadcrumbListSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: breadcrumbs.map((crumb, index) => ({
-      "@type": "ListItem",
+  return {"@context":"https://schema.org","@type":"BreadcrumbList",
+    itemListElement: breadcrumbs.map((crumb, index) => ({"@type":"ListItem",
       position: index + 1,
       name: crumb.name,
       item: crumb.url,
@@ -273,31 +217,24 @@ export function getArticleSchema(
   imageUrl?: string,
   wordCount?: number,
 ): ArticleSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Article",
+  return {"@context":"https://schema.org","@type":"Article",
     headline: title,
     description,
     image: imageUrl,
     datePublished,
     dateModified,
-    author: {
-      "@type": "Person",
+    author: {"@type":"Person",
       name: authorName,
       url: authorUrl,
       jobTitle: authorJobTitle,
     },
-    publisher: {
-      "@type": "Organization",
-      name: "ToolNova",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://www.toolnovahub.com/logo.png",
+    publisher: {"@type":"Organization",
+      name:"ToolNova",
+      logo: {"@type":"ImageObject",
+        url:"https://www.toolnovahub.com/logo.png",
       },
     },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": url,
+    mainEntityOfPage: {"@type":"WebPage","@id": url,
     },
     wordCount,
   };
@@ -314,9 +251,7 @@ export function getPersonSchema(
   socials?: string[],
   expertise?: string[],
 ): PersonSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Person",
+  return {"@context":"https://schema.org","@type":"Person",
     name,
     jobTitle,
     description,
@@ -340,12 +275,9 @@ export function schemaToJsonLd(schema: any): string {
 /**
  * Speakable Schema for Voice Search Optimization
  */
-export interface SpeakableSchema {
-  "@context": "https://schema.org";
-  "@type": "WebPage";
+export interface SpeakableSchema {"@context":"https://schema.org";"@type":"WebPage";
   name: string;
-  speakable: {
-    "@type": "SpeakableSpecification";
+  speakable: {"@type":"SpeakableSpecification";
     cssSelector: string[];
   };
 }
@@ -353,11 +285,8 @@ export interface SpeakableSchema {
 /**
  * ItemList Schema for Tool Categories
  */
-export interface ItemListSchema {
-  "@context": "https://schema.org";
-  "@type": "ItemList";
-  itemListElement: Array<{
-    "@type": "ListItem";
+export interface ItemListSchema {"@context":"https://schema.org";"@type":"ItemList";
+  itemListElement: Array<{"@type":"ListItem";
     position: number;
     url: string;
     name: string;
@@ -374,8 +303,7 @@ export interface EnhancedSoftwareApplicationSchema extends SoftwareApplicationSc
   operatingSystem?: string;
   requirements?: string;
   softwareVersion?: string;
-  author?: {
-    "@type": "Organization";
+  author?: {"@type":"Organization";
     name: string;
   };
 }
@@ -387,12 +315,9 @@ export function getSpeakableSchema(
   pageName: string,
   cssSelectors: string[],
 ): SpeakableSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
+  return {"@context":"https://schema.org","@type":"WebPage",
     name: pageName,
-    speakable: {
-      "@type": "SpeakableSpecification",
+    speakable: {"@type":"SpeakableSpecification",
       cssSelector: cssSelectors,
     },
   };
@@ -404,11 +329,8 @@ export function getSpeakableSchema(
 export function getItemListSchema(
   items: Array<{ name: string; url: string; description?: string }>,
 ): ItemListSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
+  return {"@context":"https://schema.org","@type":"ItemList",
+    itemListElement: items.map((item, index) => ({"@type":"ListItem",
       position: index + 1,
       url: item.url,
       name: item.name,
@@ -433,23 +355,19 @@ export function getComprehensiveToolSchema(
   howTo: HowToSchema;
   faq: FAQPageSchema;
 } {
-  const softwareSchema: EnhancedSoftwareApplicationSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+  const softwareSchema: EnhancedSoftwareApplicationSchema = {"@context":"https://schema.org","@type":"SoftwareApplication",
     name: toolName,
     description: description,
     url: url,
-    applicationCategory: "UtilityApplication",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
+    applicationCategory:"UtilityApplication",
+    offers: {"@type":"Offer",
+      price:"0",
+      priceCurrency:"USD",
     },
     featureList: features,
-    operatingSystem: "Web Browser",
-    author: {
-      "@type": "Organization",
-      name: "ToolNova",
+    operatingSystem:"Web Browser",
+    author: {"@type":"Organization",
+      name:"ToolNova",
     },
   };
 

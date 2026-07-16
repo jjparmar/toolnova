@@ -1,68 +1,54 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import NextImage from "next/image";
-import { getAllBlogPosts, getAllCategories } from "@/data/blog";
+import { Metadata } from"next";
+import Link from"next/link";
+import NextImage from"next/image";
+import { getAllBlogPosts, getAllCategories } from"@/data/blog";
 import {
   FaArrowRight,
   FaCalendar,
   FaClock,
   FaRocket,
   FaChevronRight,
-} from "react-icons/fa";
-import { siteConfig } from "@/config/site";
-import { TOOL_COUNT_LABEL } from "@/data/tools";
+} from"react-icons/fa";
+import { siteConfig } from"@/config/site";
+import { TOOL_COUNT_LABEL } from"@/data/tools";
 
 export const metadata: Metadata = {
-  title: "Blog - AI Tools Guides, Tips & Expert Reviews 2026 | ToolNova",
-  description:
-    "Expert guides on AI tools, productivity, writing, study tips, and business technology. Learn how to use free AI tools effectively to boost your productivity and achieve your goals.",
-  keywords: [
-    "AI tools blog",
-    "productivity tips",
-    "study guides",
-    "writing tips",
-    "AI guides",
-    "free tools tutorials",
-    "AI tool reviews",
-    "business technology guides",
-    "cloud software reviews",
+  title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026 | ToolNova",
+  description:"Expert guides on AI tools, productivity, writing, study tips, and business technology. Learn how to use free AI tools effectively to boost your productivity and achieve your goals.",
+  keywords: ["AI tools blog","productivity tips","study guides","writing tips","AI guides","free tools tutorials","AI tool reviews","business technology guides","cloud software reviews",
   ],
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
-      follow: true,
-      "max-snippet": -1,
-      "max-image-preview": "large",
+      follow: true,"max-snippet": -1,"max-image-preview":"large",
     },
   },
   openGraph: {
-    title: "Blog - AI Tools Guides, Tips & Expert Reviews 2026 | ToolNova",
-    description:
-      "Expert guides on AI tools, productivity, writing, and study tips.",
-    url: `${siteConfig.url}/blog`,
-    type: "website",
+    title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026 | ToolNova",
+    description:"Expert guides on AI tools, productivity, writing, and study tips.",
+    url:`${siteConfig.url}/blog`,
+    type:"website",
     images: [
       {
-        url: `${siteConfig.url}/og-image.png`,
+        url:`${siteConfig.url}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "ToolNova Blog",
+        alt:"ToolNova Blog",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Blog - AI Tools Guides, Tips & Expert Reviews 2026 | ToolNova",
-    description:
-      "Expert guides on AI tools, productivity, writing, and study tips.",
+    card:"summary_large_image",
+    title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026 | ToolNova",
+    description:"Expert guides on AI tools, productivity, writing, and study tips.",
     images: [`${siteConfig.url}/og-image.png`],
-    creator: "@toolnovahub",
-    site: "@toolnovahub",
+    creator:"@toolnovahub",
+    site:"@toolnovahub",
   },
   alternates: {
-    canonical: `${siteConfig.url}/blog`,
+    canonical:`${siteConfig.url}/blog`,
   },
 };
 
@@ -72,30 +58,23 @@ export default function BlogPage() {
   const featuredPost = blogPosts[0];
   const otherPosts = blogPosts.slice(1);
 
-  const blogCollectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    name: "ToolNova Blog - AI Tools Guides & Expert Reviews",
-    description:
-      "Expert guides on AI tools, productivity, writing, study tips, and business technology.",
-    url: `${siteConfig.url}/blog`,
-    publisher: {
-      "@type": "Organization",
-      name: "ToolNova",
+  const blogCollectionSchema = {"@context":"https://schema.org","@type":"CollectionPage",
+    name:"ToolNova Blog - AI Tools Guides & Expert Reviews",
+    description:"Expert guides on AI tools, productivity, writing, study tips, and business technology.",
+    url:`${siteConfig.url}/blog`,
+    publisher: {"@type":"Organization",
+      name:"ToolNova",
       url: siteConfig.url,
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteConfig.url}/logo.png`,
+      logo: {"@type":"ImageObject",
+        url:`${siteConfig.url}/logo.png`,
       },
     },
-    mainEntity: {
-      "@type": "ItemList",
-      name: "ToolNova Blog Articles",
+    mainEntity: {"@type":"ItemList",
+      name:"ToolNova Blog Articles",
       numberOfItems: blogPosts.length,
-      itemListElement: blogPosts.slice(0, 20).map((post, index) => ({
-        "@type": "ListItem",
+      itemListElement: blogPosts.slice(0, 20).map((post, index) => ({"@type":"ListItem",
         position: index + 1,
-        url: `${siteConfig.url}/blog/${post.slug}`,
+        url:`${siteConfig.url}/blog/${post.slug}`,
         name: post.title,
       })),
     },

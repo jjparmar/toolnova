@@ -1,50 +1,49 @@
 /* eslint-disable @next/next/google-font-preconnect */
-import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
-import { CookieConsent } from "@/components/CookieConsent";
-import { ConsentedScripts } from "@/components/ConsentedScripts";
-import Script from "next/script";
-import "./globals.css";
-import "./accessibility.css";
-import { Toaster } from "@/components/ui/toaster";
+import type { Metadata } from"next";
+import { Inter, Plus_Jakarta_Sans, Geist_Mono } from"next/font/google";
+import { CookieConsent } from"@/components/CookieConsent";
+import { ConsentedScripts } from"@/components/ConsentedScripts";
+import Script from"next/script";
+import"./globals.css";
+import"./accessibility.css";
+import { Toaster } from"@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "next-themes";
 import { SkipLinks } from "@/components/SkipLinks";
-import { FeedbackWidgetLazy } from "@/components/FeedbackWidgetLazy";
-import { VitalsInitializer } from "@/components/VitalsInitializer";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { siteConfig } from "@/config/site";
-import { adsenseConfig } from "@/config/adsense";
-import { Providers } from "@/components/Providers";
-import { TOOL_COUNT_LABEL } from "@/data/tools";
+import { FeedbackWidgetLazy } from"@/components/FeedbackWidgetLazy";
+import { VitalsInitializer } from"@/components/VitalsInitializer";
+import { Header } from"@/components/Header";
+import { Footer } from"@/components/Footer";
+import { siteConfig } from"@/config/site";
+import { adsenseConfig } from"@/config/adsense";
+import { Providers } from"@/components/Providers";
+import { TOOL_COUNT_LABEL } from"@/data/tools";
 
 /** Premium body — industry-standard UI readability */
 const inter = Inter({
-  variable: "--font-inter",
+  variable:"--font-inter",
   subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  display:"swap",
+  weight: ["400","500","600","700","800"],
   preload: true,
   adjustFontFallback: true,
-  fallback: ["system-ui", "arial"],
+  fallback: ["system-ui","arial"],
 });
 
 /** Geometric headings — tight, modern, premium */
 const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+  variable:"--font-jakarta",
   subsets: ["latin"],
-  display: "swap",
-  weight: ["500", "600", "700", "800"],
+  display:"swap",
+  weight: ["500","600","700","800"],
   preload: true,
   adjustFontFallback: true,
-  fallback: ["system-ui", "arial"],
+  fallback: ["system-ui","arial"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+  variable:"--font-geist-mono",
   subsets: ["latin"],
-  display: "swap",
+  display:"swap",
   preload: false,
   adjustFontFallback: true,
 });
@@ -52,29 +51,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.toolnovahub.com"),
   title: {
-    default: `${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup | ToolNova`,
-    template: "%s | ToolNova",
+    default:`${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup | ToolNova`,
+    template:"%s | ToolNova",
   },
-  description:
-    "Free AI tools for students & professionals. Merge PDFs, make flashcards, fix grammar, write essays, solve homework — all in one place. No account needed. Try now!",
-  keywords: [
-    "free AI tools for students no signup",
-    "solve homework step by step free",
-    "make flashcards from notes free",
-    "fix grammar in essay free",
-    "merge PDF online free no watermark",
-    "paraphrase essay without plagiarism free",
-    "summarize article free online",
-    "free essay writer for high school",
-    "AI study tools for college students",
-    "free quiz generator from notes",
-    "compress image without quality loss free",
-    "free AI writing tools no login",
-    "ToolNova",
+  description:"Free AI tools for students & professionals. Merge PDFs, make flashcards, fix grammar, write essays, solve homework — all in one place. No account needed. Try now!",
+  keywords: ["free AI tools for students no signup","solve homework step by step free","make flashcards from notes free","fix grammar in essay free","merge PDF online free no watermark","paraphrase essay without plagiarism free","summarize article free online","free essay writer for high school","AI study tools for college students","free quiz generator from notes","compress image without quality loss free","free AI writing tools no login","ToolNova",
   ],
-  authors: [{ name: "ToolNova Team", url: "https://www.toolnovahub.com" }],
-  creator: "ToolNova",
-  publisher: "ToolNova",
+  authors: [{ name:"ToolNova Team", url:"https://www.toolnovahub.com" }],
+  creator:"ToolNova",
+  publisher:"ToolNova",
   formatDetection: {
     email: false,
     address: false,
@@ -82,48 +67,46 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/logo.png", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url:"/logo.png", type:"image/png" },
+      { url:"/favicon-16x16.png", sizes:"16x16", type:"image/png" },
+      { url:"/favicon-32x32.png", sizes:"32x32", type:"image/png" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url:"/apple-touch-icon.png", sizes:"180x180", type:"image/png" },
     ],
   },
-  manifest: "/site.webmanifest",
+  manifest:"/site.webmanifest",
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://www.toolnovahub.com",
-    siteName: "ToolNova",
-    title: `${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup | ToolNova`,
-    description:
-      "Free AI tools for students & professionals. Merge PDFs, make flashcards, fix grammar, write essays, solve homework — all in one place. No account needed.",
+    type:"website",
+    locale:"en_US",
+    url:"https://www.toolnovahub.com",
+    siteName:"ToolNova",
+    title:`${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup | ToolNova`,
+    description:"Free AI tools for students & professionals. Merge PDFs, make flashcards, fix grammar, write essays, solve homework — all in one place. No account needed.",
     images: [
       {
-        url: "/og-image.png",
+        url:"/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ToolNova - Free AI Tools Hub",
-        type: "image/png",
+        alt:"ToolNova - Free AI Tools Hub",
+        type:"image/png",
       },
       {
-        url: "/logo.png",
+        url:"/logo.png",
         width: 512,
         height: 512,
-        alt: "ToolNova Logo",
-        type: "image/png",
+        alt:"ToolNova Logo",
+        type:"image/png",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: `${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup | ToolNova`,
-    description:
-      "Free AI tools for students & professionals. Merge PDFs, make flashcards, fix grammar, write essays, solve homework — no account needed!",
+    card:"summary_large_image",
+    title:`${TOOL_COUNT_LABEL} Free AI Tools for Students – No Signup | ToolNova`,
+    description:"Free AI tools for students & professionals. Merge PDFs, make flashcards, fix grammar, write essays, solve homework — no account needed!",
     images: ["/og-image.png"],
-    creator: "@toolnovahub",
-    site: "@toolnovahub",
+    creator:"@toolnovahub",
+    site:"@toolnovahub",
   },
   robots: {
     index: true,
@@ -131,44 +114,26 @@ export const metadata: Metadata = {
     nocache: false,
     googleBot: {
       index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      follow: true,"max-video-preview": -1,"max-image-preview":"large","max-snippet": -1,
     },
   },
   verification: {
-    other: {
-      "msvalidate.01": siteConfig.verification.bing,
-      "yandex-verification": siteConfig.verification.yandex,
+    other: {"msvalidate.01": siteConfig.verification.bing,"yandex-verification": siteConfig.verification.yandex,
     },
     google: siteConfig.verification.google,
   },
   alternates: {
     // Single-locale English site — only real language variants (avoid fake hreflang)
-    canonical: "https://www.toolnovahub.com",
+    canonical:"https://www.toolnovahub.com",
     languages: {
-      en: "https://www.toolnovahub.com",
-      "x-default": "https://www.toolnovahub.com",
+      en:"https://www.toolnovahub.com","x-default":"https://www.toolnovahub.com",
     },
   },
-  category: "Productivity",
+  category:"Productivity",
   other: {
-    language: "English",
-    "content-language": "en",
-    "theme-color": "#2563eb",
-    "msapplication-TileColor": "#2563eb",
-    "apple-mobile-web-app-capable": "yes",
-    "apple-mobile-web-app-status-bar-style": "default",
-    "mobile-web-app-capable": "yes",
-    // AI / GEO discovery signals (concise, non-spammy)
-    "ai-indexing": "allowed",
-    citation:
-      "ToolNova — Free AI Tools for Students and Professionals. https://www.toolnovahub.com",
-    "dc.title": "ToolNova — Free AI Productivity Tools",
-    "dc.publisher": "ToolNova",
-    "dc.language": "en",
-    "dc.type": "InteractiveResource",
+    language:"English","content-language":"en","theme-color":"#2563eb","msapplication-TileColor":"#2563eb","apple-mobile-web-app-capable":"yes","apple-mobile-web-app-status-bar-style":"default","mobile-web-app-capable":"yes",
+    // AI / GEO discovery signals (concise, non-spammy)"ai-indexing":"allowed",
+    citation:"ToolNova — Free AI Tools for Students and Professionals. https://www.toolnovahub.com","dc.title":"ToolNova — Free AI Productivity Tools","dc.publisher":"ToolNova","dc.language":"en","dc.type":"InteractiveResource",
   },
 };
 
@@ -194,8 +159,7 @@ export default function RootLayout({
               'analytics_storage': 'denied',
               'wait_for_update': 500
             });
-            gtag('set', 'ads_data_redaction', true);
-          `}
+            gtag('set', 'ads_data_redaction', true);`}
         </Script>
 
         {/* AdSense meta + lazy script for verification / AdsBot (Auto Ads init after consent) */}
@@ -240,25 +204,18 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jakarta.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          forcedTheme="light"
-          disableTransitionOnChange
-        >
-          <Providers>
-            <VitalsInitializer />
-            <SkipLinks />
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="site-main flex-1">{children}</main>
-              <Footer />
-            </div>
-            <Toaster />
-            <SonnerToaster position="top-center" richColors closeButton />
-            <FeedbackWidgetLazy />
-          </Providers>
-        </ThemeProvider>
+        <Providers>
+          <VitalsInitializer />
+          <SkipLinks />
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="site-main flex-1">{children}</main>
+            <Footer />
+          </div>
+          <Toaster />
+          <SonnerToaster position="top-center" richColors closeButton />
+          <FeedbackWidgetLazy />
+        </Providers>
         <CookieConsent />
         {/* GA & AdSense loaded only after cookie consent */}
         <ConsentedScripts />

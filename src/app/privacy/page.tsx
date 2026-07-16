@@ -1,34 +1,32 @@
-import { Metadata } from "next";
+import { Metadata } from"next";
 
-const LAST_UPDATED = "July 15, 2026";
+const LAST_UPDATED ="July 15, 2026";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | ToolNova",
-  description:
-    "Privacy Policy for ToolNova. Learn how we collect, use, protect, and disclose personal data, including cookie and advertising disclosures.",
+  title:"Privacy Policy | ToolNova",
+  description:"Privacy Policy for ToolNova. Learn how we collect, use, protect, and disclose personal data, including cookie and advertising disclosures.",
   alternates: {
-    canonical: "https://www.toolnovahub.com/privacy",
+    canonical:"https://www.toolnovahub.com/privacy",
   },
   openGraph: {
-    title: "Privacy Policy | ToolNova",
-    description:
-      "Learn how ToolNova collects, uses, protects, and discloses data.",
-    url: "https://www.toolnovahub.com/privacy",
-    type: "website",
+    title:"Privacy Policy | ToolNova",
+    description:"Learn how ToolNova collects, uses, protects, and discloses data.",
+    url:"https://www.toolnovahub.com/privacy",
+    type:"website",
     images: [
       {
-        url: "https://www.toolnovahub.com/og-image.png",
+        url:"https://www.toolnovahub.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ToolNova Privacy Policy",
+        alt:"ToolNova Privacy Policy",
       },
     ],
   },
   twitter: {
-    card: "summary",
-    title: "Privacy Policy | ToolNova",
-    description: "Learn how ToolNova collects, uses, and protects your data.",
-    creator: "@toolnovahub",
+    card:"summary",
+    title:"Privacy Policy | ToolNova",
+    description:"Learn how ToolNova collects, uses, and protects your data.",
+    creator:"@toolnovahub",
   },
   robots: {
     index: true,
@@ -38,17 +36,17 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="container mx-auto px-6 py-24 max-w-4xl text-slate-800 dark:text-slate-200">
+    <div className="container mx-auto px-6 py-24 max-w-4xl text-slate-800">
       <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
       <p className="text-sm text-muted-foreground mb-8">
         Last Updated: {LAST_UPDATED}
       </p>
 
-      <div className="prose dark:prose-invert max-w-none space-y-6">
+      <div className="prose max-w-none space-y-6">
         <section>
           <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
           <p>
-            ToolNova ("we," "our," or "us") provides AI-powered productivity,
+            ToolNova ("we,""our," or"us") provides AI-powered productivity,
             writing, study, image, and PDF tools at https://www.toolnovahub.com.
             This policy explains what we collect, why we collect it, and how you
             can contact us about your privacy choices.
@@ -102,11 +100,11 @@ export default function PrivacyPage() {
             functions, preferences, analytics, fraud prevention, and advertising.
             You can accept or decline non-essential cookies through our cookie
             consent notice and can also manage cookies in your browser settings.
-            See also our{" "}
+            See also our{""}
             <a href="/advertising" className="text-primary hover:underline">
               Advertising Disclosure
-            </a>{" "}
-            and{" "}
+            </a>{""}
+            and{""}
             <a href="/cookie-policy" className="text-primary hover:underline">
               Cookie Policy
             </a>
@@ -114,8 +112,8 @@ export default function PrivacyPage() {
           </p>
           <p className="mt-4">
             <strong>Google AdSense:</strong> ToolNova participates in the Google
-            AdSense program (publisher ID:{" "}
-            <code className="text-sm bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">
+            AdSense program (publisher ID:{""}
+            <code className="text-sm bg-slate-100 px-1.5 py-0.5 rounded">
               ca-pub-1328083083403070
             </code>
             ). Google and its advertising partners use cookies, device
@@ -125,7 +123,7 @@ export default function PrivacyPage() {
             DoubleClick cookie and similar mechanisms.
           </p>
           <p className="mt-4">
-            You may opt out of personalised advertising by visiting{" "}
+            You may opt out of personalised advertising by visiting{""}
             <a
               href="https://www.google.com/settings/ads"
               className="text-primary hover:underline"
@@ -133,8 +131,8 @@ export default function PrivacyPage() {
               rel="noopener noreferrer"
             >
               Google Ads Settings
-            </a>{" "}
-            or the{" "}
+            </a>{""}
+            or the{""}
             <a
               href="https://optout.networkadvertising.org/"
               className="text-primary hover:underline"
@@ -143,7 +141,7 @@ export default function PrivacyPage() {
             >
               NAI opt-out page
             </a>
-            . You can also learn how Google uses data from partner sites at{" "}
+            . You can also learn how Google uses data from partner sites at{""}
             <a
               href="https://policies.google.com/technologies/partner-sites"
               className="text-primary hover:underline"
@@ -225,7 +223,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-2xl font-semibold mb-4">9. Contact Us</h2>
           <p>
-            For privacy questions or requests, contact us at{" "}
+            For privacy questions or requests, contact us at{""}
             <a
               href="mailto:support@toolnovahub.com"
               className="text-primary hover:underline"

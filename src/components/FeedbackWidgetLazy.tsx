@@ -1,6 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import dynamic from"next/dynamic";
 
 /**
  * Client-only lazy load of FeedbackWidget.

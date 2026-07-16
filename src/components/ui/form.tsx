@@ -1,8 +1,8 @@
 "use client"
 
-import * as React from "react"
-import * as LabelPrimitive from "@radix-ui/react-label"
-import { Slot } from "@radix-ui/react-slot"
+import * as React from"react"
+import * as LabelPrimitive from"@radix-ui/react-label"
+import { Slot } from"@radix-ui/react-slot"
 import {
   Controller,
   FormProvider,
@@ -11,10 +11,10 @@ import {
   type ControllerProps,
   type FieldPath,
   type FieldValues,
-} from "react-hook-form"
+} from"react-hook-form"
 
-import { cn } from "@/lib/utils"
-import { Label } from "@/components/ui/label"
+import { cn } from"@/lib/utils"
+import { Label } from"@/components/ui/label"
 
 const Form = FormProvider
 
@@ -58,9 +58,9 @@ const useFormField = () => {
   return {
     id,
     name: fieldContext.name,
-    formItemId: `${id}-form-item`,
-    formDescriptionId: `${id}-form-item-description`,
-    formMessageId: `${id}-form-item-message`,
+    formItemId:`${id}-form-item`,
+    formDescriptionId:`${id}-form-item-description`,
+    formMessageId:`${id}-form-item-message`,
     ...fieldState,
   }
 }
@@ -113,8 +113,8 @@ function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
       id={formItemId}
       aria-describedby={
         !error
-          ? `${formDescriptionId}`
-          : `${formDescriptionId} ${formMessageId}`
+          ?`${formDescriptionId}`
+          :`${formDescriptionId} ${formMessageId}`
       }
       aria-invalid={!!error}
       {...props}
@@ -137,7 +137,7 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
 
 function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
   const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message ?? "") : props.children
+  const body = error ? String(error?.message ??"") : props.children
 
   if (!body) {
     return null

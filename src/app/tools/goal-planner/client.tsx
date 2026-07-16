@@ -1,9 +1,9 @@
 "use client";
 
-import EnhancedToolLayout from "@/components/EnhancedToolLayout";
-import { PremiumToolWrapper } from "@/components/PremiumToolWrapper";
-import { FAQSection } from "@/components/FAQSection";
-import { ToolOption } from "@/components/ToolLayout";
+import EnhancedToolLayout from"@/components/EnhancedToolLayout";
+import { PremiumToolWrapper } from"@/components/PremiumToolWrapper";
+import { FAQSection } from"@/components/FAQSection";
+import { ToolOption } from"@/components/ToolLayout";
 import {
   Target,
   Calendar,
@@ -17,72 +17,55 @@ import {
   TrendingUp,
   Award,
   Sparkles,
-} from "lucide-react";
+} from"lucide-react";
 
 const toolOptions = [
   {
-    id: "category",
-    label: "Goal Category",
-    type: "select" as const,
+    id:"category",
+    label:"Goal Category",
+    type:"select" as const,
     options: [
-      { value: "career", label: "💼 Career" },
-      { value: "personal", label: "🌟 Personal Growth" },
-      { value: "fitness", label: "💪 Health & Fitness" },
-      { value: "financial", label: "💰 Financial" },
-      { value: "learning", label: "📚 Learning" },
+      { value:"career", label:"💼 Career" },
+      { value:"personal", label:"🌟 Personal Growth" },
+      { value:"fitness", label:"💪 Health & Fitness" },
+      { value:"financial", label:"💰 Financial" },
+      { value:"learning", label:"📚 Learning" },
     ] as const,
-    defaultValue: "career",
+    defaultValue:"career",
   },
   {
-    id: "timeframe",
-    label: "Timeframe",
-    type: "select" as const,
+    id:"timeframe",
+    label:"Timeframe",
+    type:"select" as const,
     options: [
-      { value: "30days", label: "📅 30 Days" },
-      { value: "90days", label: "📅 90 Days" },
-      { value: "6months", label: "📅 6 Months" },
-      { value: "1year", label: "📅 1 Year" },
+      { value:"30days", label:"📅 30 Days" },
+      { value:"90days", label:"📅 90 Days" },
+      { value:"6months", label:"📅 6 Months" },
+      { value:"1year", label:"📅 1 Year" },
     ] as const,
-    defaultValue: "90days",
+    defaultValue:"90days",
   },
 ] as const;
 
 const generatePrompt = (input: string, options?: Record<string, any>) => {
-  const category = options?.category || "career";
-  const timeframe = options?.timeframe || "90days";
+  const category = options?.category ||"career";
+  const timeframe = options?.timeframe ||"90days";
 
-  const timeframeText: Record<string, string> = {
-    "30days": "30 days (1 month)",
-    "90days": "90 days (3 months)",
-    "6months": "6 months",
-    "1year": "1 year",
+  const timeframeText: Record<string, string> = {"30days":"30 days (1 month)","90days":"90 days (3 months)","6months":"6 months","1year":"1 year",
   };
 
-  const timeframeStrategy: Record<string, string> = {
-    "30days":
-      "SPRINT MODE: Focus on 1-2 high-impact objectives. Weekly milestones with daily action items. No time for exploration—prioritize execution. Every day counts. Include a Week 1 quick-win to build momentum.",
-    "90days":
-      "QUARTER PLAN: The sweet spot for meaningful transformation. Monthly phases: Month 1 = foundation & learning, Month 2 = execution & building, Month 3 = optimization & results. Bi-weekly check-ins.",
-    "6months":
-      "HALF-YEAR JOURNEY: Room for skill development and habit formation. Build in learning curves and plateaus. Monthly milestones with quarterly reviews. Allow 2-3 weeks for course correction.",
-    "1year":
-      "ANNUAL TRANSFORMATION: Full lifecycle planning with seasonal phases. Q1 = research & setup, Q2 = build & grow, Q3 = scale & optimize, Q4 = harvest & plan next. Include mid-year review and pivot point.",
+  const timeframeStrategy: Record<string, string> = {"30days":"SPRINT MODE: Focus on 1-2 high-impact objectives. Weekly milestones with daily action items. No time for exploration—prioritize execution. Every day counts. Include a Week 1 quick-win to build momentum.","90days":"QUARTER PLAN: The sweet spot for meaningful transformation. Monthly phases: Month 1 = foundation & learning, Month 2 = execution & building, Month 3 = optimization & results. Bi-weekly check-ins.","6months":"HALF-YEAR JOURNEY: Room for skill development and habit formation. Build in learning curves and plateaus. Monthly milestones with quarterly reviews. Allow 2-3 weeks for course correction.","1year":"ANNUAL TRANSFORMATION: Full lifecycle planning with seasonal phases. Q1 = research & setup, Q2 = build & grow, Q3 = scale & optimize, Q4 = harvest & plan next. Include mid-year review and pivot point.",
   };
 
   const categoryGuidance: Record<string, string> = {
-    career:
-      "CAREER DEVELOPMENT: Focus on professional development, skill acquisition, promotions, projects, and networking. Include industry-specific certifications, portfolio building, mentorship, LinkedIn presence, and measurable career milestones (title changes, salary increases, project completions). Consider the 70-20-10 learning model (70% on-the-job, 20% social learning, 10% formal training).",
-    personal:
-      "PERSONAL GROWTH: Focus on habits, relationships, mindfulness, hobbies, and life satisfaction. Use habit stacking and the 21/90 rule (21 days to build, 90 days to make permanent). Include self-care routines, journaling, relationship quality metrics, and personal fulfillment indicators. Address all life dimensions: mental, emotional, social, spiritual.",
-    fitness:
-      "FITNESS & HEALTH: Focus on exercise routines, nutrition, physical achievements, and wellness habits. Include progressive overload principles, nutrition tracking (macros/calories), body composition changes, and performance metrics (reps, weight, time, distance). Build in deload weeks and rest days. Reference evidence-based exercise science.",
-    financial:
-      "FINANCIAL PLANNING: Focus on savings rate, investments, debt reduction, income growth, and financial literacy. Include specific dollar targets, emergency fund milestones, debt snowball/avalanche strategy, investment allocation, and net worth tracking. Consider tax implications, compounding calculations, and multiple income streams.",
-    learning:
-      "SKILL DEVELOPMENT: Focus on skills acquisition, courses, certifications, practice projects, and knowledge milestones. Use the Dreyfus model (Novice → Advanced Beginner → Competent → Proficient → Expert). Include deliberate practice schedules, portfolio projects, knowledge assessments, and community engagement. Track both input metrics (hours studied) and output metrics (skills demonstrated).",
+    career:"CAREER DEVELOPMENT: Focus on professional development, skill acquisition, promotions, projects, and networking. Include industry-specific certifications, portfolio building, mentorship, LinkedIn presence, and measurable career milestones (title changes, salary increases, project completions). Consider the 70-20-10 learning model (70% on-the-job, 20% social learning, 10% formal training).",
+    personal:"PERSONAL GROWTH: Focus on habits, relationships, mindfulness, hobbies, and life satisfaction. Use habit stacking and the 21/90 rule (21 days to build, 90 days to make permanent). Include self-care routines, journaling, relationship quality metrics, and personal fulfillment indicators. Address all life dimensions: mental, emotional, social, spiritual.",
+    fitness:"FITNESS & HEALTH: Focus on exercise routines, nutrition, physical achievements, and wellness habits. Include progressive overload principles, nutrition tracking (macros/calories), body composition changes, and performance metrics (reps, weight, time, distance). Build in deload weeks and rest days. Reference evidence-based exercise science.",
+    financial:"FINANCIAL PLANNING: Focus on savings rate, investments, debt reduction, income growth, and financial literacy. Include specific dollar targets, emergency fund milestones, debt snowball/avalanche strategy, investment allocation, and net worth tracking. Consider tax implications, compounding calculations, and multiple income streams.",
+    learning:"SKILL DEVELOPMENT: Focus on skills acquisition, courses, certifications, practice projects, and knowledge milestones. Use the Dreyfus model (Novice → Advanced Beginner → Competent → Proficient → Expert). Include deliberate practice schedules, portfolio projects, knowledge assessments, and community engagement. Track both input metrics (hours studied) and output metrics (skills demonstrated).",
   };
 
-  return `You are an expert strategic life coach, certified goal-setting specialist, and behavioral change consultant who combines SMART methodology with OKR (Objectives & Key Results) frameworks, habit science, and positive psychology to create transformation plans with exceptionally high completion rates.
+  return`You are an expert strategic life coach, certified goal-setting specialist, and behavioral change consultant who combines SMART methodology with OKR (Objectives & Key Results) frameworks, habit science, and positive psychology to create transformation plans with exceptionally high completion rates.
 
 ## YOUR TASK
 Create a comprehensive, actionable goal plan for the following ${category} goal to be achieved within ${timeframeText[timeframe]}, designed for maximum likelihood of success.
@@ -98,8 +81,8 @@ Create a comprehensive, actionable goal plan for the following ${category} goal 
 ### 1. SMART GOAL DEFINITION
 Transform the user's goal into a precisely defined SMART objective:
 
-- **S - Specific**: Define exactly what will be accomplished, who is involved, and where it happens. Avoid vague language. Use the "W questions" (What, Why, Who, Where, Which).
-- **M - Measurable**: Establish concrete metrics and KPIs. Define "How much?", "How many?", and "How will I know when it's accomplished?" Include both leading indicators (actions taken) and lagging indicators (results achieved).
+- **S - Specific**: Define exactly what will be accomplished, who is involved, and where it happens. Avoid vague language. Use the"W questions" (What, Why, Who, Where, Which).
+- **M - Measurable**: Establish concrete metrics and KPIs. Define"How much?","How many?", and"How will I know when it's accomplished?" Include both leading indicators (actions taken) and lagging indicators (results achieved).
 - **A - Achievable**: Assess feasibility given current resources, skills, and constraints. If the goal is stretch, identify the gap and how to bridge it. Reference comparable achievements.
 - **R - Relevant**: Connect to broader life/career objectives. Explain WHY this goal matters and what achieving it enables. Link to values and long-term vision.
 - **T - Time-bound**: Set the deadline as ${timeframeText[timeframe]} with interim checkpoints. Create urgency without panic.
@@ -114,13 +97,13 @@ Transform the user's goal into a precisely defined SMART objective:
 - KR1: [Specific metric] from [baseline] to [target] by [date]
 - KR2: [Specific metric] from [baseline] to [target] by [date]
 - KR3: [Specific metric] from [baseline] to [target] by [date]
-${timeframe !== "30days" ? "- KR4: [Specific metric] from [baseline] to [target] by [date]\n- KR5: [Specific metric] from [baseline] to [target] by [date]" : ""}
+${timeframe !=="30days" ?"- KR4: [Specific metric] from [baseline] to [target] by [date]\n- KR5: [Specific metric] from [baseline] to [target] by [date]" :""}
 
 **Confidence Level**: Rate each KR as 🟢 (confident), 🟡 (stretch), or 🔴 (moonshot)
 
 ### 3. MILESTONE TIMELINE
 
-${timeframe === "30days" ? `**Week-by-Week Breakdown**:
+${timeframe ==="30days" ?`**Week-by-Week Breakdown**:
 
 📅 **Week 1: Quick Win & Foundation** (Days 1-7)
 - Primary focus: [Immediate actions to build momentum]
@@ -137,9 +120,9 @@ ${timeframe === "30days" ? `**Week-by-Week Breakdown**:
 
 📅 **Week 4: Complete & Assess** (Days 22-30)
 - Primary focus: [Final push and goal completion]
-- Assessment: [Measure final results against KRs]` : ""}
+- Assessment: [Measure final results against KRs]` :""}
 
-${timeframe === "90days" ? `**Month-by-Month Breakdown**:
+${timeframe ==="90days" ?`**Month-by-Month Breakdown**:
 
 📅 **Month 1: Foundation & Learning** (Days 1-30)
 - Theme: Build knowledge, establish habits, set up systems
@@ -154,9 +137,9 @@ ${timeframe === "90days" ? `**Month-by-Month Breakdown**:
 📅 **Month 3: Optimization & Results** (Days 61-90)
 - Theme: Refine approach, maximize results, hit targets
 - Weekly accountability check-ins
-- Final assessment at Day 90` : ""}
+- Final assessment at Day 90` :""}
 
-${timeframe === "6months" ? `**Monthly Breakdown**:
+${timeframe ==="6months" ?`**Monthly Breakdown**:
 
 📅 **Months 1-2: Research & Setup**
 📅 **Month 3: Implementation**
@@ -164,16 +147,16 @@ ${timeframe === "6months" ? `**Monthly Breakdown**:
 📅 **Month 5: Optimization**
 📅 **Month 6: Final Push & Results**
 
-For each month, include: theme, primary objectives, key deliverables, and success criteria.` : ""}
+For each month, include: theme, primary objectives, key deliverables, and success criteria.` :""}
 
-${timeframe === "1year" ? `**Quarterly Breakdown**:
+${timeframe ==="1year" ?`**Quarterly Breakdown**:
 
 📅 **Q1 (Months 1-3): Research, Setup & Foundation**
 📅 **Q2 (Months 4-6): Build & Grow**
 📅 **Q3 (Months 7-9): Scale & Optimize**
 📅 **Q4 (Months 10-12): Harvest, Refine & Plan Next**
 
-For each quarter, include: theme, monthly milestones, key deliverables, and quarterly review criteria. Include mid-year review and pivot point.` : ""}
+For each quarter, include: theme, monthly milestones, key deliverables, and quarterly review criteria. Include mid-year review and pivot point.` :""}
 
 ### 4. ACTION ITEMS & HABITS
 
@@ -218,7 +201,7 @@ For each obstacle, use the **If-Then** framework:
 | [Challenge 1] | High/Med/Low | High/Med/Low | IF [trigger], THEN [specific action] |
 | [Challenge 2] | — | — | IF [trigger], THEN [specific action] |
 | [Challenge 3] | — | — | IF [trigger], THEN [specific action] |
-${timeframe !== "30days" ? "| [Challenge 4] | — | — | IF [trigger], THEN [specific action] |\n| [Challenge 5] | — | — | IF [trigger], THEN [specific action] |" : ""}
+${timeframe !=="30days" ?"| [Challenge 4] | — | — | IF [trigger], THEN [specific action] |\n| [Challenge 5] | — | — | IF [trigger], THEN [specific action] |" :""}
 
 **Contingency plan**: If significantly off-track by [midpoint], then [fallback strategy].
 
@@ -238,9 +221,9 @@ ${timeframe !== "30days" ? "| [Challenge 4] | — | — | IF [trigger], THEN [sp
 - Mentor/coach: [How to find one for this domain]
 - Community: [Relevant groups or networks]
 
-${category === "financial" ? "**Financial Tools**: Budgeting apps, investment platforms, compound interest calculators" : ""}
-${category === "fitness" ? "**Fitness Tools**: Workout tracking apps, nutrition calculators, body measurement tools" : ""}
-${category === "learning" ? "**Learning Platforms**: Specific course recommendations, practice environments, credential programs" : ""}
+${category ==="financial" ?"**Financial Tools**: Budgeting apps, investment platforms, compound interest calculators" :""}
+${category ==="fitness" ?"**Fitness Tools**: Workout tracking apps, nutrition calculators, body measurement tools" :""}
+${category ==="learning" ?"**Learning Platforms**: Specific course recommendations, practice environments, credential programs" :""}
 
 ### 8. MOTIVATION & ACCOUNTABILITY
 
@@ -257,7 +240,7 @@ ${category === "learning" ? "**Learning Platforms**: Specific course recommendat
 **Motivation Anchors**:
 - Vision statement: [1-2 sentence inspiring vision of the achieved goal]
 - Why it matters: [Deep personal reason]
-- Identity statement: "I am someone who [goal-aligned identity]"
+- Identity statement:"I am someone who [goal-aligned identity]"
 
 ## QUALITY CHECKPOINTS
 
@@ -284,7 +267,7 @@ Present the plan with clear markdown headers, tables, and emoji indicators. Make
 
 Do NOT include:
 - Generic motivational quotes or platitudes
-- Vague advice ("work hard," "stay focused")
+- Vague advice ("work hard,""stay focused")
 - Actions that don't directly contribute to the goal
 - Unrealistic expectations for the timeframe
 - Your commentary about the planning process
@@ -296,105 +279,96 @@ Create a detailed, evidence-based, immediately actionable goal plan:`;
 const features = [
   {
     icon: Target,
-    title: "SMART Goal Framework",
-    description:
-      "Create Specific, Measurable, Achievable, Relevant, and Time-bound goals with structured planning.",
+    title:"SMART Goal Framework",
+    description:"Create Specific, Measurable, Achievable, Relevant, and Time-bound goals with structured planning.",
   },
   {
     icon: TrendingUp,
-    title: "Milestone Tracking",
-    description:
-      "Break down big goals into manageable milestones with clear checkpoints and progress indicators.",
+    title:"Milestone Tracking",
+    description:"Break down big goals into manageable milestones with clear checkpoints and progress indicators.",
   },
   {
     icon: CheckCircle,
-    title: "Action-Oriented Plans",
-    description:
-      "Get specific action items, success metrics, obstacle solutions, and motivation strategies.",
+    title:"Action-Oriented Plans",
+    description:"Get specific action items, success metrics, obstacle solutions, and motivation strategies.",
   },
 ];
 
 const howItWorks = [
   {
     step: 1,
-    title: "State Goal",
-    desc: "Describe what you want to achieve",
+    title:"State Goal",
+    desc:"Describe what you want to achieve",
     icon: Target,
-    color: "from-blue-500 to-indigo-600",
+    color:"from-blue-500 to-indigo-600",
   },
   {
     step: 2,
-    title: "Set Timeline",
-    desc: "Choose category and timeframe",
+    title:"Set Timeline",
+    desc:"Choose category and timeframe",
     icon: Calendar,
-    color: "from-purple-500 to-pink-600",
+    color:"from-purple-500 to-pink-600",
   },
   {
     step: 3,
-    title: "Get Plan",
-    desc: "Receive your actionable roadmap",
+    title:"Get Plan",
+    desc:"Receive your actionable roadmap",
     icon: Rocket,
-    color: "from-green-500 to-emerald-600",
+    color:"from-green-500 to-emerald-600",
   },
 ];
 
 const faqs = [
   {
-    question: "What is the Goal Planner?",
-    answer:
-      "The Goal Planner is an AI-powered tool that transforms your aspirations into structured, actionable plans using the SMART framework. It creates comprehensive roadmaps with milestones, action items, success metrics, obstacle solutions, and motivation strategies. Perfect for career goals, personal development, fitness targets, financial objectives, or learning ambitions.",
+    question:"What is the Goal Planner?",
+    answer:"The Goal Planner is an AI-powered tool that transforms your aspirations into structured, actionable plans using the SMART framework. It creates comprehensive roadmaps with milestones, action items, success metrics, obstacle solutions, and motivation strategies. Perfect for career goals, personal development, fitness targets, financial objectives, or learning ambitions.",
   },
   {
-    question: "What's a SMART goal?",
-    answer:
-      "SMART is the gold standard for goal setting: Specific (clearly defined), Measurable (with concrete metrics), Achievable (realistic and attainable), Relevant (aligned with broader objectives), and Time-bound (with clear deadlines). This framework dramatically increases the likelihood of goal achievement by providing structure and accountability.",
+    question:"What's a SMART goal?",
+    answer:"SMART is the gold standard for goal setting: Specific (clearly defined), Measurable (with concrete metrics), Achievable (realistic and attainable), Relevant (aligned with broader objectives), and Time-bound (with clear deadlines). This framework dramatically increases the likelihood of goal achievement by providing structure and accountability.",
   },
   {
-    question: "What goal categories are available?",
-    answer:
-      "Choose from five categories: Career (promotions, skills, projects), Personal Growth (habits, relationships, development), Health & Fitness (exercise, nutrition, wellness), Financial (savings, investments, debt reduction), or Learning (skills, courses, certifications). Each category provides tailored guidance and relevant metrics.",
+    question:"What goal categories are available?",
+    answer:"Choose from five categories: Career (promotions, skills, projects), Personal Growth (habits, relationships, development), Health & Fitness (exercise, nutrition, wellness), Financial (savings, investments, debt reduction), or Learning (skills, courses, certifications). Each category provides tailored guidance and relevant metrics.",
   },
   {
-    question: "How detailed is the plan?",
-    answer:
-      "Very detailed! Each plan includes: SMART goal breakdown, milestone timeline with dates, 5-10 specific action items, success metrics and KPIs, potential obstacles with solutions, required resources, and motivation strategies. You get everything needed to turn your goal from dream to reality.",
+    question:"How detailed is the plan?",
+    answer:"Very detailed! Each plan includes: SMART goal breakdown, milestone timeline with dates, 5-10 specific action items, success metrics and KPIs, potential obstacles with solutions, required resources, and motivation strategies. You get everything needed to turn your goal from dream to reality.",
   },
   {
-    question: "What timeframes can I choose?",
-    answer:
-      "Select from four timeframes: 30 Days (for quick wins and habit formation), 90 Days (ideal for substantial progress), 6 Months (for significant transformations), or 1 Year (for major life changes). The plan adjusts milestone frequency and action item pacing based on your chosen timeline.",
+    question:"What timeframes can I choose?",
+    answer:"Select from four timeframes: 30 Days (for quick wins and habit formation), 90 Days (ideal for substantial progress), 6 Months (for significant transformations), or 1 Year (for major life changes). The plan adjusts milestone frequency and action item pacing based on your chosen timeline.",
   },
   {
-    question: "Is the Goal Planner free?",
-    answer:
-      "Yes! The Goal Planner is completely free to use. Create unlimited goal plans for any objective without any cost. Perfect for ambitious individuals, career professionals, students, or anyone serious about achieving their goals with a structured, proven approach.",
+    question:"Is the Goal Planner free?",
+    answer:"Yes! The Goal Planner is completely free to use. Create unlimited goal plans for any objective without any cost. Perfect for ambitious individuals, career professionals, students, or anyone serious about achieving their goals with a structured, proven approach.",
   },
 ];
 
 const relatedTools = [
   {
-    name: "Revision Planner",
-    slug: "revision-planner",
+    name:"Revision Planner",
+    slug:"revision-planner",
     icon: Calendar,
-    color: "text-blue-600",
+    color:"text-blue-600",
   },
   {
-    name: "Todo List",
-    slug: "todo-list-generator",
+    name:"Todo List",
+    slug:"todo-list-generator",
     icon: CheckCircle,
-    color: "text-purple-600",
+    color:"text-purple-600",
   },
   {
-    name: "Interview Prep",
-    slug: "interview-generator",
+    name:"Interview Prep",
+    slug:"interview-generator",
     icon: Lightbulb,
-    color: "text-green-600",
+    color:"text-green-600",
   },
   {
-    name: "Cover Letter",
-    slug: "cover-letter-writer",
+    name:"Cover Letter",
+    slug:"cover-letter-writer",
     icon: Trophy,
-    color: "text-orange-600",
+    color:"text-orange-600",
   },
 ];
 

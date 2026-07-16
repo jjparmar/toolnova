@@ -33,7 +33,7 @@ export async function shareNative(
  */
 export function shareOnTwitter(text: string, url?: string): void {
   const tweetUrl = url || window.location.href;
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(tweetUrl)}`;
+  const twitterUrl =`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(tweetUrl)}`;
   openInNewTab(twitterUrl);
 }
 
@@ -42,7 +42,7 @@ export function shareOnTwitter(text: string, url?: string): void {
  */
 export function shareOnLinkedIn(url?: string): void {
   const shareUrl = url || window.location.href;
-  const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+  const linkedInUrl =`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
   openInNewTab(linkedInUrl);
 }
 
@@ -51,7 +51,7 @@ export function shareOnLinkedIn(url?: string): void {
  */
 export function shareOnFacebook(url?: string): void {
   const shareUrl = url || window.location.href;
-  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+  const facebookUrl =`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
   openInNewTab(facebookUrl);
 }
 
@@ -59,7 +59,7 @@ export function shareOnFacebook(url?: string): void {
  * Share via WhatsApp
  */
 export function shareOnWhatsApp(text: string): void {
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  const whatsappUrl =`https://wa.me/?text=${encodeURIComponent(text)}`;
   openInNewTab(whatsappUrl);
 }
 
@@ -67,7 +67,7 @@ export function shareOnWhatsApp(text: string): void {
  * Share via Email
  */
 export function shareViaEmail(subject: string, body: string): void {
-  const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const mailtoUrl =`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   window.location.href = mailtoUrl;
 }
 
@@ -80,7 +80,7 @@ export function generateShareableLink(toolName: string, input: string): string {
     tool: toolName,
     input: input.substring(0, 200), // Limit to 200 chars for URL
   });
-  return `${baseUrl}?${params.toString()}`;
+  return`${baseUrl}?${params.toString()}`;
 }
 
 /**
@@ -95,14 +95,14 @@ export async function copyLinkToClipboard(url?: string): Promise<void> {
  * Generate QR code URL using a free API
  */
 export function generateQRCodeURL(text: string, size: number = 200): string {
-  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}`;
+  return`https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}`;
 }
 
 /**
  * Utility: Open URL in new tab
  */
 function openInNewTab(url: string): void {
-  const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+  const newWindow = window.open(url,"_blank","noopener,noreferrer");
   if (newWindow) newWindow.opener = null;
 }
 
@@ -110,13 +110,13 @@ function openInNewTab(url: string): void {
  * Check if Web Share API is supported
  */
 export function isWebShareSupported(): boolean {
-  return typeof navigator !== "undefined" && "share" in navigator;
+  return typeof navigator !=="undefined" &&"share" in navigator;
 }
 
 /**
  * Share result with attribution
  */
 export function shareResult(toolName: string, result: string): string {
-  const attribution = `\n\n---\nGenerated with ToolNova\n🔗 toolnovahub.com`;
+  const attribution =`\n\n---\nGenerated with ToolNova\n🔗 toolnovahub.com`;
   return result + attribution;
 }

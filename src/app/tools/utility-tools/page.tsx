@@ -50,7 +50,7 @@ export default function UtilityToolsPage() {
             </div>
 
             {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
-            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral dark:prose-invert prose-lg">
+            <section className="mx-auto max-w-4xl px-6 mt-16 pb-20 border-t border-border/60 pt-16 prose prose-neutral prose-lg">
                 <h2 className="text-3xl font-extrabold text-foreground tracking-tight mb-6">
                     Micro-Utilities for Daily Digital Workflows and Precision Editing
                 </h2>
@@ -122,9 +122,9 @@ export default function UtilityToolsPage() {
                     </table>
                 </div>
                 <p className="text-sm text-muted-foreground mt-4">
-                    Related guides:{" "}
+                    Related guides:{""}
                     <Link href="/blog/summarize-long-articles-fast" className="underline underline-offset-4 hover:text-primary">Summarize long articles</Link>
-                    {" · "}
+                    {" ·"}
                     <Link href="/blog/compress-images-for-web-speed" className="underline underline-offset-4 hover:text-primary">Compress images for speed</Link>
                 </p>
             </section>

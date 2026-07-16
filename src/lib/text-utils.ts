@@ -6,8 +6,8 @@
 export function graphemeLength(text: string): number {
   if (!text) return 0;
   try {
-    if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
-      const seg = new Intl.Segmenter(undefined, { granularity: "grapheme" });
+    if (typeof Intl !=="undefined" &&"Segmenter" in Intl) {
+      const seg = new Intl.Segmenter(undefined, { granularity:"grapheme" });
       return Array.from(seg.segment(text)).length;
     }
   } catch {
@@ -66,9 +66,9 @@ export function toSentenceCase(input: string): string {
 /** Split identifier-like text into words for camel/pascal conversion. */
 function wordsFromMixed(input: string): string[] {
   const cleaned = input
-    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2")
-    .replace(/[^a-zA-Z0-9]+/g, " ")
+    .replace(/([a-z0-9])([A-Z])/g,"$1 $2")
+    .replace(/([A-Z]+)([A-Z][a-z])/g,"$1 $2")
+    .replace(/[^a-zA-Z0-9]+/g,"")
     .trim();
   if (!cleaned) return [];
   return cleaned.split(/\s+/).filter(Boolean);
@@ -76,7 +76,7 @@ function wordsFromMixed(input: string): string[] {
 
 export function toCamelCase(input: string): string {
   const words = wordsFromMixed(input);
-  if (!words.length) return "";
+  if (!words.length) return"";
   return words
     .map((w, i) => {
       const lower = w.toLowerCase();
@@ -129,8 +129,8 @@ export function calculateAge(birthDate: Date, asOf: Date = new Date()): AgeBreak
   const birth = new Date(birthDate);
   birth.setHours(0, 0, 0, 0);
 
-  if (isNaN(birth.getTime())) return { error: "Invalid date" };
-  if (birth > today) return { error: "Birth date cannot be in the future" };
+  if (isNaN(birth.getTime())) return { error:"Invalid date" };
+  if (birth > today) return { error:"Birth date cannot be in the future" };
 
   let years = today.getFullYear() - birth.getFullYear();
   let months = today.getMonth() - birth.getMonth();
