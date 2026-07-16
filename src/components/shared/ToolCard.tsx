@@ -15,8 +15,8 @@ export interface ToolCardProps {
   badge?: string;
   badgeTone?: "muted" | "primary" | "success" | "warning";
   variant?: ToolCardVariant;
-  gradient?: string; // Kept for API compatibility, but ignored by new clean styles
-  glowColor?: string; // Kept for API compatibility
+  gradient?: string; 
+  glowColor?: string; 
   tone?: "primary" | "success" | "warning" | "muted";
   className?: string;
 }
@@ -29,6 +29,8 @@ export function ToolCard({
   badge,
   badgeTone = "muted",
   variant = "grid",
+  gradient,
+  glowColor,
   tone = "primary",
   className,
 }: ToolCardProps) {
@@ -38,13 +40,14 @@ export function ToolCard({
       <Link
         href={href}
         className={cn(
-          "surface-card group flex flex-col items-center p-6 text-center",
+          "surface-card group flex flex-col items-center p-6 text-center hover:-translate-y-1.5",
           className
         )}
       >
         <IconTile
           icon={Icon}
           size="md"
+          gradient={gradient}
           tone={tone}
           className="mb-4"
         />
@@ -59,20 +62,31 @@ export function ToolCard({
   }
 
   /* ---------- featured + grid: full card with footer ---------- */
+  const isGrid = variant === "grid";
   return (
     <Link
       href={href}
       className={cn(
-        "surface-card group relative flex flex-col overflow-hidden p-6 hover:bg-muted/30",
+        "surface-card group relative flex flex-col overflow-hidden p-6 hover:-translate-y-1.5",
         className
       )}
     >
+      {/* Top hover accent bar */}
+      {gradient && (
+        <div
+          className={cn(
+            "absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+            gradient
+          )}
+        />
+      )}
+
       {/* Badge */}
       {badge && (
         <Pill
           tone={badgeTone}
           size="sm"
-          className="absolute right-4 top-4 shadow-sm bg-background"
+          className="absolute right-4 top-4 shadow-sm bg-background border border-border"
         >
           {badge}
         </Pill>
@@ -82,8 +96,12 @@ export function ToolCard({
       <IconTile
         icon={Icon}
         size="md"
+        gradient={gradient}
         tone={tone}
-        className="mb-5"
+        className={cn(
+          "mb-5 transition-shadow",
+          glowColor && `group-hover:${glowColor} group-hover:shadow-lg`
+        )}
       />
 
       {/* Title */}
@@ -99,7 +117,7 @@ export function ToolCard({
       )}
 
       {/* Footer link */}
-      <div className="mt-5 flex items-center gap-1 pt-4 text-sm font-semibold text-primary/80 group-hover:text-primary transition-colors">
+      <div className="mt-5 flex items-center gap-1 pt-4 text-sm font-semibold text-primary/80 group-hover:text-primary transition-colors border-t border-border/40">
         Open tool
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </div>

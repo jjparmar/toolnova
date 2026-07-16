@@ -91,22 +91,17 @@ export function HomeDashboard() {
 
   return (
     <div className="w-full">
-      {/* Hero — premium minimal layout */}
-      <section className="relative overflow-hidden border-b border-border bg-background">
+      {/* Hero — premium split layout with colorful mesh */}
+      <section className="relative overflow-hidden border-b border-border bg-gradient-mesh">
         <div
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            backgroundImage:
-              "radial-gradient(hsl(var(--foreground) / 0.03) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-          }}
+          className="pointer-events-none absolute inset-0 opacity-[0.12] bg-pattern-dots"
         />
         <div className="relative mx-auto max-w-[1120px] px-6 py-14 md:py-20 lg:py-24">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div className="text-center lg:text-left">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-sm font-semibold text-primary shadow-sm">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1.5 text-sm font-semibold text-primary shadow-glow-sm">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-40" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-50" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
                 </span>
                 Free to start · No sign-up required
@@ -114,7 +109,7 @@ export function HomeDashboard() {
 
               <h1 className="font-heading speakable text-4xl font-semibold leading-[1.12] tracking-tight text-foreground sm:text-5xl md:text-[3.15rem] mb-5">
                 Free AI tools for{" "}
-                <span className="text-primary">students &amp; professionals</span>
+                <span className="text-brand-gradient">students &amp; professionals</span>
               </h1>
 
               <p className="hero-description mx-auto mb-8 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl lg:mx-0">
@@ -152,10 +147,10 @@ export function HomeDashboard() {
               </div>
             </div>
 
-            {/* Product preview card */}
+            {/* Product preview card with colorful glows */}
             <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-              <div className="absolute -inset-4 rounded-3xl bg-primary/5 blur-2xl" />
-              <div className="surface-card-quiet relative overflow-hidden rounded-2xl shadow-premium-lg">
+              <div className="absolute -inset-10 rounded-full bg-gradient-to-tr from-primary/30 via-chart-2/20 to-chart-3/15 blur-3xl opacity-80 animate-pulse-slow" />
+              <div className="surface-card-quiet relative overflow-hidden rounded-2xl shadow-premium-lg border border-border/80 backdrop-blur-sm">
                 <div className="flex items-center gap-2 border-b border-border bg-muted/40 px-4 py-3">
                   <div className="flex gap-1.5">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />

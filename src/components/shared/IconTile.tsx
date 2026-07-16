@@ -36,16 +36,14 @@ export function IconTile({
     lg: "h-7 w-7",
   };
   
-  // We intentionally ignore the `gradient` prop in the new minimalist theme
-  // and force a clean bordered look.
-  const appliedTone = gradient ? "primary" : tone;
-  
   return (
     <div
       className={cn(
-        "flex shrink-0 items-center justify-center border transition-all duration-300 group-hover:scale-105 group-hover:bg-background group-hover:shadow-sm",
+        "flex shrink-0 items-center justify-center transition-all duration-300 group-hover:scale-110",
         sizes[size],
-        TONES[appliedTone],
+        gradient
+          ? cn("bg-gradient-to-br text-white shadow-md shadow-primary/20 border-0", gradient)
+          : cn("border border-border", TONES[tone]),
         className
       )}
     >
