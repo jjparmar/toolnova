@@ -200,15 +200,15 @@ export default function PricingClient() {
   const proPeriod = isYearly ? "year" : "month";
 
   return (
-    <div className="min-h-screen bg-background pb-20">
-      <div className="container mx-auto px-6 pt-12 md:pt-16 max-w-6xl">
+    <div className="page-shell min-h-screen overflow-hidden pb-20">
+      <div className="container relative mx-auto max-w-6xl px-6 pt-14 md:pt-20">
         {/* Hero */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6 border border-primary/15">
+          <div className="section-kicker mb-6">
             <Crown className="h-4 w-4" />
             Simple pricing
           </div>
-          <h1 className="font-heading text-3xl md:text-4xl font-semibold tracking-tight mb-4">
+          <h1 className="font-heading mb-4 text-4xl font-semibold tracking-tight md:text-5xl">
             Free to start.{" "}
             <span className="text-primary">Pro when you need unlimited AI.</span>
           </h1>
@@ -222,7 +222,7 @@ export default function PricingClient() {
         {/* Billing toggle */}
         <div className="flex justify-center mb-12">
           <div
-            className="inline-flex p-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
+            className="surface-glass inline-flex rounded-full border border-border bg-card/75 p-1 shadow-premium-sm"
             role="group"
             aria-label="Billing period"
           >
@@ -232,7 +232,7 @@ export default function PricingClient() {
               className={cn(
                 "px-6 py-2.5 rounded-full text-sm font-bold transition-all",
                 !isYearly
-                  ? "bg-white dark:bg-slate-900 text-foreground shadow-sm"
+                  ? "bg-card text-foreground shadow-premium-sm"
                   : "text-muted-foreground",
               )}
             >
@@ -244,7 +244,7 @@ export default function PricingClient() {
               className={cn(
                 "px-6 py-2.5 rounded-full text-sm font-bold transition-all",
                 isYearly
-                  ? "bg-white dark:bg-slate-900 text-foreground shadow-sm"
+                  ? "bg-card text-foreground shadow-premium-sm"
                   : "text-muted-foreground",
               )}
             >
@@ -259,7 +259,7 @@ export default function PricingClient() {
         {/* Plans */}
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto mb-16">
           {/* Free */}
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 shadow-sm flex flex-col">
+          <div className="content-panel flex flex-col p-8">
             <div className="flex items-center gap-2 mb-2">
               <FileText className="h-5 w-5 text-muted-foreground" />
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -292,7 +292,7 @@ export default function PricingClient() {
           </div>
 
           {/* Pro */}
-          <div className="rounded-2xl border-2 border-primary bg-card p-8 shadow-md flex flex-col relative overflow-hidden">
+          <div className="premium-tint flex flex-col p-8 shadow-premium relative">
             <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-wide">
               Best value
             </div>
@@ -369,7 +369,7 @@ export default function PricingClient() {
           ].map((item) => (
             <div
               key={item.title}
-              className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 text-center"
+              className="surface-card-quiet p-5 text-center"
             >
               <item.icon className="h-6 w-6 mx-auto mb-2 text-primary" />
               <p className="font-bold text-sm">{item.title}</p>
@@ -383,9 +383,9 @@ export default function PricingClient() {
           <h2 className="text-2xl font-bold text-center mb-6">
             Free vs Pro at a glance
           </h2>
-          <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+          <div className="content-panel overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-slate-50 dark:bg-slate-900">
+              <thead className="bg-muted/60">
                 <tr>
                   <th className="text-left p-4 font-semibold">Feature</th>
                   <th className="text-left p-4 font-semibold">Free</th>
@@ -398,7 +398,7 @@ export default function PricingClient() {
                 {comparisonRows.map((row) => (
                   <tr
                     key={row.feature}
-                    className="border-t border-slate-100 dark:border-slate-800"
+                    className="border-t border-border/70"
                   >
                     <td className="p-4 font-medium">{row.feature}</td>
                     <td className="p-4 text-muted-foreground">{row.free}</td>
@@ -425,7 +425,7 @@ export default function PricingClient() {
                     "rounded-2xl border transition-colors",
                     open
                       ? "border-primary/40 bg-primary/5"
-                      : "border-slate-200 dark:border-slate-800",
+                      : "border-border bg-card/70",
                   )}
                 >
                   <button

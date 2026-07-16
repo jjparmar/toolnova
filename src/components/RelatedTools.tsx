@@ -154,28 +154,28 @@ export function RelatedTools({ currentTool, category }: RelatedToolsProps) {
     if (relatedTools.length === 0) return null;
 
     return (
-        <section className="py-12 bg-[#f8f9fb] dark:bg-[#0f1419]">
-            <div className="container mx-auto px-6 max-w-[1200px]">
-                <h2 className="text-2xl font-bold text-foreground mb-6">
+        <section className="section-band py-12">
+            <div className="container mx-auto max-w-[1200px] px-6">
+                <h2 className="font-heading mb-6 text-2xl font-semibold tracking-tight text-foreground">
                     You Might Also Like
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
                     {relatedTools.map((tool) => (
                         <Link
                             key={tool.slug}
                             href={`/tools/${tool.slug}`}
-                            className="group bg-background border border-border rounded-xl p-6 hover:border-primary hover:shadow-lg transition-all duration-200"
+                            className="surface-card group flex flex-col p-6"
                         >
-                            <div className="flex items-start justify-between mb-3">
-                                <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded">
+                            <div className="mb-3 flex items-start justify-between">
+                                <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-semibold text-primary">
                                     {tool.category}
                                 </span>
-                                <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                                <ArrowRight className="h-4 w-4 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary" />
                             </div>
-                            <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                            <h3 className="mb-2 font-heading text-lg font-bold text-foreground transition-colors group-hover:text-primary">
                                 {tool.name}
                             </h3>
-                            <p className="text-sm text-muted-foreground line-clamp-2">
+                            <p className="line-clamp-2 text-sm text-muted-foreground">
                                 {tool.description}
                             </p>
                         </Link>

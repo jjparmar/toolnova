@@ -47,7 +47,7 @@ export default function ImagePDFToolsPage() {
     const breadcrumbSchema = generateBreadcrumbListSchema(CATEGORY_BREADCRUMBS['image-pdf-tools']);
 
     return (
-        <div className="w-full min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-background dark:to-background">
+        <div className="page-shell w-full min-h-screen">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -66,11 +66,11 @@ export default function ImagePDFToolsPage() {
                 </div>
 
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/15 text-sm font-semibold mb-5">
+                    <div className="section-kicker mb-5">
                         <ImageIcon className="h-4 w-4" />
                         {tools.length} Free Tools · Browser-private
                     </div>
-                    <h1 className="font-heading text-foreground text-4xl md:text-5xl font-bold tracking-tight mb-4">Image & PDF Tools</h1>
+                    <h1 className="font-heading text-foreground text-4xl md:text-5xl font-semibold tracking-tight mb-4">Image & PDF Tools</h1>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                         Merge, split, reorder, crop, convert, and compress — processed in your browser for privacy.
                     </p>
@@ -81,7 +81,7 @@ export default function ImagePDFToolsPage() {
                         <Link
                             key={tool.slug}
                             href={`/tools/${tool.slug}`}
-                            className="group relative flex flex-col p-6 rounded-2xl bg-gradient-to-br from-red-50 to-orange-50/50 dark:from-red-900/20 dark:to-orange-900/10 border border-red-100 dark:border-red-800/30 hover:shadow-2xl shadow-red-500/20 hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300"
+                            className="surface-card group relative flex flex-col p-6"
                         >
                             <div className="flex items-start gap-4">
                                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-orange-600 text-white shadow-lg group-hover:scale-110 transition-transform">
@@ -102,7 +102,7 @@ export default function ImagePDFToolsPage() {
                 </div>
 
                 {/* Pillar content — SEO / AdSense depth */}
-                <section className="mt-20 max-w-4xl mx-auto prose prose-slate dark:prose-invert prose-lg">
+                <section className="content-panel mt-20 max-w-4xl mx-auto prose prose-slate dark:prose-invert prose-lg p-7 md:p-10">
                     <h2>Free image &amp; PDF tools that run in your browser</h2>
                     <p>
                         ToolNova&apos;s image and PDF utilities are built for students and professionals who need
@@ -138,7 +138,7 @@ export default function ImagePDFToolsPage() {
                         <h2 className="text-2xl font-bold mb-6 text-center">Image &amp; PDF FAQ</h2>
                         <div className="space-y-4">
                             {aeoContent.faqs.map((f, i) => (
-                                <div key={i} className="rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-900">
+                                <div key={i} className="surface-card-quiet rounded-xl p-5">
                                     <h3 className="font-semibold text-foreground mb-2">{f.question}</h3>
                                     <p className="text-sm text-muted-foreground leading-relaxed">{f.answer}</p>
                                 </div>
@@ -155,7 +155,7 @@ export default function ImagePDFToolsPage() {
             </div>
 
             {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
-            <section className="mx-auto max-w-4xl px-6 mt-12 pb-20 border-t border-slate-200/60 dark:border-slate-800/60 pt-16 prose prose-slate dark:prose-invert prose-lg">
+            <section className="content-panel mx-auto mt-12 max-w-4xl p-7 md:p-10 prose prose-slate dark:prose-invert prose-lg">
                 <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
                     Modern Document Management and Web Asset Optimization
                 </h2>

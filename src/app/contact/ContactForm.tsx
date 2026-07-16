@@ -56,11 +56,11 @@ export function ContactForm() {
     <div className="grid md:grid-cols-2 gap-12">
       {/* Contact Info */}
       <div className="space-y-8">
-        <div className="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800">
+        <div className="content-panel p-8">
           <h3 className="text-xl font-bold mb-6">Get in touch</h3>
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <div className="bg-primary/10 p-3 rounded-lg text-primary">
+              <div className="icon-tile shrink-0">
                 <Mail className="h-6 w-6" />
               </div>
               <div>
@@ -77,7 +77,7 @@ export function ContactForm() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="bg-primary/10 p-3 rounded-lg text-primary">
+              <div className="icon-tile shrink-0">
                 <MapPin className="h-6 w-6" />
               </div>
               <div>
@@ -94,18 +94,18 @@ export function ContactForm() {
           </div>
         </div>
 
-        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-2xl p-6">
-          <p className="text-green-800 dark:text-green-400 text-sm font-medium">
+        <div className="rounded-2xl border border-success/20 bg-success/5 p-6">
+          <p className="text-success text-sm font-semibold">
             ⚡ Average response time: under 24 hours
           </p>
-          <p className="text-green-700 dark:text-green-500 text-sm mt-1">
+          <p className="text-muted-foreground text-sm mt-1">
             Monday–Friday, 9am–6pm SGT
           </p>
         </div>
       </div>
 
       {/* Contact Form */}
-      <div className="bg-white dark:bg-slate-950 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div className="content-panel p-8">
         {submitted ? (
           <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-center gap-4">
             <CheckCircle className="h-16 w-16 text-green-500" />

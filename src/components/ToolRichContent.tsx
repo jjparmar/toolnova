@@ -1,17 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-    FaLightbulb,
-    FaQuestionCircle,
-    FaShieldAlt,
-    FaRocket,
-    FaCheckCircle,
-    FaBullseye,
-    FaExclamationTriangle,
-    FaStar,
-    FaCalendarAlt,
-    FaUserEdit,
-} from 'react-icons/fa';
+    Lightbulb,
+    HelpCircle,
+    ShieldCheck,
+    Rocket,
+    CheckCircle2,
+    Target,
+    AlertTriangle,
+    Star,
+    CalendarDays,
+    PenLine,
+} from 'lucide-react';
 
 interface ToolRichContentProps {
     title: string;
@@ -51,45 +51,45 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
     const tips = expertTips && expertTips.length > 0 ? expertTips : defaultTips;
 
     return (
-        <div className="max-w-4xl mx-auto px-6 py-16 space-y-20 text-slate-800 dark:text-slate-200">
+        <div className="mx-auto max-w-4xl space-y-20 px-6 py-16 text-foreground">
 
             {/* Trust Badge: Last Reviewed */}
-            <div className="flex flex-wrap items-center gap-4 p-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-xl border border-emerald-200 dark:border-emerald-800 text-sm">
-                <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 font-medium">
-                    <FaCalendarAlt className="flex-shrink-0" />
+            <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-success/25 bg-success/8 p-4 text-sm">
+                <div className="flex items-center gap-2 font-medium text-success">
+                    <CalendarDays className="h-4 w-4 shrink-0" />
                     <span>Last reviewed by our editorial team: <strong>{lastReviewed}</strong></span>
                 </div>
-                <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 font-medium">
-                    <FaUserEdit className="flex-shrink-0" />
+                <div className="flex items-center gap-2 font-medium text-success">
+                    <PenLine className="h-4 w-4 shrink-0" />
                     <span>Fact-checked by <strong>ToolNova Editorial Team</strong></span>
                 </div>
-                <Link href="/editorial-policy" className="text-emerald-600 dark:text-emerald-400 hover:underline underline-offset-2 ml-auto text-xs">
+                <Link href="/editorial-policy" className="ml-auto text-xs text-success hover:underline underline-offset-2">
                     Our editorial standards →
                 </Link>
             </div>
 
             {/* AEO: Quick answer block — direct, cite-friendly answer for AI search */}
             <section className="rounded-2xl border border-primary/20 bg-primary/5 p-6">
-                <h2 className="text-2xl font-bold mb-3">Quick answer</h2>
+                <h2 className="mb-3 text-xl font-bold text-foreground">Quick answer</h2>
                 <p className="text-base leading-relaxed text-muted-foreground">{answerSnippet}</p>
             </section>
 
             {/* Overview */}
             <section className="space-y-6">
-                <h2 className="text-3xl font-bold tracking-tight">
+                <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground">
                     What is the {title}?
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-lg leading-relaxed text-muted-foreground">
                     {description}
                 </p>
             </section>
 
             {/* Intent fit: best for / not for */}
-            <section className="grid md:grid-cols-2 gap-6">
-                <div className="rounded-2xl border border-emerald-200 bg-emerald-50/50 dark:bg-emerald-950/20 p-6">
-                    <div className="flex items-center gap-2 mb-3 text-emerald-700 dark:text-emerald-400">
-                        <FaBullseye />
-                        <h3 className="font-bold text-lg">Best for</h3>
+            <section className="grid gap-6 md:grid-cols-2">
+                <div className="rounded-2xl border border-success/20 bg-success/5 p-6">
+                    <div className="mb-3 flex items-center gap-2 text-success">
+                        <Target className="h-5 w-5" />
+                        <h3 className="text-lg font-bold">Best for</h3>
                     </div>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                         <li>• Fast task completion with minimal steps</li>
@@ -97,10 +97,10 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
                         <li>• Users who want browser-based workflow without installs</li>
                     </ul>
                 </div>
-                <div className="rounded-2xl border border-amber-200 bg-amber-50/50 dark:bg-amber-950/20 p-6">
-                    <div className="flex items-center gap-2 mb-3 text-amber-700 dark:text-amber-400">
-                        <FaExclamationTriangle />
-                        <h3 className="font-bold text-lg">Not ideal for</h3>
+                <div className="rounded-2xl border border-warning/20 bg-warning/5 p-6">
+                    <div className="mb-3 flex items-center gap-2 text-warning-foreground">
+                        <AlertTriangle className="h-5 w-5" />
+                        <h3 className="text-lg font-bold">Not ideal for</h3>
                     </div>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                         <li>• Extremely niche enterprise workflows with custom compliance rules</li>
@@ -113,17 +113,17 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
             {/* How to Use */}
             <section className="space-y-10">
                 <div className="flex items-center gap-3">
-                    <FaRocket className="text-primary text-2xl" />
-                    <h2 className="text-2xl font-bold">How to Use the {title}</h2>
+                    <Rocket className="h-6 w-6 text-primary" />
+                    <h2 className="font-heading text-2xl font-bold text-foreground">How to Use the {title}</h2>
                 </div>
                 <div className="grid gap-6">
                     {steps.map((step, i) => (
-                        <div key={i} className="flex gap-4 p-6 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800">
-                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">
+                        <div key={i} className="flex gap-4 rounded-2xl border border-border bg-muted/40 p-6">
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary font-bold text-primary-foreground">
                                 {i + 1}
                             </div>
                             <div className="space-y-2">
-                                <h3 className="font-bold text-lg">{step.title}</h3>
+                                <h3 className="font-bold text-lg text-foreground">{step.title}</h3>
                                 <p className="text-muted-foreground">{step.desc}</p>
                             </div>
                         </div>
@@ -134,17 +134,17 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
             {/* Benefits */}
             <section className="space-y-10">
                 <div className="flex items-center gap-3">
-                    <FaLightbulb className="text-amber-500 text-2xl" />
-                    <h2 className="text-2xl font-bold">Key Benefits</h2>
+                    <Lightbulb className="h-6 w-6 text-warning-foreground" />
+                    <h2 className="font-heading text-2xl font-bold text-foreground">Key Benefits</h2>
                 </div>
-                <div className="grid sm:grid-cols-2 gap-8">
+                <div className="grid gap-8 sm:grid-cols-2">
                     {benefits.map((benefit, i) => (
                         <div key={i} className="space-y-3">
                             <div className="flex items-center gap-2 text-primary">
-                                <FaCheckCircle />
-                                <h3 className="font-bold text-lg">{benefit.title}</h3>
+                                <CheckCircle2 className="h-5 w-5" />
+                                <h3 className="text-lg font-bold text-foreground">{benefit.title}</h3>
                             </div>
-                            <p className="text-muted-foreground leading-relaxed">
+                            <p className="leading-relaxed text-muted-foreground">
                                 {benefit.desc}
                             </p>
                         </div>
@@ -155,16 +155,16 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
             {/* Expert Tips */}
             <section className="space-y-6">
                 <div className="flex items-center gap-3">
-                    <FaStar className="text-yellow-500 text-2xl" />
-                    <h2 className="text-2xl font-bold">Expert Tips for Best Results</h2>
+                    <Star className="h-6 w-6 text-warning-foreground" />
+                    <h2 className="font-heading text-2xl font-bold text-foreground">Expert Tips for Best Results</h2>
                 </div>
                 <div className="space-y-4">
                     {tips.map((tip, i) => (
-                        <div key={i} className="flex gap-4 p-5 bg-yellow-50/60 dark:bg-yellow-950/20 rounded-xl border border-yellow-200 dark:border-yellow-800">
-                            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-yellow-400 text-white flex items-center justify-center text-sm font-bold">
+                        <div key={i} className="flex gap-4 rounded-xl border border-warning/20 bg-warning/5 p-5">
+                            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-warning-foreground text-xs font-bold text-white">
                                 {i + 1}
                             </div>
-                            <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{tip}</p>
+                            <p className="text-sm leading-relaxed text-muted-foreground">{tip}</p>
                         </div>
                     ))}
                 </div>
@@ -173,14 +173,14 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
             {/* FAQ */}
             <section className="space-y-10">
                 <div className="flex items-center gap-3">
-                    <FaQuestionCircle className="text-primary text-2xl" />
-                    <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
+                    <HelpCircle className="h-6 w-6 text-primary" />
+                    <h2 className="font-heading text-2xl font-bold text-foreground">Frequently Asked Questions</h2>
                 </div>
                 <div className="space-y-6">
                     {faq.map((item, i) => (
-                        <div key={i} className="space-y-3 border-b border-slate-100 dark:border-slate-800 pb-6 last:border-0">
-                            <h3 className="font-bold text-xl">{item.question}</h3>
-                            <p className="text-muted-foreground leading-relaxed italic">
+                        <div key={i} className="space-y-3 border-b border-border pb-6 last:border-0">
+                            <h3 className="text-xl font-bold text-foreground">{item.question}</h3>
+                            <p className="italic leading-relaxed text-muted-foreground">
                                 {item.answer}
                             </p>
                         </div>
@@ -189,26 +189,26 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
             </section>
 
             {/* Internal intent links */}
-            <section className="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 bg-white dark:bg-slate-900">
-                <h2 className="text-xl font-bold mb-4">Explore related categories</h2>
+            <section className="rounded-2xl border border-border bg-card p-6">
+                <h2 className="mb-4 text-xl font-bold text-foreground">Explore related categories</h2>
                 <div className="flex flex-wrap gap-3 text-sm">
-                    <Link href="/tools" className="underline underline-offset-4">All tools</Link>
-                    <Link href="/tools/writing-tools" className="underline underline-offset-4">Writing tools</Link>
-                    <Link href="/tools/study-tools" className="underline underline-offset-4">Study tools</Link>
-                    <Link href="/tools/career-tools" className="underline underline-offset-4">Career tools</Link>
-                    <Link href="/tools/image-pdf-tools" className="underline underline-offset-4">Image &amp; PDF tools</Link>
-                    <Link href="/blog" className="underline underline-offset-4">Guides &amp; blog</Link>
-                    <Link href="/editorial-policy" className="underline underline-offset-4">Editorial policy</Link>
+                    <Link href="/tools" className="text-primary underline-offset-4 hover:underline">All tools</Link>
+                    <Link href="/tools/writing-tools" className="text-primary underline-offset-4 hover:underline">Writing tools</Link>
+                    <Link href="/tools/study-tools" className="text-primary underline-offset-4 hover:underline">Study tools</Link>
+                    <Link href="/tools/career-tools" className="text-primary underline-offset-4 hover:underline">Career tools</Link>
+                    <Link href="/tools/image-pdf-tools" className="text-primary underline-offset-4 hover:underline">Image &amp; PDF tools</Link>
+                    <Link href="/blog" className="text-primary underline-offset-4 hover:underline">Guides &amp; blog</Link>
+                    <Link href="/editorial-policy" className="text-primary underline-offset-4 hover:underline">Editorial policy</Link>
                 </div>
             </section>
 
             {/* Trust Banner */}
-            <section className="p-8 bg-gradient-to-br from-primary/10 to-blue-500/10 rounded-3xl border border-primary/20 flex flex-col md:flex-row items-center gap-6">
-                <div className="w-16 h-16 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center text-primary shadow-xl">
-                    <FaShieldAlt size={32} />
+            <section className="flex flex-col items-center gap-6 rounded-3xl border border-primary/20 bg-primary/5 p-8 md:flex-row">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-card text-primary shadow-premium">
+                    <ShieldCheck className="h-8 w-8" />
                 </div>
                 <div className="text-center md:text-left">
-                    <h3 className="text-xl font-bold mb-2">Safe &amp; Secure Processing</h3>
+                    <h3 className="mb-2 text-xl font-bold text-foreground">Safe &amp; Secure Processing</h3>
                     <p className="text-muted-foreground">
                         Your data is processed locally in your browser when possible and never stored on our servers.
                         All AI processing is encrypted and follows strict privacy standards.

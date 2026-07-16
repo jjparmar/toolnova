@@ -32,13 +32,13 @@ export default async function DashboardPage() {
   if (!dbUser) {
     // User hasn't used any tools yet — show empty dashboard
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12">
+      <div className="page-shell min-h-screen py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-slate-900 dark:text-white font-heading">My Dashboard</h1>
             <p className="mt-2 text-slate-600 dark:text-slate-400">Welcome, {user.name?.split(" ")[0] || "there"}!</p>
           </div>
-          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-12 text-center">
+          <div className="content-panel p-12 text-center">
             <div className="mx-auto h-16 w-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4">
               <FileText className="h-8 w-8 text-slate-400" />
             </div>
@@ -73,7 +73,7 @@ export default async function DashboardPage() {
   const remaining = isPremium ? -1 : Math.max(0, DAILY_FREE_LIMIT - todayCount);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12">
+    <div className="page-shell min-h-screen py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -91,7 +91,7 @@ export default async function DashboardPage() {
           {/* Plan Card */}
           <div className={`rounded-2xl p-5 border ${isPremium
             ? "bg-gradient-to-br from-primary to-teal-600 border-transparent text-white"
-            : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800"}`}>
+            : "content-panel"}`}>
             <div className="flex items-center gap-3 mb-3">
               <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${isPremium ? "bg-white/20" : "bg-indigo-50 dark:bg-indigo-900/30"}`}>
                 <Crown className={`h-5 w-5 ${isPremium ? "text-white" : "text-indigo-600 dark:text-indigo-400"}`} />
@@ -116,7 +116,7 @@ export default async function DashboardPage() {
           </div>
 
           {/* Today's Usage */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
+          <div className="surface-card-quiet p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="h-10 w-10 rounded-xl bg-green-50 dark:bg-green-900/30 flex items-center justify-center">
                 <Zap className="h-5 w-5 text-green-600 dark:text-green-400" />
@@ -134,7 +134,7 @@ export default async function DashboardPage() {
           </div>
 
           {/* Total Generations */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
+          <div className="surface-card-quiet p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="h-10 w-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
                 <BarChart3 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
@@ -150,7 +150,7 @@ export default async function DashboardPage() {
           </div>
 
           {/* Account */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
+          <div className="surface-card-quiet p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
                 <User className="h-5 w-5 text-primary" />
@@ -183,7 +183,7 @@ export default async function DashboardPage() {
         </div>
 
         {history.length === 0 ? (
-          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-12 text-center">
+          <div className="content-panel p-12 text-center">
             <div className="mx-auto h-16 w-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4">
               <FileText className="h-8 w-8 text-slate-400" />
             </div>
@@ -199,7 +199,7 @@ export default async function DashboardPage() {
             </Link>
           </div>
         ) : (
-          <div className="bg-white dark:bg-slate-900 shadow-sm rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+          <div className="content-panel overflow-hidden">
             <ul className="divide-y divide-slate-200 dark:divide-slate-800">
               {history.map((item) => {
                 let parsedPrompt = item.prompt;
@@ -234,7 +234,7 @@ export default async function DashboardPage() {
                         <h4 className="text-sm font-medium text-slate-900 dark:text-white truncate mb-1">
                           Prompt: {displayPrompt}
                         </h4>
-                        <div className="text-sm text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 rounded p-3 mt-3 border border-slate-100 dark:border-slate-800">
+                        <div className="text-sm text-muted-foreground bg-muted/60 rounded-xl p-3 mt-3 border border-border/70">
                           {displayResponse}
                         </div>
                       </div>
@@ -258,7 +258,7 @@ export default async function DashboardPage() {
 
         {/* Upgrade CTA for free users */}
         {!isPremium && (
-          <div className="mt-8 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 p-8 text-center text-white">
+          <div className="mt-8 rounded-3xl bg-gradient-primary p-8 text-center text-white shadow-premium-lg">
             <Crown className="h-10 w-10 mx-auto mb-3 text-yellow-300" />
             <h3 className="text-xl font-black mb-2">Unlock Unlimited Generations</h3>
             <p className="text-white/80 mb-5 max-w-md mx-auto">
@@ -266,7 +266,7 @@ export default async function DashboardPage() {
             </p>
             <Link
               href="/pricing"
-              className="inline-flex items-center justify-center rounded-xl bg-white text-indigo-700 font-black px-8 py-3 hover:bg-white/90 transition-all shadow-xl"
+              className="inline-flex items-center justify-center rounded-xl bg-white text-primary font-black px-8 py-3 hover:bg-white/90 transition-all shadow-xl"
             >
               Upgrade to Pro →
             </Link>

@@ -147,7 +147,7 @@ export default function ToolsPage() {
       />
       <ToolsClient />
 
-      <section className="mx-auto max-w-[1200px] px-6 mt-12 not-prose">
+      <section className="content-panel mx-auto mt-12 max-w-[1200px] px-6 py-7 not-prose md:p-8">
         <h2 className="text-xl font-bold mb-4">Browse by category</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
           {[
@@ -161,7 +161,7 @@ export default function ToolsPage() {
             <Link
               key={c.href}
               href={c.href}
-              className="rounded-xl border border-slate-200 dark:border-slate-800 p-4 hover:border-primary/40 hover:bg-primary/5 transition-colors"
+              className="surface-card rounded-xl p-4 hover:bg-primary/5"
             >
               <div className="font-semibold text-foreground">{c.label}</div>
               <div className="text-muted-foreground mt-1">{c.desc}</div>
@@ -181,7 +181,7 @@ export default function ToolsPage() {
       </section>
       
       {/* Rich Editorial Content to satisfy Google AdSense High-Quality / Thin Content policies */}
-      <section className="mt-20 border-t border-slate-200/60 dark:border-slate-800/60 pt-16 pb-24 max-w-4xl mx-auto prose prose-slate dark:prose-invert prose-lg">
+      <section className="content-panel mt-20 max-w-4xl mx-auto prose prose-slate dark:prose-invert prose-lg p-7 md:p-10">
         <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
           The Role of AI-Powered Micro-Utilities in Modern Workflows
         </h2>
@@ -217,4 +217,3 @@ export default function ToolsPage() {
     </>
   );
 }
-

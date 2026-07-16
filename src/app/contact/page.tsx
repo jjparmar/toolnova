@@ -89,21 +89,24 @@ export default function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
       />
-      <div className="container mx-auto px-6 py-24 max-w-5xl">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Have questions about our tools, a partnership idea, or just want to
-            say hello? We&apos;d love to hear from you. Prefer email?{" "}
-            <a
-              href="mailto:support@toolnovahub.com"
-              className="text-primary hover:underline font-medium"
-            >
-              support@toolnovahub.com
-            </a>
-          </p>
+      <div className="page-shell">
+        <div className="container mx-auto max-w-5xl px-6 py-16 md:py-24">
+          <div className="text-center mb-14">
+            <span className="section-kicker mb-5">Support</span>
+            <h1 className="font-heading text-4xl md:text-5xl font-semibold tracking-tight mb-4">Contact Us</h1>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Have questions about our tools, a partnership idea, or just want to
+              say hello? We&apos;d love to hear from you. Prefer email?{" "}
+              <a
+                href="mailto:support@toolnovahub.com"
+                className="text-primary hover:underline font-medium"
+              >
+                support@toolnovahub.com
+              </a>
+            </p>
+          </div>
+          <ContactForm />
         </div>
-        <ContactForm />
       </div>
     </>
   );

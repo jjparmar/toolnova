@@ -125,15 +125,15 @@ export default function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogCollectionSchema) }}
       />
-      <div className="min-h-screen bg-background">
+      <div className="page-shell min-h-screen">
         {/* Featured */}
-        <section className="py-10 md:py-14">
+        <section className="page-hero py-12 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8 text-center md:text-left">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider border border-primary/15">
+              <span className="section-kicker">
                 Blog
               </span>
-              <h1 className="font-heading text-3xl md:text-4xl font-bold mt-3 text-foreground">
+              <h1 className="font-heading text-4xl md:text-5xl font-semibold mt-4 tracking-tight text-foreground">
                 Guides &amp; insights
               </h1>
               <p className="text-muted-foreground mt-2 max-w-2xl">
@@ -143,12 +143,12 @@ export default function BlogPage() {
             </div>
 
             <Link href={`/blog/${featuredPost.slug}`} className="block group">
-              <article className="grid lg:grid-cols-2 gap-8 items-center p-6 md:p-8 bg-card border border-border rounded-2xl shadow-lg shadow-primary/5 hover:shadow-xl hover:border-primary/25 hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden">
+              <article className="content-panel grid lg:grid-cols-2 gap-8 items-center p-6 md:p-8 transition-all duration-300 relative overflow-hidden hover:border-primary/30 hover:-translate-y-0.5">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 blur-2xl pointer-events-none" />
 
                 <div className="relative z-10">
                   <div className="flex flex-wrap items-center gap-3 mb-4">
-                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-primary to-teal-600 text-primary-foreground text-xs font-bold uppercase tracking-wider shadow-md shadow-primary/20">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-primary text-primary-foreground text-xs font-bold uppercase tracking-wider shadow-md shadow-primary/20">
                       Featured
                     </span>
                     <span className="px-2.5 py-0.5 rounded-full bg-muted text-muted-foreground text-xs font-medium">
@@ -192,8 +192,8 @@ export default function BlogPage() {
                       />
                     </div>
                   ) : (
-                    <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/15 to-teal-500/15 flex items-center justify-center border border-border">
-                      <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center shadow-xl shadow-primary/25">
+                    <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/15 to-sky-500/15 flex items-center justify-center border border-border">
+                      <div className="w-24 h-24 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-xl shadow-primary/25">
                         <FaRocket className="text-white text-4xl" />
                       </div>
                     </div>
@@ -220,7 +220,7 @@ export default function BlogPage() {
                     href={`/blog/${post.slug}`}
                     className="group h-full"
                   >
-                    <article className="h-full bg-card rounded-2xl p-6 shadow-sm border border-border hover:shadow-lg hover:border-primary/25 transition-all duration-300 hover:-translate-y-1 flex flex-col">
+                    <article className="surface-card h-full p-6 flex flex-col">
                       <div className="flex items-center gap-2 mb-4">
                         <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
                           {post.category}
@@ -256,7 +256,7 @@ export default function BlogPage() {
 
         {/* Topics */}
         {categories.length > 0 && (
-          <section className="py-12 bg-muted/30 border-y border-border">
+          <section className="section-band py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">
                 Topics
@@ -278,21 +278,21 @@ export default function BlogPage() {
         {/* CTA */}
         <section className="py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 rounded-3xl p-10 md:p-14 text-center text-white relative overflow-hidden shadow-2xl">
+            <div className="bg-gradient-primary rounded-3xl p-10 md:p-14 text-center text-white relative overflow-hidden shadow-premium-lg">
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
               <div className="relative z-10">
-                <FaRocket className="text-4xl mb-6 mx-auto text-teal-200" />
+                <FaRocket className="text-4xl mb-6 mx-auto text-white/75" />
                 <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
                   Ready to boost your productivity?
                 </h2>
-                <p className="text-slate-300 text-lg mb-8 max-w-2xl mx-auto">
+                <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
                   Try {TOOL_COUNT_LABEL} free AI-powered tools — no sign-up
                   required.
                 </p>
                 <Link
                   href="/tools"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-teal-800 rounded-xl font-bold text-lg hover:bg-teal-50 transition-colors shadow-lg"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary rounded-xl font-bold text-lg hover:bg-white/90 transition-colors shadow-lg"
                 >
                   Explore free tools
                   <FaArrowRight />

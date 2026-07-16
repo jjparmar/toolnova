@@ -24,6 +24,14 @@ import { FAQAccordion } from "@/components/aeo/FAQAccordion";
 import { getHomepageAEO } from "@/lib/global-aeo-content";
 import { MultiplexAd, BetweenSectionsAd } from "@/components/ads/AdUnit";
 import { TOOL_COUNT, TOOL_COUNT_LABEL } from "@/data/tools";
+import {
+  SectionHeading,
+  ToolCard,
+  CategoryCard,
+  CTASection,
+  PremiumCard,
+  StatTile,
+} from "@/components/shared";
 
 const featuredTools = [
   {
@@ -32,7 +40,9 @@ const featuredTools = [
     title: "Merge PDF",
     desc: "Combine PDFs in order and download one file — private, in-browser.",
     badge: "Top pick",
-    iconBg: "bg-red-50 text-red-600 dark:bg-red-950/40 dark:text-red-400",
+    badgeTone: "primary" as const,
+    gradient: "from-rose-500 to-orange-500",
+    glowColor: "shadow-rose-500/20",
   },
   {
     href: "/tools/resize-image",
@@ -40,7 +50,9 @@ const featuredTools = [
     title: "Image Resizer",
     desc: "Resize by pixels or percent without quality loss.",
     badge: "Popular",
-    iconBg: "bg-sky-50 text-sky-600 dark:bg-sky-950/40 dark:text-sky-400",
+    badgeTone: "muted" as const,
+    gradient: "from-violet-500 to-purple-600",
+    glowColor: "shadow-violet-500/20",
   },
   {
     href: "/tools/flashcard-maker",
@@ -48,7 +60,9 @@ const featuredTools = [
     title: "Flashcard Maker",
     desc: "Create study cards from any topic for exam prep.",
     badge: "Students",
-    iconBg: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400",
+    badgeTone: "muted" as const,
+    gradient: "from-teal-500 to-cyan-500",
+    glowColor: "shadow-teal-500/20",
   },
 ];
 
@@ -66,15 +80,21 @@ const previewTools = [
   { icon: Sparkles, name: "Essay Writer", color: "text-primary bg-primary/10" },
 ];
 
+const whyUsFeatures = [
+  { icon: Zap, title: "Fast", desc: "Optimized tools so you get results in seconds, not minutes." },
+  { icon: ShieldCheck, title: "Private", desc: "PDF and image tools process in your browser when possible." },
+  { icon: Sparkles, title: "Useful AI", desc: "Clear outputs designed for study, writing, and career work." },
+];
+
 export function HomeDashboard() {
   const aeoContent = getHomepageAEO();
 
   return (
     <div className="w-full">
-      {/* Hero — split layout for engagement */}
+      {/* Hero — premium split layout */}
       <section className="relative overflow-hidden border-b border-border bg-gradient-mesh">
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.35]"
+          className="pointer-events-none absolute inset-0 opacity-30"
           style={{
             backgroundImage:
               "radial-gradient(hsl(var(--foreground) / 0.04) 1px, transparent 1px)",
@@ -94,10 +114,10 @@ export function HomeDashboard() {
 
               <h1 className="font-heading speakable text-4xl font-semibold leading-[1.12] tracking-tight text-foreground sm:text-5xl md:text-[3.15rem] mb-5">
                 Free AI tools for{" "}
-                <span className="text-primary">students &amp; professionals</span>
+                <span className="text-brand-gradient">students &amp; professionals</span>
               </h1>
 
-              <p className="hero-description mx-auto max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl lg:mx-0 mb-8">
+              <p className="hero-description mx-auto mb-8 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl lg:mx-0">
                 Write better, study smarter, and get more done with{" "}
                 <strong className="font-semibold text-foreground">
                   {TOOL_COUNT_LABEL} tools
@@ -125,31 +145,17 @@ export function HomeDashboard() {
                 </Link>
               </div>
 
-              <div className="grid max-w-md grid-cols-3 gap-3 mx-auto lg:mx-0">
-                {[
-                  { value: String(TOOL_COUNT), label: "Tools" },
-                  { value: "$0", label: "To start" },
-                  { value: "Private", label: "Browser PDFs" },
-                ].map((s) => (
-                  <div
-                    key={s.label}
-                    className="rounded-xl border border-border bg-card/90 px-3 py-3.5 shadow-sm backdrop-blur-sm"
-                  >
-                    <div className="font-heading text-xl font-semibold text-foreground sm:text-2xl">
-                      {s.value}
-                    </div>
-                    <div className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
-                      {s.label}
-                    </div>
-                  </div>
-                ))}
+              <div className="mx-auto grid max-w-md grid-cols-3 gap-3 lg:mx-0">
+                <StatTile value={String(TOOL_COUNT)} label="Tools" />
+                <StatTile value="$0" label="To start" />
+                <StatTile value="Private" label="Browser PDFs" />
               </div>
             </div>
 
-            {/* Product preview card — engaging visual without flashy gradients */}
+            {/* Product preview card */}
             <div className="relative mx-auto w-full max-w-md lg:max-w-none">
               <div className="absolute -inset-4 rounded-3xl bg-primary/5 blur-2xl" />
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-[0_20px_50px_-24px_hsl(var(--foreground)/0.18)]">
+              <div className="surface-card-quiet relative overflow-hidden rounded-2xl shadow-premium-lg">
                 <div className="flex items-center gap-2 border-b border-border bg-muted/40 px-4 py-3">
                   <div className="flex gap-1.5">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
@@ -190,7 +196,7 @@ export function HomeDashboard() {
                   ))}
                   <Link
                     href="/tools"
-                    className="mt-1 flex items-center justify-center gap-1.5 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-opacity hover:opacity-95"
+                    className="mt-1 flex items-center justify-center gap-1.5 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:opacity-95"
                   >
                     Open tools library
                     <ArrowRight className="h-4 w-4" />
@@ -219,6 +225,7 @@ export function HomeDashboard() {
         </div>
       </section>
 
+      {/* Quick Answer Box */}
       <section className="bg-background py-12">
         <div className="container mx-auto max-w-[1120px] px-6">
           <QuickAnswerBox
@@ -231,43 +238,26 @@ export function HomeDashboard() {
       {/* Featured tools */}
       <section id="tools" className="bg-background py-16 md:py-20">
         <div className="container mx-auto max-w-[1120px] px-6">
-          <div className="mb-12 text-center">
-            <p className="mb-2 text-sm font-semibold text-primary">Popular</p>
-            <h2 className="font-heading mb-3 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-              Start with these tools
-            </h2>
-            <p className="mx-auto max-w-lg text-base text-muted-foreground">
-              Fast, focused utilities people use every day.
-            </p>
-          </div>
+          <SectionHeading
+            eyebrow="Popular"
+            title="Start with these tools"
+            subtitle="Fast, focused utilities people use every day."
+          />
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             {featuredTools.map((tool) => (
-              <Link
+              <ToolCard
                 key={tool.href}
+                variant="featured"
                 href={tool.href}
-                className="group flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
-              >
-                <div
-                  className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${tool.iconBg}`}
-                >
-                  <tool.icon className="h-6 w-6" />
-                </div>
-                <div className="mb-2 flex items-center gap-2">
-                  <h3 className="font-heading text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
-                    {tool.title}
-                  </h3>
-                  <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                    {tool.badge}
-                  </span>
-                </div>
-                <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {tool.desc}
-                </p>
-                <div className="mt-5 flex items-center gap-1 text-sm font-semibold text-primary transition-all group-hover:gap-2">
-                  Open tool <ArrowRight className="h-4 w-4" />
-                </div>
-              </Link>
+                icon={tool.icon}
+                title={tool.title}
+                description={tool.desc}
+                badge={tool.badge}
+                badgeTone={tool.badgeTone}
+                gradient={tool.gradient}
+                glowColor={tool.glowColor}
+              />
             ))}
           </div>
 
@@ -289,57 +279,29 @@ export function HomeDashboard() {
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {categories.map((cat) => (
-              <Link
+              <CategoryCard
                 key={cat.href}
                 href={cat.href}
-                className="group flex items-start gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/30 hover:shadow-sm"
-              >
-                <div className="icon-tile shrink-0">
-                  <cat.icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="font-heading font-semibold text-foreground transition-colors group-hover:text-primary">
-                    {cat.title}
-                  </h3>
-                  <p className="mt-0.5 text-sm text-muted-foreground">{cat.desc}</p>
-                </div>
-              </Link>
+                icon={cat.icon}
+                title={cat.title}
+                description={cat.desc}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why */}
+      {/* Why ToolNova */}
       <section className="bg-background py-16 md:py-20">
         <div className="container mx-auto max-w-[1120px] px-6">
-          <div className="mb-10 max-w-2xl">
-            <p className="mb-2 text-sm font-semibold text-primary">Why ToolNova</p>
-            <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-              Built for real work — free to start
-            </h2>
-          </div>
+          <SectionHeading
+            eyebrow="Why ToolNova"
+            title="Built for real work — free to start"
+            align="left"
+          />
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-            {[
-              {
-                icon: Zap,
-                title: "Fast",
-                desc: "Optimized tools so you get results in seconds, not minutes.",
-              },
-              {
-                icon: ShieldCheck,
-                title: "Private",
-                desc: "PDF and image tools process in your browser when possible.",
-              },
-              {
-                icon: Sparkles,
-                title: "Useful AI",
-                desc: "Clear outputs designed for study, writing, and career work.",
-              },
-            ].map((f) => (
-              <div
-                key={f.title}
-                className="rounded-2xl border border-border bg-card p-6 shadow-sm"
-              >
+            {whyUsFeatures.map((f) => (
+              <PremiumCard key={f.title}>
                 <div className="icon-tile mb-4">
                   <f.icon className="h-5 w-5" />
                 </div>
@@ -349,16 +311,16 @@ export function HomeDashboard() {
                 <p className="text-sm leading-relaxed text-muted-foreground">
                   {f.desc}
                 </p>
-              </div>
+              </PremiumCard>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Trust */}
+      {/* Trust — How ToolNova stays free */}
       <section className="section-band py-12">
         <div className="container mx-auto max-w-[900px] px-6">
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8">
+          <PremiumCard interactive={false} className="p-6 md:p-8">
             <h2 className="font-heading mb-2 text-xl font-semibold text-foreground">
               How ToolNova stays free
             </h2>
@@ -390,7 +352,7 @@ export function HomeDashboard() {
                 </li>
               ))}
             </ul>
-          </div>
+          </PremiumCard>
         </div>
       </section>
 
@@ -441,6 +403,7 @@ export function HomeDashboard() {
         </div>
       </section>
 
+      {/* FAQ */}
       <section className="section-band py-14">
         <div className="container mx-auto max-w-[1120px] px-6">
           <FAQAccordion faqs={aeoContent.faqs} title="Frequently asked questions" />
@@ -449,27 +412,14 @@ export function HomeDashboard() {
 
       <BetweenSectionsAd />
 
-      {/* CTA */}
-      <section className="bg-primary py-16 text-primary-foreground md:py-20">
-        <div className="container mx-auto max-w-[1120px] px-6 text-center">
-          <h2 className="font-heading mb-4 text-3xl font-semibold tracking-tight md:text-4xl">
-            Ready to get more done?
-          </h2>
-          <p className="mx-auto mb-8 max-w-xl text-lg text-primary-foreground/85">
-            Start with {TOOL_COUNT_LABEL} free tools. No sign-up required.
-          </p>
-          <Link href="/tools">
-            <Button
-              size="lg"
-              variant="secondary"
-              className="h-12 gap-2 bg-white px-8 font-semibold text-primary hover:bg-white/95"
-            >
-              Browse all tools
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
-      </section>
+      {/* CTA — premium gradient band */}
+      <CTASection
+        title="Ready to get more done?"
+        description={`Start with ${TOOL_COUNT_LABEL} free tools. No sign-up required.`}
+        href="/tools"
+        buttonText="Browse all tools"
+        icon={Sparkles}
+      />
       <MultiplexAd />
     </div>
   );

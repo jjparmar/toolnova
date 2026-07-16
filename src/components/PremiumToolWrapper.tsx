@@ -90,7 +90,7 @@ export function PremiumToolWrapper({
   const breadcrumbSchema = getBreadcrumbSchema(breadcrumbs);
 
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+    <div className="page-shell min-h-screen text-foreground transition-colors duration-300">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: schemaToJsonLd(breadcrumbSchema) }}
@@ -101,7 +101,7 @@ export function PremiumToolWrapper({
           <button
             type="button"
             onClick={() => router.push("/tools")}
-            className="mb-6 inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-sm transition-all hover:bg-muted"
+            className="surface-glass mb-6 inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-foreground shadow-premium-sm transition-all hover:border-primary/25 hover:bg-card"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to All Tools
@@ -109,17 +109,16 @@ export function PremiumToolWrapper({
         </div>
       </div>
 
-      <section className="relative z-10 overflow-hidden pb-10 sm:pb-14">
+      <section className="page-hero relative z-10 overflow-hidden pb-12 pt-4 sm:pb-16 sm:pt-7">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex flex-col items-center text-center">
-            <div className="mb-5 inline-flex items-center rounded-full border border-primary/15 bg-primary/8 px-3.5 py-1">
-              <span className="text-xs font-semibold uppercase tracking-wide text-primary">
-                {badge}
-              </span>
+            <div className="section-kicker mb-5">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>{badge}</span>
             </div>
 
             <div className="relative mb-4">
-              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold leading-[1.15] tracking-tight text-foreground">
+              <h1 className="font-heading text-3xl font-semibold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-5xl">
                 {toolName}
               </h1>
             </div>
@@ -150,7 +149,7 @@ export function PremiumToolWrapper({
                 <div
                   className={`absolute inset-0 ${card.bgGlow} rounded-2xl opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100`}
                 />
-                <div className="relative rounded-2xl border border-border bg-card p-4 sm:p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg">
+                <div className="surface-card relative p-4 text-center sm:p-5">
                   <div
                     className={`mx-auto mb-3 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${card.color} shadow-md transition-transform duration-300 group-hover:scale-105`}
                   >
@@ -180,7 +179,7 @@ export function PremiumToolWrapper({
             {features.map((feature, i) => (
               <div
                 key={i}
-                className="h-full rounded-2xl border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg"
+                className="surface-card h-full p-7 sm:p-8"
               >
                 <div
                   className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary"
@@ -201,7 +200,7 @@ export function PremiumToolWrapper({
 
       {howItWorks && howItWorks.length > 0 && (
         <section className="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-20">
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 sm:p-12 shadow-sm">
+          <div className="content-panel relative overflow-hidden p-7 sm:p-12">
             <div className="mb-12 text-center">
               <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground">
                 Three steps to a result
@@ -243,7 +242,7 @@ export function PremiumToolWrapper({
               <Link
                 key={tool.slug}
                 href={`/tools/${tool.slug}`}
-                className="group rounded-2xl border border-border bg-card p-6 text-center transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
+                className="surface-card group p-6 text-center"
               >
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-muted transition-transform group-hover:scale-105">
                   <tool.icon className={`h-6 w-6 ${tool.color}`} />
@@ -259,7 +258,7 @@ export function PremiumToolWrapper({
 
       {ctaTitle && (
         <section className="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-20">
-          <div className="relative overflow-hidden rounded-2xl bg-primary p-10 sm:p-14 text-center text-primary-foreground shadow-lg">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-primary p-10 text-center text-primary-foreground shadow-premium-lg sm:p-14">
             <div className="relative z-10">
               <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/15">
                 <CtaIcon className="h-6 w-6" />

@@ -42,10 +42,10 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="container mx-auto px-6 py-24 max-w-5xl">
+    <div className="page-shell container mx-auto max-w-5xl px-6 py-20 md:py-24">
       {/* Hero */}
       <div className="text-center mb-20">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-teal-500">
+        <h1 className="font-heading text-4xl md:text-6xl font-semibold mb-6 text-brand-gradient tracking-tight">
           Democratizing AI for Everyone
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
@@ -76,7 +76,7 @@ export default function AboutPage() {
         ].map((item, i) => (
           <div
             key={i}
-            className="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800"
+            className="surface-card p-8"
           >
             <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center text-primary mb-6">
               <item.icon className="h-6 w-6" />
@@ -107,7 +107,7 @@ export default function AboutPage() {
         </p>
 
         <h2 className="mt-16 mb-8">Editorial &amp; Quality Standards</h2>
-        <div className="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 not-prose mb-8">
+        <div className="content-panel p-8 not-prose mb-8">
           <p className="text-muted-foreground mb-6">
             We hold our content and tools to strict standards to ensure every user gets
             genuine value. Our full editorial process is documented in our{" "}
@@ -177,7 +177,7 @@ export default function AboutPage() {
         </p>
 
         <h2 className="mt-16 mb-8">Our Team</h2>
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 not-prose mb-8">
+        <div className="content-panel p-8 not-prose mb-8">
           <div className="space-y-6">
             {[
               {
@@ -214,7 +214,7 @@ export default function AboutPage() {
         </div>
 
         <h2 className="mt-16 mb-8">Advertise with ToolNova</h2>
-        <div className="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 not-prose mb-8">
+        <div className="content-panel p-8 not-prose mb-8">
           <p className="text-muted-foreground mb-4">
             ToolNova reaches a global audience of students, educators, and professionals
             who actively seek AI productivity solutions. Our readers are high-intent
@@ -249,7 +249,7 @@ export default function AboutPage() {
         <h2 className="mt-16 mb-8 text-2xl font-bold text-center">
           Publisher Contact Information
         </h2>
-        <div className="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 text-center mb-16 not-prose">
+        <div className="content-panel p-8 text-center mb-16 not-prose">
           <p className="text-muted-foreground mb-6">
             ToolNova is operated as an independent web platform based in Singapore.
             For editorial, advertising, legal, or general inquiries:

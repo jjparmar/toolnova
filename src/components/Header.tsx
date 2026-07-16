@@ -5,12 +5,12 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { UsageCounter } from '@/components/UsageCounter';
 import { GlobalSearch } from '@/components/GlobalSearch';
-import { Menu, X, Sparkles, Sun, Moon, LayoutDashboard } from 'lucide-react';
+import { Menu, X, Sparkles, LayoutDashboard } from 'lucide-react';
 import { useState, lazy, Suspense, useEffect } from 'react';
 import { useSession, signOut } from "next-auth/react";
-import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const MobileMenu = lazy(() => import('./MobileMenu'));
 
@@ -26,13 +26,7 @@ export function Header() {
   const { data: session, status } = useSession();
   const user = session?.user;
   const loading = status === "loading";
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -48,14 +42,14 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/85 shadow-[0_1px_0_0_hsl(var(--border)/0.5)] backdrop-blur-xl supports-[backdrop-filter]:bg-background/75">
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 shadow-[0_1px_0_0_hsl(var(--border)/0.4)] backdrop-blur-2xl supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between gap-4 px-4 sm:px-6">
         <Link
           href="/"
           className="group flex shrink-0 items-center gap-2.5"
           aria-label="ToolNova home"
         >
-          <div className="relative h-9 w-9 overflow-hidden rounded-lg shadow-sm ring-1 ring-border transition-shadow group-hover:ring-primary/25">
+          <div className="relative h-9 w-9 overflow-hidden rounded-xl shadow-sm ring-1 ring-border transition-shadow group-hover:ring-primary/25">
             <Image
               src="/logo.webp"
               alt=""
@@ -66,7 +60,7 @@ export function Header() {
             />
           </div>
           <span className="font-heading text-[1.125rem] font-semibold tracking-tight text-foreground">
-            Tool<span className="text-primary">Nova</span>
+            Tool<span className="text-brand-gradient">Nova</span>
           </span>
         </Link>
 
@@ -77,7 +71,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium px-3 py-2 rounded-lg transition-colors",
+                  "nav-link px-3 py-2 text-sm font-medium rounded-lg transition-colors",
                   isActive(link.href)
                     ? "text-primary bg-primary/8"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -91,7 +85,7 @@ export function Header() {
               <Link
                 href="/login"
                 className={cn(
-                  "text-sm font-medium px-3 py-2 rounded-lg transition-colors",
+                  "nav-link px-3 py-2 text-sm font-medium rounded-lg transition-colors",
                   isActive('/login')
                     ? "text-primary bg-primary/8"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -114,7 +108,7 @@ export function Header() {
                 <UsageCounter />
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-1.5 text-sm font-medium text-foreground px-3 py-2 rounded-lg border border-border hover:bg-muted transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-foreground rounded-lg border border-border hover:bg-muted transition-colors"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   <span className="hidden lg:inline">Dashboard</span>
@@ -132,16 +126,7 @@ export function Header() {
               </Link>
             )}
 
-            {mounted && (
-              <button
-                type="button"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-              </button>
-            )}
+            <ThemeToggle />
           </div>
 
           <button

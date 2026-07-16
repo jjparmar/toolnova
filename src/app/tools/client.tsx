@@ -677,17 +677,17 @@ export function ToolsClient() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-background">
+    <div className="page-shell w-full min-h-screen">
       {/* Background Ornaments */}
       <div className="relative z-10 mx-auto max-w-[1120px] px-6 py-12 md:py-14">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/8 text-primary text-sm font-semibold mb-5 border border-primary/15">
+          <div className="section-kicker mb-5">
             <Sparkles className="h-3.5 w-3.5" />
             <span>All tools · Free to open · No sign-up</span>
           </div>
 
-          <h1 className="font-heading text-3xl md:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground">
+          <h1 className="font-heading text-4xl md:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground">
             AI Tools Library
           </h1>
 
@@ -718,7 +718,7 @@ export function ToolsClient() {
           {/* Search Bar */}
           <div className="max-w-3xl mx-auto mb-12">
             <div className="relative group">
-              <div className="relative flex items-center bg-card rounded-xl border border-border shadow-sm transition-all focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/15">
+              <div className="input-surface relative flex items-center rounded-2xl transition-all">
                 <Search className="text-muted-foreground h-5 w-5 ml-5 mr-3 shrink-0 transition-colors group-focus-within:text-primary" />
                 <input
                   ref={searchRef}
@@ -753,7 +753,7 @@ export function ToolsClient() {
               className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                 activeCategory === "All"
                   ? "bg-primary text-primary-foreground shadow-md shadow-primary/25"
-                  : "bg-card text-muted-foreground border border-border hover:text-foreground hover:border-primary/30"
+                  : "surface-glass text-muted-foreground hover:text-foreground hover:border-primary/30"
               }`}
             >
               All Tools ({ALL_TOOLS.length})
@@ -766,7 +766,7 @@ export function ToolsClient() {
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${
                   activeCategory === cat.name
                     ? "bg-primary text-primary-foreground shadow-md shadow-primary/25"
-                    : "bg-card text-muted-foreground border border-border hover:text-foreground hover:border-primary/30"
+                    : "surface-glass text-muted-foreground hover:text-foreground hover:border-primary/30"
                 }`}
               >
                 <cat.icon className="h-4 w-4" />
@@ -801,7 +801,7 @@ export function ToolsClient() {
                 <Link
                   key={tool.slug}
                   href={`/tools/${tool.slug}`}
-                  className="group glass-card !p-5 flex items-center gap-4"
+                  className="surface-card group flex items-center gap-4 p-5"
                 >
                   <div
                     className={`w-12 h-12 rounded-xl bg-gradient-to-br ${tool.gradient} flex items-center justify-center text-white shrink-0 group-hover:scale-110 transition-transform duration-300`}
@@ -840,7 +840,7 @@ export function ToolsClient() {
                   <div key={tool.slug} className="h-full">
                     <Link
                       href={`/tools/${tool.slug}`}
-                      className="group flex flex-col h-full rounded-2xl bg-card border border-border p-6 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300"
+                      className="surface-card group flex h-full flex-col p-6"
                     >
                       <div className="flex items-start justify-between mb-5">
                         <div
@@ -914,7 +914,7 @@ export function ToolsClient() {
                 <Link
                   key={category.slug}
                   href={`/tools/${category.slug}`}
-                  className="group text-center rounded-2xl bg-card border border-border p-6 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300"
+                  className="surface-card group p-6 text-center"
                 >
                   <div
                     className={`w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br ${category.gradient} flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300`}
@@ -938,8 +938,8 @@ export function ToolsClient() {
         )}
 
         {/* SEO Text Block for AdSense / Thin Content Prevention */}
-        <section className="mt-24 py-12 border-t border-border">
-          <div className="max-w-4xl mx-auto">
+        <section className="mt-24 border-t border-border py-12">
+          <div className="content-panel max-w-4xl mx-auto p-7 md:p-10">
             <h2 className="font-heading text-2xl font-bold mb-4 text-foreground">About ToolNova&apos;s Free AI Tool Library</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
               Welcome to the internet's most comprehensive collection of browser-based productivity utilities. Our library features over 50 specialized tools designed to streamline the workflows of students, educators, writers, and digital professionals. Unlike complex enterprise software suites that require expensive subscriptions and steep learning curves, ToolNova offers specialized, single-purpose micro-applications that solve immediate problems instantly.

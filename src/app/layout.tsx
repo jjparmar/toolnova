@@ -250,7 +250,7 @@ export default function RootLayout({
             <SkipLinks />
             <div className="flex min-h-screen flex-col">
               <Header />
-              <main className="flex-1">{children}</main>
+              <main className="site-main flex-1">{children}</main>
               <Footer />
             </div>
             <Toaster />

@@ -35,47 +35,47 @@ export function FAQAccordion({
         <section className={`py-12 ${className}`}>
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4 border border-primary/15">
-                        <HelpCircle className="w-4 h-4 text-primary" />
-                        <span className="text-sm font-semibold text-primary">
-                            Got questions?
-                        </span>
-                    </div>
-                    <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
+                    <p className="eyebrow justify-center mb-2">
+                        <HelpCircle className="h-4 w-4" />
+                        Got questions?
+                    </p>
+                    <h2 className="font-heading text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
                         {title}
                     </h2>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                     {faqs.map((faq, index) => {
                         const isOpen = openIndex === index;
 
                         return (
                             <div
                                 key={index}
-                                className="bg-card rounded-xl border-2 border-border overflow-hidden transition-all duration-200 hover:border-primary/40"
+                                className="surface-card-quiet overflow-hidden transition-all duration-200 data-[open=true]:border-primary/30 data-[open=true]:shadow-premium-sm"
+                                data-open={isOpen}
                                 data-speakable={isOpen ? "true" : undefined}
                             >
                                 <button
                                     onClick={() => toggleFAQ(index)}
-                                    className="w-full flex items-center justify-between gap-4 p-6 text-left transition-colors hover:bg-slate-50 dark:hover:bg-slate-700/50"
+                                    className="w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left transition-colors hover:bg-muted/40"
                                     aria-expanded={isOpen}
                                 >
-                                    <h3 className="text-lg font-bold text-slate-900 dark:text-white flex-1">
+                                    <h3 className="text-base font-bold text-foreground flex-1 md:text-lg">
                                         {faq.question}
                                     </h3>
-                                    <ChevronDown
-                                        className={`w-5 h-5 text-primary flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
-                                            }`}
-                                    />
+                                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors duration-200 ${isOpen ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground'}`} aria-hidden>
+                                        <ChevronDown
+                                            className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                                        />
+                                    </span>
                                 </button>
 
                                 <div
                                     className={`transition-all duration-200 overflow-hidden ${isOpen ? 'max-h-96' : 'max-h-0'
                                         }`}
                                 >
-                                    <div className="px-6 pb-6 pt-2">
-                                        <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                                    <div className="px-5 pb-5 pt-1 md:px-6 md:pb-6">
+                                        <p className="text-muted-foreground leading-relaxed">
                                             {faq.answer}
                                         </p>
                                     </div>
