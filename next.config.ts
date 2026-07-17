@@ -105,7 +105,7 @@ const nextConfig: NextConfig = {
               "img-src 'self' data: blob: https: http:",
               "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://pagead2.googlesyndication.com https://adservice.google.com https://googleads.g.doubleclick.net https://accounts.google.com https://oauth2.googleapis.com https://www.google.com https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://fundingchoicesmessages.google.com https://csi.gstatic.com https://api.openai.com",
               "frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://accounts.google.com",
-              "worker-src 'self' blob:",
+              "worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self' https://accounts.google.com",
@@ -123,22 +123,33 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // Cache HTML pages with stale-while-revalidate for performance
+      // HTML documents must revalidate quickly after deploys.
+      // Long browser max-age causes Application errors: cached HTML points at
+      // deleted /_next/static chunk hashes after a new build is deployed.
       {
         source: "/blog/:slug*",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=3600, stale-while-revalidate=86400",
+            value: "public, max-age=0, must-revalidate",
           },
         ],
       },
       {
-        source: "/tools/:slug*",
+        source: "/tools/:path*",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=3600, stale-while-revalidate=86400",
+            value: "public, max-age=0, must-revalidate",
+          },
+        ],
+      },
+      {
+        source: "/",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, must-revalidate",
           },
         ],
       },

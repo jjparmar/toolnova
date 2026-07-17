@@ -1,4 +1,4 @@
-﻿export default function ToolsLoading() {
+export default function ToolsLoading() {
     return (
         <div className="max-w-[1200px] mx-auto px-6 py-16 animate-pulse">
             <div className="h-8 w-48 bg-slate-200 rounded-full mb-4" />

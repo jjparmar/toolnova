@@ -15,9 +15,9 @@ export function Breadcrumbs() {
   const segments = pathname.split("/").filter(Boolean);
 
   const breadcrumbs = segments.map((segment, index) => {
-    const url =`/${segments.slice(0, index + 1).join("/")}`;
+    const url = `/${segments.slice(0, index + 1).join("/")}`;
     const name = segment
-      .replace(/-/g,"")
+      .replace(/-/g, " ")
       .replace(/\b\w/g, (char) => char.toUpperCase());
 
     return { name, url };

@@ -1,13 +1,12 @@
 "use client";
 
-import Link from"next/link";
-import { Sparkles, Search, Sun, Moon } from"lucide-react";
-import { useSession } from"next-auth/react";
-import { useTheme } from"next-themes";
-import { useEffect, useState } from"react";
-import { GlobalSearch } from"@/components/GlobalSearch";
-import { usePathname } from"next/navigation";
-import { cn } from"@/lib/utils";
+import Link from "next/link";
+import { Sparkles, Search } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { GlobalSearch } from "@/components/GlobalSearch";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 interface MobileMenuProps {
   onClose: () => void;
@@ -26,18 +25,12 @@ const links = [
 export default function MobileMenu({ onClose, id }: MobileMenuProps) {
   const { data: session, status } = useSession();
   const user = session?.user;
-  const loading = status ==="loading";
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const loading = status === "loading";
   const pathname = usePathname();
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
     const prev = document.body.style.overflow;
-    document.body.style.overflow ="hidden";
+    document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
     };
@@ -105,24 +98,6 @@ export default function MobileMenu({ onClose, id }: MobileMenuProps) {
         )}
 
         <div className="pt-4 mt-2 border-t border-border space-y-3">
-          {mounted && (
-            <button
-              type="button"
-              onClick={() => setTheme(theme ==="dark" ?"light" :"dark")}
-              className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-muted text-sm font-medium text-foreground"
-              aria-label="Toggle theme"
-            >
-              <span className="flex items-center gap-2">
-                {theme ==="dark" ? (
-                  <Sun className="h-4 w-4" />
-                ) : (
-                  <Moon className="h-4 w-4" />
-                )}
-                {theme ==="dark" ?"Light mode" :"Dark mode"}
-              </span>
-            </button>
-          )}
-
           {!loading && !user && (
             <Link href="/signup" onClick={onClose} className="w-full block">
               <button

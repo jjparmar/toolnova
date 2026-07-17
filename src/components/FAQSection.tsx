@@ -23,13 +23,15 @@ interface FAQSectionProps {
     showSearch?: boolean;
 }
 
-export function FAQSection({ faqs, title ="Frequently Asked Questions", showSearch = true }: FAQSectionProps) {
+export function FAQSection({ faqs = [], title = "Frequently Asked Questions", showSearch = true }: FAQSectionProps) {
     const [searchQuery, setSearchQuery] = useState('');
 
-    // Filter FAQs based on search query
-    const filteredFAQs = faqs.filter(faq =>
-        faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+    // Guard: some tool pages may pass undefined during partial data loads
+    const safeFaqs = Array.isArray(faqs) ? faqs : [];
+
+    const filteredFAQs = safeFaqs.filter(faq =>
+        (faq?.question ?? "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (faq?.answer ?? "").toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -48,7 +50,7 @@ export function FAQSection({ faqs, title ="Frequently Asked Questions", showSear
                     </div>
 
                     {/* Search */}
-                    {showSearch && faqs.length > 5 && (
+                    {showSearch && safeFaqs.length > 5 && (
                         <div className="mb-6">
                             <div className="relative">
                                 <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
