@@ -1,6 +1,6 @@
 "use client";
 
-import Link from"next/link";
+import Link from "next/link";
 import {
   ArrowRight,
   Merge,
@@ -17,74 +17,89 @@ import {
   Layers,
   BookOpen,
   Pencil,
-  ChevronRight
-} from"lucide-react";
-import { Button } from"@/components/ui/button";
-import { QuickAnswerBox } from"@/components/aeo/QuickAnswerBox";
-import { FAQAccordion } from"@/components/aeo/FAQAccordion";
-import { getHomepageAEO } from"@/lib/global-aeo-content";
-import { MultiplexAd, BetweenSectionsAd } from"@/components/ads/AdUnit";
-import { TOOL_COUNT, TOOL_COUNT_LABEL } from"@/data/tools";
-import {
-  SectionHeading,
-  ToolCard,
-  CategoryCard,
-  CTASection,
-  PremiumCard,
-  StatTile,
-} from"@/components/shared";
+  Lock,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { QuickAnswerBox } from "@/components/aeo/QuickAnswerBox";
+import { FAQAccordion } from "@/components/aeo/FAQAccordion";
+import { getHomepageAEO } from "@/lib/global-aeo-content";
+import { MultiplexAd, BetweenSectionsAd } from "@/components/ads/AdUnit";
+import { TOOL_COUNT, TOOL_COUNT_LABEL } from "@/data/tools";
+import { ToolCard } from "@/components/shared";
 
+/** iLovePDF-style multi-color tool tiles */
 const featuredTools = [
   {
-    href:"/tools/merge-pdf",
+    href: "/tools/merge-pdf",
     icon: Merge,
-    title:"Merge PDF",
-    desc:"Combine PDFs in order and download one file — private, in-browser.",
-    badge:"Top pick",
-    badgeTone:"primary" as const,
-    gradient:"from-rose-500 to-orange-500",
-    glowColor:"shadow-rose-500/20",
+    title: "Merge PDF",
+    desc: "Combine PDFs in the order you want — private, in your browser.",
+    badge: "Popular",
+    gradient: "from-[#E5322D] to-[#c42824]",
   },
   {
-    href:"/tools/resize-image",
+    href: "/tools/split-pdf",
+    icon: Layers,
+    title: "Split PDF",
+    desc: "Separate pages or extract a range into new PDF files.",
+    gradient: "from-[#F4A100] to-[#e08e00]",
+  },
+  {
+    href: "/tools/image-compressor",
     icon: ImageIcon,
-    title:"Image Resizer",
-    desc:"Resize by pixels or percent without quality loss.",
-    badge:"Popular",
-    badgeTone:"muted" as const,
-    gradient:"from-violet-500 to-cyan-500",
-    glowColor:"shadow-violet-500/20",
+    title: "Compress Image",
+    desc: "Shrink image size while keeping quality high.",
+    gradient: "from-[#1a9c4a] to-[#15803d]",
   },
   {
-    href:"/tools/flashcard-maker",
+    href: "/tools/resize-image",
+    icon: ImageIcon,
+    title: "Resize Image",
+    desc: "Resize by pixels or percent without quality loss.",
+    gradient: "from-[#0ea5e9] to-[#0284c7]",
+  },
+  {
+    href: "/tools/homework-solver",
+    icon: BookOpen,
+    title: "Homework Solver",
+    desc: "Step-by-step solutions that teach, not just answer.",
+    badge: "AI",
+    gradient: "from-[#6366f1] to-[#4f46e5]",
+  },
+  {
+    href: "/tools/grammar-fix",
+    icon: Pencil,
+    title: "Grammar Checker",
+    desc: "Fix grammar, spelling, and clarity in seconds.",
+    gradient: "from-[#ec4899] to-[#db2777]",
+  },
+  {
+    href: "/tools/flashcard-maker",
     icon: Library,
-    title:"Flashcard Maker",
-    desc:"Create study cards from any topic for exam prep.",
-    badge:"Students",
-    badgeTone:"muted" as const,
-    gradient:"from-teal-500 to-cyan-500",
-    glowColor:"shadow-teal-500/20",
+    title: "Flashcard Maker",
+    desc: "Create study cards from any topic for exam prep.",
+    gradient: "from-[#14b8a6] to-[#0d9488]",
+  },
+  {
+    href: "/tools/essay-writer",
+    icon: FileText,
+    title: "Essay Writer",
+    desc: "Structure and draft essays with clear arguments.",
+    gradient: "from-[#8b5cf6] to-[#7c3aed]",
   },
 ];
 
 const categories = [
-  { href:"/tools/writing-tools", icon: FileText, title:"Writing", desc:"Grammar, essays, paraphrase" },
-  { href:"/tools/study-tools", icon: GraduationCap, title:"Study", desc:"Flashcards, quizzes, notes" },
-  { href:"/tools/image-pdf-tools", icon: Layers, title:"PDF & Image", desc:"Merge, compress, convert" },
-  { href:"/tools/career-tools", icon: Briefcase, title:"Career", desc:"Resume, LinkedIn, letters" },
+  { href: "/tools/writing-tools", icon: FileText, title: "Writing", desc: "Grammar, essays, paraphrase" },
+  { href: "/tools/study-tools", icon: GraduationCap, title: "Study", desc: "Flashcards, quizzes, notes" },
+  { href: "/tools/image-pdf-tools", icon: Layers, title: "PDF & Image", desc: "Merge, compress, convert" },
+  { href: "/tools/career-tools", icon: Briefcase, title: "Career", desc: "Resume, LinkedIn, letters" },
 ];
 
-const previewTools = [
-  { icon: BookOpen, name:"Homework Solver", color:"text-blue-500 bg-blue-500/10" },
-  { icon: Pencil, name:"Grammar Checker", color:"text-emerald-500 bg-emerald-500/10" },
-  { icon: Merge, name:"Merge PDF", color:"text-rose-500 bg-rose-500/10" },
-  { icon: Sparkles, name:"Essay Writer", color:"text-primary bg-primary/10" },
-];
-
-const whyUsFeatures = [
-  { icon: Zap, title:"Instant Results", desc:"Optimized AI engines so you get high-quality results in seconds." },
-  { icon: ShieldCheck, title:"Absolute Privacy", desc:"Local processing for PDFs and images right in your browser." },
-  { icon: Sparkles, title:"Smarter Outputs", desc:"Tuned specifically for academic and professional excellence." },
+const trustItems = [
+  { icon: Lock, title: "Private by design", desc: "PDF & image tools run in your browser when possible." },
+  { icon: Zap, title: "Fast results", desc: "Get useful output in seconds — no installs." },
+  { icon: ShieldCheck, title: "Free to start", desc: "Open tools without an account. Honest limits." },
 ];
 
 export function HomeDashboard() {
@@ -92,200 +107,179 @@ export function HomeDashboard() {
 
   return (
     <div className="w-full">
-      {/* ─── Hero ─── Vibrant Premium Hero */}
-      <section className="page-hero relative overflow-hidden border-b border-border/50 pt-24 pb-20 md:pt-36 md:pb-32">
-        <div className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-full max-w-[900px] -translate-x-1/2 rounded-full bg-primary/15 blur-[120px]" />
-        <div className="pointer-events-none absolute -right-20 top-24 h-64 w-64 rounded-full bg-[hsl(186_70%_50%/0.12)] blur-[90px]" />
-        <div className="pointer-events-none absolute -left-16 bottom-10 h-56 w-56 rounded-full bg-[hsl(268_55%_60%/0.08)] blur-[80px]" />
-        
-        <div className="relative z-10 mx-auto max-w-[1200px] px-6 text-center">
-          <div className="animate-fade-in flex flex-col items-center">
-            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border bg-muted/50 px-5 py-2 text-sm font-semibold text-foreground">
-              <Sparkles className="h-4 w-4 text-primary" />
-              <span>Next-Gen AI Toolkit for Students & Pros</span>
-            </div>
-
-            <h1 className="font-heading mx-auto mb-6 max-w-4xl text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl md:text-7xl leading-[1.1]">
-              Work smarter with{""}
-              <span className="bg-gradient-to-r from-primary via-blue-500 to-cyan-400 bg-clip-text text-transparent">AI superpowers.</span>
-            </h1>
-
-            <p className="mx-auto mb-10 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Instantly merge PDFs, generate flashcards, fix grammar, and write perfect essays. 
-              Join thousands using our <span className="text-foreground font-medium">{TOOL_COUNT_LABEL} premium tools</span>—completely free.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-              <Link href="/tools/homework-solver" className="w-full sm:w-auto">
-                <Button size="lg" className="h-14 w-full sm:w-auto px-8 rounded-full text-base font-semibold shadow-[0_0_20px_-5px_rgba(var(--primary),0.4)] hover:shadow-[0_0_30px_-5px_rgba(var(--primary),0.6)] hover:-translate-y-0.5 transition-all duration-300">
-                  Try a tool free
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/tools" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="h-14 w-full sm:w-auto px-8 rounded-full text-base font-semibold transition-all hover:bg-muted border-border hover:border-primary/30">
-                  <Grid2X2 className="mr-2 h-5 w-5 text-muted-foreground" />
-                  Browse library
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Bento Box Preview & Stats ─── */}
-      <section className="relative z-20 -mt-10 md:-mt-16 mb-24 px-6">
-        <div className="mx-auto max-w-[1000px] grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Main App Window Preview (Spans 2 columns) */}
-          <div className="md:col-span-2 rounded-2xl border border-border/80 bg-card/60 backdrop-blur-xl shadow-premium overflow-hidden flex flex-col relative group transition-all duration-500 hover:shadow-premium-lg">
-             {/* Simple Header */}
-             <div className="flex items-center gap-2 border-b border-border/40 bg-muted/40 px-6 py-4">
-                <div className="flex gap-1.5 mr-2">
-                  <div className="h-3 w-3 rounded-full bg-border" />
-                  <div className="h-3 w-3 rounded-full bg-border" />
-                  <div className="h-3 w-3 rounded-full bg-border" />
-                </div>
-                <div className="mx-auto flex items-center justify-center rounded-md bg-background px-4 py-1.5 text-xs text-muted-foreground border border-border/50 font-mono shadow-sm">
-                  toolnova.com/dashboard
-                </div>
-             </div>
-
-             {/* App Content */}
-             <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-background">
-               {previewTools.map((tool) => (
-                 <div key={tool.name} className="flex items-center gap-4 rounded-lg border border-border bg-card p-4 transition-all hover:border-primary/50 cursor-pointer">
-                   <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-md ${tool.color}`}>
-                     <tool.icon className="h-6 w-6" />
-                   </div>
-                   <div>
-                     <p className="font-heading text-base font-bold text-foreground">{tool.name}</p>
-                     <p className="text-xs text-muted-foreground font-medium">Ready instantly</p>
-                   </div>
-                 </div>
-               ))}
-             </div>
-          </div>
-
-          {/* Stats Column */}
-          <div className="grid grid-rows-3 gap-6">
-            <div className="rounded-2xl border border-border bg-card p-6 flex flex-col justify-center items-center text-center shadow-premium-sm transition-all hover:-translate-y-1 hover:shadow-premium group">
-              <p className="text-4xl font-black font-heading text-foreground mb-1 group-hover:scale-110 transition-transform">{TOOL_COUNT}+</p>
-              <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Premium Tools</p>
-            </div>
-            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 flex flex-col justify-center items-center text-center shadow-premium-sm transition-all hover:-translate-y-1 hover:shadow-premium group relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <p className="text-4xl font-black font-heading text-primary mb-1 relative z-10 group-hover:scale-110 transition-transform">$0</p>
-              <p className="text-xs font-bold text-primary/80 uppercase tracking-widest relative z-10">Forever Free</p>
-            </div>
-            <div className="rounded-2xl border border-border bg-card p-6 flex flex-col justify-center items-center text-center shadow-premium-sm transition-all hover:-translate-y-1 hover:shadow-premium group">
-              <ShieldCheck className="h-10 w-10 text-primary mb-2 group-hover:scale-110 transition-transform" />
-              <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Total Privacy</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Trust strip ─── */}
-      <section className="border-y border-border/40 bg-muted/20 py-6">
-        <div className="mx-auto flex max-w-[1120px] flex-wrap items-center justify-center gap-x-12 gap-y-4 px-6 text-sm font-semibold text-muted-foreground">
-          {["No account required","Browser-side PDF privacy","Clear free AI limits","Built for real study & work",
-          ].map((item) => (
-            <span key={item} className="inline-flex items-center gap-2">
-              <Check className="h-5 w-5 text-primary" />
-              {item}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── Featured tools ─── */}
-      <section id="tools" className="relative py-24 bg-background">
-        <div className="container relative mx-auto max-w-[1120px] px-6">
-          <div className="mb-16 text-center">
-             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4 text-foreground">Start with these tools</h2>
-             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Fast, focused utilities people use every day to get ahead.</p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {featuredTools.map((tool) => (
-              <ToolCard
-                key={tool.href}
-                variant="featured"
-                href={tool.href}
-                icon={tool.icon}
-                title={tool.title}
-                description={tool.desc}
-                badge={tool.badge}
-                badgeTone={tool.badgeTone}
-                gradient={tool.gradient}
-                glowColor={tool.glowColor}
-              />
-            ))}
-          </div>
-
-          <div className="mt-14 text-center">
+      {/* ─── Hero (iLovePDF-style: bold claim + short pitch) ─── */}
+      <section className="border-b border-border bg-card">
+        <div className="mx-auto max-w-[1100px] px-6 pb-10 pt-14 text-center md:pb-14 md:pt-20">
+          <h1 className="font-heading mx-auto mb-4 max-w-3xl text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl md:text-[2.75rem] md:leading-[1.15]">
+            Every tool you need to work smarter — in one place
+          </h1>
+          <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            Free AI tools for students and professionals. Merge PDFs, fix grammar,
+            make flashcards, write essays — all at your fingertips.{" "}
+            <strong className="font-semibold text-foreground">
+              {TOOL_COUNT_LABEL} tools
+            </strong>
+            , easy to use.
+          </p>
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link href="/tools">
-              <Button variant="outline" size="lg" className="rounded-full px-8 text-base font-semibold hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
-                View library <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" className="h-12 min-w-[180px] gap-2 px-8 font-bold">
+                <Grid2X2 className="h-5 w-5" />
+                Browse all tools
+              </Button>
+            </Link>
+            <Link href="/tools/homework-solver">
+              <Button
+                variant="outline"
+                size="lg"
+                className="h-12 min-w-[180px] gap-2 px-8 font-bold"
+              >
+                Try AI free
+                <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ─── Bento Why Us & Categories ─── */}
-      <section className="border-t border-border bg-muted/30 py-24">
-        <div className="container mx-auto max-w-[1120px] px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-             
-             {/* Left side: Why ToolNova */}
-             <div className="lg:col-span-5 space-y-6">
-                <div>
-                   <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground shadow-sm">
-                     Why ToolNova
-                   </div>
-                   <h2 className="font-heading text-3xl font-bold mb-8 text-foreground leading-tight">Built for real work,<br/>designed for speed.</h2>
-                </div>
-                
-                {whyUsFeatures.map((f) => (
-                  <div key={f.title} className="flex gap-4 p-5 rounded-xl border border-border bg-card hover:border-primary/50 transition-colors shadow-sm">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      <f.icon className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-heading text-lg font-bold text-foreground mb-1">{f.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
-                    </div>
-                  </div>
-                ))}
-             </div>
+      {/* ─── Featured tools grid ─── */}
+      <section id="tools" className="bg-muted py-12 md:py-16">
+        <div className="mx-auto max-w-[1100px] px-6">
+          <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <p className="mb-1 text-sm font-bold uppercase tracking-wide text-primary">
+                Popular tools
+              </p>
+              <h2 className="font-heading text-2xl font-extrabold text-foreground md:text-3xl">
+                Start with these
+              </h2>
+            </div>
+            <Link
+              href="/tools"
+              className="inline-flex items-center gap-1 text-sm font-bold text-primary hover:underline"
+            >
+              View all {TOOL_COUNT}+ tools
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
 
-             {/* Right side: Categories Grid */}
-             <div className="lg:col-span-7">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
-                  {categories.map((cat, idx) => (
-                    <Link key={cat.href} href={cat.href} className={`group relative overflow-hidden rounded-xl border border-border bg-card p-8 transition-all hover:border-primary/50 shadow-sm flex flex-col justify-between ${idx === 0 || idx === 3 ? 'sm:col-span-2' : ''}`}>
-                      <div>
-                        <div className="flex items-center justify-between mb-4">
-                           <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-muted text-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                             <cat.icon className="h-6 w-6" />
-                           </div>
-                           <ChevronRight className="h-6 w-6 text-muted-foreground/30 group-hover:text-primary transition-colors transform group-hover:translate-x-1" />
-                        </div>
-                        <h3 className="font-heading text-2xl font-bold text-foreground mb-2">{cat.title}</h3>
-                        <p className="text-muted-foreground">{cat.desc}</p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-             </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredTools.map((tool) => (
+              <ToolCard
+                key={tool.href}
+                href={tool.href}
+                icon={tool.icon}
+                title={tool.title}
+                description={tool.desc}
+                badge={tool.badge}
+                gradient={tool.gradient}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Quick Answer Box ─── */}
-      <section className="bg-background py-16">
-        <div className="container mx-auto max-w-[900px] px-6">
+      {/* ─── Categories ─── */}
+      <section className="border-y border-border bg-card py-12 md:py-16">
+        <div className="mx-auto max-w-[1100px] px-6">
+          <h2 className="font-heading mb-6 text-2xl font-extrabold text-foreground">
+            Explore by category
+          </h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {categories.map((cat) => (
+              <Link
+                key={cat.href}
+                href={cat.href}
+                className="group flex items-start gap-3 rounded-xl border border-border bg-card p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-premium-sm"
+              >
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-primary">
+                  <cat.icon className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="font-heading font-bold text-foreground group-hover:text-primary">
+                    {cat.title}
+                  </h3>
+                  <p className="mt-0.5 text-sm text-muted-foreground">{cat.desc}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Trust (like iLovePDF security strip) ─── */}
+      <section className="bg-muted py-12 md:py-16">
+        <div className="mx-auto max-w-[1100px] px-6">
+          <div className="mb-8 text-center">
+            <h2 className="font-heading text-2xl font-extrabold text-foreground md:text-3xl">
+              The toolkit trusted by students &amp; pros
+            </h2>
+            <p className="mx-auto mt-2 max-w-xl text-muted-foreground">
+              ToolNova helps you edit files and use AI productively while keeping
+              workflows simple and private.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+            {trustItems.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-xl border border-border bg-card p-6 text-center shadow-sm"
+              >
+                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-primary">
+                  <item.icon className="h-6 w-6" />
+                </div>
+                <h3 className="font-heading mb-1 text-lg font-bold text-foreground">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Why free ─── */}
+      <section className="border-y border-border bg-card py-12">
+        <div className="mx-auto max-w-[900px] px-6">
+          <div className="rounded-2xl border border-border bg-muted/50 p-6 md:p-8">
+            <h2 className="font-heading mb-2 text-xl font-extrabold text-foreground">
+              How ToolNova stays free
+            </h2>
+            <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+              Optional{" "}
+              <Link href="/pricing" className="font-semibold text-primary hover:underline">
+                ToolNova Pro
+              </Link>{" "}
+              for unlimited AI, and clearly labeled ads when approved. See our{" "}
+              <Link href="/advertising" className="font-semibold text-primary hover:underline">
+                advertising disclosure
+              </Link>
+              .
+            </p>
+            <ul className="grid gap-3 sm:grid-cols-3">
+              {[
+                { t: "No account wall", d: "Open tools without signing up" },
+                { t: "Browser privacy", d: "Local PDF/image processing when possible" },
+                { t: "Honest limits", d: "Free daily AI; Pro is optional" },
+              ].map((item) => (
+                <li
+                  key={item.t}
+                  className="flex items-start gap-2 rounded-xl border border-border bg-card px-4 py-3"
+                >
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <div>
+                    <strong className="block text-sm text-foreground">{item.t}</strong>
+                    <span className="text-xs text-muted-foreground">{item.d}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-card py-12">
+        <div className="mx-auto max-w-[900px] px-6">
           <QuickAnswerBox
             question={aeoContent.quickAnswer.question}
             answer={aeoContent.quickAnswer.answer}
@@ -293,26 +287,51 @@ export function HomeDashboard() {
         </div>
       </section>
 
-      {/* ─── FAQ ─── */}
-      <section className="border-y border-border/40 bg-muted/10 py-20">
-        <div className="container mx-auto max-w-[900px] px-6">
-          <div className="mb-12 text-center">
-             <h2 className="font-heading text-3xl font-bold">Frequently Asked Questions</h2>
-          </div>
+      <section className="border-t border-border bg-muted py-14">
+        <div className="mx-auto max-w-[900px] px-6">
+          <h2 className="font-heading mb-8 text-center text-2xl font-extrabold text-foreground">
+            Frequently asked questions
+          </h2>
           <FAQAccordion faqs={aeoContent.faqs} />
         </div>
       </section>
 
       <BetweenSectionsAd />
 
-      {/* ─── CTA — Premium gradient band ─── */}
-      <CTASection
-        title="Ready to upgrade your workflow?"
-        description={`Start with ${TOOL_COUNT_LABEL} premium AI tools instantly. No credit card, no sign-up.`}
-        href="/tools"
-        buttonText="Get Started Free"
-        icon={Sparkles}
-      />
+      {/* ─── Premium CTA band (iLovePDF red band energy) ─── */}
+      <section className="bg-primary py-14 text-primary-foreground md:py-16">
+        <div className="mx-auto max-w-[900px] px-6 text-center">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15">
+            <Sparkles className="h-6 w-6" />
+          </div>
+          <h2 className="font-heading mb-3 text-2xl font-extrabold md:text-3xl">
+            Get more with ToolNova Pro
+          </h2>
+          <p className="mx-auto mb-7 max-w-lg text-base text-primary-foreground/90">
+            Unlimited AI generations, higher quality models, and an ad-free
+            experience — or keep using free tools forever.
+          </p>
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link href="/pricing">
+              <Button
+                size="lg"
+                className="h-12 min-w-[160px] bg-white font-bold text-primary hover:bg-white/95"
+              >
+                See Premium
+              </Button>
+            </Link>
+            <Link href="/tools">
+              <Button
+                size="lg"
+                variant="outline"
+                className="h-12 min-w-[160px] border-white/40 bg-transparent font-bold text-white hover:bg-white/10 hover:text-white"
+              >
+                Browse free tools
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
       <MultiplexAd />
     </div>
   );

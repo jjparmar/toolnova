@@ -133,8 +133,8 @@ export const metadata: Metadata = {
   other: {
     language: "English",
     "content-language": "en",
-    "theme-color": "#2f7cf6",
-    "msapplication-TileColor": "#2f7cf6",
+    "theme-color": "#E5322D",
+    "msapplication-TileColor": "#E5322D",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
     "mobile-web-app-capable": "yes",
@@ -200,8 +200,8 @@ export default function RootLayout({
         />
 
         {/* Theme Color — required for Google Discover & PWA */}
-        <meta name="theme-color" content="#2f7cf6" />
-        <meta name="msapplication-TileColor" content="#2f7cf6" />
+        <meta name="theme-color" content="#E5322D" />
+        <meta name="msapplication-TileColor" content="#E5322D" />
 
 
         {/* NOTE: Page-level JSON-LD schemas are injected by each page component.

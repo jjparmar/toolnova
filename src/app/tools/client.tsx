@@ -750,10 +750,8 @@ export function ToolsClient() {
             <button
               type="button"
               onClick={() => setActiveCategory("All")}
-              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                activeCategory ==="All"
-                  ?"bg-primary text-primary-foreground shadow-md shadow-primary/25"
-                  :"surface-glass text-muted-foreground hover:text-foreground hover:border-primary/30"
+              className={`cat-pill ${
+                activeCategory === "All" ? "cat-pill-active" : ""
               }`}
             >
               All Tools ({ALL_TOOLS.length})
@@ -763,10 +761,8 @@ export function ToolsClient() {
                 type="button"
                 key={cat.name}
                 onClick={() => setActiveCategory(cat.name)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${
-                  activeCategory === cat.name
-                    ?"bg-primary text-primary-foreground shadow-md shadow-primary/25"
-                    :"surface-glass text-muted-foreground hover:text-foreground hover:border-primary/30"
+                className={`cat-pill ${
+                  activeCategory === cat.name ? "cat-pill-active" : ""
                 }`}
               >
                 <cat.icon className="h-4 w-4" />

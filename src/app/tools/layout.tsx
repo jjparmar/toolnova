@@ -8,7 +8,7 @@ export default function ToolsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="min-h-screen bg-muted/40">
       <div className="container mx-auto px-4 md:px-6">
         <Breadcrumbs />
         {children}

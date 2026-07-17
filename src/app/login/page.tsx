@@ -33,7 +33,7 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen w-full flex flex-col lg:flex-row">
             {/* Left Panel - Branding */}
-            <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-brand overflow-hidden">
+            <div className="relative hidden overflow-hidden bg-primary lg:flex lg:w-1/2">
                 <div className="absolute inset-0">
                     <div className="absolute top-20 left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
                     <div className="absolute bottom-20 right-20 w-96 h-96 bg-sky-400/20 rounded-full blur-3xl"></div>
