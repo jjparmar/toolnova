@@ -64,14 +64,14 @@ export function TableOfContents({ content }: TableOfContentsProps) {
             <div className="lg:hidden mb-6">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="flex items-center gap-2 w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-700 font-medium hover:bg-slate-100 transition-colors"
+                    className="flex items-center gap-2 w-full px-4 py-3 bg-muted/60 rounded-xl text-foreground/80 font-medium hover:bg-muted transition-colors"
                 >
                     <List className="h-5 w-5" />
                     Table of Contents
                     <ChevronRight className={`h-4 w-4 ml-auto transition-transform ${isOpen ? 'rotate-90' : ''}`} />
                 </button>
                 {isOpen && (
-                    <nav className="mt-2 p-4 bg-slate-50 rounded-xl">
+                    <nav className="mt-2 p-4 bg-muted/60 rounded-xl">
                         <ul className="space-y-2">
                             {headings.map((heading) => (
                                 <li key={heading.id}>
@@ -79,7 +79,7 @@ export function TableOfContents({ content }: TableOfContentsProps) {
                                         href={`#${heading.id}`}
                                         onClick={() => setIsOpen(false)}
                                         className={`block py-1 text-sm transition-colors hover:text-blue-600 ${heading.level === 3 ? 'pl-4' : ''
-                                            } ${activeId === heading.id ? 'text-blue-600 font-medium' : 'text-slate-600'}`}
+                                            } ${activeId === heading.id ? 'text-blue-600 font-medium' : 'text-muted-foreground'}`}
                                     >
                                         {heading.text}
                                     </a>
@@ -92,10 +92,10 @@ export function TableOfContents({ content }: TableOfContentsProps) {
 
             {/* Desktop Sticky */}
             <aside className="hidden lg:block sticky top-24 self-start w-64 shrink-0">
-                <div className="p-5 bg-slate-50 rounded-2xl border border-slate-200/60">
-                    <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-200">
+                <div className="p-5 bg-muted/60 rounded-2xl border border-border">
+                    <div className="flex items-center gap-2 mb-4 pb-3 border-b border-border">
                         <List className="h-5 w-5 text-slate-500" />
-                        <span className="font-semibold text-slate-900">In This Article</span>
+                        <span className="font-semibold text-foreground">In This Article</span>
                     </div>
                     <nav>
                         <ul className="space-y-1">
@@ -104,7 +104,7 @@ export function TableOfContents({ content }: TableOfContentsProps) {
                                     <a
                                         href={`#${heading.id}`}
                                         className={`block py-1.5 text-sm transition-all hover:text-blue-600 hover:translate-x-1 ${heading.level === 3 ? 'pl-4 text-slate-500' : 'font-medium'
-                                            } ${activeId === heading.id ? 'text-blue-600' : 'text-slate-600'}`}
+                                            } ${activeId === heading.id ? 'text-blue-600' : 'text-muted-foreground'}`}
                                     >
                                         {heading.text}
                                     </a>

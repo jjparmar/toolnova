@@ -279,7 +279,7 @@ export default async function BlogPostPage({
           __html: JSON.stringify(consolidatedSchema),
         }}
       />
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-background">
         {/* Header with Back Link */}
         <div className="py-6 bg-white border-b border-border/40">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -344,7 +344,7 @@ export default async function BlogPostPage({
               )}
 
               {/* Article Content */}
-              <article className="bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-slate-100">
+              <article className="bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-border">
                 <div className="prose prose-lg prose-slate max-w-none">
                   {processContent(post.content)}
                 </div>
@@ -386,7 +386,7 @@ export default async function BlogPostPage({
 
               {/* FAQ Section */}
               {post.faq?.length > 0 && (
-                <div className="mt-12 bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-slate-100">
+                <div className="mt-12 bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-border">
                   <h2 className="text-2xl font-bold text-foreground mb-8">
                     Frequently Asked Questions
                   </h2>
@@ -394,7 +394,7 @@ export default async function BlogPostPage({
                     {post.faq.map((item, index) => (
                       <div
                         key={index}
-                        className="border-b border-slate-100 pb-6 last:border-0 last:pb-0"
+                        className="border-b border-border pb-6 last:border-0 last:pb-0"
                       >
                         <h3 className="text-lg font-bold text-foreground mb-3">
                           {item.question}
@@ -421,7 +421,7 @@ export default async function BlogPostPage({
                         href={`/blog/${relatedPost.slug}`}
                         className="group"
                       >
-                        <article className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <article className="bg-white rounded-2xl p-6 shadow-sm border border-border hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                           <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
                             {relatedPost.category}
                           </span>

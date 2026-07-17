@@ -20,7 +20,7 @@ const categoryColors: Record<string, string> = {
 };
 
 export function BlogCard({ post, featured = false }: BlogCardProps) {
-    const categoryColor = categoryColors[post.category] || 'bg-slate-500/10 text-slate-600 border-slate-500/20';
+    const categoryColor = categoryColors[post.category] || 'bg-muted/600/10 text-muted-foreground border-slate-500/20';
 
     return (
         <Link href={`/blog/${post.slug}`} className="group">
@@ -68,17 +68,17 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
                     </div>
 
                     {/* Title */}
-                    <h2 className={`font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-3 line-clamp-2 ${featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
+                    <h2 className={`font-bold text-foreground group-hover:text-blue-600 transition-colors mb-3 line-clamp-2 ${featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
                         {post.title}
                     </h2>
 
                     {/* Description */}
-                    <p className={`text-slate-600 leading-relaxed mb-4 flex-grow ${featured ? 'line-clamp-3' : 'line-clamp-2'}`}>
+                    <p className={`text-muted-foreground leading-relaxed mb-4 flex-grow ${featured ? 'line-clamp-3' : 'line-clamp-2'}`}>
                         {post.excerpt}
                     </p>
 
                     {/* Author & CTA */}
-                    <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
+                    <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
                         <div className="flex items-center gap-2 text-sm text-slate-500">
                             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center text-white text-xs font-bold">
                                 {post.author.split(' ').map(n => n[0]).join('')}

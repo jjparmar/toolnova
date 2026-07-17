@@ -35,14 +35,14 @@ export default async function DashboardPage() {
       <div className="page-shell min-h-screen py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-slate-900 font-heading">My Dashboard</h1>
-            <p className="mt-2 text-slate-600">Welcome, {user.name?.split("")[0] ||"there"}!</p>
+            <h1 className="text-3xl font-bold text-foreground font-heading">My Dashboard</h1>
+            <p className="mt-2 text-muted-foreground">Welcome, {user.name?.split("")[0] ||"there"}!</p>
           </div>
           <div className="content-panel p-12 text-center">
-            <div className="mx-auto h-16 w-16 bg-slate-100 rounded-full flex items-center justify-center mb-4">
-              <FileText className="h-8 w-8 text-slate-400" />
+            <div className="mx-auto h-16 w-16 bg-muted rounded-full flex items-center justify-center mb-4">
+              <FileText className="h-8 w-8 text-muted-foreground" />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">No history yet</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-2">No history yet</h3>
             <p className="text-slate-500 mb-6">Start using our AI tools to see your history here.</p>
             <Link href="/tools" className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Explore Tools</Link>
           </div>
@@ -78,10 +78,10 @@ export default async function DashboardPage() {
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 font-heading">
+          <h1 className="text-3xl font-bold text-foreground font-heading">
             My Dashboard
           </h1>
-          <p className="mt-2 text-slate-600">
+          <p className="mt-2 text-muted-foreground">
             Welcome back, {user.name?.split("")[0] ||"there"}!
           </p>
         </div>
@@ -100,7 +100,7 @@ export default async function DashboardPage() {
                 Current Plan
               </span>
             </div>
-            <p className={`text-2xl font-black ${isPremium ?"text-white" :"text-slate-900"}`}>
+            <p className={`text-2xl font-black ${isPremium ?"text-white" :"text-foreground"}`}>
               {isPremium ?"Pro" :"Free"}
             </p>
             {!isPremium && (
@@ -125,7 +125,7 @@ export default async function DashboardPage() {
                 Today&apos;s Usage
               </span>
             </div>
-            <p className="text-2xl font-black text-slate-900">
+            <p className="text-2xl font-black text-foreground">
               {todayCount}{isPremium ?"" :` / ${DAILY_FREE_LIMIT}`}
             </p>
             <p className="mt-1 text-xs text-slate-500">
@@ -143,7 +143,7 @@ export default async function DashboardPage() {
                 Total Generations
               </span>
             </div>
-            <p className="text-2xl font-black text-slate-900">
+            <p className="text-2xl font-black text-foreground">
               {history.length}{history.length === 50 ?"+" :""}
             </p>
             <p className="mt-1 text-xs text-slate-500">All time</p>
@@ -159,7 +159,7 @@ export default async function DashboardPage() {
                 Account
               </span>
             </div>
-            <p className="text-sm font-bold text-slate-900 truncate">
+            <p className="text-sm font-bold text-foreground truncate">
               {user.name ||"User"}
             </p>
             <p className="mt-1 text-xs text-slate-500 truncate">
@@ -170,7 +170,7 @@ export default async function DashboardPage() {
 
         {/* Generation History */}
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+          <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-primary" />
             Recent Generations
           </h2>
@@ -184,10 +184,10 @@ export default async function DashboardPage() {
 
         {history.length === 0 ? (
           <div className="content-panel p-12 text-center">
-            <div className="mx-auto h-16 w-16 bg-slate-100 rounded-full flex items-center justify-center mb-4">
-              <FileText className="h-8 w-8 text-slate-400" />
+            <div className="mx-auto h-16 w-16 bg-muted rounded-full flex items-center justify-center mb-4">
+              <FileText className="h-8 w-8 text-muted-foreground" />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">No history yet</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-2">No history yet</h3>
             <p className="text-slate-500 mb-6">
               You haven&apos;t generated anything using our AI tools yet.
             </p>
@@ -219,7 +219,7 @@ export default async function DashboardPage() {
                   : item.response;
 
                 return (
-                  <li key={item.id} className="p-6 hover:bg-slate-50 :bg-slate-800/50 transition-colors">
+                  <li key={item.id} className="p-6 hover:bg-muted/60 :bg-slate-800/50 transition-colors">
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-2">
@@ -231,7 +231,7 @@ export default async function DashboardPage() {
                             {formatDistanceToNow(new Date(item.createdAt), { addSuffix: true })}
                           </span>
                         </div>
-                        <h4 className="text-sm font-medium text-slate-900 truncate mb-1">
+                        <h4 className="text-sm font-medium text-foreground truncate mb-1">
                           Prompt: {displayPrompt}
                         </h4>
                         <div className="text-sm text-muted-foreground bg-muted/60 rounded-xl p-3 mt-3 border border-border/70">
@@ -242,7 +242,7 @@ export default async function DashboardPage() {
                       <div className="flex shrink-0 gap-2">
                         <Link
                           href={`/tools/${item.toolSlug}`}
-                          className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 :bg-slate-700 transition-colors"
+                          className="inline-flex items-center justify-center rounded-md border border-border bg-white px-3 py-2 text-sm font-medium text-foreground/80 shadow-sm hover:bg-muted/60 :bg-slate-700 transition-colors"
                         >
                           <ExternalLink className="mr-2 h-4 w-4" />
                           Open Tool

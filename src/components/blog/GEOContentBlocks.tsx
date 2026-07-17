@@ -92,7 +92,7 @@ export function ComparisonTable({ headers, rows }: ComparisonTableProps) {
                     {rows.map((row, rowIndex) => (
                         <tr
                             key={rowIndex}
-                            className="border-b border-slate-200 hover:bg-slate-50 :bg-slate-800/50 transition-colors"
+                            className="border-b border-border hover:bg-muted/60 :bg-slate-800/50 transition-colors"
                         >
                             <td className="px-4 py-3 text-sm font-semibold text-foreground">
                                 {row.label}

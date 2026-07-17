@@ -41,14 +41,14 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border h-16">
+    <header className="sticky top-0 z-40 h-16 w-full border-b border-border/80 bg-card/80 shadow-[0_1px_0_0_hsl(var(--primary)/0.04)] backdrop-blur-xl supports-[backdrop-filter]:bg-card/70">
       <div className="flex h-full items-center justify-between px-4 md:px-8">
         
         {/* Left Area: Hamburger (Mobile), Logo, and Desktop Nav */}
         <div className="flex items-center gap-4">
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-md border border-border/50 text-foreground hover:bg-muted transition-colors duration-200 md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-border text-foreground transition-colors duration-200 hover:bg-secondary md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
@@ -60,24 +60,25 @@ export function Header() {
             href="/"
             className="flex shrink-0 items-center gap-2"
           >
-            <div className="relative h-8 w-8 overflow-hidden rounded bg-primary text-primary-foreground flex items-center justify-center font-bold">
+            <div className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-primary to-[hsl(var(--primary-deep))] text-sm font-bold text-primary-foreground shadow-sm shadow-primary/25">
               T
             </div>
-            <span className="font-heading text-lg font-bold tracking-tight text-foreground hidden sm:block">
+            <span className="font-heading hidden text-lg font-bold tracking-tight text-foreground sm:block">
               Tool<span className="text-primary">Nova</span>
             </span>
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1 ml-6" aria-label="Main navigation">
+          <nav className="ml-6 hidden items-center gap-1 md:flex" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={cn("px-3 py-1.5 text-sm font-medium rounded-md transition-colors",
+                className={cn(
+                  "rounded-lg px-3 py-1.5 text-sm font-medium transition-colors",
                   isActive(link.href)
-                    ?"bg-muted text-foreground"
-                    :"text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                 )}
                 aria-current={isActive(link.href) ?"page" : undefined}
               >

@@ -83,7 +83,7 @@ export default function DisclaimerPage() {
                     </p>
                 </section>
 
-                <section className="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+                <section className="bg-muted/60 p-8 rounded-2xl border border-border">
                     <h2 className="text-xl font-bold mb-4">Contact Us</h2>
                     <p>
                         If you have any questions regarding this disclaimer, please

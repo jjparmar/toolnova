@@ -93,9 +93,10 @@ export function HomeDashboard() {
   return (
     <div className="w-full">
       {/* ─── Hero ─── Vibrant Premium Hero */}
-      <section className="relative overflow-hidden pt-24 pb-20 md:pt-36 md:pb-32 border-b border-border/40 bg-background">
-        {/* Soft Electric Blue Top Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
+      <section className="page-hero relative overflow-hidden border-b border-border/50 pt-24 pb-20 md:pt-36 md:pb-32">
+        <div className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-full max-w-[900px] -translate-x-1/2 rounded-full bg-primary/15 blur-[120px]" />
+        <div className="pointer-events-none absolute -right-20 top-24 h-64 w-64 rounded-full bg-[hsl(186_70%_50%/0.12)] blur-[90px]" />
+        <div className="pointer-events-none absolute -left-16 bottom-10 h-56 w-56 rounded-full bg-[hsl(268_55%_60%/0.08)] blur-[80px]" />
         
         <div className="relative z-10 mx-auto max-w-[1200px] px-6 text-center">
           <div className="animate-fade-in flex flex-col items-center">

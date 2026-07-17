@@ -131,7 +131,13 @@ export const metadata: Metadata = {
   },
   category:"Productivity",
   other: {
-    language:"English","content-language":"en","theme-color":"#2563eb","msapplication-TileColor":"#2563eb","apple-mobile-web-app-capable":"yes","apple-mobile-web-app-status-bar-style":"default","mobile-web-app-capable":"yes",
+    language: "English",
+    "content-language": "en",
+    "theme-color": "#2f7cf6",
+    "msapplication-TileColor": "#2f7cf6",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "mobile-web-app-capable": "yes",
     // AI / GEO discovery signals (concise, non-spammy)"ai-indexing":"allowed",
     citation:"ToolNova — Free AI Tools for Students and Professionals. https://www.toolnovahub.com","dc.title":"ToolNova — Free AI Productivity Tools","dc.publisher":"ToolNova","dc.language":"en","dc.type":"InteractiveResource",
   },
@@ -194,8 +200,8 @@ export default function RootLayout({
         />
 
         {/* Theme Color — required for Google Discover & PWA */}
-        <meta name="theme-color" content="#2563eb" />
-        <meta name="msapplication-TileColor" content="#2563eb" />
+        <meta name="theme-color" content="#2f7cf6" />
+        <meta name="msapplication-TileColor" content="#2f7cf6" />
 
 
         {/* NOTE: Page-level JSON-LD schemas are injected by each page component.

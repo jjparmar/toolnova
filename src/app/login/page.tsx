@@ -96,12 +96,12 @@ export default function LoginPage() {
             </div>
 
             {/* Right Panel - Login Form */}
-            <div className="flex-1 flex items-center justify-center p-6 sm:p-10 bg-background">
+            <div className="flex flex-1 items-center justify-center bg-background p-6 sm:p-10">
                 <div className="w-full max-w-md">
                     {/* Mobile Logo */}
-                    <div className="lg:hidden text-center mb-10">
-                        <Link href="/" className="inline-flex items-center gap-3 group">
-                            <div className="h-12 w-12 rounded-2xl bg-gradient-brand flex items-center justify-center group-hover:scale-105 transition-transform shadow-xl shadow-primary/30">
+                    <div className="mb-10 text-center lg:hidden">
+                        <Link href="/" className="group inline-flex items-center gap-3">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-brand shadow-xl shadow-primary/30 transition-transform group-hover:scale-105">
                                 <Sparkles className="h-7 w-7 text-white" />
                             </div>
                             <span className="font-heading text-2xl font-bold tracking-tight text-foreground">
@@ -111,7 +111,7 @@ export default function LoginPage() {
                     </div>
 
                     {/* Card */}
-                    <div className="bg-card rounded-2xl shadow-premium border border-border/60 p-8 sm:p-10">
+                    <div className="content-panel p-8 sm:p-10">
                         <div className="text-center mb-8">
                             <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground mb-2">
                                 Welcome to ToolNova

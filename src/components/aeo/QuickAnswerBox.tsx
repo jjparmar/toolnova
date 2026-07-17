@@ -16,11 +16,11 @@ interface QuickAnswerBoxProps {
 export function QuickAnswerBox({ question, answer, className = '' }: QuickAnswerBoxProps) {
     return (
         <div
-            className={`quick-answer mb-8 rounded-2xl border border-primary/20 bg-primary/[0.04] p-6 md:p-8 ${className}`}
+            className={`quick-answer mb-8 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/[0.08] to-accent p-6 md:p-8 ${className}`}
             data-speakable="true"
         >
             <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary shadow-sm shadow-primary/25">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-[hsl(var(--primary-deep))] shadow-sm shadow-primary/25">
                     <Info className="h-5 w-5 text-primary-foreground" />
                 </div>
                 <div className="flex-1">

@@ -34,12 +34,12 @@ export function Footer() {
       {/* Premium gradient divider */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
 
-      <div className="relative border-t border-border/50 bg-muted/15">
-        {/* Subtle ambient glow */}
+      <div className="relative border-t border-border bg-secondary/40">
         <div
           className="pointer-events-none absolute inset-0"
           style={{
-            background:"radial-gradient(ellipse at 10% 0%, hsl(var(--primary) / 0.04) 0%, transparent 50%), radial-gradient(ellipse at 90% 0%, hsl(192 95% 44% / 0.03) 0%, transparent 50%)",
+            background:
+              "radial-gradient(ellipse at 10% 0%, hsl(var(--primary) / 0.07) 0%, transparent 50%), radial-gradient(ellipse at 90% 0%, hsl(186 70% 48% / 0.06) 0%, transparent 50%)",
           }}
         />
 

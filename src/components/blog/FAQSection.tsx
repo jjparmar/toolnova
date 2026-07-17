@@ -25,7 +25,7 @@ export function FAQSection({ faqs, title ="Frequently Asked Questions" }: FAQSec
     };
 
     return (
-        <section className="my-12 py-12 border-t border-slate-200">
+        <section className="my-12 py-12 border-t border-border">
             {/* Schema Markup */}
             <script
                 type="application/ld+json"
@@ -37,7 +37,7 @@ export function FAQSection({ faqs, title ="Frequently Asked Questions" }: FAQSec
                 <div className="p-2 bg-blue-100 rounded-xl">
                     <HelpCircle className="h-6 w-6 text-blue-600" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground">
                     {title}
                 </h2>
             </div>
@@ -47,17 +47,17 @@ export function FAQSection({ faqs, title ="Frequently Asked Questions" }: FAQSec
                 {faqs.map((faq, index) => (
                     <div
                         key={index}
-                        className="border border-slate-200 rounded-xl overflow-hidden bg-white hover:border-blue-200 transition-colors"
+                        className="border border-border rounded-xl overflow-hidden bg-white hover:border-blue-200 transition-colors"
                     >
                         <button
                             onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                            className="w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition-colors"
+                            className="w-full flex items-center justify-between p-5 text-left hover:bg-muted/60 transition-colors"
                         >
-                            <span className="font-semibold text-slate-900 pr-4">
+                            <span className="font-semibold text-foreground pr-4">
                                 {faq.question}
                             </span>
                             <ChevronDown
-                                className={`h-5 w-5 text-slate-400 shrink-0 transition-transform duration-200 ${openIndex === index ? 'rotate-180' : ''
+                                className={`h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-200 ${openIndex === index ? 'rotate-180' : ''
                                     }`}
                             />
                         </button>
@@ -65,7 +65,7 @@ export function FAQSection({ faqs, title ="Frequently Asked Questions" }: FAQSec
                             className={`overflow-hidden transition-all duration-200 ${openIndex === index ? 'max-h-96' : 'max-h-0'
                                 }`}
                         >
-                            <div className="px-5 pb-5 text-slate-600 leading-relaxed">
+                            <div className="px-5 pb-5 text-muted-foreground leading-relaxed">
                                 {faq.answer}
                             </div>
                         </div>

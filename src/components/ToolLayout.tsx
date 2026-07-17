@@ -418,16 +418,16 @@ export function ToolLayout({
         <div className="space-y-12 mt-4">
           {/* Options Section */}
           {toolOptions.length > 0 && (
-            <div className="glass-panel rounded-3xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+            <div className="glass-panel rounded-3xl border border-border shadow-sm overflow-hidden mb-8">
               <button
                 onClick={() => setShowOptions(!showOptions)}
-                className="w-full px-8 py-5 flex items-center justify-between text-sm font-black text-slate-900 hover:bg-white/50 :bg-slate-800/30 transition-colors uppercase tracking-widest"
+                className="w-full px-8 py-5 flex items-center justify-between text-sm font-black text-foreground hover:bg-white/50 :bg-slate-800/30 transition-colors uppercase tracking-widest"
               >
                 <div className="flex items-center gap-3">
                   <Settings2 className="h-5 w-5 text-primary" />
                   Tool Customization
                 </div>
-                <div className="flex items-center gap-2 text-slate-400 font-bold">
+                <div className="flex items-center gap-2 text-muted-foreground font-bold">
                   {showOptions ?"Collapse" :"Expand"}
                   {showOptions ? (
                     <ChevronUp className="h-4 w-4" />
@@ -441,7 +441,7 @@ export function ToolLayout({
                 <div className="px-8 pb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-top-2 duration-300">
                   {toolOptions.map((opt) => (
                     <div key={opt.id} className="flex flex-col gap-3">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">
+                      <label className="text-[10px] font-black text-muted-foreground uppercase tracking-widest leading-none">
                         {opt.label}
                       </label>
                       {opt.type ==="select" && opt.options && (
@@ -451,7 +451,7 @@ export function ToolLayout({
                             onChange={(e) =>
                               handleOptionChange(opt.id, e.target.value)
                             }
-                            className="w-full h-12 px-4 pr-10 rounded-2xl bg-white border border-slate-200 text-slate-900 text-sm font-bold focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer"
+                            className="w-full h-12 px-4 pr-10 rounded-2xl bg-white border border-border text-foreground text-sm font-bold focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer"
                           >
                             {opt.options.map((o) => (
                               <option key={o.value} value={o.value}>
@@ -459,7 +459,7 @@ export function ToolLayout({
                               </option>
                             ))}
                           </select>
-                          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+                          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
                         </div>
                       )}
                       {opt.type ==="toggle" && (
@@ -470,7 +470,7 @@ export function ToolLayout({
                           className={`h-12 px-6 rounded-2xl border font-bold text-sm transition-all flex items-center justify-between ${
                             options[opt.id]
                               ?"bg-primary text-white border-primary shadow-lg shadow-primary/20"
-                              :"bg-white text-slate-600 border-slate-200 hover:border-primary"
+                              :"bg-white text-muted-foreground border-border hover:border-primary"
                           }`}
                         >
                           {options[opt.id] ?"Enabled" :"Disabled"}
@@ -491,18 +491,18 @@ export function ToolLayout({
           )}
 
           {/* Input Area */}
-          <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl p-6 md:p-12 relative overflow-hidden">
+          <div className="bg-white rounded-[2.5rem] border border-border shadow-2xl p-6 md:p-12 relative overflow-hidden">
             <div className="absolute top-0 left-0 h-1 w-full bg-primary/80"></div>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
               <div>
-                <label className="text-xl font-black text-slate-900 flex items-center gap-3">
+                <label className="text-xl font-black text-foreground flex items-center gap-3">
                   <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center">
                     <FileText className="h-4 w-4 text-primary" />
                   </div>
                   Input Data
                 </label>
-                <div className="mt-1 flex items-center gap-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-11">
+                <div className="mt-1 flex items-center gap-3 text-[10px] font-bold text-muted-foreground uppercase tracking-widest pl-11">
                   <span>{wordCount} words</span>
                   <span className="w-1 h-1 rounded-full bg-slate-300"></span>
                   <span>{charCount} characters</span>
@@ -513,7 +513,7 @@ export function ToolLayout({
                 <Button
                   variant="outline"
                   size="sm"
-                  className="rounded-xl border-slate-200 font-bold text-xs h-10 hover:bg-slate-50 :bg-slate-800"
+                  className="rounded-xl border-border font-bold text-xs h-10 hover:bg-muted/60 :bg-slate-800"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <Upload className="h-3.5 w-3.5 mr-2" /> Import
@@ -521,7 +521,7 @@ export function ToolLayout({
                 <Button
                   variant="outline"
                   size="sm"
-                  className="rounded-xl border-slate-200 font-bold text-xs h-10 hover:bg-red-50 :bg-red-900/20 hover:text-red-500 hover:border-red-200"
+                  className="rounded-xl border-border font-bold text-xs h-10 hover:bg-red-50 :bg-red-900/20 hover:text-red-500 hover:border-red-200"
                   onClick={() => setInput("")}
                   disabled={!input}
                 >
@@ -541,7 +541,7 @@ export function ToolLayout({
               {/* Optional soft CTA for guests — tools work without sign-in */}
               {!isNonAITool && !loading && !authLoading && !user && (
                 <div className="mb-3 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm">
-                  <p className="text-slate-600">
+                  <p className="text-muted-foreground">
                     Free to use without an account. Sign in for more daily uses and saved history.
                   </p>
                   <Button
@@ -560,7 +560,7 @@ export function ToolLayout({
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={placeholder}
-                className="w-full min-h-[220px] md:min-h-[280px] resize-none p-8 rounded-[1.8rem] bg-slate-50 border-slate-100 text-slate-900 text-lg focus:ring-4 focus:ring-primary/10 focus:border-primary/50 transition-all font-medium placeholder:text-slate-400 placeholder:font-normal leading-relaxed"
+                className="w-full min-h-[220px] md:min-h-[280px] resize-none p-8 rounded-[1.8rem] bg-muted/60 border-border text-foreground text-lg focus:ring-4 focus:ring-primary/10 focus:border-primary/50 transition-all font-medium placeholder:text-muted-foreground placeholder:font-normal leading-relaxed"
               />
             </div>
 
@@ -607,12 +607,12 @@ export function ToolLayout({
                     <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
                       <Check className="h-6 w-6 text-green-500" />
                     </div>
-                    <label className="text-2xl font-black text-slate-900">
+                    <label className="text-2xl font-black text-foreground">
                       {resultLabel}
                     </label>
                   </div>
                   {processingTime > 0 && (
-                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-13">
+                    <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest pl-13">
                       Processing complete in{""}
                       {(processingTime / 1000).toFixed(2)}s
                     </div>
@@ -623,7 +623,7 @@ export function ToolLayout({
                   <Button
                     variant="outline"
                     size="lg"
-                    className="h-12 px-6 gap-3 rounded-[1.2rem] border-slate-200 font-black text-sm hover:bg-slate-900 hover:text-white :bg-white :text-slate-900 transition-all overflow-hidden relative"
+                    className="h-12 px-6 gap-3 rounded-[1.2rem] border-border font-black text-sm hover:bg-slate-900 hover:text-white :bg-white :text-foreground transition-all overflow-hidden relative"
                     onClick={handleCopy}
                   >
                     {copied ? (
@@ -639,7 +639,7 @@ export function ToolLayout({
                       <Button
                         variant="outline"
                         size="lg"
-                        className="h-12 px-6 gap-3 rounded-[1.2rem] border-slate-200 font-black text-sm hover:bg-blue-600 hover:text-white transition-all"
+                        className="h-12 px-6 gap-3 rounded-[1.2rem] border-border font-black text-sm hover:bg-blue-600 hover:text-white transition-all"
                       >
                         <Share2 className="h-4 w-4" />
                         Export
@@ -648,7 +648,7 @@ export function ToolLayout({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                       align="end"
-                      className="w-56 p-2 rounded-2xl border-slate-200"
+                      className="w-56 p-2 rounded-2xl border-border"
                     >
                       <DropdownMenuItem
                         onClick={handleDownload}
@@ -668,7 +668,7 @@ export function ToolLayout({
                         )}
                         {isSpeaking ?"Stop Dictation" :"Read Out Loud"}
                       </DropdownMenuItem>
-                      <div className="h-px bg-slate-100 my-2"></div>
+                      <div className="h-px bg-muted my-2"></div>
                       <DropdownMenuItem
                         onClick={() => handleSocialShare("whatsapp")}
                         className="cursor-pointer rounded-xl h-11 font-bold"
@@ -688,7 +688,7 @@ export function ToolLayout({
                 </div>
               </div>
 
-              <div className="bg-slate-50 rounded-[2rem] p-8 md:p-12 border border-slate-100 relative z-10">
+              <div className="bg-muted/60 rounded-[2rem] p-8 md:p-12 border border-border relative z-10">
                 {customResultRenderer ? (
                   customResultRenderer(result)
                 ) : isNonAITool ? (
@@ -722,8 +722,8 @@ export function ToolLayout({
             </button>
 
             {showHistory && (
-              <div className="mt-4 bg-white rounded-2xl border border-slate-100 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
-                <div className="flex items-center justify-between p-4 border-b border-slate-100">
+              <div className="mt-4 bg-white rounded-2xl border border-border overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
+                <div className="flex items-center justify-between p-4 border-b border-border">
                   <span className="text-sm font-semibold text-foreground">
                     Recent Generations
                   </span>
@@ -741,7 +741,7 @@ export function ToolLayout({
                     <button
                       key={index}
                       onClick={() => handleLoadFromHistory(item)}
-                      className="w-full p-4 text-left border-b border-slate-50 last:border-0 hover:bg-slate-50 :bg-slate-800/50 transition-colors"
+                      className="w-full p-4 text-left border-b border-slate-50 last:border-0 hover:bg-muted/60 :bg-slate-800/50 transition-colors"
                     >
                       <div className="text-sm text-foreground font-medium line-clamp-1">
                         {item.input}

@@ -84,7 +84,7 @@ export default function CookiePolicyPage() {
                     </p>
                 </section>
 
-                <section className="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+                <section className="bg-muted/60 p-8 rounded-2xl border border-border">
                     <h2 className="text-xl font-bold mb-4">Contact for Cookie Related Inquiries</h2>
                     <p>
                         For any questions about our use of cookies, please contact
