@@ -188,39 +188,42 @@ export default function PricingClient() {
   const proPeriod = isYearly ?"year" :"month";
 
   return (
-    <div className="page-shell min-h-screen overflow-hidden pb-20">
-      <div className="container relative mx-auto max-w-6xl px-6 pt-14 md:pt-20">
-        {/* Hero */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="section-kicker mb-6">
+    <div className="min-h-screen bg-background pb-20">
+      {/* Hero band */}
+      <section className="border-b border-border bg-card">
+        <div className="mx-auto max-w-[900px] px-6 py-14 text-center md:py-16">
+          <div className="section-kicker mb-5">
             <Crown className="h-4 w-4" />
             Simple pricing
           </div>
-          <h1 className="font-heading mb-4 text-4xl font-bold tracking-tight md:text-5xl">
-            Free to start.{""}
+          <h1 className="font-heading mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">
+            Free to start.{" "}
             <span className="text-primary">Pro when you need unlimited AI.</span>
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
             Use {TOOL_COUNT_LABEL} tools without a credit card. Browser PDF &amp;
             image tools stay unlimited. Upgrade only if you want unlimited AI
-            generations and an ad-free workspace.
+            and an ad-free workspace.
           </p>
         </div>
+      </section>
 
+      <div className="mx-auto max-w-6xl px-6 pt-12">
         {/* Billing toggle */}
-        <div className="flex justify-center mb-12">
+        <div className="mb-12 flex justify-center">
           <div
-            className="surface-glass inline-flex rounded-full border border-border bg-card/75 p-1 shadow-premium-sm"
+            className="inline-flex rounded-full border border-border bg-muted p-1"
             role="group"
             aria-label="Billing period"
           >
             <button
               type="button"
               onClick={() => setIsYearly(false)}
-              className={cn("px-6 py-2.5 rounded-full text-sm font-bold transition-all",
+              className={cn(
+                "rounded-full px-6 py-2.5 text-sm font-bold transition-all",
                 !isYearly
-                  ?"bg-card text-foreground shadow-premium-sm"
-                  :"text-muted-foreground",
+                  ? "bg-card text-foreground shadow-sm"
+                  : "text-muted-foreground"
               )}
             >
               Monthly
@@ -228,14 +231,15 @@ export default function PricingClient() {
             <button
               type="button"
               onClick={() => setIsYearly(true)}
-              className={cn("px-6 py-2.5 rounded-full text-sm font-bold transition-all",
+              className={cn(
+                "rounded-full px-6 py-2.5 text-sm font-bold transition-all",
                 isYearly
-                  ?"bg-card text-foreground shadow-premium-sm"
-                  :"text-muted-foreground",
+                  ? "bg-card text-foreground shadow-sm"
+                  : "text-muted-foreground"
               )}
             >
               Yearly
-              <span className="ml-2 text-xs font-semibold text-emerald-600">
+              <span className="ml-2 text-xs font-semibold text-primary">
                 Save {YEARLY_SAVE_PCT}%
               </span>
             </button>
@@ -243,16 +247,16 @@ export default function PricingClient() {
         </div>
 
         {/* Plans */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto mb-16">
+        <div className="mx-auto mb-16 grid max-w-4xl gap-6 md:grid-cols-2 lg:gap-8">
           {/* Free */}
           <div className="content-panel flex flex-col p-8">
-            <div className="flex items-center gap-2 mb-2">
+            <div className="mb-2 flex items-center gap-2">
               <FileText className="h-5 w-5 text-muted-foreground" />
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Free forever
               </span>
             </div>
-            <h2 className="font-heading text-2xl font-black mb-1">Free</h2>
+            <h2 className="font-heading mb-1 text-2xl font-extrabold">Free</h2>
             <p className="text-muted-foreground text-sm mb-6">
               Perfect for students and light use
             </p>
@@ -278,17 +282,17 @@ export default function PricingClient() {
           </div>
 
           {/* Pro */}
-          <div className="premium-tint flex flex-col p-8 shadow-premium relative">
-            <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-wide">
+          <div className="relative flex flex-col rounded-xl border-2 border-primary bg-card p-8 shadow-premium-sm">
+            <div className="absolute right-4 top-4 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-primary-foreground">
               Best value
             </div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="mb-2 flex items-center gap-2">
               <Crown className="h-5 w-5 text-primary" />
               <span className="text-xs font-bold uppercase tracking-wider text-primary">
                 Pro
               </span>
             </div>
-            <h2 className="font-heading text-2xl font-black mb-1">Pro</h2>
+            <h2 className="font-heading mb-1 text-2xl font-extrabold">Pro</h2>
             <p className="text-muted-foreground text-sm mb-6">
               For daily AI power users
             </p>

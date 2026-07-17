@@ -32,19 +32,21 @@ export default async function DashboardPage() {
   if (!dbUser) {
     // User hasn't used any tools yet — show empty dashboard
     return (
-      <div className="page-shell min-h-screen py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-background py-12">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-foreground font-heading">My Dashboard</h1>
-            <p className="mt-2 text-muted-foreground">Welcome, {user.name?.split("")[0] ||"there"}!</p>
+            <h1 className="font-heading text-3xl font-extrabold text-foreground">My dashboard</h1>
+            <p className="mt-2 text-muted-foreground">Welcome, {user.name?.split(" ")[0] || "there"}!</p>
           </div>
           <div className="content-panel p-12 text-center">
-            <div className="mx-auto h-16 w-16 bg-muted rounded-full flex items-center justify-center mb-4">
-              <FileText className="h-8 w-8 text-muted-foreground" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-accent">
+              <FileText className="h-8 w-8 text-primary" />
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">No history yet</h3>
-            <p className="text-slate-500 mb-6">Start using our AI tools to see your history here.</p>
-            <Link href="/tools" className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">Explore Tools</Link>
+            <h3 className="mb-2 text-lg font-bold text-foreground">No history yet</h3>
+            <p className="mb-6 text-muted-foreground">Start using our AI tools to see your history here.</p>
+            <Link href="/tools" className="inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-[hsl(var(--primary-deep))]">
+              Explore tools
+            </Link>
           </div>
         </div>
       </div>
@@ -73,31 +75,31 @@ export default async function DashboardPage() {
   const remaining = isPremium ? -1 : Math.max(0, DAILY_FREE_LIMIT - todayCount);
 
   return (
-    <div className="page-shell min-h-screen py-12">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background py-12">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground font-heading">
-            My Dashboard
+          <h1 className="font-heading text-3xl font-extrabold text-foreground">
+            My dashboard
           </h1>
           <p className="mt-2 text-muted-foreground">
-            Welcome back, {user.name?.split("")[0] ||"there"}!
+            Welcome back, {user.name?.split(" ")[0] || "there"}!
           </p>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {/* Plan Card */}
-          <div className={`rounded-2xl p-5 border ${isPremium
-            ?"bg-gradient-to-br from-primary to-teal-600 border-transparent text-white"
-            :"content-panel"}`}>
-            <div className="flex items-center gap-3 mb-3">
-              <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${isPremium ?"bg-white/20" :"bg-indigo-50"}`}>
-                <Crown className={`h-5 w-5 ${isPremium ?"text-white" :"text-indigo-600"}`} />
+          <div className={`rounded-xl border p-5 ${isPremium
+            ? "border-primary bg-primary text-primary-foreground"
+            : "content-panel"}`}>
+            <div className="mb-3 flex items-center gap-3">
+              <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${isPremium ? "bg-white/20" : "bg-accent"}`}>
+                <Crown className={`h-5 w-5 ${isPremium ? "text-white" : "text-primary"}`} />
               </div>
-              <span className={`text-sm font-semibold ${isPremium ?"text-white/80" :"text-slate-500"}`}>
-                Current Plan
+              <span className={`text-sm font-semibold ${isPremium ? "text-white/80" : "text-muted-foreground"}`}>
+                Current plan
               </span>
             </div>
             <p className={`text-2xl font-black ${isPremium ?"text-white" :"text-foreground"}`}>

@@ -104,18 +104,16 @@ export default function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogCollectionSchema) }}
       />
-      <div className="page-shell min-h-screen">
+      <div className="min-h-screen bg-background">
         {/* Featured */}
-        <section className="page-hero py-12 md:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="border-b border-border bg-card py-12 md:py-14">
+          <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
             <div className="mb-8 text-center md:text-left">
-              <span className="section-kicker">
-                Blog
-              </span>
-              <h1 className="font-heading text-4xl md:text-5xl font-semibold mt-4 tracking-tight text-foreground">
+              <span className="section-kicker">Blog</span>
+              <h1 className="font-heading mt-4 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
                 Guides &amp; insights
               </h1>
-              <p className="text-muted-foreground mt-2 max-w-2xl">
+              <p className="mt-2 max-w-2xl text-muted-foreground">
                 Practical tips for AI tools, study workflows, writing, and
                 productivity.
               </p>
@@ -184,9 +182,9 @@ export default function BlogPage() {
         </section>
 
         {/* Grid */}
-        <section className="py-12 md:py-16 border-t border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-10">
+        <section className="border-t border-border bg-muted py-12 md:py-16">
+          <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
+            <h2 className="font-heading mb-8 text-2xl font-extrabold text-foreground md:text-3xl">
               Latest articles
             </h2>
             {otherPosts.length === 0 ? (

@@ -36,7 +36,7 @@ export default function UtilityToolsPage() {
     const breadcrumbSchema = generateBreadcrumbListSchema(CATEGORY_BREADCRUMBS['utility-tools']);
 
     return (
-        <div className="page-shell w-full min-h-screen">
+        <div className="min-h-screen w-full bg-background">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

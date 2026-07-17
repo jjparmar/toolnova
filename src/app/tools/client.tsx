@@ -677,37 +677,35 @@ export function ToolsClient() {
   }, []);
 
   return (
-    <div className="page-shell w-full min-h-screen">
-      {/* Background Ornaments */}
-      <div className="relative z-10 mx-auto max-w-[1120px] px-6 py-12 md:py-14">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <div className="section-kicker mb-5">
+    <div className="min-h-screen w-full bg-background">
+      {/* Hero */}
+      <section className="border-b border-border bg-card">
+        <div className="mx-auto max-w-[1100px] px-6 pb-10 pt-12 text-center md:pb-12 md:pt-14">
+          <div className="section-kicker mb-4">
             <Sparkles className="h-3.5 w-3.5" />
             <span>All tools · Free to open · No sign-up</span>
           </div>
 
-          <h1 className="font-heading text-4xl md:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground">
-            AI Tools Library
+          <h1 className="font-heading mb-3 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
+            Every tool you need — free
           </h1>
 
-          <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
-            Search writing, study, PDF, image, and career tools — built for speed
+          <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            Search writing, study, PDF, image, and career tools. Built for speed
             and clarity.
           </p>
 
-          {/* Stats Bar */}
-          <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-12">
+          <div className="mx-auto mb-8 flex max-w-2xl flex-wrap justify-center gap-5 md:gap-8">
             {heroStats.map((stat) => (
               <div key={stat.label} className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/10">
-                  <stat.icon className="h-5 w-5 text-primary" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-primary">
+                  <stat.icon className="h-5 w-5" />
                 </div>
                 <div className="text-left">
-                  <div className="text-xl font-bold font-heading text-foreground leading-tight">
+                  <div className="font-heading text-lg font-extrabold leading-tight text-foreground">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-muted-foreground font-medium">
+                  <div className="text-xs font-medium text-muted-foreground">
                     {stat.label}
                   </div>
                 </div>
@@ -715,38 +713,38 @@ export function ToolsClient() {
             ))}
           </div>
 
-          {/* Search Bar */}
-          <div className="max-w-3xl mx-auto mb-12">
-            <div className="relative group">
-              <div className="input-surface relative flex items-center rounded-2xl transition-all">
-                <Search className="text-muted-foreground h-5 w-5 ml-5 mr-3 shrink-0 transition-colors group-focus-within:text-primary" />
-                <input
-                  ref={searchRef}
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search tools... (e.g. 'essay', 'pdf', 'resume')"
-                  className="flex-1 py-4 md:py-5 bg-transparent border-none text-foreground placeholder:text-muted-foreground/50 focus:outline-none text-base md:text-lg font-medium"
-                />
-                {searchQuery ? (
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery("")}
-                    className="mr-2 p-2 rounded-xl hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
-                  >
-                    <X className="h-5 w-5" />
-                  </button>
-                ) : (
-                  <div className="hidden md:flex items-center mr-5 px-2.5 py-1 rounded-lg bg-muted/60 text-muted-foreground text-xs font-mono border border-border">
-                    Ctrl + K
-                  </div>
-                )}
-              </div>
+          <div className="mx-auto max-w-2xl">
+            <div className="input-surface relative flex items-center rounded-xl">
+              <Search className="ml-4 mr-2 h-5 w-5 shrink-0 text-muted-foreground" />
+              <input
+                ref={searchRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search tools... (e.g. essay, pdf, resume)"
+                className="flex-1 border-none bg-transparent py-3.5 text-base font-medium text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
+              />
+              {searchQuery ? (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="mr-2 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              ) : (
+                <div className="mr-3 hidden items-center rounded-md border border-border bg-muted px-2 py-1 font-mono text-[10px] text-muted-foreground md:flex">
+                  Ctrl + K
+                </div>
+              )}
             </div>
           </div>
+        </div>
+      </section>
 
+      <div className="mx-auto max-w-[1100px] px-6 py-10 md:py-12">
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap justify-center gap-2.5 mb-14">
+          <div className="mb-10 flex flex-wrap justify-center gap-2">
             <button
               type="button"
               onClick={() => setActiveCategory("All")}
@@ -779,17 +777,16 @@ export function ToolsClient() {
               </button>
             ))}
           </div>
-        </div>
 
         {/* Featured / Popular Tools Banner (only when no search/filter) */}
-        {!searchQuery && activeCategory ==="All" && (
+        {!searchQuery && activeCategory === "All" && (
           <div className="mb-16 animate-fade-in">
             <div className="flex items-center gap-3 mb-6">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
                 <Award className="h-4 w-4 text-primary-foreground" />
               </div>
-              <h2 className="font-heading text-2xl font-semibold text-foreground">
-                Popular Tools
+              <h2 className="font-heading text-2xl font-extrabold text-foreground">
+                Popular tools
               </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

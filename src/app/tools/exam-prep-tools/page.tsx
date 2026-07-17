@@ -34,7 +34,7 @@ export default function ExamPrepToolsPage() {
     const breadcrumbSchema = generateBreadcrumbListSchema(CATEGORY_BREADCRUMBS['exam-prep-tools']);
 
     return (
-        <div className="page-shell w-full min-h-screen">
+        <div className="min-h-screen w-full bg-background">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

@@ -47,7 +47,7 @@ export default function ImagePDFToolsPage() {
     const breadcrumbSchema = generateBreadcrumbListSchema(CATEGORY_BREADCRUMBS['image-pdf-tools']);
 
     return (
-        <div className="page-shell w-full min-h-screen">
+        <div className="min-h-screen w-full bg-background">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -56,46 +56,37 @@ export default function ImagePDFToolsPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
-            <div className="mx-auto max-w-[1200px] px-6 py-10">
-                <div className="flex flex-wrap gap-2 mb-6">
-                    <Link href="/" className="text-muted-foreground text-sm font-medium hover:text-primary">Home</Link>
-                    <span className="text-muted-foreground/50 text-sm">/</span>
-                    <Link href="/tools" className="text-muted-foreground text-sm font-medium hover:text-primary">Tools</Link>
-                    <span className="text-muted-foreground/50 text-sm">/</span>
-                    <span className="text-primary text-sm font-semibold">Image & PDF Tools</span>
-                </div>
-
-                <div className="text-center mb-12">
-                    <div className="section-kicker mb-5">
+            <div className="mx-auto max-w-[1100px] px-6 py-10">
+                <div className="mb-10 text-center">
+                    <div className="section-kicker mb-4">
                         <ImageIcon className="h-4 w-4" />
-                        {tools.length} Free Tools · Browser-private
+                        {tools.length} free tools · Browser-private
                     </div>
-                    <h1 className="font-heading text-foreground text-4xl md:text-5xl font-semibold tracking-tight mb-4">Image & PDF Tools</h1>
-                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                    <h1 className="font-heading mb-3 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
+                      Image &amp; PDF tools
+                    </h1>
+                    <p className="mx-auto max-w-2xl text-base text-muted-foreground md:text-lg">
                         Merge, split, reorder, crop, convert, and compress — processed in your browser for privacy.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {tools.map((tool) => (
                         <Link
                             key={tool.slug}
                             href={`/tools/${tool.slug}`}
-                            className="surface-card group relative flex flex-col p-6"
+                            className="surface-card group flex flex-col p-5"
                         >
-                            <div className="flex items-start gap-4">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-orange-600 text-white shadow-lg group-hover:scale-110 transition-transform">
-                                    <tool.icon className="h-6 w-6" />
-                                </div>
-                                <div className="flex-1">
-                                    <h3 className="text-foreground font-bold text-lg group-hover:text-primary transition-colors">{tool.name}</h3>
-                                    <p className="text-muted-foreground text-sm mt-1">{tool.description}</p>
-                                </div>
+                            <div className="tool-icon mb-4 bg-gradient-to-br from-[#E5322D] to-[#c42824] transition-transform group-hover:scale-105">
+                                <tool.icon className="h-6 w-6" strokeWidth={1.75} />
                             </div>
-                            <div className="mt-4 flex items-center justify-end">
-                                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-card/40 backdrop-blur-md text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                                    <ArrowRight className="h-4 w-4" />
-                                </div>
+                            <h3 className="font-heading mb-1.5 text-lg font-bold text-foreground group-hover:text-primary">
+                              {tool.name}
+                            </h3>
+                            <p className="mb-4 flex-1 text-sm text-muted-foreground">{tool.description}</p>
+                            <div className="flex items-center gap-1 text-sm font-bold text-primary">
+                              Open tool
+                              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                             </div>
                         </Link>
                     ))}

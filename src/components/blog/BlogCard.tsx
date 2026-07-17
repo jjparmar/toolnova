@@ -20,13 +20,13 @@ const categoryColors: Record<string, string> = {
 };
 
 export function BlogCard({ post, featured = false }: BlogCardProps) {
-    const categoryColor = categoryColors[post.category] || 'bg-muted/600/10 text-muted-foreground border-slate-500/20';
+    const categoryColor = categoryColors[post.category] || 'bg-accent text-primary border-primary/20';
 
     return (
         <Link href={`/blog/${post.slug}`} className="group">
-            <article className={`h-full overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 ${featured ? 'md:flex' : ''}`}>
+            <article className={`h-full overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-premium-sm ${featured ? 'md:flex' : ''}`}>
                 {/* Image */}
-                <div className={`relative bg-gradient-to-br from-slate-100 to-slate-50 ${featured ? 'md:w-2/5 aspect-[4/3] md:aspect-auto' : 'aspect-[16/9]'}`}>
+                <div className={`relative bg-muted ${featured ? 'md:w-2/5 aspect-[4/3] md:aspect-auto' : 'aspect-[16/9]'}`}>
                     {post.coverImage && post.coverImage !== '' ? (
                         <Image
                             src={post.coverImage}

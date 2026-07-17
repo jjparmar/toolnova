@@ -35,18 +35,21 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="page-shell container mx-auto max-w-5xl px-6 py-20 md:py-24">
-      {/* Hero */}
-      <div className="text-center mb-20">
-        <h1 className="font-heading text-4xl md:text-6xl font-bold mb-6 text-brand-gradient tracking-tight">
-          Democratizing AI for Everyone
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          ToolNova is an all-in-one platform built to empower students,
-          creators, and professionals with professional-grade AI tools —
-          completely free, with no account required.
-        </p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <section className="border-b border-border bg-card">
+        <div className="mx-auto max-w-[900px] px-6 py-14 text-center md:py-16">
+          <div className="section-kicker mb-4">About us</div>
+          <h1 className="font-heading mb-4 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
+            Democratizing AI for everyone
+          </h1>
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            ToolNova is an all-in-one platform for students, creators, and
+            professionals — professional-grade AI tools, free to start, no
+            account required.
+          </p>
+        </div>
+      </section>
+      <div className="mx-auto max-w-5xl px-6 py-14 md:py-16">
 
       {/* Mission Grid */}
       <div className="grid md:grid-cols-3 gap-8 mb-24">
@@ -277,6 +280,7 @@ export default function AboutPage() {
           <em>&ldquo;Is this genuinely useful for a student at 11pm before an exam?&rdquo;</em>{""}
           If the answer is yes, it gets built and stays free.
         </p>
+      </div>
       </div>
     </div>
   );

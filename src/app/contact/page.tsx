@@ -72,12 +72,14 @@ export default function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
       />
-      <div className="page-shell">
-        <div className="container mx-auto max-w-5xl px-6 py-16 md:py-24">
-          <div className="text-center mb-14">
-            <span className="section-kicker mb-5">Support</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-semibold tracking-tight mb-4">Contact Us</h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+      <div className="min-h-screen bg-background">
+        <section className="border-b border-border bg-card">
+          <div className="mx-auto max-w-[900px] px-6 py-14 text-center md:py-16">
+            <span className="section-kicker mb-4">Support</span>
+            <h1 className="font-heading mb-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+              Contact us
+            </h1>
+            <p className="mx-auto max-w-2xl text-base text-muted-foreground md:text-lg">
               Have questions about our tools, a partnership idea, or just want to
               say hello? We&apos;d love to hear from you. Prefer email?{""}
               <a
@@ -88,6 +90,8 @@ export default function ContactPage() {
               </a>
             </p>
           </div>
+        </section>
+        <div className="mx-auto max-w-5xl px-6 py-12 md:py-16">
           <ContactForm />
         </div>
       </div>

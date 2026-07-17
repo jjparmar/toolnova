@@ -359,16 +359,18 @@ export default function EnhancedToolLayout({
       )}
 
       {freeNote && (
-        <div className="relative z-10 mb-6 rounded-md border border-border bg-muted/50 px-5 py-4 text-sm text-foreground/90 shadow-sm flex items-start gap-3">
-          <Sparkles className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+        <div className="relative z-10 mb-5 flex items-start gap-3 rounded-xl border border-border bg-card px-5 py-4 text-sm text-foreground shadow-sm">
+          <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
           <div>
-            <strong className="font-semibold text-primary tracking-wide uppercase text-xs">Free to start</strong>
-            {" —"}
-            no sign-up required. Free daily AI uses included;{""}
+            <strong className="text-xs font-bold uppercase tracking-wide text-primary">
+              Free to start
+            </strong>
+            {" — "}
+            no sign-up required. Free daily AI uses included;{" "}
             <button
               type="button"
               onClick={() => router.push("/pricing")}
-              className="text-primary font-medium underline underline-offset-4 hover:no-underline hover:text-primary/80 transition-colors"
+              className="font-semibold text-primary underline underline-offset-4 transition-colors hover:no-underline"
             >
               Pro unlocks unlimited AI
             </button>
@@ -377,12 +379,11 @@ export default function EnhancedToolLayout({
         </div>
       )}
 
-      <div className="relative z-20 rounded-2xl border border-border/80 bg-card shadow-premium overflow-hidden flex flex-col group">
-        
+      <div className="relative z-20 flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-premium-sm">
         {/* Simple Header */}
-        <div className="flex items-center justify-between border-b border-border bg-muted/30 px-6 py-4">
+        <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-3 sm:px-6 sm:py-4">
           <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center justify-center rounded bg-background px-4 py-1.5 text-xs text-muted-foreground border border-border font-mono">
+            <div className="hidden items-center justify-center rounded-lg border border-border bg-card px-3 py-1.5 font-mono text-xs text-muted-foreground sm:flex">
               toolnova.com/tools/{toolSlug}
             </div>
           </div>
@@ -648,7 +649,7 @@ export default function EnhancedToolLayout({
                 onKeyDown={onKeyDown}
                 placeholder={placeholder}
                 rows={inputRows}
-                className="w-full px-5 py-5 rounded-lg border border-border bg-background text-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary outline-none placeholder:text-muted-foreground/60 resize-y transition-all min-h-[280px] sm:min-h-[360px]"
+                className="min-h-[280px] w-full resize-y rounded-xl border border-border bg-card px-5 py-5 text-foreground outline-none transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:ring-2 focus:ring-primary/15 sm:min-h-[360px]"
               />
 
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
@@ -656,7 +657,7 @@ export default function EnhancedToolLayout({
                   type="button"
                   onClick={() => void handleGenerate()}
                   disabled={loading || !input.trim()}
-                  className="flex-1 py-4 px-6 rounded-full bg-primary text-primary-foreground font-bold text-lg shadow-[0_0_20px_-5px_rgba(var(--primary),0.4)] hover:shadow-[0_0_30px_-5px_rgba(var(--primary),0.6)] hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 transition-all duration-300"
+                  className="flex flex-1 items-center justify-center gap-3 rounded-xl bg-primary px-6 py-4 text-lg font-bold text-primary-foreground shadow-[0_4px_14px_-4px_hsl(var(--primary)/0.45)] transition-all hover:-translate-y-0.5 hover:bg-[hsl(var(--primary-deep))] hover:shadow-[0_8px_20px_-6px_hsl(var(--primary)/0.5)] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
                 >
                   {loading ? (
                     <>

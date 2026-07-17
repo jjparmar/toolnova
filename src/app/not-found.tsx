@@ -22,18 +22,18 @@ const popularTools = [
 
 export default function NotFound() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-background px-6 py-24">
-      <div className="max-w-2xl w-full text-center">
+    <div className="flex min-h-[80vh] items-center justify-center bg-background px-6 py-24">
+      <div className="w-full max-w-2xl text-center">
         {/* 404 Visual */}
         <div className="mb-8">
-          <span className="font-heading text-8xl md:text-9xl font-extrabold text-brand-gradient select-none">
+          <span className="font-heading select-none text-8xl font-extrabold text-primary md:text-9xl">
             404
           </span>
         </div>
 
         {/* Heading */}
-        <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4 tracking-tight">
-          Page Not Found
+        <h1 className="font-heading mb-4 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
+          Page not found
         </h1>
         <p className="text-muted-foreground text-lg mb-10 max-w-md mx-auto leading-relaxed">
           Sorry, we couldn&apos;t find the page you&apos;re looking for. It may
@@ -88,19 +88,19 @@ export default function NotFound() {
         </div>
 
         {/* Popular Tools Section */}
-        <div className="text-left bg-muted/30 rounded-2xl border border-border/60 p-8">
-          <h2 className="font-heading text-lg font-bold text-foreground mb-1">
-            Popular Tools You Might Like
+        <div className="rounded-xl border border-border bg-muted p-8 text-left">
+          <h2 className="font-heading mb-1 text-lg font-extrabold text-foreground">
+            Popular tools you might like
           </h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            Try one of our most-used free AI tools:
+          <p className="mb-6 text-sm text-muted-foreground">
+            Try one of our most-used free tools:
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {popularTools.map((tool) => (
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="flex items-center gap-3 p-3 rounded-xl bg-card border border-border/60 hover:border-primary/30 hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-200 group"
+                className="group flex items-center gap-3 rounded-xl border border-border bg-card p-3 transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-premium-sm"
               >
                 <span className="text-xl" role="img" aria-hidden="true">
                   {tool.emoji}
