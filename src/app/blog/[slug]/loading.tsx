@@ -1,6 +1,6 @@
 export default function BlogPostLoading() {
     return (
-        <div className="min-h-screen bg-slate-50 animate-pulse">
+        <div className="min-h-screen animate-pulse bg-background">
             {/* Header skeleton */}
             <div className="py-6 bg-white border-b border-border/40">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
