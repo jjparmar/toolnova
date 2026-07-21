@@ -4,11 +4,12 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { UsageCounter } from '@/components/UsageCounter';
 import { GlobalSearch } from '@/components/GlobalSearch';
-import { Menu, X, LayoutDashboard } from 'lucide-react';
+import { Menu, X, LayoutDashboard, Sparkles } from 'lucide-react';
 import { useState, lazy, Suspense, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const MobileMenu = lazy(() => import('./MobileMenu'));
 
@@ -40,12 +41,12 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 h-[64px] w-full border-b border-border bg-card">
-      <div className="mx-auto flex h-full max-w-[1200px] items-center justify-between gap-4 px-4 sm:px-6">
-        <div className="flex items-center gap-3 sm:gap-6">
+    <header className="sticky top-0 z-50 h-[68px] w-full border-b border-border/50 bg-background/80 backdrop-blur-xl transition-all">
+      <div className="mx-auto flex h-full max-w-[1240px] items-center justify-between gap-4 px-4 sm:px-6">
+        <div className="flex items-center gap-3 sm:gap-8">
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-muted md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-border/60 bg-card text-foreground transition-colors hover:bg-muted md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
@@ -54,25 +55,30 @@ export function Header() {
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
 
-          <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="ToolNova home">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-sm font-extrabold text-primary-foreground shadow-sm">
+          <Link href="/" className="group flex shrink-0 items-center gap-2.5" aria-label="ToolNova home">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#FF3B5C] to-[#7C3AED] text-base font-extrabold text-white shadow-md shadow-primary/25 transition-transform duration-300 group-hover:scale-105">
               T
             </div>
-            <span className="font-heading text-lg font-extrabold tracking-tight text-foreground">
-              Tool<span className="text-primary">Nova</span>
-            </span>
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-heading text-xl font-extrabold tracking-tight text-foreground">
+                Tool<span className="text-gradient">Nova</span>
+              </span>
+              <span className="hidden rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-extrabold text-primary border border-primary/20 sm:inline-block">
+                AI HUB
+              </span>
+            </div>
           </Link>
 
-          <nav className="hidden items-center gap-0.5 md:flex" aria-label="Main navigation">
+          <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  'rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors',
+                  'relative rounded-xl px-4 py-2 text-sm font-bold transition-all duration-200',
                   isActive(link.href)
-                    ? 'text-primary'
-                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                    ? 'bg-primary/10 text-primary font-extrabold'
+                    : 'text-muted-foreground hover:bg-muted/70 hover:text-foreground'
                 )}
                 aria-current={isActive(link.href) ? 'page' : undefined}
               >
@@ -82,25 +88,27 @@ export function Header() {
           </nav>
         </div>
 
-        <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3">
-          <div className="hidden w-44 shrink-0 sm:block lg:w-56">
+        <div className="flex min-w-0 flex-1 items-center justify-end gap-2.5 sm:gap-3.5">
+          <div className="hidden w-48 shrink-0 sm:block lg:w-64">
             <GlobalSearch />
           </div>
 
-          <div className="hidden items-center gap-2 md:flex">
+          <ThemeToggle />
+
+          <div className="hidden items-center gap-2.5 md:flex">
             {loading ? (
-              <div className="h-9 w-20 animate-pulse rounded-lg bg-muted" />
+              <div className="h-10 w-20 animate-pulse rounded-xl bg-muted" />
             ) : user ? (
               <>
                 <UsageCounter />
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+                  className="flex items-center gap-2 rounded-xl border border-border/80 bg-card px-3.5 py-2 text-sm font-bold text-foreground transition-all hover:bg-muted hover:border-primary/30"
                 >
-                  <LayoutDashboard className="h-4 w-4" />
+                  <LayoutDashboard className="h-4 w-4 text-primary" />
                   <span className="hidden lg:inline">Dashboard</span>
                 </Link>
-                <Button onClick={handleSignOut} variant="outline" size="sm">
+                <Button onClick={handleSignOut} variant="outline" size="sm" className="rounded-xl font-bold">
                   Sign out
                 </Button>
               </>
@@ -108,12 +116,13 @@ export function Header() {
               <>
                 <Link
                   href="/login"
-                  className="px-3 py-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
+                  className="px-3.5 py-2 text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
                 >
                   Log in
                 </Link>
                 <Link href="/signup">
-                  <Button size="sm" className="font-bold">
+                  <Button size="sm" className="btn-premium px-5 rounded-xl font-extrabold shadow-md">
+                    <Sparkles className="mr-1.5 h-3.5 w-3.5" />
                     Sign up
                   </Button>
                 </Link>
@@ -124,7 +133,7 @@ export function Header() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="absolute left-0 right-0 top-16 border-b border-border bg-card p-4 shadow-premium md:hidden">
+        <div className="absolute left-0 right-0 top-[68px] border-b border-border bg-card/95 p-4 backdrop-blur-xl shadow-2xl md:hidden">
           <Suspense fallback={null}>
             <MobileMenu onClose={() => setMobileMenuOpen(false)} id="mobile-menu" />
           </Suspense>
@@ -133,3 +142,4 @@ export function Header() {
     </header>
   );
 }
+

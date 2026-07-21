@@ -184,40 +184,41 @@ export function ToolsLibrary() {
     });
 
     return (
-        <section className="py-16 md:py-24">
-            <div className="mx-auto max-w-[1240px] px-6">
+        <section className="relative py-16 md:py-24 overflow-hidden">
+            {/* Ambient Background Glow */}
+            <div className="pointer-events-none absolute top-12 left-1/2 -z-10 h-96 w-[600px] -translate-x-1/2 rounded-full bg-gradient-to-br from-[#FF3B5C]/10 to-[#7C3AED]/10 blur-[120px]" />
 
+            <div className="mx-auto max-w-[1240px] px-6">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <span className="section-label mb-5">
-                        <Sparkles className="h-3.5 w-3.5" />
-                        {TOOL_COUNT_LABEL} tools
+                    <span className="section-badge mb-4 animate-float">
+                        <Sparkles className="h-4 w-4 text-[#FF3B5C]" />
+                        {TOOL_COUNT_LABEL} Productivity Tools
                     </span>
-                    <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-foreground mb-4 tracking-tight mt-4">
-                        Tools library
-                    </h2>
-                    <p className="text-muted-foreground max-w-lg mx-auto text-base md:text-lg">
-                        Every link below is live — {TOOL_COUNT} free tools for writing, study, PDF, and career work.
+                    <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight mt-3">
+                        Complete <span className="text-gradient">Tools Library</span>
+                    </h1>
+                    <p className="text-muted-foreground max-w-xl mx-auto text-base md:text-lg">
+                        Every utility below is completely free — fast, private, and instant execution.
                     </p>
                 </div>
 
                 {/* Search bar */}
-                <div className="max-w-lg mx-auto mb-8 relative group">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-muted-foreground group-focus-within:text-primary transition-colors" style={{ height: '1.1rem', width: '1.1rem' }} />
+                <div className="max-w-xl mx-auto mb-10 relative group">
+                    <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
                     <input
                         type="search"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search tools…"
-                        className="w-full h-13 pl-12 pr-12 rounded-2xl border border-border/60 bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all shadow-soft text-[0.95rem]"
-                        style={{ height: '3.25rem' }}
+                        placeholder="Search tools by keyword (e.g. pdf, homework, resume)..."
+                        className="w-full h-14 pl-13 pr-12 rounded-2xl border border-border/80 bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-4 focus:ring-primary/15 focus:border-primary transition-all shadow-md text-base font-medium"
                         aria-label="Search tools library"
                     />
                     {searchQuery && (
                         <button
                             type="button"
                             onClick={() => setSearchQuery('')}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-1 rounded-full bg-muted"
                             aria-label="Clear search"
                         >
                             <X className="h-4 w-4" />
@@ -226,26 +227,25 @@ export function ToolsLibrary() {
                 </div>
 
                 {/* Category filter pills */}
-                <div className="flex flex-wrap justify-center gap-2 mb-10">
+                <div className="flex flex-wrap justify-center gap-2.5 mb-12">
                     {categories.map((cat) => (
                         <button
                             key={cat.name}
                             type="button"
                             onClick={() => setActiveCategory(cat.name)}
-                            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                            className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-extrabold transition-all duration-300 ${
                                 activeCategory === cat.name
-                                    ? 'bg-primary text-white shadow-lg shadow-primary/25 scale-105'
-                                    : 'bg-muted/70 text-muted-foreground hover:text-foreground hover:bg-muted border border-border/60'
+                                    ? 'cat-pill-active scale-105'
+                                    : 'bg-card text-muted-foreground hover:text-foreground border border-border/70 hover:border-primary/40 shadow-xs'
                             }`}
                         >
-                            {cat.icon && <cat.icon className="h-3.5 w-3.5" />}
+                            {cat.icon && <cat.icon className="h-4 w-4" />}
                             {cat.name}
-                            <span className={`text-xs px-1.5 py-0.5 rounded-full font-bold ${
+                            <span className={`text-xs px-2 py-0.5 rounded-full font-bold ${
                                 activeCategory === cat.name
                                     ? 'bg-white/20 text-white'
-                                    : 'bg-foreground/8 text-muted-foreground'
+                                    : 'bg-muted text-muted-foreground'
                             }`}
-                            style={{ background: activeCategory === cat.name ? 'rgba(255,255,255,0.2)' : undefined }}
                             >
                                 {cat.count}
                             </span>
@@ -254,32 +254,32 @@ export function ToolsLibrary() {
                 </div>
 
                 {/* Tools grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filtered.map((tool) => (
                         <Link
                             key={tool.href}
                             href={tool.href}
-                            className="group relative flex flex-col rounded-2xl bg-card border border-border/60 p-6 shadow-premium-sm hover:shadow-premium hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                            className="surface-card group relative flex flex-col rounded-2xl bg-card border border-border/70 p-6 shadow-sm hover:shadow-xl hover:border-primary/40 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
                         >
                             {/* Top hover accent */}
                             <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${tool.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
                             {/* Badge */}
                             {tool.badge && (
-                                <span className={`absolute top-4 right-4 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full ${tool.badgeVariant}`}>
+                                <span className={`absolute top-4 right-4 text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full ${tool.badgeVariant}`}>
                                     {tool.badge}
                                 </span>
                             )}
 
                             {/* Icon */}
                             <div
-                                className={`mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${tool.gradient} text-white shadow-lg ${tool.glowColor} group-hover:scale-110 group-hover:rotate-3 transition-all duration-400`}
+                                className={`mb-5 flex h-13 w-13 items-center justify-center rounded-2xl bg-gradient-to-br ${tool.gradient} text-white shadow-lg ${tool.glowColor} group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
                             >
-                                <tool.icon className="h-5.5 w-5.5" style={{ height: '1.375rem', width: '1.375rem' }} />
+                                <tool.icon className="h-6 w-6" />
                             </div>
 
                             {/* Content */}
-                            <h3 className="text-base font-bold text-foreground mb-2 tracking-tight group-hover:text-primary transition-colors leading-snug">
+                            <h3 className="text-lg font-extrabold text-foreground mb-2 tracking-tight group-hover:text-primary transition-colors leading-snug">
                                 {tool.title}
                             </h3>
                             <p className="text-sm text-muted-foreground leading-relaxed flex-1">
@@ -287,9 +287,9 @@ export function ToolsLibrary() {
                             </p>
 
                             {/* Footer */}
-                            <div className="mt-5 flex items-center text-primary text-sm font-semibold pt-4 border-t border-border/60">
-                                Open tool
-                                <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1.5 transition-transform" />
+                            <div className="mt-5 flex items-center text-primary text-xs font-extrabold uppercase tracking-wider pt-4 border-t border-border/60">
+                                Open Tool
+                                <ChevronRight className="h-4 w-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
                             </div>
                         </Link>
                     ))}
@@ -297,31 +297,23 @@ export function ToolsLibrary() {
 
                 {/* Empty state */}
                 {filtered.length === 0 && (
-                    <div className="text-center py-16">
-                        <div className="h-14 w-14 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-4">
-                            <Search className="h-6 w-6 text-muted-foreground" />
+                    <div className="text-center py-20">
+                        <div className="h-16 w-16 rounded-2xl bg-muted/80 flex items-center justify-center mx-auto mb-4 border border-border">
+                            <Search className="h-7 w-7 text-muted-foreground" />
                         </div>
-                        <p className="text-muted-foreground font-medium mb-2">No tools found</p>
-                        <p className="text-muted-foreground/70 text-sm">Try another keyword or browse all tools.</p>
+                        <p className="text-foreground font-bold text-lg mb-1">No tools matched your search</p>
+                        <p className="text-muted-foreground text-sm">Try searching for generic terms like "PDF", "essay", or "math".</p>
                         <button
                             type="button"
                             onClick={() => { setSearchQuery(''); setActiveCategory('All Tools'); }}
-                            className="mt-4 text-primary text-sm font-semibold hover:underline underline-offset-4"
+                            className="mt-5 btn-premium inline-flex items-center gap-2 px-6 py-2.5 text-sm rounded-xl font-bold"
                         >
-                            Clear filters
+                            Reset Filters
                         </button>
                     </div>
                 )}
-
-                <div className="text-center mt-12">
-                    <Link href="/tools">
-                        <Button className="h-14 px-8 rounded-full font-bold gap-2 shadow-[0_0_20px_-5px_rgba(var(--primary),0.4)] hover:shadow-[0_0_30px_-5px_rgba(var(--primary),0.6)] hover:-translate-y-0.5 transition-all duration-300">
-                            View all {TOOL_COUNT_LABEL} tools
-                            <ArrowRight className="h-4 w-4" />
-                        </Button>
-                    </Link>
-                </div>
             </div>
         </section>
     );
 }
+

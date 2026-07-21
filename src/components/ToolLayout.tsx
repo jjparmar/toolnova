@@ -354,18 +354,18 @@ export function ToolLayout({
     generateButtonText || (isNonAITool ?"Process Now" :"Generate with AI");
 
   return (
-    <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
+    <div className="flex-1 w-full min-h-screen bg-background text-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Top Banner Ad */}
         <TopBannerAd />
 
         {!isNonAITool && (
-          <div className="mb-6 rounded-xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm text-muted-foreground">
+          <div className="mb-6 rounded-2xl border border-primary/20 bg-primary/5 px-5 py-3.5 text-sm text-muted-foreground shadow-xs">
             <strong className="text-foreground">Free to start</strong> — no
-            sign-up required. Free daily AI uses included;{""}
+            sign-up required. Free daily AI uses included;{" "}
             <Link
               href="/pricing"
-              className="text-primary font-medium underline underline-offset-2 hover:no-underline"
+              className="text-primary font-bold underline underline-offset-4 hover:no-underline"
             >
               Pro unlocks unlimited AI
             </Link>
@@ -378,7 +378,7 @@ export function ToolLayout({
           <Button
             variant="ghost"
             onClick={() => router.back()}
-            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-semibold"
+            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-bold rounded-xl"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Tools
@@ -388,19 +388,19 @@ export function ToolLayout({
           <div className="hidden sm:flex items-center gap-2">
             <Link
               href="/"
-              className="text-muted-foreground text-xs font-medium hover:text-primary transition-colors"
+              className="text-muted-foreground text-xs font-semibold hover:text-primary transition-colors"
             >
               Home
             </Link>
-            <span className="text-muted-foreground/30 text-xs">/</span>
+            <span className="text-muted-foreground/40 text-xs">/</span>
             <Link
               href="/tools"
-              className="text-muted-foreground text-xs font-medium hover:text-primary transition-colors"
+              className="text-muted-foreground text-xs font-semibold hover:text-primary transition-colors"
             >
               Tools
             </Link>
-            <span className="text-muted-foreground/30 text-xs">/</span>
-            <span className="text-primary text-xs font-bold">{title}</span>
+            <span className="text-muted-foreground/40 text-xs">/</span>
+            <span className="text-primary text-xs font-extrabold">{title}</span>
           </div>
         </div>
 
@@ -415,16 +415,16 @@ export function ToolLayout({
         </div>
 
         {/* Main Tool Content - Immersive Design */}
-        <div className="space-y-12 mt-4">
+        <div className="space-y-10 mt-4">
           {/* Options Section */}
           {toolOptions.length > 0 && (
-            <div className="glass-panel rounded-3xl border border-border shadow-sm overflow-hidden mb-8">
+            <div className="surface-card rounded-2xl border border-border overflow-hidden mb-8">
               <button
                 onClick={() => setShowOptions(!showOptions)}
-                className="w-full px-8 py-5 flex items-center justify-between text-sm font-black text-foreground hover:bg-white/50 :bg-slate-800/30 transition-colors uppercase tracking-widest"
+                className="w-full px-6 py-4 flex items-center justify-between text-xs font-extrabold text-foreground hover:bg-muted/50 transition-colors uppercase tracking-widest"
               >
-                <div className="flex items-center gap-3">
-                  <Settings2 className="h-5 w-5 text-primary" />
+                <div className="flex items-center gap-2.5">
+                  <Settings2 className="h-4 w-4 text-primary" />
                   Tool Customization
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground font-bold">
@@ -438,10 +438,10 @@ export function ToolLayout({
               </button>
 
               {showOptions && (
-                <div className="px-8 pb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-top-2 duration-300">
+                <div className="px-6 pb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 animate-in fade-in slide-in-from-top-2 duration-300">
                   {toolOptions.map((opt) => (
-                    <div key={opt.id} className="flex flex-col gap-3">
-                      <label className="text-[10px] font-black text-muted-foreground uppercase tracking-widest leading-none">
+                    <div key={opt.id} className="flex flex-col gap-2">
+                      <label className="text-[10px] font-extrabold text-muted-foreground uppercase tracking-widest leading-none">
                         {opt.label}
                       </label>
                       {opt.type ==="select" && opt.options && (
@@ -451,7 +451,7 @@ export function ToolLayout({
                             onChange={(e) =>
                               handleOptionChange(opt.id, e.target.value)
                             }
-                            className="w-full h-12 px-4 pr-10 rounded-2xl bg-white border border-border text-foreground text-sm font-bold focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer"
+                            className="w-full h-11 px-4 pr-10 rounded-xl bg-card border border-border text-foreground text-sm font-bold focus:border-primary focus:ring-4 focus:ring-primary/15 transition-all appearance-none cursor-pointer"
                           >
                             {opt.options.map((o) => (
                               <option key={o.value} value={o.value}>
@@ -467,15 +467,15 @@ export function ToolLayout({
                           onClick={() =>
                             handleOptionChange(opt.id, !options[opt.id])
                           }
-                          className={`h-12 px-6 rounded-2xl border font-bold text-sm transition-all flex items-center justify-between ${
+                          className={`h-11 px-5 rounded-xl border font-bold text-sm transition-all flex items-center justify-between ${
                             options[opt.id]
-                              ?"bg-primary text-white border-primary shadow-lg shadow-primary/20"
-                              :"bg-white text-muted-foreground border-border hover:border-primary"
+                              ?"bg-primary text-white border-primary shadow-md shadow-primary/20"
+                              :"bg-card text-muted-foreground border-border hover:border-primary"
                           }`}
                         >
                           {options[opt.id] ?"Enabled" :"Disabled"}
                           <div
-                            className={`w-8 h-4 rounded-full relative transition-colors ${options[opt.id] ?"bg-white/20" :"bg-slate-200"}`}
+                            className={`w-8 h-4 rounded-full relative transition-colors ${options[opt.id] ?"bg-white/20" :"bg-muted"}`}
                           >
                             <div
                               className={`absolute top-0.5 w-3 h-3 rounded-full bg-white transition-all ${options[opt.id] ?"left-4.5" :"left-0.5"}`}
@@ -491,23 +491,24 @@ export function ToolLayout({
           )}
 
           {/* Input Area */}
-          <div className="bg-white rounded-[2.5rem] border border-border shadow-2xl p-6 md:p-12 relative overflow-hidden">
-            <div className="absolute top-0 left-0 h-1 w-full bg-primary/80"></div>
+          <div className="surface-card rounded-3xl border border-border/80 bg-card p-6 md:p-10 relative overflow-hidden shadow-xl">
+            <div className="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-[#FF3B5C] to-[#7C3AED]"></div>
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-6">
               <div>
-                <label className="text-xl font-black text-foreground flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <FileText className="h-4 w-4 text-primary" />
+                <label className="text-xl font-extrabold text-foreground flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                    <FileText className="h-5 w-5" />
                   </div>
                   Input Data
                 </label>
-                <div className="mt-1 flex items-center gap-3 text-[10px] font-bold text-muted-foreground uppercase tracking-widest pl-11">
+                <div className="mt-1.5 flex items-center gap-3 text-xs font-bold text-muted-foreground uppercase tracking-wider pl-12">
                   <span>{wordCount} words</span>
-                  <span className="w-1 h-1 rounded-full bg-slate-300"></span>
+                  <span className="w-1 h-1 rounded-full bg-muted-foreground/40"></span>
                   <span>{charCount} characters</span>
                 </div>
               </div>
+
 
               <div className="flex items-center gap-2">
                 <Button
@@ -569,7 +570,7 @@ export function ToolLayout({
               <Button
                 onClick={handleGenerate}
                 disabled={loading || !input.trim()}
-                className="group flex h-14 w-full items-center justify-center gap-3 rounded-xl bg-primary text-lg font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/92 hover:shadow-xl hover:shadow-primary/30 disabled:opacity-50 disabled:grayscale"
+                className="btn-premium group flex h-14 w-full items-center justify-center gap-3 rounded-2xl text-lg font-extrabold shadow-xl transition-all disabled:opacity-50 disabled:grayscale"
               >
                 {loading ? (
                   <div className="flex items-center gap-3">
@@ -578,7 +579,7 @@ export function ToolLayout({
                   </div>
                 ) : (
                   <>
-                    <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <div className="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center group-hover:rotate-12 transition-transform">
                       {isNonAITool ? (
                         <Zap className="h-5 w-5" />
                       ) : (
@@ -586,7 +587,7 @@ export function ToolLayout({
                       )}
                     </div>
                     {buttonText}
-                    <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                    <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform" />
                   </>
                 )}
               </Button>
@@ -597,27 +598,28 @@ export function ToolLayout({
           {result && (
             <div
               ref={resultRef}
-              className="mt-20 p-8 md:p-14 rounded-[3rem] bg-white border border-indigo-100 shadow-2xl animate-in font-enter fade-in slide-in-from-bottom-8 duration-700 relative overflow-hidden"
+              className="surface-card mt-16 p-6 sm:p-10 md:p-12 rounded-3xl border border-border bg-card shadow-2xl animate-in fade-in slide-in-from-bottom-8 duration-500 relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+              <div className="absolute top-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
 
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12 relative z-10">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 relative z-10">
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
-                      <Check className="h-6 w-6 text-green-500" />
+                    <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 border border-emerald-500/20">
+                      <Check className="h-5 w-5" />
                     </div>
-                    <label className="text-2xl font-black text-foreground">
+                    <label className="text-2xl font-extrabold text-foreground">
                       {resultLabel}
                     </label>
                   </div>
                   {processingTime > 0 && (
-                    <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest pl-13">
-                      Processing complete in{""}
+                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider pl-13">
+                      Processing complete in{" "}
                       {(processingTime / 1000).toFixed(2)}s
                     </div>
                   )}
                 </div>
+
 
                 <div className="flex gap-3 flex-wrap">
                   <Button

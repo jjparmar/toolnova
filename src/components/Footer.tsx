@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, Twitter, Github, Linkedin } from "lucide-react";
+import { Mail, Twitter, Github, Linkedin, Sparkles } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { TOOL_COUNT_LABEL } from "@/data/tools";
 
@@ -39,24 +39,27 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="footer-dark mt-auto w-full">
-      <div className="mx-auto max-w-[1200px] px-6 py-14 md:py-16">
-        <div className="mb-12 grid grid-cols-2 gap-10 md:grid-cols-5">
+    <footer className="footer-dark relative mt-auto w-full overflow-hidden">
+      {/* Top ambient gradient line */}
+      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#FF3B5C] to-transparent opacity-60" />
+
+      <div className="mx-auto max-w-[1240px] px-6 py-16 md:py-20">
+        <div className="mb-14 grid grid-cols-2 gap-10 md:grid-cols-5">
           <div className="col-span-2 md:col-span-2">
-            <div className="mb-4 flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-extrabold text-primary-foreground">
+            <Link href="/" className="group mb-5 flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#FF3B5C] to-[#7C3AED] text-lg font-extrabold text-white shadow-lg shadow-primary/30 transition-transform duration-300 group-hover:scale-105">
                 T
               </div>
-              <span className="font-heading text-lg font-extrabold tracking-tight text-white">
-                Tool<span className="text-primary">Nova</span>
+              <span className="font-heading text-xl font-extrabold tracking-tight text-white">
+                Tool<span className="text-gradient">Nova</span>
               </span>
-            </div>
-            <p className="mb-5 max-w-[280px] text-sm leading-relaxed text-[hsl(var(--footer-muted))]">
-              {TOOL_COUNT_LABEL} free AI-powered tools for students and
-              professionals. Write better, study smarter, get more done — no
-              sign-up required.
+            </Link>
+
+            <p className="mb-6 max-w-sm text-sm leading-relaxed text-[hsl(var(--footer-muted))]">
+              {TOOL_COUNT_LABEL} free AI-powered productivity tools designed for students, researchers, and professionals worldwide. Zero registration required.
             </p>
-            <div className="flex gap-2">
+
+            <div className="flex gap-2.5">
               {[
                 { href: siteConfig.links.twitter, label: "Twitter", Icon: Twitter },
                 { href: siteConfig.links.github, label: "GitHub", Icon: Github },
@@ -69,22 +72,22 @@ export function Footer() {
                   target={href.startsWith("mailto") ? undefined : "_blank"}
                   rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-[hsl(var(--footer-muted))] transition-colors hover:bg-primary hover:text-white"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-[hsl(var(--footer-muted))] transition-all duration-300 hover:border-primary/50 hover:bg-gradient-to-br hover:from-[#FF3B5C] hover:to-[#7C3AED] hover:text-white hover:shadow-lg hover:shadow-primary/30"
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-4.5 w-4.5" />
                 </a>
               ))}
             </div>
           </div>
 
           <div>
-            <h4 className="mb-4 text-xs font-bold uppercase tracking-wider text-white/90">
-              Writing
+            <h4 className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
+              Writing Tools
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {writingTools.map((t) => (
                 <li key={t.href}>
-                  <Link href={t.href} className="text-sm">
+                  <Link href={t.href} className="text-sm font-medium transition-colors hover:text-white">
                     {t.name}
                   </Link>
                 </li>
@@ -93,13 +96,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-xs font-bold uppercase tracking-wider text-white/90">
-              Popular tools
+            <h4 className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
+              Popular Tools
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {studyCareerTools.map((t) => (
                 <li key={t.href}>
-                  <Link href={t.href} className="text-sm">
+                  <Link href={t.href} className="text-sm font-medium transition-colors hover:text-white">
                     {t.name}
                   </Link>
                 </li>
@@ -108,25 +111,26 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-xs font-bold uppercase tracking-wider text-white/90">
+            <h4 className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
               Company
             </h4>
-            <ul className="mb-6 space-y-2.5">
+            <ul className="mb-6 space-y-3">
               {companyLinks.map((t) => (
                 <li key={t.href}>
-                  <Link href={t.href} className="text-sm">
+                  <Link href={t.href} className="text-sm font-medium transition-colors hover:text-white">
                     {t.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <h4 className="mb-4 text-xs font-bold uppercase tracking-wider text-white/90">
+
+            <h4 className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
               Legal
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {legalLinks.map((t) => (
                 <li key={t.href}>
-                  <Link href={t.href} className="text-sm">
+                  <Link href={t.href} className="text-sm font-medium transition-colors hover:text-white">
                     {t.label}
                   </Link>
                 </li>
@@ -135,11 +139,17 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-[hsl(var(--footer-muted))] md:flex-row">
-          <p>© 2026 ToolNova. All rights reserved.</p>
-          <p>Free AI tools for students &amp; professionals · Singapore</p>
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-[hsl(var(--footer-muted))] md:flex-row">
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-4 w-4 text-[#FF3B5C]" />
+            <p>© 2026 ToolNova Hub. Built for peak productivity.</p>
+          </div>
+          <p className="font-medium text-white/80">
+            Free AI tools for students &amp; professionals · Singapore
+          </p>
         </div>
       </div>
     </footer>
   );
 }
+
