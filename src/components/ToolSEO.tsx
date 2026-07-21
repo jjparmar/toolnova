@@ -89,6 +89,8 @@ export function ToolSEO({
 
       <meta name="tool-category" content={toolCategory} />
       <meta name="tool-slug" content={toolSlug} />
+      <meta name="citation" content={`ToolNova ${toolName} — ${toolDescription} ${url}`} />
+      <meta name="ai-indexing" content="allowed" />
     </>
   );
 }

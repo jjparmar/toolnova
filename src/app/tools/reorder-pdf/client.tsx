@@ -298,7 +298,6 @@ export default function ReorderPdfClient() {
                       </div>
                       <div className="aspect-[3/4] rounded-lg overflow-hidden bg-background flex items-center justify-center">
                         {page.thumb ? (
-                          // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={page.thumb}
                             alt={`Page ${page.sourceIndex + 1}`}

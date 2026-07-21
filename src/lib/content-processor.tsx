@@ -468,9 +468,11 @@ export function processContent(content: string): React.ReactNode[] {
         // H2 heading
         if (trimmedLine.startsWith('## ')) {
             flushList(`list-${index}`);
+            const text = trimmedLine.replace('## ', '');
+            const id = slugifyHeading(text);
             elements.push(
-                <h2 key={index} className="text-3xl font-bold text-slate-900 mt-16 mb-6 tracking-tight leading-tight">
-                    {trimmedLine.replace('## ', '')}
+                <h2 id={id} key={index} className="text-3xl font-bold text-slate-900 mt-16 mb-6 tracking-tight leading-tight scroll-mt-24">
+                    {text}
                 </h2>
             );
             return;
@@ -479,9 +481,11 @@ export function processContent(content: string): React.ReactNode[] {
         // H3 heading
         if (trimmedLine.startsWith('### ')) {
             flushList(`list-${index}`);
+            const text = trimmedLine.replace('### ', '');
+            const id = slugifyHeading(text);
             elements.push(
-                <h3 key={index} className="text-2xl font-bold text-slate-900 mt-10 mb-5 tracking-tight">
-                    {trimmedLine.replace('### ', '')}
+                <h3 id={id} key={index} className="text-2xl font-bold text-slate-900 mt-10 mb-5 tracking-tight scroll-mt-24">
+                    {text}
                 </h3>
             );
             return;
@@ -556,4 +560,36 @@ export function extractYoutubeVideoIds(content: string): string[] {
         }
     }
     return [...new Set(ids)];
+}
+
+export function slugifyHeading(text: string): string {
+    return text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '-');
+}
+
+export interface ArticleHeading {
+    id: string;
+    text: string;
+    level: 2 | 3;
+}
+
+export function extractHeadings(content: string): ArticleHeading[] {
+    const lines = content.split('\n');
+    const headings: ArticleHeading[] = [];
+
+    lines.forEach((line) => {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('## ') && !trimmed.startsWith('### ')) {
+            const text = trimmed.replace('## ', '').trim();
+            headings.push({ id: slugifyHeading(text), text, level: 2 });
+        } else if (trimmed.startsWith('### ') && !trimmed.startsWith('#### ')) {
+            const text = trimmed.replace('### ', '').trim();
+            headings.push({ id: slugifyHeading(text), text, level: 3 });
+        }
+    });
+
+    return headings;
 }

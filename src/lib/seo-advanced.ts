@@ -121,6 +121,11 @@ export function generateWebSiteSchema() {
     inLanguage: ["en-US","en-GB","en-CA","en-AU","en-IN"],
     publisher: {"@id":`${siteConfig.url}/#organization`,
     },
+    sameAs: [
+      siteConfig.links.twitter,
+      siteConfig.links.github,
+      siteConfig.links.linkedin,
+    ],
     // Enhanced search action for AI
     potentialAction: [
       {"@type":"SearchAction",
@@ -132,6 +137,13 @@ export function generateWebSiteSchema() {
       {"@type":"Action","@id":`${siteConfig.url}/#tool-action`,
         name:"Use ToolNova Tools",
         description:"Access AI-powered tools for writing, studying, and productivity",
+        target: {"@type":"EntryPoint",
+          urlTemplate:`${siteConfig.url}/tools/{tool_slug}`,
+        },
+      },
+      {"@type":"ConsumeAction","@id":`${siteConfig.url}/#consume-action`,
+        name:"Execute Browser AI Tool",
+        actionStatus:"CompletedActionStatus",
         target: {"@type":"EntryPoint",
           urlTemplate:`${siteConfig.url}/tools/{tool_slug}`,
         },

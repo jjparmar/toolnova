@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   ArrowRight,
   Merge,
@@ -18,13 +20,14 @@ import {
   BookOpen,
   Pencil,
   Lock,
+  Search,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuickAnswerBox } from "@/components/aeo/QuickAnswerBox";
 import { FAQAccordion } from "@/components/aeo/FAQAccordion";
 import { getHomepageAEO } from "@/lib/global-aeo-content";
 import { MultiplexAd, BetweenSectionsAd } from "@/components/ads/AdUnit";
-import { TOOL_COUNT, TOOL_COUNT_LABEL } from "@/data/tools";
+import { TOOL_COUNT, TOOL_COUNT_LABEL, toolsData } from "@/data/tools";
 import { ToolCard } from "@/components/shared";
 
 /** iLovePDF-style multi-color tool tiles */
@@ -104,6 +107,25 @@ const trustItems = [
 
 export function HomeDashboard() {
   const aeoContent = getHomepageAEO();
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
+
+  const allTools = Object.entries(toolsData).map(([slug, tool]) => ({
+    slug,
+    name: tool.name,
+    description: tool.tagline || tool.description,
+    category: tool.category,
+    url: `/tools/${slug}`,
+  }));
+
+  const filteredTools = searchQuery.trim()
+    ? allTools.filter(
+        (t) =>
+          t.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          t.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          t.category.toLowerCase().includes(searchQuery.toLowerCase())
+      ).slice(0, 6)
+    : [];
 
   return (
     <div className="w-full">
@@ -121,6 +143,53 @@ export function HomeDashboard() {
             </strong>
             , easy to use.
           </p>
+
+          {/* Instant Tool Search Bar */}
+          <div className="relative mx-auto mb-8 max-w-xl text-left">
+            <div className="relative flex items-center">
+              <Search className="absolute left-4 h-5 w-5 text-muted-foreground" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search 47+ free tools (e.g. merge pdf, homework, paraphraser)..."
+                className="w-full rounded-2xl border border-border bg-background py-3.5 pl-11 pr-10 text-sm font-medium text-foreground shadow-sm transition-all placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 rounded-full p-1 text-xs text-muted-foreground hover:bg-muted"
+                  aria-label="Clear search"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            {/* Dropdown Suggestions */}
+            {filteredTools.length > 0 && (
+              <div className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-xl border border-border bg-card shadow-xl">
+                {filteredTools.map((t) => (
+                  <Link
+                    key={t.slug}
+                    href={t.url}
+                    onClick={() => setSearchQuery("")}
+                    className="flex items-center justify-between px-4 py-3 text-sm transition-colors hover:bg-muted"
+                  >
+                    <div>
+                      <span className="font-semibold text-foreground">{t.name}</span>
+                      <p className="line-clamp-1 text-xs text-muted-foreground">{t.description}</p>
+                    </div>
+                    <span className="ml-3 shrink-0 rounded-md bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
+                      {t.category}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link href="/tools">
               <Button size="lg" className="h-12 min-w-[180px] gap-2 px-8 font-bold">

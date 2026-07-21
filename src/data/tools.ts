@@ -57,7 +57,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
     },"paraphraser": {
         slug:"paraphraser",
         name:"Paraphrasing Tool",
-        tagline:"Rewrite text in your own voice",
+        tagline:"Free AI Paraphrasing Tool – Reword Essays Without Plagiarism",
         description:"Rephrase articles, sentences, and essays while avoiding plagiarism and maintaining meaning. Our AI-driven paraphraser uses contextual awareness to find the best synonyms and sentence structures, ensuring your writing is fresh, clear, and professional. It's the ideal companion for writers looking to improve clarity or students needing to rephrase complex academic concepts.",
         category:"Writing Tools",
         howItWorks: [
@@ -84,7 +84,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
     },"grammar-fix": {
         slug:"grammar-fix",
         name:"AI Grammar Fix",
-        tagline:"Perfect your writing instantly",
+        tagline:"Free AI Grammar Checker – Perfect Your Writing Instantly",
         description:"Fix grammar, spelling, punctuation, and style errors with AI-powered corrections. Our advanced proofreading engine goes beyond basic spell-check, identifying subtle issues in tone, clarity, and syntax. Whether you're writing a formal business email, a university essay, or a creative story, ToolNova ensures your message is conveyed with professional polish and zero distractions.",
         category:"Writing Tools",
         howItWorks: [
@@ -138,7 +138,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
     },"merge-pdf": {
         slug:"merge-pdf",
         name:"Merge PDF",
-        tagline:"Combine multiple PDFs into one",
+        tagline:"Merge PDF Online Free – No Watermark & No Signup",
         description:"Merge multiple PDF files into a single, organized document in seconds. Simply upload your files, drag to reorder, and download the combined PDF. All processing happens securely in your browser—your files are never uploaded to any server.",
         category:"PDF Tools",
         howItWorks: [

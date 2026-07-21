@@ -11,9 +11,12 @@ import { getAuthor } from"@/data/authors";
 import {
   processContent,
   extractYoutubeVideoIds,
+  extractHeadings,
 } from"@/lib/content-processor";
 import BlogSidebar from"@/components/blog/BlogSidebar";
 import { ArticleHeader } from"@/components/blog/ArticleHeader";
+import TableOfContents from"@/components/blog/TableOfContents";
+import InArticleToolCallout from"@/components/blog/InArticleToolCallout";
 import { siteConfig } from"@/config/site";
 import { FaArrowLeft, FaChevronRight, FaRocket } from"react-icons/fa";
 import ShareButtons from"@/components/blog/ShareButtons";
@@ -120,6 +123,7 @@ export default async function BlogPostPage({
 
   const relatedPosts = getRelatedPosts(slug, 2);
   const youtubeIds = extractYoutubeVideoIds(post.content);
+  const headings = extractHeadings(post.content);
 
   // Get author data for GEO
   const author = post.authorSlug ? getAuthor(post.authorSlug) : null;
@@ -345,9 +349,11 @@ export default async function BlogPostPage({
 
               {/* Article Content */}
               <article className="bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-border">
+                <TableOfContents headings={headings} />
                 <div className="prose prose-lg prose-slate max-w-none">
                   {processContent(post.content)}
                 </div>
+                <InArticleToolCallout category={post.category} />
                 {/* Ad — In Article */}
                 <InArticleAd className="not-prose" />
 

@@ -13,35 +13,13 @@ import { initializeAutoAds, shouldShowAds } from"@/config/adsense";
 export function ConsentedScripts() {
   const [consented, setConsented] = useState(false);
 
-  useEffect(() => {
-    const consent = localStorage.getItem("cookie_consent");
-    if (consent ==="accepted") {
-      setConsented(true);
-      grantConsent();
-      tryInitAds();
-    }
-  }, []);
-
-  useEffect(() => {
-    const handler = () => {
-      const consent = localStorage.getItem("cookie_consent");
-      if (consent ==="accepted") {
-        setConsented(true);
-        grantConsent();
-        tryInitAds();
-      }
-    };
-    window.addEventListener("cookie-consent-changed", handler);
-    return () => window.removeEventListener("cookie-consent-changed", handler);
-  }, []);
-
   function grantConsent() {
-    if (typeof window !=="undefined" && (window as any).gtag) {
-      (window as any).gtag("consent","update", {
-        ad_storage:"granted",
-        ad_user_data:"granted",
-        ad_personalization:"granted",
-        analytics_storage:"granted",
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("consent", "update", {
+        ad_storage: "granted",
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+        analytics_storage: "granted",
       });
     }
   }
@@ -62,6 +40,28 @@ export function ConsentedScripts() {
     };
     tick();
   }
+
+  useEffect(() => {
+    const consent = localStorage.getItem("cookie_consent");
+    if (consent === "accepted") {
+      setConsented(true);
+      grantConsent();
+      tryInitAds();
+    }
+  }, []);
+
+  useEffect(() => {
+    const handler = () => {
+      const consent = localStorage.getItem("cookie_consent");
+      if (consent === "accepted") {
+        setConsented(true);
+        grantConsent();
+        tryInitAds();
+      }
+    };
+    window.addEventListener("cookie-consent-changed", handler);
+    return () => window.removeEventListener("cookie-consent-changed", handler);
+  }, []);
 
   if (!consented) return null;
 

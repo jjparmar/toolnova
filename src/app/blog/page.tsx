@@ -11,6 +11,7 @@ import {
 } from"react-icons/fa";
 import { siteConfig } from"@/config/site";
 import { TOOL_COUNT_LABEL } from"@/data/tools";
+import BlogGridWithFilters from "@/components/blog/BlogGridWithFilters";
 
 export const metadata: Metadata = {
   title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026 | ToolNova",
@@ -181,53 +182,13 @@ export default function BlogPage() {
           </div>
         </section>
 
-        {/* Grid */}
+        {/* Grid with Category Filters */}
         <section className="border-t border-border bg-muted py-12 md:py-16">
           <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
-            <h2 className="font-heading mb-8 text-2xl font-extrabold text-foreground md:text-3xl">
-              Latest articles
+            <h2 className="font-heading mb-6 text-2xl font-extrabold text-foreground md:text-3xl">
+              Latest articles &amp; guides
             </h2>
-            {otherPosts.length === 0 ? (
-              <p className="text-muted-foreground">More posts coming soon.</p>
-            ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {otherPosts.map((post) => (
-                  <Link
-                    key={post.slug}
-                    href={`/blog/${post.slug}`}
-                    className="group h-full"
-                  >
-                    <article className="surface-card h-full p-6 flex flex-col">
-                      <div className="flex items-center gap-2 mb-4">
-                        <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
-                          {post.category}
-                        </span>
-                      </div>
-                      <h3 className="font-heading text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2 leading-tight">
-                        {post.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm mb-4 flex-grow line-clamp-3 leading-relaxed">
-                        {post.excerpt}
-                      </p>
-                      <div className="flex items-center justify-between pt-4 border-t border-border mt-auto">
-                        <span className="text-muted-foreground text-xs flex items-center gap-1.5">
-                          <FaCalendar className="text-primary/70" />
-                          {post.date}
-                        </span>
-                        <span className="text-muted-foreground text-xs flex items-center gap-1.5">
-                          <FaClock className="text-primary/70" />
-                          {post.readTime}
-                        </span>
-                      </div>
-                      <div className="mt-4 flex items-center gap-1 text-primary text-sm font-medium group-hover:gap-2 transition-all">
-                        Read more
-                        <FaChevronRight className="text-xs" />
-                      </div>
-                    </article>
-                  </Link>
-                ))}
-              </div>
-            )}
+            <BlogGridWithFilters posts={otherPosts} categories={categories} />
           </div>
         </section>
 
