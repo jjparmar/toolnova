@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Upload, Download, Trash2, Image as ImageIcon, Loader2, ArrowLeft, Shield, Zap, Sparkles, Layers, Star, FileText } from 'lucide-react';
+import { Upload, Download, Trash2, Image as ImageIcon, Loader2, ArrowLeft, Shield, Zap, Sparkles, Layers, Star, FileText, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
 import Link from 'next/link';
 import { isImageFile } from '@/lib/image-client';
@@ -22,12 +22,14 @@ export default function ImageCompressorClient() {
     const [compressing, setCompressing] = useState(false);
     const [quality, setQuality] = useState(75);
     const [maxWidth, setMaxWidth] = useState(0); // 0 = original
-    const [outputFormat, setOutputFormat] = useState<'image/jpeg' | 'image/webp' | 'image/png'>('image/jpeg');
+    const [outputFormat, setOutputFormat] = useState<'auto' | 'image/jpeg' | 'image/webp' | 'image/png'>('auto');
+    const [actualFormat, setActualFormat] = useState<string>('image/jpeg');
     const [originalSize, setOriginalSize] = useState<number>(0);
     const [compressedSize, setCompressedSize] = useState<number>(0);
     const [compressedUrl, setCompressedUrl] = useState<string>('');
     const [dragOver, setDragOver] = useState(false);
     const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
+    const [note, setNote] = useState<string>('');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const formatSize = (bytes: number) => {
@@ -54,9 +56,9 @@ export default function ImageCompressorClient() {
         setCompressedUrl('');
         setCompressedSize(0);
         setDims(null);
-        if (file.type === 'image/png') setOutputFormat('image/png');
-        else if (file.type === 'image/webp') setOutputFormat('image/webp');
-        else setOutputFormat('image/jpeg');
+        setNote('');
+        setOutputFormat('auto');
+
         const reader = new FileReader();
         reader.onload = (e) => {
             const url = e.target?.result as string;
@@ -68,57 +70,158 @@ export default function ImageCompressorClient() {
         reader.readAsDataURL(file);
     };
 
+    const quantizeCanvas = (ctx: CanvasRenderingContext2D, w: number, h: number, q: number) => {
+        if (q >= 98) return;
+        try {
+            const imageData = ctx.getImageData(0, 0, w, h);
+            const data = imageData.data;
+            const step = Math.max(2, Math.round(((100 - q) / 100) * 28));
+            for (let i = 0; i < data.length; i += 4) {
+                data[i] = Math.min(255, Math.round(data[i] / step) * step);
+                data[i + 1] = Math.min(255, Math.round(data[i + 1] / step) * step);
+                data[i + 2] = Math.min(255, Math.round(data[i + 2] / step) * step);
+            }
+            ctx.putImageData(imageData, 0, 0);
+        } catch {
+            // Ignore canvas error if any
+        }
+    };
+
+    const getCanvasBlob = (canvas: HTMLCanvasElement, mime: string, q: number): Promise<Blob | null> => {
+        return new Promise((resolve) => {
+            canvas.toBlob((blob) => resolve(blob), mime, mime === 'image/png' ? undefined : q);
+        });
+    };
+
     const compressImage = async () => {
         if (!image || !preview) return;
         setCompressing(true);
+        setNote('');
 
         try {
             if (compressedUrl) URL.revokeObjectURL(compressedUrl);
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            const img = new window.Image();
 
-            img.onload = () => {
+            const img = new window.Image();
+            img.onload = async () => {
                 let w = img.width;
                 let h = img.height;
                 if (maxWidth > 0 && w > maxWidth) {
                     h = Math.round((h * maxWidth) / w);
                     w = maxWidth;
                 }
-                canvas.width = w;
-                canvas.height = h;
-                if (ctx) {
-                    ctx.imageSmoothingEnabled = true;
-                    ctx.imageSmoothingQuality = 'high';
-                    if (outputFormat === 'image/jpeg') {
-                        ctx.fillStyle = '#ffffff';
-                        ctx.fillRect(0, 0, w, h);
+
+                const createCanvas = (fillWhite = false) => {
+                    const c = document.createElement('canvas');
+                    c.width = w;
+                    c.height = h;
+                    const ctx = c.getContext('2d');
+                    if (ctx) {
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
+                        if (fillWhite) {
+                            ctx.fillStyle = '#ffffff';
+                            ctx.fillRect(0, 0, w, h);
+                        }
+                        ctx.drawImage(img, 0, 0, w, h);
                     }
-                    ctx.drawImage(img, 0, 0, w, h);
+                    return { canvas: c, ctx };
+                };
+
+                let finalBlob: Blob | null = null;
+                let usedMime = outputFormat === 'auto' ? 'image/jpeg' : outputFormat;
+                let customNote = '';
+
+                if (outputFormat === 'auto') {
+                    const { canvas: testCanvas, ctx: testCtx } = createCanvas(false);
+                    let hasAlpha = false;
+                    if (testCtx) {
+                        const data = testCtx.getImageData(0, 0, w, h).data;
+                        for (let i = 3; i < data.length; i += 4) {
+                            if (data[i] < 255) {
+                                hasAlpha = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (hasAlpha) {
+                        usedMime = 'image/webp';
+                        finalBlob = await getCanvasBlob(testCanvas, 'image/webp', quality / 100);
+                        if (!finalBlob) {
+                            if (testCtx) quantizeCanvas(testCtx, w, h, quality);
+                            finalBlob = await getCanvasBlob(testCanvas, 'image/png', 1);
+                            usedMime = 'image/png';
+                        }
+                    } else {
+                        const webpBlob = await getCanvasBlob(testCanvas, 'image/webp', quality / 100);
+                        const { canvas: jpegCanvas } = createCanvas(true);
+                        const jpegBlob = await getCanvasBlob(jpegCanvas, 'image/jpeg', quality / 100);
+
+                        if (webpBlob && jpegBlob) {
+                            if (webpBlob.size <= jpegBlob.size) {
+                                finalBlob = webpBlob;
+                                usedMime = 'image/webp';
+                            } else {
+                                finalBlob = jpegBlob;
+                                usedMime = 'image/jpeg';
+                            }
+                        } else {
+                            finalBlob = webpBlob || jpegBlob;
+                            usedMime = webpBlob ? 'image/webp' : 'image/jpeg';
+                        }
+                    }
+                } else if (outputFormat === 'image/png') {
+                    const { canvas, ctx } = createCanvas(false);
+                    if (ctx && quality < 100) {
+                        quantizeCanvas(ctx, w, h, quality);
+                    }
+                    finalBlob = await getCanvasBlob(canvas, 'image/png', 1);
+                    usedMime = 'image/png';
+
+                    if (finalBlob && finalBlob.size >= originalSize && maxWidth === 0) {
+                        const webpBlob = await getCanvasBlob(canvas, 'image/webp', Math.min(quality, 80) / 100);
+                        if (webpBlob && webpBlob.size < originalSize) {
+                            finalBlob = webpBlob;
+                            usedMime = 'image/webp';
+                            customNote = 'Original PNG re-encoding increased size. Automatically converted to WebP for maximum compression.';
+                        }
+                    }
+                } else if (outputFormat === 'image/jpeg') {
+                    const { canvas } = createCanvas(true);
+                    finalBlob = await getCanvasBlob(canvas, 'image/jpeg', quality / 100);
+                    usedMime = 'image/jpeg';
+                } else if (outputFormat === 'image/webp') {
+                    const { canvas } = createCanvas(false);
+                    finalBlob = await getCanvasBlob(canvas, 'image/webp', quality / 100);
+                    usedMime = 'image/webp';
                 }
 
-                const mime = outputFormat;
-                const q = mime === 'image/png' ? undefined : quality / 100;
-                canvas.toBlob(
-                    (blob) => {
-                        if (blob) {
-                            setCompressedSize(blob.size);
-                            const url = URL.createObjectURL(blob);
-                            setCompressedUrl(url);
-                            const saved = originalSize - blob.size;
-                            toast.success(
-                                saved > 0
-                                    ?`Compressed! Saved ${formatSize(saved)}`
-                                    : 'Done — try lower quality or max width for smaller files',
-                            );
-                        } else {
-                            toast.error('Compression failed for this format');
-                        }
-                        setCompressing(false);
-                    },
-                    mime,
-                    q,
-                );
+                if (finalBlob && finalBlob.size >= originalSize && quality > 40 && usedMime !== 'image/png') {
+                    const lowerQ = Math.max(30, quality - 25);
+                    const { canvas } = createCanvas(usedMime === 'image/jpeg');
+                    const retryBlob = await getCanvasBlob(canvas, usedMime, lowerQ / 100);
+                    if (retryBlob && retryBlob.size < finalBlob.size) {
+                        finalBlob = retryBlob;
+                        if (!customNote) customNote = `Auto-adjusted quality to ${lowerQ}% to guarantee smaller file size.`;
+                    }
+                }
+
+                if (finalBlob) {
+                    setCompressedSize(finalBlob.size);
+                    setActualFormat(usedMime);
+                    const url = URL.createObjectURL(finalBlob);
+                    setCompressedUrl(url);
+                    setNote(customNote);
+                    const saved = originalSize - finalBlob.size;
+                    toast.success(
+                        saved > 0
+                            ? `Compressed! Saved ${formatSize(saved)} (${Math.round((saved / originalSize) * 100)}% smaller)`
+                            : 'Compression complete! Try lowering quality or dimensions for further reduction.',
+                    );
+                } else {
+                    toast.error('Compression failed for this format');
+                }
+                setCompressing(false);
             };
             img.onerror = () => {
                 toast.error('Could not load image');
@@ -134,15 +237,15 @@ export default function ImageCompressorClient() {
     const downloadCompressed = () => {
         if (!compressedUrl) return;
         const ext =
-            outputFormat === 'image/png'
+            actualFormat === 'image/png'
                 ? 'png'
-                : outputFormat === 'image/webp'
+                : actualFormat === 'image/webp'
                   ? 'webp'
                   : 'jpg';
         const base = (image?.name || 'image').replace(/\.[^.]+$/, '');
         const a = document.createElement('a');
         a.href = compressedUrl;
-        a.download =`compressed-${base}.${ext}`;
+        a.download = `compressed-${base}.${ext}`;
         a.click();
     };
 
@@ -163,7 +266,7 @@ export default function ImageCompressorClient() {
                 {/* Back Button */}
                 <button
                     onClick={() => router.back()}
-                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-white :bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md"
+                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-white transition-all duration-300 shadow-sm hover:shadow-md"
                 >
                     <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back</span>
@@ -185,7 +288,7 @@ export default function ImageCompressorClient() {
                         Free Compressor
                     </div>
                     <h1 className="text-foreground text-4xl md:text-5xl font-black tracking-tight mb-4">Image Compressor</h1>
-                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Reduce image file size while maintaining quality</p>
+                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Reduce image file size instantly while maintaining high visual quality</p>
                 </div>
 
                 <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
@@ -210,7 +313,7 @@ export default function ImageCompressorClient() {
                             >
                                 <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
                                 <p className="text-lg font-semibold text-foreground mb-2">Drop image here or click to upload</p>
-                                <p className="text-sm text-muted-foreground">JPG, PNG, WebP · processed in your browser · free forever</p>
+                                <p className="text-sm text-muted-foreground">JPG, PNG, WebP · processed locally in your browser · free forever</p>
                             </div>
                         ) : (
                             <div className="space-y-6">
@@ -220,12 +323,12 @@ export default function ImageCompressorClient() {
                                         <p className="font-medium text-foreground truncate">{image.name}</p>
                                         <p className="text-sm text-muted-foreground">
                                             Original: {formatSize(originalSize)}
-                                            {dims ?` · ${dims.w}×${dims.h}px` : ''}
+                                            {dims ? ` · ${dims.w}×${dims.h}px` : ''}
                                         </p>
                                     </div>
                                     <Button variant="ghost" size="icon" onClick={() => {
                                         if (compressedUrl) URL.revokeObjectURL(compressedUrl);
-                                        setImage(null); setPreview(''); setCompressedUrl(''); setDims(null);
+                                        setImage(null); setPreview(''); setCompressedUrl(''); setDims(null); setNote('');
                                     }} className="text-red-500">
                                         <Trash2 className="h-5 w-5" />
                                     </Button>
@@ -237,11 +340,12 @@ export default function ImageCompressorClient() {
                                         <select
                                             value={outputFormat}
                                             onChange={(e) => setOutputFormat(e.target.value as typeof outputFormat)}
-                                            className="w-full h-11 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md px-3 text-sm"
+                                            className="w-full h-11 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md px-3 text-sm font-medium"
                                         >
-                                            <option value="image/jpeg">JPG (best for photos)</option>
-                                            <option value="image/webp">WebP (smaller, modern)</option>
-                                            <option value="image/png">PNG (lossless / transparency)</option>
+                                            <option value="auto">Auto (Recommended - Smallest Size)</option>
+                                            <option value="image/webp">WebP (Modern, High Compression)</option>
+                                            <option value="image/jpeg">JPG (Best for Photos)</option>
+                                            <option value="image/png">PNG (Lossless / Transparent)</option>
                                         </select>
                                     </div>
                                     <div className="space-y-2">
@@ -249,7 +353,7 @@ export default function ImageCompressorClient() {
                                         <select
                                             value={maxWidth}
                                             onChange={(e) => setMaxWidth(parseInt(e.target.value, 10))}
-                                            className="w-full h-11 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md px-3 text-sm"
+                                            className="w-full h-11 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md px-3 text-sm font-medium"
                                         >
                                             <option value={0}>Keep original size</option>
                                             <option value={1920}>1920px (Full HD)</option>
@@ -260,49 +364,68 @@ export default function ImageCompressorClient() {
                                     </div>
                                 </div>
 
-                                {outputFormat !== 'image/png' && (
-                                    <div className="space-y-3">
-                                        <div className="flex items-center justify-between">
-                                            <label className="font-medium text-foreground">Quality: {quality}%</label>
-                                            <span className="text-sm text-muted-foreground">{quality < 50 ? 'Smaller file' : quality < 80 ? 'Balanced' : 'High quality'}</span>
-                                        </div>
-                                        <input
-                                            type="range"
-                                            min="10"
-                                            max="100"
-                                            value={quality}
-                                            onChange={(e) => setQuality(parseInt(e.target.value))}
-                                            className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
-                                        />
+                                <div className="space-y-3">
+                                    <div className="flex items-center justify-between">
+                                        <label className="font-medium text-foreground">Quality: {quality}%</label>
+                                        <span className="text-sm text-muted-foreground">
+                                            {quality < 50 ? 'Smaller file' : quality < 80 ? 'Balanced' : 'High quality'}
+                                        </span>
                                     </div>
-                                )}
+                                    <input
+                                        type="range"
+                                        min="10"
+                                        max="100"
+                                        value={quality}
+                                        onChange={(e) => setQuality(parseInt(e.target.value))}
+                                        className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
+                                    />
+                                </div>
 
                                 <Button onClick={compressImage} disabled={compressing} className="w-full h-14 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold rounded-2xl shadow-xl shadow-orange-500/30">
                                     {compressing ? <><Loader2 className="h-5 w-5 animate-spin mr-2" /> Compressing...</> : <><Zap className="h-5 w-5 mr-2" /> Compress Image</>}
                                 </Button>
 
                                 {compressedUrl && (
-                                    <div className="p-4 bg-green-50 rounded-xl border border-green-200 space-y-3">
+                                    <div className="p-5 bg-emerald-50/90 rounded-2xl border border-emerald-200 space-y-4">
                                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                             <div>
-                                                <p className="font-bold text-green-700">Ready to download</p>
-                                                <p className="text-sm text-green-600">
-                                                    {formatSize(originalSize)} → {formatSize(compressedSize)}
-                                                    {reduction > 0 ?` (${reduction}% smaller)` : reduction < 0 ? ' (larger — try JPG/WebP or lower quality)' : ''}
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+                                                    <p className="font-bold text-emerald-800 text-lg">Compression Ready!</p>
+                                                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-200 text-emerald-800 font-bold uppercase tracking-wider">
+                                                        {actualFormat.replace('image/', '')}
+                                                    </span>
+                                                </div>
+                                                <p className="text-sm text-emerald-700">
+                                                    {formatSize(originalSize)} → <span className="font-bold">{formatSize(compressedSize)}</span>
+                                                    {reduction > 0 ? (
+                                                        <span className="ml-2 font-bold text-emerald-800 bg-emerald-200/70 px-2 py-0.5 rounded-md">
+                                                            ↓ {reduction}% smaller
+                                                        </span>
+                                                    ) : (
+                                                        <span className="ml-2 text-amber-700">
+                                                            (Same size — lower quality slider for higher compression)
+                                                        </span>
+                                                    )}
                                                 </p>
+                                                {note && (
+                                                    <p className="text-xs text-emerald-800/90 mt-1.5 font-medium">
+                                                        💡 {note}
+                                                    </p>
+                                                )}
                                             </div>
-                                            <Button onClick={downloadCompressed} className="bg-green-600 hover:bg-green-700">
+                                            <Button onClick={downloadCompressed} className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-md">
                                                 <Download className="h-4 w-4 mr-2" /> Download
                                             </Button>
                                         </div>
                                         <div className="grid grid-cols-2 gap-3">
                                             <div>
-                                                <p className="text-xs text-muted-foreground mb-1">Original</p>
-                                                <img src={preview} alt="Original" className="w-full h-28 object-contain rounded-lg bg-white/50" />
+                                                <p className="text-xs text-muted-foreground mb-1">Original ({formatSize(originalSize)})</p>
+                                                <img src={preview} alt="Original" className="w-full h-32 object-contain rounded-lg bg-white/50 border border-slate-200/60" />
                                             </div>
                                             <div>
-                                                <p className="text-xs text-muted-foreground mb-1">Compressed</p>
-                                                <img src={compressedUrl} alt="Compressed preview" className="w-full h-28 object-contain rounded-lg bg-white/50" />
+                                                <p className="text-xs text-muted-foreground mb-1">Compressed ({formatSize(compressedSize)})</p>
+                                                <img src={compressedUrl} alt="Compressed preview" className="w-full h-32 object-contain rounded-lg bg-white/50 border border-slate-200/60" />
                                             </div>
                                         </div>
                                     </div>
