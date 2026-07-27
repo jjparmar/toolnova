@@ -18,32 +18,32 @@ import { adsenseConfig } from"@/config/adsense";
 import { Providers } from"@/components/Providers";
 import { TOOL_COUNT_LABEL } from"@/data/tools";
 
-/** Premium body — industry-standard UI readability */
+/** Body font — fewer weights = less LCP font payload */
 const inter = Inter({
-  variable:"--font-inter",
+  variable: "--font-inter",
   subsets: ["latin"],
-  display:"swap",
-  weight: ["400","500","600","700","800"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
   preload: true,
   adjustFontFallback: true,
-  fallback: ["system-ui","arial"],
+  fallback: ["system-ui", "arial"],
 });
 
-/** Geometric headings — tight, modern, premium */
+/** Headings — preload only the bold weights we use most */
 const jakarta = Plus_Jakarta_Sans({
-  variable:"--font-jakarta",
+  variable: "--font-jakarta",
   subsets: ["latin"],
-  display:"swap",
-  weight: ["500","600","700","800"],
+  display: "swap",
+  weight: ["600", "700", "800"],
   preload: true,
   adjustFontFallback: true,
-  fallback: ["system-ui","arial"],
+  fallback: ["system-ui", "arial"],
 });
 
 const geistMono = Geist_Mono({
-  variable:"--font-geist-mono",
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  display:"swap",
+  display: "swap",
   preload: false,
   adjustFontFallback: true,
 });
@@ -215,7 +215,9 @@ export default function RootLayout({
           <SkipLinks />
           <div className="flex flex-col min-h-screen">
             <Header />
-            <main className="site-main flex-1">{children}</main>
+            <main id="main-content" className="site-main flex-1" tabIndex={-1}>
+              {children}
+            </main>
             <Footer />
           </div>
           <Toaster />

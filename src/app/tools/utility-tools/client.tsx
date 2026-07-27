@@ -25,7 +25,7 @@ export function UtilityToolsClient({ tools }: { tools: Tool[] }) {
     <CategoryToolsHub
       title="Utility tools"
       description="Word counters, case converters, calculators, and everyday helpers."
-      kicker={`${tools.length} utility tools · Free`}
+      kicker={`${tools.length} utility tools · Free forever (browser tools)`}
       tools={tools.map((t) => ({
         ...t,
         icon: iconMap[t.icon] || Wrench,

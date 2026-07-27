@@ -104,6 +104,153 @@ export function baseName(filename: string): string {
   return filename.replace(/\.[^.]+$/,"") ||"image";
 }
 
+export type CompressImageOptions = {
+  quality?: number; // 1–100
+  maxWidth?: number; // 0 = keep
+  outputFormat?: "auto" | "image/jpeg" | "image/webp" | "image/png";
+};
+
+export type CompressImageResult = {
+  blob: Blob;
+  mime: string;
+  width: number;
+  height: number;
+  originalSize: number;
+  note?: string;
+};
+
+/** Compress a single image File in the browser (used by Image Compressor batch mode). */
+export async function compressImageFile(
+  file: File,
+  opts: CompressImageOptions = {},
+): Promise<CompressImageResult> {
+  const quality = Math.min(100, Math.max(10, opts.quality ?? 75));
+  const maxWidth = opts.maxWidth ?? 0;
+  const outputFormat = opts.outputFormat ?? "auto";
+  const originalSize = file.size;
+
+  const src = await readFileAsDataURL(file);
+  const img = await loadImageFromSrc(src);
+  let w = img.naturalWidth || img.width;
+  let h = img.naturalHeight || img.height;
+  if (maxWidth > 0 && w > maxWidth) {
+    h = Math.round((h * maxWidth) / w);
+    w = maxWidth;
+  }
+
+  const draw = (fillWhite: boolean) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("Canvas not supported");
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    if (fillWhite) {
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, w, h);
+    }
+    ctx.drawImage(img, 0, 0, w, h);
+    return { canvas, ctx };
+  };
+
+  const toBlob = (
+    canvas: HTMLCanvasElement,
+    mime: string,
+    q: number,
+  ): Promise<Blob | null> =>
+    new Promise((resolve) => {
+      canvas.toBlob(
+        resolve,
+        mime,
+        mime === "image/png" ? undefined : q,
+      );
+    });
+
+  let finalBlob: Blob | null = null;
+  let usedMime = outputFormat === "auto" ? "image/jpeg" : outputFormat;
+  let note: string | undefined;
+
+  if (outputFormat === "auto") {
+    const { canvas, ctx } = draw(false);
+    let hasAlpha = false;
+    try {
+      const data = ctx.getImageData(0, 0, w, h).data;
+      for (let i = 3; i < data.length; i += 4) {
+        if (data[i] < 255) {
+          hasAlpha = true;
+          break;
+        }
+      }
+    } catch {
+      // tainted / security — ignore
+    }
+
+    if (hasAlpha) {
+      usedMime = "image/webp";
+      finalBlob = await toBlob(canvas, "image/webp", quality / 100);
+      if (!finalBlob) {
+        finalBlob = await toBlob(canvas, "image/png", 1);
+        usedMime = "image/png";
+      }
+    } else {
+      const webpBlob = await toBlob(canvas, "image/webp", quality / 100);
+      const { canvas: jpegCanvas } = draw(true);
+      const jpegBlob = await toBlob(jpegCanvas, "image/jpeg", quality / 100);
+      if (webpBlob && jpegBlob) {
+        if (webpBlob.size <= jpegBlob.size) {
+          finalBlob = webpBlob;
+          usedMime = "image/webp";
+        } else {
+          finalBlob = jpegBlob;
+          usedMime = "image/jpeg";
+        }
+      } else {
+        finalBlob = webpBlob || jpegBlob;
+        usedMime = webpBlob ? "image/webp" : "image/jpeg";
+      }
+    }
+  } else if (outputFormat === "image/png") {
+    const { canvas } = draw(false);
+    finalBlob = await toBlob(canvas, "image/png", 1);
+    usedMime = "image/png";
+  } else if (outputFormat === "image/jpeg") {
+    const { canvas } = draw(true);
+    finalBlob = await toBlob(canvas, "image/jpeg", quality / 100);
+    usedMime = "image/jpeg";
+  } else {
+    const { canvas } = draw(false);
+    finalBlob = await toBlob(canvas, "image/webp", quality / 100);
+    usedMime = "image/webp";
+  }
+
+  if (
+    finalBlob &&
+    finalBlob.size >= originalSize &&
+    quality > 40 &&
+    usedMime !== "image/png"
+  ) {
+    const lowerQ = Math.max(30, quality - 25);
+    const { canvas } = draw(usedMime === "image/jpeg");
+    const retry = await toBlob(canvas, usedMime, lowerQ / 100);
+    if (retry && retry.size < finalBlob.size) {
+      finalBlob = retry;
+      note = `Auto-adjusted quality to ${lowerQ}% for a smaller file.`;
+    }
+  }
+
+  if (!finalBlob) throw new Error(`Could not compress ${file.name}`);
+
+  return {
+    blob: finalBlob,
+    mime: usedMime,
+    width: w,
+    height: h,
+    originalSize,
+    note,
+  };
+}
+
 export type RotateDeg = 0 | 90 | 180 | 270;
 
 /**

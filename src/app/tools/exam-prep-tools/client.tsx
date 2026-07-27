@@ -24,7 +24,7 @@ export function ExamPrepToolsClient({ tools }: { tools: Tool[] }) {
     <CategoryToolsHub
       title="Exam prep tools"
       description="Vocabulary, synonyms, idioms, and language practice for competitive exams."
-      kicker={`${tools.length} exam tools · Free`}
+      kicker={`${tools.length} exam tools · Free to start`}
       tools={tools.map((t) => ({
         ...t,
         icon: iconMap[t.icon] || BookOpen,

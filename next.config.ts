@@ -180,6 +180,146 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  // Permanent redirects for dead/legacy tool URLs that Google has discovered
+  // (blog internal links, guessed aliases, removed tools). Prevents 404s in GSC.
+  async redirects() {
+    return [
+      // Dead tool pages that were linked from blog content
+      {
+        source: "/tools/password-protect-pdf",
+        destination: "/tools/image-pdf-tools",
+        permanent: true,
+      },
+      {
+        source: "/tools/unlock-pdf",
+        destination: "/tools/merge-pdf",
+        permanent: true,
+      },
+      {
+        source: "/tools/pdf-compressor",
+        destination: "/tools/compress-pdf",
+        permanent: true,
+      },
+      {
+        source: "/tools/pdf-compress",
+        destination: "/tools/compress-pdf",
+        permanent: true,
+      },
+      {
+        source: "/tools/json-formatter",
+        destination: "/tools/utility-tools",
+        permanent: true,
+      },
+      {
+        source: "/tools/base64",
+        destination: "/tools/utility-tools",
+        permanent: true,
+      },
+      {
+        source: "/tools/xml-to-json",
+        destination: "/tools/utility-tools",
+        permanent: true,
+      },
+      {
+        source: "/tools/jwt",
+        destination: "/tools/utility-tools",
+        permanent: true,
+      },
+      {
+        source: "/tools/url",
+        destination: "/tools/utility-tools",
+        permanent: true,
+      },
+      // Common alias / typo URLs
+      {
+        source: "/tools/grammar-checker",
+        destination: "/tools/grammar-fix",
+        permanent: true,
+      },
+      {
+        source: "/tools/pdf-merge",
+        destination: "/tools/merge-pdf",
+        permanent: true,
+      },
+      {
+        source: "/tools/summarizer",
+        destination: "/tools/text-summarizer",
+        permanent: true,
+      },
+      {
+        source: "/tools/text-summariser",
+        destination: "/tools/text-summarizer",
+        permanent: true,
+      },
+      {
+        source: "/tools/image-compress",
+        destination: "/tools/image-compressor",
+        permanent: true,
+      },
+      {
+        source: "/tools/flashcards",
+        destination: "/tools/flashcard-maker",
+        permanent: true,
+      },
+      {
+        source: "/tools/flashcard",
+        destination: "/tools/flashcard-maker",
+        permanent: true,
+      },
+      {
+        source: "/tools/resume-bullet",
+        destination: "/tools/resume-bullets",
+        permanent: true,
+      },
+      {
+        source: "/home",
+        destination: "/",
+        permanent: true,
+      },
+      // Blog slug aliases / old draft slugs → published URLs
+      {
+        source: "/blog/summarize-long-articles-in-1-minute",
+        destination: "/blog/summarize-long-articles-fast",
+        permanent: true,
+      },
+      {
+        source: "/blog/build-exam-revision-system-in-30-minutes",
+        destination: "/blog/build-exam-revision-system-30-minutes",
+        permanent: true,
+      },
+      {
+        source: "/blog/resume-bullet-points-that-get-interviews",
+        destination: "/blog/resume-bullets-that-get-interviews",
+        permanent: true,
+      },
+      {
+        source: "/blog/linkedin-headline-about-section-formula",
+        destination: "/blog/linkedin-headline-about-formula",
+        permanent: true,
+      },
+      {
+        source: "/blog/compress-images-for-web-speed-without-quality-loss",
+        destination: "/blog/compress-images-for-web-speed",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-writing-workflow-for-students",
+        destination: "/blog/ai-writing-workflow-students",
+        permanent: true,
+      },
+      {
+        source: "/blog/top-10-enterprise-vpn-solutions-remote-teams-2026",
+        destination: "/blog/top-10-enterprise-vpn-solutions-remote-teams",
+        permanent: true,
+      },
+      {
+        source: "/blog/flashcards-vs-notes-retention",
+        destination: "/blog/flashcards-vs-notes-for-retention",
+        permanent: true,
+      },
+    ];
+  },
+
   // Experimental features for performance
   experimental: {
     optimizeCss: true, // Optimize CSS delivery (requires critters)

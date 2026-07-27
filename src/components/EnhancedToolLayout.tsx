@@ -125,11 +125,15 @@ export default function EnhancedToolLayout({
   const [feedback, setFeedback] = useState<"up" |"down" | null>(null);
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
   const { nestedInPremiumShell } = useToolShell();
   const resolvedToolOptions = optionAlias ?? toolOptions;
   const resolvedPromptTemplate = promptTemplate ?? generatePrompt;
   const freeNote =
     showFreeTierNote !== undefined ? showFreeTierNote : !isNonAITool;
+  // Soft guidance: most tools need more than a single character for quality results
+  const MIN_INPUT_CHARS = isNonAITool ? 1 : 3;
+  const MAX_INPUT_CHARS = 12000;
 
   useEffect(() => {
     const defaultOptions: Record<string, unknown> = {};
@@ -189,8 +193,37 @@ export default function EnhancedToolLayout({
     [maxHistoryItems, toolSlug],
   );
 
+  const handleCancel = useCallback(() => {
+    abortRef.current?.abort();
+    abortRef.current = null;
+    setLoading(false);
+    toast.message("Generation cancelled");
+  }, []);
+
   const handleGenerate = async () => {
-    if (!input.trim() || loading) return;
+    if (loading) return;
+
+    const trimmed = input.trim();
+    if (!trimmed) {
+      toast.error("Please enter some text first");
+      textareaRef.current?.focus();
+      return;
+    }
+    if (trimmed.length < MIN_INPUT_CHARS) {
+      toast.error(`Please enter at least ${MIN_INPUT_CHARS} characters`);
+      return;
+    }
+    if (trimmed.length > MAX_INPUT_CHARS && !isNonAITool) {
+      toast.error(
+        `Input is too long (${trimmed.length.toLocaleString()} chars). Keep it under ${MAX_INPUT_CHARS.toLocaleString()} characters.`,
+      );
+      return;
+    }
+
+    // Cancel any in-flight request
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
 
     setLoading(true);
     setError(null);
@@ -201,54 +234,130 @@ export default function EnhancedToolLayout({
       let result: string;
 
       if (isNonAITool && nonAIHandler) {
-        result = await nonAIHandler(input, options);
+        result = await nonAIHandler(trimmed, options);
       } else {
         if (!resolvedPromptTemplate) {
           throw new Error("No prompt template configured for this tool");
         }
 
-        const prompt = resolvedPromptTemplate(input, options);
+        const prompt = resolvedPromptTemplate(trimmed, options);
         const response = await fetch("/api/ai", {
-          method:"POST",
-          headers: {"Content-Type":"application/json" },
-          body: JSON.stringify({ prompt, systemPrompt, toolSlug }),
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            prompt,
+            systemPrompt,
+            toolSlug,
+            stream: true,
+          }),
+          signal: controller.signal,
         });
 
-        const data = await response.json().catch(() => ({}));
+        // Non-stream error responses (limit, validation) are JSON
+        const contentType = response.headers.get("content-type") || "";
         if (!response.ok) {
+          const data = await response.json().catch(() => ({}));
           const msg =
-            typeof data?.error ==="string"
+            typeof data?.error === "string"
               ? data.error
-              :"Generation failed. Please try again.";
+              : "Generation failed. Please try again.";
           throw new Error(msg);
         }
-        if (!data?.result || typeof data.result !=="string") {
-          throw new Error("Empty response from AI. Please try again.");
-        }
-        result = data.result.trim();
-        if (!result) {
-          throw new Error("Empty response from AI. Please try again.");
+
+        if (contentType.includes("ndjson") && response.body) {
+          // Live-stream tokens into the output panel
+          setOutput("");
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = "";
+          let assembled = "";
+          let streamError: string | null = null;
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split("\n");
+            buffer = lines.pop() || "";
+            for (const line of lines) {
+              if (!line.trim()) continue;
+              try {
+                const evt = JSON.parse(line) as {
+                  type?: string;
+                  text?: string;
+                  result?: string;
+                  error?: string;
+                };
+                if (evt.type === "delta" && typeof evt.text === "string") {
+                  assembled += evt.text;
+                  setOutput(assembled);
+                } else if (
+                  evt.type === "done" &&
+                  typeof evt.result === "string"
+                ) {
+                  assembled = evt.result;
+                  setOutput(assembled);
+                } else if (evt.type === "error" && typeof evt.error === "string") {
+                  streamError = evt.error;
+                }
+              } catch {
+                // skip malformed chunk
+              }
+            }
+          }
+
+          if (streamError) throw new Error(streamError);
+          result = assembled.trim();
+          if (!result) {
+            throw new Error("Empty response from AI. Please try again.");
+          }
+        } else {
+          // Fallback classic JSON
+          const data = await response.json().catch(() => ({}));
+          if (!data?.result || typeof data.result !== "string") {
+            throw new Error("Empty response from AI. Please try again.");
+          }
+          result = data.result.trim();
+          if (!result) {
+            throw new Error("Empty response from AI. Please try again.");
+          }
         }
       }
+
+      if (controller.signal.aborted) return;
 
       setOutput(result);
       setError(null);
 
-      if (!isNonAITool || toolSlug ==="youtube-summarizer") {
+      if (!isNonAITool || toolSlug === "youtube-summarizer") {
         window.dispatchEvent(new Event("ai-usage-updated"));
       }
 
-      pushHistory(input, result, options);
+      pushHistory(trimmed, result, options);
       toast.success("Result ready");
+      // Keep user on output tab; scroll result into view on small screens
+      if (typeof window !== "undefined" && window.innerWidth < 768) {
+        requestAnimationFrame(() => {
+          document
+            .getElementById("tool-output-panel")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
     } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") {
+        return;
+      }
       const message =
         err instanceof Error
           ? err.message
-          :"An error occurred. Please try again.";
+          : "An error occurred. Please try again.";
       setError(message);
       setOutput("");
       toast.error(message);
     } finally {
+      if (abortRef.current === controller) {
+        abortRef.current = null;
+      }
       setLoading(false);
     }
   };
@@ -649,6 +758,8 @@ export default function EnhancedToolLayout({
                 onKeyDown={onKeyDown}
                 placeholder={placeholder}
                 rows={inputRows}
+                maxLength={isNonAITool ? undefined : MAX_INPUT_CHARS + 500}
+                spellCheck
                 className="min-h-[280px] w-full resize-y rounded-xl border border-border bg-card px-5 py-5 text-foreground outline-none transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:ring-2 focus:ring-primary/15 sm:min-h-[360px]"
               />
 
@@ -671,7 +782,23 @@ export default function EnhancedToolLayout({
                     </>
                   )}
                 </button>
+                {loading && (
+                  <button
+                    type="button"
+                    onClick={handleCancel}
+                    className="rounded-xl border border-border bg-card px-5 py-4 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
+                  >
+                    Cancel
+                  </button>
+                )}
               </div>
+              {charCount > MAX_INPUT_CHARS && !isNonAITool && (
+                <p className="text-xs text-red-500 font-medium text-center sm:text-left">
+                  Input is over the {MAX_INPUT_CHARS.toLocaleString()}-character
+                  limit ({charCount.toLocaleString()} now). Shorten it for best
+                  results.
+                </p>
+              )}
               <p className="text-xs text-muted-foreground flex items-center gap-1.5 justify-center sm:justify-start">
                 <Keyboard className="h-3.5 w-3.5" />
                 Press{""}
@@ -686,7 +813,7 @@ export default function EnhancedToolLayout({
               </p>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div id="tool-output-panel" className="space-y-4 scroll-mt-24">
               {loading ? (
                 <div className="flex flex-col items-center justify-center py-16 sm:py-20 space-y-4">
                   <div className="relative">
@@ -696,6 +823,13 @@ export default function EnhancedToolLayout({
                   <p className="text-muted-foreground font-medium">
                     Creating your result…
                   </p>
+                  <button
+                    type="button"
+                    onClick={handleCancel}
+                    className="mt-2 rounded-xl border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
+                  >
+                    Cancel
+                  </button>
                   <p className="text-xs text-muted-foreground">
                     Usually a few seconds
                   </p>

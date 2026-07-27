@@ -22,6 +22,7 @@ const navLinks = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { data: session, status } = useSession();
   const user = session?.user;
   const loading = status === 'loading';
@@ -30,6 +31,23 @@ export function Header() {
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileMenuOpen]);
 
   const handleSignOut = async () => {
     await signOut({ callbackUrl: '/' });
@@ -41,7 +59,14 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 h-[68px] w-full border-b border-border/50 bg-background/80 backdrop-blur-xl transition-all">
+    <header
+      className={cn(
+        'sticky top-0 z-50 h-[68px] w-full border-b bg-background/80 backdrop-blur-xl transition-all duration-300',
+        scrolled
+          ? 'border-border/80 shadow-sm shadow-black/5'
+          : 'border-border/50'
+      )}
+    >
       <div className="mx-auto flex h-full max-w-[1240px] items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-3 sm:gap-8">
           <button
@@ -69,7 +94,11 @@ export function Header() {
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
+          <nav
+            id="navigation"
+            className="hidden items-center gap-1 md:flex"
+            aria-label="Main navigation"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -89,7 +118,7 @@ export function Header() {
         </div>
 
         <div className="flex min-w-0 flex-1 items-center justify-end gap-2.5 sm:gap-3.5">
-          <div className="hidden w-48 shrink-0 sm:block lg:w-64">
+          <div id="search" className="hidden w-48 shrink-0 sm:block lg:w-64">
             <GlobalSearch />
           </div>
 
@@ -133,11 +162,9 @@ export function Header() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="absolute left-0 right-0 top-[68px] border-b border-border bg-card/95 p-4 backdrop-blur-xl shadow-2xl md:hidden">
-          <Suspense fallback={null}>
-            <MobileMenu onClose={() => setMobileMenuOpen(false)} id="mobile-menu" />
-          </Suspense>
-        </div>
+        <Suspense fallback={null}>
+          <MobileMenu onClose={() => setMobileMenuOpen(false)} id="mobile-menu" />
+        </Suspense>
       )}
     </header>
   );

@@ -229,7 +229,7 @@ const faqs = [
   },
   {
     question:"Is the Diagram Explainer free?",
-    answer:"Yes! The Diagram Explainer is completely free to use. Explain unlimited diagrams from any subject without any cost. Perfect for students studying science, medicine, engineering, or anyone who needs to understand visual concepts better.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

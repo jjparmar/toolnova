@@ -235,7 +235,7 @@ const faqs = [
   },
   {
     question:"Is the Chapter Summary tool free?",
-    answer:"Yes! The Chapter Summary tool is completely free to use. Summarize unlimited chapters from any textbook or subject without any cost. Perfect for students preparing for exams, catching up on readings, or creating efficient study materials from lengthy course content.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

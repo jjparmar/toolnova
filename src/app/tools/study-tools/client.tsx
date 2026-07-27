@@ -40,11 +40,25 @@ export function StudyToolsClient({ tools }: { tools: Tool[] }) {
     <CategoryToolsHub
       title="Study tools"
       description="Homework help, notes, quizzes, and flashcards — free AI for learning faster."
-      kicker={`${tools.length} study tools · Free`}
+      kicker={`${tools.length} study tools · Free to start`}
       tools={tools.map((t) => ({
         ...t,
         icon: iconMap[t.icon] || BookOpen,
       }))}
+      relatedGuides={[
+        {
+          href: "/blog/homework-solver-best-practices",
+          label: "Homework solver best practices",
+        },
+        {
+          href: "/blog/build-exam-revision-system-30-minutes",
+          label: "30-minute exam revision system",
+        },
+        {
+          href: "/blog/flashcards-vs-notes-for-retention",
+          label: "Flashcards vs notes",
+        },
+      ]}
     />
   );
 }

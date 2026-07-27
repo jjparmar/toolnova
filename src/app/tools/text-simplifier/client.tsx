@@ -198,7 +198,7 @@ const faqs = [
   },
   {
     question:"Is the Text Simplifier free?",
-    answer:"Yes! The Text Simplifier is completely free to use. Simplify unlimited text from any source without any cost. Perfect for educators making materials accessible, businesses improving customer communication, students understanding difficult readings, or anyone needing to make complex information clear.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

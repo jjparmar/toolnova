@@ -258,7 +258,7 @@ const faqs = [
   },
   {
     question:"Is the Story Generator free?",
-    answer:"Yes! The Story Generator is completely free to use. Create unlimited stories in any genre without any cost. Perfect for aspiring writers, creative writing students, parents creating bedtime stories, or anyone who loves imaginative storytelling.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

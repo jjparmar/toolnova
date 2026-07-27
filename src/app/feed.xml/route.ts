@@ -7,6 +7,7 @@ export async function GET() {
   const posts = getAllBlogPosts();
   const baseUrl = siteConfig.url;
 
+  // getAllBlogPosts() is already newest-first; slice for feed size if needed
   const rssItems = posts
     .map((post) => {
       const postUrl =`${baseUrl}/blog/${post.slug}`;
@@ -32,6 +33,15 @@ export async function GET() {
         0,
         500,
       );
+      // Plain-text snippet from markdown body for richer feed readers / discovery
+      const bodySnippet = String(post.content ||"")
+        .replace(/:::[A-Z-]+[\s\S]*?:::/g," ")
+        .replace(/!\[[^\]]*\]\([^)]+\)/g," ")
+        .replace(/\[([^\]]+)\]\([^)]+\)/g,"$1")
+        .replace(/[#>*_`|-]/g," ")
+        .replace(/\s+/g," ")
+        .trim()
+        .slice(0, 1200);
 
       return`
     <item>
@@ -39,7 +49,7 @@ export async function GET() {
       <link>${postUrl}</link>
       <guid isPermaLink="true">${postUrl}</guid>
       <description><![CDATA[${description}]]></description>
-      <content:encoded><![CDATA[<p>${fullExcerpt}</p><p><a href="${postUrl}">Read the full article on ToolNova →</a></p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>${fullExcerpt}</p><p>${bodySnippet}</p><p><a href="${postUrl}">Read the full article on ToolNova →</a></p>]]></content:encoded>
       <pubDate>${pubDate}</pubDate>
       <dc:date>${modDate}</dc:date>
       <dc:creator><![CDATA[${post.author || siteConfig.author.name}]]></dc:creator>

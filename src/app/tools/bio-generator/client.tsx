@@ -283,7 +283,7 @@ const faqs = [
   },
   {
     question:"Is the Bio Generator free?",
-    answer:"Yes! The Bio Generator is completely free to use. Create unlimited bios for any platform without any cost. Perfect for influencers, professionals, students, or anyone looking to improve their social media presence.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

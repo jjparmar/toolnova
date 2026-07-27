@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Upload, Download, Trash2, Image as ImageIcon, Loader2, ArrowLeft, Shield, Zap, Sparkles, Layers, Star, FileText, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
 import Link from 'next/link';
-import { isImageFile } from '@/lib/image-client';
+import { isImageFile, compressImageFile, extForMime, baseName, downloadBlob, formatBytes } from '@/lib/image-client';
+import JSZip from 'jszip';
 
 const relatedTools = [
     { name: 'Crop Image', slug: 'image-crop', icon: ImageIcon, color: 'from-violet-500 to-purple-500' },
@@ -30,6 +31,9 @@ export default function ImageCompressorClient() {
     const [dragOver, setDragOver] = useState(false);
     const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
     const [note, setNote] = useState<string>('');
+    type BatchItem = { id: string; file: File; status: 'pending' | 'done' | 'error'; originalSize: number; compressedSize?: number; url?: string; mime?: string; error?: string };
+    const [batchItems, setBatchItems] = useState<BatchItem[]>([]);
+    const [batchMode, setBatchMode] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const formatSize = (bytes: number) => {
@@ -42,15 +46,33 @@ export default function ImageCompressorClient() {
 
     const handleFileSelect = (files: FileList | null) => {
         if (!files || files.length === 0) return;
-        const file = files[0];
-        if (!isImageFile(file)) {
-            toast.error('Please select an image file');
+        const list = Array.from(files).filter(isImageFile).slice(0, 30);
+        if (!list.length) {
+            toast.error('Please select image files (JPG, PNG, WebP)');
             return;
         }
-        if (file.size > 40 * 1024 * 1024) {
-            toast.error('Please use an image under 40MB for browser compression');
+        if (list.some((f) => f.size > 40 * 1024 * 1024)) {
+            toast.error('Each image must be under 40MB');
             return;
         }
+        if (list.length > 1) {
+            setBatchMode(true);
+            setImage(null);
+            setPreview('');
+            if (compressedUrl) URL.revokeObjectURL(compressedUrl);
+            setCompressedUrl('');
+            setBatchItems(list.map((file, i) => ({
+                id: `${Date.now()}-${i}`,
+                file,
+                status: 'pending' as const,
+                originalSize: file.size,
+            })));
+            toast.success(`${list.length} images ready for batch compress`);
+            return;
+        }
+        setBatchMode(false);
+        setBatchItems([]);
+        const file = list[0];
         setImage(file);
         setOriginalSize(file.size);
         setCompressedUrl('');
@@ -68,6 +90,55 @@ export default function ImageCompressorClient() {
             probe.src = url;
         };
         reader.readAsDataURL(file);
+    };
+
+    const compressBatch = async () => {
+        if (!batchItems.length || compressing) return;
+        setCompressing(true);
+        const next = [...batchItems];
+        for (let i = 0; i < next.length; i++) {
+            const item = next[i];
+            try {
+                const res = await compressImageFile(item.file, {
+                    quality,
+                    maxWidth,
+                    outputFormat,
+                });
+                if (item.url) URL.revokeObjectURL(item.url);
+                next[i] = {
+                    ...item,
+                    status: 'done',
+                    compressedSize: res.blob.size,
+                    url: URL.createObjectURL(res.blob),
+                    mime: res.mime,
+                };
+            } catch (e) {
+                next[i] = {
+                    ...item,
+                    status: 'error',
+                    error: e instanceof Error ? e.message : 'Failed',
+                };
+            }
+            setBatchItems([...next]);
+        }
+        setCompressing(false);
+        const ok = next.filter((x) => x.status === 'done').length;
+        toast.success(`Compressed ${ok}/${next.length} images`);
+    };
+
+    const downloadBatchZip = async () => {
+        const done = batchItems.filter((x) => x.status === 'done' && x.url);
+        if (!done.length) return;
+        const zip = new JSZip();
+        for (const item of done) {
+            const res = await fetch(item.url!);
+            const blob = await res.blob();
+            const ext = extForMime(item.mime || 'image/jpeg');
+            zip.file(`compressed-${baseName(item.file.name)}.${ext}`, blob);
+        }
+        const out = await zip.generateAsync({ type: 'blob' });
+        downloadBlob(out, `compressed-images-${Date.now()}.zip`);
+        toast.success('ZIP download started');
     };
 
     const quantizeCanvas = (ctx: CanvasRenderingContext2D, w: number, h: number, q: number) => {
@@ -293,9 +364,69 @@ export default function ImageCompressorClient() {
 
                 <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
                     <div className="p-6 md:p-8">
-                        <input type="file" ref={fileInputRef} onChange={(e) => handleFileSelect(e.target.files)} accept="image/*" className="hidden" />
+                        <input type="file" ref={fileInputRef} onChange={(e) => handleFileSelect(e.target.files)} accept="image/*" multiple className="hidden" />
 
-                        {!image ? (
+                        {batchMode && batchItems.length > 0 ? (
+                            <div className="space-y-5">
+                                <div className="flex flex-wrap items-center justify-between gap-3">
+                                    <p className="font-semibold text-foreground">{batchItems.length} images selected</p>
+                                    <Button variant="ghost" size="sm" onClick={() => {
+                                        batchItems.forEach((b) => b.url && URL.revokeObjectURL(b.url));
+                                        setBatchItems([]);
+                                        setBatchMode(false);
+                                    }} className="text-red-500"><Trash2 className="h-4 w-4 mr-1" /> Clear</Button>
+                                </div>
+                                <div className="grid sm:grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium">Output format</label>
+                                        <select value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as typeof outputFormat)} className="w-full h-11 rounded-xl border border-border/50 px-3 text-sm">
+                                            <option value="auto">Auto (smallest)</option>
+                                            <option value="image/webp">WebP</option>
+                                            <option value="image/jpeg">JPG</option>
+                                            <option value="image/png">PNG</option>
+                                        </select>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium">Max width</label>
+                                        <select value={maxWidth} onChange={(e) => setMaxWidth(parseInt(e.target.value, 10))} className="w-full h-11 rounded-xl border border-border/50 px-3 text-sm">
+                                            <option value={0}>Original</option>
+                                            <option value={1920}>1920px</option>
+                                            <option value={1280}>1280px</option>
+                                            <option value={800}>800px</option>
+                                            <option value={400}>400px</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="font-medium">Quality: {quality}%</label>
+                                    <input type="range" min="10" max="100" value={quality} onChange={(e) => setQuality(parseInt(e.target.value))} className="w-full" />
+                                </div>
+                                <div className="flex flex-col sm:flex-row gap-3">
+                                    <Button onClick={() => void compressBatch()} disabled={compressing} className="flex-1 h-12 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold">
+                                        {compressing ? <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Compressing batch…</> : <><Zap className="h-4 w-4 mr-2" /> Compress all</>}
+                                    </Button>
+                                    {batchItems.some((b) => b.status === 'done') && (
+                                        <Button onClick={() => void downloadBatchZip()} variant="secondary" className="h-12 font-bold">
+                                            <Download className="h-4 w-4 mr-2" /> Download ZIP
+                                        </Button>
+                                    )}
+                                </div>
+                                <ul className="divide-y divide-border rounded-xl border border-border max-h-80 overflow-auto">
+                                    {batchItems.map((item) => (
+                                        <li key={item.id} className="flex items-center justify-between gap-3 px-3 py-2 text-sm">
+                                            <span className="truncate font-medium">{item.file.name}</span>
+                                            <span className="shrink-0 text-muted-foreground">
+                                                {item.status === 'pending' && formatBytes(item.originalSize)}
+                                                {item.status === 'done' && item.compressedSize != null && (
+                                                    <span className="text-emerald-700 font-semibold">{formatBytes(item.originalSize)} → {formatBytes(item.compressedSize)}</span>
+                                                )}
+                                                {item.status === 'error' && <span className="text-red-600">{item.error || 'Error'}</span>}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ) : !image ? (
                             <div
                                 onClick={() => fileInputRef.current?.click()}
                                 onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
@@ -312,8 +443,8 @@ export default function ImageCompressorClient() {
                                 }`}
                             >
                                 <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                                <p className="text-lg font-semibold text-foreground mb-2">Drop image here or click to upload</p>
-                                <p className="text-sm text-muted-foreground">JPG, PNG, WebP · processed locally in your browser · free forever</p>
+                                <p className="text-lg font-semibold text-foreground mb-2">Drop images here or click to upload</p>
+                                <p className="text-sm text-muted-foreground">JPG, PNG, WebP · single or batch (up to 30) · processed in your browser</p>
                             </div>
                         ) : (
                             <div className="space-y-6">

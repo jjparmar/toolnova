@@ -320,7 +320,7 @@ const faqs = [
   },
   {
     question:"Is the Cover Letter Writer free?",
-    answer:"Yes! The Cover Letter Writer is completely free to use. Generate unlimited cover letters for any job application without any cost. Perfect for job seekers, career changers, or anyone applying to multiple positions who needs professional, tailored cover letters quickly.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

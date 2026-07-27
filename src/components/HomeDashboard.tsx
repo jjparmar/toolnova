@@ -12,7 +12,6 @@ import {
   ShieldCheck,
   Sparkles,
   Grid2X2,
-  Check,
   FileText,
   GraduationCap,
   Briefcase,
@@ -43,31 +42,25 @@ const featuredTools = [
     gradient: "from-[#FF3B5C] to-[#E11D48]",
   },
   {
-    href: "/tools/split-pdf",
-    icon: Layers,
-    title: "Split PDF",
-    desc: "Extract specific page ranges or break large PDFs into pieces.",
-    gradient: "from-[#F59E0B] to-[#D97706]",
+    href: "/tools/compress-pdf",
+    icon: FileText,
+    title: "Compress PDF",
+    desc: "Shrink PDFs for email and upload portals. Private browser tool.",
+    badge: "New",
+    gradient: "from-[#F43F5E] to-[#E11D48]",
   },
   {
     href: "/tools/image-compressor",
     icon: ImageIcon,
     title: "Compress Image",
-    desc: "Shrink image file sizes sharply while maintaining HD clarity.",
+    desc: "Batch-compress images for web speed without leaving your device.",
     gradient: "from-[#10B981] to-[#059669]",
-  },
-  {
-    href: "/tools/resize-image",
-    icon: ImageIcon,
-    title: "Resize Image",
-    desc: "Modify exact pixel height/width or scaling percentage.",
-    gradient: "from-[#06B6D4] to-[#0284C7]",
   },
   {
     href: "/tools/homework-solver",
     icon: BookOpen,
     title: "Homework Solver",
-    desc: "Get instant step-by-step explanations for complex problems.",
+    desc: "Step-by-step explanations so you learn the method, not just answers.",
     badge: "AI Powered",
     gradient: "from-[#6366F1] to-[#4F46E5]",
   },
@@ -75,22 +68,29 @@ const featuredTools = [
     href: "/tools/grammar-fix",
     icon: Pencil,
     title: "Grammar Checker",
-    desc: "Polishes grammar, tone, spelling, and essay structure in real-time.",
+    desc: "Fix grammar, spelling, and clarity while keeping your voice.",
     gradient: "from-[#EC4899] to-[#DB2777]",
   },
   {
     href: "/tools/flashcard-maker",
     icon: Library,
     title: "Flashcard Maker",
-    desc: "Transform class notes or documents into study flashcard decks.",
+    desc: "Turn notes into study cards for faster exam revision.",
     gradient: "from-[#14B8A6] to-[#0D9488]",
   },
   {
     href: "/tools/essay-writer",
     icon: FileText,
     title: "Essay Writer",
-    desc: "Draft well-researched essays with strong thesis statements.",
+    desc: "Draft structured essays with clear intros, body, and conclusions.",
     gradient: "from-[#8B5CF6] to-[#7C3AED]",
+  },
+  {
+    href: "/tools/split-pdf",
+    icon: Layers,
+    title: "Split PDF",
+    desc: "Extract page ranges or break large PDFs into smaller files.",
+    gradient: "from-[#F59E0B] to-[#D97706]",
   },
 ];
 
@@ -102,9 +102,9 @@ const categories = [
 ];
 
 const trustItems = [
-  { icon: Lock, title: "100% Private & Secure", desc: "PDF & image tools run directly inside your local web browser." },
-  { icon: Zap, title: "Lightning Fast Engine", desc: "Instant calculations & AI responses in less than 2 seconds." },
-  { icon: ShieldCheck, title: "No Account Required", desc: "Access full utility suite immediately without login barriers." },
+  { icon: Lock, title: "Private where it matters", desc: "PDF & image tools process files in your browser—nothing uploaded for those tools." },
+  { icon: Zap, title: "Fast by design", desc: "Local tools run instantly; AI tools stream results as they generate." },
+  { icon: ShieldCheck, title: "Start free, no account", desc: "Use tools immediately. Free daily AI included; Pro unlocks unlimited AI." },
 ];
 
 export function HomeDashboard() {
@@ -147,34 +147,39 @@ export function HomeDashboard() {
           </div>
 
           {/* Main Headline */}
-          <h1 className="font-heading mx-auto mb-6 max-w-4xl text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl md:leading-[1.1]">
+          <h1 className="hero-title font-heading mx-auto mb-6 max-w-4xl text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl md:leading-[1.1]">
             Work &amp; Study <span className="text-gradient">Smarter with AI</span> — All in One Hub
           </h1>
 
-          <p className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-xl">
-            Merge PDFs, fix grammar, generate study flashcards, and write essays effortlessly.{" "}
+          <p className="hero-description mx-auto mb-10 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-xl">
+            Merge and compress PDFs, fix grammar, build flashcards, and draft essays in one place.{" "}
             <strong className="font-bold text-foreground">
-              {TOOL_COUNT} premium tools
+              {TOOL_COUNT_LABEL} free tools
             </strong>
-            , completely free.
+            — start without an account.
           </p>
 
           {/* Instant Tool Search Input */}
           <div className="relative mx-auto mb-10 max-w-2xl text-left">
             <div className="group relative flex items-center">
-              <Search className="absolute left-5 h-5 w-5 text-muted-foreground transition-colors group-focus-within:text-primary" />
+              <Search className="absolute left-5 h-5 w-5 text-muted-foreground transition-colors group-focus-within:text-primary" aria-hidden />
+              <label htmlFor="home-tool-search" className="sr-only">
+                Search tools
+              </label>
               <input
-                type="text"
+                id="home-tool-search"
+                type="search"
+                autoComplete="off"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search 47+ tools (e.g. merge pdf, homework solver, essay writer)..."
-                className="w-full rounded-2xl border border-border/80 bg-card py-4 pl-13 pr-12 text-base font-medium text-foreground shadow-lg transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15"
+                placeholder={`Search ${TOOL_COUNT_LABEL} tools (e.g. compress pdf, homework solver)…`}
+                className="w-full rounded-2xl border border-border/80 bg-card py-4 pl-14 pr-12 text-base font-medium text-foreground shadow-lg transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15"
               />
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-4 rounded-full bg-muted p-1 text-xs text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
+                  className="absolute right-4 rounded-full bg-muted p-1.5 text-xs text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
                   aria-label="Clear search"
                 >
                   ✕
@@ -186,7 +191,7 @@ export function HomeDashboard() {
             {!searchQuery && (
               <div className="mt-3 flex flex-wrap items-center justify-center gap-2 text-xs font-semibold text-muted-foreground">
                 <span className="text-foreground/70">Popular:</span>
-                {["Merge PDF", "Homework Solver", "Grammar Checker", "Flashcards"].map((tag) => (
+                {["Compress PDF", "Merge PDF", "Homework Solver", "Grammar Checker"].map((tag) => (
                   <button
                     key={tag}
                     type="button"
@@ -201,15 +206,20 @@ export function HomeDashboard() {
 
             {/* Dropdown Suggestions */}
             {filteredTools.length > 0 && (
-              <div className="absolute left-0 right-0 top-full z-30 mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-2xl backdrop-blur-xl">
+              <div
+                role="listbox"
+                aria-label="Search results"
+                className="absolute left-0 right-0 top-full z-30 mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-2xl backdrop-blur-xl"
+              >
                 {filteredTools.map((t) => (
                   <Link
                     key={t.slug}
                     href={t.url}
+                    role="option"
                     onClick={() => setSearchQuery("")}
                     className="flex items-center justify-between px-5 py-3.5 text-sm transition-colors hover:bg-muted/80"
                   >
-                    <div>
+                    <div className="min-w-0">
                       <span className="font-bold text-foreground">{t.name}</span>
                       <p className="line-clamp-1 text-xs text-muted-foreground">{t.description}</p>
                     </div>
@@ -218,6 +228,15 @@ export function HomeDashboard() {
                     </span>
                   </Link>
                 ))}
+              </div>
+            )}
+            {searchQuery.trim() && filteredTools.length === 0 && (
+              <div className="absolute left-0 right-0 top-full z-30 mt-3 rounded-2xl border border-border bg-card px-5 py-4 text-sm text-muted-foreground shadow-2xl">
+                No tools matched “{searchQuery}”. Try “pdf”, “grammar”, or{" "}
+                <Link href="/tools" className="font-semibold text-primary underline underline-offset-2">
+                  browse all tools
+                </Link>
+                .
               </div>
             )}
           </div>
@@ -230,13 +249,13 @@ export function HomeDashboard() {
                 Browse All Tools
               </Button>
             </Link>
-            <Link href="/tools/homework-solver">
+            <Link href="/tools/compress-pdf">
               <Button
                 variant="outline"
                 size="lg"
                 className="h-14 min-w-[200px] gap-2 rounded-xl border-border/80 bg-card px-8 text-base font-bold shadow-sm transition-all hover:border-primary/40 hover:bg-muted"
               >
-                Try AI Helper Free
+                Compress a PDF free
                 <ArrowRight className="h-4 w-4 text-primary" />
               </Button>
             </Link>
@@ -245,10 +264,10 @@ export function HomeDashboard() {
           {/* Key Metrics Bar */}
           <div className="mt-16 grid grid-cols-2 gap-4 border-t border-border/50 pt-10 sm:grid-cols-4 lg:gap-8">
             {[
-              { num: "47+", label: "Productivity Tools" },
-              { num: "100%", label: "Free & Private" },
-              { num: "0", label: "Signups Required" },
-              { num: "< 2s", label: "Instant Execution" },
+              { num: TOOL_COUNT_LABEL, label: "Free tools" },
+              { num: "Local", label: "PDF & image privacy" },
+              { num: "0", label: "Sign-up to start" },
+              { num: "Stream", label: "Live AI results" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="font-heading text-2xl font-extrabold text-foreground md:text-3xl">

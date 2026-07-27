@@ -61,22 +61,38 @@ export async function POST(req: NextRequest) {
     }
 
     const transcript = await YoutubeTranscript.fetchTranscript(videoId);
+    // Join caption chunks with spaces — previous code stripped ALL whitespace
+    // which produced unreadable input and poor AI summaries.
     const text = transcript
-      .map((t) => t.text)
-      .join("")
-      .replace(/\s+/g,"")
+      .map((t) => String(t.text || "").replace(/\s+/g, " ").trim())
+      .filter(Boolean)
+      .join(" ")
+      .replace(/\s+/g, " ")
       .trim();
 
-    if (!text) {
+    if (!text || text.length < 40) {
       return NextResponse.json(
         {
-          error:"No captions found for this video. Try a public video with subtitles enabled.",
+          error:"No usable captions found for this video. Try a public video with subtitles enabled.",
         },
         { status: 422 },
       );
     }
 
-    return NextResponse.json({ success: true, text, videoId });
+    // Cap payload size for the AI summarizer (chars ≈ tokens/4; keep under API limits)
+    const MAX_TRANSCRIPT_CHARS = 48000;
+    const clipped =
+      text.length > MAX_TRANSCRIPT_CHARS
+        ? `${text.slice(0, MAX_TRANSCRIPT_CHARS)}\n\n[Transcript truncated for length — summary covers the first portion of the video.]`
+        : text;
+
+    return NextResponse.json({
+      success: true,
+      text: clipped,
+      videoId,
+      truncated: text.length > MAX_TRANSCRIPT_CHARS,
+      charCount: text.length,
+    });
   } catch (error) {
     console.error("YouTube Transcript Error:", error);
     return NextResponse.json(

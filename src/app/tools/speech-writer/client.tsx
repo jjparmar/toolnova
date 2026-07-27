@@ -272,7 +272,7 @@ const faqs = [
   },
   {
     question:"Is the Speech Writer free?",
-    answer:"Yes! The Speech Writer is completely free to use. Create unlimited speeches for any occasion without any cost. Perfect for best men and maids of honor, business professionals, students, or anyone who needs to deliver a memorable speech.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

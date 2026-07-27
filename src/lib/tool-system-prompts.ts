@@ -13,8 +13,10 @@ RULES:
 - Be accurate; if unsure, say so briefly rather than invent facts.
 - Match requested length; full essays, quizzes, and card sets may be long.
 - Write natural, fluent English unless the user asks for another language.
-- Never invent citations, URLs, statistics, employers, or credentials the user did not provide.
-- Prefer specific, actionable content over vague filler.`;
+- Never invent citations, URLs, statistics, employers, metrics, or credentials the user did not provide.
+- Prefer specific, actionable content over vague filler.
+- If the user input is too short or ambiguous, make minimal reasonable assumptions and state them briefly.
+- Prefer complete, usable outputs over truncated half-answers.`;
 
 export const TOOL_SYSTEM_PROMPTS: Record<string, string> = {"text-summarizer":`${BASE}
 Role: Expert summarizer.
@@ -122,15 +124,52 @@ Follow the user instructions carefully and produce a complete, well-structured r
 /** Suggested sampling settings by tool family */
 export function getGenerationParams(toolSlug: string | undefined, isPremium: boolean) {
   const slug = (toolSlug ||"").toLowerCase();
-  const creative = ["story-generator","caption-generator","speech-writer","bio-generator","paragraph-generator","email-writer",
+  const creative = [
+    "story-generator",
+    "caption-generator",
+    "speech-writer",
+    "bio-generator",
+    "paragraph-generator",
+    "email-writer",
+    "linkedin-optimizer",
   ].includes(slug);
-  const precise = ["homework-solver","formula-generator","mcq-generator","grammar-fix","plagiarism-checker","doubt-solver","concept-explainer",
+  const precise = [
+    "homework-solver",
+    "formula-generator",
+    "mcq-generator",
+    "grammar-fix",
+    "plagiarism-checker",
+    "doubt-solver",
+    "concept-explainer",
+    "diagram-explainer",
+    "one-word-substitution",
+    "synonym-finder",
+    "antonym-finder",
   ].includes(slug);
-  const longForm = ["essay-writer","speech-writer","cover-letter-writer","notes-generator","chapter-summary","quiz-generator","mcq-generator","flashcard-maker","story-generator","revision-planner","timetable-generator","interview-generator","youtube-summarizer",
+  const longForm = [
+    "essay-writer",
+    "speech-writer",
+    "cover-letter-writer",
+    "notes-generator",
+    "chapter-summary",
+    "quiz-generator",
+    "mcq-generator",
+    "flashcard-maker",
+    "story-generator",
+    "revision-planner",
+    "timetable-generator",
+    "interview-generator",
+    "youtube-summarizer",
+    "homework-solver",
+    "goal-planner",
+    "linkedin-optimizer",
+    "resume-bullets",
+    "vocabulary-builder",
+    "text-summarizer",
   ].includes(slug);
 
   return {
-    temperature: creative ? 0.82 : precise ? 0.32 : 0.55,
+    temperature: creative ? 0.78 : precise ? 0.28 : 0.52,
     // Longer max for essays/notes/quizzes so free tier is still complete
     max_tokens: isPremium
       ? longForm

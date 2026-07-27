@@ -7,11 +7,11 @@ import {
   FaCalendar,
   FaClock,
   FaRocket,
-  FaChevronRight,
 } from"react-icons/fa";
 import { siteConfig } from"@/config/site";
 import { TOOL_COUNT_LABEL } from"@/data/tools";
 import BlogGridWithFilters from "@/components/blog/BlogGridWithFilters";
+import { formatDisplayDate, formatReadTime } from "@/lib/format";
 
 export const metadata: Metadata = {
   title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026 | ToolNova",
@@ -141,12 +141,14 @@ export default function BlogPage() {
                   </p>
                   <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-6">
                     <span className="flex items-center gap-1.5">
-                      <FaCalendar className="text-primary" />
-                      {featuredPost.date}
+                      <FaCalendar className="text-primary" aria-hidden />
+                      <time dateTime={featuredPost.date}>
+                        {formatDisplayDate(featuredPost.date)}
+                      </time>
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <FaClock className="text-primary" />
-                      {featuredPost.readTime}
+                      <FaClock className="text-primary" aria-hidden />
+                      {formatReadTime(featuredPost.readTime)}
                     </span>
                   </div>
                   <div className="inline-flex items-center gap-2 text-primary font-bold group-hover:gap-3 transition-all">
@@ -159,20 +161,22 @@ export default function BlogPage() {
 
                 <div className="relative hidden lg:block">
                   {featuredPost.coverImage ? (
-                    <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
                       <NextImage
                         src={featuredPost.coverImage}
                         alt={featuredPost.imageAlt || featuredPost.title}
-                        width={800}
-                        height={600}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        fill
+                        sizes="(max-width: 1024px) 0px, 520px"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                         priority
+                        // LCP candidate on blog listing
+                        fetchPriority="high"
                       />
                     </div>
                   ) : (
-                    <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/15 to-sky-500/15 flex items-center justify-center border border-border">
-                      <div className="w-24 h-24 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-xl shadow-primary/25">
-                        <FaRocket className="text-white text-4xl" />
+                    <div className="flex aspect-[4/3] items-center justify-center rounded-2xl border border-border bg-gradient-to-br from-primary/15 to-sky-500/15">
+                      <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-primary shadow-xl shadow-primary/25">
+                        <FaRocket className="text-4xl text-white" aria-hidden />
                       </div>
                     </div>
                   )}
@@ -183,7 +187,10 @@ export default function BlogPage() {
         </section>
 
         {/* Grid with Category Filters */}
-        <section className="border-t border-border bg-muted py-12 md:py-16">
+        <section
+          id="latest-articles"
+          className="scroll-mt-24 border-t border-border bg-muted py-12 md:py-16"
+        >
           <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
             <h2 className="font-heading mb-6 text-2xl font-extrabold text-foreground md:text-3xl">
               Latest articles &amp; guides
@@ -192,21 +199,26 @@ export default function BlogPage() {
           </div>
         </section>
 
-        {/* Topics */}
+        {/* Topics — jump links back to filtered grid */}
         {categories.length > 0 && (
           <section className="section-band py-12">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <h2 className="font-heading mb-3 text-center text-2xl font-bold text-foreground md:text-3xl">
                 Topics
               </h2>
-              <div className="flex flex-wrap gap-3 justify-center">
+              <p className="mx-auto mb-8 max-w-lg text-center text-sm text-muted-foreground">
+                Browse {blogPosts.length} guides across writing, study, PDF, and
+                career workflows.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
                 {categories.slice(0, 12).map((topic) => (
-                  <span
+                  <a
                     key={topic}
-                    className="px-4 py-2 rounded-full bg-card border border-border text-foreground text-sm font-medium"
+                    href="#latest-articles"
+                    className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
                   >
                     {topic}
-                  </span>
+                  </a>
                 ))}
               </div>
             </div>

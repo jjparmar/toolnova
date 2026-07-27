@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
-    "predeploy": "node scripts/pre-deploy-check.js",
+    "predeploy": "node scripts/pre-deploy-check.js && node scripts/lighthouse-check.js",
+    "eval:tools": "node scripts/eval-tools-quality.js",
+    "eval:tools:live": "node scripts/eval-tools-quality.js --live",
+    "lighthouse": "node scripts/lighthouse-check.js",
+    "lighthouse:live": "node scripts/lighthouse-check.js --live",
     "build": "prisma generate && next build --webpack",
     "postbuild": "node scripts/ping-search-engines.js",
     "ping:indexnow": "node scripts/ping-search-engines.js",

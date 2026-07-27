@@ -279,7 +279,7 @@ const faqs = [
   },
   {
     question:"Is the Todo List Generator free?",
-    answer:"Yes! The Todo List Generator is completely free to use. Create unlimited todo lists for any purpose without any cost. Perfect for busy professionals, students, project managers, or anyone who wants to stay organized and productive with clear, actionable task lists.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

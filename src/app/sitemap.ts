@@ -109,6 +109,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
     {
+      url:`${baseUrl}/shipping`,
+      lastModified: LEGAL_MODIFIED,
+      changeFrequency:"yearly" as const,
+      priority: 0.25,
+    },
+    {
       url:`${baseUrl}/seo-audit`,
       lastModified: ABOUT_MODIFIED,
       changeFrequency:"monthly" as const,

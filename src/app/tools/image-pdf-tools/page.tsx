@@ -32,9 +32,10 @@ export const metadata = {
 const tools = [
     { name: 'Merge PDF', slug: 'merge-pdf', description: 'Combine multiple PDFs into one file', icon: Merge },
     { name: 'Split PDF', slug: 'split-pdf', description: 'Extract pages, pick pages, or ZIP all', icon: Scissors },
+    { name: 'Compress PDF', slug: 'compress-pdf', description: 'Shrink PDF size for email & portals', icon: Shrink },
     { name: 'Reorder PDF', slug: 'reorder-pdf', description: 'Drag thumbnails to rearrange pages', icon: FileText },
     { name: 'Image to PDF', slug: 'image-to-pdf', description: 'Convert images to PDF documents', icon: ImagePlus },
-    { name: 'Image Compressor', slug: 'image-compressor', description: 'Reduce image file size', icon: Shrink },
+    { name: 'Image Compressor', slug: 'image-compressor', description: 'Reduce image file size (batch)', icon: Shrink },
     { name: 'Crop Image', slug: 'image-crop', description: 'Select region, rotate, flip & crop', icon: ImageIcon },
     { name: 'Resize Image', slug: 'resize-image', description: 'Resize images by pixels or percentage', icon: ImageIcon },
     { name: 'JPG to PNG', slug: 'jpg-to-png', description: 'Convert JPG images to PNG format', icon: ArrowRightLeft },
@@ -66,8 +67,28 @@ export default function ImagePDFToolsPage() {
                       Image &amp; PDF tools
                     </h1>
                     <p className="mx-auto max-w-2xl text-base text-muted-foreground md:text-lg">
-                        Merge, split, reorder, crop, convert, and compress — processed in your browser for privacy.
+                        Merge, split, compress, crop, convert, and optimize files — processed in your browser for privacy. Free, unlimited, no account.
                     </p>
+                    <div className="mt-5 flex flex-wrap justify-center gap-2 text-sm">
+                        <Link
+                          href="/tools/compress-pdf"
+                          className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 font-semibold text-primary"
+                        >
+                          Compress PDF
+                        </Link>
+                        <Link
+                          href="/tools/merge-pdf"
+                          className="rounded-full border border-border bg-card px-3 py-1.5 font-medium text-muted-foreground hover:border-primary/40 hover:text-primary"
+                        >
+                          Merge PDF
+                        </Link>
+                        <Link
+                          href="/tools/image-compressor"
+                          className="rounded-full border border-border bg-card px-3 py-1.5 font-medium text-muted-foreground hover:border-primary/40 hover:text-primary"
+                        >
+                          Compress images
+                        </Link>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -115,11 +136,13 @@ export default function ImagePDFToolsPage() {
                         <li><strong>PNG</strong> — screenshots, logos, and transparency</li>
                     </ul>
                     <p>
-                        Guides:{""}
+                        Guides:{" "}
+                        <Link href="/blog/how-to-compress-a-pdf-to-1mb-online">Compress a PDF to 1MB</Link>
+                        {" · "}
                         <Link href="/blog/merge-pdf-without-losing-formatting">Merge without losing formatting</Link>
-                        {" ·"}
+                        {" · "}
                         <Link href="/blog/compress-images-for-web-speed">Compress images for web speed</Link>
-                        {" ·"}
+                        {" · "}
                         <Link href="/blog/jpg-png-pdf-workflow-guide">JPG / PNG / PDF workflow</Link>
                     </p>
                 </section>

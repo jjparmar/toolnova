@@ -17,7 +17,7 @@ const studyCareerTools = [
   { name: "Homework Solver", href: "/tools/homework-solver" },
   { name: "Flashcard Maker", href: "/tools/flashcard-maker" },
   { name: "Merge PDF", href: "/tools/merge-pdf" },
-  { name: "Resume Bullets", href: "/tools/resume-bullets" },
+  { name: "Compress PDF", href: "/tools/compress-pdf" },
   { name: "Image Compressor", href: "/tools/image-compressor" },
 ];
 
@@ -27,6 +27,7 @@ const companyLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/pricing", label: "Pricing" },
   { href: "/tools", label: "All tools" },
+  { href: "/sitemap-page", label: "Sitemap" },
 ];
 
 const legalLinks = [
@@ -35,6 +36,7 @@ const legalLinks = [
   { href: "/cookie-policy", label: "Cookies" },
   { href: "/advertising", label: "Advertising" },
   { href: "/editorial-policy", label: "Editorial" },
+  { href: "/disclaimer", label: "Disclaimer" },
 ];
 
 export function Footer() {
@@ -56,7 +58,7 @@ export function Footer() {
             </Link>
 
             <p className="mb-6 max-w-sm text-sm leading-relaxed text-[hsl(var(--footer-muted))]">
-              {TOOL_COUNT_LABEL} free AI-powered productivity tools designed for students, researchers, and professionals worldwide. Zero registration required.
+              {TOOL_COUNT_LABEL} free AI and browser productivity tools for students and professionals. Start without registration—PDF and image tools stay private on your device.
             </p>
 
             <div className="flex gap-2.5">
@@ -87,7 +89,10 @@ export function Footer() {
             <ul className="space-y-3">
               {writingTools.map((t) => (
                 <li key={t.href}>
-                  <Link href={t.href} className="text-sm font-medium transition-colors hover:text-white">
+                  <Link
+                    href={t.href}
+                    className="text-sm font-medium text-[hsl(var(--footer-muted))] transition-colors hover:text-white"
+                  >
                     {t.name}
                   </Link>
                 </li>
@@ -102,7 +107,10 @@ export function Footer() {
             <ul className="space-y-3">
               {studyCareerTools.map((t) => (
                 <li key={t.href}>
-                  <Link href={t.href} className="text-sm font-medium transition-colors hover:text-white">
+                  <Link
+                    href={t.href}
+                    className="text-sm font-medium text-[hsl(var(--footer-muted))] transition-colors hover:text-white"
+                  >
                     {t.name}
                   </Link>
                 </li>
@@ -117,7 +125,10 @@ export function Footer() {
             <ul className="mb-6 space-y-3">
               {companyLinks.map((t) => (
                 <li key={t.href}>
-                  <Link href={t.href} className="text-sm font-medium transition-colors hover:text-white">
+                  <Link
+                    href={t.href}
+                    className="text-sm font-medium text-[hsl(var(--footer-muted))] transition-colors hover:text-white"
+                  >
                     {t.label}
                   </Link>
                 </li>
@@ -130,7 +141,10 @@ export function Footer() {
             <ul className="space-y-3">
               {legalLinks.map((t) => (
                 <li key={t.href}>
-                  <Link href={t.href} className="text-sm font-medium transition-colors hover:text-white">
+                  <Link
+                    href={t.href}
+                    className="text-sm font-medium text-[hsl(var(--footer-muted))] transition-colors hover:text-white"
+                  >
                     {t.label}
                   </Link>
                 </li>

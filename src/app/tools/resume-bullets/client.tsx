@@ -262,15 +262,15 @@ const faqs = [
   },
   {
     question:"What makes a good resume bullet?",
-    answer:"Great resume bullets start with strong action verbs, include quantifiable results (numbers, percentages, metrics), demonstrate impact and value, use industry-relevant keywords for ATS, and focus on achievements rather than just responsibilities. For example: 'Led team of 10 engineers to deliver product 3 weeks ahead of schedule, reducing costs by 25%' instead of 'Responsible for managing team.'",
+    answer:"Great resume bullets start with strong action verbs, show impact (not only duties), use industry keywords naturally, and stay truthful. Prefer real metrics when you have them. Pattern: Action + what you did + result. Example shape: 'Led a 10-person squad to ship checkout redesign, cutting support tickets for payment issues' — only use numbers you can defend in an interview.",
   },
   {
     question:"What bullet styles are available?",
-    answer:"Choose from three styles: Action-Oriented (starts with powerful action verbs like Led, Developed, Achieved), Impact-Focused (emphasizes measurable results and metrics), or Skills-Based (highlights specific technical and professional competencies). Select based on what aspect of your experience you want to emphasize.",
+    answer:"Choose from three styles: Action-Oriented (starts with powerful action verbs like Led, Developed, Achieved), Impact-Focused (emphasizes results and outcomes), or Skills-Based (highlights tools and competencies you actually used). Select based on what you want to emphasize for each role.",
   },
   {
     question:"How do I add numbers and metrics?",
-    answer:"Include any measurable data in your input: team size ('managed 10 people'), budget ('$500K budget'), time saved ('reduced processing time by 40%'), revenue impact ('increased sales by $2M'), percentage improvements ('improved efficiency by 30%'), or volumes ('processed 500+ applications'). Numbers make your achievements tangible and impressive.",
+    answer:"Paste real metrics from your experience: team size, budget, time saved, volume handled, rank, or conversion improvements you measured. The tool will weave numbers you provide into bullets. If you have no numbers, it writes strong qualitative impact lines instead of inventing fake percentages.",
   },
   {
     question:"What industries are supported?",
@@ -278,7 +278,7 @@ const faqs = [
   },
   {
     question:"Is the Resume Bullet Generator free?",
-    answer:"Yes! The Resume Bullet Generator is completely free to use. Create unlimited professional resume bullets without any cost. Perfect for job seekers, career changers, students, or anyone looking to improve their resume and increase interview callbacks.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

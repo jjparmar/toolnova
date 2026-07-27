@@ -295,7 +295,7 @@ const faqs = [
   },
   {
     question:"Is the Interview Generator free?",
-    answer:"Yes! The Interview Question Generator is completely free to use. Generate unlimited question sets for any role or interview type without any cost. Perfect for job seekers, career changers, or anyone preparing for important interviews who wants to practice with realistic questions.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

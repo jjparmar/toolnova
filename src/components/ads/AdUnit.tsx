@@ -98,13 +98,14 @@ export function InArticleAd({ className ="" }: { className?: string }) {
   return (
     maybeAd(
       adsenseConfig.adUnits.toolInContent,
-      <div className={`my-8 ${className}`}>
+      <div className={`ad-slot-shell ad-slot-shell--inarticle my-8 ${className}`}>
         <AdLabel />
         <AdUnit
           slot={adsenseConfig.adUnits.toolInContent}
           format="auto"
           fullWidthResponsive={true}
           className="max-w-3xl mx-auto"
+          style={{ minHeight: "100px" }}
         />
       </div>,
     ) ?? null
@@ -143,7 +144,7 @@ export function TopBannerAd({ className ="" }: { className?: string }) {
   if (!canDesktop && !canMobile) return null;
 
   return (
-    <div className={`my-4 ${className}`}>
+    <div className={`ad-slot-shell ad-slot-shell--banner my-4 ${className}`}>
       <AdLabel />
       {canDesktop && (
         <div className="hidden md:block">
@@ -151,7 +152,7 @@ export function TopBannerAd({ className ="" }: { className?: string }) {
             slot={desktopSlot}
             format="horizontal"
             fullWidthResponsive={true}
-            style={{ minHeight:"90px" }}
+            style={{ minHeight: "90px" }}
           />
         </div>
       )}
@@ -161,7 +162,7 @@ export function TopBannerAd({ className ="" }: { className?: string }) {
             slot={mobileSlot}
             format="auto"
             fullWidthResponsive={true}
-            style={{ minHeight:"50px" }}
+            style={{ minHeight: "50px" }}
           />
         </div>
       )}
@@ -176,13 +177,13 @@ export function BottomBoxAd({ className ="" }: { className?: string }) {
   return (
     maybeAd(
       adsenseConfig.adUnits.toolBottomBox,
-      <div className={`my-8 ${className}`}>
+      <div className={`ad-slot-shell ad-slot-shell--box my-8 ${className}`}>
         <AdLabel />
         <AdUnit
           slot={adsenseConfig.adUnits.toolBottomBox}
           format="rectangle"
           fullWidthResponsive={true}
-          style={{ minHeight:"250px" }}
+          style={{ minHeight: "250px" }}
           className="max-w-md mx-auto"
         />
       </div>,

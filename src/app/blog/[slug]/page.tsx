@@ -50,6 +50,15 @@ export async function generateMetadata({
     ?`${siteConfig.url}${post.coverImage}`
     :`${siteConfig.url}/og-image.png`;
 
+  // Always emit ISO-8601 for article dates (OG + meta). Raw "Jul 21, 2026"
+  // strings create duplicate/conflicting published_time tags and confuse crawlers.
+  const publishedIso = post.date
+    ? new Date(post.date).toISOString()
+    : undefined;
+  const modifiedIso = post.dateModified
+    ? new Date(post.dateModified).toISOString()
+    : publishedIso;
+
   return {
     title: post.title,
     description: post.metaDescription,
@@ -67,8 +76,8 @@ export async function generateMetadata({
       title: post.title,
       description: post.metaDescription,
       type:"article",
-      publishedTime: post.date,
-      modifiedTime: post.dateModified || post.date,
+      publishedTime: publishedIso,
+      modifiedTime: modifiedIso,
       authors: ["ToolNova Editorial Team"],
       url: canonicalUrl,
       locale:"en_US",
@@ -94,17 +103,14 @@ export async function generateMetadata({
     },
     other: {
       news_keywords:
-        post.keywords?.slice(0, 10).join(",") || post.category ||"","article:published_time": post.date
-        ? new Date(post.date).toISOString()
-        :"","article:modified_time": post.dateModified
-        ? new Date(post.dateModified).toISOString()
-        : post.date
-          ? new Date(post.date).toISOString()
-          :"","article:author":"ToolNova Editorial Team","article:section": post.category ||"Education","article:tag": post.keywords?.slice(0, 5).join(",") ||"","og:locale":"en_US","og:updated_time": post.dateModified
-        ? new Date(post.dateModified).toISOString()
-        : post.date
-          ? new Date(post.date).toISOString()
-          :"",
+        post.keywords?.slice(0, 10).join(",") || post.category ||"",
+      ...(publishedIso ? { "article:published_time": publishedIso } : {}),
+      ...(modifiedIso ? { "article:modified_time": modifiedIso } : {}),
+      "article:author":"ToolNova Editorial Team",
+      "article:section": post.category ||"Education",
+      "article:tag": post.keywords?.slice(0, 5).join(",") ||"",
+      "og:locale":"en_US",
+      ...(modifiedIso ? { "og:updated_time": modifiedIso } : {}),
     },
   };
 }
@@ -156,8 +162,14 @@ export default async function BlogPostPage({
       },
       sameAs: Object.values(siteConfig.links),
     },
-    datePublished: post.date,
-    dateModified: post.dateModified || post.date,
+    datePublished: post.date
+      ? new Date(post.date).toISOString()
+      : post.date,
+    dateModified: post.dateModified
+      ? new Date(post.dateModified).toISOString()
+      : post.date
+        ? new Date(post.date).toISOString()
+        : post.date,
     mainEntityOfPage: {"@type":"WebPage","@id": articleUrl,
     },
     wordCount: post.wordCount,
@@ -285,21 +297,34 @@ export default async function BlogPostPage({
       />
       <div className="min-h-screen bg-background">
         {/* Header with Back Link */}
-        <div className="py-6 bg-white border-b border-border/40">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="border-b border-border/60 bg-card/80 py-5 backdrop-blur-sm">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+              <Link href="/" className="hover:text-primary">
+                Home
+              </Link>
+              <span aria-hidden>/</span>
+              <Link href="/blog" className="hover:text-primary">
+                Blog
+              </Link>
+              <span aria-hidden>/</span>
+              <span className="line-clamp-1 font-medium text-foreground">
+                {post.title}
+              </span>
+            </nav>
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-slate-500 hover:text-primary text-sm font-medium transition-colors"
+              className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
-              <FaArrowLeft className="text-xs" />
+              <FaArrowLeft className="text-xs" aria-hidden />
               Back to Blog
             </Link>
           </div>
         </div>
 
         {/* GEO-Optimized Article Header */}
-        <div className="py-12 bg-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="border-b border-border/40 bg-card py-10 md:py-12">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             {author ? (
               <ArticleHeader
                 title={post.title}
@@ -307,15 +332,15 @@ export default async function BlogPostPage({
                 author={author}
                 publishedDate={post.date}
                 modifiedDate={post.dateModified}
-                readingTime={parseInt(post.readTime)}
+                readingTime={post.readTime}
                 category={post.category}
               />
             ) : (
               <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                <h1 className="font-heading mb-4 text-3xl font-extrabold tracking-tight text-foreground md:text-5xl">
                   {post.title}
                 </h1>
-                <p className="text-xl text-muted-foreground mb-6">
+                <p className="mb-6 text-lg text-muted-foreground md:text-xl">
                   {post.excerpt}
                 </p>
               </div>
@@ -323,51 +348,51 @@ export default async function BlogPostPage({
           </div>
         </div>
 
-        {/* Ad — Top Banner */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        {/* Ad — Top Banner (reserved height) */}
+        <div className="ad-slot-shell ad-slot-shell--banner mx-auto max-w-4xl px-4 pt-4 sm:px-6 lg:px-8">
           <TopBannerAd />
         </div>
 
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-12">
             {/* Article Column */}
             <div className="lg:col-span-2">
-              {/* Featured Image */}
+              {/* Featured Image — aspect box reduces CLS */}
               {post.coverImage && (
-                <div className="mb-10 relative rounded-2xl overflow-hidden shadow-xl shadow-primary/10">
+                <div className="relative mb-8 aspect-[16/9] overflow-hidden rounded-2xl border border-border shadow-lg shadow-primary/5 md:mb-10">
                   <NextImage
                     src={post.coverImage}
                     alt={post.imageAlt || post.title}
-                    width={800}
-                    height={450}
-                    className="w-full h-auto object-cover"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 720px"
+                    className="object-cover"
                     priority
                   />
                 </div>
               )}
 
               {/* Article Content */}
-              <article className="bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-border">
+              <article className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-10">
                 <TableOfContents headings={headings} />
-                <div className="prose prose-lg prose-slate max-w-none">
+                <div className="article-prose prose prose-lg max-w-none">
                   {processContent(post.content)}
                 </div>
                 <InArticleToolCallout category={post.category} />
-                {/* Ad — In Article */}
-                <InArticleAd className="not-prose" />
+                <div className="ad-slot-shell ad-slot-shell--inarticle not-prose">
+                  <InArticleAd className="not-prose" />
+                </div>
 
-                {/* Keywords/Tags */}
                 {post.keywords?.length > 0 && (
-                  <div className="mt-12 pt-8 border-t border-border/40">
-                    <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">
-                      Related Topics
+                  <div className="mt-12 border-t border-border pt-8">
+                    <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                      Related topics
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {post.keywords.slice(0, 8).map((keyword) => (
                         <span
                           key={keyword}
-                          className="px-3 py-1.5 rounded-full bg-muted text-muted-foreground text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer"
+                          className="rounded-full bg-muted px-3 py-1.5 text-sm font-medium text-muted-foreground"
                         >
                           {keyword}
                         </span>
@@ -376,9 +401,8 @@ export default async function BlogPostPage({
                   </div>
                 )}
 
-                {/* Share Buttons */}
-                <div className="mt-10 pt-8 border-t border-border/40">
-                  <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">
+                <div className="mt-10 border-t border-border pt-8">
+                  <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-muted-foreground">
                     Share this article
                   </h3>
                   <ShareButtons
@@ -387,14 +411,18 @@ export default async function BlogPostPage({
                   />
                 </div>
               </article>
-              {/* Ad — Bottom Box */}
-              <BottomBoxAd />
 
-              {/* FAQ Section */}
+              <div className="ad-slot-shell ad-slot-shell--box mt-8">
+                <BottomBoxAd />
+              </div>
+
               {post.faq?.length > 0 && (
-                <div className="mt-12 bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-border">
-                  <h2 className="text-2xl font-bold text-foreground mb-8">
-                    Frequently Asked Questions
+                <div
+                  id="faq"
+                  className="mt-12 scroll-mt-24 rounded-2xl border border-border bg-card p-6 shadow-sm md:p-10"
+                >
+                  <h2 className="font-heading mb-8 text-2xl font-extrabold text-foreground">
+                    Frequently asked questions
                   </h2>
                   <div className="space-y-6">
                     {post.faq.map((item, index) => (
@@ -402,10 +430,10 @@ export default async function BlogPostPage({
                         key={index}
                         className="border-b border-border pb-6 last:border-0 last:pb-0"
                       >
-                        <h3 className="text-lg font-bold text-foreground mb-3">
+                        <h3 className="faq-question mb-3 text-lg font-bold text-foreground">
                           {item.question}
                         </h3>
-                        <p className="text-muted-foreground leading-relaxed">
+                        <p className="faq-answer leading-relaxed text-muted-foreground">
                           {item.answer}
                         </p>
                       </div>
@@ -414,32 +442,31 @@ export default async function BlogPostPage({
                 </div>
               )}
 
-              {/* Related Posts */}
               {relatedPosts.length > 0 && (
                 <div className="mt-12">
-                  <h2 className="text-2xl font-bold text-foreground mb-8">
-                    Related Articles
+                  <h2 className="font-heading mb-6 text-2xl font-extrabold text-foreground">
+                    Related articles
                   </h2>
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid gap-5 md:grid-cols-2">
                     {relatedPosts.map((relatedPost) => (
                       <Link
                         key={relatedPost.slug}
                         href={`/blog/${relatedPost.slug}`}
                         className="group"
                       >
-                        <article className="bg-white rounded-2xl p-6 shadow-sm border border-border hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                          <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
+                        <article className="surface-card h-full p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30">
+                          <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
                             {relatedPost.category}
                           </span>
-                          <h3 className="text-lg font-bold text-foreground mt-4 group-hover:text-primary transition-colors line-clamp-2">
+                          <h3 className="mt-4 line-clamp-2 text-lg font-bold text-foreground transition-colors group-hover:text-primary">
                             {relatedPost.title}
                           </h3>
-                          <p className="text-muted-foreground text-sm mt-2 line-clamp-2">
+                          <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
                             {relatedPost.excerpt}
                           </p>
-                          <div className="mt-4 flex items-center gap-1 text-primary text-sm font-medium">
+                          <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-primary">
                             Read more
-                            <FaChevronRight className="text-xs" />
+                            <FaChevronRight className="text-xs" aria-hidden />
                           </div>
                         </article>
                       </Link>
@@ -451,33 +478,38 @@ export default async function BlogPostPage({
 
             {/* Sidebar */}
             <div className="hidden lg:block lg:col-span-1">
-              <BlogSidebar />
+              <div className="sticky top-24">
+                <BlogSidebar />
+              </div>
             </div>
           </div>
         </div>
 
         {/* CTA Section */}
-        <section className="py-20 bg-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-br from-primary to-blue-700 rounded-3xl p-10 md:p-14 text-center text-white relative overflow-hidden shadow-2xl shadow-primary/25">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-fuchsia-500/20 rounded-full blur-3xl pointer-events-none" />
+        <section className="border-t border-border bg-muted/40 py-16 md:py-20">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-violet-700 p-10 text-center text-white shadow-2xl shadow-primary/25 md:p-14">
+              <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+              <div className="pointer-events-none absolute bottom-0 left-0 h-48 w-48 rounded-full bg-fuchsia-500/20 blur-3xl" />
 
               <div className="relative z-10">
-                <FaRocket className="text-4xl mb-6 mx-auto text-primary-foreground/70" />
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Ready to Level Up?
+                <FaRocket
+                  className="mx-auto mb-6 text-4xl text-primary-foreground/70"
+                  aria-hidden
+                />
+                <h2 className="mb-4 text-3xl font-extrabold md:text-4xl">
+                  Put this guide into practice
                 </h2>
-                <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
-                  Try our free AI-powered tools and start saving time today. No
-                  sign-up required.
+                <p className="mx-auto mb-8 max-w-2xl text-lg text-primary-foreground/85">
+                  Use ToolNova&apos;s free AI and browser tools—no sign-up
+                  required to start.
                 </p>
                 <Link
                   href="/tools"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary rounded-xl font-bold text-lg hover:bg-primary/5 transition-colors shadow-lg shadow-black/10"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-lg font-bold text-primary shadow-lg shadow-black/10 transition-colors hover:bg-white/95"
                 >
-                  Explore Free Tools
-                  <FaChevronRight />
+                  Explore free tools
+                  <FaChevronRight aria-hidden />
                 </Link>
               </div>
             </div>

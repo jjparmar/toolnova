@@ -34,11 +34,21 @@ export function CareerToolsClient({ tools }: { tools: Tool[] }) {
     <CategoryToolsHub
       title="Career tools"
       description="Resume bullets, cover letters, interviews, and LinkedIn — built for job seekers."
-      kicker={`${tools.length} career tools · Free`}
+      kicker={`${tools.length} career tools · Free to start`}
       tools={tools.map((t) => ({
         ...t,
         icon: iconMap[t.icon] || Briefcase,
       }))}
+      relatedGuides={[
+        {
+          href: "/blog/resume-bullets-that-get-interviews",
+          label: "Resume bullets that get interviews",
+        },
+        {
+          href: "/blog/linkedin-headline-about-formula",
+          label: "LinkedIn headline + About formula",
+        },
+      ]}
     />
   );
 }

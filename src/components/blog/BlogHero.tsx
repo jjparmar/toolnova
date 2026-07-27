@@ -66,10 +66,10 @@ export function BlogHero({ post }: BlogHeroProps) {
                         {/* CTA Button */}
                         <Link
                             href={`/blog/${post.slug}`}
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-blue-600/25"
+                            className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 hover:gap-3 hover:opacity-95"
                         >
-                            Read Full Article
-                            <ArrowRight className="h-5 w-5" />
+                            Read full article
+                            <ArrowRight className="h-5 w-5" aria-hidden />
                         </Link>
                     </div>
 
@@ -79,8 +79,9 @@ export function BlogHero({ post }: BlogHeroProps) {
                             {post.coverImage && post.coverImage !== '' ? (
                                 <Image
                                     src={post.coverImage}
-                                    alt={post.title}
+                                    alt={post.imageAlt || post.title}
                                     fill
+                                    sizes="(max-width: 1024px) 100vw, 520px"
                                     className="object-cover"
                                     priority
                                 />

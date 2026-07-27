@@ -56,10 +56,11 @@ const relatedToolsMap: Record<string, string[]> = {
     'one-word-substitution': ['vocabulary-builder', 'idioms-phrases', 'synonym-finder', 'antonym-finder'],
 
     // PDF & Image Tools
-    'merge-pdf': ['split-pdf', 'image-to-pdf', 'image-compressor', 'resize-image'],
-    'split-pdf': ['merge-pdf', 'image-to-pdf', 'image-compressor'],
-    'image-to-pdf': ['merge-pdf', 'split-pdf', 'image-compressor', 'resize-image'],
-    'image-compressor': ['resize-image', 'jpg-to-png', 'png-to-jpg', 'image-to-pdf'],
+    'merge-pdf': ['split-pdf', 'compress-pdf', 'image-to-pdf', 'image-compressor'],
+    'split-pdf': ['merge-pdf', 'compress-pdf', 'image-to-pdf', 'image-compressor'],
+    'compress-pdf': ['split-pdf', 'merge-pdf', 'image-compressor', 'image-to-pdf'],
+    'image-to-pdf': ['merge-pdf', 'split-pdf', 'compress-pdf', 'image-compressor'],
+    'image-compressor': ['compress-pdf', 'resize-image', 'jpg-to-png', 'image-to-pdf'],
     'jpg-to-png': ['png-to-jpg', 'image-compressor', 'resize-image', 'image-to-pdf'],
     'png-to-jpg': ['jpg-to-png', 'image-compressor', 'resize-image', 'image-to-pdf'],
     'resize-image': ['image-compressor', 'jpg-to-png', 'png-to-jpg', 'image-to-pdf'],
@@ -114,6 +115,7 @@ const toolData: Record<string, { name: string; description: string; category: st
     'one-word-substitution': { name: 'One Word Substitution', description: 'Replace phrases with single words', category: 'Exam Prep' },
     'merge-pdf': { name: 'Merge PDF', description: 'Combine multiple PDFs into one', category: 'PDF & Image' },
     'split-pdf': { name: 'Split PDF', description: 'Split PDF into multiple files', category: 'PDF & Image' },
+    'compress-pdf': { name: 'Compress PDF', description: 'Shrink PDF size for email and portals', category: 'PDF & Image' },
     'image-to-pdf': { name: 'Image to PDF', description: 'Convert images to PDF format', category: 'PDF & Image' },
     'image-compressor': { name: 'Image Compressor', description: 'Compress images without quality loss', category: 'PDF & Image' },
     'jpg-to-png': { name: 'JPG to PNG', description: 'Convert JPG images to PNG format', category: 'PDF & Image' },

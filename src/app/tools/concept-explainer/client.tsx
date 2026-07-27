@@ -293,7 +293,7 @@ const faqs = [
   },
   {
     question:"Is the Concept Explainer free?",
-    answer:"Yes! The Concept Explainer is completely free to use. Get unlimited explanations for any concept without any cost. Perfect for students, lifelong learners, professionals expanding their knowledge, or anyone curious about understanding complex topics better.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

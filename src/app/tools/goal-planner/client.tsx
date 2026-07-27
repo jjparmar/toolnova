@@ -341,7 +341,7 @@ const faqs = [
   },
   {
     question:"Is the Goal Planner free?",
-    answer:"Yes! The Goal Planner is completely free to use. Create unlimited goal plans for any objective without any cost. Perfect for ambitious individuals, career professionals, students, or anyone serious about achieving their goals with a structured, proven approach.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

@@ -301,7 +301,7 @@ const faqs = [
   },
   {
     question:"Is the Email Writer free?",
-    answer:"Yes! The Email Writer is completely free to use. Generate unlimited professional emails for any purpose without any cost. Perfect for business professionals, students, job seekers, or anyone who needs to communicate effectively via email.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

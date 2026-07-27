@@ -226,7 +226,7 @@ const faqs = [
   },
   {
     question:"Is the Paragraph Generator free?",
-    answer:"Yes! The Paragraph Generator is completely free to use. Generate unlimited paragraphs for essays, articles, creative writing, or any content needs without any cost. Perfect for students, writers, and content creators of all levels.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

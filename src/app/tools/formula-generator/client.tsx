@@ -352,7 +352,7 @@ const faqs = [
   },
   {
     question:"Is the Formula Generator free to use?",
-    answer:"Yes! The Formula Generator is completely free. You can generate unlimited formula sheets for any subject or topic without any cost. Perfect for students, teachers, and anyone needing quick formula references.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

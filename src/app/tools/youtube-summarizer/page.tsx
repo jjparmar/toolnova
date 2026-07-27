@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
+import { RelatedBlogGuides } from '@/components/RelatedBlogGuides';
 import { getToolSchema, getFAQSchema, schemaToJsonLd } from '@/lib/schema';
 import { generateBreadcrumbSchema } from '@/lib/seo-advanced';
 import { getToolData } from '@/data/tools';
@@ -64,14 +64,8 @@ export default function YoutubeSummarizerPage() {
         faq={toolData.faqs}
       />
 
-      <section className="mx-auto max-w-5xl px-4 py-8">
-        <h2 className="text-xl font-semibold mb-3">Related guides and tools</h2>
-        <div className="flex flex-wrap gap-3 text-sm">
-          <Link href="/tools" className="underline underline-offset-4">All AI tools</Link>
-          <Link href="/tools/study-tools" className="underline underline-offset-4">Study tools</Link>
-          <Link href="/blog" className="underline underline-offset-4">Blog guides</Link>
-        </div>
-      </section>
+      <RelatedBlogGuides toolSlug="youtube-summarizer" />
+
 
       <RelatedTools currentTool="youtube-summarizer" category="Study" />
     </>

@@ -57,7 +57,7 @@ Rules:
 - No"Here is a summary" intro — start with ### Overview
 
 ## Transcript
-${text.substring(0, 28000)}`;
+${text}`;
 
     const aiRes = await fetch("/api/ai", {
       method:"POST",

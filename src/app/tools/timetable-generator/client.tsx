@@ -288,7 +288,7 @@ const faqs = [
   },
   {
     question:"Is the Timetable Generator free?",
-    answer:"Yes! The Timetable Generator is completely free to use. Create unlimited weekly schedules for any purpose without any cost. Perfect for organizing study schedules, work routines, fitness plans, or balancing multiple commitments efficiently.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

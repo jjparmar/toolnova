@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import { getToolSchema, schemaToJsonLd } from '@/lib/schema';
 import AgeCalculatorClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';

@@ -248,7 +248,7 @@ const faqs = [
   },
   {
     question:"Is this Synonym Finder tool completely free to use?",
-    answer:"Yes, our Synonym Finder is completely free to use with unlimited searches and no hidden fees or premium tiers required. You can look up as many words as you need, generate multiple synonym lists, and access all features including context selection, formality levels, and usage examples without any cost. We believe that language learning tools and vocabulary resources should be accessible to everyone—students, writers, professionals, and English language learners—regardless of financial means. Many synonym finder tools limit free users to basic word lists without explanations or examples, or impose daily search limits. We don't. You get comprehensive synonym analysis with definitions, usage examples, connotation notes, and organization by formality and intensity, all completely free. The tool saves your search history locally in your browser for convenience, but all data remains private and under your control—we don't require email registration or account creation to access features. Our goal is to help people communicate more effectively by expanding their vocabulary and understanding word nuances. We may introduce optional premium features in the future, such as personalized vocabulary tracking or advanced etymology information, but the core synonym finding functionality with context-aware suggestions and usage examples will always remain free for everyone.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
   {
     question:"What's the difference between similar synonyms and how do I understand nuances?",

@@ -263,7 +263,7 @@ const faqs = [
   },
   {
     question:"Is the Doubt Solver free?",
-    answer:"Yes! The Doubt Solver is completely free to use. Ask unlimited questions across all subjects without any cost. Perfect for students at all levels, lifelong learners, or anyone seeking quick answers to academic questions.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

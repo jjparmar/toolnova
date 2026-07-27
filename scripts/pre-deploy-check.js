@@ -81,15 +81,62 @@ if (exists("src/config/site.ts")) {
 }
 
 // 5) Blog integrity
-console.log("\n[5] Blog slugs");
+console.log("\n[5] Blog slugs & covers");
 if (exists("src/data/blog/articles.ts")) {
   const s = read("src/data/blog/articles.ts");
-  const slugs = [...s.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
+  const slugs = [
+    ...s.matchAll(/(?:slug|"slug")\s*:\s*["']([^"']+)["']/g),
+  ].map((m) => m[1]);
   const counts = {};
   slugs.forEach((x) => (counts[x] = (counts[x] || 0) + 1));
   const dups = Object.entries(counts).filter(([, c]) => c > 1);
-  if (dups.length) fail("Duplicate blog slugs: " + dups.map(([k]) => k).join(", "));
+  if (dups.length)
+    fail("Duplicate blog slugs: " + dups.map(([k]) => k).join(", "));
   else ok(`${Object.keys(counts).length} unique blog posts`);
+
+  // Human-readable dates break consistent lastmod / OG times
+  const humanDates = [
+    ...s.matchAll(/date(?:Modified)?\s*:\s*["'][A-Za-z]{3} \d/g),
+  ];
+  if (humanDates.length)
+    fail(`${humanDates.length} non-ISO blog date field(s) (use YYYY-MM-DD)`);
+  else ok("All blog dates use ISO YYYY-MM-DD");
+
+  // Cover images must exist under public/
+  const covers = [
+    ...s.matchAll(/coverImage["']?\s*:\s*["']([^"']+)["']/g),
+  ].map((m) => m[1]);
+  let missingCovers = 0;
+  for (const c of [...new Set(covers)]) {
+    if (c.startsWith("http")) continue;
+    const rel = "public" + (c.startsWith("/") ? c : "/" + c);
+    if (!exists(rel)) {
+      missingCovers++;
+      fail(`Missing cover: ${c}`);
+    }
+  }
+  if (!missingCovers) ok(`${new Set(covers).size} cover image path(s) exist`);
+
+  // Broken internal /tools/ links in articles
+  const toolDirs = fs
+    .readdirSync(path.join(root, "src/app/tools"), { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name);
+  const toolLinks = [
+    ...s.matchAll(/\]\(\/tools\/([a-z0-9-]+)\)/g),
+  ].map((m) => m[1]);
+  const badTools = [...new Set(toolLinks)].filter((t) => !toolDirs.includes(t));
+  if (badTools.length) fail("Broken tool links in blog: " + badTools.join(", "));
+  else ok("No broken /tools/ markdown links in articles");
+
+  const blogLinks = [
+    ...s.matchAll(/\]\(\/blog\/([a-z0-9-]+)\)/g),
+  ].map((m) => m[1]);
+  const slugSet = new Set(slugs);
+  const badBlogs = [...new Set(blogLinks)].filter((b) => !slugSet.has(b));
+  if (badBlogs.length)
+    fail("Broken blog links in articles: " + badBlogs.join(", "));
+  else ok("No broken /blog/ markdown links in articles");
 }
 
 // 6) Env example (don't require secrets in CI)
@@ -148,6 +195,11 @@ const configured = slotKeys.filter((k) => {
 if (configured.length) ok(`${configured.length} slot env(s) set in current process`);
 else ok("No manual slots in env yet (Auto Ads OK)");
 
+// 11) Point to CWV gate (also run via npm run predeploy chain)
+console.log("\n[11] CWV / Lighthouse gate");
+ok("Run automatically after this script: node scripts/lighthouse-check.js");
+ok("Live Lighthouse (optional): npm run lighthouse:live -- --url=https://www.toolnovahub.com");
+
 // Summary
 console.log("\n" + "=".repeat(40));
 if (failed === 0) {
@@ -162,7 +214,7 @@ Next steps:
      https://www.toolnovahub.com/advertising
      https://www.toolnovahub.com/sitemap.xml
   4. Request indexing in Google Search Console
-  5. Reapply AdSense after crawl + traffic
+  5. Optional CWV live: npm run lighthouse:live -- --url=https://www.toolnovahub.com
 `);
   process.exit(0);
 } else {

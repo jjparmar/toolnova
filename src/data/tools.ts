@@ -160,6 +160,31 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
             { question:"Can I reorder the PDFs before merging?", answer:"Yes. After uploading, you can drag and drop the file thumbnails to arrange them in any order before clicking Merge." },
             { question:"Does this work on mobile devices?", answer:"Yes. The Merge PDF tool is fully responsive and works on smartphones and tablets running modern browsers like Chrome, Safari, and Firefox." }
         ]
+    },"compress-pdf": {
+        slug:"compress-pdf",
+        name:"Compress PDF",
+        tagline:"Compress PDF Online Free – Shrink to 1MB",
+        description:"Compress PDF files in your browser to hit email and portal size limits. Reduce file size with quality presets while keeping documents readable—no upload, no watermark, no sign-up.",
+        category:"PDF Tools",
+        howItWorks: [
+            { step: 1, title:"Upload PDF", desc:"Drop a PDF (scans, portfolios, multi-page docs). Processing stays on your device." },
+            { step: 2, title:"Choose quality", desc:"Pick High, Balanced, or Smallest depending on how hard you need to shrink the file." },
+            { step: 3, title:"Compress", desc:"Pages are re-encoded at the selected resolution and JPEG quality for a smaller PDF." },
+            { step: 4, title:"Download", desc:"Save the compressed PDF and check the new file size against your 1MB/2MB limit." }
+        ],
+        benefits: [
+            { title:"Portal-friendly sizes", desc:"Hit common 1MB–5MB upload caps for jobs, universities, and government forms." },
+            { title:"Private by design", desc:"Compression runs fully in your browser—files never leave your device." },
+            { title:"Quality presets", desc:"Balance readability vs size without fiddling with advanced settings." },
+            { title:"Free & unlimited", desc:"No account, no watermark, no daily cap on local PDF compression." }
+        ],
+        faqs: [
+            { question:"Will text stay sharp?", answer:"Text-heavy digital PDFs may be rasterized during aggressive compression so the whole page becomes an image. For maximum text sharpness, export from Word/Google Docs as 'web/standard' quality first, or compress source images before building the PDF." },
+            { question:"Is this better than desktop Acrobat?", answer:"For most students and professionals, browser compression is enough to pass portal limits. Acrobat offers finer control for print workflows if you need it." },
+            { question:"Are my files uploaded?", answer:"No. Compression runs client-side with PDF.js and pdf-lib in your browser." },
+            { question:"What if the file is still too large?", answer:"Use the Smallest preset, split heavy pages with Split PDF, or compress embedded photos first with Image Compressor, then rebuild." },
+            { question:"Is Compress PDF free?", answer:"Yes. Browser PDF tools are free and unlimited with no sign-up." }
+        ]
     },"split-pdf": {
         slug:"split-pdf",
         name:"Split PDF",
@@ -180,7 +205,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
         ],
         faqs: [
             { question:"Can I extract specific pages from a PDF?", answer:"Yes. You can select individual pages (e.g., pages 3, 7, 12) or specify a range (e.g., pages 5–15) to extract into a new PDF document." },
-            { question:"Is the Split PDF tool free?", answer:"Yes, it is completely free with no limits on usage. There is no sign-up, no watermark, and no subscription required." },
+            { question:"Is the Split PDF tool free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." },
             { question:"Will splitting affect the quality of the PDF?", answer:"No. The extracted pages retain their original quality, formatting, images, and fonts without any degradation." },
             { question:"Can I split a password-protected PDF?", answer:"You will need to unlock the PDF first. Our tool processes unprotected files. Remove the password using your PDF reader before uploading." },
             { question:"Does it work offline?", answer:"After the page loads, the splitting engine works entirely in your browser on your device, so intermittent connectivity won't affect processing." }
@@ -258,7 +283,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
             { question:"Will I lose quality converting PNG to JPG?", answer:"JPG uses lossy compression, so there is a slight quality reduction. However, at high quality settings (90%+), the difference is virtually imperceptible to the human eye." },
             { question:"What happens to transparency?", answer:"JPG does not support transparency. Any transparent areas in your PNG will be replaced with a white background in the converted JPG." },
             { question:"Can I batch convert multiple files?", answer:"Yes. Upload multiple PNG files and convert them all to JPG simultaneously." },
-            { question:"Is the tool free to use?", answer:"Yes, completely free with no limits, no sign-up, and no watermarks." }
+            { question:"Is the tool free to use?", answer:"Yes. Browser image conversion is free and unlimited—no sign-up required." }
         ]
     },"image-compressor": {
         slug:"image-compressor",
@@ -305,7 +330,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
         faqs: [
             { question:"Can I reverse page order?", answer:"Yes. Use the Reverse button, then download." },
             { question:"Are thumbnails full quality?", answer:"Thumbnails are previews only. The download uses original PDF page data." },
-            { question:"Is reordering free?", answer:"Yes — unlimited and private in your browser." }
+            { question:"Is reordering free?", answer:"Yes. Reorder PDF is free and unlimited in your browser—no account required." }
         ]
     },"image-crop": {
         slug:"image-crop",
@@ -328,7 +353,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
         faqs: [
             { question:"How do I select part of an image to crop?", answer:"Upload the image, then drag the blue selection box over the area you want. Use corner and edge handles to refine the size, or type X/Y/width/height values." },
             { question:"Can I crop to Instagram size?", answer:"Yes. Choose the 1:1 aspect preset for square posts, or 9:16 for stories, then adjust the position." },
-            { question:"Is the crop tool free?", answer:"Yes. Completely free with unlimited use in your browser." },
+            { question:"Is the crop tool free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." },
             { question:"Do you upload my photos?", answer:"No. Processing is 100% client-side." }
         ]
     },"resize-image": {
@@ -354,7 +379,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
             { question:"What formats does the resizer support?", answer:"You can resize JPG, JPEG, PNG, WebP, and BMP images." },
             { question:"How do I avoid stretching my image?", answer:"Keep the 'Maintain Aspect Ratio' option checked. When you change the width, the height will automatically adjust to keep the image proportional." },
             { question:"Is there a limit on file size?", answer:"Because everything runs in your browser, the only limit is your device's memory. Most modern devices can easily handle images up to 50MB." },
-            { question:"Is the Image Resizer free?", answer:"Yes, completely free with no limits or watermarks." }
+            { question:"Is the Image Resizer free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },"bio-generator": {
         slug:"bio-generator",
@@ -629,7 +654,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
             { question:"Can teachers use this for classroom quizzes?", answer:"Absolutely. Many educators use our tool to quickly generate assessments, pop quizzes, and review materials for their classes." },
             { question:"How many questions can I generate?", answer:"You can generate quizzes with as few as 5 or as many as 100 questions per session." },
             { question:"Does it include an answer key?", answer:"Yes. Every generated quiz includes a complete answer key with explanations." },
-            { question:"Is the quiz generator free?", answer:"Yes, completely free for both students and educators." }
+            { question:"Is the quiz generator free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },"homework-solver": {
         slug:"homework-solver",
@@ -954,7 +979,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
             { question:"Can I convert long paragraphs?", answer:"Yes. There is no length limit. Paste entire documents and convert them instantly." },
             { question:"Is it useful for programming?", answer:"Yes. Developers use it to convert variable names between camelCase, snake_case, PascalCase, and other coding conventions." },
             { question:"Does it handle special characters?", answer:"Yes. Special characters, numbers, and punctuation are preserved during conversion." },
-            { question:"Is the case converter free?", answer:"Yes, completely free with unlimited conversions." }
+            { question:"Is the case converter free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },"character-counter": {
         slug:"character-counter",
@@ -979,7 +1004,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
             { question:"Does it update in real time?", answer:"Yes. All counts update instantly as you type or paste text—no need to click a button." },
             { question:"What are common platform character limits?", answer:"Twitter: 280 characters, Instagram bio: 150, Instagram caption: 2,200, Meta title: 60, Meta description: 160, Google Ads headline: 30." },
             { question:"Can I use it for SEO?", answer:"Yes. Track meta title and description lengths to ensure they display properly in search results." },
-            { question:"Is the character counter free?", answer:"Yes, completely free with unlimited use." }
+            { question:"Is the character counter free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },"word-counter": {
         slug:"word-counter",
@@ -1004,7 +1029,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
             { question:"Does it calculate reading time?", answer:"Yes. Reading time is based on an average reading speed of 238 words per minute, and speaking time on 130 words per minute." },
             { question:"Can it check keyword density?", answer:"Yes. The tool shows the frequency and percentage of each unique word, helping with SEO optimization and avoiding overuse." },
             { question:"What is the readability score?", answer:"The Flesch-Kincaid grade level indicates the US school grade level needed to understand your text. Lower numbers mean easier reading." },
-            { question:"Is the word counter free?", answer:"Yes, completely free with unlimited use." }
+            { question:"Is the word counter free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },"linkedin-optimizer": {
         slug:"linkedin-optimizer",
@@ -1204,7 +1229,7 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
             { question:"Can I calculate age between two custom dates?", answer:"Yes. Enter any start and end dates to find the exact time difference between them." },
             { question:"Does it account for leap years?", answer:"Yes. The calculator correctly handles leap years in all calculations for perfect accuracy." },
             { question:"Can I find out what day I was born on?", answer:"Yes. Enter your birth date and the tool shows you the day of the week you were born." },
-            { question:"Is the age calculator free?", answer:"Yes, completely free with unlimited calculations." }
+            { question:"Is the age calculator free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
         ]
     },"plagiarism-checker": {
         slug:"plagiarism-checker",

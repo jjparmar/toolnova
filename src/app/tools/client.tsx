@@ -290,6 +290,17 @@ const ALL_TOOLS = [
     isPopular: false,
   },
   {
+    name:"Compress PDF",
+    slug:"compress-pdf",
+    category:"Image & PDF Tools",
+    description:"Shrink PDF file size for email and upload portals",
+    icon: ImageIcon,
+    color:"text-rose-500",
+    gradient:"from-rose-500 to-red-600",
+    isNew: true,
+    isPopular: true,
+  },
+  {
     name:"Reorder PDF",
     slug:"reorder-pdf",
     category:"Image & PDF Tools",
@@ -629,10 +640,10 @@ const categories = [
 ];
 
 const heroStats = [
-  { icon: Zap, value: TOOL_COUNT_LABEL, label:"AI Tools" },
-  { icon: Globe, value:"100%", label:"Free to Start" },
-  { icon: ShieldCheck, value:"No", label:"Sign-up" },
-  { icon: Clock, value:"<10s", label:"Results" },
+  { icon: Zap, value: TOOL_COUNT_LABEL, label: "Tools" },
+  { icon: Globe, value: "Free", label: "To start" },
+  { icon: ShieldCheck, value: "Local", label: "PDF privacy" },
+  { icon: Clock, value: "Live", label: "AI stream" },
 ];
 
 export function ToolsClient() {
@@ -640,12 +651,16 @@ export function ToolsClient() {
   const [activeCategory, setActiveCategory] = useState("All");
   const searchRef = useRef<HTMLInputElement>(null);
 
-  // Keyboard shortcut Ctrl+K for search
+  // Keyboard shortcut Ctrl+K for search; Escape clears
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key ==="k") {
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
         e.preventDefault();
         searchRef.current?.focus();
+      }
+      if (e.key === "Escape" && document.activeElement === searchRef.current) {
+        setSearchQuery("");
+        searchRef.current?.blur();
       }
     };
     window.addEventListener("keydown", handler);
@@ -653,12 +668,16 @@ export function ToolsClient() {
   }, []);
 
   const filteredTools = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim();
     return ALL_TOOLS.filter((tool) => {
       const matchesSearch =
-        tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.description.toLowerCase().includes(searchQuery.toLowerCase());
+        !q ||
+        tool.name.toLowerCase().includes(q) ||
+        tool.description.toLowerCase().includes(q) ||
+        tool.slug.includes(q) ||
+        tool.category.toLowerCase().includes(q);
       const matchesCategory =
-        activeCategory ==="All" || tool.category === activeCategory;
+        activeCategory === "All" || tool.category === activeCategory;
       return matchesSearch && matchesCategory;
     });
   }, [searchQuery, activeCategory]);
@@ -714,14 +733,19 @@ export function ToolsClient() {
           </div>
 
           <div className="mx-auto max-w-2xl">
+            <label htmlFor="tools-catalog-search" className="sr-only">
+              Search all tools
+            </label>
             <div className="input-surface relative flex items-center rounded-xl">
-              <Search className="ml-4 mr-2 h-5 w-5 shrink-0 text-muted-foreground" />
+              <Search className="ml-4 mr-2 h-5 w-5 shrink-0 text-muted-foreground" aria-hidden />
               <input
+                id="tools-catalog-search"
                 ref={searchRef}
-                type="text"
+                type="search"
+                autoComplete="off"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search tools... (e.g. essay, pdf, resume)"
+                placeholder="Search tools… (essay, pdf, resume, compress)"
                 className="flex-1 border-none bg-transparent py-3.5 text-base font-medium text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
               />
               {searchQuery ? (
@@ -729,6 +753,7 @@ export function ToolsClient() {
                   type="button"
                   onClick={() => setSearchQuery("")}
                   className="mr-2 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+                  aria-label="Clear search"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -738,44 +763,57 @@ export function ToolsClient() {
                 </div>
               )}
             </div>
+            <p className="mt-2 text-center text-xs text-muted-foreground">
+              Tip: try “compress”, “grammar”, or “flashcard”
+            </p>
           </div>
         </div>
       </section>
 
       <div className="mx-auto max-w-[1100px] px-6 py-10 md:py-12">
-          {/* Category Filter Pills */}
-          <div className="mb-10 flex flex-wrap justify-center gap-2">
+          {/* Sticky category filter */}
+          <div className="sticky top-[68px] z-20 -mx-2 mb-10 border-b border-border/60 bg-background/90 px-2 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
+            <div
+              className="flex flex-wrap justify-center gap-2"
+              role="tablist"
+              aria-label="Filter tools by category"
+            >
             <button
               type="button"
+              role="tab"
+              aria-selected={activeCategory === "All"}
               onClick={() => setActiveCategory("All")}
               className={`cat-pill ${
                 activeCategory === "All" ? "cat-pill-active" : ""
               }`}
             >
-              All Tools ({ALL_TOOLS.length})
+              All ({ALL_TOOLS.length})
             </button>
             {categories.map((cat) => (
               <button
                 type="button"
+                role="tab"
+                aria-selected={activeCategory === cat.name}
                 key={cat.name}
                 onClick={() => setActiveCategory(cat.name)}
                 className={`cat-pill ${
                   activeCategory === cat.name ? "cat-pill-active" : ""
                 }`}
               >
-                <cat.icon className="h-4 w-4" />
-                <span>{cat.name.replace(" Tools","")}</span>
+                <cat.icon className="h-4 w-4" aria-hidden />
+                <span>{cat.name.replace(" Tools", "")}</span>
                 <span
                   className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
                     activeCategory === cat.name
-                      ?"bg-white/20 text-white"
-                      :"bg-muted text-muted-foreground"
+                      ? "bg-white/20 text-white"
+                      : "bg-muted text-muted-foreground"
                   }`}
                 >
                   {toolCountByCategory[cat.name] || 0}
                 </span>
               </button>
             ))}
+            </div>
           </div>
 
         {/* Featured / Popular Tools Banner (only when no search/filter) */}
@@ -868,25 +906,41 @@ export function ToolsClient() {
                   </div>
                 ))
               ) : (
-              <div className="col-span-full text-center py-24">
-                <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Search className="h-10 w-10 text-muted-foreground" />
+              <div className="col-span-full text-center py-20">
+                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-muted">
+                  <Search className="h-8 w-8 text-muted-foreground" aria-hidden />
                 </div>
-                <h3 className="font-heading text-2xl font-bold text-foreground mb-2">
-                  No tools found
+                <h3 className="font-heading mb-2 text-2xl font-bold text-foreground">
+                  No tools match{searchQuery ? ` “${searchQuery}”` : ""}
                 </h3>
-                <p className="text-muted-foreground mb-6">
-                  Try a different search term or browse by category.
+                <p className="mx-auto mb-6 max-w-md text-muted-foreground">
+                  Try another keyword, or jump to a category below.
                 </p>
+                <div className="mb-6 flex flex-wrap justify-center gap-2">
+                  {["pdf", "essay", "homework", "image", "resume"].map((hint) => (
+                    <button
+                      key={hint}
+                      type="button"
+                      onClick={() => {
+                        setActiveCategory("All");
+                        setSearchQuery(hint);
+                        searchRef.current?.focus();
+                      }}
+                      className="rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium text-muted-foreground hover:border-primary/40 hover:text-primary"
+                    >
+                      {hint}
+                    </button>
+                  ))}
+                </div>
                 <button
                   type="button"
                   onClick={() => {
                     setSearchQuery("");
                     setActiveCategory("All");
                   }}
-                  className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity"
+                  className="rounded-xl bg-primary px-6 py-3 font-bold text-primary-foreground transition-opacity hover:opacity-90"
                 >
-                  Show All Tools
+                  Show all tools
                 </button>
               </div>
             )}

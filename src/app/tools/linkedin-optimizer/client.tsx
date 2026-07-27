@@ -355,7 +355,7 @@ const faqs = [
   },
   {
     question:"Is this LinkedIn Optimizer tool free to use?",
-    answer:"Yes, our LinkedIn Optimizer is completely free to use with no hidden fees or premium tiers required. You can optimize your headline, about section, experience sections, or entire profile as many times as you need without any cost. We believe that career advancement tools should be accessible to everyone, regardless of their financial situation. The tool provides professional-quality optimizations that you might otherwise pay hundreds of dollars for through career coaching services or professional LinkedIn profile writers. There are no limits on the number of optimizations you can generate, and you retain full ownership of all content created. We don't require credit card information or email registration to use the basic features. Our goal is to democratize access to career development resources and help professionals at all levels increase their visibility on LinkedIn. The tool saves your optimization history locally in your browser for convenience, but all data remains private and under your control. Future premium features may include personalized coaching or industry-specific templates, but the core optimization functionality will always remain free.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
   {
     question:"What sections of my LinkedIn profile should I optimize first?",

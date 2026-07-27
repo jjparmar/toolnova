@@ -312,7 +312,7 @@ const faqs = [
   },
   {
     question:"Is the Caption Generator free?",
-    answer:"Yes! The Caption Generator is completely free to use. Create unlimited captions with hashtags for any platform without any cost. Perfect for influencers, businesses, content creators, or anyone looking to improve their social media presence and engagement.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

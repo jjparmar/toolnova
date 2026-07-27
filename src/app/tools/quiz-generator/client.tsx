@@ -311,7 +311,7 @@ const faqs = [
   },
   {
     question:"Is the Quiz Generator free?",
-    answer:"Yes! The Quiz Generator is completely free to use. Create unlimited quizzes for any subject or topic without any cost. Perfect for students, teachers creating practice materials, or anyone who wants to test their knowledge.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 

@@ -264,7 +264,7 @@ const faqs = [
   },
   {
     question:"Is the Revision Planner free?",
-    answer:"Yes! The Revision Planner is completely free to use. Create unlimited study plans for any exam or learning goal without any cost. Perfect for students preparing for finals, professionals studying for certifications, or anyone with a structured learning objective.",
+    answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access.",
   },
 ];
 
