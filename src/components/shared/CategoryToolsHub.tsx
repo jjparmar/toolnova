@@ -145,7 +145,7 @@ export function CategoryToolsHub({
       </div>
 
       {filtered.length === 0 && (
-        <div className="rounded-2xl border border-border bg-card px-6 py-14 text-center">
+        <div className="content-panel px-6 py-14 text-center">
           <p className="mb-2 font-heading text-lg font-bold text-foreground">
             No tools match your search
           </p>

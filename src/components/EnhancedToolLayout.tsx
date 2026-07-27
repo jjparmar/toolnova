@@ -468,7 +468,7 @@ export default function EnhancedToolLayout({
       )}
 
       {freeNote && (
-        <div className="relative z-10 mb-5 flex items-start gap-3 rounded-xl border border-border bg-card px-5 py-4 text-sm text-foreground shadow-sm">
+        <div className="relative z-10 mb-5 flex items-start gap-3 rounded-xl border border-[var(--border-color)] bg-card/90 px-5 py-4 text-sm text-foreground shadow-[0_2px_12px_rgba(148,163,184,0.06)]">
           <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
           <div>
             <strong className="text-xs font-bold uppercase tracking-wide text-primary">
@@ -488,11 +488,11 @@ export default function EnhancedToolLayout({
         </div>
       )}
 
-      <div className="relative z-20 flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-premium-sm">
+      <div className="tool-shell relative z-20 flex flex-col">
         {/* Simple Header */}
-        <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-3 sm:px-6 sm:py-4">
+        <div className="flex items-center justify-between border-b border-[var(--border-color)] bg-muted/30 px-4 py-3 sm:px-6 sm:py-4">
           <div className="flex items-center gap-4">
-            <div className="hidden items-center justify-center rounded-lg border border-border bg-card px-3 py-1.5 font-mono text-xs text-muted-foreground sm:flex">
+            <div className="hidden items-center justify-center rounded-lg border border-[var(--border-color)] bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground sm:flex">
               toolnova.com/tools/{toolSlug}
             </div>
           </div>
@@ -577,10 +577,10 @@ export default function EnhancedToolLayout({
 
         {/* Options */}
         {showOptions && resolvedToolOptions.length > 0 && (
-          <div className="p-4 sm:p-6 bg-muted/15 border-b border-border/60">
+          <div className="p-4 sm:p-6 bg-muted/20 border-b border-[var(--border-color)] animate-in fade-in slide-in-from-top-1 duration-200">
             <div className="flex items-center gap-2 mb-4">
               <Wand2 className="h-4 w-4 text-primary" />
-              <h3 className="text-sm font-bold text-foreground uppercase tracking-wide">
+              <h3 className="text-sm font-bold font-heading text-foreground uppercase tracking-wide">
                 Options
               </h3>
             </div>
@@ -596,7 +596,7 @@ export default function EnhancedToolLayout({
                       onChange={(e) =>
                         setOptions({ ...options, [option.id]: e.target.value })
                       }
-                      className="w-full px-4 py-2.5 rounded-xl border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all"
+                      className="input-surface w-full px-4 py-2.5 text-foreground focus:outline-none"
                     >
                       {option.options?.map((opt) => (
                         <option key={opt.value} value={opt.value}>
@@ -657,7 +657,7 @@ export default function EnhancedToolLayout({
                       onChange={(e) =>
                         setOptions({ ...options, [option.id]: e.target.value })
                       }
-                      className="w-full px-4 py-2.5 rounded-xl border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      className="input-surface w-full px-4 py-2.5 text-foreground focus:outline-none"
                     />
                   )}
                 </div>
@@ -668,11 +668,11 @@ export default function EnhancedToolLayout({
 
         {/* History */}
         {showHistory && history.length > 0 && (
-          <div className="p-4 sm:p-6 bg-muted/10 border-b border-border/60">
+          <div className="p-4 sm:p-6 bg-muted/15 border-b border-[var(--border-color)] animate-in fade-in slide-in-from-top-1 duration-200">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <History className="h-4 w-4 text-primary" />
-                <h3 className="text-sm font-bold text-foreground uppercase tracking-wide">
+                <h3 className="text-sm font-bold font-heading text-foreground uppercase tracking-wide">
                   Recent history
                 </h3>
               </div>
@@ -691,7 +691,7 @@ export default function EnhancedToolLayout({
                   type="button"
                   key={item.id}
                   onClick={() => loadHistoryItem(item)}
-                  className="w-full p-3 rounded-xl bg-card border border-border hover:border-primary/40 hover:shadow-md transition-all text-left group"
+                  className="w-full p-3 rounded-xl bg-card border border-[var(--border-color)] hover:border-primary/35 hover:shadow-md transition-all text-left group"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex-1 min-w-0">
@@ -717,38 +717,38 @@ export default function EnhancedToolLayout({
         )}
 
         {/* Tabs */}
-        <div className="flex border-b border-border bg-card">
+        <div className="flex border-b border-[var(--border-color)] bg-card">
           <button
             type="button"
             onClick={() => setActiveTab("input")}
-            className={cn("flex-1 px-4 sm:px-6 py-4 text-sm font-bold transition-all relative overflow-hidden",
+            className={cn("flex-1 px-4 sm:px-6 py-4 text-sm font-bold font-heading transition-all relative overflow-hidden",
               activeTab ==="input"
-                ?"text-primary bg-muted/50"
+                ?"text-primary bg-primary/5"
                 :"text-muted-foreground hover:text-foreground hover:bg-muted/30",
             )}
           >
             {inputLabel}
             {activeTab ==="input" && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#7c3aed] to-[#d946ef]" />
             )}
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("output")}
-            className={cn("flex-1 px-4 sm:px-6 py-4 text-sm font-bold transition-all relative overflow-hidden",
+            className={cn("flex-1 px-4 sm:px-6 py-4 text-sm font-bold font-heading transition-all relative overflow-hidden",
               activeTab ==="output"
-                ?"text-primary bg-muted/50"
+                ?"text-primary bg-primary/5"
                 :"text-muted-foreground hover:text-foreground hover:bg-muted/30",
             )}
           >
             {resultLabel}
             {activeTab ==="output" && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#7c3aed] to-[#d946ef]" />
             )}
           </button>
         </div>
 
-        <div className="p-4 sm:p-6">
+        <div className="p-4 sm:p-6 bg-card">
           {activeTab ==="input" ? (
             <div className="space-y-4">
               <textarea
@@ -760,7 +760,7 @@ export default function EnhancedToolLayout({
                 rows={inputRows}
                 maxLength={isNonAITool ? undefined : MAX_INPUT_CHARS + 500}
                 spellCheck
-                className="min-h-[280px] w-full resize-y rounded-xl border border-border bg-card px-5 py-5 text-foreground outline-none transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:ring-2 focus:ring-primary/15 sm:min-h-[360px]"
+                className="input-surface min-h-[280px] w-full resize-y px-5 py-5 text-foreground outline-none placeholder:text-muted-foreground/60 sm:min-h-[360px]"
               />
 
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
@@ -786,7 +786,7 @@ export default function EnhancedToolLayout({
                   <button
                     type="button"
                     onClick={handleCancel}
-                    className="rounded-xl border border-border bg-card px-5 py-4 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
+                    className="rounded-xl border border-[var(--border-color)] bg-card px-5 py-4 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
                   >
                     Cancel
                   </button>

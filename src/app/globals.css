@@ -99,9 +99,9 @@
   --warning: 38 92% 50%;
   --warning-foreground: 28 70% 16%;
 
-  /* #94a3b833-ish border */
-  --border: 214 20% 90%;
-  --input: 214 20% 90%;
+  /* Soft slate border — never harsh black */
+  --border: 214 28% 92%;
+  --input: 214 28% 92%;
   --ring: 258 90% 66%;
 
   /* Charts: violet / fuchsia / red / emerald / amber */
@@ -122,8 +122,8 @@
   --gradient-warm: linear-gradient(135deg, #e40014 0%, #7c3aed 100%);
   --gradient-hero: radial-gradient(100% 100% at 50% 0%, #f5f3ff 0%, #f8fafc 55%, #f8fafc 100%);
   --gradient-brand-text: linear-gradient(135deg, #7c3aed 0%, #d946ef 100%);
-  --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.95));
-  --border-color: rgba(148, 163, 184, 0.2);
+  --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.98));
+  --border-color: rgba(148, 163, 184, 0.16);
   --primary-glow: rgba(139, 92, 246, 0.15);
 }
 
@@ -143,15 +143,15 @@
   --muted-foreground: 215 16% 65%;
   --accent: 262 40% 16%;
   --accent-foreground: 270 100% 88%;
-  --border: 224 18% 18%;
-  --input: 224 18% 18%;
+  --border: 224 16% 22%;
+  --input: 224 16% 22%;
   --ring: 258 90% 70%;
   --footer: 224 30% 5%;
   --footer-foreground: 210 40% 98%;
   --footer-muted: 215 16% 62%;
   --gradient-hero: radial-gradient(100% 100% at 50% 0%, #1e1b4b 0%, #0f172a 55%, #0b1220 100%);
   --card-gradient: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.9));
-  --border-color: rgba(148, 163, 184, 0.18);
+  --border-color: rgba(148, 163, 184, 0.14);
   --primary-glow: rgba(139, 92, 246, 0.22);
 }
 
@@ -403,63 +403,120 @@
   font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* ── Surfaces & glass (YTH glass-premium style) ── */
+/* ── Surfaces & glass (unified sitewide) ──
+   Soft violet-slate borders — no harsh black outlines.
+   Interactive cards may lift; chrome/glass must not. */
 .surface-card {
   background: var(--card-gradient);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
   border-radius: 1rem;
-  box-shadow: 0 4px 20px rgba(148, 163, 184, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 18px rgba(148, 163, 184, 0.08);
+  transition:
+    border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .surface-card:hover {
-  border-color: rgba(139, 92, 246, 0.3);
-  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.28);
+  box-shadow: 0 12px 28px rgba(139, 92, 246, 0.12);
   transform: translateY(-2px);
 }
 
+/* Static panels (FAQs, stats, info) — no lift */
+.surface-card-quiet {
+  background: hsl(var(--card));
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(148, 163, 184, 0.06);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+.surface-card-quiet[data-open="true"] {
+  border-color: rgba(139, 92, 246, 0.28);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.1);
+}
+
+/* Header / sticky chrome — never translate on hover */
 .glass-premium,
 .glass-card-premium {
-  background: var(--card-gradient);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 20px rgba(148, 163, 184, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: color-mix(in srgb, hsl(var(--card)) 82%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+  border-color: var(--border-color);
+  box-shadow: 0 1px 0 rgba(148, 163, 184, 0.08);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .glass-premium:hover,
 .glass-card-premium:hover {
-  border-color: rgba(139, 92, 246, 0.3);
-  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
-  transform: translateY(-2px);
+  /* intentionally no transform — sticky chrome must stay put */
+  border-color: rgba(139, 92, 246, 0.18);
 }
+
 .dark .glass-premium,
 .dark .glass-card-premium,
-.dark .surface-card {
+.dark .surface-card,
+.dark .surface-card-quiet {
   background: var(--card-gradient);
   border-color: var(--border-color);
 }
-
-.content-panel {
+.dark .surface-card-quiet {
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 16px;
-  box-shadow: var(--shadow-premium-sm);
+}
+
+/* Canonical content box (tools, blog panels, legal) */
+.content-panel,
+.soft-panel {
+  background: hsl(var(--card));
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: 0 2px 14px rgba(148, 163, 184, 0.07);
+}
+
+/* Tool workspace shell */
+.tool-shell {
+  background: hsl(var(--card));
+  border: 1px solid var(--border-color);
+  border-radius: 1.05rem;
+  box-shadow: 0 4px 22px rgba(148, 163, 184, 0.08);
+  overflow: hidden;
 }
 
 .input-surface,
 .input-premium {
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 14px;
-  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  border-radius: 0.875rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .input-surface:focus-within,
-.input-premium:focus-within {
-  border-color: hsl(var(--primary));
-  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.15);
+.input-premium:focus-within,
+.input-surface:focus,
+.input-premium:focus {
+  border-color: hsl(var(--primary) / 0.55);
+  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.12);
+  outline: none;
 }
+
+/* Smooth expand/collapse without max-height clipping */
+.expand-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.expand-grid[data-open="true"],
+.expand-grid.is-open {
+  grid-template-rows: 1fr;
+}
+.expand-grid > .expand-grid-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+
 
 /* ── Typography & Gradients ── */
 .text-brand-gradient,
@@ -549,16 +606,17 @@
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 700;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid var(--border-color);
   background: hsl(var(--card));
   color: hsl(var(--muted-foreground));
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   cursor: pointer;
 }
 .cat-pill:hover {
-  border-color: hsl(var(--primary) / 0.4);
+  border-color: hsl(var(--primary) / 0.35);
   color: hsl(var(--foreground));
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);
 }
 .cat-pill-active {
   background: var(--gradient-primary);

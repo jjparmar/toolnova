@@ -58,7 +58,7 @@ export function processContent(content: string): React.ReactNode[] {
         if (listItems.length > 0) {
             const ListTag = listType === 'ol' ? 'ol' : 'ul';
             elements.push(
-                <ListTag key={key} className={`space-y-2 my-6 ${listType === 'ol' ? 'list-decimal' : 'list-disc'} pl-6 text-slate-700`}>
+                <ListTag key={key} className={`space-y-2 my-6 ${listType === 'ol' ? 'list-decimal' : 'list-disc'} pl-6 text-foreground/80`}>
                     {listItems.map((item, i) => (
                         <li key={i} className="leading-relaxed pl-2">{parseInlineMarkdown(item,`li-${key}-${i}`, true)}</li>
                     ))}
@@ -79,7 +79,7 @@ export function processContent(content: string): React.ReactNode[] {
 
             if (blockquoteType === 'QUOTE') {
                 elements.push(
-                    <blockquote key={key} className="border-l-4 border-primary bg-primary/5 p-6 my-8 rounded-r-xl text-slate-700 italic shadow-sm">
+                    <blockquote key={key} className="border-l-4 border-primary bg-primary/5 p-6 my-8 rounded-r-xl text-foreground/80 italic shadow-sm">
                         {contentElements}
                     </blockquote>
                 );
@@ -91,27 +91,27 @@ export function processContent(content: string): React.ReactNode[] {
 
                 switch (blockquoteType) {
                     case 'NOTE':
-                        styles ="bg-blue-50 border-blue-200 text-slate-700";
+                        styles ="bg-sky-50 border-sky-200/80 text-foreground/80";
                         icon = <FaInfoCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />;
                         title ="Note";
                         break;
                     case 'TIP':
-                        styles ="bg-emerald-50 border-emerald-200 text-slate-700";
+                        styles ="bg-emerald-50 border-emerald-200/80 text-foreground/80";
                         icon = <FaLightbulb className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />;
                         title ="Pro Tip";
                         break;
                     case 'IMPORTANT':
-                        styles ="bg-primary/5 border-primary/20 text-slate-700";
+                        styles ="bg-primary/5 border-primary/20 text-foreground/80";
                         icon = <FaBolt className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />;
                         title ="Important";
                         break;
                     case 'WARNING':
-                        styles ="bg-amber-50 border-amber-200 text-slate-800";
+                        styles ="bg-amber-50 border-amber-200/80 text-foreground/85";
                         icon = <FaExclamationTriangle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />;
                         title ="Warning";
                         break;
                     case 'CAUTION':
-                        styles ="bg-red-50 border-red-200 text-slate-800";
+                        styles ="bg-red-50 border-red-200/80 text-foreground/85";
                         icon = <FaExclamationTriangle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />;
                         title ="Caution";
                         break;
@@ -207,11 +207,11 @@ export function processContent(content: string): React.ReactNode[] {
 
                 elements.push(
                     <div key={key} className="my-8 overflow-x-auto">
-                        <table className="w-full border-collapse border border-slate-200 rounded-xl overflow-hidden">
-                            <thead className="bg-slate-100">
+                        <table className="w-full border-collapse border border-[var(--border-color)] rounded-xl overflow-hidden">
+                            <thead className="bg-muted/70">
                                 <tr>
                                     {headerRow.map((cell, i) => (
-                                        <th key={i} className="px-4 py-3 text-left font-bold text-slate-900 border-b border-slate-200">
+                                        <th key={i} className="px-4 py-3 text-left font-bold font-heading text-foreground border-b border-[var(--border-color)]">
                                             {cell}
                                         </th>
                                     ))}
@@ -219,9 +219,9 @@ export function processContent(content: string): React.ReactNode[] {
                             </thead>
                             <tbody>
                                 {dataRows.map((row, i) => (
-                                    <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                                    <tr key={i} className={i % 2 === 0 ? 'bg-card' : 'bg-muted/40'}>
                                         {row.map((cell, j) => (
-                                            <td key={j} className="px-4 py-3 text-slate-600 border-b border-slate-100">
+                                            <td key={j} className="px-4 py-3 text-muted-foreground border-b border-[var(--border-color)]">
                                                 {parseInlineMarkdown(cell,`td-${key}-${i}-${j}`, false)}
                                             </td>
                                         ))}
@@ -264,7 +264,7 @@ export function processContent(content: string): React.ReactNode[] {
                                 height={450}
                                 className="w-full h-auto object-cover"
                             />
-                            {alt && <p className="text-center text-sm text-slate-500 mt-3 italic">{alt}</p>}
+                            {alt && <p className="text-center text-sm text-muted-foreground mt-3 italic">{alt}</p>}
                         </div>
                     );
                     return;
@@ -275,7 +275,7 @@ export function processContent(content: string): React.ReactNode[] {
             if (part.startsWith('**') && part.endsWith('**')) {
                 const innerText = part.slice(2, -2);
                 nodes.push(
-                    <strong key={key} className="font-bold text-slate-900">
+                    <strong key={key} className="font-bold text-foreground">
                         {parseInlineMarkdown(innerText,`${key}-bold`, false)}
                     </strong>
                 );
@@ -471,7 +471,7 @@ export function processContent(content: string): React.ReactNode[] {
             const text = trimmedLine.replace('## ', '');
             const id = slugifyHeading(text);
             elements.push(
-                <h2 id={id} key={index} className="text-3xl font-bold text-slate-900 mt-16 mb-6 tracking-tight leading-tight scroll-mt-24">
+                <h2 id={id} key={index} className="text-3xl font-bold font-heading text-foreground mt-16 mb-6 tracking-tight leading-tight scroll-mt-24">
                     {text}
                 </h2>
             );
@@ -484,7 +484,7 @@ export function processContent(content: string): React.ReactNode[] {
             const text = trimmedLine.replace('### ', '');
             const id = slugifyHeading(text);
             elements.push(
-                <h3 id={id} key={index} className="text-2xl font-bold text-slate-900 mt-10 mb-5 tracking-tight scroll-mt-24">
+                <h3 id={id} key={index} className="text-2xl font-bold font-heading text-foreground mt-10 mb-5 tracking-tight scroll-mt-24">
                     {text}
                 </h3>
             );
@@ -495,7 +495,7 @@ export function processContent(content: string): React.ReactNode[] {
         if (trimmedLine.startsWith('#### ')) {
             flushList(`list-${index}`);
             elements.push(
-                <h4 key={index} className="text-xl font-bold text-slate-900 mt-8 mb-4 tracking-tight">
+                <h4 key={index} className="text-xl font-bold font-heading text-foreground mt-8 mb-4 tracking-tight">
                     {trimmedLine.replace('#### ', '')}
                 </h4>
             );
@@ -520,7 +520,7 @@ export function processContent(content: string): React.ReactNode[] {
         if (trimmedLine.startsWith('**') && trimmedLine.endsWith('**')) {
             flushList(`list-${index}`);
             elements.push(
-                <p key={index} className="font-bold text-slate-900 text-lg my-6">
+                <p key={index} className="font-bold text-foreground text-lg my-6">
                     {parseInlineMarkdown(trimmedLine.replace(/\*\*/g, ''),`p-${index}`, false)}
                 </p>
             );
@@ -532,7 +532,7 @@ export function processContent(content: string): React.ReactNode[] {
         // Regular paragraph
         flushList(`list-${index}`);
         elements.push(
-            <p key={index} className="text-slate-600 outline-none my-5 leading-8 text-[1.1rem]">
+            <p key={index} className="text-muted-foreground outline-none my-5 leading-8 text-[1.1rem]">
                 {parseInlineMarkdown(trimmedLine,`p-${index}`, true)}
             </p>
         );

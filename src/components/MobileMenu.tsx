@@ -94,7 +94,7 @@ export default function MobileMenu({ onClose, id }: MobileMenuProps) {
       <div
         id={id}
         ref={panelRef}
-        className="absolute left-0 right-0 top-[68px] max-h-[min(85dvh,calc(100dvh-68px))] overflow-y-auto overscroll-contain rounded-b-2xl border-b border-border bg-background shadow-2xl animate-in slide-in-from-top-2 fade-in duration-200"
+        className="absolute left-0 right-0 top-[68px] max-h-[min(85dvh,calc(100dvh-68px))] overflow-y-auto overscroll-contain rounded-b-2xl border-b border-[var(--border-color)] bg-background/98 shadow-[0_20px_40px_rgba(15,23,42,0.12)] backdrop-blur-md animate-in slide-in-from-top-2 fade-in duration-200"
       >
         <div className="flex flex-col gap-1 p-4 pb-6">
           <p id={titleId} className="sr-only">
@@ -159,7 +159,7 @@ export default function MobileMenu({ onClose, id }: MobileMenuProps) {
                   key={href}
                   href={href}
                   onClick={onClose}
-                  className="flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/35 hover:bg-muted/60"
+                  className="flex items-center gap-2 rounded-xl border border-[var(--border-color)] bg-card px-3 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/35 hover:bg-muted/60"
                 >
                   <Icon className="h-4 w-4 shrink-0 text-primary" aria-hidden />
                   <span className="truncate">{label}</span>

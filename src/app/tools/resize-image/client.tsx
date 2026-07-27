@@ -385,7 +385,7 @@ export default function ResizeImageClient() {
                             { step: 2, title: 'Set Dimensions', desc: 'Enter width & height', icon: Maximize2, color: 'from-indigo-500 to-purple-600' },
                             { step: 3, title: 'Download', desc: 'Get resized file', icon: Download, color: 'from-green-500 to-emerald-600' },
                         ].map((item) => (
-                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 border border-slate-100">
+                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-card/70 border border-[var(--border-color)]">
                                 <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg`}>
                                     <item.icon className="h-7 w-7 text-white" />
                                 </div>
@@ -446,7 +446,7 @@ export default function ResizeImageClient() {
                             <Link
                                 key={tool.slug}
                                 href={`/tools/${tool.slug}`}
-                                className="group p-4 rounded-xl bg-white/50 border border-slate-100  hover:border-primary/50 hover:shadow-lg transition-all text-center"
+                                className="group p-4 rounded-xl bg-card/70 border border-[var(--border-color)]  hover:border-primary/50 hover:shadow-lg transition-all text-center"
                             >
                                 <div className={`h-10 w-10 mx-auto rounded-xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                                     <tool.icon className="h-5 w-5 text-white" />

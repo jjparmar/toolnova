@@ -173,7 +173,7 @@ export function HomeDashboard() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={`Search ${TOOL_COUNT_LABEL} tools (e.g. compress pdf, homework solver)…`}
-                className="w-full rounded-2xl border border-border/80 bg-card py-4 pl-14 pr-12 text-base font-medium text-foreground shadow-lg transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15"
+                className="w-full rounded-2xl border border-[var(--border-color)] bg-card py-4 pl-14 pr-12 text-base font-medium text-foreground shadow-[0_8px_30px_rgba(148,163,184,0.12)] transition-all placeholder:text-muted-foreground/60 focus:border-primary/50 focus:outline-none focus:ring-4 focus:ring-primary/12"
               />
               {searchQuery && (
                 <button
@@ -209,7 +209,7 @@ export function HomeDashboard() {
               <div
                 role="listbox"
                 aria-label="Search results"
-                className="absolute left-0 right-0 top-full z-30 mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-2xl backdrop-blur-xl"
+                className="absolute left-0 right-0 top-full z-30 mt-3 overflow-hidden rounded-2xl border border-[var(--border-color)] bg-card shadow-[0_16px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl"
               >
                 {filteredTools.map((t) => (
                   <Link
@@ -231,7 +231,7 @@ export function HomeDashboard() {
               </div>
             )}
             {searchQuery.trim() && filteredTools.length === 0 && (
-              <div className="absolute left-0 right-0 top-full z-30 mt-3 rounded-2xl border border-border bg-card px-5 py-4 text-sm text-muted-foreground shadow-2xl">
+              <div className="absolute left-0 right-0 top-full z-30 mt-3 rounded-2xl border border-[var(--border-color)] bg-card px-5 py-4 text-sm text-muted-foreground shadow-[0_16px_40px_rgba(15,23,42,0.12)]">
                 No tools matched “{searchQuery}”. Try “pdf”, “grammar”, or{" "}
                 <Link href="/tools" className="font-semibold text-primary underline underline-offset-2">
                   browse all tools
@@ -337,7 +337,7 @@ export function HomeDashboard() {
               <Link
                 key={cat.href}
                 href={cat.href}
-                className="group flex flex-col rounded-2xl border border-border/60 bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-xl"
+                className="surface-card group flex flex-col p-6"
               >
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-primary transition-transform duration-300 group-hover:scale-110">
                   <cat.icon className="h-6 w-6" />
@@ -405,7 +405,7 @@ export function HomeDashboard() {
               ].map((item) => (
                 <div
                   key={item.t}
-                  className="flex items-start gap-3 rounded-2xl border border-border/60 bg-card p-4 shadow-xs"
+                  className="surface-card-quiet flex items-start gap-3 p-4"
                 >
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                   <div>

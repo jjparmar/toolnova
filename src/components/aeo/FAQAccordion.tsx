@@ -51,33 +51,45 @@ export function FAQAccordion({
                         return (
                             <div
                                 key={index}
-                                className="surface-card-quiet overflow-hidden transition-all duration-200 data-[open=true]:border-primary/30 data-[open=true]:shadow-premium-sm"
+                                className="surface-card-quiet"
                                 data-open={isOpen}
-                                data-speakable={isOpen ?"true" : undefined}
+                                data-speakable={isOpen ? "true" : undefined}
                             >
                                 <button
+                                    type="button"
                                     onClick={() => toggleFAQ(index)}
-                                    className="w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left transition-colors hover:bg-muted/40"
+                                    className="w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left transition-colors hover:bg-muted/40 rounded-[inherit]"
                                     aria-expanded={isOpen}
                                 >
-                                    <h3 className="text-base font-bold text-foreground flex-1 md:text-lg">
+                                    <h3 className="text-base font-bold font-heading text-foreground flex-1 md:text-lg">
                                         {faq.question}
                                     </h3>
-                                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors duration-200 ${isOpen ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground'}`} aria-hidden>
+                                    <span
+                                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors duration-200 ${
+                                            isOpen
+                                                ? "bg-primary/12 text-primary"
+                                                : "bg-muted text-muted-foreground"
+                                        }`}
+                                        aria-hidden
+                                    >
                                         <ChevronDown
-                                            className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                                            className={`w-4 h-4 transition-transform duration-200 ${
+                                                isOpen ? "rotate-180" : ""
+                                            }`}
                                         />
                                     </span>
                                 </button>
 
                                 <div
-                                    className={`transition-all duration-200 overflow-hidden ${isOpen ? 'max-h-96' : 'max-h-0'
-                                        }`}
+                                    className="expand-grid"
+                                    data-open={isOpen}
                                 >
-                                    <div className="px-5 pb-5 pt-1 md:px-6 md:pb-6">
-                                        <p className="text-muted-foreground leading-relaxed">
-                                            {faq.answer}
-                                        </p>
+                                    <div className="expand-grid-inner">
+                                        <div className="px-5 pb-5 pt-0 md:px-6 md:pb-6 border-t border-border/50">
+                                            <p className="pt-4 text-muted-foreground leading-relaxed">
+                                                {faq.answer}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

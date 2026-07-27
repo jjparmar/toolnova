@@ -123,14 +123,14 @@ export default async function DashboardPage() {
               <div className="h-10 w-10 rounded-xl bg-green-50 flex items-center justify-center">
                 <Zap className="h-5 w-5 text-green-600" />
               </div>
-              <span className="text-sm font-semibold text-slate-500">
+              <span className="text-sm font-semibold text-muted-foreground">
                 Today&apos;s Usage
               </span>
             </div>
             <p className="text-2xl font-black text-foreground">
               {todayCount}{isPremium ?"" :` / ${DAILY_FREE_LIMIT}`}
             </p>
-            <p className="mt-1 text-xs text-slate-500">
+            <p className="mt-1 text-xs text-muted-foreground">
               {isPremium ?"Unlimited generations" :`${remaining} remaining today`}
             </p>
           </div>
@@ -141,14 +141,14 @@ export default async function DashboardPage() {
               <div className="h-10 w-10 rounded-xl bg-blue-50 flex items-center justify-center">
                 <BarChart3 className="h-5 w-5 text-blue-600" />
               </div>
-              <span className="text-sm font-semibold text-slate-500">
+              <span className="text-sm font-semibold text-muted-foreground">
                 Total Generations
               </span>
             </div>
             <p className="text-2xl font-black text-foreground">
               {history.length}{history.length === 50 ?"+" :""}
             </p>
-            <p className="mt-1 text-xs text-slate-500">All time</p>
+            <p className="mt-1 text-xs text-muted-foreground">All time</p>
           </div>
 
           {/* Account */}
@@ -157,14 +157,14 @@ export default async function DashboardPage() {
               <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
                 <User className="h-5 w-5 text-primary" />
               </div>
-              <span className="text-sm font-semibold text-slate-500">
+              <span className="text-sm font-semibold text-muted-foreground">
                 Account
               </span>
             </div>
             <p className="text-sm font-bold text-foreground truncate">
               {user.name ||"User"}
             </p>
-            <p className="mt-1 text-xs text-slate-500 truncate">
+            <p className="mt-1 text-xs text-muted-foreground truncate">
               {user.email}
             </p>
           </div>
@@ -190,7 +190,7 @@ export default async function DashboardPage() {
               <FileText className="h-8 w-8 text-muted-foreground" />
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-2">No history yet</h3>
-            <p className="text-slate-500 mb-6">
+            <p className="text-muted-foreground mb-6">
               You haven&apos;t generated anything using our AI tools yet.
             </p>
             <Link
@@ -228,7 +228,7 @@ export default async function DashboardPage() {
                           <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
                             {item.toolSlug.replace(/-/g,"").toUpperCase()}
                           </span>
-                          <span className="flex items-center text-xs text-slate-500">
+                          <span className="flex items-center text-xs text-muted-foreground">
                             <Clock className="mr-1 h-3 w-3" />
                             {formatDistanceToNow(new Date(item.createdAt), { addSuffix: true })}
                           </span>
@@ -244,7 +244,7 @@ export default async function DashboardPage() {
                       <div className="flex shrink-0 gap-2">
                         <Link
                           href={`/tools/${item.toolSlug}`}
-                          className="inline-flex items-center justify-center rounded-md border border-border bg-white px-3 py-2 text-sm font-medium text-foreground/80 shadow-sm hover:bg-muted/60 :bg-slate-700 transition-colors"
+                          className="inline-flex items-center justify-center rounded-md border border-[var(--border-color)] bg-card px-3 py-2 text-sm font-medium text-foreground/80 shadow-sm hover:bg-muted/60 :bg-slate-700 transition-colors"
                         >
                           <ExternalLink className="mr-2 h-4 w-4" />
                           Open Tool

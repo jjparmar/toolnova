@@ -86,7 +86,7 @@ export default function EditorialPolicyPage() {
       </div>
 
       {/* Who We Are */}
-      <section className="mb-16 p-8 bg-slate-50 rounded-2xl border border-slate-100">
+      <section className="mb-16 p-8 bg-slate-50 rounded-2xl border border-[var(--border-color)]">
         <h2 className="text-2xl font-bold mb-4">Who Creates Content at ToolNova</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
           ToolNova was founded in 2026 in Singapore with the mission of making professional-grade 
@@ -114,7 +114,7 @@ export default function EditorialPolicyPage() {
           {standards.map((standard, i) => (
             <div
               key={i}
-              className="flex gap-6 p-8 bg-white rounded-2xl border border-slate-100 shadow-sm"
+              className="flex gap-6 p-8 bg-card rounded-2xl border border-[var(--border-color)] shadow-sm"
             >
               <div className="flex-shrink-0">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
@@ -170,7 +170,7 @@ export default function EditorialPolicyPage() {
           </a>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-50 :bg-slate-700 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-[var(--border-color)] rounded-xl font-semibold hover:bg-slate-50 :bg-slate-700 transition-colors"
           >
             Contact Form
           </Link>

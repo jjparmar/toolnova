@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function AdvertisingPage() {
   return (
-    <div className="container mx-auto px-6 py-24 max-w-4xl text-slate-800">
+    <div className="container mx-auto px-6 py-24 max-w-4xl text-foreground">
       <h1 className="text-4xl font-bold mb-4">Advertising Disclosure</h1>
       <p className="text-sm text-muted-foreground mb-10">
         Last Updated: {LAST_UPDATED}

@@ -43,7 +43,7 @@ const featuredTools = [
 export default function BlogSidebar() {
   return (
     <aside className="sticky top-24 space-y-8">
-      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+      <div className="content-panel p-6">
         <h3 className="font-heading mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
           <FaRocket className="text-primary" />
           Popular Tools

@@ -13,23 +13,23 @@ export function AuthorBio({ name, date, readingTime, category }: AuthorBioProps)
     const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
 
     return (
-        <div className="flex flex-wrap items-center gap-4 py-4 border-b border-slate-200">
+        <div className="flex flex-wrap items-center gap-4 py-4 border-b border-[var(--border-color)]">
             {/* Author Avatar & Name */}
             <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-teal-600 flex items-center justify-center text-white font-bold text-sm">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#d946ef] flex items-center justify-center text-white font-bold text-sm">
                     {initials}
                 </div>
                 <div>
-                    <div className="font-semibold text-slate-900">{name}</div>
-                    <div className="text-sm text-slate-500">Content Writer</div>
+                    <div className="font-semibold font-heading text-foreground">{name}</div>
+                    <div className="text-sm text-muted-foreground">Content Writer</div>
                 </div>
             </div>
 
             {/* Separator */}
-            <div className="hidden sm:block w-px h-8 bg-slate-200" />
+            <div className="hidden sm:block w-px h-8 bg-border" />
 
             {/* Meta Info */}
-            <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1.5">
                     <Calendar className="h-4 w-4" />
                     <time dateTime={date}>

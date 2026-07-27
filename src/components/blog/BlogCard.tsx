@@ -37,7 +37,7 @@ export function BlogCard({
   return (
     <Link href={`/blog/${post.slug}`} className="group">
       <article
-        className={`h-full overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-premium-sm ${
+        className={`surface-card h-full overflow-hidden p-0 ${
           featured ? "md:flex" : ""
         }`}
       >

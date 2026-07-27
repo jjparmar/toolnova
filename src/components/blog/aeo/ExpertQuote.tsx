@@ -16,17 +16,17 @@ export default function ExpertQuote({ quote, author, role, image }: ExpertQuoteP
                 <FaQuoteLeft className="h-5 w-5" />
             </div>
 
-            <div className="relative rounded-2xl border border-border bg-card p-8 pt-10 shadow-lg shadow-primary/5">
+            <div className="content-panel relative p-8 pt-10 shadow-lg shadow-primary/5">
                 <div className="absolute -left-4 -top-4 flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
                     <span className="font-serif text-2xl leading-none text-primary">&quot;</span>
                 </div>
-                <blockquote className="text-xl text-slate-800 font-medium leading-relaxed italic mb-6">
+                <blockquote className="text-xl text-foreground font-medium leading-relaxed italic mb-6">
                     {quote}
                 </blockquote>
 
-                <div className="flex items-center gap-4 border-t border-slate-100 pt-6">
+                <div className="flex items-center gap-4 border-t border-[var(--border-color)] pt-6">
                     {image ? (
-                        <div className="relative w-12 h-12 rounded-full overflow-hidden bg-slate-200">
+                        <div className="relative w-12 h-12 rounded-full overflow-hidden bg-muted">
                             <NextImage
                                 src={image}
                                 alt={author}
@@ -41,10 +41,10 @@ export default function ExpertQuote({ quote, author, role, image }: ExpertQuoteP
                     )}
 
                     <div>
-                        <cite className="not-italic font-bold text-slate-900 block">
+                        <cite className="not-italic font-bold text-foreground block">
                             {author}
                         </cite>
-                        <span className="text-sm text-slate-500 font-medium">
+                        <span className="text-sm text-muted-foreground font-medium">
                             {role}
                         </span>
                     </div>

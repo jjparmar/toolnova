@@ -71,7 +71,7 @@ export function Header() {
         <div className="flex items-center gap-3 sm:gap-8">
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-border/60 bg-card text-foreground transition-colors hover:bg-muted md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border-color)] bg-card text-foreground transition-colors hover:bg-muted md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
@@ -135,7 +135,7 @@ export function Header() {
                 <UsageCounter />
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-2 rounded-xl border border-border/80 bg-card px-3.5 py-2 text-sm font-bold text-foreground transition-all hover:bg-muted hover:border-primary/30"
+                  className="flex items-center gap-2 rounded-xl border border-[var(--border-color)] bg-card px-3.5 py-2 text-sm font-bold text-foreground transition-all hover:bg-muted hover:border-primary/30"
                 >
                   <LayoutDashboard className="h-4 w-4 text-primary" />
                   <span className="hidden lg:inline">Dashboard</span>

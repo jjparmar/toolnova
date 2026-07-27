@@ -34,43 +34,59 @@ export function FAQSection({ faqs, title ="Frequently Asked Questions" }: FAQSec
 
             {/* Header */}
             <div className="flex items-center gap-3 mb-8">
-                <div className="p-2 bg-blue-100 rounded-xl">
-                    <HelpCircle className="h-6 w-6 text-blue-600" />
+                <div className="p-2 bg-primary/10 rounded-xl">
+                    <HelpCircle className="h-6 w-6 text-primary" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+                <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
                     {title}
                 </h2>
             </div>
 
             {/* FAQ Accordion */}
             <div className="space-y-3">
-                {faqs.map((faq, index) => (
+                {faqs.map((faq, index) => {
+                    const isOpen = openIndex === index;
+                    return (
                     <div
                         key={index}
-                        className="border border-border rounded-xl overflow-hidden bg-white hover:border-blue-200 transition-colors"
+                        className="surface-card-quiet"
+                        data-open={isOpen}
                     >
                         <button
-                            onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                            className="w-full flex items-center justify-between p-5 text-left hover:bg-muted/60 transition-colors"
+                            type="button"
+                            onClick={() => setOpenIndex(isOpen ? null : index)}
+                            className="w-full flex items-center justify-between p-5 text-left hover:bg-muted/50 transition-colors rounded-[inherit]"
+                            aria-expanded={isOpen}
                         >
-                            <span className="font-semibold text-foreground pr-4">
+                            <span className="font-semibold font-heading text-foreground pr-4">
                                 {faq.question}
                             </span>
-                            <ChevronDown
-                                className={`h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-200 ${openIndex === index ? 'rotate-180' : ''
-                                    }`}
-                            />
-                        </button>
-                        <div
-                            className={`overflow-hidden transition-all duration-200 ${openIndex === index ? 'max-h-96' : 'max-h-0'
+                            <span
+                                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
+                                    isOpen
+                                        ? "bg-primary/12 text-primary"
+                                        : "bg-muted text-muted-foreground"
                                 }`}
-                        >
-                            <div className="px-5 pb-5 text-muted-foreground leading-relaxed">
-                                {faq.answer}
+                            >
+                                <ChevronDown
+                                    className={`h-4 w-4 transition-transform duration-200 ${
+                                        isOpen ? "rotate-180" : ""
+                                    }`}
+                                />
+                            </span>
+                        </button>
+                        <div className="expand-grid" data-open={isOpen}>
+                            <div className="expand-grid-inner">
+                                <div className="px-5 pb-5 border-t border-border/50">
+                                    <p className="pt-4 text-muted-foreground leading-relaxed">
+                                        {faq.answer}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                ))}
+                    );
+                })}
             </div>
         </section>
     );

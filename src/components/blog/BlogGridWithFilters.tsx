@@ -59,7 +59,7 @@ export function BlogGridWithFilters({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search guides…"
-            className="w-full rounded-xl border border-border bg-card py-2.5 pl-10 pr-3 text-sm font-medium text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className="input-surface w-full py-2.5 pl-10 pr-3 text-sm font-medium text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
           />
         </div>
 
@@ -102,7 +102,7 @@ export function BlogGridWithFilters({
       </div>
 
       {filteredPosts.length === 0 ? (
-        <div className="rounded-2xl border border-border bg-card px-6 py-14 text-center">
+        <div className="content-panel px-6 py-14 text-center">
           <p className="mb-2 font-heading text-lg font-bold text-foreground">
             No articles found
           </p>

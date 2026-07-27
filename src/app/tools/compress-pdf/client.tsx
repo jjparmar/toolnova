@@ -154,7 +154,7 @@ export default function CompressPDFClient() {
         <button
           type="button"
           onClick={() => router.push("/tools/image-pdf-tools")}
-          className="group mb-6 inline-flex items-center gap-2 rounded-xl border border-border/50 bg-background/60 px-4 py-2 text-sm font-medium shadow-sm transition hover:border-primary/40"
+          className="group mb-6 inline-flex items-center gap-2 rounded-xl border border-[var(--border-color)] bg-background/60 px-4 py-2 text-sm font-medium shadow-sm transition hover:border-primary/40"
         >
           <ArrowLeft className="h-4 w-4" />
           Image & PDF tools
@@ -195,7 +195,7 @@ export default function CompressPDFClient() {
           className={`cursor-pointer rounded-2xl border-2 border-dashed p-10 text-center transition ${
             dragOver
               ? "border-primary bg-primary/5"
-              : "border-border bg-card hover:border-primary/40"
+              : "border-[var(--border-color)] bg-card hover:border-primary/40"
           }`}
         >
           <input
@@ -215,7 +215,7 @@ export default function CompressPDFClient() {
         </div>
 
         {file && (
-          <div className="mt-6 space-y-5 rounded-2xl border border-border bg-card p-5 shadow-sm">
+          <div className="content-panel mt-6 space-y-5 p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex min-w-0 items-center gap-3">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-600">
@@ -254,7 +254,7 @@ export default function CompressPDFClient() {
                       className={`rounded-xl border p-3 text-left transition ${
                         active
                           ? "border-primary bg-primary/5 ring-1 ring-primary/30"
-                          : "border-border hover:border-primary/30"
+                          : "border-[var(--border-color)] hover:border-primary/30"
                       }`}
                     >
                       <div className="text-sm font-bold text-foreground">
@@ -358,7 +358,7 @@ export default function CompressPDFClient() {
           ].map((c) => (
             <div
               key={c.title}
-              className="rounded-xl border border-border bg-card p-4"
+              className="content-panel p-4"
             >
               <c.icon className="mb-2 h-5 w-5 text-primary" />
               <div className="font-semibold text-foreground">{c.title}</div>
@@ -376,7 +376,7 @@ export default function CompressPDFClient() {
               <Link
                 key={t.slug}
                 href={`/tools/${t.slug}`}
-                className="rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium hover:border-primary/40 hover:text-primary"
+                className="rounded-full border border-[var(--border-color)] bg-card px-3 py-1.5 text-sm font-medium hover:border-primary/40 hover:text-primary"
               >
                 {t.name}
               </Link>

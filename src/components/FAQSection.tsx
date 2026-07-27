@@ -66,13 +66,15 @@ export function FAQSection({ faqs = [], title = "Frequently Asked Questions", sh
                     )}
 
                     {/* FAQ Accordion */}
-                    <Card className="p-6">
+                    <Card className="p-2 sm:p-4">
                         {filteredFAQs.length > 0 ? (
-                            <Accordion type="single" collapsible className="w-full">
+                            <Accordion type="single" collapsible className="w-full px-2 sm:px-4">
                                 {filteredFAQs.map((faq, index) => (
                                     <AccordionItem key={index} value={`item-${index}`}>
                                         <AccordionTrigger className="text-left hover:no-underline">
-                                            <span className="font-semibold">{faq.question}</span>
+                                            <span className="font-semibold font-heading text-foreground pr-2">
+                                                {faq.question}
+                                            </span>
                                         </AccordionTrigger>
                                         <AccordionContent>
                                             <div className="text-muted-foreground leading-relaxed">

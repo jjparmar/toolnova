@@ -360,7 +360,7 @@ export default async function BlogPostPage({
             <div className="lg:col-span-2">
               {/* Featured Image — aspect box reduces CLS */}
               {post.coverImage && (
-                <div className="relative mb-8 aspect-[16/9] overflow-hidden rounded-2xl border border-border shadow-lg shadow-primary/5 md:mb-10">
+                <div className="relative mb-8 aspect-[16/9] overflow-hidden rounded-2xl border border-[var(--border-color)] shadow-lg shadow-primary/5 md:mb-10">
                   <NextImage
                     src={post.coverImage}
                     alt={post.imageAlt || post.title}
@@ -373,7 +373,7 @@ export default async function BlogPostPage({
               )}
 
               {/* Article Content */}
-              <article className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-10">
+              <article className="content-panel p-6 md:p-10">
                 <TableOfContents headings={headings} />
                 <div className="article-prose prose prose-lg max-w-none">
                   {processContent(post.content)}
@@ -419,7 +419,7 @@ export default async function BlogPostPage({
               {post.faq?.length > 0 && (
                 <div
                   id="faq"
-                  className="mt-12 scroll-mt-24 rounded-2xl border border-border bg-card p-6 shadow-sm md:p-10"
+                  className="content-panel mt-12 scroll-mt-24 p-6 md:p-10"
                 >
                   <h2 className="font-heading mb-8 text-2xl font-extrabold text-foreground">
                     Frequently asked questions

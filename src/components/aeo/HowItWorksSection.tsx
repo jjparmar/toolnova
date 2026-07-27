@@ -42,7 +42,7 @@ export function HowItWorksSection({
                             <div key={step.step} className="relative">
                                 {/* Connector Line */}
                                 {!isLast && (
-                                    <div className="absolute left-6 top-16 bottom-0 w-0.5 bg-slate-200 -mb-6" />
+                                    <div className="absolute left-6 top-16 bottom-0 w-0.5 bg-border -mb-6" />
                                 )}
 
                                 <div className="flex gap-4 md:gap-6 items-start">
@@ -55,14 +55,14 @@ export function HowItWorksSection({
                                     </div>
 
                                     {/* Content */}
-                                    <div className="flex-1 bg-white rounded-xl p-6 shadow-sm border border-slate-200">
+                                    <div className="flex-1 surface-card-quiet p-6">
                                         <div className="flex items-start gap-3 mb-3">
                                             <Icon className={`w-6 h-6 flex-shrink-0 mt-1 ${step.color.replace('bg-', 'text-')}`} />
-                                            <h3 className="text-xl font-bold text-slate-900">
+                                            <h3 className="text-xl font-bold font-heading text-foreground">
                                                 {step.title}
                                             </h3>
                                         </div>
-                                        <p className="text-slate-600 leading-relaxed">
+                                        <p className="text-muted-foreground leading-relaxed">
                                             {step.description}
                                         </p>
                                     </div>
