@@ -968,9 +968,9 @@ export function ToolsClient() {
                   >
                     <category.icon className="h-7 w-7" />
                   </div>
-                  <h4 className="font-heading font-bold text-foreground mb-1.5 text-lg">
+                  <h3 className="font-heading font-bold text-foreground mb-1.5 text-lg">
                     {category.name}
-                  </h4>
+                  </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                     {category.description}
                   </p>

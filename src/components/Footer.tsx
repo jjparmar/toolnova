@@ -83,9 +83,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
+            <p className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
               Writing Tools
-            </h4>
+            </p>
             <ul className="space-y-3">
               {writingTools.map((t) => (
                 <li key={t.href}>
@@ -101,9 +101,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
+            <p className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
               Popular Tools
-            </h4>
+            </p>
             <ul className="space-y-3">
               {studyCareerTools.map((t) => (
                 <li key={t.href}>
@@ -119,9 +119,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
+            <p className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
               Company
-            </h4>
+            </p>
             <ul className="mb-6 space-y-3">
               {companyLinks.map((t) => (
                 <li key={t.href}>
@@ -135,9 +135,9 @@ export function Footer() {
               ))}
             </ul>
 
-            <h4 className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
+            <p className="mb-4 text-xs font-extrabold uppercase tracking-widest text-white/90">
               Legal
-            </h4>
+            </p>
             <ul className="space-y-3">
               {legalLinks.map((t) => (
                 <li key={t.href}>

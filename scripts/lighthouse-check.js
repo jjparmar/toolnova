@@ -97,9 +97,14 @@ if (globals.includes("ad-slot-shell") || globals.includes("min-height"))
 else warn("Ad slot min-height shells not found");
 
 console.log("\n[3] Font payload discipline");
-if (layout.includes('weight: ["400", "500", "600", "700"]') || layout.includes("weight: [\"400\""))
-  ok("Inter weights trimmed for LCP");
-else warn("Inter may still preload too many weights");
+if (
+  (layout.includes("Outfit") || layout.includes("Inter")) &&
+  (layout.includes('weight: ["400", "500", "600", "700"]') ||
+    layout.includes('weight: ["400"') ||
+    layout.includes("weight: [\"400\""))
+)
+  ok("Primary font weights trimmed for LCP");
+else warn("Primary font may still preload too many weights");
 
 if (layout.includes("Geist_Mono") && layout.includes("preload: false"))
   ok("Mono font not preloaded");

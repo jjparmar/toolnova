@@ -80,8 +80,11 @@ export function Header() {
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
 
-          <Link href="/" className="group flex shrink-0 items-center gap-2.5" aria-label="ToolNova home">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#d946ef] text-base font-extrabold text-white shadow-md shadow-violet-500/30 transition-transform duration-300 group-hover:scale-105">
+          <Link href="/" className="group flex shrink-0 items-center gap-2.5">
+            <div
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#d946ef] text-base font-extrabold text-white shadow-md shadow-violet-500/30 transition-transform duration-300 group-hover:scale-105"
+              aria-hidden="true"
+            >
               T
             </div>
             <div className="flex items-baseline gap-1.5">
