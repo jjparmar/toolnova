@@ -98,7 +98,7 @@ export default function ImagePDFToolsPage() {
                             href={`/tools/${tool.slug}`}
                             className="surface-card group flex flex-col p-5"
                         >
-                            <div className="tool-icon mb-4 bg-gradient-to-br from-[#E5322D] to-[#c42824] transition-transform group-hover:scale-105">
+                            <div className="tool-icon mb-4 bg-gradient-to-br from-[#7c3aed] to-[#d946ef] transition-transform group-hover:scale-105">
                                 <tool.icon className="h-6 w-6" strokeWidth={1.75} />
                             </div>
                             <h3 className="font-heading mb-1.5 text-lg font-bold text-foreground group-hover:text-primary">

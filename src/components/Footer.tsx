@@ -43,13 +43,13 @@ export function Footer() {
   return (
     <footer className="footer-dark relative mt-auto w-full overflow-hidden">
       {/* Top ambient gradient line */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#FF3B5C] to-transparent opacity-60" />
+      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#8b5cf6] to-transparent opacity-70" />
 
       <div className="mx-auto max-w-[1240px] px-6 py-16 md:py-20">
         <div className="mb-14 grid grid-cols-2 gap-10 md:grid-cols-5">
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="group mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#FF3B5C] to-[#7C3AED] text-lg font-extrabold text-white shadow-lg shadow-primary/30 transition-transform duration-300 group-hover:scale-105">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#d946ef] text-lg font-extrabold text-white shadow-lg shadow-violet-500/30 transition-transform duration-300 group-hover:scale-105">
                 T
               </div>
               <span className="font-heading text-xl font-extrabold tracking-tight text-white">
@@ -74,7 +74,7 @@ export function Footer() {
                   target={href.startsWith("mailto") ? undefined : "_blank"}
                   rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-[hsl(var(--footer-muted))] transition-all duration-300 hover:border-primary/50 hover:bg-gradient-to-br hover:from-[#FF3B5C] hover:to-[#7C3AED] hover:text-white hover:shadow-lg hover:shadow-primary/30"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-[hsl(var(--footer-muted))] transition-all duration-300 hover:border-violet-400/50 hover:bg-gradient-to-br hover:from-[#7c3aed] hover:to-[#d946ef] hover:text-white hover:shadow-lg hover:shadow-violet-500/30"
                 >
                   <Icon className="h-4.5 w-4.5" />
                 </a>
@@ -155,7 +155,7 @@ export function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-[hsl(var(--footer-muted))] md:flex-row">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-[#FF3B5C]" />
+            <Sparkles className="h-4 w-4 text-[#a78bfa]" />
             <p>© 2026 ToolNova Hub. Built for peak productivity.</p>
           </div>
           <p className="font-medium text-white/80">

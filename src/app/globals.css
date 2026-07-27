@@ -6,7 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-outfit), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-jakarta);
   --font-mono: var(--font-geist-mono);
 
@@ -59,14 +59,15 @@
 }
 
 /* ========================================
-   TOOLNOVA — World-Class Ultra-Premium Theme
-   Dynamic Gradients · Glassmorphism · Ambient Glow
+   TOOLNOVA — YTH-inspired design system
+   Violet primary · Glass cards · Outfit + Jakarta
+   (aligned with youtubetoolshub.com tokens)
    ======================================== */
 :root {
   --radius: 0.75rem;
 
-  /* Pure crisp canvas */
-  --background: 210 40% 98.5%;
+  /* Slate canvas (#f8fafc / #0f172a) */
+  --background: 210 40% 98%;
   --foreground: 222 47% 11%;
 
   --card: 0 0% 100%;
@@ -75,76 +76,83 @@
   --popover: 0 0% 100%;
   --popover-foreground: 222 47% 11%;
 
-  /* Premium Sunset Coral / Electric Rose (#FF3B5C) */
-  --primary: 346 84% 61%;
-  --primary-deep: 346 84% 50%;
+  /* Violet primary #8b5cf6 / deep #7c3aed */
+  --primary: 258 90% 66%;
+  --primary-deep: 262 83% 58%;
   --primary-foreground: 0 0% 100%;
 
-  /* Soft cool slate secondary */
-  --secondary: 214 32% 95%;
+  /* Soft slate secondary #f1f5f9 */
+  --secondary: 210 40% 96%;
   --secondary-foreground: 222 47% 15%;
 
-  /* Muted sections & cards */
-  --muted: 214 32% 96.5%;
+  --muted: 210 40% 96%;
   --muted-foreground: 215 16% 47%;
 
-  /* Soft vibrant blush accent */
-  --accent: 346 95% 96%;
-  --accent-foreground: 346 84% 45%;
+  /* Soft violet accent */
+  --accent: 270 100% 98%;
+  --accent-foreground: 262 83% 45%;
 
-  --destructive: 0 84% 60%;
+  --destructive: 0 84% 55%;
   --destructive-foreground: 0 0% 100%;
-  --success: 152 69% 38%;
+  --success: 160 84% 39%;
   --success-foreground: 0 0% 100%;
   --warning: 38 92% 50%;
   --warning-foreground: 28 70% 16%;
 
-  --border: 214 25% 91%;
-  --input: 214 25% 91%;
-  --ring: 346 84% 61%;
+  /* #94a3b833-ish border */
+  --border: 214 20% 90%;
+  --input: 214 20% 90%;
+  --ring: 258 90% 66%;
 
-  /* Multi-color tool palette */
-  --chart-1: 346 84% 61%;
-  --chart-2: 262 83% 58%;
-  --chart-3: 217 91% 60%;
-  --chart-4: 152 69% 42%;
+  /* Charts: violet / fuchsia / red / emerald / amber */
+  --chart-1: 258 90% 66%;
+  --chart-2: 292 91% 61%;
+  --chart-3: 350 89% 55%;
+  --chart-4: 160 84% 39%;
   --chart-5: 38 92% 50%;
 
-  --footer: 224 25% 8%;
+  --footer: 224 28% 8%;
   --footer-foreground: 210 40% 98%;
-  --footer-muted: 215 20% 65%;
+  --footer-muted: 215 16% 65%;
 
-  --glow-color: 346 84% 61%;
-  --gradient-primary: linear-gradient(135deg, hsl(346 84% 61%) 0%, hsl(262 83% 58%) 100%);
-  --gradient-cool: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(186 90% 45%) 100%);
-  --gradient-warm: linear-gradient(135deg, hsl(346 84% 61%) 0%, hsl(38 92% 54%) 100%);
-  --gradient-hero: radial-gradient(100% 100% at 50% 0%, hsl(346 84% 97%) 0%, hsl(210 40% 98.5%) 100%);
-  --gradient-brand-text: linear-gradient(135deg, hsl(346 84% 58%) 0%, hsl(262 83% 55%) 100%);
+  --glow-color: 258 90% 66%;
+  /* Violet → fuchsia brand (matches YTH text-gradient) */
+  --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #d946ef 100%);
+  --gradient-cool: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+  --gradient-warm: linear-gradient(135deg, #e40014 0%, #7c3aed 100%);
+  --gradient-hero: radial-gradient(100% 100% at 50% 0%, #f5f3ff 0%, #f8fafc 55%, #f8fafc 100%);
+  --gradient-brand-text: linear-gradient(135deg, #7c3aed 0%, #d946ef 100%);
+  --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.95));
+  --border-color: rgba(148, 163, 184, 0.2);
+  --primary-glow: rgba(139, 92, 246, 0.15);
 }
 
 .dark {
-  --background: 224 25% 6%;
+  --background: 224 28% 7%;
   --foreground: 210 40% 98%;
   --card: 224 24% 10%;
   --card-foreground: 210 40% 98%;
   --popover: 224 24% 10%;
   --popover-foreground: 210 40% 98%;
-  --primary: 346 84% 63%;
-  --primary-deep: 346 84% 53%;
+  --primary: 258 90% 70%;
+  --primary-deep: 262 83% 62%;
   --primary-foreground: 0 0% 100%;
   --secondary: 224 20% 14%;
   --secondary-foreground: 210 40% 95%;
   --muted: 224 20% 13%;
   --muted-foreground: 215 16% 65%;
-  --accent: 346 50% 16%;
-  --accent-foreground: 346 84% 75%;
-  --border: 224 20% 16%;
-  --input: 224 20% 16%;
-  --ring: 346 84% 63%;
-  --footer: 224 28% 4%;
+  --accent: 262 40% 16%;
+  --accent-foreground: 270 100% 88%;
+  --border: 224 18% 18%;
+  --input: 224 18% 18%;
+  --ring: 258 90% 70%;
+  --footer: 224 30% 5%;
   --footer-foreground: 210 40% 98%;
-  --footer-muted: 215 16% 60%;
-  --gradient-hero: radial-gradient(100% 100% at 50% 0%, hsl(224 25% 10%) 0%, hsl(224 25% 6%) 100%);
+  --footer-muted: 215 16% 62%;
+  --gradient-hero: radial-gradient(100% 100% at 50% 0%, #1e1b4b 0%, #0f172a 55%, #0b1220 100%);
+  --card-gradient: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.9));
+  --border-color: rgba(148, 163, 184, 0.18);
+  --primary-glow: rgba(139, 92, 246, 0.22);
 }
 
 @layer base {
@@ -173,6 +181,7 @@
 
   body {
     @apply bg-background text-foreground font-sans;
+    font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
@@ -394,36 +403,42 @@
   font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* ── World-Class Surfaces & Glassmorphism ── */
+/* ── Surfaces & glass (YTH glass-premium style) ── */
 .surface-card {
-  background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 16px;
-  box-shadow: var(--shadow-premium-sm);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--card-gradient);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(148, 163, 184, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .surface-card:hover {
-  border-color: hsl(var(--primary) / 0.3);
-  box-shadow: var(--shadow-premium), 0 0 20px -5px hsl(var(--primary) / 0.15);
-  transform: translateY(-4px);
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
+  transform: translateY(-2px);
 }
 
+.glass-premium,
 .glass-card-premium {
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--card-gradient);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 16px;
-  box-shadow: var(--shadow-premium-sm);
-  transition: all 0.25s ease;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(148, 163, 184, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.dark .glass-card-premium {
-  background: rgba(15, 23, 42, 0.6);
-  border-color: rgba(255, 255, 255, 0.08);
-}
+.glass-premium:hover,
 .glass-card-premium:hover {
-  border-color: hsl(var(--primary) / 0.4);
-  box-shadow: var(--shadow-premium);
-  transform: translateY(-3px);
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
+  transform: translateY(-2px);
+}
+.dark .glass-premium,
+.dark .glass-card-premium,
+.dark .surface-card {
+  background: var(--card-gradient);
+  border-color: var(--border-color);
 }
 
 .content-panel {
@@ -449,8 +464,15 @@
 /* ── Typography & Gradients ── */
 .text-brand-gradient,
 .text-gradient {
-  background: var(--gradient-brand-text);
+  background: linear-gradient(135deg, #7c3aed 0%, #d946ef 100%);
   -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #c026d3 0%, #d946ef 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -459,16 +481,16 @@
 .bg-gradient-warm { background: var(--gradient-warm); }
 
 .btn-premium {
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #7c3aed 0%, #d946ef 100%);
   color: white;
   font-weight: 700;
   border-radius: 12px;
-  box-shadow: 0 4px 20px -4px hsl(var(--primary) / 0.5);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px -4px rgba(124, 58, 237, 0.45);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .btn-premium:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px -4px hsl(var(--primary) / 0.6);
+  box-shadow: 0 10px 28px -4px rgba(217, 70, 239, 0.45);
   opacity: 0.96;
 }
 
@@ -477,13 +499,18 @@
   align-items: center;
   gap: 0.5rem;
   border-radius: 9999px;
-  border: 1px solid hsl(var(--primary) / 0.2);
-  background: hsl(var(--accent));
-  color: hsl(var(--primary));
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  background: rgba(245, 243, 255, 0.9);
+  color: #7c3aed;
   padding: 0.4rem 1rem;
   font-size: 0.8125rem;
   font-weight: 700;
-  box-shadow: 0 2px 8px -2px hsl(var(--primary) / 0.15);
+  box-shadow: 0 2px 8px -2px rgba(139, 92, 246, 0.12);
+}
+.dark .section-badge {
+  background: rgba(76, 29, 149, 0.35);
+  color: #e9d5ff;
+  border-color: rgba(167, 139, 250, 0.35);
 }
 
 .tool-icon {

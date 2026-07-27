@@ -186,13 +186,13 @@ export function ToolsLibrary() {
     return (
         <section className="relative py-16 md:py-24 overflow-hidden">
             {/* Ambient Background Glow */}
-            <div className="pointer-events-none absolute top-12 left-1/2 -z-10 h-96 w-[600px] -translate-x-1/2 rounded-full bg-gradient-to-br from-[#FF3B5C]/10 to-[#7C3AED]/10 blur-[120px]" />
+            <div className="pointer-events-none absolute top-12 left-1/2 -z-10 h-96 w-[600px] -translate-x-1/2 rounded-full bg-gradient-to-br from-[#8b5cf6]/15 to-[#d946ef]/10 blur-[120px]" />
 
             <div className="mx-auto max-w-[1240px] px-6">
                 {/* Header */}
                 <div className="text-center mb-12">
                     <span className="section-badge mb-4 animate-float">
-                        <Sparkles className="h-4 w-4 text-[#FF3B5C]" />
+                        <Sparkles className="h-4 w-4 text-[#7c3aed]" />
                         {TOOL_COUNT_LABEL} Productivity Tools
                     </span>
                     <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight mt-3">

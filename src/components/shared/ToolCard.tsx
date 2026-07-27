@@ -18,7 +18,7 @@ export interface ToolCardProps {
   glowColor?: string;
   tone?: "primary" | "success" | "warning" | "muted";
   className?: string;
-  /** Solid icon bg color class e.g. bg-[#E5322D] */
+  /** Solid icon bg color class e.g. bg-[#8b5cf6] */
   iconBg?: string;
 }
 
@@ -29,7 +29,7 @@ export function ToolCard({
   icon: Icon,
   badge,
   variant = "grid",
-  gradient = "from-[#FF3B5C] to-[#7C3AED]",
+  gradient = "from-[#7c3aed] to-[#d946ef]",
   iconBg,
   className,
 }: ToolCardProps) {

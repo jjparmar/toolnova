@@ -39,7 +39,7 @@ const featuredTools = [
     title: "Merge PDF",
     desc: "Combine PDFs in your browser — zero file upload needed.",
     badge: "Popular",
-    gradient: "from-[#FF3B5C] to-[#E11D48]",
+    gradient: "from-[#7c3aed] to-[#d946ef]",
   },
   {
     href: "/tools/compress-pdf",
@@ -47,7 +47,7 @@ const featuredTools = [
     title: "Compress PDF",
     desc: "Shrink PDFs for email and upload portals. Private browser tool.",
     badge: "New",
-    gradient: "from-[#F43F5E] to-[#E11D48]",
+    gradient: "from-[#F43F5E] to-[#7c3aed]",
   },
   {
     href: "/tools/image-compressor",
@@ -134,14 +134,14 @@ export function HomeDashboard() {
       {/* ─── Hero Section with Ambient Background Glow ─── */}
       <section className="relative overflow-hidden border-b border-border/50 bg-background pt-16 pb-16 md:pt-24 md:pb-24">
         {/* Decorative Ambient Radial Glow Orbs */}
-        <div className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-[#FF3B5C]/15 via-[#7C3AED]/15 to-transparent blur-[120px]" />
-        <div className="pointer-events-none absolute top-48 right-10 -z-10 h-72 w-72 rounded-full bg-[#06B6D4]/10 blur-[100px]" />
+        <div className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-[#8b5cf6]/20 via-[#d946ef]/15 to-transparent blur-[120px]" />
+        <div className="pointer-events-none absolute top-48 right-10 -z-10 h-72 w-72 rounded-full bg-[#7c3aed]/10 blur-[100px]" />
 
         <div className="mx-auto max-w-[1240px] px-6 text-center">
           {/* Top Section Badge */}
           <div className="mb-6 flex justify-center">
             <span className="section-badge animate-float">
-              <Sparkles className="h-4 w-4 text-[#FF3B5C]" />
+              <Sparkles className="h-4 w-4 text-[#7c3aed]" />
               {TOOL_COUNT_LABEL} Free AI Tools • No Registration Needed
             </span>
           </div>
@@ -370,7 +370,7 @@ export function HomeDashboard() {
                 key={item.title}
                 className="surface-card flex flex-col items-center p-8 text-center"
               >
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#FF3B5C]/10 to-[#7C3AED]/10 text-primary border border-primary/20">
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#8b5cf6]/15 to-[#d946ef]/10 text-primary border border-primary/20">
                   <item.icon className="h-7 w-7" />
                 </div>
                 <h3 className="font-heading mb-2 text-xl font-bold text-foreground">
@@ -446,7 +446,7 @@ export function HomeDashboard() {
 
         <div className="mx-auto max-w-[960px] px-6 text-center">
           <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-white backdrop-blur-xl">
-            <Sparkles className="h-7 w-7 text-[#FF3B5C]" />
+            <Sparkles className="h-7 w-7 text-[#7c3aed]" />
           </div>
           <h2 className="font-heading mb-4 text-3xl font-extrabold tracking-tight md:text-5xl">
             Unlock Unlimited AI Power with Pro

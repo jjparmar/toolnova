@@ -492,7 +492,7 @@ export function ToolLayout({
 
           {/* Input Area */}
           <div className="surface-card rounded-3xl border border-border/80 bg-card p-6 md:p-10 relative overflow-hidden shadow-xl">
-            <div className="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-[#FF3B5C] to-[#7C3AED]"></div>
+            <div className="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-[#7c3aed] to-[#d946ef]"></div>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-6">
               <div>

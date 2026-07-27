@@ -24,14 +24,14 @@ interface CategoryToolsHubProps {
 }
 
 const DEFAULT_COLORS = [
-  "from-[#E5322D] to-[#c42824]",
+  "from-[#7c3aed] to-[#d946ef]",
+  "from-[#8b5cf6] to-[#6366f1]",
+  "from-[#e40014] to-[#7c3aed]",
   "from-[#0ea5e9] to-[#0284c7]",
-  "from-[#1a9c4a] to-[#15803d]",
-  "from-[#8b5cf6] to-[#7c3aed]",
+  "from-[#10b981] to-[#059669]",
   "from-[#f59e0b] to-[#d97706]",
   "from-[#ec4899] to-[#db2777]",
   "from-[#14b8a6] to-[#0d9488]",
-  "from-[#6366f1] to-[#4f46e5]",
 ];
 
 /**

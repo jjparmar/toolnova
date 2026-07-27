@@ -61,10 +61,10 @@ export function Header() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 h-[68px] w-full border-b bg-background/80 backdrop-blur-xl transition-all duration-300',
+        'glass-premium sticky top-0 z-50 h-[68px] w-full border-b transition-all duration-300',
         scrolled
-          ? 'border-border/80 shadow-sm shadow-black/5'
-          : 'border-border/50'
+          ? 'border-border/70 shadow-md shadow-violet-500/5'
+          : 'border-white/5'
       )}
     >
       <div className="mx-auto flex h-full max-w-[1240px] items-center justify-between gap-4 px-4 sm:px-6">
@@ -81,7 +81,7 @@ export function Header() {
           </button>
 
           <Link href="/" className="group flex shrink-0 items-center gap-2.5" aria-label="ToolNova home">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#FF3B5C] to-[#7C3AED] text-base font-extrabold text-white shadow-md shadow-primary/25 transition-transform duration-300 group-hover:scale-105">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#d946ef] text-base font-extrabold text-white shadow-md shadow-violet-500/30 transition-transform duration-300 group-hover:scale-105">
               T
             </div>
             <div className="flex items-baseline gap-1.5">

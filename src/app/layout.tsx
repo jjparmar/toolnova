@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/google-font-preconnect */
 import type { Metadata } from"next";
-import { Inter, Plus_Jakarta_Sans, Geist_Mono } from"next/font/google";
+import { Outfit, Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import { CookieConsent } from"@/components/CookieConsent";
 import { ConsentedScripts } from"@/components/ConsentedScripts";
 import Script from"next/script";
@@ -18,9 +18,9 @@ import { adsenseConfig } from"@/config/adsense";
 import { Providers } from"@/components/Providers";
 import { TOOL_COUNT_LABEL } from"@/data/tools";
 
-/** Body font — fewer weights = less LCP font payload */
-const inter = Inter({
-  variable: "--font-inter",
+/** Body — Outfit (matches YouTube Tools Hub) */
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
@@ -29,7 +29,7 @@ const inter = Inter({
   fallback: ["system-ui", "arial"],
 });
 
-/** Headings — preload only the bold weights we use most */
+/** Headings — Plus Jakarta Sans */
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
@@ -133,8 +133,8 @@ export const metadata: Metadata = {
   other: {
     language: "English",
     "content-language": "en",
-    "theme-color": "#E5322D",
-    "msapplication-TileColor": "#E5322D",
+    "theme-color": "#8b5cf6",
+    "msapplication-TileColor": "#8b5cf6",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
     "mobile-web-app-capable": "yes",
@@ -200,15 +200,15 @@ export default function RootLayout({
         />
 
         {/* Theme Color — required for Google Discover & PWA */}
-        <meta name="theme-color" content="#E5322D" />
-        <meta name="msapplication-TileColor" content="#E5322D" />
+        <meta name="theme-color" content="#8b5cf6" />
+        <meta name="msapplication-TileColor" content="#8b5cf6" />
 
 
         {/* NOTE: Page-level JSON-LD schemas are injected by each page component.
             No global schema here to avoid duplicate JSON-LD across all pages. */}
       </head>
       <body
-        className={`${inter.variable} ${jakarta.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${outfit.variable} ${jakarta.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
         <Providers>
           <VitalsInitializer />
