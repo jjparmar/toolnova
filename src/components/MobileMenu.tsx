@@ -94,7 +94,7 @@ export default function MobileMenu({ onClose, id }: MobileMenuProps) {
       <div
         id={id}
         ref={panelRef}
-        className="absolute left-0 right-0 top-[68px] max-h-[min(85dvh,calc(100dvh-68px))] overflow-y-auto overscroll-contain rounded-b-2xl border-b border-[var(--border-color)] bg-background/98 shadow-[0_20px_40px_rgba(15,23,42,0.12)] backdrop-blur-md animate-in slide-in-from-top-2 fade-in duration-200"
+        className="absolute left-0 right-0 top-[4.25rem] max-h-[min(85dvh,calc(100dvh-4.25rem))] overflow-y-auto overscroll-contain rounded-b-3xl border-b border-[var(--border-color)] bg-background/98 shadow-[0_20px_40px_rgba(15,23,42,0.12)] backdrop-blur-md animate-in slide-in-from-top-2 fade-in duration-200"
       >
         <div className="flex flex-col gap-1 p-4 pb-6">
           <p id={titleId} className="sr-only">

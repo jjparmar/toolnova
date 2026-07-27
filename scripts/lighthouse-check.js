@@ -98,10 +98,14 @@ else warn("Ad slot min-height shells not found");
 
 console.log("\n[3] Font payload discipline");
 if (
-  (layout.includes("Outfit") || layout.includes("Inter")) &&
-  (layout.includes('weight: ["400", "500", "600", "700"]') ||
-    layout.includes('weight: ["400"') ||
-    layout.includes("weight: [\"400\""))
+  (layout.includes("Manrope") ||
+    layout.includes("Sora") ||
+    layout.includes("Outfit") ||
+    layout.includes("Inter")) &&
+  (layout.includes('weight: ["400"') ||
+    layout.includes("weight: [\"400\"") ||
+    layout.includes('weight: ["500"') ||
+    layout.includes("weight: [\"500\""))
 )
   ok("Primary font weights trimmed for LCP");
 else warn("Primary font may still preload too many weights");

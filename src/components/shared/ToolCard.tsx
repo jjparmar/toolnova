@@ -108,7 +108,7 @@ export function ToolCard({
       )}
 
       {/* CTA Footer */}
-      <div className="mt-5 flex items-center gap-1.5 border-t border-border/60 pt-4 text-xs font-bold uppercase tracking-wider text-primary">
+      <div className="mt-5 flex items-center gap-1.5 border-t border-[var(--border-color)] pt-4 text-xs font-bold uppercase tracking-wider text-primary">
         <span>Open tool</span>
         <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1.5" />
       </div>

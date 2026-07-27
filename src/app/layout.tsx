@@ -1,40 +1,40 @@
 /* eslint-disable @next/next/google-font-preconnect */
-import type { Metadata } from"next";
-import { Outfit, Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
-import { CookieConsent } from"@/components/CookieConsent";
-import { ConsentedScripts } from"@/components/ConsentedScripts";
-import Script from"next/script";
-import"./globals.css";
-import"./accessibility.css";
-import { Toaster } from"@/components/ui/toaster";
+import type { Metadata } from "next";
+import { Manrope, Sora, Geist_Mono } from "next/font/google";
+import { CookieConsent } from "@/components/CookieConsent";
+import { ConsentedScripts } from "@/components/ConsentedScripts";
+import Script from "next/script";
+import "./globals.css";
+import "./accessibility.css";
+import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { SkipLinks } from "@/components/SkipLinks";
-import { FeedbackWidgetLazy } from"@/components/FeedbackWidgetLazy";
-import { VitalsInitializer } from"@/components/VitalsInitializer";
-import { Header } from"@/components/Header";
-import { Footer } from"@/components/Footer";
-import { siteConfig } from"@/config/site";
-import { adsenseConfig } from"@/config/adsense";
-import { Providers } from"@/components/Providers";
-import { TOOL_COUNT_LABEL } from"@/data/tools";
+import { FeedbackWidgetLazy } from "@/components/FeedbackWidgetLazy";
+import { VitalsInitializer } from "@/components/VitalsInitializer";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { siteConfig } from "@/config/site";
+import { adsenseConfig } from "@/config/adsense";
+import { Providers } from "@/components/Providers";
+import { TOOL_COUNT_LABEL } from "@/data/tools";
 
-/** Body — Outfit (matches YouTube Tools Hub) */
-const outfit = Outfit({
-  variable: "--font-outfit",
+/** Body — Manrope (modern geometric UI sans) */
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   preload: true,
   adjustFontFallback: true,
   fallback: ["system-ui", "arial"],
 });
 
-/** Headings — Plus Jakarta Sans */
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+/** Headings — Sora (distinct modern display) */
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
   display: "swap",
-  weight: ["600", "700", "800"],
+  weight: ["500", "600", "700", "800"],
   preload: true,
   adjustFontFallback: true,
   fallback: ["system-ui", "arial"],
@@ -208,12 +208,12 @@ export default function RootLayout({
             No global schema here to avoid duplicate JSON-LD across all pages. */}
       </head>
       <body
-        className={`${outfit.variable} ${jakarta.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${manrope.variable} ${sora.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
         <Providers>
           <VitalsInitializer />
           <SkipLinks />
-          <div className="flex flex-col min-h-screen">
+          <div className="flex min-h-screen flex-col">
             <Header />
             <main id="main-content" className="site-main flex-1" tabIndex={-1}>
               {children}

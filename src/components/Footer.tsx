@@ -45,14 +45,14 @@ export function Footer() {
       {/* Top ambient gradient line */}
       <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#8b5cf6] to-transparent opacity-70" />
 
-      <div className="mx-auto max-w-[1240px] px-6 py-16 md:py-20">
+      <div className="page-container py-16 md:py-20">
         <div className="mb-14 grid grid-cols-2 gap-10 md:grid-cols-5">
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="group mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#d946ef] text-lg font-extrabold text-white shadow-lg shadow-violet-500/30 transition-transform duration-300 group-hover:scale-105">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#d946ef] text-lg font-extrabold text-white shadow-lg shadow-violet-500/30 transition-transform duration-300 group-hover:scale-105">
                 T
               </div>
-              <span className="font-heading text-xl font-extrabold tracking-tight text-white">
+              <span className="font-heading text-xl font-bold tracking-tight text-white">
                 Tool<span className="text-gradient">Nova</span>
               </span>
             </Link>

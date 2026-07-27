@@ -5,7 +5,7 @@ import { cn } from"@/lib/utils";
  * Replaces the hand-rolled eyebrow + h2 + subtitle markup repeated across pages.
  *
  * - eyebrow: small uppercase primary label above the title
- * - title:   the section H2 (rendered with Plus Jakarta Sans via .font-heading)
+ * - title:   the section H2 (rendered with Sora via .font-heading)
  * - subtitle: optional supporting line
  * - align:"center" (default) or"left"
  */

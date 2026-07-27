@@ -107,11 +107,11 @@ export default function BlogPage() {
       />
       <div className="min-h-screen bg-background">
         {/* Featured */}
-        <section className="border-b border-border bg-card py-12 md:py-14">
-          <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
+        <section className="mesh-hero border-b border-[var(--border-color)] py-12 md:py-16">
+          <div className="page-container">
             <div className="mb-8 text-center md:text-left">
               <span className="section-kicker">Blog</span>
-              <h1 className="font-heading mt-4 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
+              <h1 className="font-heading mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                 Guides &amp; insights
               </h1>
               <p className="mt-2 max-w-2xl text-muted-foreground">

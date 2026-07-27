@@ -131,29 +131,24 @@ export function HomeDashboard() {
 
   return (
     <div className="w-full">
-      {/* ─── Hero Section with Ambient Background Glow ─── */}
-      <section className="relative overflow-hidden border-b border-border/50 bg-background pt-16 pb-16 md:pt-24 md:pb-24">
-        {/* Decorative Ambient Radial Glow Orbs */}
-        <div className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-[#8b5cf6]/20 via-[#d946ef]/15 to-transparent blur-[120px]" />
-        <div className="pointer-events-none absolute top-48 right-10 -z-10 h-72 w-72 rounded-full bg-[#7c3aed]/10 blur-[100px]" />
-
-        <div className="mx-auto max-w-[1240px] px-6 text-center">
-          {/* Top Section Badge */}
-          <div className="mb-6 flex justify-center">
+      {/* ─── Hero ─── */}
+      <section className="mesh-hero border-b border-[var(--border-color)] pt-16 pb-16 md:pt-24 md:pb-24">
+        <div className="page-container text-center">
+          <div className="mb-7 flex justify-center">
             <span className="section-badge animate-float">
-              <Sparkles className="h-4 w-4 text-[#7c3aed]" />
-              {TOOL_COUNT_LABEL} Free AI Tools • No Registration Needed
+              <Sparkles className="h-3.5 w-3.5" />
+              {TOOL_COUNT_LABEL} free AI tools · no signup
             </span>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="hero-title font-heading mx-auto mb-6 max-w-4xl text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl md:leading-[1.1]">
-            Work &amp; Study <span className="text-gradient">Smarter with AI</span> — All in One Hub
+          <h1 className="hero-title font-heading mx-auto mb-6 max-w-4xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-[3.5rem] md:leading-[1.08]">
+            Work &amp; study <span className="text-gradient">smarter with AI</span>
+            <span className="block text-foreground/90">— all in one modern hub</span>
           </h1>
 
-          <p className="hero-description mx-auto mb-10 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-xl">
+          <p className="hero-description mx-auto mb-10 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
             Merge and compress PDFs, fix grammar, build flashcards, and draft essays in one place.{" "}
-            <strong className="font-bold text-foreground">
+            <strong className="font-semibold text-foreground">
               {TOOL_COUNT_LABEL} free tools
             </strong>
             — start without an account.
@@ -173,7 +168,7 @@ export function HomeDashboard() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={`Search ${TOOL_COUNT_LABEL} tools (e.g. compress pdf, homework solver)…`}
-                className="w-full rounded-2xl border border-[var(--border-color)] bg-card py-4 pl-14 pr-12 text-base font-medium text-foreground shadow-[0_8px_30px_rgba(148,163,184,0.12)] transition-all placeholder:text-muted-foreground/60 focus:border-primary/50 focus:outline-none focus:ring-4 focus:ring-primary/12"
+                className="input-surface w-full rounded-2xl py-4 pl-14 pr-12 text-base font-medium text-foreground shadow-[var(--shadow-premium)] placeholder:text-muted-foreground/60 focus:outline-none"
               />
               {searchQuery && (
                 <button
@@ -196,7 +191,7 @@ export function HomeDashboard() {
                     key={tag}
                     type="button"
                     onClick={() => setSearchQuery(tag)}
-                    className="rounded-lg border border-border/60 bg-card px-2.5 py-1 text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                    className="rounded-full border border-[var(--border-color)] bg-card/80 px-3 py-1 text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
                   >
                     {tag}
                   </button>
@@ -244,16 +239,16 @@ export function HomeDashboard() {
           {/* Action CTAs */}
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/tools">
-              <Button size="lg" className="btn-premium h-14 min-w-[200px] gap-2 px-8 text-base font-extrabold shadow-lg">
+              <Button size="lg" className="btn-premium h-13 min-w-[200px] gap-2 px-8 text-base font-bold">
                 <Grid2X2 className="h-5 w-5" />
-                Browse All Tools
+                Browse all tools
               </Button>
             </Link>
             <Link href="/tools/compress-pdf">
               <Button
                 variant="outline"
                 size="lg"
-                className="h-14 min-w-[200px] gap-2 rounded-xl border-border/80 bg-card px-8 text-base font-bold shadow-sm transition-all hover:border-primary/40 hover:bg-muted"
+                className="h-13 min-w-[200px] gap-2 rounded-full border-[var(--border-color)] bg-card/90 px-8 text-base font-semibold shadow-sm"
               >
                 Compress a PDF free
                 <ArrowRight className="h-4 w-4 text-primary" />
@@ -261,19 +256,21 @@ export function HomeDashboard() {
             </Link>
           </div>
 
-          {/* Key Metrics Bar */}
-          <div className="mt-16 grid grid-cols-2 gap-4 border-t border-border/50 pt-10 sm:grid-cols-4 lg:gap-8">
+          <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
             {[
               { num: TOOL_COUNT_LABEL, label: "Free tools" },
               { num: "Local", label: "PDF & image privacy" },
               { num: "0", label: "Sign-up to start" },
               { num: "Stream", label: "Live AI results" },
             ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="font-heading text-2xl font-extrabold text-foreground md:text-3xl">
+              <div
+                key={stat.label}
+                className="surface-card-quiet px-3 py-4 text-center sm:px-4"
+              >
+                <div className="font-heading text-xl font-bold text-foreground md:text-2xl">
                   <span className="text-gradient">{stat.num}</span>
                 </div>
-                <div className="mt-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <div className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                   {stat.label}
                 </div>
               </div>
@@ -283,21 +280,21 @@ export function HomeDashboard() {
       </section>
 
       {/* ─── Popular Tools Grid ─── */}
-      <section id="tools" className="bg-muted/50 py-16 md:py-24">
-        <div className="mx-auto max-w-[1240px] px-6">
+      <section id="tools" className="section-pad bg-muted/40">
+        <div className="page-container">
           <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-extrabold text-primary border border-primary/20">
+              <div className="section-kicker mb-3">
                 <Flame className="h-3.5 w-3.5" />
-                MOST POPULAR
+                Most popular
               </div>
-              <h2 className="font-heading text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
-                Featured Tools &amp; Utilities
+              <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                Featured tools
               </h2>
             </div>
             <Link
               href="/tools"
-              className="inline-flex items-center gap-2 text-sm font-extrabold text-primary transition-all hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-bold text-primary transition-all hover:underline"
             >
               View all {TOOL_COUNT}+ tools
               <ArrowRight className="h-4 w-4" />
@@ -320,15 +317,16 @@ export function HomeDashboard() {
         </div>
       </section>
 
-      {/* ─── Categories Overview Section ─── */}
-      <section className="border-y border-border/50 bg-background py-16 md:py-24">
-        <div className="mx-auto max-w-[1240px] px-6">
+      {/* ─── Categories ─── */}
+      <section className="section-pad border-y border-[var(--border-color)]">
+        <div className="page-container">
           <div className="mb-12 text-center">
-            <h2 className="font-heading text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
-              Explore Tools by Category
+            <div className="section-kicker mb-3 justify-center">Browse by goal</div>
+            <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              Explore tools by category
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-              Everything you need for academic success, creative writing, and digital file management.
+              Everything you need for study, writing, files, and career workflows.
             </p>
           </div>
 
@@ -352,15 +350,16 @@ export function HomeDashboard() {
         </div>
       </section>
 
-      {/* ─── Trust & Security Banner ─── */}
-      <section className="bg-muted/40 py-16 md:py-24">
-        <div className="mx-auto max-w-[1240px] px-6">
+      {/* ─── Trust ─── */}
+      <section className="section-pad bg-muted/35">
+        <div className="page-container">
           <div className="mb-12 text-center">
-            <h2 className="font-heading text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
-              Built for Speed &amp; Total Privacy
+            <div className="section-kicker mb-3 justify-center">Why ToolNova</div>
+            <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              Built for speed &amp; privacy
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-              ToolNova processes files directly in your web browser whenever possible.
+              Files stay in your browser whenever possible. AI streams as it writes.
             </p>
           </div>
 
@@ -383,12 +382,12 @@ export function HomeDashboard() {
         </div>
       </section>
 
-      {/* ─── How ToolNova Stays Free ─── */}
-      <section className="border-y border-border/50 bg-background py-16">
-        <div className="mx-auto max-w-[960px] px-6">
-          <div className="rounded-3xl border border-border/80 bg-muted/40 p-8 shadow-sm md:p-10">
-            <h2 className="font-heading mb-3 text-2xl font-extrabold text-foreground">
-              How ToolNova Stays Free for Everyone
+      {/* ─── Free model ─── */}
+      <section className="section-pad border-y border-[var(--border-color)]">
+        <div className="page-container max-w-4xl">
+          <div className="content-panel p-8 md:p-10">
+            <h2 className="font-heading mb-3 text-2xl font-bold text-foreground">
+              How ToolNova stays free
             </h2>
             <p className="mb-6 text-sm leading-relaxed text-muted-foreground md:text-base">
               We believe quality productivity software should be accessible to all students and researchers. We offer optional{" "}
@@ -419,8 +418,8 @@ export function HomeDashboard() {
         </div>
       </section>
 
-      <section className="bg-background py-16">
-        <div className="mx-auto max-w-[960px] px-6">
+      <section className="section-pad">
+        <div className="page-container max-w-4xl">
           <QuickAnswerBox
             question={aeoContent.quickAnswer.question}
             answer={aeoContent.quickAnswer.answer}
@@ -428,10 +427,10 @@ export function HomeDashboard() {
         </div>
       </section>
 
-      <section className="border-t border-border/50 bg-muted/30 py-16">
-        <div className="mx-auto max-w-[960px] px-6">
-          <h2 className="font-heading mb-10 text-center text-3xl font-extrabold text-foreground">
-            Frequently Asked Questions
+      <section className="section-pad border-t border-[var(--border-color)] bg-muted/30">
+        <div className="page-container max-w-4xl">
+          <h2 className="font-heading mb-10 text-center text-3xl font-bold text-foreground">
+            Frequently asked questions
           </h2>
           <FAQAccordion faqs={aeoContent.faqs} />
         </div>
@@ -439,37 +438,33 @@ export function HomeDashboard() {
 
       <BetweenSectionsAd />
 
-      {/* ─── Ultra-Premium CTA Band ─── */}
       <section className="relative overflow-hidden bg-footer py-16 text-white md:py-24">
-        {/* Glow accent */}
         <div className="pointer-events-none absolute -bottom-10 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-primary/30 blur-[100px]" />
+        <div className="pointer-events-none absolute top-0 right-0 h-48 w-48 rounded-full bg-fuchsia-500/20 blur-[80px]" />
 
-        <div className="mx-auto max-w-[960px] px-6 text-center">
+        <div className="page-container max-w-3xl text-center">
           <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-white backdrop-blur-xl">
-            <Sparkles className="h-7 w-7 text-[#7c3aed]" />
+            <Sparkles className="h-7 w-7 text-[#c4b5fd]" />
           </div>
-          <h2 className="font-heading mb-4 text-3xl font-extrabold tracking-tight md:text-5xl">
-            Unlock Unlimited AI Power with Pro
+          <h2 className="font-heading mb-4 text-3xl font-bold tracking-tight md:text-5xl">
+            Unlock unlimited AI with Pro
           </h2>
-          <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
-            Enjoy unlimited daily generations, faster response speeds, and priority access to new features.
+          <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-white/75 md:text-lg">
+            Unlimited daily generations, faster responses, and priority access to new tools.
           </p>
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
             <Link href="/pricing">
-              <Button
-                size="lg"
-                className="btn-premium h-14 min-w-[180px] px-8 text-base font-extrabold shadow-xl"
-              >
-                Explore Pro Plan
+              <Button size="lg" className="btn-premium h-13 min-w-[180px] px-8 text-base font-bold">
+                Explore Pro
               </Button>
             </Link>
             <Link href="/tools">
               <Button
                 size="lg"
                 variant="outline"
-                className="h-14 min-w-[180px] rounded-xl border-white/20 bg-transparent px-8 text-base font-bold text-white transition-all hover:bg-white/10 hover:text-white"
+                className="h-13 min-w-[180px] rounded-full border-white/20 bg-transparent px-8 text-base font-semibold text-white hover:bg-white/10 hover:text-white"
               >
-                Browse Free Tools
+                Browse free tools
               </Button>
             </Link>
           </div>

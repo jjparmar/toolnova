@@ -99,23 +99,23 @@ export function PremiumToolWrapper({
       />
 
       {/* Hero band */}
-      <section className="border-b border-border bg-card">
-        <div className="mx-auto max-w-[1100px] px-4 pb-10 pt-6 sm:px-6 sm:pb-12 sm:pt-8">
+      <section className="mesh-hero border-b border-[var(--border-color)]">
+        <div className="page-container pb-10 pt-6 sm:pb-12 sm:pt-8">
           <button
             type="button"
             onClick={() => router.push("/tools")}
-            className="mb-6 inline-flex items-center gap-2 rounded-lg border border-border bg-muted/40 px-3.5 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--border-color)] bg-card/80 px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
           >
             <ArrowLeft className="h-4 w-4" />
             All tools
           </button>
 
           <div className="text-center">
-            <div className="section-kicker mb-4">
+            <div className="section-kicker mb-4 justify-center">
               <Sparkles className="h-3.5 w-3.5" />
               <span>{badge}</span>
             </div>
-            <h1 className="font-heading mx-auto mb-3 max-w-3xl text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl md:text-[2.5rem] md:leading-[1.15]">
+            <h1 className="font-heading mx-auto mb-3 max-w-3xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-[2.6rem] md:leading-[1.12]">
               {toolName}
             </h1>
             <p className="mx-auto mb-2 max-w-2xl text-base font-medium text-muted-foreground sm:text-lg">
@@ -129,8 +129,8 @@ export function PremiumToolWrapper({
       </section>
 
       {/* Tool workspace */}
-      <div id="tool-input" className="scroll-mt-24 bg-muted/50 py-8 sm:py-10">
-        <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
+      <div id="tool-input" className="scroll-mt-24 bg-muted/40 py-8 sm:py-10">
+        <div className="page-container">
           <ToolShellContext.Provider value={{ nestedInPremiumShell: true }}>
             {children}
           </ToolShellContext.Provider>
@@ -138,8 +138,8 @@ export function PremiumToolWrapper({
       </div>
 
       {subjectCards && subjectCards.length > 0 && (
-        <section className="border-t border-border bg-card py-12 sm:py-16">
-          <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
+        <section className="section-pad border-t border-[var(--border-color)]">
+          <div className="page-container">
             <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-5">
               {subjectCards.map((card) => (
                 <div
@@ -162,10 +162,10 @@ export function PremiumToolWrapper({
       )}
 
       {features && features.length > 0 && (
-        <section className="border-t border-border bg-muted py-12 sm:py-16">
-          <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
+        <section className="section-pad border-t border-[var(--border-color)] bg-muted/40">
+          <div className="page-container">
             <div className="mb-8 text-center">
-              <h2 className="font-heading mb-2 text-2xl font-extrabold text-foreground sm:text-3xl">
+              <h2 className="font-heading mb-2 text-2xl font-bold text-foreground sm:text-3xl">
                 Built for reliable results
               </h2>
               <p className="mx-auto max-w-xl text-muted-foreground">
@@ -192,9 +192,9 @@ export function PremiumToolWrapper({
       )}
 
       {howItWorks && howItWorks.length > 0 && (
-        <section className="border-t border-border bg-card py-12 sm:py-16">
-          <div className="mx-auto max-w-[1000px] px-4 sm:px-6">
-            <h2 className="font-heading mb-10 text-center text-2xl font-extrabold text-foreground sm:text-3xl">
+        <section className="section-pad border-t border-[var(--border-color)]">
+          <div className="page-container max-w-4xl">
+            <h2 className="font-heading mb-10 text-center text-2xl font-bold text-foreground sm:text-3xl">
               How it works
             </h2>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -220,9 +220,9 @@ export function PremiumToolWrapper({
       )}
 
       {relatedTools && relatedTools.length > 0 && (
-        <section className="border-t border-border bg-muted py-12 sm:py-16">
-          <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
-            <h2 className="font-heading mb-6 text-center text-2xl font-extrabold text-foreground">
+        <section className="section-pad border-t border-[var(--border-color)] bg-muted/40">
+          <div className="page-container">
+            <h2 className="font-heading mb-6 text-center text-2xl font-bold text-foreground">
               More essential tools
             </h2>
             <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -246,12 +246,12 @@ export function PremiumToolWrapper({
       )}
 
       {ctaTitle && (
-        <section className="bg-primary py-12 text-primary-foreground sm:py-14">
-          <div className="mx-auto max-w-[700px] px-4 text-center sm:px-6">
+        <section className="bg-gradient-to-br from-[#7c3aed] to-[#d946ef] py-12 text-primary-foreground sm:py-14">
+          <div className="page-container max-w-2xl text-center">
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15">
               <CtaIcon className="h-6 w-6" />
             </div>
-            <h3 className="font-heading mb-2 text-2xl font-extrabold tracking-tight sm:text-3xl">
+            <h3 className="font-heading mb-2 text-2xl font-bold tracking-tight sm:text-3xl">
               {ctaTitle}
             </h3>
             {ctaDescription && (
@@ -261,7 +261,7 @@ export function PremiumToolWrapper({
             )}
             <a
               href="#tool-input"
-              className="inline-flex h-12 items-center gap-2 rounded-xl bg-white px-7 text-base font-bold text-primary shadow-sm transition-all hover:-translate-y-0.5 hover:bg-white/95"
+              className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-base font-bold text-primary shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white/95"
             >
               {ctaButtonText} <ArrowRight className="h-4 w-4" />
             </a>

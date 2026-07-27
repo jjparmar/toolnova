@@ -698,14 +698,14 @@ export function ToolsClient() {
   return (
     <div className="min-h-screen w-full bg-background">
       {/* Hero */}
-      <section className="border-b border-border bg-card">
-        <div className="mx-auto max-w-[1100px] px-6 pb-10 pt-12 text-center md:pb-12 md:pt-14">
-          <div className="section-kicker mb-4">
+      <section className="mesh-hero border-b border-[var(--border-color)]">
+        <div className="page-container pb-10 pt-12 text-center md:pb-14 md:pt-16">
+          <div className="section-kicker mb-4 justify-center">
             <Sparkles className="h-3.5 w-3.5" />
-            <span>All tools · Free to open · No sign-up</span>
+            <span>All tools · free · no sign-up</span>
           </div>
 
-          <h1 className="font-heading mb-3 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
+          <h1 className="font-heading mb-3 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             Every tool you need — free
           </h1>
 
@@ -770,9 +770,9 @@ export function ToolsClient() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-[1100px] px-6 py-10 md:py-12">
+      <div className="page-container py-10 md:py-12">
           {/* Sticky category filter */}
-          <div className="sticky top-[68px] z-20 -mx-2 mb-10 border-b border-border/60 bg-background/90 px-2 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
+          <div className="sticky top-[4.25rem] z-20 -mx-2 mb-10 border-b border-[var(--border-color)] bg-background/90 px-2 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
             <div
               className="flex flex-wrap justify-center gap-2"
               role="tablist"
