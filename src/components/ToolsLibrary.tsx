@@ -23,7 +23,7 @@ import {
     X,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { TOOL_COUNT, TOOL_COUNT_LABEL } from '@/data/tools';
+import { TOOL_COUNT, TOOL_COUNT_LABEL } from '@/data/tool-search-index';
 
 /** Real tools only — no dead links to unreleased features. */
 export function ToolsLibrary() {

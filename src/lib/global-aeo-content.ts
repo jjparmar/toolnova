@@ -4,7 +4,7 @@
  */
 
 import { LucideIcon } from 'lucide-react';
-import { TOOL_COUNT_LABEL } from '@/data/tools';
+import { TOOL_COUNT_LABEL } from '@/data/tool-search-index';
 
 export interface GlobalAEOContent {
     quickAnswer: {

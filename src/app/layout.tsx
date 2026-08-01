@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/google-font-preconnect */
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Sora, Geist_Mono } from "next/font/google";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ConsentedScripts } from "@/components/ConsentedScripts";
@@ -47,6 +47,12 @@ const geistMono = Geist_Mono({
   preload: false,
   adjustFontFallback: true,
 });
+
+export const viewport: Viewport = {
+  themeColor: "#8b5cf6",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.toolnovahub.com"),
@@ -133,7 +139,6 @@ export const metadata: Metadata = {
   other: {
     language: "English",
     "content-language": "en",
-    "theme-color": "#8b5cf6",
     "msapplication-TileColor": "#8b5cf6",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
@@ -200,7 +205,6 @@ export default function RootLayout({
         />
 
         {/* Theme Color — required for Google Discover & PWA */}
-        <meta name="theme-color" content="#8b5cf6" />
         <meta name="msapplication-TileColor" content="#8b5cf6" />
 
 

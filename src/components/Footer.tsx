@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Mail, Twitter, Github, Linkedin, Sparkles } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { TOOL_COUNT_LABEL } from "@/data/tools";
+import { TOOL_COUNT_LABEL } from "@/data/tool-search-index";
 
 const writingTools = [
   { name: "Grammar Checker", href: "/tools/grammar-fix" },

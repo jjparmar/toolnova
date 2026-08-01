@@ -7,9 +7,12 @@ import {
   schemaToJsonLd,
 } from"@/lib/schema";
 import { generateBreadcrumbSchema } from"@/lib/seo-advanced";
+import { getOptimizedToolMetadata } from"@/lib/tool-metadata";
 import { RelatedTools } from"@/components/RelatedTools";
 import { ToolRichContent } from"@/components/ToolRichContent";
 import ReorderPdfClient from"./client";
+
+const toolMeta = getOptimizedToolMetadata("reorder-pdf");
 
 const faqs = [
   {
@@ -64,13 +67,13 @@ const benefits = [
 ];
 
 export const metadata: Metadata = {
-  title:"Reorder PDF Pages Free – Drag Thumbnails Online | ToolNova",
-  description:"Reorder PDF pages free with visual thumbnails. Drag and drop pages, reverse or reset order, download instantly. Private browser tool — no signup.",
-  keywords: ["reorder pdf pages free","rearrange pdf online","drag drop pdf pages","pdf page order changer",
+  title: toolMeta?.title || "Reorder PDF Pages Free – Drag Thumbnails Online | ToolNova",
+  description: toolMeta?.description || "Reorder PDF pages free with visual thumbnails. Drag and drop pages, reverse or reset order, download instantly. Private browser tool — no signup.",
+  keywords: toolMeta?.keywords || ["reorder pdf pages free","rearrange pdf online","drag drop pdf pages","pdf page order changer",
   ],
   alternates: { canonical:"https://www.toolnovahub.com/tools/reorder-pdf" },
   openGraph: {
-    title:"Reorder PDF Pages Free | ToolNova",
+    title: toolMeta?.title || "Reorder PDF Pages Free | ToolNova",
     description:"Drag thumbnail pages to rearrange your PDF. Free and private.",
     url:"https://www.toolnovahub.com/tools/reorder-pdf",
     type:"website",

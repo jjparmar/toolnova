@@ -200,6 +200,20 @@ console.log("\n[11] CWV / Lighthouse gate");
 ok("Run automatically after this script: node scripts/lighthouse-check.js");
 ok("Live Lighthouse (optional): npm run lighthouse:live -- --url=https://www.toolnovahub.com");
 
+// 12) Tool search index sync (client bundle safety)
+console.log("\n[12] Tool search index vs catalog");
+const syncScript = path.join(root, "scripts", "sync-tool-search-index.js");
+try {
+  const out = require("child_process").execFileSync(
+    process.execPath,
+    [syncScript, "--check"],
+    { encoding: "utf8" }
+  );
+  ok(out.trim());
+} catch (err) {
+  fail((err.stdout || "").trim() || (err.message || "sync check failed"));
+}
+
 // Summary
 console.log("\n" + "=".repeat(40));
 if (failed === 0) {

@@ -23,7 +23,7 @@ import {
 } from"lucide-react";
 import { cn } from"@/lib/utils";
 import { DAILY_FREE_LIMIT } from"@/lib/limits";
-import { TOOL_COUNT_LABEL } from"@/data/tools";
+import { TOOL_COUNT_LABEL } from"@/data/tool-search-index";
 import { toast } from"sonner";
 
 const MONTHLY_PRICE = 2.99;

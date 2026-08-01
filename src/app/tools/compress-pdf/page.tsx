@@ -7,15 +7,19 @@ import {
   schemaToJsonLd,
 } from "@/lib/schema";
 import { getToolData } from "@/data/tools";
+import { getOptimizedToolMetadata } from "@/lib/tool-metadata";
 import { RelatedTools } from "@/components/RelatedTools";
 import CompressPDFClient from "./client";
 import { ToolRichContent } from "@/components/ToolRichContent";
 
+const toolMeta = getOptimizedToolMetadata("compress-pdf");
+
 export const metadata: Metadata = {
-  title: "Compress PDF Online Free – Shrink PDF Size | ToolNova",
+  title: toolMeta?.title || "Compress PDF Online Free – Shrink PDF Size | ToolNova",
   description:
+    toolMeta?.description ||
     "Compress PDF files free in your browser. Reduce file size for email and upload portals—no watermark, no signup, files stay private.",
-  keywords: [
+  keywords: toolMeta?.keywords || [
     "compress pdf",
     "compress pdf to 1mb",
     "reduce pdf file size free",
@@ -26,7 +30,7 @@ export const metadata: Metadata = {
     canonical: "https://www.toolnovahub.com/tools/compress-pdf",
   },
   openGraph: {
-    title: "Compress PDF Online Free | ToolNova",
+    title: toolMeta?.title || "Compress PDF Online Free | ToolNova",
     description:
       "Shrink PDF file size in your browser. Free, private, no watermark.",
     url: "https://www.toolnovahub.com/tools/compress-pdf",
@@ -34,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compress PDF Free Online | ToolNova",
+    title: toolMeta?.title || "Compress PDF Free Online | ToolNova",
     description: "Reduce PDF size for portals and email. Private browser tool.",
   },
 };

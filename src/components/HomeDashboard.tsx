@@ -28,7 +28,7 @@ import { QuickAnswerBox } from "@/components/aeo/QuickAnswerBox";
 import { FAQAccordion } from "@/components/aeo/FAQAccordion";
 import { getHomepageAEO } from "@/lib/global-aeo-content";
 import { MultiplexAd, BetweenSectionsAd } from "@/components/ads/AdUnit";
-import { TOOL_COUNT, TOOL_COUNT_LABEL, toolsData } from "@/data/tools";
+import { TOOL_COUNT, TOOL_COUNT_LABEL, toolSearchIndex } from "@/data/tool-search-index";
 import { ToolCard } from "@/components/shared";
 
 /** Multi-color gradient tool tiles */
@@ -112,12 +112,12 @@ export function HomeDashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
 
-  const allTools = Object.entries(toolsData).map(([slug, tool]) => ({
-    slug,
+  const allTools = toolSearchIndex.map((tool) => ({
+    slug: tool.slug,
     name: tool.name,
-    description: tool.tagline || tool.description,
+    description: tool.description,
     category: tool.category,
-    url: `/tools/${slug}`,
+    url: `/tools/${tool.slug}`,
   }));
 
   const filteredTools = searchQuery.trim()

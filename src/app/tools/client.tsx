@@ -27,7 +27,7 @@ import {
   Youtube,
   ShieldAlert,
 } from"lucide-react";
-import { TOOL_COUNT_LABEL } from"@/data/tools";
+import { TOOL_COUNT_LABEL } from"@/data/tool-search-index";
 
 // Tool data with categories
 const ALL_TOOLS = [

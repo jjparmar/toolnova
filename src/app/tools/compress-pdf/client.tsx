@@ -56,13 +56,13 @@ export default function CompressPDFClient() {
   const [pageCount, setPageCount] = useState(0);
   const [dragOver, setDragOver] = useState(false);
 
-  const clearResult = () => {
+  const clearResult = useCallback(() => {
     if (resultUrl) URL.revokeObjectURL(resultUrl);
     setResultUrl("");
     setResultSize(0);
     setPageCount(0);
     setProgress("");
-  };
+  }, [resultUrl]);
 
   const acceptFile = useCallback(
     (f: File | null) => {
@@ -79,8 +79,7 @@ export default function CompressPDFClient() {
       setFile(f);
       setOriginalSize(f.size);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [resultUrl],
+    [resultUrl, clearResult],
   );
 
   const onFiles = (list: FileList | null) => {

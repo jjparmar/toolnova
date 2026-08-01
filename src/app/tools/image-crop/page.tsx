@@ -7,9 +7,12 @@ import {
   schemaToJsonLd,
 } from"@/lib/schema";
 import { generateBreadcrumbSchema } from"@/lib/seo-advanced";
+import { getOptimizedToolMetadata } from"@/lib/tool-metadata";
 import { RelatedTools } from"@/components/RelatedTools";
 import { ToolRichContent } from"@/components/ToolRichContent";
 import ImageCropClient from"./client";
+
+const toolMeta = getOptimizedToolMetadata("image-crop");
 
 const faqs = [
   {
@@ -68,13 +71,13 @@ const benefits = [
 ];
 
 export const metadata: Metadata = {
-  title:"Crop Image Online Free – Select Area & Download | ToolNova",
-  description:"Crop any part of an image online free. Drag to select the region, lock aspect ratios (1:1, 16:9), and download PNG/JPG/WebP. Private browser crop tool — no signup.",
-  keywords: ["crop image online free","image crop tool select area","crop photo free no signup","crop image 1:1 16:9","browser image cropper",
+  title: toolMeta?.title || "Crop Image Online Free – Select Area & Download | ToolNova",
+  description: toolMeta?.description || "Crop any part of an image online free. Drag to select the region, lock aspect ratios (1:1, 16:9), and download PNG/JPG/WebP. Private browser crop tool — no signup.",
+  keywords: toolMeta?.keywords || ["crop image online free","image crop tool select area","crop photo free no signup","crop image 1:1 16:9","browser image cropper",
   ],
   alternates: { canonical:"https://www.toolnovahub.com/tools/image-crop" },
   openGraph: {
-    title:"Crop Image Online Free | ToolNova",
+    title: toolMeta?.title || "Crop Image Online Free | ToolNova",
     description:"Drag-select any region and crop images free in your browser. No upload, no watermark.",
     url:"https://www.toolnovahub.com/tools/image-crop",
     type:"website",

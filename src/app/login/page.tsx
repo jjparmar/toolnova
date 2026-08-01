@@ -7,7 +7,7 @@ import { toast } from"sonner";
 import { Sparkles, Shield, Zap, ArrowRight, Check } from"lucide-react";
 import Link from"next/link";
 import { DAILY_FREE_LIMIT } from"@/lib/limits";
-import { TOOL_COUNT_LABEL } from"@/data/tools";
+import { TOOL_COUNT_LABEL } from"@/data/tool-search-index";
 import { getClientCallbackUrl } from"@/lib/auth-callback";
 
 export default function LoginPage() {

@@ -345,6 +345,27 @@ export const optimizedToolMetadata: Record<string, ToolMetadata> = {
         description: 'Estimate AI-like writing patterns in essays and get humanization tips. Not a legal plagiarism database scan — use as a writing coach. Free daily AI use, no login required to start.',
         keywords: ['AI writing detector free online', 'detect AI writing patterns free', 'AI content detector for students', 'humanize AI text free', 'check AI footprint in essay free', 'originality writing coach free'],
     },
+    'compress-pdf': {
+        slug: 'compress-pdf',
+        name: 'Compress PDF',
+        title: 'Compress PDF to 1MB Free Online – No Signup | ToolNova',
+        description: 'Compress PDF files free in your browser. Shrink PDFs to under 1MB for email and portal uploads—no watermark, no signup, files never leave your device.',
+        keywords: ['compress PDF to 1mb free online', 'reduce PDF file size free no watermark', 'shrink PDF for email attachment free', 'free online PDF compressor no signup', 'compress scanned PDF in browser', 'make PDF smaller for job application'],
+    },
+    'image-crop': {
+        slug: 'image-crop',
+        name: 'Crop Image',
+        title: 'Crop Image Online Free – Aspect Ratios 1:1, 16:9 | ToolNova',
+        description: 'Crop any image online free. Select the region with drag handles, lock aspect ratios like 1:1 and 16:9, download PNG/JPG/WebP. Private browser tool—no signup.',
+        keywords: ['crop image online free', 'crop photo to 1:1 16:9 free', 'free image cropper no signup', 'crop jpg png webp free online', 'crop picture for instagram free', 'browser crop tool no upload'],
+    },
+    'reorder-pdf': {
+        slug: 'reorder-pdf',
+        name: 'Reorder PDF Pages',
+        title: 'Reorder PDF Pages Free – Drag Thumbnails Online | ToolNova',
+        description: 'Reorder PDF pages free with visual thumbnails. Drag and drop pages, reverse the order, then download instantly. Private browser tool—no upload, no signup.',
+        keywords: ['reorder pdf pages free online', 'rearrange pdf page order no signup', 'drag and drop pdf pages free', 'reverse pdf page order online', 'change pdf page sequence free', 'free pdf page sorter in browser'],
+    },
 };
 
 /**
@@ -355,7 +376,8 @@ export function getOptimizedToolMetadata(toolSlug: string): ToolMetadata | null 
 }
 
 /**
- * Generate all tool slugs
+ * Generate all tool slugs — derived from the canonical tools catalog so the
+ * metadata store can never silently drift out of sync with the tool pages.
  */
 export function getAllToolSlugs(): string[] {
     return Object.keys(optimizedToolMetadata);

@@ -11,7 +11,7 @@ import {
     CommandItem,
     CommandList,
 } from '@/components/ui/command';
-import { toolsData } from '@/data/tools';
+import { toolSearchIndex } from '@/data/tool-search-index';
 
 const categoryIcons: Record<string, 'sparkles' | 'pen' | 'book' | 'calculator'> = {
     'AI Study Tools': 'sparkles',
@@ -48,10 +48,10 @@ export function GlobalSearch() {
         return () => document.removeEventListener('keydown', down);
     }, []);
 
-    const tools = Object.entries(toolsData).map(([slug, tool]) => ({
+    const tools = toolSearchIndex.map((tool) => ({
         name: tool.name,
-        href:`/tools/${slug}`,
-        description: tool.tagline || tool.description,
+        href:`/tools/${tool.slug}`,
+        description: tool.description,
         category: tool.category,
         icon: categoryIcons[tool.category] || 'sparkles',
     }));
