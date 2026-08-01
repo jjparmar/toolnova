@@ -81,11 +81,7 @@ ${text}`;
       throw new Error("Empty summary from AI. Please try again.");
     }
 
-    // Refresh header usage counter (this path uses isNonAITool wrapper)
-    if (typeof window !=="undefined") {
-      window.dispatchEvent(new Event("ai-usage-updated"));
-    }
-
+    // Usage counter refresh is handled by EnhancedToolLayout for youtube-summarizer
     return data.result;
   };
 

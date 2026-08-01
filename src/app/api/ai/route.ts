@@ -4,7 +4,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { DAILY_FREE_LIMIT } from "@/lib/limits";
 import { db } from "@/lib/db";
-import { applyGuestCookie, evaluateGuestUsage } from "@/lib/guest-limits";
+import {
+  applyGuestCookie,
+  buildIncrementedGuestCookie,
+  evaluateGuestUsage,
+} from "@/lib/guest-limits";
 
 const MAX_PROMPT_CHARS = 12000;
 const MAX_SYSTEM_PROMPT_CHARS = 4000;
@@ -13,9 +17,27 @@ type AuthContext = {
   isAuthenticated: boolean;
   isPremium: boolean;
   resolvedUserId: string | null;
+  /** Remaining uses AFTER a successful generation (-1 = unlimited). */
   remaining: number;
-  guestCookieValue?: string;
+  isGuest: boolean;
 };
+
+function friendlyAIError(err: unknown): string {
+  const message = err instanceof Error ? err.message : "AI generation failed";
+  if (/rate limit|429/i.test(message)) {
+    return "The AI service is busy right now. Please wait a few seconds and try again.";
+  }
+  if (/timeout|ETIMEDOUT|network|ECONNRESET|fetch failed/i.test(message)) {
+    return "The request timed out. Try a shorter input or try again shortly.";
+  }
+  if (/API key|authentication|401|403/i.test(message)) {
+    return "AI service configuration error. Please try again later or contact support.";
+  }
+  if (err instanceof Error && err.name === "AbortError") {
+    return "Cancelled";
+  }
+  return "AI generation failed. Please try again in a moment.";
+}
 
 async function resolveAuthAndLimits(): Promise<
   | { ok: true; ctx: AuthContext }
@@ -28,7 +50,6 @@ async function resolveAuthAndLimits(): Promise<
   let isPremium = false;
   let resolvedUserId: string | null = null;
   let remaining: number = DAILY_FREE_LIMIT;
-  let guestCookieValue: string | undefined;
 
   if (isAuthenticated && user?.email) {
     const dbUser = await db.user.upsert({
@@ -54,8 +75,9 @@ async function resolveAuthAndLimits(): Promise<
     isPremium = !!subscription;
 
     if (!isPremium) {
+      // UTC day boundary — matches guest cookie date key (YYYY-MM-DD UTC)
       const startOfToday = new Date();
-      startOfToday.setHours(0, 0, 0, 0);
+      startOfToday.setUTCHours(0, 0, 0, 0);
 
       const currentCount = await db.generationHistory.count({
         where: {
@@ -78,6 +100,7 @@ async function resolveAuthAndLimits(): Promise<
           ),
         };
       }
+      // Project remaining after this successful use (history written on success)
       remaining = Math.max(0, DAILY_FREE_LIMIT - currentCount - 1);
     } else {
       remaining = -1;
@@ -98,8 +121,8 @@ async function resolveAuthAndLimits(): Promise<
         ),
       };
     }
-    remaining = guest.remaining;
-    guestCookieValue = guest.cookieValue;
+    // Project remaining after a successful use (cookie applied only on success)
+    remaining = Math.max(0, guest.remaining - 1);
   }
 
   return {
@@ -109,7 +132,7 @@ async function resolveAuthAndLimits(): Promise<
       isPremium,
       resolvedUserId,
       remaining,
-      guestCookieValue,
+      isGuest: !isAuthenticated,
     },
   };
 }
@@ -187,29 +210,61 @@ export async function POST(req: NextRequest) {
     if (wantStream) {
       const encoder = new TextEncoder();
       let fullText = "";
+      let guestCookieValue: string | undefined;
+      let finalRemaining = ctx.remaining;
+
+      // Buffer the first token so we only charge guest quota after AI responds.
+      // Headers (incl. Set-Cookie) must be set before the body streams.
+      const streamGen = runAIStream(
+        prompt,
+        safeSystemPrompt,
+        model,
+        slug,
+        req.signal,
+      );
+
+      let firstDelta: string | undefined;
+      try {
+        const first = await streamGen.next();
+        if (first.done || typeof first.value !== "string" || !first.value) {
+          // Empty stream — try to drain any error by continuing; treat as failure
+          return NextResponse.json(
+            { error: "Empty response from AI. Please try again." },
+            { status: 502 },
+          );
+        }
+        firstDelta = first.value;
+        fullText = firstDelta;
+      } catch (err) {
+        console.error("Stream AI Error (first chunk):", err);
+        return NextResponse.json(
+          { error: friendlyAIError(err) },
+          { status: 502 },
+        );
+      }
+
+      if (ctx.isGuest) {
+        const inc = await buildIncrementedGuestCookie();
+        guestCookieValue = inc.cookieValue;
+        finalRemaining = inc.remaining;
+      }
 
       const readable = new ReadableStream({
         async start(controller) {
           const send = (obj: Record<string, unknown>) => {
-            controller.enqueue(
-              encoder.encode(`${JSON.stringify(obj)}\n`),
-            );
+            controller.enqueue(encoder.encode(`${JSON.stringify(obj)}\n`));
           };
           try {
             send({
               type: "meta",
-              remaining: ctx.remaining,
-              isGuest: !ctx.isAuthenticated,
+              remaining: finalRemaining,
+              isGuest: ctx.isGuest,
               isPremium: ctx.isPremium,
             });
 
-            for await (const delta of runAIStream(
-              prompt,
-              safeSystemPrompt,
-              model,
-              slug,
-              req.signal,
-            )) {
+            send({ type: "delta", text: firstDelta });
+
+            for await (const delta of streamGen) {
               fullText += delta;
               send({ type: "delta", text: delta });
             }
@@ -236,10 +291,7 @@ export async function POST(req: NextRequest) {
               console.error("Stream AI Error:", err);
               send({
                 type: "error",
-                error:
-                  err instanceof Error
-                    ? err.message
-                    : "AI generation failed",
+                error: friendlyAIError(err),
               });
             }
           } finally {
@@ -255,8 +307,8 @@ export async function POST(req: NextRequest) {
           "X-Accel-Buffering": "no",
         },
       });
-      if (ctx.guestCookieValue) {
-        applyGuestCookie(response, ctx.guestCookieValue);
+      if (guestCookieValue) {
+        applyGuestCookie(response, guestCookieValue);
       }
       return response;
     }
@@ -279,16 +331,24 @@ export async function POST(req: NextRequest) {
       result.content || "",
     );
 
+    let remaining = ctx.remaining;
+    let guestCookieValue: string | undefined;
+    if (ctx.isGuest) {
+      const inc = await buildIncrementedGuestCookie();
+      guestCookieValue = inc.cookieValue;
+      remaining = inc.remaining;
+    }
+
     const response = NextResponse.json({
       success: true,
       result: result.content,
-      remaining: ctx.remaining,
-      isGuest: !ctx.isAuthenticated,
+      remaining,
+      isGuest: ctx.isGuest,
       isPremium: ctx.isPremium,
     });
 
-    if (ctx.guestCookieValue) {
-      applyGuestCookie(response, ctx.guestCookieValue);
+    if (guestCookieValue) {
+      applyGuestCookie(response, guestCookieValue);
     }
 
     return response;

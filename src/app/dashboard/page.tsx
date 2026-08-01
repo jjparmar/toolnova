@@ -23,8 +23,9 @@ export default async function DashboardPage() {
     redirect("/login?callbackUrl=/dashboard");
   }
 
+  // UTC day boundary — matches /api/ai and /api/usage
   const startOfToday = new Date();
-  startOfToday.setHours(0, 0, 0, 0);
+  startOfToday.setUTCHours(0, 0, 0, 0);
 
   // Look up DB user by email (since JWT user.id is Google's sub, not our DB cuid)
   const dbUser = await db.user.findUnique({ where: { email: user.email } });

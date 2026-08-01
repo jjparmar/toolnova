@@ -24,6 +24,7 @@ import {
 import { cn } from"@/lib/utils";
 import { DAILY_FREE_LIMIT } from"@/lib/limits";
 import { TOOL_COUNT_LABEL } from"@/data/tool-search-index";
+import { PRO_PLAN_IDS } from"@/lib/razorpay-plans";
 import { toast } from"sonner";
 
 const MONTHLY_PRICE = 2.99;
@@ -152,19 +153,29 @@ export default function PricingClient() {
           email: session.user?.email || undefined,
           name: session.user?.name || undefined,
         },
-        handler: async function (response: any) {
+        handler: async function (response: {
+          razorpay_payment_id?: string;
+          razorpay_subscription_id?: string;
+          razorpay_signature?: string;
+          razorpay_order_id?: string;
+        }) {
           try {
+            // Must include planId — Razorpay checkout response does not carry it,
+            // and without it verify-payment cannot create the Subscription row.
             const verifyRes = await fetch("/api/verify-payment", {
-              method:"POST",
-              headers: {"Content-Type":"application/json" },
-              body: JSON.stringify(response),
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ ...response, planId }),
             });
             const verifyData = await verifyRes.json().catch(() => ({}));
-            if (verifyData.success || verifyRes.ok) {
+            if (verifyData.success) {
               toast.success("Welcome to Pro! Unlimited AI is unlocked.");
               router.push("/dashboard");
             } else {
-              toast.message("Payment received — Pro will activate shortly after verification.",
+              toast.message(
+                typeof verifyData?.message === "string"
+                  ? verifyData.message
+                  : "Payment received — Pro will activate shortly after verification.",
               );
             }
           } catch {
@@ -314,7 +325,7 @@ export default function PricingClient() {
               disabled={loading}
               onClick={() =>
                 startSubscription(
-                  isYearly ?"plan_SEPrpn71jkiE0u" :"plan_SEPqtQNsEaZpDB",
+                  isYearly ? PRO_PLAN_IDS.yearly : PRO_PLAN_IDS.monthly,
                 )
               }
             >

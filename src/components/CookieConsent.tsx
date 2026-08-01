@@ -72,11 +72,11 @@ export function CookieConsent() {
                     >
                         We use essential cookies to run the site, and optional cookies for
                         analytics and personalized ads. You can accept or decline optional
-                        cookies anytime.{""}
+                        cookies anytime.{" "}
                         <Link href="/privacy" className="text-primary hover:underline">
                             Privacy Policy
                         </Link>
-                        {" ·"}
+                        {" · "}
                         <Link href="/cookie-policy" className="text-primary hover:underline">
                             Cookie Policy
                         </Link>

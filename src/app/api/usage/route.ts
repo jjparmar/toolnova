@@ -22,9 +22,8 @@ export async function GET() {
             });
         }
         
-        const userId = (user as any).id;
-
         // Ensure user exists in Hostinger MySQL (Prisma) — use email as stable lookup key
+        // (JWT session.user.id is OAuth sub, not our Prisma cuid)
         const dbUser = await db.user.upsert({
             where: { email: user.email },
             create: {
@@ -53,8 +52,9 @@ export async function GET() {
             return NextResponse.json({ count: 0, limit: -1, remaining: -1, isPremium: true });
         }
 
+        // UTC day boundary — matches guest cookie + /api/ai limits
         const startOfToday = new Date();
-        startOfToday.setHours(0, 0, 0, 0);
+        startOfToday.setUTCHours(0, 0, 0, 0);
 
         // Get count from GenerationHistory in MySQL
         const count = await db.generationHistory.count({

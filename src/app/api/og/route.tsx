@@ -8,9 +8,10 @@ const SIZE = { width: 1200, height: 630 };
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
 
-  const title = searchParams.get("title") ||"ToolNova";
-  const description = searchParams.get("description") ||"";
-  const category = searchParams.get("category") ||"";
+  // Clamp lengths so malicious/huge query strings cannot blow up edge memory
+  const title = (searchParams.get("title") || "ToolNova").slice(0, 120);
+  const description = (searchParams.get("description") || "").slice(0, 200);
+  const category = (searchParams.get("category") || "").slice(0, 40);
 
   return new ImageResponse(
     <div

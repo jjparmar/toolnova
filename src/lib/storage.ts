@@ -11,7 +11,10 @@ export interface GenerationHistoryItem {
 }
 
 const HISTORY_KEY = 'tool_generation_history';
-const MAX_HISTORY_ITEMS = 10;
+const MAX_HISTORY_ITEMS = 20;
+/** Keep enough text that reloading history is still useful */
+const MAX_INPUT_CHARS = 8000;
+const MAX_RESULT_CHARS = 50000;
 
 /**
  * Save a generation to history
@@ -20,17 +23,30 @@ export function saveToHistory(toolName: string, input: string, result: string): 
     try {
         const history = getHistory();
         const newItem: GenerationHistoryItem = {
-            id: Date.now().toString(),
+            id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
             toolName,
-            input: input.substring(0, 200), // Save first 200 chars to save space
-            result: result.substring(0, 500), //Save first 500 chars
+            input: input.slice(0, MAX_INPUT_CHARS),
+            result: result.slice(0, MAX_RESULT_CHARS),
             timestamp: Date.now(),
         };
 
         const updatedHistory = [newItem, ...history].slice(0, MAX_HISTORY_ITEMS);
         localStorage.setItem(HISTORY_KEY, JSON.stringify(updatedHistory));
     } catch (error) {
-        console.error('Failed to save to history:', error);
+        // QuotaExceeded or private mode — drop oldest and retry once
+        try {
+            const history = getHistory().slice(0, 5);
+            const newItem: GenerationHistoryItem = {
+                id: `${Date.now()}`,
+                toolName,
+                input: input.slice(0, 2000),
+                result: result.slice(0, 10000),
+                timestamp: Date.now(),
+            };
+            localStorage.setItem(HISTORY_KEY, JSON.stringify([newItem, ...history]));
+        } catch {
+            console.error('Failed to save to history:', error);
+        }
     }
 }
 

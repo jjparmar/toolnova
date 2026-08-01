@@ -88,34 +88,37 @@ export async function getGuestUsage(): Promise<GuestUsageState> {
 }
 
 /**
- * Evaluate guest usage and prepare an incremented cookie value if allowed.
- * Caller must attach cookie via applyGuestCookie() on the response.
+ * Check whether a guest is still under the daily free AI limit (no increment).
  */
 export async function evaluateGuestUsage(): Promise<
-  GuestUsageState & { allowed: boolean; cookieValue?: string }
+  GuestUsageState & { allowed: boolean }
 > {
+  const usage = await getGuestUsage();
+  return {
+    ...usage,
+    allowed: usage.count < usage.limit,
+  };
+}
+
+/**
+ * Build the signed cookie value for the next successful AI use.
+ * Call only after generation succeeds so failed requests do not burn quota.
+ */
+export async function buildIncrementedGuestCookie(): Promise<{
+  cookieValue: string;
+  remaining: number;
+  count: number;
+  limit: number;
+}> {
   const jar = await cookies();
   const parsed = parseGuestCookie(jar.get(GUEST_COOKIE_NAME)?.value);
   const limit = DAILY_FREE_LIMIT;
-
-  if (parsed.count >= limit) {
-    return {
-      date: parsed.date,
-      count: parsed.count,
-      limit,
-      remaining: 0,
-      allowed: false,
-    };
-  }
-
-  const nextCount = parsed.count + 1;
+  const nextCount = Math.min(limit, parsed.count + 1);
   return {
-    date: parsed.date,
+    cookieValue: encodeGuestCookie(parsed.date, nextCount),
+    remaining: Math.max(0, limit - nextCount),
     count: nextCount,
     limit,
-    remaining: Math.max(0, limit - nextCount),
-    allowed: true,
-    cookieValue: encodeGuestCookie(parsed.date, nextCount),
   };
 }
 
