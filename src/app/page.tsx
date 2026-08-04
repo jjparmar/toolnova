@@ -5,6 +5,7 @@ import { getHomepageAEO } from '@/lib/global-aeo-content';
 import { generateWebSiteSchema, generateFAQSchema } from '@/lib/seo-advanced';
 import { generateEnhancedOrganizationSchema, generateEntityData, generateServiceSchema } from '@/lib/seo-worldclass';
 import { siteConfig } from '@/config/site';
+import { getRecentPosts } from '@/data/blog';
 
 export const metadata: Metadata = getHomepageMetadata();
 
@@ -100,13 +101,16 @@ export default function Home() {
     ],
   };
 
+  // Fetch 3 most recent posts for the homepage to satisfy AdSense content requirements
+  const recentPosts = getRecentPosts(3);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(consolidatedSchema) }}
       />
-      <HomeDashboard />
+      <HomeDashboard recentPosts={recentPosts} />
     </>
   );
 }

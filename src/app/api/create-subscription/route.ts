@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
         email: session.user.email,
         planId,
       },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
     } as any);
 
     return NextResponse.json(subscription);

@@ -30,6 +30,7 @@ import { getHomepageAEO } from "@/lib/global-aeo-content";
 import { MultiplexAd, BetweenSectionsAd } from "@/components/ads/AdUnit";
 import { TOOL_COUNT, TOOL_COUNT_LABEL, toolSearchIndex } from "@/data/tool-search-index";
 import { ToolCard } from "@/components/shared";
+import type { BlogPost } from "@/data/blog/types";
 
 /** Multi-color gradient tool tiles */
 const featuredTools = [
@@ -107,7 +108,7 @@ const trustItems = [
   { icon: ShieldCheck, title: "Start free, no account", desc: "Use tools immediately. Free daily AI included; Pro unlocks unlimited AI." },
 ];
 
-export function HomeDashboard() {
+export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }) {
   const aeoContent = getHomepageAEO();
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
@@ -349,6 +350,65 @@ export function HomeDashboard() {
           </div>
         </div>
       </section>
+
+      {/* ─── Latest Blog Posts ─── */}
+      {recentPosts && recentPosts.length > 0 && (
+        <section className="section-pad bg-background">
+          <div className="page-container">
+            <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+              <div>
+                <div className="section-kicker mb-3">Productivity guides</div>
+                <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                  Latest from the blog
+                </h2>
+              </div>
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 text-sm font-bold text-primary transition-all hover:underline"
+              >
+                Read all articles
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+              {recentPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--border-color)] bg-card transition-all hover:shadow-[var(--shadow-premium)]"
+                >
+                  <div className="aspect-[16/9] w-full overflow-hidden bg-muted">
+                    <img 
+                      src={post.coverImage} 
+                      alt={post.imageAlt}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="mb-3 flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-primary">
+                      {post.category}
+                    </div>
+                    <h3 className="mb-2 line-clamp-2 text-lg font-bold text-foreground transition-colors group-hover:text-primary">
+                      {post.title}
+                    </h3>
+                    <p className="mb-4 line-clamp-2 flex-1 text-sm text-muted-foreground">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between text-xs font-semibold text-muted-foreground">
+                      <span>{post.readTime}</span>
+                      <span className="flex items-center gap-1 transition-colors group-hover:text-primary">
+                        Read more <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─── Trust ─── */}
       <section className="section-pad bg-muted/35">

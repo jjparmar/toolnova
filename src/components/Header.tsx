@@ -9,7 +9,6 @@ import { useState, lazy, Suspense, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { ThemeToggle } from '@/components/ThemeToggle';
 
 const MobileMenu = lazy(() => import('./MobileMenu'));
 
@@ -121,8 +120,6 @@ export function Header() {
           <div id="search" className="hidden w-44 shrink-0 sm:block lg:w-60">
             <GlobalSearch />
           </div>
-
-          <ThemeToggle />
 
           <div className="hidden items-center gap-2 md:flex">
             {loading ? (
