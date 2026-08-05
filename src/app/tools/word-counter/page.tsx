@@ -7,19 +7,19 @@ import WordCounterClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-  title: 'Word Counter Free – Count Words & Characters | ToolNova',
+  title: 'Word Counter Free – Count Words & Characters',
   description: 'Free word counter tool. Count words, characters, sentences, and paragraphs instantly. Perfect for essays, assignments, and content writing.',
   keywords: ['word counter', 'character counter', 'word count tool', 'text counter'],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/word-counter' },
   openGraph: {
-    title: 'Word Counter – Count Words and Characters Free | ToolNova',
+    title: 'Word Counter – Count Words and Characters Free',
     description: 'Count words, characters, sentences, and reading time instantly.',
     url: 'https://www.toolnovahub.com/tools/word-counter',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Word Counter – Count Words and Characters Free | ToolNova',
+    title: 'Word Counter – Count Words and Characters Free',
     description: 'Count words, characters, sentences, and reading time instantly.',
   },
 };

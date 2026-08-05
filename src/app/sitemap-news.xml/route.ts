@@ -1,5 +1,6 @@
 import { getAllBlogPosts } from"@/data/blog";
 import { siteConfig } from"@/config/site";
+import { isIndexableBlogPost } from"@/lib/blog-seo";
 
 export const dynamic ="force-dynamic";
 export const revalidate = 1800;
@@ -15,6 +16,7 @@ export async function GET() {
 
   const recentPosts = posts
     .filter((post) => {
+      if (!isIndexableBlogPost(post)) return false;
       if (!post.date) return false;
       const t = new Date(post.date).getTime();
       return !Number.isNaN(t) && t >= cutoff;

@@ -14,7 +14,7 @@ import BlogGridWithFilters from "@/components/blog/BlogGridWithFilters";
 import { formatDisplayDate, formatReadTime } from "@/lib/format";
 
 export const metadata: Metadata = {
-  title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026 | ToolNova",
+  title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026",
   description:"Expert guides on AI tools, productivity, writing, study tips, and business technology. Learn how to use free AI tools effectively to boost your productivity and achieve your goals.",
   keywords: ["AI tools blog","productivity tips","study guides","writing tips","AI guides","free tools tutorials","AI tool reviews","business technology guides","cloud software reviews",
   ],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026 | ToolNova",
+    title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026",
     description:"Expert guides on AI tools, productivity, writing, and study tips.",
     url:`${siteConfig.url}/blog`,
     type:"website",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card:"summary_large_image",
-    title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026 | ToolNova",
+    title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026",
     description:"Expert guides on AI tools, productivity, writing, and study tips.",
     images: [`${siteConfig.url}/og-image.png`],
     creator:"@toolnovahub",
@@ -109,37 +109,35 @@ export default function BlogPage() {
         {/* Featured */}
         <section className="mesh-hero border-b border-[var(--border-color)] py-12 md:py-16">
           <div className="page-container">
-            <div className="mb-8 text-center md:text-left">
+            <div className="section-header mb-8 text-center md:text-left">
               <span className="section-kicker">Blog</span>
-              <h1 className="font-heading mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                Guides &amp; insights
-              </h1>
-              <p className="mt-2 max-w-2xl text-muted-foreground">
+              <h1 className="section-title mt-4">Guides &amp; insights</h1>
+              <p className="section-lead mx-auto mt-2 md:mx-0">
                 Practical tips for AI tools, study workflows, writing, and
                 productivity.
               </p>
             </div>
 
-            <Link href={`/blog/${featuredPost.slug}`} className="block group">
-              <article className="content-panel grid lg:grid-cols-2 gap-8 items-center p-6 md:p-8 transition-all duration-300 relative overflow-hidden hover:border-primary/30 hover:-translate-y-0.5">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 blur-2xl pointer-events-none" />
+            <Link href={`/blog/${featuredPost.slug}`} className="group block">
+              <article className="content-panel relative grid items-center gap-8 overflow-hidden p-6 transition-all duration-300 hover:border-primary/30 md:p-8 lg:grid-cols-2">
+                <div className="pointer-events-none absolute right-0 top-0 h-40 w-40 bg-primary/10 blur-2xl" />
 
                 <div className="relative z-10">
-                  <div className="flex flex-wrap items-center gap-3 mb-4">
-                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-primary text-primary-foreground text-xs font-bold uppercase tracking-wider shadow-md shadow-primary/20">
+                  <div className="mb-4 flex flex-wrap items-center gap-3">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-gradient-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary-foreground shadow-md shadow-primary/20">
                       Featured
                     </span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-muted text-muted-foreground text-xs font-medium">
+                    <span className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
                       {featuredPost.category}
                     </span>
                   </div>
-                  <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors leading-tight">
+                  <h2 className="font-heading mb-4 text-2xl font-bold leading-tight tracking-tight text-foreground transition-colors group-hover:text-primary md:text-3xl lg:text-4xl">
                     {featuredPost.title}
                   </h2>
-                  <p className="text-muted-foreground mb-6 text-lg leading-relaxed line-clamp-3">
+                  <p className="mb-6 line-clamp-3 text-lg leading-relaxed text-muted-foreground">
                     {featuredPost.excerpt}
                   </p>
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-6">
+                  <div className="mb-6 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1.5">
                       <FaCalendar className="text-primary" aria-hidden />
                       <time dateTime={featuredPost.date}>
@@ -151,9 +149,9 @@ export default function BlogPage() {
                       {formatReadTime(featuredPost.readTime)}
                     </span>
                   </div>
-                  <div className="inline-flex items-center gap-2 text-primary font-bold group-hover:gap-3 transition-all">
+                  <div className="inline-flex items-center gap-2 font-bold text-primary transition-all group-hover:gap-3">
                     Read article
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 transition-all group-hover:bg-primary group-hover:text-primary-foreground">
                       <FaArrowRight className="text-xs" />
                     </div>
                   </div>
@@ -169,7 +167,6 @@ export default function BlogPage() {
                         sizes="(max-width: 1024px) 0px, 520px"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         priority
-                        // LCP candidate on blog listing
                         fetchPriority="high"
                       />
                     </div>
@@ -189,10 +186,10 @@ export default function BlogPage() {
         {/* Grid with Category Filters */}
         <section
           id="latest-articles"
-          className="scroll-mt-24 border-t border-border bg-muted py-12 md:py-16"
+          className="scroll-mt-24 border-t border-[var(--border-color)] bg-muted/35 py-12 md:py-16"
         >
-          <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
-            <h2 className="font-heading mb-6 text-2xl font-extrabold text-foreground md:text-3xl">
+          <div className="page-container max-w-[1100px]">
+            <h2 className="section-title mb-6 text-2xl md:text-3xl">
               Latest articles &amp; guides
             </h2>
             <BlogGridWithFilters posts={otherPosts} categories={categories} />
@@ -201,21 +198,21 @@ export default function BlogPage() {
 
         {/* Topics — jump links back to filtered grid */}
         {categories.length > 0 && (
-          <section className="section-band py-12">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <h2 className="font-heading mb-3 text-center text-2xl font-bold text-foreground md:text-3xl">
-                Topics
-              </h2>
-              <p className="mx-auto mb-8 max-w-lg text-center text-sm text-muted-foreground">
-                Browse {blogPosts.length} guides across writing, study, PDF, and
-                career workflows.
-              </p>
-              <div className="flex flex-wrap justify-center gap-3">
+          <section className="section-pad border-t border-[var(--border-color)]">
+            <div className="page-container">
+              <div className="section-header mx-auto max-w-lg text-center">
+                <h2 className="section-title text-2xl md:text-3xl">Topics</h2>
+                <p className="section-lead mx-auto">
+                  Browse {blogPosts.length} guides across writing, study, PDF, and
+                  career workflows.
+                </p>
+              </div>
+              <div className="flex flex-wrap justify-center gap-2.5">
                 {categories.slice(0, 12).map((topic) => (
                   <a
                     key={topic}
                     href="#latest-articles"
-                    className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                    className="rounded-full border border-[var(--border-color)] bg-card px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:border-primary/40 hover:text-primary"
                   >
                     {topic}
                   </a>

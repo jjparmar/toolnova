@@ -4,18 +4,18 @@ import { getCategoryAEO } from '@/lib/global-aeo-content';
 import { generateFAQPageSchema, generateBreadcrumbListSchema, CATEGORY_BREADCRUMBS } from '@/lib/seo-worldclass';
 
 export const metadata = {
-    title: 'Exam Prep Tools - Vocabulary, Synonyms & More | ToolNova',
+    title: 'Exam Prep Tools - Vocabulary, Synonyms & More',
     description: 'Free exam prep tools: vocabulary builder, synonym finder, antonym finder, idioms & phrases, one word substitution.',
     alternates: { canonical: 'https://www.toolnovahub.com/tools/exam-prep-tools' },
     openGraph: {
-        title: 'Exam Prep Tools - Vocabulary, Synonyms & More | ToolNova',
+        title: 'Exam Prep Tools - Vocabulary, Synonyms & More',
         description: 'Use free exam prep tools for vocabulary, synonyms, antonyms, idioms, and one-word substitution.',
         url: 'https://www.toolnovahub.com/tools/exam-prep-tools',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Exam Prep Tools | ToolNova',
+        title: 'Exam Prep Tools',
         description: 'Free AI exam prep tools for vocabulary and language practice.',
     },
 };

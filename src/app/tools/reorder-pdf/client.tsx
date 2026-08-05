@@ -1,13 +1,10 @@
 "use client";
 
-import { useRef, useState } from"react";
-import { useRouter } from"next/navigation";
-import Link from"next/link";
+import { useRef, useState } from "react";
 import {
   Upload,
   Download,
   Trash2,
-  ArrowLeft,
   ArrowUp,
   ArrowDown,
   Loader2,
@@ -15,21 +12,20 @@ import {
   GripVertical,
   Shield,
   RotateCcw,
-} from"lucide-react";
-import { toast } from"sonner";
-import { Button } from"@/components/ui/button";
-import { PDFDocument } from"pdf-lib";
+  Zap,
+  Merge,
+  Scissors,
+  Layers,
+} from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { PDFDocument } from "pdf-lib";
 import {
   downloadBytes,
   isPdfFile,
   renderPdfPageThumbnails,
-} from"@/lib/pdf-client";
-
-const related = [
-  { name:"Merge PDF", href:"/tools/merge-pdf" },
-  { name:"Split PDF", href:"/tools/split-pdf" },
-  { name:"Image to PDF", href:"/tools/image-to-pdf" },
-];
+} from "@/lib/pdf-client";
+import { PremiumToolWrapper } from "@/components/PremiumToolWrapper";
 
 type PageItem = {
   /** original 0-based index in source PDF */
@@ -37,8 +33,56 @@ type PageItem = {
   thumb: string;
 };
 
+const shellFeatures = [
+  {
+    title: "Drag & drop pages",
+    description: "Reorder pages visually with live thumbnails.",
+    icon: GripVertical,
+  },
+  {
+    title: "Private browser tool",
+    description: "PDF never leaves your device during reorder.",
+    icon: Shield,
+  },
+  {
+    title: "Exact page quality",
+    description: "Output keeps full page fidelity—no re-rasterize.",
+    icon: FileText,
+  },
+];
+
+const shellHowItWorks = [
+  {
+    step: 1,
+    title: "Upload PDF",
+    desc: "Drop a PDF to render page thumbnails.",
+    icon: Upload,
+    color: "from-violet-500 to-fuchsia-500",
+  },
+  {
+    step: 2,
+    title: "Reorder",
+    desc: "Drag cards or use arrows; reset/reverse anytime.",
+    icon: GripVertical,
+    color: "from-indigo-500 to-violet-500",
+  },
+  {
+    step: 3,
+    title: "Download",
+    desc: "Save a new PDF in the order you chose.",
+    icon: Download,
+    color: "from-fuchsia-500 to-pink-500",
+  },
+];
+
+const shellRelated = [
+  { name: "Merge PDF", slug: "merge-pdf", icon: Merge, color: "text-violet-500" },
+  { name: "Split PDF", slug: "split-pdf", icon: Scissors, color: "text-blue-500" },
+  { name: "Compress PDF", slug: "compress-pdf", icon: FileText, color: "text-rose-500" },
+  { name: "Image to PDF", slug: "image-to-pdf", icon: Layers, color: "text-emerald-500" },
+];
+
 export default function ReorderPdfClient() {
-  const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [pdfBytes, setPdfBytes] = useState<ArrayBuffer | null>(null);
@@ -57,12 +101,11 @@ export default function ReorderPdfClient() {
     setLoading(true);
     try {
       const buf = await f.arrayBuffer();
-      // Keep a copy — pdf.js may detach the buffer
       const copy = buf.slice(0);
       setPdfBytes(copy);
       setFile(f);
       setOutputName(
-        f.name.replace(/\.pdf$/i,"").replace(/[^\w\-]+/g,"-") +"-reordered",
+        f.name.replace(/\.pdf$/i, "").replace(/[^\w\-]+/g, "-") + "-reordered",
       );
 
       toast.message("Rendering page thumbnails…");
@@ -75,14 +118,15 @@ export default function ReorderPdfClient() {
       for (let i = 0; i < pageCount; i++) {
         items.push({
           sourceIndex: i,
-          thumb: thumbs[i] ||"",
+          thumb: thumbs[i] || "",
         });
       }
       setPages(items);
       toast.success(`Loaded ${pageCount} page(s) — drag to reorder`);
     } catch (e) {
       console.error(e);
-      toast.error("Could not load PDF for previews. File may be encrypted or unsupported.",
+      toast.error(
+        "Could not load PDF for previews. File may be encrypted or unsupported.",
       );
       setFile(null);
       setPdfBytes(null);
@@ -126,8 +170,8 @@ export default function ReorderPdfClient() {
       const copied = await out.copyPages(src, order);
       copied.forEach((p) => out.addPage(p));
       const bytes = await out.save({ useObjectStreams: false });
-      const name = (outputName.trim() ||"reordered").replace(/[^\w\-]+/g,"-");
-      downloadBytes(bytes,`${name}.pdf`,"application/pdf");
+      const name = (outputName.trim() || "reordered").replace(/[^\w\-]+/g, "-");
+      downloadBytes(bytes, `${name}.pdf`, "application/pdf");
       toast.success("Reordered PDF downloaded");
     } catch (e) {
       console.error(e);
@@ -160,34 +204,24 @@ export default function ReorderPdfClient() {
   };
 
   return (
-    <div className="flex-1 w-full min-h-screen relative">
-      {/* Animated Background */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[50%] rounded-full bg-indigo-500/10 blur-[120px] mix-blend-screen animate-pulse-glow" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[50%] rounded-full bg-blue-500/10 blur-[120px] mix-blend-screen" style={{ animationDelay: '1s' }} />
-      </div>
-      <div className="max-w-[1100px] mx-auto px-4 py-10">
-        <button
-          type="button"
-          onClick={() => router.push("/tools/image-pdf-tools")}
-          className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary"
-        >
-          <ArrowLeft className="h-4 w-4" /> Back to Image & PDF
-        </button>
-
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-500/10 to-blue-500/10 text-indigo-400 text-sm font-semibold mb-5">
-            <GripVertical className="h-4 w-4" /> Free · Private · Thumbnails
-          </div>
-          <h1 className="text-foreground text-4xl md:text-5xl font-black tracking-tight mb-4">Reorder PDF Pages</h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            See each page as a thumbnail, drag to reorder, then download a new
-            PDF. All processing stays in your browser.
-          </p>
-        </div>
-
-        <div className="bg-card/40 backdrop-blur-3xl rounded-[2rem] shadow-premium-lg border border-border/60 overflow-hidden relative group p-6 md:p-8 space-y-6">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+    <PremiumToolWrapper
+      toolName="Reorder PDF Pages Free"
+      toolSlug="reorder-pdf"
+      tagline="Drag thumbnails to rearrange — private browser tool"
+      description="See each page as a thumbnail, drag to reorder, then download a new PDF. All processing stays in your browser."
+      badge="Free PDF tool · browser-private"
+      category="PDF Tools"
+      categorySlug="image-pdf-tools"
+      features={shellFeatures}
+      howItWorks={shellHowItWorks}
+      relatedTools={shellRelated}
+      ctaTitle="Ready to reorder pages?"
+      ctaDescription="Upload a PDF, drag pages into place, and download the new order."
+      ctaButtonText="Start reordering"
+      ctaIcon={GripVertical}
+    >
+      <div className="tool-shell">
+        <div className="space-y-6 p-5 sm:p-7 md:p-8">
           <input
             ref={inputRef}
             type="file"
@@ -208,21 +242,25 @@ export default function ReorderPdfClient() {
                 e.preventDefault();
                 setDragOver(false);
                 const f = e.dataTransfer.files?.[0];
-                if (f) loadFile(f);
+                if (f) void loadFile(f);
               }}
-              className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all relative z-10 ${
+              className={`cursor-pointer rounded-2xl border-2 border-dashed p-10 text-center transition-all sm:p-12 ${
                 dragOver
-                  ?"border-primary bg-primary/5 scale-[1.02]"
-                  :"border-border/60 hover:border-primary/50 hover:bg-muted/30 hover:shadow-glow-sm"
+                  ? "scale-[1.01] border-primary bg-primary/5"
+                  : "border-[var(--border-color)] bg-muted/20 hover:border-primary/45 hover:bg-muted/35"
               }`}
             >
               {loading ? (
-                <Loader2 className="h-12 w-12 mx-auto animate-spin text-primary" />
+                <Loader2 className="mx-auto h-11 w-11 animate-spin text-primary" />
               ) : (
                 <>
-                  <Upload className="h-12 w-12 mx-auto mb-3 text-muted-foreground" />
-                  <p className="font-semibold">Drop a PDF or click to upload</p>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                    <Upload className="h-7 w-7" />
+                  </div>
+                  <p className="font-semibold text-foreground">
+                    Drop a PDF or click to upload
+                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">
                     Thumbnails load for up to 100 pages
                   </p>
                 </>
@@ -231,54 +269,70 @@ export default function ReorderPdfClient() {
           ) : (
             <>
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-3 min-w-0">
-                  <FileText className="h-8 w-8 text-primary shrink-0" />
+                <div className="flex min-w-0 items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <FileText className="h-5 w-5" />
+                  </div>
                   <div className="min-w-0">
-                    <p className="font-semibold truncate">{file.name}</p>
+                    <p className="truncate font-semibold text-foreground">
+                      {file.name}
+                    </p>
                     <p className="text-sm text-muted-foreground">
                       {pages.length} pages · drag cards to reorder
                     </p>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  <Button type="button" variant="outline" size="sm" onClick={resetOrder} className="bg-background/50 border-border/50 hover:border-primary/50 transition-colors">
-                    <RotateCcw className="h-4 w-4 mr-1" /> Reset
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={resetOrder}
+                  >
+                    <RotateCcw className="mr-1 h-4 w-4" /> Reset
                   </Button>
-                  <Button type="button" variant="outline" size="sm" onClick={reverseOrder} className="bg-background/50 border-border/50 hover:border-primary/50 transition-colors">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={reverseOrder}
+                  >
                     Reverse
                   </Button>
                   <Button
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="text-red-500 hover:text-red-400 hover:bg-red-950/30"
+                    className="text-red-600 hover:bg-red-50 hover:text-red-700"
                     onClick={clear}
                   >
-                    <Trash2 className="h-4 w-4 mr-1" /> Remove
+                    <Trash2 className="mr-1 h-4 w-4" /> Remove
                   </Button>
                 </div>
               </div>
 
-              <label className="block text-sm space-y-1 max-w-md relative z-10">
-                <span className="font-medium">Output filename</span>
+              <label className="block max-w-md space-y-1.5 text-sm">
+                <span className="font-semibold text-foreground">
+                  Output filename
+                </span>
                 <div className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={outputName}
-                      onChange={(e) => setOutputName(e.target.value)}
-                      className="flex-1 h-12 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm px-4 text-sm focus:outline-none focus:ring-1 focus:ring-primary/40 transition-all"
-                    />
-                    <span className="text-muted-foreground text-sm">.pdf</span>
+                  <input
+                    type="text"
+                    value={outputName}
+                    onChange={(e) => setOutputName(e.target.value)}
+                    className="input-surface h-12 flex-1 px-4 text-sm"
+                  />
+                  <span className="text-sm text-muted-foreground">.pdf</span>
                 </div>
               </label>
 
               {loading ? (
                 <div className="py-16 text-center text-muted-foreground">
-                  <Loader2 className="h-8 w-8 animate-spin mx-auto mb-2" />
+                  <Loader2 className="mx-auto mb-2 h-8 w-8 animate-spin" />
                   Rendering thumbnails…
                 </div>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                   {pages.map((page, index) => (
                     <div
                       key={`${page.sourceIndex}-${index}`}
@@ -286,42 +340,43 @@ export default function ReorderPdfClient() {
                       onDragStart={() => onDragStart(index)}
                       onDragOver={(e) => e.preventDefault()}
                       onDrop={() => onDrop(index)}
-                      className="relative rounded-xl border border-border/40 bg-background/40 backdrop-blur-sm p-2 cursor-grab active:cursor-grabbing hover:border-primary/50 transition-colors z-10"
+                      className="relative cursor-grab rounded-xl border border-[var(--border-color)] bg-card p-2 transition-colors hover:border-primary/50 active:cursor-grabbing"
                     >
-                      <div className="absolute top-1 left-1 z-10 flex items-center gap-1">
-                        <span className="text-[10px] font-black bg-primary text-primary-foreground px-1.5 py-0.5 rounded shadow-sm">
+                      <div className="absolute left-1 top-1 z-10 flex items-center gap-1">
+                        <span className="rounded bg-primary px-1.5 py-0.5 text-[10px] font-black text-primary-foreground shadow-sm">
                           {index + 1}
                         </span>
-                        <span className="text-[10px] font-medium bg-black/70 backdrop-blur-md text-white px-1.5 py-0.5 rounded shadow-sm">
+                        <span className="rounded bg-black/70 px-1.5 py-0.5 text-[10px] font-medium text-white shadow-sm backdrop-blur-md">
                           was {page.sourceIndex + 1}
                         </span>
                       </div>
-                      <div className="aspect-[3/4] rounded-lg overflow-hidden bg-background flex items-center justify-center">
+                      <div className="flex aspect-[3/4] items-center justify-center overflow-hidden rounded-lg bg-muted/40">
                         {page.thumb ? (
+                          // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={page.thumb}
                             alt={`Page ${page.sourceIndex + 1}`}
-                            className="w-full h-full object-contain"
+                            className="h-full w-full object-contain"
                             draggable={false}
                           />
                         ) : (
                           <FileText className="h-8 w-8 text-muted-foreground" />
                         )}
                       </div>
-                      <div className="flex justify-center gap-1 mt-2">
+                      <div className="mt-2 flex justify-center gap-1">
                         <button
                           type="button"
-                          className="p-1 rounded hover:bg-muted disabled:opacity-30 transition-colors"
+                          className="rounded p-1 transition-colors hover:bg-muted disabled:opacity-30"
                           disabled={index === 0}
                           onClick={() => move(index, -1)}
                           aria-label="Move earlier"
                         >
                           <ArrowUp className="h-4 w-4" />
                         </button>
-                        <GripVertical className="h-4 w-4 text-muted-foreground mt-1" />
+                        <GripVertical className="mt-1 h-4 w-4 text-muted-foreground" />
                         <button
                           type="button"
-                          className="p-1 rounded hover:bg-muted disabled:opacity-30 transition-colors"
+                          className="rounded p-1 transition-colors hover:bg-muted disabled:opacity-30"
                           disabled={index === pages.length - 1}
                           onClick={() => move(index, 1)}
                           aria-label="Move later"
@@ -335,62 +390,24 @@ export default function ReorderPdfClient() {
               )}
 
               <Button
-                className="w-full h-14 rounded-2xl font-bold text-base relative z-10 bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow-md hover:shadow-glow-lg transition-all"
-                onClick={save}
+                className="btn-premium h-13 w-full gap-2 text-base font-bold"
+                onClick={() => void save()}
                 disabled={saving || pages.length === 0}
               >
                 {saving ? (
                   <>
-                    <Loader2 className="h-5 w-5 animate-spin mr-2" /> Saving…
+                    <Loader2 className="h-5 w-5 animate-spin" /> Saving…
                   </>
                 ) : (
                   <>
-                    <Download className="h-5 w-5 mr-2" /> Download reordered PDF
+                    <Download className="h-5 w-5" /> Download reordered PDF
                   </>
                 )}
               </Button>
             </>
           )}
         </div>
-
-        <div className="mt-10 grid sm:grid-cols-3 gap-4">
-          {[
-            {
-              icon: GripVertical,
-              t:"Drag & drop",
-              d:"Reorder pages visually with thumbnails",
-            },
-            {
-              icon: Shield,
-              t:"Private",
-              d:"PDF never leaves your device",
-            },
-            {
-              icon: FileText,
-              t:"Exact pages",
-              d:"Output keeps full page quality",
-            },
-          ].map((x) => (
-            <div key={x.t} className="rounded-2xl bg-card/40 backdrop-blur-md border border-border/40 p-5 hover:border-primary/30 transition-colors">
-              <x.icon className="h-6 w-6 text-primary mb-3" />
-              <p className="font-bold text-foreground mb-1">{x.t}</p>
-              <p className="text-sm text-muted-foreground">{x.d}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6 flex flex-wrap gap-3 text-sm">
-          {related.map((r) => (
-            <Link
-              key={r.href}
-              href={r.href}
-              className="underline underline-offset-4 hover:text-primary"
-            >
-              {r.name}
-            </Link>
-          ))}
-        </div>
       </div>
-    </div>
+    </PremiumToolWrapper>
   );
 }

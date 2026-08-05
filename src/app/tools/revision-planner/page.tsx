@@ -7,19 +7,19 @@ import RevisionPlannerClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'AI Revision Planner – Create Study Schedule Free | ToolNova',
+    title: 'AI Revision Planner – Create Study Schedule Free',
     description: 'Create a personalized study schedule for exam preparation. Free AI revision planner with day-by-day planning.',
     keywords: ['revision planner', 'study schedule', 'exam preparation', 'study plan', 'revision timetable'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/revision-planner' },
   openGraph: {
-    title: 'AI Revision Planner – Create Study Revision Plans Free | ToolNova',
+    title: 'AI Revision Planner – Create Study Revision Plans Free',
     description: 'Build smart revision timetables for exams in minutes.',
     url: 'https://www.toolnovahub.com/tools/revision-planner',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Revision Planner – Create Study Revision Plans Free | ToolNova',
+    title: 'AI Revision Planner – Create Study Revision Plans Free',
     description: 'Build smart revision timetables for exams in minutes.',
   },
 };

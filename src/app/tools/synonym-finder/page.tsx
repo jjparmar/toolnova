@@ -7,19 +7,19 @@ import SynonymFinderClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'Synonym Finder – Find Similar Words Free | ToolNova',
+    title: 'Synonym Finder – Find Similar Words Free',
     description: 'Find synonyms for any word to enhance your vocabulary and writing. Free synonym finder for students and writers.',
     keywords: ['synonym finder', 'similar words', 'thesaurus', 'vocabulary', 'word alternatives'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/synonym-finder' },
   openGraph: {
-    title: 'Synonym Finder – Find Similar Words Instantly Free | ToolNova',
+    title: 'Synonym Finder – Find Similar Words Instantly Free',
     description: 'Find synonyms for any word instantly to improve writing clarity and variety.',
     url: 'https://www.toolnovahub.com/tools/synonym-finder',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Synonym Finder – Find Similar Words Instantly Free | ToolNova',
+    title: 'Synonym Finder – Find Similar Words Instantly Free',
     description: 'Find synonyms for any word instantly to improve writing clarity and variety.',
   },
 };

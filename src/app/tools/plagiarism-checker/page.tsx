@@ -11,19 +11,19 @@ import { ToolRichContent } from '@/components/ToolRichContent';
 const toolMeta = getOptimizedToolMetadata('plagiarism-checker');
 
 export const metadata: Metadata = {
-  title: toolMeta?.title || 'AI Writing Detector – Spot AI Patterns Free | ToolNova',
+  title: toolMeta?.title || 'AI Writing Detector – Spot AI Patterns Free',
   description: toolMeta?.description || 'Estimate AI-like writing patterns and get humanization tips. Educational coach only — not a legal plagiarism database verdict. Free daily AI use.',
   keywords: toolMeta?.keywords || ['AI writing detector', 'AI content detector', 'detect AI writing patterns', 'humanize AI text', 'AI footprint scanner'],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/plagiarism-checker' },
   openGraph: {
-    title: toolMeta?.title || 'AI Writing Detector | ToolNova',
+    title: toolMeta?.title || 'AI Writing Detector',
     description: toolMeta?.description || 'Estimate AI-like writing patterns and improve originality with practical tips.',
     url: 'https://www.toolnovahub.com/tools/plagiarism-checker',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Writing Detector | ToolNova',
+    title: 'AI Writing Detector',
     description: 'Estimate AI-like writing patterns and get humanization tips.',
   },
 };

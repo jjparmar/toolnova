@@ -4,18 +4,18 @@ import { getCategoryAEO } from '@/lib/global-aeo-content';
 import { generateFAQPageSchema, generateBreadcrumbListSchema, CATEGORY_BREADCRUMBS } from '@/lib/seo-worldclass';
 
 export const metadata = {
-    title: 'AI Study Tools - Homework Solver, Notes Generator & More | ToolNova',
+    title: 'AI Study Tools - Homework Solver, Notes Generator & More',
     description: 'Free AI-powered study tools: homework solver, notes generator, flashcard maker, quiz generator, formula generator, and more.',
     alternates: { canonical: 'https://www.toolnovahub.com/tools/study-tools' },
     openGraph: {
-        title: 'AI Study Tools - Homework Solver, Notes Generator & More | ToolNova',
+        title: 'AI Study Tools - Homework Solver, Notes Generator & More',
         description: 'Explore free AI study tools for homework, notes, flashcards, quizzes, and revision.',
         url: 'https://www.toolnovahub.com/tools/study-tools',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AI Study Tools | ToolNova',
+        title: 'AI Study Tools',
         description: 'Free AI study tools for homework, flashcards, quizzes, and revision.',
     },
 };

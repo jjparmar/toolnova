@@ -11,7 +11,26 @@ import {
     Star,
     CalendarDays,
     PenLine,
+    Users,
+    GitCompare,
+    Link2,
 } from 'lucide-react';
+
+export interface ToolUseCase {
+    title: string;
+    desc: string;
+}
+
+export interface ToolComparisonRow {
+    feature: string;
+    toolnova: string;
+    alternative: string;
+}
+
+export interface ToolRelatedLink {
+    href: string;
+    label: string;
+}
 
 interface ToolRichContentProps {
     title: string;
@@ -21,14 +40,26 @@ interface ToolRichContentProps {
     faq: { question: string; answer: string }[];
     expertTips?: string[];
     lastReviewed?: string;
+    /** Short AEO answer (40–80 words). Falls back to generated snippet. */
+    quickAnswer?: string;
+    bestFor?: string[];
+    notIdealFor?: string[];
+    useCases?: ToolUseCase[];
+    comparison?: {
+        heading?: string;
+        alternativeLabel?: string;
+        rows: ToolComparisonRow[];
+    };
+    relatedLinks?: ToolRelatedLink[];
+    /** Extra long-tail paragraphs under "What is" */
+    longFormSections?: { heading: string; body: string }[];
 }
 
-const REVIEW_DATE = 'June 2026';
+const REVIEW_DATE = 'August 2026';
 
 const getAnswerSnippet = (title: string, description: string) => {
-    // Keep it concise (40-70 words) and answer-shaped for AI/voice extraction.
     const trimmedDesc = description.trim();
-    return`The ${title} is a free online tool from ToolNova. ${trimmedDesc} No sign-up is required to start. Browser-based PDF/image tools are unlimited; AI tools include free daily use with optional Pro for higher limits.`;
+    return `The ${title} is a free online tool from ToolNova. ${trimmedDesc} No sign-up is required to start. Browser-based PDF/image tools are unlimited; AI tools include free daily use with optional Pro for higher limits.`;
 };
 
 export const ToolRichContent: React.FC<ToolRichContentProps> = ({
@@ -39,36 +70,74 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
     faq,
     expertTips,
     lastReviewed = REVIEW_DATE,
+    quickAnswer,
+    bestFor,
+    notIdealFor,
+    useCases,
+    comparison,
+    relatedLinks,
+    longFormSections,
 }) => {
-    const answerSnippet = getAnswerSnippet(title, description);
+    const answerSnippet =
+        quickAnswer?.trim() || getAnswerSnippet(title, description);
 
-    const defaultTips = [`Start with a clear, specific input — the more context you give the ${title}, the better your results will be.`,`Review and edit the output before using it. AI tools provide an excellent starting point, but a final human review always improves quality.`,`Use the output options (format, length, tone) to tailor results to your exact needs instead of accepting the default settings.`,
+    const defaultTips = [
+        `Start with a clear, specific input — the more context you give the ${title}, the better your results will be.`,
+        `Review and edit the output before using it. AI tools provide an excellent starting point, but a final human review always improves quality.`,
+        `Use the output options (format, length, tone) to tailor results to your exact needs instead of accepting the default settings.`,
     ];
 
     const tips = expertTips && expertTips.length > 0 ? expertTips : defaultTips;
 
-    return (
-        <div className="mx-auto max-w-4xl space-y-20 px-6 py-16 text-foreground">
+    const bestForItems = bestFor?.length
+        ? bestFor
+        : [
+              'Fast task completion with minimal steps',
+              'Students and professionals who need reliable output',
+              'Users who want browser-based workflow without installs',
+          ];
 
+    const notIdealItems = notIdealFor?.length
+        ? notIdealFor
+        : [
+              'Extremely niche enterprise workflows with custom compliance rules',
+              'Offline-only environments',
+              'Cases requiring human legal/professional certification',
+          ];
+
+    return (
+        <div className="mx-auto max-w-4xl space-y-16 px-6 py-14 text-foreground md:space-y-20 md:py-16">
             {/* Trust Badge: Last Reviewed */}
             <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-success/25 bg-success/8 p-4 text-sm">
                 <div className="flex items-center gap-2 font-medium text-success">
                     <CalendarDays className="h-4 w-4 shrink-0" />
-                    <span>Last reviewed by our editorial team: <strong>{lastReviewed}</strong></span>
+                    <span>
+                        Last reviewed by our editorial team:{' '}
+                        <strong>{lastReviewed}</strong>
+                    </span>
                 </div>
                 <div className="flex items-center gap-2 font-medium text-success">
                     <PenLine className="h-4 w-4 shrink-0" />
-                    <span>Fact-checked by <strong>ToolNova Editorial Team</strong></span>
+                    <span>
+                        Fact-checked by <strong>ToolNova Editorial Team</strong>
+                    </span>
                 </div>
-                <Link href="/editorial-policy" className="ml-auto text-xs text-success hover:underline underline-offset-2">
+                <Link
+                    href="/editorial-policy"
+                    className="ml-auto text-xs text-success underline-offset-2 hover:underline"
+                >
                     Our editorial standards →
                 </Link>
             </div>
 
-            {/* AEO: Quick answer block — direct, cite-friendly answer for AI search */}
+            {/* AEO: Quick answer */}
             <section className="rounded-2xl border border-primary/20 bg-primary/5 p-6">
-                <h2 className="mb-3 text-xl font-bold text-foreground">Quick answer</h2>
-                <p className="text-base leading-relaxed text-muted-foreground">{answerSnippet}</p>
+                <h2 className="mb-3 text-xl font-bold text-foreground">
+                    Quick answer
+                </h2>
+                <p className="text-base leading-relaxed text-muted-foreground">
+                    {answerSnippet}
+                </p>
             </section>
 
             {/* Overview */}
@@ -79,9 +148,19 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
                 <p className="text-lg leading-relaxed text-muted-foreground">
                     {description}
                 </p>
+                {longFormSections?.map((section) => (
+                    <div key={section.heading} className="space-y-3">
+                        <h3 className="text-xl font-bold text-foreground">
+                            {section.heading}
+                        </h3>
+                        <p className="leading-relaxed text-muted-foreground">
+                            {section.body}
+                        </p>
+                    </div>
+                ))}
             </section>
 
-            {/* Intent fit: best for / not for */}
+            {/* Intent fit */}
             <section className="grid gap-6 md:grid-cols-2">
                 <div className="rounded-2xl border border-success/20 bg-success/5 p-6">
                     <div className="mb-3 flex items-center gap-2 text-success">
@@ -89,9 +168,9 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
                         <h3 className="text-lg font-bold">Best for</h3>
                     </div>
                     <ul className="space-y-2 text-sm text-muted-foreground">
-                        <li>• Fast task completion with minimal steps</li>
-                        <li>• Students and professionals who need reliable output</li>
-                        <li>• Users who want browser-based workflow without installs</li>
+                        {bestForItems.map((item) => (
+                            <li key={item}>• {item}</li>
+                        ))}
                     </ul>
                 </div>
                 <div className="rounded-2xl border border-warning/20 bg-warning/5 p-6">
@@ -100,9 +179,9 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
                         <h3 className="text-lg font-bold">Not ideal for</h3>
                     </div>
                     <ul className="space-y-2 text-sm text-muted-foreground">
-                        <li>• Extremely niche enterprise workflows with custom compliance rules</li>
-                        <li>• Offline-only environments</li>
-                        <li>• Cases requiring human legal/professional certification</li>
+                        {notIdealItems.map((item) => (
+                            <li key={item}>• {item}</li>
+                        ))}
                     </ul>
                 </div>
             </section>
@@ -111,16 +190,23 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
             <section className="space-y-10">
                 <div className="flex items-center gap-3">
                     <Rocket className="h-6 w-6 text-primary" />
-                    <h2 className="font-heading text-2xl font-bold text-foreground">How to Use the {title}</h2>
+                    <h2 className="font-heading text-2xl font-bold text-foreground">
+                        How to use the {title}
+                    </h2>
                 </div>
                 <div className="grid gap-6">
                     {steps.map((step, i) => (
-                        <div key={i} className="flex gap-4 rounded-2xl border border-border bg-muted/40 p-6">
+                        <div
+                            key={i}
+                            className="flex gap-4 rounded-2xl border border-border bg-muted/40 p-6"
+                        >
                             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary font-bold text-primary-foreground">
                                 {i + 1}
                             </div>
                             <div className="space-y-2">
-                                <h3 className="font-bold text-lg text-foreground">{step.title}</h3>
+                                <h3 className="text-lg font-bold text-foreground">
+                                    {step.title}
+                                </h3>
                                 <p className="text-muted-foreground">{step.desc}</p>
                             </div>
                         </div>
@@ -128,18 +214,49 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
                 </div>
             </section>
 
+            {/* Use cases — long-tail intent */}
+            {useCases && useCases.length > 0 && (
+                <section className="space-y-8">
+                    <div className="flex items-center gap-3">
+                        <Users className="h-6 w-6 text-primary" />
+                        <h2 className="font-heading text-2xl font-bold text-foreground">
+                            Real-world use cases
+                        </h2>
+                    </div>
+                    <div className="grid gap-6 sm:grid-cols-2">
+                        {useCases.map((uc) => (
+                            <div
+                                key={uc.title}
+                                className="rounded-2xl border border-border bg-card p-6"
+                            >
+                                <h3 className="mb-2 text-lg font-bold text-foreground">
+                                    {uc.title}
+                                </h3>
+                                <p className="text-sm leading-relaxed text-muted-foreground">
+                                    {uc.desc}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
             {/* Benefits */}
             <section className="space-y-10">
                 <div className="flex items-center gap-3">
                     <Lightbulb className="h-6 w-6 text-warning-foreground" />
-                    <h2 className="font-heading text-2xl font-bold text-foreground">Key Benefits</h2>
+                    <h2 className="font-heading text-2xl font-bold text-foreground">
+                        Key benefits
+                    </h2>
                 </div>
                 <div className="grid gap-8 sm:grid-cols-2">
                     {benefits.map((benefit, i) => (
                         <div key={i} className="space-y-3">
                             <div className="flex items-center gap-2 text-primary">
                                 <CheckCircle2 className="h-5 w-5" />
-                                <h3 className="text-lg font-bold text-foreground">{benefit.title}</h3>
+                                <h3 className="text-lg font-bold text-foreground">
+                                    {benefit.title}
+                                </h3>
                             </div>
                             <p className="leading-relaxed text-muted-foreground">
                                 {benefit.desc}
@@ -149,19 +266,75 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
                 </div>
             </section>
 
+            {/* Comparison */}
+            {comparison && comparison.rows.length > 0 && (
+                <section className="space-y-6">
+                    <div className="flex items-center gap-3">
+                        <GitCompare className="h-6 w-6 text-primary" />
+                        <h2 className="font-heading text-2xl font-bold text-foreground">
+                            {comparison.heading ||
+                                `${title} vs doing it manually`}
+                        </h2>
+                    </div>
+                    <div className="overflow-x-auto rounded-2xl border border-border">
+                        <table className="w-full min-w-[480px] text-left text-sm">
+                            <thead className="bg-muted/60">
+                                <tr>
+                                    <th className="px-4 py-3 font-semibold text-foreground">
+                                        Feature
+                                    </th>
+                                    <th className="px-4 py-3 font-semibold text-foreground">
+                                        ToolNova
+                                    </th>
+                                    <th className="px-4 py-3 font-semibold text-foreground">
+                                        {comparison.alternativeLabel ||
+                                            'Typical free tools'}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {comparison.rows.map((row) => (
+                                    <tr
+                                        key={row.feature}
+                                        className="border-t border-border"
+                                    >
+                                        <td className="px-4 py-3 font-medium text-foreground">
+                                            {row.feature}
+                                        </td>
+                                        <td className="px-4 py-3 text-muted-foreground">
+                                            {row.toolnova}
+                                        </td>
+                                        <td className="px-4 py-3 text-muted-foreground">
+                                            {row.alternative}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            )}
+
             {/* Expert Tips */}
             <section className="space-y-6">
                 <div className="flex items-center gap-3">
                     <Star className="h-6 w-6 text-warning-foreground" />
-                    <h2 className="font-heading text-2xl font-bold text-foreground">Expert Tips for Best Results</h2>
+                    <h2 className="font-heading text-2xl font-bold text-foreground">
+                        Expert tips for best results
+                    </h2>
                 </div>
                 <div className="space-y-4">
                     {tips.map((tip, i) => (
-                        <div key={i} className="flex gap-4 rounded-xl border border-warning/20 bg-warning/5 p-5">
+                        <div
+                            key={i}
+                            className="flex gap-4 rounded-xl border border-warning/20 bg-warning/5 p-5"
+                        >
                             <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-warning-foreground text-xs font-bold text-white">
                                 {i + 1}
                             </div>
-                            <p className="text-sm leading-relaxed text-muted-foreground">{tip}</p>
+                            <p className="text-sm leading-relaxed text-muted-foreground">
+                                {tip}
+                            </p>
                         </div>
                     ))}
                 </div>
@@ -171,13 +344,20 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
             <section className="space-y-10">
                 <div className="flex items-center gap-3">
                     <HelpCircle className="h-6 w-6 text-primary" />
-                    <h2 className="font-heading text-2xl font-bold text-foreground">Frequently Asked Questions</h2>
+                    <h2 className="font-heading text-2xl font-bold text-foreground">
+                        Frequently asked questions
+                    </h2>
                 </div>
                 <div className="space-y-6">
                     {faq.map((item, i) => (
-                        <div key={i} className="space-y-3 border-b border-border pb-6 last:border-0">
-                            <h3 className="text-xl font-bold text-foreground">{item.question}</h3>
-                            <p className="italic leading-relaxed text-muted-foreground">
+                        <div
+                            key={i}
+                            className="space-y-3 border-b border-border pb-6 last:border-0"
+                        >
+                            <h3 className="text-xl font-bold text-foreground">
+                                {item.question}
+                            </h3>
+                            <p className="leading-relaxed text-muted-foreground not-italic">
                                 {item.answer}
                             </p>
                         </div>
@@ -185,17 +365,77 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
                 </div>
             </section>
 
+            {/* Related tools / guides */}
+            {relatedLinks && relatedLinks.length > 0 && (
+                <section className="rounded-2xl border border-border bg-card p-6">
+                    <div className="mb-4 flex items-center gap-2">
+                        <Link2 className="h-5 w-5 text-primary" />
+                        <h2 className="text-xl font-bold text-foreground">
+                            Related tools & guides
+                        </h2>
+                    </div>
+                    <div className="flex flex-wrap gap-3 text-sm">
+                        {relatedLinks.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className="rounded-full border border-border bg-muted/40 px-3 py-1.5 text-primary underline-offset-4 hover:underline"
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+            )}
+
             {/* Internal intent links */}
             <section className="rounded-2xl border border-border bg-card p-6">
-                <h2 className="mb-4 text-xl font-bold text-foreground">Explore related categories</h2>
+                <h2 className="mb-4 text-xl font-bold text-foreground">
+                    Explore related categories
+                </h2>
                 <div className="flex flex-wrap gap-3 text-sm">
-                    <Link href="/tools" className="text-primary underline-offset-4 hover:underline">All tools</Link>
-                    <Link href="/tools/writing-tools" className="text-primary underline-offset-4 hover:underline">Writing tools</Link>
-                    <Link href="/tools/study-tools" className="text-primary underline-offset-4 hover:underline">Study tools</Link>
-                    <Link href="/tools/career-tools" className="text-primary underline-offset-4 hover:underline">Career tools</Link>
-                    <Link href="/tools/image-pdf-tools" className="text-primary underline-offset-4 hover:underline">Image &amp; PDF tools</Link>
-                    <Link href="/blog" className="text-primary underline-offset-4 hover:underline">Guides &amp; blog</Link>
-                    <Link href="/editorial-policy" className="text-primary underline-offset-4 hover:underline">Editorial policy</Link>
+                    <Link
+                        href="/tools"
+                        className="text-primary underline-offset-4 hover:underline"
+                    >
+                        All tools
+                    </Link>
+                    <Link
+                        href="/tools/writing-tools"
+                        className="text-primary underline-offset-4 hover:underline"
+                    >
+                        Writing tools
+                    </Link>
+                    <Link
+                        href="/tools/study-tools"
+                        className="text-primary underline-offset-4 hover:underline"
+                    >
+                        Study tools
+                    </Link>
+                    <Link
+                        href="/tools/career-tools"
+                        className="text-primary underline-offset-4 hover:underline"
+                    >
+                        Career tools
+                    </Link>
+                    <Link
+                        href="/tools/image-pdf-tools"
+                        className="text-primary underline-offset-4 hover:underline"
+                    >
+                        Image &amp; PDF tools
+                    </Link>
+                    <Link
+                        href="/blog"
+                        className="text-primary underline-offset-4 hover:underline"
+                    >
+                        Guides &amp; blog
+                    </Link>
+                    <Link
+                        href="/editorial-policy"
+                        className="text-primary underline-offset-4 hover:underline"
+                    >
+                        Editorial policy
+                    </Link>
                 </div>
             </section>
 
@@ -205,11 +445,21 @@ export const ToolRichContent: React.FC<ToolRichContentProps> = ({
                     <ShieldCheck className="h-8 w-8" />
                 </div>
                 <div className="text-center md:text-left">
-                    <h3 className="mb-2 text-xl font-bold text-foreground">Safe &amp; Secure Processing</h3>
+                    <h3 className="mb-2 text-xl font-bold text-foreground">
+                        Safe &amp; secure processing
+                    </h3>
                     <p className="text-muted-foreground">
-                        Your data is processed locally in your browser when possible and never stored on our servers.
-                        All AI processing is encrypted and follows strict privacy standards.
-                        Read our <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link> for full details.
+                        Your data is processed locally in your browser when
+                        possible and never stored on our servers. All AI
+                        processing is encrypted and follows strict privacy
+                        standards. Read our{' '}
+                        <Link
+                            href="/privacy"
+                            className="text-primary hover:underline"
+                        >
+                            Privacy Policy
+                        </Link>{' '}
+                        for full details.
                     </p>
                 </div>
             </section>

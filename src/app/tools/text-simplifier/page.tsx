@@ -7,19 +7,19 @@ import TextSimplifierClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'Text Simplifier – Simplify Complex Text Free | ToolNova',
+    title: 'Text Simplifier – Simplify Complex Text Free',
     description: 'Simplify complex text into easy-to-understand language. Free AI tool for making content accessible.',
     keywords: ['text simplifier', 'simplify text', 'plain language', 'easy to read', 'simplify content'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/text-simplifier' },
   openGraph: {
-    title: 'Text Simplifier – Simplify Complex Text Free | ToolNova',
+    title: 'Text Simplifier – Simplify Complex Text Free',
     description: 'Rewrite complex text into simple, easy-to-read language instantly.',
     url: 'https://www.toolnovahub.com/tools/text-simplifier',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Text Simplifier – Simplify Complex Text Free | ToolNova',
+    title: 'Text Simplifier – Simplify Complex Text Free',
     description: 'Rewrite complex text into simple, easy-to-read language instantly.',
   },
 };

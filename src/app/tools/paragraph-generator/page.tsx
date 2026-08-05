@@ -7,19 +7,19 @@ import ParagraphGeneratorClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'AI Paragraph Generator – Write Perfect Paragraphs Free | ToolNova',
+    title: 'AI Paragraph Generator – Write Perfect Paragraphs Free',
     description: 'Generate well-structured paragraphs on any topic instantly. Free AI paragraph generator for students and writers.',
     keywords: ['paragraph generator', 'write paragraphs', 'content writing', 'paragraph writer', 'AI writing'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/paragraph-generator' },
   openGraph: {
-    title: 'AI Paragraph Generator – Write Paragraphs Instantly Free | ToolNova',
+    title: 'AI Paragraph Generator – Write Paragraphs Instantly Free',
     description: 'Generate clear, structured paragraphs for essays, blogs, and assignments.',
     url: 'https://www.toolnovahub.com/tools/paragraph-generator',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Paragraph Generator – Write Paragraphs Instantly Free | ToolNova',
+    title: 'AI Paragraph Generator – Write Paragraphs Instantly Free',
     description: 'Generate clear, structured paragraphs for essays, blogs, and assignments.',
   },
 };

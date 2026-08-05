@@ -5,7 +5,7 @@ import { getAllBlogPosts } from"@/data/blog";
 import { siteConfig } from"@/config/site";
 
 export const metadata: Metadata = {
-  title:"Sitemap - All Tools, Guides & Pages | ToolNova",
+  title:"Sitemap - All Tools, Guides & Pages",
   description:"Browse the complete ToolNova sitemap: all AI tools by category, in-depth guides, and company pages in one place.",
   alternates: {
     canonical:"https://www.toolnovahub.com/sitemap-page",

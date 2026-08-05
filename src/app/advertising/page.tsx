@@ -5,13 +5,13 @@ import { siteConfig } from"@/config/site";
 const LAST_UPDATED ="July 15, 2026";
 
 export const metadata: Metadata = {
-  title:"Advertising Disclosure | ToolNova",
+  title:"Advertising Disclosure",
   description:"How ToolNova is funded, how Google AdSense and ads work on our site, and your advertising privacy choices. Transparent disclosure for users and partners.",
   alternates: {
     canonical:"https://www.toolnovahub.com/advertising",
   },
   openGraph: {
-    title:"Advertising Disclosure | ToolNova",
+    title:"Advertising Disclosure",
     description:"How ToolNova is funded and how advertising works on our free tools platform.",
     url:"https://www.toolnovahub.com/advertising",
     type:"website",

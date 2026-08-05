@@ -28,29 +28,27 @@ export function ArticleHeader({
       : formatReadTime(readingTime);
 
   return (
-    <header className="mb-8 md:mb-10">
+    <header className="mb-2 md:mb-4">
       {category && (
         <div className="mb-4">
-          <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary">
-            {category}
-          </span>
+          <span className="section-kicker">{category}</span>
         </div>
       )}
 
-      <h1 className="font-heading mb-4 text-3xl font-extrabold leading-[1.15] tracking-tight text-foreground sm:text-4xl md:text-5xl">
+      <h1 className="font-heading mb-4 max-w-4xl text-[1.85rem] font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl md:text-[2.65rem]">
         {title}
       </h1>
 
-      <p className="mb-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+      <p className="mb-7 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
         {description}
       </p>
 
-      <div className="flex flex-wrap items-center gap-5 border-y border-border py-4">
+      <div className="flex flex-wrap items-center gap-5 rounded-2xl border border-[var(--border-color)] bg-card/70 px-4 py-3.5 shadow-sm sm:px-5">
         <Link
           href={`/author/${author.slug}`}
           className="flex items-center gap-3 transition-opacity hover:opacity-80"
         >
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-primary to-violet-600 text-sm font-bold text-white shadow-md shadow-primary/20">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[#7c3aed] to-[#d946ef] text-sm font-bold text-white shadow-md shadow-violet-500/25">
             {author.image ||
               author.name
                 .split(" ")
@@ -71,9 +69,11 @@ export function ArticleHeader({
           </div>
         </Link>
 
+        <div className="hidden h-8 w-px bg-border sm:block" aria-hidden />
+
         <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-1.5">
-            <Calendar className="h-4 w-4" aria-hidden />
+            <Calendar className="h-4 w-4 text-primary/80" aria-hidden />
             <time dateTime={publishedDate}>
               {formatDisplayDate(publishedDate)}
             </time>
@@ -90,7 +90,7 @@ export function ArticleHeader({
 
           {readLabel && (
             <div className="flex items-center gap-1.5">
-              <Clock className="h-4 w-4" aria-hidden />
+              <Clock className="h-4 w-4 text-primary/80" aria-hidden />
               <span>{readLabel}</span>
             </div>
           )}

@@ -7,19 +7,19 @@ import JPGtoPNGClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'JPG to PNG Converter – Convert JPEG to PNG Free | ToolNova',
+    title: 'JPG to PNG Converter – Convert JPEG to PNG Free',
     description: 'Convert JPG/JPEG images to PNG format instantly. Free, lossless conversion with transparency support.',
     keywords: ['jpg to png', 'jpeg to png', 'convert jpg to png', 'image converter', 'png converter'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/jpg-to-png' },
   openGraph: {
-    title: 'JPG to PNG Converter – Convert JPEG to PNG Free | ToolNova',
+    title: 'JPG to PNG Converter – Convert JPEG to PNG Free',
     description: 'Convert JPG/JPEG images to PNG format instantly. Free, lossless conversion with transparency support.',
     url: 'https://www.toolnovahub.com/tools/jpg-to-png',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'JPG to PNG Converter – Convert JPEG to PNG Free | ToolNova',
+    title: 'JPG to PNG Converter – Convert JPEG to PNG Free',
     description: 'Convert JPG/JPEG images to PNG format instantly. Free, lossless conversion with transparency support.',
   },
 };

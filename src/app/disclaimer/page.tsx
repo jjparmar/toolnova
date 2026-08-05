@@ -4,7 +4,7 @@ import { Metadata } from"next";
 const LAST_UPDATED ="June 14, 2026";
 
 export const metadata: Metadata = {
-    title:"Disclaimer | ToolNova",
+    title:"Disclaimer",
     description:"Legal disclaimer for using ToolNova's AI-powered tools. Understand the limitations and responsibilities when using our platform.",
     alternates: {
         canonical:"https://www.toolnovahub.com/disclaimer",

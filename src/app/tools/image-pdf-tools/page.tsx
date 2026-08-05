@@ -13,18 +13,18 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-    title: 'Image & PDF Tools - Merge, Split, Compress & Convert | ToolNova',
+    title: 'Image & PDF Tools - Merge, Split, Compress & Convert',
     description: 'Free image and PDF tools: merge, split, reorder pages with thumbnails, crop, resize, compress, convert JPG/PNG. Private browser tools.',
     alternates: { canonical: 'https://www.toolnovahub.com/tools/image-pdf-tools' },
     openGraph: {
-        title: 'Image & PDF Tools - Merge, Split, Compress & Convert | ToolNova',
+        title: 'Image & PDF Tools - Merge, Split, Compress & Convert',
         description: 'Use free image and PDF tools to merge, split, compress, and convert files instantly.',
         url: 'https://www.toolnovahub.com/tools/image-pdf-tools',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Image & PDF Tools | ToolNova',
+        title: 'Image & PDF Tools',
         description: 'Merge, split, compress, and convert image/PDF files for free.',
     },
 };

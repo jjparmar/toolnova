@@ -3,20 +3,21 @@ import { getAllBlogPosts } from"@/data/blog";
 import { getAllAuthors } from"@/data/authors";
 import { getAllToolSlugs } from"@/data/tools";
 import { siteConfig } from"@/config/site";
+import { filterIndexableBlogPosts } from"@/lib/blog-seo";
 
 // Revalidate daily — fresher than static, cheaper than force-dynamic
 export const revalidate = 86400;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
-  // Stable lastmod for tools (avoid rewriting every request with"now")
-  const toolsLastMod ="2026-07-15";
+  // Stable lastmod for tools (bump when tool pages meaningfully change)
+  const toolsLastMod ="2026-08-05";
 
   // Real last-modified dates for static pages
   // Update these when you actually change a page's content
-  const HOMEPAGE_MODIFIED ="2026-07-15";
-  const TOOLS_MODIFIED ="2026-07-15";
-  const BLOG_MODIFIED ="2026-07-15";
+  const HOMEPAGE_MODIFIED ="2026-08-05";
+  const TOOLS_MODIFIED ="2026-08-05";
+  const BLOG_MODIFIED ="2026-08-05";
   const ABOUT_MODIFIED ="2026-07-15";
   const CONTACT_MODIFIED ="2026-07-15";
   const PRICING_MODIFIED ="2026-07-15";
@@ -159,17 +160,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  // ── Blog post URLs ────────────────────────────────────────────
-  const blogUrls: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url:`${baseUrl}/blog/${post.slug}`,
-    lastModified: post.dateModified
-      ? new Date(post.dateModified).toISOString()
-      : post.date
-        ? new Date(post.date).toISOString()
-        : toolsLastMod,
-    changeFrequency:"weekly" as const,
-    priority: 0.8,
-  }));
+  // ── Blog post URLs (on-topic only — matches robots index policy) ──
+  const blogUrls: MetadataRoute.Sitemap = filterIndexableBlogPosts(blogPosts).map(
+    (post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: post.dateModified
+        ? new Date(post.dateModified).toISOString()
+        : post.date
+          ? new Date(post.date).toISOString()
+          : toolsLastMod,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    }),
+  );
 
   return [
     ...staticPages,

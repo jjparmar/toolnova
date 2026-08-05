@@ -37,8 +37,61 @@ function keyFileOk() {
   return body === INDEXNOW_KEY || body.includes(INDEXNOW_KEY);
 }
 
+// Keep IndexNow aligned with noindex policy (see src/lib/blog-seo.ts)
+const OFF_TOPIC_BLOG_SLUGS = new Set([
+  "best-online-programming-courses-with-certificates",
+  "best-lms-for-training-companies-and-corporate-learning",
+  "aws-vs-azure-vs-google-cloud-comparison",
+  "best-payroll-software-small-business",
+  "erp-software-guide-how-to-choose-for-your-business",
+  "best-cloud-call-center-software-small-business",
+  "virtual-data-room-software-best-options-enterprises",
+  "ai-agents-transforming-customer-support-2026",
+  "chatgpt-vs-claude-vs-gemini-best-ai-for-business",
+  "marketing-automation-software-ultimate-comparison",
+  "best-help-desk-software-small-business-2026",
+  "ai-hr-software-complete-guide-small-business",
+  "top-10-enterprise-vpn-solutions-remote-teams",
+  "how-ai-is-transforming-small-business-operations-2026",
+  "top-email-marketing-solutions-business-growth",
+  "best-online-business-degree-programs-2026",
+  "online-mba-programs-guide-working-professionals",
+]);
+
+// Money pages + new guides — submitted first so crawlers see them sooner
+const PRIORITY_PATHS = [
+  "",
+  "/tools",
+  "/blog",
+  "/tools/merge-pdf",
+  "/tools/compress-pdf",
+  "/tools/grammar-fix",
+  "/tools/paraphraser",
+  "/tools/flashcard-maker",
+  "/tools/homework-solver",
+  "/tools/essay-writer",
+  "/tools/split-pdf",
+  "/tools/image-to-pdf",
+  "/tools/image-compressor",
+  "/tools/text-summarizer",
+  "/tools/notes-generator",
+  "/tools/quiz-generator",
+  "/tools/resume-bullets",
+  "/tools/cover-letter-writer",
+  "/blog/student-pdf-submission-workflow-portal-limits",
+  "/blog/essay-polish-workflow-grammar-paraphrase-summarize",
+  "/blog/lecture-notes-to-exam-ready-flashcards-quiz",
+  "/blog/job-application-kit-resume-bullets-cover-letter",
+  "/sitemap.xml",
+];
+
 const toolUrls = extractSlugs("src/data/tools.ts", "tools");
-const blogUrls = extractSlugs("src/data/blog/articles.ts", "blog");
+const blogUrls = extractSlugs("src/data/blog/articles.ts", "blog").filter(
+  (url) => {
+    const slug = url.split("/blog/")[1];
+    return slug && !OFF_TOPIC_BLOG_SLUGS.has(slug);
+  },
+);
 
 const categoryUrls = [
   "writing-tools",
@@ -63,7 +116,12 @@ const staticUrls = [
   `${SITE_URL}/llms.txt`,
 ];
 
+const priorityUrls = PRIORITY_PATHS.map((p) =>
+  p ? `${SITE_URL}${p}` : SITE_URL,
+);
+
 const urlList = [
+  ...priorityUrls,
   ...staticUrls,
   ...categoryUrls,
   ...toolUrls,

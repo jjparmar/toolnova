@@ -7,19 +7,19 @@ import CaseConverterClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-  title: 'Case Converter Free – Change Text Case Online | ToolNova',
+  title: 'Case Converter Free – Change Text Case Online',
   description: 'Free case converter. Convert text to UPPERCASE, lowercase, Title Case, Sentence case, and more. Instant conversion.',
   keywords: ['case converter', 'text case changer', 'uppercase converter', 'lowercase converter'],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/case-converter' },
   openGraph: {
-    title: 'Case Converter – Change Text Case Instantly Free | ToolNova',
+    title: 'Case Converter – Change Text Case Instantly Free',
     description: 'Convert text to uppercase, lowercase, title case, and sentence case instantly.',
     url: 'https://www.toolnovahub.com/tools/case-converter',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Case Converter – Change Text Case Instantly Free | ToolNova',
+    title: 'Case Converter – Change Text Case Instantly Free',
     description: 'Convert text to uppercase, lowercase, title case, and sentence case instantly.',
   },
 };

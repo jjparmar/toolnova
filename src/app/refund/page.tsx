@@ -3,7 +3,7 @@ import { Metadata } from"next";
 const LAST_UPDATED ="June 14, 2026";
 
 export const metadata: Metadata = {
-    title:"Refund & Cancellation Policy | ToolNova",
+    title:"Refund & Cancellation Policy",
     description:"Refund and Cancellation Policy for ToolNova. Learn about our refund eligibility, cancellation process, and subscription terms.",
     robots: {
         index: false,

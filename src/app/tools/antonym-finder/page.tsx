@@ -7,19 +7,19 @@ import AntonymFinderClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'Antonym Finder – Find Opposite Words Free | ToolNova',
+    title: 'Antonym Finder – Find Opposite Words Free',
     description: 'Find antonyms (opposite words) for any word. Free antonym finder for students, writers, and vocabulary building.',
     keywords: ['antonym finder', 'opposite words', 'vocabulary', 'word opposites', 'thesaurus'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/antonym-finder' },
   openGraph: {
-    title: 'Antonym Finder – Find Opposite Words Instantly Free | ToolNova',
+    title: 'Antonym Finder – Find Opposite Words Instantly Free',
     description: 'Find accurate antonyms quickly for essays, assignments, and vocabulary building.',
     url: 'https://www.toolnovahub.com/tools/antonym-finder',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Antonym Finder – Find Opposite Words Instantly Free | ToolNova',
+    title: 'Antonym Finder – Find Opposite Words Instantly Free',
     description: 'Find accurate antonyms quickly for essays, assignments, and vocabulary building.',
   },
 };

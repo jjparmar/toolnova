@@ -5,7 +5,7 @@ import { siteConfig } from"@/config/site";
 import { TOOL_COUNT } from"@/data/tools";
 
 export const metadata: Metadata = {
-  title:`All Free AI Tools - ${TOOL_COUNT}+ Writing, Study, PDF & Career Tools | ToolNova`,
+  title:`All Free AI Tools - ${TOOL_COUNT}+ Writing, Study, PDF & Career Tools`,
   description:`Explore ${TOOL_COUNT}+ free AI-powered tools for study, writing, exam prep, image editing, PDF management, and career development. No sign-up required.`,
   keywords: ["free AI tools","online tools","study tools","writing tools","PDF tools","career tools","AI productivity","ToolNova","free online tools 2026","AI tools for students","best free AI tools",
   ],
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     canonical:"https://www.toolnovahub.com/tools",
   },
   openGraph: {
-    title:`All Free AI Tools - ${TOOL_COUNT}+ Writing, Study, PDF & Career Tools | ToolNova`,
+    title:`All Free AI Tools - ${TOOL_COUNT}+ Writing, Study, PDF & Career Tools`,
     description:`Explore ${TOOL_COUNT}+ free AI-powered tools for study, writing, exam prep, image editing, PDF management, and career development.`,
     url:"https://www.toolnovahub.com/tools",
     type:"website",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card:"summary_large_image",
-    title:`All Free AI Tools - ${TOOL_COUNT}+ Tools | ToolNova`,
+    title:`All Free AI Tools - ${TOOL_COUNT}+ Tools`,
     description:`Explore ${TOOL_COUNT}+ free AI-powered tools. No sign-up required.`,
     images: ["https://www.toolnovahub.com/og-image.png"],
     creator:"@toolnovahub",

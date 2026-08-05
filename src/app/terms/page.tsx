@@ -3,13 +3,13 @@ import { Metadata } from"next";
 const LAST_UPDATED ="June 14, 2026";
 
 export const metadata: Metadata = {
-  title:"Terms of Service | ToolNova",
+  title:"Terms of Service",
   description:"Terms of Service for ToolNova. Read our rules, regulations, and usage policies for all AI-powered tools.",
   alternates: {
     canonical:"https://www.toolnovahub.com/terms",
   },
   openGraph: {
-    title:"Terms of Service | ToolNova",
+    title:"Terms of Service",
     description:"Read ToolNova's terms of service, rules, and usage policies.",
     url:"https://www.toolnovahub.com/terms",
     type:"website",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card:"summary",
-    title:"Terms of Service | ToolNova",
+    title:"Terms of Service",
     description:"Read ToolNova's terms of service, rules, and usage policies.",
     creator:"@toolnovahub",
   },

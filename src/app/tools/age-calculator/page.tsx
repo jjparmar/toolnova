@@ -4,19 +4,19 @@ import AgeCalculatorClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-  title: 'Age Calculator Free – Calculate Exact Age Online | ToolNova',
+  title: 'Age Calculator Free – Calculate Exact Age Online',
   description: 'Free age calculator. Calculate your exact age in years, months, and days. Find age difference between two dates instantly. Precise, fast, and privacy-focused.',
   keywords: ['age calculator', 'calculate age', 'age from date of birth', 'age difference calculator', 'how old am i'],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/age-calculator' },
   openGraph: {
-    title: 'Age Calculator – Calculate Exact Age Online Free | ToolNova',
+    title: 'Age Calculator – Calculate Exact Age Online Free',
     description: 'Calculate exact age by date of birth in years, months, and days instantly.',
     url: 'https://www.toolnovahub.com/tools/age-calculator',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Age Calculator – Calculate Exact Age Online Free | ToolNova',
+    title: 'Age Calculator – Calculate Exact Age Online Free',
     description: 'Calculate exact age by date of birth in years, months, and days instantly.',
   },
 };

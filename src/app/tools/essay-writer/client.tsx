@@ -325,10 +325,10 @@ const faqs = [
 export default function EssayWriterClient() {
   return (
     <PremiumToolWrapper
-      toolName="AI Essay Writer"
+      toolName="Write a Free Essay Online"
       toolSlug="essay-writer"
-      tagline="Generate high-quality essays in minutes"
-      description="Create well-structured, engaging essays on any topic with AI assistance. Perfect for students, writers, and educators who need inspiration and guidance."
+      tagline="Free AI essay generator — draft, then rewrite in your voice"
+      description="Get a structured intro, body, and conclusion free—no login to start. Use it as a scaffold: personalize every paragraph, add real citations, follow school integrity rules."
       badge="AI-Powered"
       category="Writing Tools"
       categorySlug="writing-tools"
@@ -342,7 +342,7 @@ export default function EssayWriterClient() {
       <EnhancedToolLayout
         toolSlug="essay-writer"
         systemPrompt={systemPrompt}
-        toolName="AI Essay Writer"
+        toolName="Write a Free Essay Online"
         placeholder={`📝 Enter your essay topic or thesis statement...
 
 Examples:

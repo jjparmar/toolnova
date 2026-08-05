@@ -70,8 +70,8 @@ const config: Config = {
   			'3xl': 'calc(var(--radius) + 12px)'
   		},
   		fontFamily: {
-			sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-			heading: ['var(--font-jakarta)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+			sans: ['var(--font-manrope)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+			heading: ['var(--font-sora)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 			mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace']
 		},
   		fontSize: {

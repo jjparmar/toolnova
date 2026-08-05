@@ -11,19 +11,19 @@ import { ToolRichContent } from '@/components/ToolRichContent';
 const toolMeta = getOptimizedToolMetadata('youtube-summarizer');
 
 export const metadata: Metadata = {
-  title: toolMeta?.title || 'YouTube Video Summarizer – AI Summaries Instantly | ToolNova',
+  title: toolMeta?.title || 'YouTube Video Summarizer – AI Summaries Instantly',
   description: toolMeta?.description || 'Get instant, comprehensive summaries of any YouTube video with our free AI tool. Extract key points and actionable takeaways from long videos.',
   keywords: toolMeta?.keywords || ['YouTube summarizer', 'AI video summary', 'YouTube transcript generator', 'video to text summary'],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/youtube-summarizer' },
   openGraph: {
-    title: toolMeta?.title || 'YouTube Video Summarizer | ToolNova',
+    title: toolMeta?.title || 'YouTube Video Summarizer',
     description: toolMeta?.description || 'Get instant summaries of any YouTube video.',
     url: 'https://www.toolnovahub.com/tools/youtube-summarizer',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'YouTube Video Summarizer | ToolNova',
+    title: 'YouTube Video Summarizer',
     description: 'Get instant summaries of any YouTube video.',
   },
 };

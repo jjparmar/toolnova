@@ -7,19 +7,19 @@ import SpeechWriterClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-  title: 'AI Speech Writer – Write Speeches Free | ToolNova',
+  title: 'AI Speech Writer – Write Speeches Free',
   description: 'Write compelling speeches for any occasion with our free AI speech writer. Wedding, graduation, business and more.',
   keywords: ['AI speech writer', 'speech generator', 'wedding speech', 'graduation speech'],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/speech-writer' },
   openGraph: {
-    title: 'AI Speech Writer – Create Speeches Instantly Free | ToolNova',
+    title: 'AI Speech Writer – Create Speeches Instantly Free',
     description: 'Generate structured speeches for presentations, events, and public speaking.',
     url: 'https://www.toolnovahub.com/tools/speech-writer',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Speech Writer – Create Speeches Instantly Free | ToolNova',
+    title: 'AI Speech Writer – Create Speeches Instantly Free',
     description: 'Generate structured speeches for presentations, events, and public speaking.',
   },
 };

@@ -3,7 +3,7 @@ import { Metadata } from"next";
 import { TOOL_COUNT_LABEL } from"@/data/tools";
 
 export const metadata: Metadata = {
-  title:"Page Not Found | ToolNova",
+  title:"Page Not Found",
   description:"The page you're looking for doesn't exist. Explore free AI-powered tools for students and professionals at ToolNova.",
   robots: {
     index: false,

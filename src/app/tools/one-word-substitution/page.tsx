@@ -7,19 +7,19 @@ import OneWordSubstitutionClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'One Word Substitution – Replace Phrases with Single Words | ToolNova',
+    title: 'One Word Substitution – Replace Phrases with Single Words',
     description: 'Find one word substitutions for phrases. Essential for competitive exams like SSC, Bank, and UPSC.',
     keywords: ['one word substitution', 'competitive exams', 'SSC vocabulary', 'English for exams', 'word meanings'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/one-word-substitution' },
   openGraph: {
-    title: 'One Word Substitution Tool – Find Precise Terms Free | ToolNova',
+    title: 'One Word Substitution Tool – Find Precise Terms Free',
     description: 'Convert long phrases into one precise word for concise and powerful writing.',
     url: 'https://www.toolnovahub.com/tools/one-word-substitution',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'One Word Substitution Tool – Find Precise Terms Free | ToolNova',
+    title: 'One Word Substitution Tool – Find Precise Terms Free',
     description: 'Convert long phrases into one precise word for concise and powerful writing.',
   },
 };

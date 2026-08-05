@@ -7,19 +7,19 @@ import InterviewGeneratorClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'Interview Question Generator – Practice Interview Questions Free | ToolNova',
+    title: 'Interview Question Generator – Practice Interview Questions Free',
     description: 'Generate interview questions for any role with sample answers. Free AI tool for interview preparation.',
     keywords: ['interview questions', 'interview prep', 'practice interview', 'job interview', 'interview generator'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/interview-generator' },
   openGraph: {
-    title: 'AI Interview Questions Generator – Practice Interviews Free | ToolNova',
+    title: 'AI Interview Questions Generator – Practice Interviews Free',
     description: 'Generate interview questions and sample answers instantly for better job prep.',
     url: 'https://www.toolnovahub.com/tools/interview-generator',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Interview Questions Generator – Practice Interviews Free | ToolNova',
+    title: 'AI Interview Questions Generator – Practice Interviews Free',
     description: 'Generate interview questions and sample answers instantly for better job prep.',
   },
 };

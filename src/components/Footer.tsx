@@ -43,10 +43,10 @@ export function Footer() {
   return (
     <footer className="footer-dark relative mt-auto w-full overflow-hidden">
       {/* Top ambient gradient line */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#8b5cf6] to-transparent opacity-70" />
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#a78bfa] to-transparent opacity-80" />
 
       <div className="page-container py-16 md:py-20">
-        <div className="mb-14 grid grid-cols-2 gap-10 md:grid-cols-5">
+        <div className="mb-14 grid grid-cols-2 gap-10 md:grid-cols-5 md:gap-8">
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="group mb-5 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#d946ef] text-lg font-extrabold text-white shadow-lg shadow-violet-500/30 transition-transform duration-300 group-hover:scale-105">

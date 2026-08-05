@@ -7,19 +7,19 @@ import DoubtSolverClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'AI Doubt Solver – Get Instant Answers Free | ToolNova',
+    title: 'AI Doubt Solver – Get Instant Answers Free',
     description: 'Get instant answers to any academic question with our free AI doubt solver. Perfect for students needing quick, accurate explanations.',
     keywords: ['AI doubt solver', 'ask questions online', 'instant answers', 'study help', 'homework help'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/doubt-solver' },
   openGraph: {
-    title: 'AI Doubt Solver – Get Instant Answers Free | ToolNova',
+    title: 'AI Doubt Solver – Get Instant Answers Free',
     description: 'Ask any study doubt and get clear step-by-step explanations.',
     url: 'https://www.toolnovahub.com/tools/doubt-solver',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Doubt Solver – Get Instant Answers Free | ToolNova',
+    title: 'AI Doubt Solver – Get Instant Answers Free',
     description: 'Ask any study doubt and get clear step-by-step explanations.',
   },
 };

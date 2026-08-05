@@ -4,18 +4,18 @@ import { getCategoryAEO } from '@/lib/global-aeo-content';
 import { generateFAQPageSchema, generateBreadcrumbListSchema, CATEGORY_BREADCRUMBS } from '@/lib/seo-worldclass';
 
 export const metadata = {
-    title: 'AI Writing Tools - Essay Writer, Email Generator & More | ToolNova',
+    title: 'AI Writing Tools - Essay Writer, Email Generator & More',
     description: 'Free AI writing tools: essay writer, story generator, email writer, grammar checker, paraphraser, and more.',
     alternates: { canonical: 'https://www.toolnovahub.com/tools/writing-tools' },
     openGraph: {
-        title: 'AI Writing Tools - Essay Writer, Email Generator & More | ToolNova',
+        title: 'AI Writing Tools - Essay Writer, Email Generator & More',
         description: 'Explore free AI writing tools for essays, emails, grammar fixes, paraphrasing, and more.',
         url: 'https://www.toolnovahub.com/tools/writing-tools',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AI Writing Tools | ToolNova',
+        title: 'AI Writing Tools',
         description: 'Free writing tools for essays, emails, grammar and paraphrasing.',
     },
 };

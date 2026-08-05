@@ -312,10 +312,10 @@ const relatedTools = [
 export default function ResumeBulletsClient() {
   return (
     <PremiumToolWrapper
-      toolName="Resume Bullet Generator"
+      toolName="Generate Resume Bullet Points Free"
       toolSlug="resume-bullets"
-      tagline="Create impactful resume bullets that get noticed"
-      description="Transform your job experience into powerful, achievement-focused resume bullet points. ATS-optimized with quantifiable results and industry-specific keywords."
+      tagline="Action-verb achievements for ATS and recruiters"
+      description="Turn job duties into results-focused resume bullets free. No signup to start—always edit with real metrics you can defend in interviews."
       badge="Career Booster"
       category="Writing Tools"
       categorySlug="writing-tools"
@@ -340,7 +340,7 @@ export default function ResumeBulletsClient() {
       </div>
       <EnhancedToolLayout
         toolSlug="resume-bullets"
-        toolName="Resume Bullet Generator"
+        toolName="Generate Resume Bullet Points Free"
         placeholder={`💼 Describe your job responsibilities and achievements...
 
 Examples:

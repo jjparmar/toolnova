@@ -25,12 +25,12 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
 
     if (!author) {
         return {
-            title: 'Author Not Found | ToolNova',
+            title: 'Author Not Found',
         };
     }
 
     return {
-        title:`${author.name} | ToolNova`,
+        title:`${author.name}`,
         description: author.bio,
     };
 }

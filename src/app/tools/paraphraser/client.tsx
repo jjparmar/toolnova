@@ -241,18 +241,18 @@ const faqs = [
 export default function ParaphraserClient() {
   return (
     <PremiumToolWrapper
-      toolName="AI Paraphraser"
+      toolName="Paraphrase Essay Free Online"
       toolSlug="paraphraser"
-      tagline="Rewrite text in your own unique voice"
-      description="Transform any text into fresh, original content while preserving the meaning. Perfect for avoiding plagiarism, improving clarity, or adapting tone for different audiences."
+      tagline="Paraphrase without changing meaning — free, no login"
+      description="Rewrite essays and paragraphs while keeping the original idea. Free paraphrasing tool with Standard, Fluency, and Creative modes. Always cite your sources."
       badge="AI-Powered"
       category="Writing Tools"
       categorySlug="writing-tools"
       features={features}
       howItWorks={howItWorks}
       relatedTools={relatedTools}
-      ctaTitle="Ready to Rewrite Your Content?"
-      ctaDescription="Get unique, plagiarism-free text in seconds"
+      ctaTitle="Ready to rephrase your paragraph?"
+      ctaDescription="Rewrite meaning-first — then cite sources and proofread"
       ctaIcon={RefreshCw}
     >
       <div className="mx-6 mb-4 rounded-xl border border-sky-200 bg-sky-50/80 px-4 py-3 text-sm text-sky-950">
@@ -269,7 +269,7 @@ export default function ParaphraserClient() {
       <EnhancedToolLayout
         toolSlug="paraphraser"
         systemPrompt={systemPrompt}
-        toolName="AI Paraphraser"
+        toolName="Paraphrase Essay Free Online"
         placeholder={`📝 Paste or type your text here...
 
 Examples:

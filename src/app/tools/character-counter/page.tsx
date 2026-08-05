@@ -7,19 +7,19 @@ import CharacterCounterClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-  title: 'Character Counter Free – Count Characters Online | ToolNova',
+  title: 'Character Counter Free – Count Characters Online',
   description: 'Free character counter. Count characters with or without spaces instantly. Perfect for Twitter, SMS, and word limits.',
   keywords: ['character counter', 'char count', 'text length counter', 'Twitter character counter'],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/character-counter' },
   openGraph: {
-    title: 'Character Counter – Count Characters Online Free | ToolNova',
+    title: 'Character Counter – Count Characters Online Free',
     description: 'Count characters, spaces, words, and paragraphs instantly.',
     url: 'https://www.toolnovahub.com/tools/character-counter',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Character Counter – Count Characters Online Free | ToolNova',
+    title: 'Character Counter – Count Characters Online Free',
     description: 'Count characters, spaces, words, and paragraphs instantly.',
   },
 };

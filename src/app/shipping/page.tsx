@@ -3,7 +3,7 @@ import { Metadata } from"next";
 const LAST_UPDATED ="June 14, 2026";
 
 export const metadata: Metadata = {
-    title:"Shipping & Delivery Policy | ToolNova",
+    title:"Shipping & Delivery Policy",
     description:"Shipping and Delivery Policy for ToolNova. As a digital SaaS platform, we do not ship physical products.",
     robots: {
         index: false,

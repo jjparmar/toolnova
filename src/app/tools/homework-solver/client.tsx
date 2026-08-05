@@ -350,10 +350,10 @@ const faqs = [
 export default function HomeworkSolverClient() {
   return (
     <PremiumToolWrapper
-      toolName="AI Homework Solver"
+      toolName="Solve Homework Step by Step Free"
       toolSlug="homework-solver"
-      tagline="Get instant, step-by-step solutions to any homework problem"
-      description="AI-powered homework helper that provides detailed explanations, practice problems, and verification methods. Perfect for students of all grades who want to understand, not just answer."
+      tagline="Free AI tutor — method first, not just the answer"
+      description="Paste math, science, English, or history problems and get step-by-step explanations. Learn the process so you can solve the next one alone. No signup required to start."
       badge="AI-Powered"
       category="Study Tools"
       categorySlug="study-tools"
@@ -379,7 +379,7 @@ export default function HomeworkSolverClient() {
       <EnhancedToolLayout
         toolSlug="homework-solver"
         systemPrompt={systemPrompt}
-        toolName="AI Homework Solver"
+        toolName="Solve Homework Step by Step Free"
         placeholder={`✍️ Enter your homework question here...
 
 Examples:

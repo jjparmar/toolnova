@@ -345,10 +345,10 @@ const relatedTools = [
 export default function QuizGeneratorClient() {
   return (
     <PremiumToolWrapper
-      toolName="AI Quiz Generator"
+      toolName="Create a Quiz from Any Topic Free"
       toolSlug="quiz-generator"
-      tagline="Test your knowledge with custom quizzes"
-      description="Generate practice quizzes with various question types to reinforce your learning. Perfect for exam prep, self-testing, and knowledge retention."
+      tagline="Free AI quiz maker — practice tests with answer key"
+      description="Generate quiz questions from a topic or your notes. Self-test closed-book, then check the key. No account needed to start."
       badge="Self-Test Tool"
       category="Study Tools"
       categorySlug="study-tools"
@@ -363,7 +363,7 @@ export default function QuizGeneratorClient() {
       <EnhancedToolLayout
         toolSlug="quiz-generator"
         systemPrompt={systemPrompt}
-        toolName="Quiz Generator"
+        toolName="Create a Quiz from Any Topic Free"
         placeholder={`📖 Enter your topic or paste study content...
 
 Examples:

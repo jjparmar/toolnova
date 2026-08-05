@@ -7,19 +7,19 @@ import StoryGeneratorClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-  title: 'AI Story Generator – Create Stories Free | ToolNova',
+  title: 'AI Story Generator – Create Stories Free',
   description: 'Generate captivating stories in any genre with our free AI story generator. Fantasy, sci-fi, mystery, romance and more.',
   keywords: ['AI story generator', 'story writer', 'creative writing AI', 'fiction generator'],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/story-generator' },
   openGraph: {
-    title: 'AI Story Generator – Create Stories Instantly Free | ToolNova',
+    title: 'AI Story Generator – Create Stories Instantly Free',
     description: 'Generate creative stories with prompts, tone, and style instantly.',
     url: 'https://www.toolnovahub.com/tools/story-generator',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Story Generator – Create Stories Instantly Free | ToolNova',
+    title: 'AI Story Generator – Create Stories Instantly Free',
     description: 'Generate creative stories with prompts, tone, and style instantly.',
   },
 };

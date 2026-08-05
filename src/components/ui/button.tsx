@@ -5,16 +5,16 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-150 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 aria-invalid:ring-destructive/20 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-invalid:ring-destructive/20 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-[#7c3aed] to-[#d946ef] text-primary-foreground shadow-[0_8px_22px_-6px_rgba(124,58,237,0.5)] hover:shadow-[0_12px_28px_-6px_rgba(217,70,239,0.45)] hover:-translate-y-0.5 active:translate-y-px",
+          "bg-gradient-to-r from-[#7c3aed] via-[#9333ea] to-[#d946ef] text-primary-foreground shadow-[0_8px_22px_-6px_rgba(124,58,237,0.5)] hover:shadow-[0_14px_30px_-6px_rgba(217,70,239,0.48)] hover:-translate-y-0.5 active:translate-y-px",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-[var(--border-color)] bg-card/90 text-foreground shadow-sm hover:border-primary/30 hover:bg-muted hover:text-foreground",
+          "border border-[var(--border-color)] bg-card/95 text-foreground shadow-sm hover:border-primary/35 hover:bg-muted/80 hover:text-foreground",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-muted hover:text-foreground",

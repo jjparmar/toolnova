@@ -3,13 +3,13 @@ import { Metadata } from"next";
 const LAST_UPDATED ="July 15, 2026";
 
 export const metadata: Metadata = {
-  title:"Privacy Policy | ToolNova",
+  title:"Privacy Policy",
   description:"Privacy Policy for ToolNova. Learn how we collect, use, protect, and disclose personal data, including cookie and advertising disclosures.",
   alternates: {
     canonical:"https://www.toolnovahub.com/privacy",
   },
   openGraph: {
-    title:"Privacy Policy | ToolNova",
+    title:"Privacy Policy",
     description:"Learn how ToolNova collects, uses, protects, and discloses data.",
     url:"https://www.toolnovahub.com/privacy",
     type:"website",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card:"summary",
-    title:"Privacy Policy | ToolNova",
+    title:"Privacy Policy",
     description:"Learn how ToolNova collects, uses, and protects your data.",
     creator:"@toolnovahub",
   },

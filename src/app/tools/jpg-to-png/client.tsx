@@ -1,21 +1,20 @@
 "use client";
 
-import { useRef, useState } from"react";
-import { useRouter } from"next/navigation";
-import Link from"next/link";
+import { useRef, useState } from "react";
 import {
   Upload,
   Download,
   Trash2,
   Image as ImageIcon,
   Loader2,
-  ArrowLeft,
   Shield,
   Zap,
   Sparkles,
-} from"lucide-react";
-import { toast } from"sonner";
-import { Button } from"@/components/ui/button";
+  Layers,
+  Crop,
+} from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   baseName,
   downloadBlob,
@@ -23,14 +22,8 @@ import {
   imageToBlob,
   isImageFile,
   readFileAsDataURL,
-} from"@/lib/image-client";
-
-const related = [
-  { name:"PNG to JPG", href:"/tools/png-to-jpg" },
-  { name:"Crop Image", href:"/tools/image-crop" },
-  { name:"Image Compressor", href:"/tools/image-compressor" },
-  { name:"Image to PDF", href:"/tools/image-to-pdf" },
-];
+} from "@/lib/image-client";
+import { PremiumToolWrapper } from "@/components/PremiumToolWrapper";
 
 type Item = {
   id: string;
@@ -41,8 +34,56 @@ type Item = {
   dims?: { w: number; h: number };
 };
 
+const shellFeatures = [
+  {
+    title: "Private conversion",
+    description: "Never leaves your browser — no upload required.",
+    icon: Shield,
+  },
+  {
+    title: "Full quality PNG",
+    description: "Lossless PNG export for graphics and screenshots.",
+    icon: ImageIcon,
+  },
+  {
+    title: "Batch ready",
+    description: "Convert many images at once and download each PNG.",
+    icon: Zap,
+  },
+];
+
+const shellHowItWorks = [
+  {
+    step: 1,
+    title: "Upload images",
+    desc: "Drop JPG, PNG, or WebP files (batch OK).",
+    icon: Upload,
+    color: "from-violet-500 to-fuchsia-500",
+  },
+  {
+    step: 2,
+    title: "Convert",
+    desc: "One click converts all selected images to PNG.",
+    icon: Sparkles,
+    color: "from-indigo-500 to-violet-500",
+  },
+  {
+    step: 3,
+    title: "Download",
+    desc: "Save individual PNGs or download all.",
+    icon: Download,
+    color: "from-fuchsia-500 to-pink-500",
+  },
+];
+
+const shellRelated = [
+  { name: "PNG to JPG", slug: "png-to-jpg", icon: ImageIcon, color: "text-cyan-500" },
+  { name: "Image Compressor", slug: "image-compressor", icon: Zap, color: "text-amber-500" },
+  { name: "Crop Image", slug: "image-crop", icon: Crop, color: "text-violet-500" },
+  { name: "Image to PDF", slug: "image-to-pdf", icon: Layers, color: "text-emerald-500" },
+];
+
 export default function JPGtoPNGClient() {
-  const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [items, setItems] = useState<Item[]>([]);
   const [busy, setBusy] = useState(false);
@@ -66,7 +107,7 @@ export default function JPGtoPNGClient() {
           img.src = preview;
         });
         next.push({
-          id:`${Date.now()}-${Math.random()}`,
+          id: `${Date.now()}-${Math.random()}`,
           file,
           preview,
           dims: { w: img.naturalWidth, h: img.naturalHeight },
@@ -81,7 +122,7 @@ export default function JPGtoPNGClient() {
 
   const convertOne = async (item: Item): Promise<Item> => {
     const { blob, width, height } = await imageToBlob(item.preview, {
-      mime:"image/png",
+      mime: "image/png",
     });
     if (item.resultUrl) URL.revokeObjectURL(item.resultUrl);
     return {
@@ -111,19 +152,14 @@ export default function JPGtoPNGClient() {
 
   const downloadOne = async (item: Item) => {
     let url = item.resultUrl;
-    let size = item.resultSize;
     if (!url) {
       const updated = await convertOne(item);
       url = updated.resultUrl!;
-      size = updated.resultSize;
-      setItems((prev) =>
-        prev.map((p) => (p.id === item.id ? updated : p)),
-      );
+      setItems((prev) => prev.map((p) => (p.id === item.id ? updated : p)));
     }
     const res = await fetch(url);
     const blob = await res.blob();
-    downloadBlob(blob,`${baseName(item.file.name)}.png`);
-    void size;
+    downloadBlob(blob, `${baseName(item.file.name)}.png`);
   };
 
   const downloadAll = async () => {
@@ -143,36 +179,37 @@ export default function JPGtoPNGClient() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      <div className="max-w-[1000px] mx-auto px-4 py-10">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary"
-        >
-          <ArrowLeft className="h-4 w-4" /> Back
-        </button>
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-black mb-2">JPG to PNG Converter</h1>
-          <p className="text-muted-foreground">
-            Convert images to PNG with full quality. Batch support · private browser processing.
-          </p>
-        </div>
-
-        <div className="rounded-3xl border border-border/40 bg-card/40 backdrop-blur-md p-6 md:p-8 shadow-xl space-y-6">
+    <PremiumToolWrapper
+      toolName="JPG to PNG Converter Free"
+      toolSlug="jpg-to-png"
+      tagline="Convert images to PNG with full quality — private browser tool"
+      description="Convert images to PNG with full quality. Batch support · private browser processing · no signup."
+      badge="Free converter · browser-private"
+      category="Image Tools"
+      categorySlug="image-pdf-tools"
+      features={shellFeatures}
+      howItWorks={shellHowItWorks}
+      relatedTools={shellRelated}
+      ctaTitle="Ready to convert to PNG?"
+      ctaDescription="Upload images, convert in one click, and download lossless PNGs."
+      ctaButtonText="Start converting"
+      ctaIcon={ImageIcon}
+    >
+      <div className="tool-shell">
+        <div className="space-y-6 p-5 sm:p-7 md:p-8">
           <input
             ref={inputRef}
             type="file"
             accept="image/*,.jpg,.jpeg,.png,.webp"
             multiple
             className="hidden"
-            onChange={(e) => addFiles(e.target.files)}
+            onChange={(e) => void addFiles(e.target.files)}
           />
           <div
             role="button"
             tabIndex={0}
             onClick={() => inputRef.current?.click()}
-            onKeyDown={(e) => e.key ==="Enter" && inputRef.current?.click()}
+            onKeyDown={(e) => e.key === "Enter" && inputRef.current?.click()}
             onDragOver={(e) => {
               e.preventDefault();
               setDragOver(true);
@@ -181,37 +218,53 @@ export default function JPGtoPNGClient() {
             onDrop={(e) => {
               e.preventDefault();
               setDragOver(false);
-              addFiles(e.dataTransfer.files);
+              void addFiles(e.dataTransfer.files);
             }}
-            className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer ${
-              dragOver ?"border-primary bg-primary/5" :"border-border/50"
+            className={`cursor-pointer rounded-2xl border-2 border-dashed p-10 text-center transition-all ${
+              dragOver
+                ? "border-primary bg-primary/5"
+                : "border-[var(--border-color)] bg-muted/20 hover:border-primary/45 hover:bg-muted/35"
             }`}
           >
-            <Upload className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
-            <p className="font-semibold">Drop images or click to upload</p>
-            <p className="text-sm text-muted-foreground mt-1">
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <Upload className="h-6 w-6" />
+            </div>
+            <p className="font-semibold text-foreground">Drop images or click to upload</p>
+            <p className="mt-1 text-sm text-muted-foreground">
               JPG, PNG, WebP · multiple files OK
             </p>
           </div>
 
           {items.length > 0 && (
             <>
-              <div className="flex flex-wrap gap-2 justify-between items-center">
-                <p className="font-bold text-sm">{items.length} file(s)</p>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-sm font-bold text-foreground">
+                  {items.length} file(s)
+                </p>
                 <div className="flex flex-wrap gap-2">
-                  <Button variant="outline" size="sm" onClick={clear} className="text-red-600">
-                    <Trash2 className="h-4 w-4 mr-1" /> Clear
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={clear}
+                    className="text-red-600"
+                  >
+                    <Trash2 className="mr-1 h-4 w-4" /> Clear
                   </Button>
-                  <Button size="sm" onClick={convertAll} disabled={busy}>
+                  <Button size="sm" onClick={() => void convertAll()} disabled={busy}>
                     {busy ? (
-                      <Loader2 className="h-4 w-4 animate-spin mr-1" />
+                      <Loader2 className="mr-1 h-4 w-4 animate-spin" />
                     ) : (
-                      <Sparkles className="h-4 w-4 mr-1" />
+                      <Sparkles className="mr-1 h-4 w-4" />
                     )}
                     Convert all to PNG
                   </Button>
-                  <Button size="sm" variant="secondary" onClick={downloadAll} disabled={busy}>
-                    <Download className="h-4 w-4 mr-1" /> Download all
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => void downloadAll()}
+                    disabled={busy}
+                  >
+                    <Download className="mr-1 h-4 w-4" /> Download all
                   </Button>
                 </div>
               </div>
@@ -220,46 +273,48 @@ export default function JPGtoPNGClient() {
                 {items.map((item) => (
                   <div
                     key={item.id}
-                    className="rounded-2xl border border-border/40 p-4 grid md:grid-cols-[1fr_1fr_auto] gap-4 items-center"
+                    className="grid items-center gap-4 rounded-2xl border border-[var(--border-color)] bg-card p-4 md:grid-cols-[1fr_1fr_auto]"
                   >
                     <div>
-                      <p className="text-xs text-muted-foreground mb-1">Original</p>
+                      <p className="mb-1 text-xs text-muted-foreground">Original</p>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={item.preview}
                         alt=""
-                        className="h-28 w-full object-contain rounded-lg bg-slate-50"
+                        className="h-28 w-full rounded-lg bg-muted/40 object-contain"
                       />
-                      <p className="text-xs mt-1 truncate">
+                      <p className="mt-1 truncate text-xs">
                         {item.file.name} · {formatBytes(item.file.size)}
-                        {item.dims ?` · ${item.dims.w}×${item.dims.h}` :""}
+                        {item.dims ? ` · ${item.dims.w}×${item.dims.h}` : ""}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-muted-foreground mb-1">PNG result</p>
+                      <p className="mb-1 text-xs text-muted-foreground">PNG result</p>
                       {item.resultUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={item.resultUrl}
                           alt=""
-                          className="h-28 w-full object-contain rounded-lg bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHJlY3Qgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI2VlZSIvPjxyZWN0IHg9IjgiIHk9IjgiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIGZpbGw9IiNlZWUiLz48L3N2Zz4=')] bg-slate-50"
+                          className="h-28 w-full rounded-lg bg-muted/40 object-contain"
                         />
                       ) : (
-                        <div className="h-28 rounded-lg bg-slate-50  flex items-center justify-center text-xs text-muted-foreground">
+                        <div className="flex h-28 items-center justify-center rounded-lg bg-muted/40 text-xs text-muted-foreground">
                           Convert to preview
                         </div>
                       )}
                       {item.resultSize != null && (
-                        <p className="text-xs mt-1 text-emerald-600">
+                        <p className="mt-1 text-xs text-emerald-600">
                           PNG · {formatBytes(item.resultSize)}
                         </p>
                       )}
                     </div>
                     <Button
                       type="button"
-                      onClick={() => downloadOne(item)}
+                      onClick={() => void downloadOne(item)}
                       disabled={busy}
                       className="w-full md:w-auto"
                     >
-                      <Download className="h-4 w-4 mr-1" /> PNG
+                      <Download className="mr-1 h-4 w-4" /> PNG
                     </Button>
                   </div>
                 ))}
@@ -267,28 +322,7 @@ export default function JPGtoPNGClient() {
             </>
           )}
         </div>
-
-        <div className="mt-10 grid sm:grid-cols-3 gap-4">
-          {[
-            { icon: Shield, t:"Private", d:"Never leaves your browser" },
-            { icon: ImageIcon, t:"Full quality", d:"Lossless PNG export" },
-            { icon: Zap, t:"Batch ready", d:"Convert many images at once" },
-          ].map((x) => (
-            <div key={x.t} className="rounded-2xl border p-4">
-              <x.icon className="h-5 w-5 text-primary mb-2" />
-              <p className="font-bold text-sm">{x.t}</p>
-              <p className="text-xs text-muted-foreground">{x.d}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 flex flex-wrap gap-3 text-sm">
-          {related.map((r) => (
-            <Link key={r.href} href={r.href} className="underline underline-offset-4 hover:text-primary">
-              {r.name}
-            </Link>
-          ))}
-        </div>
       </div>
-    </div>
+    </PremiumToolWrapper>
   );
 }

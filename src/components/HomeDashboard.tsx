@@ -133,21 +133,21 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
   return (
     <div className="w-full">
       {/* ─── Hero ─── */}
-      <section className="mesh-hero border-b border-[var(--border-color)] pt-16 pb-16 md:pt-24 md:pb-24">
+      <section className="mesh-hero border-b border-[var(--border-color)] pt-14 pb-16 md:pt-20 md:pb-24">
         <div className="page-container text-center">
-          <div className="mb-7 flex justify-center">
-            <span className="section-badge animate-float">
+          <div className="mb-6 flex justify-center">
+            <span className="section-badge">
               <Sparkles className="h-3.5 w-3.5" />
               {TOOL_COUNT_LABEL} free AI tools · no signup
             </span>
           </div>
 
-          <h1 className="hero-title font-heading mx-auto mb-6 max-w-4xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-[3.5rem] md:leading-[1.08]">
+          <h1 className="hero-title font-heading mx-auto mb-5 max-w-4xl text-[2.15rem] font-bold tracking-tight text-foreground sm:text-5xl md:text-[3.4rem] md:leading-[1.08]">
             Work &amp; study <span className="text-gradient">smarter with AI</span>
-            <span className="block text-foreground/90">— all in one modern hub</span>
+            <span className="mt-1 block text-foreground/85">— all in one modern hub</span>
           </h1>
 
-          <p className="hero-description mx-auto mb-10 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="hero-description mx-auto mb-9 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
             Merge and compress PDFs, fix grammar, build flashcards, and draft essays in one place.{" "}
             <strong className="font-semibold text-foreground">
               {TOOL_COUNT_LABEL} free tools
@@ -156,7 +156,7 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
           </p>
 
           {/* Instant Tool Search Input */}
-          <div className="relative mx-auto mb-10 max-w-2xl text-left">
+          <div className="relative mx-auto mb-9 max-w-2xl text-left">
             <div className="group relative flex items-center">
               <Search className="absolute left-5 h-5 w-5 text-muted-foreground transition-colors group-focus-within:text-primary" aria-hidden />
               <label htmlFor="home-tool-search" className="sr-only">
@@ -169,7 +169,7 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={`Search ${TOOL_COUNT_LABEL} tools (e.g. compress pdf, homework solver)…`}
-                className="input-surface w-full rounded-2xl py-4 pl-14 pr-12 text-base font-medium text-foreground shadow-[var(--shadow-premium)] placeholder:text-muted-foreground/60 focus:outline-none"
+                className="input-surface w-full rounded-[1.15rem] border py-4 pl-14 pr-12 text-base font-medium text-foreground shadow-[var(--shadow-premium)] placeholder:text-muted-foreground/55 focus:outline-none"
               />
               {searchQuery && (
                 <button
@@ -185,14 +185,14 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
 
             {/* Quick Search Tag Hints */}
             {!searchQuery && (
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-2 text-xs font-semibold text-muted-foreground">
-                <span className="text-foreground/70">Popular:</span>
+              <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2 text-xs font-semibold text-muted-foreground">
+                <span className="text-foreground/65">Popular:</span>
                 {["Compress PDF", "Merge PDF", "Homework Solver", "Grammar Checker"].map((tag) => (
                   <button
                     key={tag}
                     type="button"
                     onClick={() => setSearchQuery(tag)}
-                    className="rounded-full border border-[var(--border-color)] bg-card/80 px-3 py-1 text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                    className="rounded-full border border-[var(--border-color)] bg-card/90 px-3 py-1.5 text-muted-foreground shadow-sm transition-colors hover:border-primary/40 hover:text-primary"
                   >
                     {tag}
                   </button>
@@ -257,7 +257,7 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
             </Link>
           </div>
 
-          <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+          <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
             {[
               { num: TOOL_COUNT_LABEL, label: "Free tools" },
               { num: "Local", label: "PDF & image privacy" },
@@ -271,7 +271,7 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
                 <div className="font-heading text-xl font-bold text-foreground md:text-2xl">
                   <span className="text-gradient">{stat.num}</span>
                 </div>
-                <div className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                <div className="mt-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                   {stat.label}
                 </div>
               </div>
@@ -281,17 +281,15 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
       </section>
 
       {/* ─── Popular Tools Grid ─── */}
-      <section id="tools" className="section-pad bg-muted/40">
+      <section id="tools" className="section-pad bg-muted/35">
         <div className="page-container">
-          <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <div className="section-header flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <div className="section-kicker mb-3">
                 <Flame className="h-3.5 w-3.5" />
                 Most popular
               </div>
-              <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                Featured tools
-              </h2>
+              <h2 className="section-title">Featured tools</h2>
             </div>
             <Link
               href="/tools"
@@ -302,7 +300,7 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             {featuredTools.map((tool) => (
               <ToolCard
                 key={tool.href}
@@ -321,27 +319,25 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
       {/* ─── Categories ─── */}
       <section className="section-pad border-y border-[var(--border-color)]">
         <div className="page-container">
-          <div className="mb-12 text-center">
+          <div className="section-header mx-auto max-w-2xl text-center">
             <div className="section-kicker mb-3 justify-center">Browse by goal</div>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-              Explore tools by category
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
+            <h2 className="section-title">Explore tools by category</h2>
+            <p className="section-lead mx-auto">
               Everything you need for study, writing, files, and career workflows.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             {categories.map((cat) => (
               <Link
                 key={cat.href}
                 href={cat.href}
-                className="surface-card group flex flex-col p-6"
+                className="surface-card surface-card-interactive group flex flex-col p-6"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-primary transition-transform duration-300 group-hover:scale-110">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-primary ring-1 ring-primary/10 transition-transform duration-300 group-hover:scale-105">
                   <cat.icon className="h-6 w-6" />
                 </div>
-                <h3 className="font-heading mb-1.5 text-lg font-bold text-foreground transition-colors group-hover:text-primary">
+                <h3 className="font-heading mb-1.5 text-lg font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
                   {cat.title}
                 </h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">{cat.desc}</p>
@@ -355,12 +351,10 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
       {recentPosts && recentPosts.length > 0 && (
         <section className="section-pad bg-background">
           <div className="page-container">
-            <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+            <div className="section-header flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
               <div>
                 <div className="section-kicker mb-3">Productivity guides</div>
-                <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                  Latest from the blog
-                </h2>
+                <h2 className="section-title">Latest from the blog</h2>
               </div>
               <Link
                 href="/blog"

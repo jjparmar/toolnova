@@ -4,18 +4,18 @@ import { getCategoryAEO } from '@/lib/global-aeo-content';
 import { generateFAQPageSchema, generateBreadcrumbListSchema, CATEGORY_BREADCRUMBS } from '@/lib/seo-worldclass';
 
 export const metadata = {
-    title: 'Career Tools - Cover Letter, Interview Prep & More | ToolNova',
+    title: 'Career Tools - Cover Letter, Interview Prep & More',
     description: 'Free career tools: cover letter writer, interview question generator, goal planner, timetable generator, to-do list generator.',
     alternates: { canonical: 'https://www.toolnovahub.com/tools/career-tools' },
     openGraph: {
-        title: 'Career Tools - Cover Letter, Interview Prep & More | ToolNova',
+        title: 'Career Tools - Cover Letter, Interview Prep & More',
         description: 'Explore free AI career tools for cover letters, interviews, resumes, and productivity planning.',
         url: 'https://www.toolnovahub.com/tools/career-tools',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Career Tools | ToolNova',
+        title: 'Career Tools',
         description: 'Free career tools for cover letters, interviews, resumes, and planning.',
     },
 };

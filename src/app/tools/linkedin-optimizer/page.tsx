@@ -7,19 +7,19 @@ import LinkedInOptimizerClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Optimizer – Boost Your Profile Free | ToolNova',
+    title: 'LinkedIn Profile Optimizer – Boost Your Profile Free',
     description: 'Optimize your LinkedIn profile for recruiters and SEO. Free AI-powered LinkedIn headline, about section, and experience optimizer.',
     keywords: ['linkedin optimizer', 'linkedin profile optimization', 'linkedin headline generator', 'linkedin SEO', 'recruiter visibility', 'AI linkedin tool'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/linkedin-optimizer' },
   openGraph: {
-    title: 'LinkedIn Optimizer – Improve LinkedIn Profile Free | ToolNova',
+    title: 'LinkedIn Optimizer – Improve LinkedIn Profile Free',
     description: 'Optimize your LinkedIn headline, summary, and profile content with AI.',
     url: 'https://www.toolnovahub.com/tools/linkedin-optimizer',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LinkedIn Optimizer – Improve LinkedIn Profile Free | ToolNova',
+    title: 'LinkedIn Optimizer – Improve LinkedIn Profile Free',
     description: 'Optimize your LinkedIn headline, summary, and profile content with AI.',
   },
 };

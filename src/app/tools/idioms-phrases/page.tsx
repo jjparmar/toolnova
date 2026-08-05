@@ -7,19 +7,19 @@ import IdiomsPhrasesClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'Idioms & Phrases Tool – Learn English Expressions Free | ToolNova',
+    title: 'Idioms & Phrases Tool – Learn English Expressions Free',
     description: 'Learn common idioms and phrases with meanings and examples. Free tool for English language learning and exam preparation.',
     keywords: ['idioms and phrases', 'English idioms', 'common phrases', 'language learning', 'English expressions'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/idioms-phrases' },
   openGraph: {
-    title: 'Idioms and Phrases Generator – Learn Usage Examples Free | ToolNova',
+    title: 'Idioms and Phrases Generator – Learn Usage Examples Free',
     description: 'Discover idioms, meanings, and usage examples to improve fluency and writing.',
     url: 'https://www.toolnovahub.com/tools/idioms-phrases',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Idioms and Phrases Generator – Learn Usage Examples Free | ToolNova',
+    title: 'Idioms and Phrases Generator – Learn Usage Examples Free',
     description: 'Discover idioms, meanings, and usage examples to improve fluency and writing.',
   },
 };

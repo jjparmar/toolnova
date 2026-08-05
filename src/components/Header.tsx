@@ -61,15 +61,15 @@ export function Header() {
       className={cn(
         'glass-premium sticky top-0 z-50 w-full border-b transition-all duration-300',
         scrolled
-          ? 'border-[var(--border-color)] shadow-[0_8px_30px_-18px_rgba(124,58,237,0.35)]'
-          : 'border-transparent'
+          ? 'border-[var(--border-color)] shadow-[0_10px_36px_-20px_rgba(124,58,237,0.45)]'
+          : 'border-transparent shadow-none'
       )}
     >
       <div className="page-container flex h-[4.25rem] items-center justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-3 sm:gap-6">
+        <div className="flex min-w-0 items-center gap-3 sm:gap-5">
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--border-color)] bg-card/80 text-foreground transition-colors hover:bg-muted md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--border-color)] bg-card/90 text-foreground shadow-sm transition-colors hover:bg-muted md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
@@ -90,14 +90,14 @@ export function Header() {
                 Tool<span className="text-gradient">Nova</span>
               </span>
               <span className="hidden rounded-full border border-primary/15 bg-primary/8 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary sm:inline-block">
-                AI
+                Free AI
               </span>
             </div>
           </Link>
 
           <nav
             id="navigation"
-            className="hidden items-center gap-0.5 rounded-full border border-[var(--border-color)] bg-card/60 p-1 shadow-sm md:flex"
+            className="hidden items-center gap-0.5 rounded-full border border-[var(--border-color)] bg-card/70 p-1 shadow-sm md:flex"
             aria-label="Main navigation"
           >
             {navLinks.map((link) => (

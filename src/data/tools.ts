@@ -30,210 +30,214 @@ export interface ToolData {
 export const toolsData: Record<string, ToolData> = {"text-summarizer": {
         slug:"text-summarizer",
         name:"Text Summarizer",
-        tagline:"Summarize any text in seconds",
-        description:"Condense long articles, documents, and content into clear summaries at your preferred length. Our AI-powered summarizer identifies core concepts and supporting details to provide a coherent reduction of any text while maintaining its original focus and context. Perfect for students, researchers, and busy professionals who need to extract value from information quickly.",
+        tagline:"Summarize Any Article or Essay Free – No Signup",
+        description:"Summarize any article or essay free—no signup. Paste long text and get a brief, medium, or detailed summary that keeps the main ideas. Free article summarizer for students and professionals who need clarity fast.",
         category:"Writing Tools",
         howItWorks: [
-            { step: 1, title: 'Input Content', desc: 'Paste your text directly into the editor or upload a document file (PDF, TXT, DOCX) to get started.' },
-            { step: 2, title: 'Customize Settings', desc: 'Select your desired summary length—Brief (TL;DR), Medium (Standard), or Detailed (Comprehensive)—to match your specific needs.' },
-            { step: 3, title: 'AI Processing', desc: 'Our advanced neural networks analyze the semantic structure of your text to identify key themes and pivotal information.' },
-            { step: 4, title: 'Review & Refine', desc: 'Read your generated summary instantly. You can adjust the length settings and re-summarize if you need more or less detail.' },
-            { step: 5, title: 'Export Results', desc: 'Copy your summary to your clipboard or download it as a clean text file for use in your reports or notes.' }
+            { step: 1, title: 'Paste the text', desc: 'Drop an article, essay draft, report, or chapter section into the editor.' },
+            { step: 2, title: 'Pick summary length', desc: 'Choose Brief (TL;DR), Medium, or Detailed depending on how much depth you need.' },
+            { step: 3, title: 'Generate summary', desc: 'AI compresses key claims and supporting points into a readable overview.' },
+            { step: 4, title: 'Verify against source', desc: 'Skim the original for quotes and numbers before you cite or decide.' },
+            { step: 5, title: 'Study next step', desc: 'Send insights into Notes Generator or Flashcard Maker for revision.' }
         ],
         benefits: [
-            { title:"Time Efficiency", desc:"Extract the most important information from long documents in seconds, allowing you to process more information in less time." },
-            { title:"Smart Compression", desc:"Our AI doesn't just cut text; it intelligently compresses ideas for maximum readability and coherence." },
-            { title:"Versatile Formats", desc:"Works with articles, research papers, legal documents, and casual emails with equal precision." },
-            { title:"Focused Learning", desc:"Ideal for students needing to understand complex topics quickly by focusing on core arguments." }
+            { title:"Summarize articles free, fast", desc:"Cut reading time when you only need the core argument first." },
+            { title:"Length you control", desc:"Brief for triage, detailed when you will study the ideas further." },
+            { title:"Student-ready workflow", desc:"Great before class responses, literature skims, and revision packs." },
+            { title:"No signup to start", desc:"Free text summarizer access without an account wall." }
         ],
         faqs: [
-            { question:"How does the AI text summarizer work?", answer:"Our tool uses advanced Natural Language Processing (NLP) to perform 'extractive' and 'abstractive' summarization. It identifies the most important sentences and then weaves them together into a concise, readable version that captures the essence of the original text." },
-            { question:"What is the maximum word count I can summarize?", answer:"The free version of ToolNova's summarizer handles up to 10,000 words per session, which covers most articles, essays, and standard business reports. For larger documents, we recommend summarizing in sections." },
-            { question:"Does the tool support multiple languages?", answer:"Yes, our AI is multilingual and can accurately summarize text in over 30 languages, including Spanish, French, German, Chinese, and many more, while maintaining grammatical integrity." },
-            { question:"Can I use this for academic or research papers?", answer:"Absolutely. Many researchers use our tool to quickly scan through abstracts and long-form studies to determine relevance, saving hours of manual reading time. However, always ensure you've captured all nuance before final citations." },
-            { question:"Is the summarized content unique?", answer:"The summary is a condensed version of your specific input. While it uses the same core facts, the arrangement and extraction process create a unique overview tailored to the length you selected." },
-            { question:"Is my uploaded content stored on your servers?", answer:"No. At ToolNova, we prioritize user privacy. Your text is processed in a secure environment and is deleted as soon as the session ends. We never use your data to train our public models." }
+            { question:"Can I summarize an article free with no signup?", answer:"Yes. Paste text into ToolNova’s summarizer and start without creating an account. Free daily AI use is included." },
+            { question:"How do I summarize an essay online free?", answer:"Paste the essay or a section, choose Medium or Detailed, generate, then check that the summary still matches your thesis." },
+            { question:"Should I cite a summary without reading the source?", answer:"No. Use summaries to triage reading, then verify claims in the original before citing." },
+            { question:"What length options exist?", answer:"Brief (TL;DR), Medium (standard), and Detailed (more comprehensive)." },
+            { question:"Does it work for long documents?", answer:"Yes—summarize in sections for research papers or books for better accuracy." },
+            { question:"Is my text stored?", answer:"Text is processed for the request. See our Privacy Policy for details; we do not treat your drafts as a public content library." }
         ]
     },"paraphraser": {
         slug:"paraphraser",
         name:"Paraphrasing Tool",
-        tagline:"Free AI Paraphrasing Tool – Reword Essays Without Plagiarism",
-        description:"Rephrase articles, sentences, and essays while avoiding plagiarism and maintaining meaning. Our AI-driven paraphraser uses contextual awareness to find the best synonyms and sentence structures, ensuring your writing is fresh, clear, and professional. It's the ideal companion for writers looking to improve clarity or students needing to rephrase complex academic concepts.",
+        tagline:"Paraphrase Essay Without Changing Meaning – Free, No Login",
+        description:"Paraphrase essays, paragraphs, and sentences without changing meaning. This free paraphrasing tool rewrites text with Standard, Fluency, or Creative modes so students and writers can rephrase online without a login wall—always cite sources when ideas come from others.",
         category:"Writing Tools",
         howItWorks: [
-            { step: 1, title: 'Text Entry', desc: 'Paste your original text or a specific sentence into the paraphrasing box to begin the transformation.' },
-            { step: 2, title: 'Style Selection', desc: 'Choose a mode that fits your goal: Standard (most common), Fluency (for better flow), or Creative (for varied vocabulary).' },
-            { step: 3, title: 'Intelligent Rewriting', desc: 'Our AI engine analyzes the context of your words to ensure the new version retains the exact same meaning as the original.' },
-            { step: 4, title: 'Manual Refinement', desc: 'Click on a specific word in the result to see a list of relevant synonyms and hand-pick the ones that best fit your tone.' },
-            { step: 5, title: 'Plagiarism Check Link', desc: 'Review your final version and use our integrated tools to ensure your content is unique and ready for submission.' }
+            { step: 1, title: 'Paste the paragraph', desc: 'Drop in 1–2 paragraphs (or up to a few hundred words) for the highest accuracy—better than dumping a whole essay at once.' },
+            { step: 2, title: 'Pick a rewrite mode', desc: 'Standard keeps meaning tight, Fluency smooths awkward phrasing, Creative varies vocabulary when text feels repetitive.' },
+            { step: 3, title: 'Generate the paraphrase', desc: 'AI rewrites structure and wording while aiming to preserve the original idea—not a blind thesaurus swap.' },
+            { step: 4, title: 'Compare meaning side by side', desc: 'Check that claims, numbers, and intent still match. Edit any sentence that drifted.' },
+            { step: 5, title: 'Cite + polish', desc: 'Add your citation, then run Grammar Fix if you want a final grammar and punctuation pass.' }
         ],
         benefits: [
-            { title:"Plagiarism Avoidance", desc:"Create 100% unique versions of your content that pass strict plagiarism checks while maintaining the original intent." },
-            { title:"Enhanced Vocabulary", desc:"Discover new ways to express ideas with our context-aware synonym suggestions and stylistic modes." },
-            { title:"Context Preservation", desc:"Unlike simple word-swappers, our AI understands the meaning of the whole sentence to ensure accuracy." },
-            { title:"Tone Customization", desc:"Easily switch between formal, casual, and creative tones to match your target audience." }
+            { title:"Meaning-first rewrites", desc:"Context-aware paraphrasing targets full sentences so ideas stay intact while wording changes." },
+            { title:"Modes for real tasks", desc:"Standard for safe academic restating, Fluency for clarity, Creative when you need fresher phrasing." },
+            { title:"Faster than a thesaurus", desc:"Rewrite a dense paragraph in seconds instead of hunting synonyms that break grammar." },
+            { title:"Free to start, no login wall", desc:"Paraphrase paragraph online free without creating an account first. Free daily AI use included." }
         ],
         faqs: [
-            { question:"Will paraphrasing avoid plagiarism?", answer:"Yes, our tool changes the structure and vocabulary of your text, which helps in creating unique content. However, always remember to cite your original sources when using paraphrased work in academic settings." },
-            { question:"How many modes are available?", answer:"We offer three distinct modes: 'Standard' for general use, 'Fluency' to fix awkward phrasing, and 'Creative' for when you want to see a completely different stylistic take on your input." },
-            { question:"Does it work for long essays?", answer:"Yes, you can paraphrase entire paragraphs and essays. We recommend processing 500-800 words at a time for the best results and the highest contextual accuracy." },
-            { question:"Can the paraphraser improve my writing style?", answer:"Definitely. By seeing how our AI restructures your sentences, you can learn more effective ways to communicate complex ideas and expand your active vocabulary." },
-            { question:"Is it better than just using a thesaurus?", answer:"Yes, because our AI understands 'context'. A thesaurus just gives synonyms, but our tool knows which synonym fits the current sentence grammatically and semantically." },
-            { question:"Is the paraphrasing tool free to use?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
+            { question:"Can I paraphrase an essay without changing meaning?", answer:"Yes—paste section by section, use Standard mode, then verify every claim still matches the source. Meaning-first rewriting is the goal; always review before you submit." },
+            { question:"Will paraphrasing avoid plagiarism?", answer:"New wording alone is not enough. If the idea comes from another author, you must cite them. Use this tool to restate ideas you understand—not to hide copy-paste work." },
+            { question:"Is there a free paraphrasing tool with no login?", answer:"Yes. ToolNova lets you start paraphrasing without signing up. Free daily AI use is included; create an account or upgrade to Pro for higher limits." },
+            { question:"How long should each paraphrase run be?", answer:"Best results come from 500–800 words or 1–2 paragraphs at a time. Very long dumps reduce contextual accuracy." },
+            { question:"What modes are available?", answer:"Standard (safe rewrite), Fluency (smoother flow), and Creative (more varied vocabulary). Pick based on whether you need safety or style." },
+            { question:"Should I run a grammar check after paraphrasing?", answer:"Recommended. Pair with Grammar Fix so any awkward edges get cleaned before submission." }
         ]
     },"grammar-fix": {
         slug:"grammar-fix",
         name:"AI Grammar Fix",
-        tagline:"Free AI Grammar Checker – Perfect Your Writing Instantly",
-        description:"Fix grammar, spelling, punctuation, and style errors with AI-powered corrections. Our advanced proofreading engine goes beyond basic spell-check, identifying subtle issues in tone, clarity, and syntax. Whether you're writing a formal business email, a university essay, or a creative story, ToolNova ensures your message is conveyed with professional polish and zero distractions.",
+        tagline:"Fix Grammar Mistakes in Essays Free – No Signup",
+        description:"Fix grammar mistakes in essays free with an AI grammar checker that catches spelling, punctuation, subject-verb agreement, and clarity issues. Built for students, ESL writers, and professionals who need a free proofreading pass without signup.",
         category:"Writing Tools",
         howItWorks: [
-            { step: 1, title: 'Upload or Paste', desc: 'Submit your draft by pasting the text or uploading your document file into our high-speed processing engine.' },
-            { step: 2, title: 'Context Analysis', desc: 'The AI scans your entire text to understand the subject matter and intent, ensuring corrections match the required tone.' },
-            { step: 3, title: 'Automatic Correction', desc: 'All obvious errors in spelling, grammar, and punctuation are corrected instantly while maintaining your original voice.' },
-            { step: 4, title: 'Style Suggestions', desc: 'Receive high-level suggestions for improving sentence flow, word choice, and overall readability to make your writing more impactful.' },
-            { step: 5, title: 'One-Click Apply', desc: 'Review the changes and apply them all at once, or go through them one by one to ensure you stay in total control of your content.' }
+            { step: 1, title: 'Paste your draft', desc: 'Copy the essay, email, or assignment paragraph into the editor—no account required to start.' },
+            { step: 2, title: 'Choose correction level', desc: 'Basic for spelling, Standard for grammar + punctuation, Advanced for style and clarity polish.' },
+            { step: 3, title: 'Set tone (optional)', desc: 'Keep original voice or shift toward Formal / Professional for academic and workplace writing.' },
+            { step: 4, title: 'Generate corrections', desc: 'AI returns a cleaned version of your text with errors fixed while aiming to preserve your meaning.' },
+            { step: 5, title: 'Review explanations', desc: 'Turn on explanations when you want to learn the rule—not only accept the fix blindly.' }
         ],
         benefits: [
-            { title:"Professional Polish", desc:"Eliminate embarrassing errors and ensure your writing meets the highest professional and academic standards." },
-            { title:"Deeper Corrections", desc:"Identify complex issues like dangling modifiers, subject-verb disagreement, and inconsistent tense usage." },
-            { title:"Style Enhancement", desc:"Go beyond correctness to improve the overall clarity and impact of your specific communication style." },
-            { title:"Learning Tool", desc:"Individual explanations for each correction help you learn from your mistakes and become a better writer." }
+            { title:"Beyond spell-check", desc:"Catch agreement errors, run-ons, comma issues, and unclear phrasing browsers often miss." },
+            { title:"Essay-ready polish", desc:"Fix grammar mistakes in essays free before deadlines—no premium paywall to open the tool." },
+            { title:"ESL-friendly help", desc:"Strong on articles, prepositions, tense consistency, and natural wording for non-native writers." },
+            { title:"Learn while you fix", desc:"Optional explanations turn each correction into a mini grammar lesson." }
         ],
         faqs: [
-            { question:"Is this more than just a spell-checker?", answer:"Yes. While it catches spelling mistakes, its real power lies in detecting grammar rules, subject-verb agreement, and complex punctuation issues that standard checkers miss." },
-            { question:"Can I use it for professional emails?", answer:"Absolutely. We have a 'Formal' mode optimized specifically for business communications, helping you sound authoritative and polite." },
-            { question:"Does the tool explain the errors?", answer:"Yes, we provide explanations for major corrections so you can understand the grammar rule behind the fix and improve your writing over time." },
-            { question:"Is it 100% accurate?", answer:"Our AI model is one of the most advanced in the industry and catches 99% of common and advanced errors. We always recommend a final human read-through for creative nuance." },
-            { question:"How does it handle different dialects (US vs UK English)?", answer:"You can toggle between different English variants in the settings to ensure you are meeting the specific spelling and grammar conventions of your region." },
-            { question:"Is my text private during the grammar check?", answer:"Privacy is our core value. Your text is encrypted during processing and is immediately discarded from our caches once you close the page." }
+            { question:"Can I fix grammar mistakes in an essay free?", answer:"Yes. Paste your draft into ToolNova’s AI grammar checker and run Standard or Advanced correction without creating an account first. Free daily AI use is included." },
+            { question:"Is this better than browser spell-check?", answer:"Spell-check mostly finds typos. This tool also targets grammar, punctuation, agreement, and clarity—especially useful for longer essays." },
+            { question:"Does it work for ESL students?", answer:"Yes. It is commonly used for article use (a/an/the), prepositions, tense consistency, and smoother academic phrasing." },
+            { question:"Will it change my ideas?", answer:"It aims to keep your meaning while fixing errors. Always skim the output and reject any rewrite that shifts your argument." },
+            { question:"Can I use it for emails and cover letters?", answer:"Yes. Choose a more Formal or Professional tone for workplace and application writing." },
+            { question:"Is my text private?", answer:"Text is processed for the correction request and is not kept as a public document store. See our Privacy Policy for details." }
         ]
     },"essay-writer": {
         slug:"essay-writer",
         name:"AI Essay Writer",
-        tagline:"Write professional essays in minutes",
-        description:"Generate well-structured essays with introductions, body paragraphs, and conclusions on any topic. Our AI handles the heavy lifting of organization and brainstorming, providing you with a solid foundation to build upon. Perfect for overcoming writer's block and understanding how to structure academic arguments effectively.",
+        tagline:"Write a Free Essay Online – AI Generator, No Login",
+        description:"Write a free essay online with a structured AI draft—introduction, body paragraphs, and conclusion. Built for high school and college students who need a free AI essay writer to beat blank-page block, then rewrite in their own voice and add real citations.",
         category:"Writing Tools",
         howItWorks: [
-            { step: 1, title: 'Define Topic', desc: 'Type your essay prompt or topic into the generator to provide a clear direction for the AI.' },
-            { step: 2, title: 'Select Type', desc: 'Choose the essay format (e.g., Argumentative, Narrative, Descriptive) to ensure the AI uses the correct tone and structure.' },
-            { step: 3, title: 'Outline Generation', desc: 'The tool first creates a logical outline, ensuring a smooth transition between introduction, body, and conclusion.' },
-            { step: 4, title: 'Full Draft Creation', desc: 'Our AI writes a complete first draft based on the outline, incorporating relevant facts and logical arguments.' },
-            { step: 5, title: 'Edit and Personalize', desc: 'Use the generated draft as a starting point. Add your personal insights, cite your sources, and refine the voice to make it your own.' }
+            { step: 1, title: 'Enter your prompt', desc: 'Paste the essay question, topic, or assignment brief so the draft stays on task.' },
+            { step: 2, title: 'Choose essay type', desc: 'Pick argumentative, expository, narrative, descriptive, or persuasive structure.' },
+            { step: 3, title: 'Generate structured draft', desc: 'AI produces intro, body, and conclusion you can treat as a scaffold—not a final submit.' },
+            { step: 4, title: 'Rewrite in your voice', desc: 'Edit every paragraph, insert your examples, and remove anything that does not match your view.' },
+            { step: 5, title: 'Cite + polish', desc: 'Add verified sources, then run Grammar Fix before submission per school rules.' }
         ],
         benefits: [
-            { title:"Beat Writer's Block", desc:"Get over the 'blank page' hurdle with an instant, structured draft that you can refine into a masterpiece." },
-            { title:"Structural Guidance", desc:"Learn the proper way to organize academic arguments with AI-generated introductions, transitions, and conclusions." },
-            { title:"Diverse Topics", desc:"Our AI is trained on a vast array of subjects, from history and literature to science and business technology." },
-            { title:"Time Optimization", desc:"Focus your energy on refining arguments and adding personal voice rather than struggling with basic organization." }
+            { title:"Blank-page killer", desc:"Get a free essay draft online in seconds so you spend time improving, not stalling." },
+            { title:"Clear academic structure", desc:"Practice intro → claims → evidence → conclusion flow used in real assignments." },
+            { title:"Works across subjects", desc:"History, literature, science prompts, and general education topics." },
+            { title:"No login to start", desc:"Free AI essay writer access for daily use without an account wall." }
         ],
         faqs: [
-            { question:"Is using an AI essay writer plagiarism?", answer:"The content generated is unique. However, we recommend using it as a starting point or an 'inspiration tool'. Always rewrite the content in your own voice and adhere to your institution's academic integrity policies." },
-            { question:"What essay formats do you support?", answer:"We support Argumentative, Expository, Narrative, Descriptive, and Persuasive essay formats, each with its own specific structural logic." },
-            { question:"Can it generate citations?", answer:"The current version generates general text. We recommend using a dedicated citation manager to add accurate APA, MLA, or Chicago style citations to the final draft." },
-            { question:"How long can the essays be?", answer:"You can generate essays ranging from 500 to 2,500 words by selecting the 'Long Form' option in the settings." },
-            { question:"Can I choose the point of view?", answer:"Yes, you can specify if the essay should be written in the first person (I), second person (you), or third person (it/they) in the advanced settings." },
-            { question:"Is the tool completely free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
+            { question:"Can I write an essay online free for school?", answer:"Yes—generate a draft free, then rewrite it in your own words, add sources, and follow your school’s academic integrity policy. Do not submit AI text unchanged." },
+            { question:"Is using an AI essay writer plagiarism?", answer:"Unedited AI text can violate school rules. Use the tool as a scaffold: personalize heavily, cite real sources, and meet your institution’s guidelines." },
+            { question:"What essay formats are supported?", answer:"Argumentative, expository, narrative, descriptive, and persuasive structures." },
+            { question:"Does it create real citations?", answer:"Add verified APA/MLA/Chicago citations yourself with a citation manager. Do not invent references." },
+            { question:"Is there a free AI essay writer with no login?", answer:"Yes. Start without signing up. Free daily AI use is included; accounts unlock higher limits." },
+            { question:"How should I improve the draft?", answer:"Rewrite in your voice, verify facts, add evidence, then polish with Grammar Fix." }
         ]
     },"merge-pdf": {
         slug:"merge-pdf",
         name:"Merge PDF",
-        tagline:"Merge PDF Online Free – No Watermark & No Signup",
-        description:"Merge multiple PDF files into a single, organized document in seconds. Simply upload your files, drag to reorder, and download the combined PDF. All processing happens securely in your browser—your files are never uploaded to any server.",
+        tagline:"Merge PDF Files Online Free – No Watermark, No Signup",
+        description:"Merge PDF files online free into one organized document—no watermark, no signup, no install. Drag multiple PDFs into order, combine them in your browser, and download a single file. Ideal for students and professionals who need to join multiple PDF into one before emailing or uploading.",
         category:"PDF Tools",
         howItWorks: [
-            { step: 1, title:"Upload Files", desc:"Click the upload area or drag and drop multiple PDF files from your computer." },
-            { step: 2, title:"Reorder Pages", desc:"Drag the file thumbnails to arrange them in your preferred order before merging." },
-            { step: 3, title:"Merge", desc:"Click the 'Merge' button and our browser-based engine combines all files instantly." },
-            { step: 4, title:"Download", desc:"Download your merged PDF file, ready to share or print." }
+            { step: 1, title:"Upload every PDF", desc:"Drag and drop multiple PDF files (assignments, scans, certificates) into the merger—no account required." },
+            { step: 2, title:"Reorder before merge", desc:"Drag thumbnails so cover pages, main docs, and appendices sit in the exact order you need." },
+            { step: 3, title:"Merge in the browser", desc:"Click Merge. Pages are stitched locally so fonts, images, and layout stay intact—no server upload." },
+            { step: 4, title:"Download one file", desc:"Save the combined PDF. If a portal rejects the size, run Compress PDF next to hit 1MB–5MB caps." }
         ],
         benefits: [
-            { title:"100% Browser-Based", desc:"All merging happens locally in your browser. Your files never leave your device, ensuring complete privacy." },
-            { title:"No File Limits", desc:"Merge as many PDF files as you need without restrictions on file count or total size." },
-            { title:"Preserve Quality", desc:"The merged document retains the exact formatting, fonts, and images of the originals." },
-            { title:"No Sign-Up Required", desc:"Start merging immediately—no account, no subscription, no hidden fees." }
+            { title:"No watermark, free forever for local merge", desc:"Combine files without logo stamps, trial paywalls, or forced signup prompts." },
+            { title:"Private browser processing", desc:"Files never leave your device—safer for personal IDs, transcripts, and contracts." },
+            { title:"Preserve formatting", desc:"Lossless page merge keeps text, images, and fonts from each original PDF." },
+            { title:"Built for real submissions", desc:"One clean file for school portals, job applications, and email attachments." }
         ],
         faqs: [
-            { question:"Is it safe to merge PDFs online?", answer:"Yes. ToolNova's Merge PDF tool processes files entirely in your browser using client-side JavaScript. Your PDFs are never uploaded to a server, ensuring complete data privacy and security." },
-            { question:"How many PDFs can I merge at once?", answer:"There is no hard limit. You can merge dozens of PDF files in a single session. Performance depends on your device's memory, but most users can merge 50+ files without issues." },
-            { question:"Will the merged PDF lose quality?", answer:"No. Our tool performs a lossless merge, preserving all text, images, fonts, and formatting from each original document exactly as they are." },
-            { question:"Can I reorder the PDFs before merging?", answer:"Yes. After uploading, you can drag and drop the file thumbnails to arrange them in any order before clicking Merge." },
-            { question:"Does this work on mobile devices?", answer:"Yes. The Merge PDF tool is fully responsive and works on smartphones and tablets running modern browsers like Chrome, Safari, and Firefox." }
+            { question:"Can I merge PDF files online free with no watermark?", answer:"Yes. ToolNova’s Merge PDF tool combines files in your browser with no watermark and no signup. Download the merged PDF ready for submission." },
+            { question:"Is it safe to merge PDFs online?", answer:"Yes when processing is client-side. Your files are merged in the browser and are not uploaded to ToolNova servers for storage." },
+            { question:"How do I join multiple PDF into one free?", answer:"Upload all files, drag them into the correct order, click Merge, then download the single combined document." },
+            { question:"Will merging lose formatting or quality?", answer:"No. This is a page-level merge, not a low-quality re-export. Text, images, and fonts from each source stay as they were." },
+            { question:"How many PDFs can I merge at once?", answer:"There is no hard product cap. Most users can merge dozens of files; very large batches depend on your device memory." },
+            { question:"What if the merged file is too big for a portal?", answer:"Use Compress PDF after merging to shrink toward common 1MB–5MB limits, or split out unused pages first." }
         ]
     },"compress-pdf": {
         slug:"compress-pdf",
         name:"Compress PDF",
-        tagline:"Compress PDF Online Free – Shrink to 1MB",
-        description:"Compress PDF files in your browser to hit email and portal size limits. Reduce file size with quality presets while keeping documents readable—no upload, no watermark, no sign-up.",
+        tagline:"Compress PDF to 1MB Free Online – No Signup",
+        description:"Compress PDF online free in your browser to hit email and portal size limits. Shrink PDFs toward 1MB–5MB for university uploads, job applications, and Gmail attachments—no watermark, no signup, files stay on your device.",
         category:"PDF Tools",
         howItWorks: [
-            { step: 1, title:"Upload PDF", desc:"Drop a PDF (scans, portfolios, multi-page docs). Processing stays on your device." },
-            { step: 2, title:"Choose quality", desc:"Pick High, Balanced, or Smallest depending on how hard you need to shrink the file." },
-            { step: 3, title:"Compress", desc:"Pages are re-encoded at the selected resolution and JPEG quality for a smaller PDF." },
-            { step: 4, title:"Download", desc:"Save the compressed PDF and check the new file size against your 1MB/2MB limit." }
+            { step: 1, title:"Drop your PDF", desc:"Upload a scanned assignment, portfolio, or multi-page form. Processing stays on your device." },
+            { step: 2, title:"Pick a size goal", desc:"Choose High (max quality), Balanced (most portals), or Smallest (hard 1MB–2MB caps)." },
+            { step: 3, title:"Compress locally", desc:"Pages are re-encoded in the browser—no server upload and no watermark on the result." },
+            { step: 4, title:"Check size & download", desc:"Confirm the new file size against your limit, then download. Re-run with a stronger preset if needed." }
         ],
         benefits: [
-            { title:"Portal-friendly sizes", desc:"Hit common 1MB–5MB upload caps for jobs, universities, and government forms." },
-            { title:"Private by design", desc:"Compression runs fully in your browser—files never leave your device." },
-            { title:"Quality presets", desc:"Balance readability vs size without fiddling with advanced settings." },
-            { title:"Free & unlimited", desc:"No account, no watermark, no daily cap on local PDF compression." }
+            { title:"Hit 1MB portal limits", desc:"Shrink PDF file size free for common university, government, and job upload caps." },
+            { title:"Private by design", desc:"Compression runs fully in your browser—documents never leave your device." },
+            { title:"Simple quality presets", desc:"No advanced Acrobat menus—just High, Balanced, or Smallest." },
+            { title:"Free, unlimited local use", desc:"No account, no watermark, no daily cap on browser PDF compression." }
         ],
         faqs: [
-            { question:"Will text stay sharp?", answer:"Text-heavy digital PDFs may be rasterized during aggressive compression so the whole page becomes an image. For maximum text sharpness, export from Word/Google Docs as 'web/standard' quality first, or compress source images before building the PDF." },
-            { question:"Is this better than desktop Acrobat?", answer:"For most students and professionals, browser compression is enough to pass portal limits. Acrobat offers finer control for print workflows if you need it." },
-            { question:"Are my files uploaded?", answer:"No. Compression runs client-side with PDF.js and pdf-lib in your browser." },
-            { question:"What if the file is still too large?", answer:"Use the Smallest preset, split heavy pages with Split PDF, or compress embedded photos first with Image Compressor, then rebuild." },
-            { question:"Is Compress PDF free?", answer:"Yes. Browser PDF tools are free and unlimited with no sign-up." }
+            { question:"Can I compress PDF to 1MB free?", answer:"Often yes—use the Smallest or Balanced preset and check the resulting size. Scan-heavy files shrink more than tiny text PDFs. If you are still over, split pages or compress images first." },
+            { question:"Will text stay readable?", answer:"Balanced keeps most assignments readable on screen. Aggressive compression may reduce zoom sharpness; always preview before submitting." },
+            { question:"Are my files uploaded to a server?", answer:"No. Compression runs client-side in your browser." },
+            { question:"Is this free without signup?", answer:"Yes. Browser PDF tools on ToolNova are free and unlimited with no account required." },
+            { question:"What if the file is still too large?", answer:"Switch to Smallest, remove unused pages with Split PDF, or compress photos with Image Compressor and rebuild." },
+            { question:"Should I merge or compress first?", answer:"Merge related PDFs first, then compress the final file so you only optimize one document for the portal." }
         ]
     },"split-pdf": {
         slug:"split-pdf",
         name:"Split PDF",
-        tagline:"Extract pages from any PDF",
-        description:"Split a PDF into individual pages or extract specific page ranges. Whether you need to pull out a single chapter, remove unwanted pages, or break a large document into smaller files, our browser-based splitter handles it instantly and securely.",
+        tagline:"Split PDF into Separate Pages Free – No Watermark",
+        description:"Split a PDF into separate pages free or extract a page range online—no watermark, no signup. Pull chapters, forms, or single pages in your browser for school portals and email. Private, lossless page extraction.",
         category:"PDF Tools",
         howItWorks: [
-            { step: 1, title:"Upload PDF", desc:"Upload the PDF file you want to split by clicking the upload area or dragging the file in." },
-            { step: 2, title:"Select Pages", desc:"Choose which pages to extract—select individual pages, a range, or split into single-page files." },
-            { step: 3, title:"Split", desc:"Click 'Split' and the tool extracts your selected pages into a new PDF instantly." },
-            { step: 4, title:"Download", desc:"Download the resulting PDF file(s) to your device, ready for sharing." }
+            { step: 1, title:"Upload the PDF", desc:"Drop the multi-page file you want to split—assignments, packets, or scanned forms." },
+            { step: 2, title:"Pick pages or ranges", desc:"Select individual pages (e.g. 3, 7) or a range (e.g. 5–15) to extract." },
+            { step: 3, title:"Split in the browser", desc:"Pages are extracted locally with no server upload and no watermark on the result." },
+            { step: 4, title:"Download the extract", desc:"Save the new PDF. Compress next if a portal has a size limit." }
         ],
         benefits: [
-            { title:"Precise Extraction", desc:"Extract exactly the pages you need—individual pages, custom ranges, or every page as a separate file." },
-            { title:"Privacy Guaranteed", desc:"All splitting happens in your browser. No files are uploaded to any server." },
-            { title:"Fast Processing", desc:"Split even large PDFs with hundreds of pages in seconds." },
-            { title:"Free & Unlimited", desc:"No limits on file size or number of splits per session." }
+            { title:"Extract only what you need", desc:"Stop uploading 40-page packets when the portal needs three pages." },
+            { title:"No watermark, free unlimited local use", desc:"Browser PDF splitter without account walls or logo stamps." },
+            { title:"Lossless page quality", desc:"Extracted pages keep original text, fonts, and images." },
+            { title:"Private by design", desc:"Splitting stays on your device—safer for personal documents." }
         ],
         faqs: [
-            { question:"Can I extract specific pages from a PDF?", answer:"Yes. You can select individual pages (e.g., pages 3, 7, 12) or specify a range (e.g., pages 5–15) to extract into a new PDF document." },
-            { question:"Is the Split PDF tool free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." },
-            { question:"Will splitting affect the quality of the PDF?", answer:"No. The extracted pages retain their original quality, formatting, images, and fonts without any degradation." },
-            { question:"Can I split a password-protected PDF?", answer:"You will need to unlock the PDF first. Our tool processes unprotected files. Remove the password using your PDF reader before uploading." },
-            { question:"Does it work offline?", answer:"After the page loads, the splitting engine works entirely in your browser on your device, so intermittent connectivity won't affect processing." }
+            { question:"Can I split a PDF into separate pages free?", answer:"Yes. Use ToolNova’s free PDF splitter in your browser with no watermark and no signup." },
+            { question:"Can I extract specific pages from a PDF free online?", answer:"Yes. Choose individual pages or a range and download only that extract." },
+            { question:"Will splitting reduce quality?", answer:"No. Pages are copied as-is—not re-exported as low-quality images." },
+            { question:"Can I split a password-protected PDF?", answer:"Unlock it first in a PDF reader. Encrypted files cannot be processed until the password is removed." },
+            { question:"Is Split PDF free without an account?", answer:"Yes. Browser PDF tools are free and unlimited with no sign-up." },
+            { question:"What if I need the pages together again later?", answer:"Use Merge PDF to recombine extracts in the correct order." }
         ]
     },"image-to-pdf": {
         slug:"image-to-pdf",
         name:"Image to PDF",
-        tagline:"Convert images to PDF instantly",
-        description:"Convert JPG, PNG, WebP, and other image formats into a professional PDF document. Upload multiple images, arrange their order, and download a single PDF. Perfect for creating portfolios, scanning documents, or compiling photo collections.",
+        tagline:"Convert Images to PDF Free Online – No Watermark",
+        description:"Convert images to PDF free online—JPG, PNG, WebP, and more—with no watermark and no signup. Combine multiple images into one PDF in your browser for homework scans, forms, and portfolios.",
         category:"PDF Tools",
         howItWorks: [
-            { step: 1, title:"Upload Images", desc:"Select or drag and drop one or more images (JPG, PNG, WebP, BMP) into the converter." },
-            { step: 2, title:"Arrange Order", desc:"Drag thumbnails to reorder the images as you want them to appear in the PDF." },
-            { step: 3, title:"Convert", desc:"Click 'Convert to PDF' and the tool generates your document in seconds." },
-            { step: 4, title:"Download PDF", desc:"Download the finished PDF, ready to print, email, or archive." }
+            { step: 1, title:"Upload images", desc:"Drop JPG, PNG, WebP, or other supported photos/scans—phone homework shots welcome." },
+            { step: 2, title:"Reorder pages", desc:"Drag thumbnails so page 1 is the cover or first worksheet." },
+            { step: 3, title:"Convert in browser", desc:"Build one PDF locally with no watermark and no server upload." },
+            { step: 4, title:"Download & optional compress", desc:"Save the PDF. If a portal rejects the size, run Compress PDF next." }
         ],
         benefits: [
-            { title:"Multiple Formats", desc:"Supports JPG, PNG, WebP, BMP, and GIF image formats for maximum flexibility." },
-            { title:"Batch Conversion", desc:"Convert multiple images into a single PDF in one go—ideal for photo albums and document scans." },
-            { title:"High Quality Output", desc:"Images are embedded at full resolution, ensuring crisp, print-ready PDF documents." },
-            { title:"No Watermarks", desc:"The generated PDF is clean with no watermarks, branding, or limitations." }
+            { title:"JPG/PNG to PDF free", desc:"Convert photos and scans into portal-ready PDFs without paid apps." },
+            { title:"Multi-image combine", desc:"Merge many images into one PDF in a single pass with order control." },
+            { title:"No watermark", desc:"Clean PDFs for school and work—no logo on every page." },
+            { title:"Private browser conversion", desc:"Images stay on your device during conversion." }
         ],
         faqs: [
-            { question:"What image formats can I convert to PDF?", answer:"You can convert JPG, JPEG, PNG, WebP, BMP, and GIF images to PDF using this tool." },
-            { question:"Can I combine multiple images into one PDF?", answer:"Yes. Upload as many images as you like and they will all be combined into a single PDF document. You can reorder them before converting." },
-            { question:"Is there a file size limit?", answer:"There is no strict file size limit. The tool processes images locally in your browser, so performance depends on your device's capabilities." },
-            { question:"Will the image quality be preserved in the PDF?", answer:"Yes. Images are embedded at their original resolution and quality. There is no compression or quality loss during conversion." },
-            { question:"Can I adjust page size or orientation?", answer:"The tool automatically fits each image to a standard page size. Landscape images are fitted accordingly to maintain their aspect ratio." }
+            { question:"Can I convert images to PDF free online with no watermark?", answer:"Yes. ToolNova’s image to PDF converter is free, watermark-free, and works without signup." },
+            { question:"Can I combine multiple images into one PDF free?", answer:"Yes. Upload many files, reorder them, and download a single multi-page PDF." },
+            { question:"What formats are supported?", answer:"JPG, JPEG, PNG, WebP, BMP, and GIF are commonly supported." },
+            { question:"Will quality drop during conversion?", answer:"Images are embedded at full resolution during conversion. File size can still grow—compress afterward if needed." },
+            { question:"Is there a file size limit?", answer:"No hard product cap; performance depends on your device when processing large batches." },
+            { question:"My portal still rejects the PDF—what next?", answer:"Use Compress PDF, or compress images first with Image Compressor, then convert again." }
         ]
     },"jpg-to-png": {
         slug:"jpg-to-png",
@@ -288,27 +292,28 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
     },"image-compressor": {
         slug:"image-compressor",
         name:"Image Compressor",
-        tagline:"Reduce image file size instantly",
-        description:"Compress JPG, PNG, and WebP images to reduce file size without visible quality loss. Our smart compression algorithm analyzes each image to find the optimal balance between size reduction and visual fidelity, helping you speed up websites and save storage.",
+        tagline:"Compress Images Without Losing Quality – Free",
+        description:"Compress images without losing quality free—reduce JPG, PNG, and WebP file size in your browser for websites, email, and slides. No watermark, no signup, files never leave your device.",
         category:"Image Tools",
         howItWorks: [
-            { step: 1, title:"Upload Image", desc:"Select or drag and drop the images you want to compress (JPG, PNG, or WebP)." },
-            { step: 2, title:"Set Compression", desc:"Choose a compression level or let the tool automatically find the optimal setting." },
-            { step: 3, title:"Compress", desc:"The tool compresses your images instantly in your browser using advanced algorithms." },
-            { step: 4, title:"Download", desc:"Download the compressed images and see the file size savings." }
+            { step: 1, title:"Upload images", desc:"Drop JPG, PNG, or WebP files—photos, screenshots, or web assets." },
+            { step: 2, title:"Choose compression level", desc:"Start moderate for near-original look; go stronger only if size still fails limits." },
+            { step: 3, title:"Compress locally", desc:"Optimization runs in your browser—no upload to a third-party server." },
+            { step: 4, title:"Download smaller files", desc:"Save compressed images and compare size vs quality before publishing or attaching." }
         ],
         benefits: [
-            { title:"Smart Compression", desc:"Our algorithm intelligently reduces file size while maintaining visual quality that's indistinguishable from the original." },
-            { title:"Faster Websites", desc:"Smaller images mean faster page load times, better Core Web Vitals scores, and improved SEO rankings." },
-            { title:"Batch Processing", desc:"Compress multiple images at once—perfect for optimizing entire photo galleries or website asset folders." },
-            { title:"Privacy First", desc:"All compression runs in your browser. Your images never leave your device." }
+            { title:"Smaller without obvious blur", desc:"Sensible settings keep photos looking sharp at normal viewing sizes." },
+            { title:"Faster pages & better SEO signals", desc:"Lighter images improve load time and Core Web Vitals." },
+            { title:"Email and portal friendly", desc:"Reduce image file size free so attachments and LMS uploads succeed." },
+            { title:"Private & free", desc:"Browser compression with no signup and no watermark." }
         ],
         faqs: [
-            { question:"How much can images be compressed?", answer:"Typical compression reduces file size by 40-80% depending on the image and format. JPG images usually see 50-70% reduction, while PNG files can see even larger savings." },
-            { question:"Will compression make my images look bad?", answer:"Our smart algorithm prioritizes visual quality. At recommended settings, the compressed image is virtually indistinguishable from the original to the human eye." },
-            { question:"What formats are supported?", answer:"The compressor supports JPG, JPEG, PNG, and WebP image formats." },
-            { question:"Why should I compress images for my website?", answer:"Compressed images load faster, improving user experience, SEO rankings, and Core Web Vitals scores. Google recommends optimized images for better search performance." },
-            { question:"Is there a limit on how many images I can compress?", answer:"No. You can compress as many images as you need in a single session, completely free." }
+            { question:"Can I compress an image without losing quality free?", answer:"Yes—at moderate settings most photos look the same at normal zoom while file size drops a lot. Always preview text-heavy screenshots." },
+            { question:"How much size can I save?", answer:"Often 40–80% depending on the photo and format. Results vary; check the new file size after each run." },
+            { question:"What formats are supported?", answer:"JPG, JPEG, PNG, and WebP." },
+            { question:"Is this free without signup?", answer:"Yes. Browser image tools are free and unlimited with no account required." },
+            { question:"Should I compress before Image to PDF?", answer:"Yes when photos are large. Compress first, convert to PDF, then Compress PDF if the portal still rejects the file." },
+            { question:"Are my images uploaded?", answer:"No. Compression runs in your browser on your device." }
         ]
     },"reorder-pdf": {
         slug:"reorder-pdf",
@@ -534,77 +539,79 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
     },"cover-letter-writer": {
         slug:"cover-letter-writer",
         name:"AI Cover Letter Writer",
-        tagline:"Write tailored cover letters fast",
-        description:"Generate personalized, job-specific cover letters that highlight your relevant skills, experience, and enthusiasm. Our AI analyzes the job description to emphasize the qualifications that matter most, helping you stand out from other applicants.",
+        tagline:"Write a Cover Letter for Any Job Free – AI",
+        description:"Write a cover letter for any job free with AI. Enter the role, company, and your background to generate a personalized draft—no login required to start. Customize with real stories before you apply.",
         category:"Career Tools",
         howItWorks: [
-            { step: 1, title:"Enter Job Details", desc:"Paste the job title, company name, and key requirements from the job listing." },
-            { step: 2, title:"Add Your Background", desc:"Provide your relevant experience, skills, and achievements." },
-            { step: 3, title:"Generate", desc:"AI crafts a tailored cover letter that aligns your qualifications with the job requirements." },
-            { step: 4, title:"Customize & Send", desc:"Review, personalize with specific details, and submit with your application." }
+            { step: 1, title:"Paste job details", desc:"Add job title, company, and key requirements from the posting." },
+            { step: 2, title:"Add your background", desc:"List relevant experience, projects, skills, and one or two wins." },
+            { step: 3, title:"Generate the draft", desc:"AI writes a tailored letter structure mapped to the role." },
+            { step: 4, title:"Personalize & send", desc:"Insert a real anecdote, company-specific why, and proofread before apply." }
         ],
         benefits: [
-            { title:"Job-Specific", desc:"Each cover letter is tailored to the specific job description and company." },
-            { title:"ATS-Friendly", desc:"Incorporates relevant keywords to pass Applicant Tracking System screening." },
-            { title:"Professional Format", desc:"Follows standard business letter formatting with proper structure and flow." },
-            { title:"Save Hours", desc:"Generate a polished cover letter in minutes instead of hours of writing and editing." }
+            { title:"Job-specific by default", desc:"Uses the description you paste instead of a one-size template." },
+            { title:"Faster first draft", desc:"Minutes to a full letter you can edit instead of a blank page." },
+            { title:"Works for internships too", desc:"Emphasize projects and coursework when experience is thin." },
+            { title:"Free to start", desc:"Free cover letter writer without a login wall for first drafts." }
         ],
         faqs: [
-            { question:"How does it tailor the cover letter to the job?", answer:"The AI analyzes the job description you provide and matches your skills and experience to the specific requirements, emphasizing the most relevant qualifications." },
-            { question:"Should I edit the generated cover letter?", answer:"Yes. While the AI creates a strong foundation, adding specific personal anecdotes and company-specific details makes the letter more authentic and compelling." },
-            { question:"Does it work for all industries?", answer:"Yes. The tool generates cover letters for tech, finance, healthcare, education, marketing, engineering, and all other industries." },
-            { question:"Can it write cover letters for internships?", answer:"Yes. Select 'Entry-Level' or 'Internship' as the experience level, and the AI adjusts the tone and emphasis accordingly." },
-            { question:"Is the cover letter writer free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
+            { question:"Can I write a cover letter for any job free?", answer:"Yes. Generate a free AI cover letter draft without signing up first, then personalize it for each application." },
+            { question:"Should I edit the generated letter?", answer:"Always. Add a true story, name the company, and delete anything that could fit any job." },
+            { question:"Does it work for internships?", answer:"Yes. Provide projects, coursework, and skills; the draft can emphasize potential and learning." },
+            { question:"Will a generic letter hurt me?", answer:"Yes. Recruiters spot copy-paste. Tailor every letter to the posting." },
+            { question:"Is the cover letter writer free?", answer:"Yes. Free daily AI use is included without sign-up; higher limits via account/Pro." },
+            { question:"How does it pair with resume bullets?", answer:"Reuse the same achievements so your letter and resume tell one consistent story." }
         ]
     },"flashcard-maker": {
         slug:"flashcard-maker",
         name:"AI Flashcard Maker",
-        tagline:"Create study flashcards instantly",
-        description:"Transform any topic, textbook content, or notes into effective study flashcards. Our AI identifies key concepts and generates question-answer pairs optimized for spaced repetition learning, helping students retain information more efficiently.",
+        tagline:"Make Flashcards from Notes Automatically Free",
+        description:"Make flashcards from notes automatically free. Paste lecture notes or a textbook chapter and generate question-and-answer cards for spaced repetition and exam prep—no account required to start.",
         category:"Study Tools",
         howItWorks: [
-            { step: 1, title:"Input Content", desc:"Paste your study material, notes, or simply enter a topic you want to learn." },
-            { step: 2, title:"Set Options", desc:"Choose the number of flashcards and difficulty level (basic, intermediate, advanced)." },
-            { step: 3, title:"Generate Cards", desc:"AI analyzes the content and creates targeted question-answer flashcard pairs." },
-            { step: 4, title:"Study & Export", desc:"Review the flashcards on screen or export them for offline study." }
+            { step: 1, title:"Paste notes or a chapter section", desc:"Drop lecture notes, definitions, or one textbook section—not an entire book—for sharper cards." },
+            { step: 2, title:"Set count & difficulty", desc:"Choose how many cards you want and Basic / Intermediate / Advanced based on your exam level." },
+            { step: 3, title:"Generate Q&A cards", desc:"AI extracts key facts and turns them into focused front/back flashcards for active recall." },
+            { step: 4, title:"Edit weak cards, then review", desc:"Delete duplicates, tighten vague answers, and practice out loud before flipping." }
         ],
         benefits: [
-            { title:"Active Recall", desc:"Flashcards leverage active recall—the most scientifically proven study technique for long-term retention." },
-            { title:"Smart Extraction", desc:"AI identifies the most important concepts and creates focused, testable questions." },
-            { title:"Any Subject", desc:"Works for sciences, humanities, languages, medicine, law, and all academic disciplines." },
-            { title:"Time Saver", desc:"Create 50+ flashcards in seconds instead of spending hours making them manually." }
+            { title:"Active recall by default", desc:"Q&A format beats passive re-reading for long-term retention before exams." },
+            { title:"From notes in seconds", desc:"Generate flashcards from textbook chapter sections instead of handwriting for hours." },
+            { title:"Works across subjects", desc:"Science, history, languages, business, medicine—any text-based material." },
+            { title:"Free to start", desc:"Free digital flashcard maker with no signup required for your first sessions." }
         ],
         faqs: [
-            { question:"How does the AI create flashcards?", answer:"Our AI analyzes your input text and identifies key concepts, definitions, facts, and relationships. It then formulates focused questions on the front and clear, concise answers on the back of each card." },
-            { question:"Can I edit the generated flashcards?", answer:"Yes. You can edit, delete, or add to any generated flashcard to perfectly match your study needs." },
-            { question:"What subjects work best?", answer:"The tool works excellently for all subjects—sciences, history, languages, medicine, law, business, and more." },
-            { question:"How many flashcards can I generate?", answer:"You can generate as many flashcards as you need. We recommend 20-30 cards per study session for optimal retention." },
-            { question:"Is the flashcard maker free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
+            { question:"Can I make flashcards from notes automatically free?", answer:"Yes. Paste your notes into ToolNova’s flashcard maker and generate Q&A cards without signing up first. Free daily AI use is included." },
+            { question:"Can I generate flashcards from a textbook chapter?", answer:"Yes—paste one section or chapter chunk at a time. Smaller inputs produce cleaner, less duplicate cards." },
+            { question:"How many cards should I make per session?", answer:"Aim for 20–30 cards. That is enough for a solid review block without overwhelm." },
+            { question:"Can I edit the generated flashcards?", answer:"Yes. Edit, delete, or rewrite any card so every prompt tests one clear idea." },
+            { question:"What subjects work best?", answer:"Any text-heavy subject: sciences, humanities, languages, law, medicine, business, and certifications." },
+            { question:"Is the flashcard maker free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for higher limits." }
         ]
     },"notes-generator": {
         slug:"notes-generator",
         name:"AI Notes Generator",
-        tagline:"Generate organized study notes",
-        description:"Transform lectures, textbook chapters, or raw content into well-organized, concise study notes. Our AI structures information with headings, bullet points, and key takeaways, creating notes that are perfect for exam revision and quick reference.",
+        tagline:"Generate Study Notes from Any Topic Free – AI",
+        description:"Generate study notes from any topic free. Paste a lecture, textbook passage, or topic name and get organized headings and bullets for exam prep—no login required to start. Free AI study notes generator for students.",
         category:"Study Tools",
         howItWorks: [
-            { step: 1, title:"Input Material", desc:"Paste lecture transcripts, textbook text, or describe the topic you need notes for." },
-            { step: 2, title:"Choose Format", desc:"Select the note style—bullet points, Cornell method, outline format, or mind map." },
-            { step: 3, title:"Generate Notes", desc:"AI organizes the information into clear, structured notes with headings and key points." },
-            { step: 4, title:"Review & Save", desc:"Review the generated notes, make edits, and save or copy for your study materials." }
+            { step: 1, title:"Paste material or topic", desc:"Drop lecture notes, a chapter section, or type a topic when you need a starter outline." },
+            { step: 2, title:"Choose note style", desc:"Prefer bullets, outline structure, or denser study notes depending on how you revise." },
+            { step: 3, title:"Generate structured notes", desc:"AI organizes definitions, processes, and key points under clear headings." },
+            { step: 4, title:"Edit & practice", desc:"Add professor examples, then turn key facts into flashcards or a quiz." }
         ],
         benefits: [
-            { title:"Structured Organization", desc:"Notes are organized with clear headings, subheadings, and bullet points for easy scanning." },
-            { title:"Key Concepts Highlighted", desc:"AI identifies and emphasizes the most important concepts, definitions, and facts." },
-            { title:"Multiple Formats", desc:"Choose from bullet points, outline format, Cornell method, or summarized paragraphs." },
-            { title:"Exam-Ready", desc:"Notes are structured for quick revision, highlighting what's most likely to be tested." }
+            { title:"Organized by default", desc:"Headings and bullets beat walls of text for fast revision." },
+            { title:"From mess to exam pack", desc:"Turn rough transcripts into study-ready notes free." },
+            { title:"Works with or without a source paste", desc:"Topic-only mode helps when you need a scaffold fast." },
+            { title:"No login to start", desc:"Free notes generator access for daily AI use without signup first." }
         ],
         faqs: [
-            { question:"What sources can I use to generate notes?", answer:"You can paste lecture transcripts, textbook passages, article text, or simply enter a topic name and the AI will generate comprehensive notes." },
-            { question:"Can I choose different note-taking formats?", answer:"Yes. We support bullet-point lists, outline format, Cornell method, and summarized paragraph styles." },
-            { question:"How detailed are the generated notes?", answer:"You can control the detail level—choose concise for quick review or comprehensive for in-depth study." },
-            { question:"Can I edit the notes after generation?", answer:"Yes. All generated notes are fully editable so you can add personal annotations or clarifications." },
-            { question:"Is the notes generator free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
+            { question:"Can I generate study notes from any topic free?", answer:"Yes. Enter a topic or paste text into ToolNova’s notes generator without signing up first. Free daily AI use is included." },
+            { question:"What sources work best?", answer:"Lecture notes, textbook sections, article text, or a clear topic name. Smaller chunks produce cleaner structure." },
+            { question:"Can I edit the notes?", answer:"Yes—and you should. Add class-specific examples and syllabus terms after generation." },
+            { question:"Are the notes exam-ready as-is?", answer:"They are a strong skeleton. Active practice (flashcards/quizzes) still beats re-reading alone." },
+            { question:"Is the notes generator free?", answer:"Yes. Free daily AI use without sign-up; higher limits with account/Pro." }
         ]
     },"mcq-generator": {
         slug:"mcq-generator",
@@ -634,52 +641,53 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
     },"quiz-generator": {
         slug:"quiz-generator",
         name:"AI Quiz Generator",
-        tagline:"Create custom quizzes on any topic",
-        description:"Generate comprehensive quizzes with a mix of question types—multiple choice, true/false, fill-in-the-blank, and short answer. Perfect for teachers creating assessments, students preparing for exams, or trainers building knowledge checks.",
+        tagline:"Create a Quiz from Any Topic Free – AI",
+        description:"Create a quiz from any topic free—or paste notes and generate practice questions with an answer key. Free AI quiz maker for students and teachers. No account needed to start self-testing.",
         category:"Study Tools",
         howItWorks: [
-            { step: 1, title:"Enter Topic", desc:"Provide the subject matter, paste content, or describe what the quiz should cover." },
-            { step: 2, title:"Configure Quiz", desc:"Set the number of questions, question types, and difficulty level." },
-            { step: 3, title:"Generate Quiz", desc:"AI creates a balanced quiz with varied question types and an answer key." },
-            { step: 4, title:"Take or Share", desc:"Take the quiz yourself or share it with students and colleagues." }
+            { step: 1, title:"Enter topic or paste notes", desc:"Describe the subject or drop the study text you want tested." },
+            { step: 2, title:"Set size & difficulty", desc:"Choose question count and level so practice matches your exam." },
+            { step: 3, title:"Generate quiz + key", desc:"AI builds mixed practice questions with answers for review." },
+            { step: 4, title:"Take closed-book", desc:"Answer first, then check the key—misses become flashcards." }
         ],
         benefits: [
-            { title:"Mixed Question Types", desc:"Quizzes include multiple choice, true/false, fill-in-the-blank, and short answer for comprehensive testing." },
-            { title:"Auto Answer Key", desc:"Every quiz comes with a complete answer key for quick grading." },
-            { title:"Teacher-Friendly", desc:"Perfect for creating classroom assessments, homework assignments, and review materials." },
-            { title:"Self-Study Tool", desc:"Students can generate quizzes to test their understanding before actual exams." }
+            { title:"Active recall built in", desc:"Practice tests beat passive re-reading for memory." },
+            { title:"From notes to questions free", desc:"Turn your own material into a quiz without manual item writing." },
+            { title:"Answer key included", desc:"Grade yourself or use as a teacher draft for review sets." },
+            { title:"No signup wall to start", desc:"Free online quiz generator for daily AI use without an account first." }
         ],
         faqs: [
-            { question:"What types of questions can the quiz include?", answer:"Multiple choice, true/false, fill-in-the-blank, short answer, and matching questions depending on the topic and your preferences." },
-            { question:"Can teachers use this for classroom quizzes?", answer:"Absolutely. Many educators use our tool to quickly generate assessments, pop quizzes, and review materials for their classes." },
-            { question:"How many questions can I generate?", answer:"You can generate quizzes with as few as 5 or as many as 100 questions per session." },
-            { question:"Does it include an answer key?", answer:"Yes. Every generated quiz includes a complete answer key with explanations." },
-            { question:"Is the quiz generator free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
+            { question:"Can I create a quiz from any topic free?", answer:"Yes. Enter a topic in ToolNova’s quiz generator without signing up first. Free daily AI use is included." },
+            { question:"Can I generate quiz questions from text free?", answer:"Yes—paste notes or a chapter summary so questions track your actual study material." },
+            { question:"Does it include an answer key?", answer:"Yes. Use it after you attempt the quiz, not before." },
+            { question:"Can teachers use it?", answer:"Yes for warm-ups and review drafts. Human-review items before high-stakes grading." },
+            { question:"Is the quiz generator free?", answer:"Yes. Free daily AI use without sign-up; higher limits with account/Pro." }
         ]
     },"homework-solver": {
         slug:"homework-solver",
         name:"AI Homework Solver",
-        tagline:"Get step-by-step homework help",
-        description:"Get detailed, step-by-step solutions and explanations for homework problems across all subjects. Our AI doesn't just give answers—it explains the reasoning behind each step, helping you understand the concepts and learn how to solve similar problems independently.",
+        tagline:"Solve Homework Step by Step Free – AI Tutor",
+        description:"Solve homework step by step free with an AI tutor that explains the method—not only the final answer. Free AI homework help for math, science, English, and history. No signup required to start; use it to learn, not to cheat on exams.",
         category:"Study Tools",
         howItWorks: [
-            { step: 1, title:"Enter Question", desc:"Type your homework question or paste the problem you need help with." },
-            { step: 2, title:"Select Subject", desc:"Choose the subject area for more accurate and contextual solutions." },
-            { step: 3, title:"Get Solution", desc:"AI provides a detailed, step-by-step solution with clear explanations." },
-            { step: 4, title:"Learn & Apply", desc:"Study the explanation to understand the underlying concepts for future problems." }
+            { step: 1, title:"Paste the full problem", desc:"Include given values, what to find, and any constraints—clear prompts get clearer steps." },
+            { step: 2, title:"Pick the subject", desc:"Math, science, English, history, and more for better context in the explanation." },
+            { step: 3, title:"Get step-by-step help", desc:"AI walks through reasoning so you can redo the approach on similar problems." },
+            { step: 4, title:"Re-solve without looking", desc:"Cover the solution and practice once yourself—that is how the learning sticks." }
         ],
         benefits: [
-            { title:"Step-by-Step Solutions", desc:"Every answer includes detailed steps so you understand the process, not just the final answer." },
-            { title:"All Subjects", desc:"Math, science, English, history, computer science, economics, and more." },
-            { title:"Learn to Learn", desc:"Explanations teach problem-solving methods you can apply to future assignments." },
-            { title:"Available 24/7", desc:"Get homework help anytime—no waiting for office hours or tutoring sessions." }
+            { title:"Method over shortcuts", desc:"Step-by-step math and science help free—built to teach process, not copy-paste." },
+            { title:"Multi-subject coverage", desc:"Algebra to essays: one free AI homework helper for common school subjects." },
+            { title:"24/7 study support", desc:"Get unstuck after class without waiting for office hours." },
+            { title:"No signup wall to start", desc:"Free daily AI use included without creating an account first." }
         ],
         faqs: [
-            { question:"Does it just give answers or explain the process?", answer:"Our tool provides complete step-by-step explanations, not just final answers. The goal is to help you understand the concept so you can solve similar problems on your own." },
-            { question:"What subjects does it cover?", answer:"Math (algebra, calculus, statistics), science (physics, chemistry, biology), English, history, computer science, economics, and more." },
-            { question:"Is it accurate?", answer:"Our AI provides high-quality solutions, but we recommend verifying important answers and using the tool as a learning aid, not a replacement for understanding." },
-            { question:"Can I upload images of my homework?", answer:"Currently, you can type or paste your questions as text. We recommend clearly describing any diagrams or figures." },
-            { question:"Is the homework solver free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
+            { question:"Can I solve homework step by step free?", answer:"Yes. Paste your problem into ToolNova’s AI homework solver for free daily use without signup. Focus on learning the steps, not only the answer." },
+            { question:"Does it explain math problems with work shown?", answer:"Yes—step-by-step reasoning is the point. Use it as a tutor, then re-solve on paper." },
+            { question:"What subjects are supported?", answer:"Math (algebra, calculus, statistics), science (physics, chemistry, biology), English, history, computer science, economics, and more." },
+            { question:"Is this free AI homework help for high school?", answer:"Yes. High school and college students can start without an account. Free daily limits apply; Pro raises caps." },
+            { question:"Should I submit the AI answer as-is?", answer:"No. School integrity rules apply. Use explanations to learn, write your own work, and never use it during closed-book exams." },
+            { question:"How accurate is it?", answer:"Strong for common problems, but always verify critical numbers and methods with your textbook or teacher." }
         ]
     },"doubt-solver": {
         slug:"doubt-solver",
@@ -1059,27 +1067,27 @@ export const toolsData: Record<string, ToolData> = {"text-summarizer": {
     },"resume-bullets": {
         slug:"resume-bullets",
         name:"AI Resume Bullet Points",
-        tagline:"Write impactful resume bullets",
-        description:"Generate powerful, quantified resume bullet points that showcase your achievements using the proven STAR method. Our AI transforms vague job descriptions into compelling, action-oriented statements that grab recruiter attention and pass ATS screening.",
+        tagline:"Generate Resume Bullet Points Free – AI",
+        description:"Generate resume bullet points free with AI. Turn job duties into action-verb, results-focused achievements that scan better for recruiters and ATS. Free resume bullet writer—no signup required to start. Always use real metrics.",
         category:"Career Tools",
         howItWorks: [
-            { step: 1, title:"Enter Role", desc:"Provide your job title, company, and key responsibilities or achievements." },
-            { step: 2, title:"Add Details", desc:"Include any metrics, numbers, or specific outcomes you achieved." },
-            { step: 3, title:"Generate Bullets", desc:"AI creates multiple impactful bullet points using strong action verbs and quantified results." },
-            { step: 4, title:"Select & Use", desc:"Choose the best bullets and add them to your resume." }
+            { step: 1, title:"Describe the role", desc:"Job title, company, and what you actually did day to day." },
+            { step: 2, title:"Add real metrics", desc:"%, $, time saved, users, tickets—truthful numbers only." },
+            { step: 3, title:"Generate bullets", desc:"AI drafts multiple action + result lines you can edit." },
+            { step: 4, title:"Tailor & paste", desc:"Keep 3–6 strongest bullets; mirror keywords only when true." }
         ],
         benefits: [
-            { title:"Action-Oriented", desc:"Every bullet starts with a strong action verb that demonstrates leadership and initiative." },
-            { title:"Quantified Results", desc:"AI helps you quantify achievements with percentages, dollar amounts, and metrics." },
-            { title:"ATS-Optimized", desc:"Bullet points include industry keywords that pass Applicant Tracking System screening." },
-            { title:"STAR Method", desc:"Structured using the Situation-Task-Action-Result framework preferred by recruiters." }
+            { title:"Action + result formula", desc:"Replace vague duties with scannable achievement lines." },
+            { title:"Quantify your impact", desc:"Prompted metrics make bullets stronger and more credible." },
+            { title:"ATS-friendly wording", desc:"Easier to include role keywords without keyword stuffing." },
+            { title:"Free to start", desc:"Generate resume bullet points free without a login wall." }
         ],
         faqs: [
-            { question:"What makes a good resume bullet point?", answer:"Strong bullet points start with an action verb, describe a specific achievement, and include a quantified result. Our AI follows this proven formula." },
-            { question:"Do I need to provide metrics?", answer:"If you have specific numbers (revenue, team size, percentages), include them. If not, the AI can help you estimate and frame your impact." },
-            { question:"How many bullet points per job?", answer:"We recommend 3-6 bullet points per position, focusing on your most impactful achievements." },
-            { question:"Does it work for all industries?", answer:"Yes. The tool generates relevant bullets for tech, finance, healthcare, marketing, engineering, education, and all other fields." },
-            { question:"Is the resume bullet generator free?", answer:"Yes. Free daily AI use is included without sign-up. Create a free account for more daily uses, or upgrade to Pro for unlimited AI access." }
+            { question:"Can I generate resume bullet points free?", answer:"Yes. Use ToolNova’s resume bullet generator without signing up first. Free daily AI use is included." },
+            { question:"What makes a good resume bullet?", answer:"Strong action verb + what you did + measurable result. One idea per line." },
+            { question:"Should I invent metrics?", answer:"Never. Only use numbers you can defend in an interview." },
+            { question:"How many bullets per job?", answer:"Usually 3–6 for recent roles; fewer for older positions." },
+            { question:"Is the resume bullet generator free?", answer:"Yes. Free daily AI use without sign-up; higher limits with account/Pro." }
         ]
     },"interview-generator": {
         slug:"interview-generator",

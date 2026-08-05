@@ -2,7 +2,7 @@ import { Metadata } from"next";
 import { ContactForm } from"./ContactForm";
 
 export const metadata: Metadata = {
-  title:"Contact Us - Get in Touch | ToolNova",
+  title:"Contact Us - Get in Touch",
   description:"Get in touch with the ToolNova team for support, feedback, or partnership inquiries. We respond within 24 hours.",
   keywords: ["contact ToolNova","ToolNova support","AI tools help","feedback",
   ],
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     canonical:"https://www.toolnovahub.com/contact",
   },
   openGraph: {
-    title:"Contact Us - Get in Touch | ToolNova",
+    title:"Contact Us - Get in Touch",
     description:"Get in touch with the ToolNova team for support, feedback, or partnership inquiries.",
     url:"https://www.toolnovahub.com/contact",
     type:"website",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card:"summary_large_image",
-    title:"Contact Us | ToolNova",
+    title:"Contact Us",
     description:"Get in touch with the ToolNova team for support or inquiries.",
     images: ["https://www.toolnovahub.com/og-image.png"],
     creator:"@toolnovahub",

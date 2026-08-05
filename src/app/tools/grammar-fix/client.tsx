@@ -278,10 +278,10 @@ const faqs = [
 export default function GrammarFixClient() {
   return (
     <PremiumToolWrapper
-      toolName="AI Grammar Fix"
+      toolName="Fix Grammar Mistakes in Essays Free"
       toolSlug="grammar-fix"
-      tagline="Perfect your writing with AI-powered grammar corrections"
-      description="Fix grammar, spelling, punctuation, and style errors instantly. Get professional-quality writing with advanced corrections and clarity improvements."
+      tagline="Free AI grammar checker — no signup required"
+      description="Fix grammar mistakes in essays free: spelling, punctuation, subject-verb agreement, and clarity. Built for students, ESL writers, and professional emails."
       badge="AI-Powered"
       category="Writing Tools"
       categorySlug="writing-tools"
@@ -295,7 +295,7 @@ export default function GrammarFixClient() {
       <EnhancedToolLayout
         toolSlug="grammar-fix"
         systemPrompt={systemPrompt}
-        toolName="AI Grammar Fix"
+        toolName="Fix Grammar Mistakes in Essays Free"
         placeholder={`📝 Paste or type your text here...
 
 Examples:

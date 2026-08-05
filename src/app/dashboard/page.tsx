@@ -11,7 +11,7 @@ import {
 import { DAILY_FREE_LIMIT } from"@/lib/limits";
 
 export const metadata = {
-  title:"My Dashboard | ToolNova",
+  title:"My Dashboard",
   description:"View your generation history, usage stats, and subscription plan.",
 };
 

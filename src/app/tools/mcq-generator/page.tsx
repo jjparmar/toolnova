@@ -7,19 +7,19 @@ import MCQGeneratorClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-  title: 'AI MCQ Generator – Create Multiple Choice Questions Free | ToolNova',
+  title: 'AI MCQ Generator – Create Multiple Choice Questions Free',
   description: 'Generate multiple choice questions instantly with our free AI MCQ generator. Perfect for teachers, students, and exam prep.',
   keywords: ['AI MCQ generator', 'multiple choice generator', 'quiz question maker', 'test generator'],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/mcq-generator' },
   openGraph: {
-    title: 'AI MCQ Generator – Create Multiple Choice Questions Free | ToolNova',
+    title: 'AI MCQ Generator – Create Multiple Choice Questions Free',
     description: 'Generate MCQs instantly from any topic for exams and practice.',
     url: 'https://www.toolnovahub.com/tools/mcq-generator',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI MCQ Generator – Create Multiple Choice Questions Free | ToolNova',
+    title: 'AI MCQ Generator – Create Multiple Choice Questions Free',
     description: 'Generate MCQs instantly from any topic for exams and practice.',
   },
 };

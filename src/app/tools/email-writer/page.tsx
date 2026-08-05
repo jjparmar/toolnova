@@ -7,19 +7,19 @@ import EmailWriterClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-  title: 'AI Email Writer – Write Professional Emails Free | ToolNova',
+  title: 'AI Email Writer – Write Professional Emails Free',
   description: 'Write professional emails instantly with our free AI email writer. Perfect for business, job applications, and personal correspondence.',
   keywords: ['AI email writer', 'email generator', 'professional email writer', 'business email'],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/email-writer' },
   openGraph: {
-    title: 'AI Email Writer – Generate Professional Emails Free | ToolNova',
+    title: 'AI Email Writer – Generate Professional Emails Free',
     description: 'Write professional emails instantly with AI for work, school, and business.',
     url: 'https://www.toolnovahub.com/tools/email-writer',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Email Writer – Generate Professional Emails Free | ToolNova',
+    title: 'AI Email Writer – Generate Professional Emails Free',
     description: 'Write professional emails instantly with AI for work, school, and business.',
   },
 };

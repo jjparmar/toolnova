@@ -6,19 +6,19 @@ import GoalPlannerClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'Goal Planner – Break Down Goals Into Steps Free | ToolNova',
+    title: 'Goal Planner – Break Down Goals Into Steps Free',
     description: 'Create actionable goal plans with milestones and weekly tasks. Free AI goal planning tool.',
     keywords: ['goal planner', 'goal setting', 'action plan', 'SMART goals', 'productivity'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/goal-planner' },
   openGraph: {
-    title: 'AI Goal Planner – Plan Goals with Action Steps Free | ToolNova',
+    title: 'AI Goal Planner – Plan Goals with Action Steps Free',
     description: 'Turn big goals into actionable milestones and daily tasks.',
     url: 'https://www.toolnovahub.com/tools/goal-planner',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Goal Planner – Plan Goals with Action Steps Free | ToolNova',
+    title: 'AI Goal Planner – Plan Goals with Action Steps Free',
     description: 'Turn big goals into actionable milestones and daily tasks.',
   },
 };

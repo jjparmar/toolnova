@@ -241,24 +241,24 @@ const faqs = [
 export default function FlashcardMakerClient() {
   return (
     <PremiumToolWrapper
-      toolName="AI Flashcard Maker"
+      toolName="Make Flashcards from Notes Automatically Free"
       toolSlug="flashcard-maker"
-      tagline="Create study flashcards with memory techniques"
-      description="Generate effective flashcards for any subject with memory tips and proven learning techniques. Perfect for exam preparation and long-term retention."
+      tagline="Auto-generate Q&A cards from notes or a textbook chapter"
+      description="Paste lecture notes or a chapter section and create study flashcards for spaced repetition—free, no signup required to start. Built for exam prep."
       badge="AI-Powered"
       category="Study Tools"
       categorySlug="study-tools"
       features={features}
       howItWorks={howItWorks}
       relatedTools={relatedTools}
-      ctaTitle="Ready to Master Your Subject?"
-      ctaDescription="Create effective flashcards and ace your exams"
+      ctaTitle="Ready to build tonight's deck?"
+      ctaDescription="Turn notes into active-recall flashcards in seconds"
       ctaIcon={Brain}
     >
       <EnhancedToolLayout
         toolSlug="flashcard-maker"
         systemPrompt={systemPrompt}
-        toolName="AI Flashcard Maker"
+        toolName="Make Flashcards from Notes Automatically Free"
         placeholder={`📚 Enter the topic you need flashcards for...
 
 Examples:

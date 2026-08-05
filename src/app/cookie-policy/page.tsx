@@ -4,7 +4,7 @@ import { Metadata } from"next";
 const LAST_UPDATED ="June 14, 2026";
 
 export const metadata: Metadata = {
-    title:"Cookie Policy | ToolNova",
+    title:"Cookie Policy",
     description:"Detailed cookie policy for ToolNova. Learn how we use cookies to improve your experience and serve personalized advertisements.",
     alternates: {
         canonical:"https://www.toolnovahub.com/cookie-policy",

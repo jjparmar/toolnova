@@ -6,19 +6,19 @@ import TodoListGeneratorClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'To-Do List Generator – Create Task Lists Free | ToolNova',
+    title: 'To-Do List Generator – Create Task Lists Free',
     description: 'Generate organized to-do lists from your goals. Free AI-powered task planner.',
     keywords: ['to-do list generator', 'task list', 'task planner', 'productivity tool', 'checklist maker'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/todo-list-generator' },
   openGraph: {
-    title: 'AI To-Do List Generator – Create Task Lists Free | ToolNova',
+    title: 'AI To-Do List Generator – Create Task Lists Free',
     description: 'Generate organized to-do lists from goals, projects, and routines.',
     url: 'https://www.toolnovahub.com/tools/todo-list-generator',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI To-Do List Generator – Create Task Lists Free | ToolNova',
+    title: 'AI To-Do List Generator – Create Task Lists Free',
     description: 'Generate organized to-do lists from goals, projects, and routines.',
   },
 };

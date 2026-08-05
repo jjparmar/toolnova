@@ -5,7 +5,7 @@ import { TOOL_FAQS, TOOL_HOWTOS } from"@/lib/seo-worldclass";
 const LAST_UPDATED ="June 14, 2026";
 
 export const metadata: Metadata = {
-  title:"SEO Audit Report | ToolNova - World-Class SEO, AEO & GEO",
+  title:"SEO Audit Report - World-Class SEO, AEO & GEO",
   description:"Comprehensive SEO audit for ToolNova - analyzing SEO, AEO (Answer Engine Optimization), and GEO (Generative Engine Optimization) performance. See our world-class search optimization strategy.",
   keywords: ["SEO audit","AEO optimization","GEO optimization","AI search optimization","ChatGPT optimization","Perplexity optimization","world-class SEO",
   ],

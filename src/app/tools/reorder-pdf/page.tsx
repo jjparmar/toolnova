@@ -67,13 +67,13 @@ const benefits = [
 ];
 
 export const metadata: Metadata = {
-  title: toolMeta?.title || "Reorder PDF Pages Free – Drag Thumbnails Online | ToolNova",
+  title: toolMeta?.title || "Reorder PDF Pages Free – Drag Thumbnails Online",
   description: toolMeta?.description || "Reorder PDF pages free with visual thumbnails. Drag and drop pages, reverse or reset order, download instantly. Private browser tool — no signup.",
   keywords: toolMeta?.keywords || ["reorder pdf pages free","rearrange pdf online","drag drop pdf pages","pdf page order changer",
   ],
   alternates: { canonical:"https://www.toolnovahub.com/tools/reorder-pdf" },
   openGraph: {
-    title: toolMeta?.title || "Reorder PDF Pages Free | ToolNova",
+    title: toolMeta?.title || "Reorder PDF Pages Free",
     description:"Drag thumbnail pages to rearrange your PDF. Free and private.",
     url:"https://www.toolnovahub.com/tools/reorder-pdf",
     type:"website",

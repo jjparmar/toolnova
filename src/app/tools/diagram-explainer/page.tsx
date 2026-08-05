@@ -7,19 +7,19 @@ import DiagramExplainerClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'AI Diagram Explainer – Understand Visual Concepts Free | ToolNova',
+    title: 'AI Diagram Explainer – Understand Visual Concepts Free',
     description: 'Get detailed explanations of complex diagrams and visual concepts. Perfect for biology, chemistry, physics, and more.',
     keywords: ['diagram explainer', 'explain diagrams', 'visual learning', 'biology diagrams', 'science diagrams'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/diagram-explainer' },
   openGraph: {
-    title: 'AI Diagram Explainer – Understand Diagrams Instantly | ToolNova',
+    title: 'AI Diagram Explainer – Understand Diagrams Instantly',
     description: 'Explain charts, biology diagrams, and visual concepts in simple language.',
     url: 'https://www.toolnovahub.com/tools/diagram-explainer',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Diagram Explainer – Understand Diagrams Instantly | ToolNova',
+    title: 'AI Diagram Explainer – Understand Diagrams Instantly',
     description: 'Explain charts, biology diagrams, and visual concepts in simple language.',
   },
 };

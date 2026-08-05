@@ -7,19 +7,19 @@ import ConceptExplainerClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'AI Concept Explainer – Simplify Complex Topics Free | ToolNova',
+    title: 'AI Concept Explainer – Simplify Complex Topics Free',
     description: 'Break down complex concepts into simple explanations with our free AI concept explainer. Perfect for students at any level.',
     keywords: ['concept explainer', 'explain topics simply', 'learning tool', 'study help', 'simplify concepts'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/concept-explainer' },
   openGraph: {
-    title: 'AI Concept Explainer – Explain Any Topic Simply | ToolNova',
+    title: 'AI Concept Explainer – Explain Any Topic Simply',
     description: 'Break down complex topics into simple explanations with examples.',
     url: 'https://www.toolnovahub.com/tools/concept-explainer',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Concept Explainer – Explain Any Topic Simply | ToolNova',
+    title: 'AI Concept Explainer – Explain Any Topic Simply',
     description: 'Break down complex topics into simple explanations with examples.',
   },
 };

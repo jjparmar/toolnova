@@ -1,23 +1,82 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Upload, Download, Trash2, Image as ImageIcon, Loader2, ArrowLeft, Shield, Zap, Sparkles, Layers, Star, FileText, CheckCircle2 } from 'lucide-react';
+import {
+  Upload,
+  Download,
+  Trash2,
+  Image as ImageIcon,
+  Loader2,
+  Shield,
+  Zap,
+  Layers,
+  FileText,
+  CheckCircle2,
+  Crop,
+} from 'lucide-react';
 import { toast } from 'sonner';
-import Link from 'next/link';
-import { isImageFile, compressImageFile, extForMime, baseName, downloadBlob, formatBytes } from '@/lib/image-client';
+import {
+  isImageFile,
+  compressImageFile,
+  extForMime,
+  baseName,
+  downloadBlob,
+  formatBytes,
+} from '@/lib/image-client';
 import JSZip from 'jszip';
+import { PremiumToolWrapper } from '@/components/PremiumToolWrapper';
 
-const relatedTools = [
-    { name: 'Crop Image', slug: 'image-crop', icon: ImageIcon, color: 'from-violet-500 to-purple-500' },
-    { name: 'JPG to PNG', slug: 'jpg-to-png', icon: ImageIcon, color: 'from-cyan-500 to-blue-500' },
-    { name: 'Image to PDF', slug: 'image-to-pdf', icon: FileText, color: 'from-green-500 to-teal-500' },
-    { name: 'Merge PDF', slug: 'merge-pdf', icon: Layers, color: 'from-red-500 to-orange-500' },
+const shellFeatures = [
+  {
+    title: '100% private',
+    description: 'Compression runs fully in your browser—images never leave your device.',
+    icon: Shield,
+  },
+  {
+    title: 'Adjustable quality',
+    description: 'Control quality, max width, and output format for web or email.',
+    icon: Zap,
+  },
+  {
+    title: 'Single or batch',
+    description: 'Compress one image or up to 30 at once and download a ZIP.',
+    icon: Layers,
+  },
+];
+
+const shellHowItWorks = [
+  {
+    step: 1,
+    title: 'Upload image(s)',
+    desc: 'Drop JPG, PNG, or WebP — single or batch.',
+    icon: Upload,
+    color: 'from-violet-500 to-fuchsia-500',
+  },
+  {
+    step: 2,
+    title: 'Set quality',
+    desc: 'Pick format, max width, and quality slider.',
+    icon: Zap,
+    color: 'from-indigo-500 to-violet-500',
+  },
+  {
+    step: 3,
+    title: 'Download',
+    desc: 'Save the smaller file or a ZIP of the batch.',
+    icon: Download,
+    color: 'from-fuchsia-500 to-pink-500',
+  },
+];
+
+const shellRelated = [
+  { name: 'Image to PDF', slug: 'image-to-pdf', icon: FileText, color: 'text-emerald-500' },
+  { name: 'Crop Image', slug: 'image-crop', icon: Crop, color: 'text-violet-500' },
+  { name: 'Compress PDF', slug: 'compress-pdf', icon: FileText, color: 'text-rose-500' },
+  { name: 'JPG to PNG', slug: 'jpg-to-png', icon: ImageIcon, color: 'text-cyan-500' },
 ];
 
 export default function ImageCompressorClient() {
-    const router = useRouter();
     const [image, setImage] = useState<File | null>(null);
     const [preview, setPreview] = useState<string>('');
     const [compressing, setCompressing] = useState(false);
@@ -325,328 +384,350 @@ export default function ImageCompressorClient() {
         : 0;
 
     return (
-        <div className="flex-1 w-full min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
-            {/* Animated Background */}
-            <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-                <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-            </div>
+      <PremiumToolWrapper
+        toolName="Compress Images Without Losing Quality Free"
+        toolSlug="image-compressor"
+        tagline="Shrink JPG, PNG & WebP for web and email — private browser tool"
+        description="Reduce image file size free—no watermark, no signup. Files stay on your device. Single image or batch up to 30."
+        badge="Free compressor · browser-private"
+        category="Image Tools"
+        categorySlug="image-pdf-tools"
+        features={shellFeatures}
+        howItWorks={shellHowItWorks}
+        relatedTools={shellRelated}
+        ctaTitle="Ready to shrink images?"
+        ctaDescription="Upload photos, tune quality, and download smaller files for web, email, or slides."
+        ctaButtonText="Start compressing"
+        ctaIcon={Zap}
+      >
+        <div className="tool-shell">
+          <div className="p-5 sm:p-7 md:p-8">
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={(e) => handleFileSelect(e.target.files)}
+              accept="image/*"
+              multiple
+              className="hidden"
+            />
 
-            <div className="max-w-[1000px] mx-auto px-4 sm:px-6 py-10">
-                {/* Back Button */}
-                <button
-                    onClick={() => router.back()}
-                    className="group flex items-center gap-2 mb-4 px-4 py-2 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-white transition-all duration-300 shadow-sm hover:shadow-md"
-                >
-                    <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                    <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Back</span>
-                </button>
-
-                <div className="flex flex-wrap gap-2 mb-6 justify-center">
-                    <Link href="/" className="text-muted-foreground text-sm font-medium hover:text-primary transition-colors">Home</Link>
-                    <span className="text-muted-foreground/50 text-sm">/</span>
-                    <Link href="/tools" className="text-muted-foreground text-sm font-medium hover:text-primary transition-colors">Tools</Link>
-                    <span className="text-muted-foreground/50 text-sm">/</span>
-                    <Link href="/tools/image-pdf-tools" className="text-muted-foreground text-sm font-medium hover:text-primary transition-colors">Image & PDF Tools</Link>
-                    <span className="text-muted-foreground/50 text-sm">/</span>
-                    <span className="text-primary text-sm font-semibold">Image Compressor</span>
+            {batchMode && batchItems.length > 0 ? (
+              <div className="space-y-5">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <p className="font-semibold text-foreground">
+                    {batchItems.length} images selected
+                  </p>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      batchItems.forEach((b) => b.url && URL.revokeObjectURL(b.url));
+                      setBatchItems([]);
+                      setBatchMode(false);
+                    }}
+                    className="text-red-600 hover:bg-red-50 hover:text-red-700"
+                  >
+                    <Trash2 className="mr-1 h-4 w-4" /> Clear
+                  </Button>
                 </div>
-
-                <div className="text-center mb-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-orange-500/10 to-red-500/10 text-orange-600 text-sm font-semibold mb-5">
-                        <Zap className="h-4 w-4" />
-                        Free Compressor
-                    </div>
-                    <h1 className="text-foreground text-4xl md:text-5xl font-black tracking-tight mb-4">Image Compressor</h1>
-                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Reduce image file size instantly while maintaining high visual quality</p>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Output format</label>
+                    <select
+                      value={outputFormat}
+                      onChange={(e) =>
+                        setOutputFormat(e.target.value as typeof outputFormat)
+                      }
+                      className="input-surface h-11 w-full px-3 text-sm"
+                    >
+                      <option value="auto">Auto (smallest)</option>
+                      <option value="image/webp">WebP</option>
+                      <option value="image/jpeg">JPG</option>
+                      <option value="image/png">PNG</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Max width</label>
+                    <select
+                      value={maxWidth}
+                      onChange={(e) => setMaxWidth(parseInt(e.target.value, 10))}
+                      className="input-surface h-11 w-full px-3 text-sm"
+                    >
+                      <option value={0}>Original</option>
+                      <option value={1920}>1920px</option>
+                      <option value={1280}>1280px</option>
+                      <option value={800}>800px</option>
+                      <option value={400}>400px</option>
+                    </select>
+                  </div>
                 </div>
-
-                <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-border/40 overflow-hidden">
-                    <div className="p-6 md:p-8">
-                        <input type="file" ref={fileInputRef} onChange={(e) => handleFileSelect(e.target.files)} accept="image/*" multiple className="hidden" />
-
-                        {batchMode && batchItems.length > 0 ? (
-                            <div className="space-y-5">
-                                <div className="flex flex-wrap items-center justify-between gap-3">
-                                    <p className="font-semibold text-foreground">{batchItems.length} images selected</p>
-                                    <Button variant="ghost" size="sm" onClick={() => {
-                                        batchItems.forEach((b) => b.url && URL.revokeObjectURL(b.url));
-                                        setBatchItems([]);
-                                        setBatchMode(false);
-                                    }} className="text-red-500"><Trash2 className="h-4 w-4 mr-1" /> Clear</Button>
-                                </div>
-                                <div className="grid sm:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium">Output format</label>
-                                        <select value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as typeof outputFormat)} className="w-full h-11 rounded-xl border border-border/50 px-3 text-sm">
-                                            <option value="auto">Auto (smallest)</option>
-                                            <option value="image/webp">WebP</option>
-                                            <option value="image/jpeg">JPG</option>
-                                            <option value="image/png">PNG</option>
-                                        </select>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium">Max width</label>
-                                        <select value={maxWidth} onChange={(e) => setMaxWidth(parseInt(e.target.value, 10))} className="w-full h-11 rounded-xl border border-border/50 px-3 text-sm">
-                                            <option value={0}>Original</option>
-                                            <option value={1920}>1920px</option>
-                                            <option value={1280}>1280px</option>
-                                            <option value={800}>800px</option>
-                                            <option value={400}>400px</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="font-medium">Quality: {quality}%</label>
-                                    <input type="range" min="10" max="100" value={quality} onChange={(e) => setQuality(parseInt(e.target.value))} className="w-full" />
-                                </div>
-                                <div className="flex flex-col sm:flex-row gap-3">
-                                    <Button onClick={() => void compressBatch()} disabled={compressing} className="flex-1 h-12 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold">
-                                        {compressing ? <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Compressing batch…</> : <><Zap className="h-4 w-4 mr-2" /> Compress all</>}
-                                    </Button>
-                                    {batchItems.some((b) => b.status === 'done') && (
-                                        <Button onClick={() => void downloadBatchZip()} variant="secondary" className="h-12 font-bold">
-                                            <Download className="h-4 w-4 mr-2" /> Download ZIP
-                                        </Button>
-                                    )}
-                                </div>
-                                <ul className="divide-y divide-border rounded-xl border border-border max-h-80 overflow-auto">
-                                    {batchItems.map((item) => (
-                                        <li key={item.id} className="flex items-center justify-between gap-3 px-3 py-2 text-sm">
-                                            <span className="truncate font-medium">{item.file.name}</span>
-                                            <span className="shrink-0 text-muted-foreground">
-                                                {item.status === 'pending' && formatBytes(item.originalSize)}
-                                                {item.status === 'done' && item.compressedSize != null && (
-                                                    <span className="text-emerald-700 font-semibold">{formatBytes(item.originalSize)} → {formatBytes(item.compressedSize)}</span>
-                                                )}
-                                                {item.status === 'error' && <span className="text-red-600">{item.error || 'Error'}</span>}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ) : !image ? (
-                            <div
-                                onClick={() => fileInputRef.current?.click()}
-                                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-                                onDragLeave={() => setDragOver(false)}
-                                onDrop={(e) => {
-                                    e.preventDefault();
-                                    setDragOver(false);
-                                    handleFileSelect(e.dataTransfer.files);
-                                }}
-                                className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all ${
-                                    dragOver
-                                        ? 'border-primary bg-primary/5 scale-[1.01]'
-                                        : 'border-border/50 hover:border-primary/50'
-                                }`}
-                            >
-                                <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                                <p className="text-lg font-semibold text-foreground mb-2">Drop images here or click to upload</p>
-                                <p className="text-sm text-muted-foreground">JPG, PNG, WebP · single or batch (up to 30) · processed in your browser</p>
-                            </div>
-                        ) : (
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-4 p-4 bg-muted/50 rounded-xl">
-                                    <img src={preview} alt="Preview" className="h-16 w-16 object-cover rounded-lg" />
-                                    <div className="flex-1 min-w-0">
-                                        <p className="font-medium text-foreground truncate">{image.name}</p>
-                                        <p className="text-sm text-muted-foreground">
-                                            Original: {formatSize(originalSize)}
-                                            {dims ? ` · ${dims.w}×${dims.h}px` : ''}
-                                        </p>
-                                    </div>
-                                    <Button variant="ghost" size="icon" onClick={() => {
-                                        if (compressedUrl) URL.revokeObjectURL(compressedUrl);
-                                        setImage(null); setPreview(''); setCompressedUrl(''); setDims(null); setNote('');
-                                    }} className="text-red-500">
-                                        <Trash2 className="h-5 w-5" />
-                                    </Button>
-                                </div>
-
-                                <div className="grid sm:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-foreground">Output format</label>
-                                        <select
-                                            value={outputFormat}
-                                            onChange={(e) => setOutputFormat(e.target.value as typeof outputFormat)}
-                                            className="w-full h-11 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md px-3 text-sm font-medium"
-                                        >
-                                            <option value="auto">Auto (Recommended - Smallest Size)</option>
-                                            <option value="image/webp">WebP (Modern, High Compression)</option>
-                                            <option value="image/jpeg">JPG (Best for Photos)</option>
-                                            <option value="image/png">PNG (Lossless / Transparent)</option>
-                                        </select>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-foreground">Max width (optional)</label>
-                                        <select
-                                            value={maxWidth}
-                                            onChange={(e) => setMaxWidth(parseInt(e.target.value, 10))}
-                                            className="w-full h-11 rounded-xl border border-border/50 bg-card/40 backdrop-blur-md px-3 text-sm font-medium"
-                                        >
-                                            <option value={0}>Keep original size</option>
-                                            <option value={1920}>1920px (Full HD)</option>
-                                            <option value={1280}>1280px</option>
-                                            <option value={800}>800px (blog)</option>
-                                            <option value={400}>400px (thumbnail)</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div className="space-y-3">
-                                    <div className="flex items-center justify-between">
-                                        <label className="font-medium text-foreground">Quality: {quality}%</label>
-                                        <span className="text-sm text-muted-foreground">
-                                            {quality < 50 ? 'Smaller file' : quality < 80 ? 'Balanced' : 'High quality'}
-                                        </span>
-                                    </div>
-                                    <input
-                                        type="range"
-                                        min="10"
-                                        max="100"
-                                        value={quality}
-                                        onChange={(e) => setQuality(parseInt(e.target.value))}
-                                        className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
-                                    />
-                                </div>
-
-                                <Button onClick={compressImage} disabled={compressing} className="w-full h-14 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold rounded-2xl shadow-xl shadow-orange-500/30">
-                                    {compressing ? <><Loader2 className="h-5 w-5 animate-spin mr-2" /> Compressing...</> : <><Zap className="h-5 w-5 mr-2" /> Compress Image</>}
-                                </Button>
-
-                                {compressedUrl && (
-                                    <div className="p-5 bg-emerald-50/90 rounded-2xl border border-emerald-200 space-y-4">
-                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                            <div>
-                                                <div className="flex items-center gap-2 mb-1">
-                                                    <CheckCircle2 className="h-5 w-5 text-emerald-600" />
-                                                    <p className="font-bold text-emerald-800 text-lg">Compression Ready!</p>
-                                                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-200 text-emerald-800 font-bold uppercase tracking-wider">
-                                                        {actualFormat.replace('image/', '')}
-                                                    </span>
-                                                </div>
-                                                <p className="text-sm text-emerald-700">
-                                                    {formatSize(originalSize)} → <span className="font-bold">{formatSize(compressedSize)}</span>
-                                                    {reduction > 0 ? (
-                                                        <span className="ml-2 font-bold text-emerald-800 bg-emerald-200/70 px-2 py-0.5 rounded-md">
-                                                            ↓ {reduction}% smaller
-                                                        </span>
-                                                    ) : (
-                                                        <span className="ml-2 text-amber-700">
-                                                            (Same size — lower quality slider for higher compression)
-                                                        </span>
-                                                    )}
-                                                </p>
-                                                {note && (
-                                                    <p className="text-xs text-emerald-800/90 mt-1.5 font-medium">
-                                                        💡 {note}
-                                                    </p>
-                                                )}
-                                            </div>
-                                            <Button onClick={downloadCompressed} className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-md">
-                                                <Download className="h-4 w-4 mr-2" /> Download
-                                            </Button>
-                                        </div>
-                                        <div className="grid grid-cols-2 gap-3">
-                                            <div>
-                                                <p className="text-xs text-muted-foreground mb-1">Original ({formatSize(originalSize)})</p>
-                                                <img src={preview} alt="Original" className="w-full h-32 object-contain rounded-lg bg-card/70 border border-[var(--border-color)]" />
-                                            </div>
-                                            <div>
-                                                <p className="text-xs text-muted-foreground mb-1">Compressed ({formatSize(compressedSize)})</p>
-                                                <img src={compressedUrl} alt="Compressed preview" className="w-full h-32 object-contain rounded-lg bg-card/70 border border-[var(--border-color)]" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
+                <div className="space-y-2">
+                  <label className="font-medium">Quality: {quality}%</label>
+                  <input
+                    type="range"
+                    min="10"
+                    max="100"
+                    value={quality}
+                    onChange={(e) => setQuality(parseInt(e.target.value))}
+                    className="w-full"
+                  />
+                </div>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Button
+                    onClick={() => void compressBatch()}
+                    disabled={compressing}
+                    className="btn-premium h-12 flex-1"
+                  >
+                    {compressing ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Compressing batch…
+                      </>
+                    ) : (
+                      <>
+                        <Zap className="mr-2 h-4 w-4" /> Compress all
+                      </>
+                    )}
+                  </Button>
+                  {batchItems.some((b) => b.status === 'done') && (
+                    <Button
+                      onClick={() => void downloadBatchZip()}
+                      variant="outline"
+                      className="h-12 rounded-full font-bold"
+                    >
+                      <Download className="mr-2 h-4 w-4" /> Download ZIP
+                    </Button>
+                  )}
+                </div>
+                <ul className="max-h-80 divide-y divide-border overflow-auto rounded-xl border border-[var(--border-color)] bg-card">
+                  {batchItems.map((item) => (
+                    <li
+                      key={item.id}
+                      className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm"
+                    >
+                      <span className="truncate font-medium">{item.file.name}</span>
+                      <span className="shrink-0 text-muted-foreground">
+                        {item.status === 'pending' && formatBytes(item.originalSize)}
+                        {item.status === 'done' && item.compressedSize != null && (
+                          <span className="font-semibold text-emerald-700">
+                            {formatBytes(item.originalSize)} →{' '}
+                            {formatBytes(item.compressedSize)}
+                          </span>
                         )}
-                    </div>
+                        {item.status === 'error' && (
+                          <span className="text-red-600">{item.error || 'Error'}</span>
+                        )}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : !image ? (
+              <div
+                onClick={() => fileInputRef.current?.click()}
+                onDragOver={(e) => {
+                  e.preventDefault();
+                  setDragOver(true);
+                }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  setDragOver(false);
+                  handleFileSelect(e.dataTransfer.files);
+                }}
+                className={`cursor-pointer rounded-2xl border-2 border-dashed p-8 text-center transition-all sm:p-10 ${
+                  dragOver
+                    ? 'scale-[1.01] border-primary bg-primary/5'
+                    : 'border-[var(--border-color)] bg-muted/20 hover:border-primary/45 hover:bg-muted/35'
+                }`}
+              >
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <Upload className="h-7 w-7" />
+                </div>
+                <p className="mb-1.5 text-lg font-semibold text-foreground">
+                  Drop images here or click to upload
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  JPG, PNG, WebP · single or batch (up to 30) · processed in your browser
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                <div className="flex items-center gap-4 rounded-xl border border-[var(--border-color)] bg-card p-4">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={preview}
+                    alt="Preview"
+                    className="h-16 w-16 rounded-lg object-cover"
+                  />
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate font-medium text-foreground">{image.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Original: {formatSize(originalSize)}
+                      {dims ? ` · ${dims.w}×${dims.h}px` : ''}
+                    </p>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => {
+                      if (compressedUrl) URL.revokeObjectURL(compressedUrl);
+                      setImage(null);
+                      setPreview('');
+                      setCompressedUrl('');
+                      setDims(null);
+                      setNote('');
+                    }}
+                    className="text-red-500 hover:bg-red-50 hover:text-red-600"
+                    aria-label="Remove image"
+                  >
+                    <Trash2 className="h-5 w-5" />
+                  </Button>
                 </div>
 
-                {/* How It Works */}
-                <div className="mt-12">
-                    <h2 className="text-xl font-bold text-foreground text-center mb-8">How It Works</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {[
-                            { step: 1, title: 'Upload Image', desc: 'Select your image', icon: Upload, color: 'from-orange-500 to-red-600' },
-                            { step: 2, title: 'Set Quality', desc: 'Adjust compression', icon: Zap, color: 'from-amber-500 to-orange-600' },
-                            { step: 3, title: 'Download', desc: 'Get smaller file', icon: Download, color: 'from-green-500 to-emerald-600' },
-                        ].map((item) => (
-                            <div key={item.step} className="flex flex-col items-center text-center p-6 rounded-2xl bg-card/70 border border-[var(--border-color)]">
-                                <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg`}>
-                                    <item.icon className="h-7 w-7 text-white" />
-                                </div>
-                                <div className="text-xs font-bold text-muted-foreground mb-1">STEP {item.step}</div>
-                                <h3 className="font-bold text-foreground mb-1">{item.title}</h3>
-                                <p className="text-sm text-muted-foreground">{item.desc}</p>
-                            </div>
-                        ))}
-                    </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-foreground">
+                      Output format
+                    </label>
+                    <select
+                      value={outputFormat}
+                      onChange={(e) =>
+                        setOutputFormat(e.target.value as typeof outputFormat)
+                      }
+                      className="input-surface h-11 w-full px-3 text-sm font-medium"
+                    >
+                      <option value="auto">Auto (Recommended - Smallest Size)</option>
+                      <option value="image/webp">WebP (Modern, High Compression)</option>
+                      <option value="image/jpeg">JPG (Best for Photos)</option>
+                      <option value="image/png">PNG (Lossless / Transparent)</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-foreground">
+                      Max width (optional)
+                    </label>
+                    <select
+                      value={maxWidth}
+                      onChange={(e) => setMaxWidth(parseInt(e.target.value, 10))}
+                      className="input-surface h-11 w-full px-3 text-sm font-medium"
+                    >
+                      <option value={0}>Keep original size</option>
+                      <option value={1920}>1920px (Full HD)</option>
+                      <option value={1280}>1280px</option>
+                      <option value={800}>800px (blog)</option>
+                      <option value={400}>400px (thumbnail)</option>
+                    </select>
+                  </div>
                 </div>
 
-                {/* Features */}
-                <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50/50 border border-green-100">
-                        <Shield className="h-8 w-8 text-green-600 mb-3" />
-                        <h3 className="font-bold text-foreground mb-2">100% Private</h3>
-                        <p className="text-sm text-muted-foreground">Processed locally in browser</p>
-                    </div>
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-50 to-amber-50/50 border border-orange-100">
-                        <Zap className="h-8 w-8 text-orange-600 mb-3" />
-                        <h3 className="font-bold text-foreground mb-2">Adjustable Quality</h3>
-                        <p className="text-sm text-muted-foreground">Control compression level</p>
-                    </div>
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50/50 border border-purple-100">
-                        <Sparkles className="h-8 w-8 text-purple-600 mb-3" />
-                        <h3 className="font-bold text-foreground mb-2">Instant Results</h3>
-                        <p className="text-sm text-muted-foreground">See size reduction immediately</p>
-                    </div>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <label className="font-medium text-foreground">
+                      Quality: {quality}%
+                    </label>
+                    <span className="text-sm text-muted-foreground">
+                      {quality < 50
+                        ? 'Smaller file'
+                        : quality < 80
+                          ? 'Balanced'
+                          : 'High quality'}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="10"
+                    max="100"
+                    value={quality}
+                    onChange={(e) => setQuality(parseInt(e.target.value))}
+                    className="w-full"
+                  />
                 </div>
 
-                {/* Testimonial */}
-                <div className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-orange-500/5 via-red-500/5 to-amber-500/5 border border-orange-200/50">
-                    <div className="flex flex-col items-center text-center">
-                        <div className="flex gap-1 mb-4">
-                            {[...Array(5)].map((_, i) => (
-                                <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
-                            ))}
+                <Button
+                  onClick={compressImage}
+                  disabled={compressing}
+                  className="btn-premium h-13 w-full gap-2 text-base font-bold"
+                >
+                  {compressing ? (
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" /> Compressing…
+                    </>
+                  ) : (
+                    <>
+                      <Zap className="h-5 w-5" /> Compress image
+                    </>
+                  )}
+                </Button>
+
+                {compressedUrl && (
+                  <div className="space-y-4 rounded-2xl border border-emerald-200 bg-emerald-50/90 p-5">
+                    <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+                      <div>
+                        <div className="mb-1 flex flex-wrap items-center gap-2">
+                          <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+                          <p className="text-lg font-bold text-emerald-800">
+                            Compression ready
+                          </p>
+                          <span className="rounded-full bg-emerald-200 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider text-emerald-800">
+                            {actualFormat.replace('image/', '')}
+                          </span>
                         </div>
-                        <p className="text-lg italic text-foreground/80 max-w-2xl mb-4">"Reduced my website images by 60%! Page load speed improved dramatically."
+                        <p className="text-sm text-emerald-700">
+                          {formatSize(originalSize)} →{' '}
+                          <span className="font-bold">{formatSize(compressedSize)}</span>
+                          {reduction > 0 ? (
+                            <span className="ml-2 rounded-md bg-emerald-200/70 px-2 py-0.5 font-bold text-emerald-800">
+                              ↓ {reduction}% smaller
+                            </span>
+                          ) : (
+                            <span className="ml-2 text-amber-700">
+                              (Same size — lower quality for more compression)
+                            </span>
+                          )}
                         </p>
-                        <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold">
-                                M
-                            </div>
-                            <div className="text-left">
-                                <p className="font-semibold text-foreground">Mark Johnson</p>
-                                <p className="text-sm text-muted-foreground">Web Developer</p>
-                            </div>
-                        </div>
+                        {note && (
+                          <p className="mt-1.5 text-xs font-medium text-emerald-800/90">
+                            💡 {note}
+                          </p>
+                        )}
+                      </div>
+                      <Button
+                        onClick={downloadCompressed}
+                        className="rounded-full bg-emerald-600 px-6 font-bold text-white hover:bg-emerald-700"
+                      >
+                        <Download className="mr-2 h-4 w-4" /> Download
+                      </Button>
                     </div>
-                </div>
-
-                {/* Related Tools */}
-                <div className="mt-12">
-                    <h2 className="text-xl font-bold text-foreground text-center mb-6">Related Tools</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {relatedTools.map((tool) => (
-                            <Link
-                                key={tool.slug}
-                                href={`/tools/${tool.slug}`}
-                                className="group p-4 rounded-xl bg-card/70 border border-[var(--border-color)]  hover:border-primary/50 hover:shadow-lg transition-all text-center"
-                            >
-                                <div className={`h-10 w-10 mx-auto rounded-xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                                    <tool.icon className="h-5 w-5 text-white" />
-                                </div>
-                                <p className="font-medium text-sm text-foreground">{tool.name}</p>
-                            </Link>
-                        ))}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <p className="mb-1 text-xs text-muted-foreground">
+                          Original ({formatSize(originalSize)})
+                        </p>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={preview}
+                          alt="Original"
+                          className="h-32 w-full rounded-lg border border-[var(--border-color)] bg-card object-contain"
+                        />
+                      </div>
+                      <div>
+                        <p className="mb-1 text-xs text-muted-foreground">
+                          Compressed ({formatSize(compressedSize)})
+                        </p>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={compressedUrl}
+                          alt="Compressed preview"
+                          className="h-32 w-full rounded-lg border border-[var(--border-color)] bg-card object-contain"
+                        />
+                      </div>
                     </div>
-                </div>
-            </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
+      </PremiumToolWrapper>
     );
 }

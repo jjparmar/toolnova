@@ -354,10 +354,10 @@ const relatedTools = [
 export default function CoverLetterWriterClient() {
   return (
     <PremiumToolWrapper
-      toolName="Cover Letter Writer"
+      toolName="Write a Cover Letter for Any Job Free"
       toolSlug="cover-letter-writer"
-      tagline="Write compelling cover letters that get interviews"
-      description="Generate personalized, professional cover letters tailored to your target job and company. Stand out with results-focused content that showcases your value."
+      tagline="Free AI cover letter — tailor, personalize, apply"
+      description="Paste the role, company, and your background for a job-specific draft. No login to start—always add a real story before you send."
       badge="Career Essential"
       category="Career Tools"
       categorySlug="career-tools"
@@ -371,7 +371,7 @@ export default function CoverLetterWriterClient() {
     >
       <EnhancedToolLayout
         toolSlug="cover-letter-writer"
-        toolName="Cover Letter Writer"
+        toolName="Write a Cover Letter for Any Job Free"
         placeholder={`💼 Enter your job application details...
 
 Include:

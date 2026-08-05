@@ -3,13 +3,13 @@ import Link from"next/link";
 import { CheckCircle, FileText, Users, ShieldCheck, RefreshCw, AlertTriangle } from"lucide-react";
 
 export const metadata: Metadata = {
-  title:"Editorial Policy & Standards | ToolNova",
+  title:"Editorial Policy & Standards",
   description:"Learn how ToolNova's editorial team researches, writes, and maintains all blog content and AI tool documentation. Our commitment to accuracy, transparency, and user value.",
   alternates: {
     canonical:"https://www.toolnovahub.com/editorial-policy",
   },
   openGraph: {
-    title:"Editorial Policy & Standards | ToolNova",
+    title:"Editorial Policy & Standards",
     description:"ToolNova's standards for content accuracy, author expertise, tool testing, and editorial transparency.",
     url:"https://www.toolnovahub.com/editorial-policy",
     type:"website",

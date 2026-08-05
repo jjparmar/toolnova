@@ -3,7 +3,7 @@ import Link from"next/link";
 import { Rocket, Heart, Shield, CheckCircle } from"lucide-react";
 
 export const metadata: Metadata = {
-  title:"About Us - Our Mission & Team | ToolNova",
+  title:"About Us - Our Mission & Team",
   description:"Learn about ToolNova's mission to democratize AI productivity tools. Meet the team behind free AI-powered tools for students and professionals.",
   keywords: ["about ToolNova","AI tools team","ToolNova mission","free AI tools company",
   ],
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     canonical:"https://www.toolnovahub.com/about",
   },
   openGraph: {
-    title:"About Us - Our Mission & Team | ToolNova",
+    title:"About Us - Our Mission & Team",
     description:"Learn about ToolNova's mission to democratize AI productivity tools for everyone.",
     url:"https://www.toolnovahub.com/about",
     type:"website",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card:"summary_large_image",
-    title:"About Us | ToolNova",
+    title:"About Us",
     description:"Learn about ToolNova's mission to democratize AI productivity tools.",
     images: ["https://www.toolnovahub.com/og-image.png"],
     creator:"@toolnovahub",

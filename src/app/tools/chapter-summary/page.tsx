@@ -7,19 +7,19 @@ import ChapterSummaryClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'AI Chapter Summary – Summarize Textbook Chapters Free | ToolNova',
+    title: 'AI Chapter Summary – Summarize Textbook Chapters Free',
     description: 'Turn long textbook chapters into concise, exam-ready summaries. Free AI-powered chapter summarizer for students.',
     keywords: ['chapter summary', 'textbook summary', 'study notes', 'exam revision', 'summarize chapter'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/chapter-summary' },
   openGraph: {
-    title: 'AI Chapter Summary – Summarize Chapters Instantly | ToolNova',
+    title: 'AI Chapter Summary – Summarize Chapters Instantly',
     description: 'Get concise chapter summaries with key points and takeaways.',
     url: 'https://www.toolnovahub.com/tools/chapter-summary',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Chapter Summary – Summarize Chapters Instantly | ToolNova',
+    title: 'AI Chapter Summary – Summarize Chapters Instantly',
     description: 'Get concise chapter summaries with key points and takeaways.',
   },
 };

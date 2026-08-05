@@ -298,10 +298,10 @@ const faqs = [
 export default function TextSummarizerClient() {
   return (
     <PremiumToolWrapper
-      toolName="AI Text Summarizer"
+      toolName="Summarize Any Article Free – No Signup"
       toolSlug="text-summarizer"
-      tagline="Summarize any text in seconds with AI"
-      description="Condense long articles, documents, and content into clear summaries. Choose from brief overviews to detailed summaries in multiple formats."
+      tagline="Free text summarizer — brief, medium, or detailed"
+      description="Paste an article, essay, or report and get a clear summary that keeps the main ideas. No account required to start. Always verify before you cite."
       badge="AI-Powered"
       category="Utility Tools"
       categorySlug="utility-tools"
@@ -315,7 +315,7 @@ export default function TextSummarizerClient() {
       <EnhancedToolLayout
         toolSlug="text-summarizer"
         systemPrompt={systemPrompt}
-        toolName="AI Text Summarizer"
+        toolName="Summarize Any Article Free – No Signup"
         placeholder={`📝 Paste or type the text you want to summarize...
 
 Examples:

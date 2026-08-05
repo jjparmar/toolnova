@@ -6,19 +6,19 @@ import TimetableGeneratorClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'Timetable Generator – Create Study Schedule Free | ToolNova',
+    title: 'Timetable Generator – Create Study Schedule Free',
     description: 'Generate a structured weekly timetable for study or work. Free AI-powered schedule maker.',
     keywords: ['timetable generator', 'study schedule', 'weekly planner', 'schedule maker', 'time management'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/timetable-generator' },
   openGraph: {
-    title: 'AI Timetable Generator – Build Study Schedules Free | ToolNova',
+    title: 'AI Timetable Generator – Build Study Schedules Free',
     description: 'Create personalized weekly study timetables in minutes.',
     url: 'https://www.toolnovahub.com/tools/timetable-generator',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Timetable Generator – Build Study Schedules Free | ToolNova',
+    title: 'AI Timetable Generator – Build Study Schedules Free',
     description: 'Create personalized weekly study timetables in minutes.',
   },
 };

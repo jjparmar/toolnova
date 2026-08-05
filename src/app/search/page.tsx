@@ -4,7 +4,7 @@ import { getAllBlogPosts } from"@/data/blog";
 import { SearchClient } from"./client";
 
 export const metadata: Metadata = {
-  title:"Search AI Tools & Articles | ToolNova",
+  title:"Search AI Tools & Articles",
   description:"Search ToolNova's full library of free AI tools and in-depth guides for students and professionals.",
   alternates: {
     canonical:"https://www.toolnovahub.com/search",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title:"Search AI Tools & Articles | ToolNova",
+    title:"Search AI Tools & Articles",
     description:"Search ToolNova's full library of free AI tools and in-depth guides.",
     url:"https://www.toolnovahub.com/search",
     type:"website",

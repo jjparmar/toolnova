@@ -1,10 +1,12 @@
 import { getAllBlogPosts } from"@/data/blog";
 import { siteConfig } from"@/config/site";
+import { filterIndexableBlogPosts } from"@/lib/blog-seo";
 
 export const dynamic ="force-dynamic";
 
 export async function GET() {
-  const posts = getAllBlogPosts();
+  // RSS only surfaces on-topic posts (same policy as sitemap / indexability)
+  const posts = filterIndexableBlogPosts(getAllBlogPosts());
   const baseUrl = siteConfig.url;
 
   // getAllBlogPosts() is already newest-first; slice for feed size if needed

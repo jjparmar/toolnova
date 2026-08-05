@@ -705,19 +705,22 @@ export function ToolsClient() {
             <span>All tools · free · no sign-up</span>
           </div>
 
-          <h1 className="font-heading mb-3 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+          <h1 className="section-title mb-3 md:text-5xl">
             Every tool you need — free
           </h1>
 
-          <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="section-lead mx-auto mb-8 max-w-xl md:text-lg">
             Search writing, study, PDF, image, and career tools. Built for speed
             and clarity.
           </p>
 
-          <div className="mx-auto mb-8 flex max-w-2xl flex-wrap justify-center gap-5 md:gap-8">
+          <div className="mx-auto mb-8 flex max-w-2xl flex-wrap justify-center gap-4 md:gap-6">
             {heroStats.map((stat) => (
-              <div key={stat.label} className="flex items-center gap-2.5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-primary">
+              <div
+                key={stat.label}
+                className="surface-card-quiet flex items-center gap-2.5 px-3 py-2.5"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-primary ring-1 ring-primary/10">
                   <stat.icon className="h-5 w-5" />
                 </div>
                 <div className="text-left">
@@ -736,7 +739,7 @@ export function ToolsClient() {
             <label htmlFor="tools-catalog-search" className="sr-only">
               Search all tools
             </label>
-            <div className="input-surface relative flex items-center rounded-xl">
+            <div className="input-surface relative flex items-center rounded-[1.15rem] shadow-[var(--shadow-premium-sm)]">
               <Search className="ml-4 mr-2 h-5 w-5 shrink-0 text-muted-foreground" aria-hidden />
               <input
                 id="tools-catalog-search"
@@ -763,7 +766,7 @@ export function ToolsClient() {
                 </div>
               )}
             </div>
-            <p className="mt-2 text-center text-xs text-muted-foreground">
+            <p className="mt-2.5 text-center text-xs text-muted-foreground">
               Tip: try “compress”, “grammar”, or “flashcard”
             </p>
           </div>
@@ -772,7 +775,7 @@ export function ToolsClient() {
 
       <div className="page-container py-10 md:py-12">
           {/* Sticky category filter */}
-          <div className="sticky top-[4.25rem] z-20 -mx-2 mb-10 border-b border-[var(--border-color)] bg-background/90 px-2 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
+          <div className="sticky-filters">
             <div
               className="flex flex-wrap justify-center gap-2"
               role="tablist"
@@ -832,7 +835,7 @@ export function ToolsClient() {
                 <Link
                   key={tool.slug}
                   href={`/tools/${tool.slug}`}
-                  className="surface-card group flex items-center gap-4 p-5"
+                  className="surface-card surface-card-interactive group flex items-center gap-4 p-5"
                 >
                   <div
                     className={`w-12 h-12 rounded-xl bg-gradient-to-br ${tool.gradient} flex items-center justify-center text-white shrink-0 group-hover:scale-110 transition-transform duration-300`}

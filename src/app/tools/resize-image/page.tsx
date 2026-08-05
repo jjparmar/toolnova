@@ -7,19 +7,19 @@ import ResizeImageClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'Image Resizer – Resize Images Free Online | ToolNova',
+    title: 'Image Resizer – Resize Images Free Online',
     description: 'Resize JPG, PNG, and WebP images to exact dimensions. Fast, free, and private image resizer in your browser.',
     keywords: ['image resizer', 'resize image', 'change image size', 'resize picture', 'image dimensions'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/resize-image' },
   openGraph: {
-    title: 'Image Resizer – Resize Images Free Online | ToolNova',
+    title: 'Image Resizer – Resize Images Free Online',
     description: 'Resize JPG, PNG, and WebP images to exact dimensions. Fast, free, and private image resizer in your browser.',
     url: 'https://www.toolnovahub.com/tools/resize-image',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Image Resizer – Resize Images Free Online | ToolNova',
+    title: 'Image Resizer – Resize Images Free Online',
     description: 'Resize JPG, PNG, and WebP images to exact dimensions. Fast, free, and private image resizer in your browser.',
   },
 };

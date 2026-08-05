@@ -7,19 +7,19 @@ import CaptionGeneratorClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-  title: 'AI Caption Generator – Create Social Media Captions Free | ToolNova',
+  title: 'AI Caption Generator – Create Social Media Captions Free',
   description: 'Generate engaging captions for Instagram, TikTok, Twitter and more with our free AI caption generator. Includes hashtags and emojis.',
   keywords: ['AI caption generator', 'Instagram caption generator', 'TikTok captions', 'social media captions'],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/caption-generator' },
   openGraph: {
-    title: 'AI Caption Generator – Create Social Captions Free | ToolNova',
+    title: 'AI Caption Generator – Create Social Captions Free',
     description: 'Generate engaging captions for Instagram, LinkedIn, and more in seconds.',
     url: 'https://www.toolnovahub.com/tools/caption-generator',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Caption Generator – Create Social Captions Free | ToolNova',
+    title: 'AI Caption Generator – Create Social Captions Free',
     description: 'Generate engaging captions for Instagram, LinkedIn, and more in seconds.',
   },
 };

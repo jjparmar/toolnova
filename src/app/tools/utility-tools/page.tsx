@@ -4,18 +4,18 @@ import { getCategoryAEO } from '@/lib/global-aeo-content';
 import { generateFAQPageSchema, generateBreadcrumbListSchema, CATEGORY_BREADCRUMBS } from '@/lib/seo-worldclass';
 
 export const metadata = {
-    title: 'Utility Tools - Word Counter, Case Converter & More | ToolNova',
+    title: 'Utility Tools - Word Counter, Case Converter & More',
     description: 'Free utility tools: word counter, character counter, case converter, text summarizer, text simplifier, age calculator.',
     alternates: { canonical: 'https://www.toolnovahub.com/tools/utility-tools' },
     openGraph: {
-        title: 'Utility Tools - Word Counter, Case Converter & More | ToolNova',
+        title: 'Utility Tools - Word Counter, Case Converter & More',
         description: 'Use free utility tools for text counting, formatting, summarizing, and calculations.',
         url: 'https://www.toolnovahub.com/tools/utility-tools',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Utility Tools | ToolNova',
+        title: 'Utility Tools',
         description: 'Free utility tools for word count, text formatting, summaries, and more.',
     },
 };

@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
 import { RelatedBlogGuides } from '@/components/RelatedBlogGuides';
 import { getToolSchema, getHowToSchema, getFAQSchema, schemaToJsonLd } from '@/lib/schema';
+import { generateBreadcrumbSchema } from '@/lib/seo-advanced';
 import { getToolData } from '@/data/tools';
 import { getOptimizedToolMetadata } from '@/lib/tool-metadata';
+import { getToolRichProps } from '@/lib/tool-rich-props';
 import { RelatedTools } from '@/components/RelatedTools';
 import TextSummarizerClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
@@ -10,20 +12,36 @@ import { ToolRichContent } from '@/components/ToolRichContent';
 const toolMeta = getOptimizedToolMetadata('text-summarizer');
 
 export const metadata: Metadata = {
-  title: toolMeta?.title || 'AI Text Summarizer – Summarize Any Text Free | ToolNova',
-  description: toolMeta?.description || 'Summarize long texts instantly with our free AI text summarizer. Get concise summaries of articles, essays, and documents. Accurate, fast, and secure.',
-  keywords: toolMeta?.keywords || ['AI text summarizer', 'summarize text', 'article summarizer', 'summary generator', 'tl;dr generator'],
+  title: toolMeta?.title || 'Summarize Any Article or Essay Free – No Signup',
+  description:
+    toolMeta?.description ||
+    'Free text summarizer—no signup. Paste an article or essay and get brief, medium, or detailed summaries.',
+  keywords: toolMeta?.keywords || [
+    'summarize article free',
+    'text summarizer no signup',
+    'how to summarize an essay online free',
+  ],
   alternates: { canonical: 'https://www.toolnovahub.com/tools/text-summarizer' },
   openGraph: {
-    title: toolMeta?.title || 'AI Text Summarizer – Summarize Any Text Free | ToolNova',
-    description: toolMeta?.description || 'Summarize long texts instantly with our free AI text summarizer.',
+    title: `${toolMeta?.title || 'Summarize Any Article Free'} | ToolNova`,
+    description:
+      toolMeta?.description ||
+      'Summarize long text free—brief, medium, or detailed. No signup.',
     url: 'https://www.toolnovahub.com/tools/text-summarizer',
     type: 'website',
+    images: [
+      {
+        url: 'https://www.toolnovahub.com/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Text Summarizer Free – ToolNova',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Text Summarizer Free | ToolNova',
-    description: 'Turn long text into concise summaries in seconds.',
+    title: `${toolMeta?.title || 'Summarize Articles Free'} | ToolNova`,
+    description: 'Free article summarizer for students. No signup required.',
   },
 };
 
@@ -32,37 +50,54 @@ export default function TextSummarizerPage() {
 
   if (!toolData) return <TextSummarizerClient />;
 
-  const toolSchema = getToolSchema(toolData.name, toolData.description, 'https://www.toolnovahub.com/tools/text-summarizer');
+  const rich = getToolRichProps('text-summarizer', toolData);
 
-  const howToSchema = getHowToSchema(`How to use ${toolData.name}`,
+  const toolSchema = getToolSchema(
+    toolData.name,
     toolData.description,
-    toolData.howItWorks.map(step => ({
+    'https://www.toolnovahub.com/tools/text-summarizer',
+  );
+
+  const howToSchema = getHowToSchema(
+    'How to Summarize Any Article Free Online',
+    toolData.description,
+    toolData.howItWorks.map((step) => ({
       name: step.title,
       text: step.desc,
-      url:`https://www.toolnovahub.com/tools/text-summarizer#step-${step.step}`
-    }))
+      url: `https://www.toolnovahub.com/tools/text-summarizer#step-${step.step}`,
+    })),
   );
 
   const faqSchema = getFAQSchema(toolData.faqs);
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://www.toolnovahub.com' },
+    { name: 'Tools', url: 'https://www.toolnovahub.com/tools' },
+    { name: 'Writing Tools', url: 'https://www.toolnovahub.com/tools/writing-tools' },
+    { name: 'Text Summarizer', url: 'https://www.toolnovahub.com/tools/text-summarizer' },
+  ]);
+
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaToJsonLd(toolSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaToJsonLd(howToSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaToJsonLd(faqSchema) }} />
-      <TextSummarizerClient />
-
-      <ToolRichContent
-        title={toolData.name}
-        description={toolData.description}
-        steps={toolData.howItWorks}
-        benefits={toolData.benefits}
-        faq={toolData.faqs}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: schemaToJsonLd(toolSchema) }}
       />
-
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: schemaToJsonLd(howToSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: schemaToJsonLd(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: schemaToJsonLd(breadcrumbSchema) }}
+      />
+      <TextSummarizerClient />
+      <ToolRichContent {...rich} />
       <RelatedBlogGuides toolSlug="text-summarizer" />
-
-
       <RelatedTools currentTool="text-summarizer" category="Writing" />
     </>
   );

@@ -277,10 +277,10 @@ const faqs = [
 export default function NotesGeneratorClient() {
   return (
     <PremiumToolWrapper
-      toolName="AI Notes Generator"
+      toolName="Generate Study Notes from Any Topic Free"
       toolSlug="notes-generator"
-      tagline="Generate comprehensive study notes from any topic"
-      description="Create well-organized, study-ready notes in multiple formats. Perfect for students who want to learn efficiently and ace their exams with properly structured study materials."
+      tagline="Free AI study notes — headings, bullets, exam-ready"
+      description="Paste a lecture, textbook section, or topic and get organized notes for revision. No login required to start. Edit with your own examples next."
       badge="AI-Powered"
       category="Study Tools"
       categorySlug="study-tools"
@@ -294,7 +294,7 @@ export default function NotesGeneratorClient() {
       <EnhancedToolLayout
         toolSlug="notes-generator"
         systemPrompt={systemPrompt}
-        toolName="AI Notes Generator"
+        toolName="Generate Study Notes from Any Topic Free"
         placeholder={`📚 Enter the topic you need notes for...
 
 Examples:

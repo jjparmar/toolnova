@@ -3,7 +3,7 @@ import PricingClient from"./PricingClient";
 import { TOOL_COUNT_LABEL } from"@/data/tools";
 
 export const metadata: Metadata = {
-  title:"Pricing – Free & Pro AI Tools | ToolNova",
+  title:"Pricing – Free & Pro AI Tools",
   description:`Use ${TOOL_COUNT_LABEL} ToolNova tools free to start. PDF & image tools unlimited in-browser. Upgrade to Pro for unlimited AI, premium models, and ad-free use. 7-day money-back.`,
   keywords: ["ToolNova pricing","AI tools free plan","ToolNova Pro","AI tools subscription","free AI tools","premium AI writing tools",
   ],
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     canonical:"https://www.toolnovahub.com/pricing",
   },
   openGraph: {
-    title:"Pricing – Free & Pro | ToolNova",
+    title:"Pricing – Free & Pro",
     description:`Free to start with ${TOOL_COUNT_LABEL} tools. Pro unlocks unlimited AI and an ad-free experience.`,
     url:"https://www.toolnovahub.com/pricing",
     type:"website",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card:"summary_large_image",
-    title:"Pricing – Free & Pro | ToolNova",
+    title:"Pricing – Free & Pro",
     description:`Free plan to start. Pro for unlimited AI. ${TOOL_COUNT_LABEL} tools.`,
     images: ["https://www.toolnovahub.com/og-image.png"],
     creator:"@toolnovahub",

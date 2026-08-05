@@ -7,19 +7,19 @@ import BioGeneratorClient from './client';
 import { ToolRichContent } from '@/components/ToolRichContent';
 
 export const metadata: Metadata = {
-    title: 'AI Bio Generator – Create Catchy Social Media Bios Free | ToolNova',
+    title: 'AI Bio Generator – Create Catchy Social Media Bios Free',
     description: 'Generate catchy bios for Instagram, Twitter, LinkedIn, and more. Free AI bio generator for all social media platforms.',
     keywords: ['bio generator', 'Instagram bio', 'Twitter bio', 'LinkedIn bio', 'social media bio'],
     alternates: { canonical: 'https://www.toolnovahub.com/tools/bio-generator' },
   openGraph: {
-    title: 'AI Bio Generator – Create Social Media Bios Free | ToolNova',
+    title: 'AI Bio Generator – Create Social Media Bios Free',
     description: 'Generate professional and catchy bios for social profiles instantly.',
     url: 'https://www.toolnovahub.com/tools/bio-generator',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Bio Generator – Create Social Media Bios Free | ToolNova',
+    title: 'AI Bio Generator – Create Social Media Bios Free',
     description: 'Generate professional and catchy bios for social profiles instantly.',
   },
 };
