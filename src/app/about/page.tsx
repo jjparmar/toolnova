@@ -57,7 +57,7 @@ export default function AboutPage() {
           {
             icon: Rocket,
             title:"Our Mission",
-            desc:"To provide accessible, high-quality AI tools that simplify complex tasks and boost global productivity — with no paywalls, no subscriptions, and no sign-up barriers.",
+            desc:"To provide accessible, high-quality AI tools that simplify complex tasks and boost global productivity — with a free tier and no sign-up barriers for core workflows.",
           },
           {
             icon: Heart,
@@ -96,8 +96,9 @@ export default function AboutPage() {
         <p>
           We started with three tools — a text summarizer, a grammar fixer, and a PDF
           merger — and built from there based directly on user requests. Today, ToolNova
-          offers 47+ tools across writing, study, career, image and PDF processing, and
-          general productivity. Every single one is free to use with no account required.
+          offers 50+ tools across writing, study, career, image and PDF processing, and
+          general productivity. Core workflows are free to start with no account required;
+          optional Pro plans offer higher AI limits and premium features.
           Our team of software engineers, UX designers, and domain experts continues to
           expand and refine the platform every week.
         </p>
@@ -180,13 +181,13 @@ export default function AboutPage() {
                 initials:"ET",
                 name:"ToolNova Engineering Team",
                 role:"Product & Software Development",
-                desc:"Our engineering team builds and maintains all 47+ tools on the platform. Engineers specialise in AI/ML integration, browser-based file processing, and full-stack web development. Every tool is tested end-to-end before release and monitored for quality regressions.",
+                desc:"Our engineering team builds and maintains all 50+ tools on the platform. Engineers specialise in AI/ML integration, browser-based file processing, and full-stack web development. Every tool is tested end-to-end before release and monitored for quality regressions.",
               },
               {
                 initials:"EC",
                 name:"ToolNova Editorial Team",
                 role:"Content, Research & Quality",
-                desc:"Our editorial team includes certified educators, career coaches, and professional writers who research and produce all blog content and tool documentation. They are also responsible for fact-checking, content updates, and responding to user correction requests.",
+                desc:"Our editorial team researches and maintains blog content and tool documentation, reviews corrections, and updates content when product behavior or supporting sources change.",
               },
               {
                 initials:"DS",
@@ -217,7 +218,7 @@ export default function AboutPage() {
             users in the education and productivity market.
           </p>
           <p className="text-muted-foreground mb-4">
-            We currently serve display advertising through{""}
+            When approved and enabled, we may serve display advertising through{""}
             <strong>Google AdSense</strong>. If you are interested in direct advertising
             opportunities, sponsorships, or editorial partnerships, please contact us.
             Full details are on our{""}

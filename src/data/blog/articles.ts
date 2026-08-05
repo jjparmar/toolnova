@@ -1,4 +1,5 @@
 import { BlogPost } from"./types";
+import { filterIndexableBlogPosts } from"@/lib/blog-seo";
 
 export const blogPosts: BlogPost[] = [
     {
@@ -10780,11 +10781,14 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
 }
 
 export function getRelatedPosts(slug: string, limit: number = 3): BlogPost[] {
-    const currentPost = getBlogPostBySlug(slug);
-    if (!currentPost) return [];
+  const currentPost = getBlogPostBySlug(slug);
+  if (!currentPost) return [];
 
-    const sameCategory = blogPosts
-        .map(withEditorialAuthor)
+  const indexablePosts = filterIndexableBlogPosts(
+    blogPosts.map(withEditorialAuthor),
+  );
+
+  const sameCategory = indexablePosts
         .filter((post) => post.slug !== slug && post.category === currentPost.category)
         .sort((a, b) => {
             const da = new Date(a.dateModified || a.date).getTime();
@@ -10797,8 +10801,7 @@ export function getRelatedPosts(slug: string, limit: number = 3): BlogPost[] {
     }
 
     // Fill remaining slots with recent posts from other categories
-    const extras = blogPosts
-        .map(withEditorialAuthor)
+  const extras = indexablePosts
         .filter(
             (post) =>
                 post.slug !== slug &&
@@ -10814,11 +10817,11 @@ export function getRelatedPosts(slug: string, limit: number = 3): BlogPost[] {
 }
 
 export function getRecentPosts(limit: number = 5): BlogPost[] {
-    return getAllBlogPosts().slice(0, limit);
+    return filterIndexableBlogPosts(getAllBlogPosts()).slice(0, limit);
 }
 
 export function getFeaturedPosts(): BlogPost[] {
-    return getAllBlogPosts().slice(0, 1);
+    return filterIndexableBlogPosts(getAllBlogPosts()).slice(0, 1);
 }
 
 export function getAllCategories(): string[] {
@@ -10836,5 +10839,5 @@ export const getPostBySlug = getBlogPostBySlug;
 export const getAllTags = getAllKeywords;
 
 export function getPostsByAuthor(_authorName: string): BlogPost[] {
-    return getAllBlogPosts();
+    return filterIndexableBlogPosts(getAllBlogPosts());
 }

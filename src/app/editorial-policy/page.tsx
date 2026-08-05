@@ -39,7 +39,7 @@ const standards = [
   {
     icon: Users,
     title:"Author Expertise & Credentials",
-    description:"Our contributors are subject-matter specialists: career coaches, certified educators, software engineers, and productivity researchers. Author profiles on each article include their name, role, and area of expertise. When an author makes claims about tools, platforms, or outcomes, those claims are backed by direct testing or cited from authoritative third-party sources. We do not publish articles by anonymous contributors on topics requiring specialist knowledge.",
+    description:"Articles use a ToolNova Editorial Team byline and link to its author page. We identify the editorial owner and provide a contact route for corrections. Claims about third-party tools, platforms, pricing, or outcomes should be supported by direct testing or an authoritative source before publication.",
   },
   {
     icon: CheckCircle,
@@ -136,9 +136,9 @@ export default function EditorialPolicyPage() {
       <section className="mb-16 p-8 bg-amber-50 rounded-2xl border border-amber-200">
         <h2 className="text-2xl font-bold mb-4">Advertising &amp; Revenue Disclosure</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
-          ToolNova is a free platform. We sustain operations primarily through display advertising 
-          served by <strong>Google AdSense</strong> (publisher ID: ca-pub-1328083083403070). 
-          Google and its partners may use cookies and device identifiers to show you 
+          ToolNova has a free tier and optional Pro plans. When Google AdSense is approved
+          and enabled, ads may be served using publisher ID <strong>ca-pub-1328083083403070</strong>.
+          Google and its partners may then use cookies and device identifiers to show you
           interest-based ads. Our <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link> explains 
           how this works and how you can opt out.
         </p>

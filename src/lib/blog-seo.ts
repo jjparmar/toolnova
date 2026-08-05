@@ -42,6 +42,21 @@ const OFF_TOPIC_SLUGS = new Set([
   "online-mba-programs-guide-working-professionals",
 ]);
 
+// These short posts are still available to readers, but are not yet deep
+// enough to represent the site in search. Re-enable a slug after replacing it
+// with a researched, substantially expanded guide.
+const REVIEW_REQUIRED_SLUGS = new Set([
+  "homework-solver-best-practices",
+  "compress-images-for-web-speed",
+  "summarize-long-articles-fast",
+  "grammar-checker-vs-human-editing",
+  "resume-bullets-that-get-interviews",
+  "ai-writing-workflow-students",
+  "jpg-png-pdf-workflow-guide",
+  "build-exam-revision-system-30-minutes",
+  "linkedin-headline-about-formula",
+]);
+
 /** Core product categories we want indexed and linked. */
 export const CORE_BLOG_CATEGORIES = new Set([
   "AI Tools",
@@ -58,6 +73,7 @@ export const CORE_BLOG_CATEGORIES = new Set([
 
 export function isIndexableBlogPost(post: Pick<BlogPost, "slug" | "category">): boolean {
   if (OFF_TOPIC_SLUGS.has(post.slug)) return false;
+  if (REVIEW_REQUIRED_SLUGS.has(post.slug)) return false;
   if (OFF_TOPIC_CATEGORIES.has(post.category)) return false;
   return true;
 }

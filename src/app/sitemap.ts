@@ -104,30 +104,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.35,
     },
     {
-      url:`${baseUrl}/refund`,
-      lastModified: LEGAL_MODIFIED,
-      changeFrequency:"yearly" as const,
-      priority: 0.3,
-    },
-    {
-      url:`${baseUrl}/shipping`,
-      lastModified: LEGAL_MODIFIED,
-      changeFrequency:"yearly" as const,
-      priority: 0.25,
-    },
-    {
-      url:`${baseUrl}/seo-audit`,
-      lastModified: ABOUT_MODIFIED,
-      changeFrequency:"monthly" as const,
-      priority: 0.4,
-    },
-    {
-      url:`${baseUrl}/search`,
-      lastModified: TOOLS_MODIFIED,
-      changeFrequency:"weekly" as const,
-      priority: 0.5,
-    },
-    {
       url:`${baseUrl}/sitemap-page`,
       lastModified: TOOLS_MODIFIED,
       changeFrequency:"weekly" as const,

@@ -5,8 +5,9 @@ const s = fs.readFileSync(
   path.join(__dirname, "..", "src", "data", "blog", "articles.ts"),
   "utf8"
 );
-const slugs = [...s.matchAll(/slug\s*:\s*["']([^"']+)["']/g)].map((m) => m[1]);
+const slugs = [...s.matchAll(/["']?slug["']?\s*:\s*["']([^"']+)["']/g)].map((m) => m[1]);
 const blogSet = new Set(slugs);
+let failed = 0;
 
 const needed = [
   "flashcards-vs-notes-for-retention",
@@ -22,7 +23,11 @@ const needed = [
   "homework-solver-best-practices",
 ];
 console.log("=== required slugs ===");
-for (const n of needed) console.log(blogSet.has(n) ? "OK" : "MISSING", n);
+for (const n of needed) {
+  const exists = blogSet.has(n);
+  console.log(exists ? "OK" : "MISSING", n);
+  if (!exists) failed++;
+}
 
 const thin = [
   "homework-solver-best-practices",
@@ -38,10 +43,11 @@ const thin = [
 console.log("\n=== thin post meta ===");
 for (const slug of thin) {
   const re = new RegExp(
-    `slug\\s*:\\s*["']${slug}["'][\\s\\S]{0,900}?wordCount\\s*:\\s*(\\d+)[\\s\\S]{0,200}?coverImage\\s*:\\s*["']([^"']+)["']`
+    `["']?slug["']?\\s*:\\s*["']${slug}["'][\\s\\S]{0,4000}?["']?wordCount["']?\\s*:\\s*(\\d+)[\\s\\S]{0,800}?["']?coverImage["']?\\s*:\\s*["']([^"']+)["']`
   );
   const m = s.match(re);
   console.log(slug, m ? `wc=${m[1]} cover=${m[2]}` : "PARSE FAIL");
+  if (!m) failed++;
 }
 
 const human = [
@@ -52,6 +58,7 @@ console.log("\nhuman dates left:", human.length);
 const md = [...s.matchAll(/\]\(\/blog\/([a-z0-9-]+)\)/g)].map((m) => m[1]);
 const broken = [...new Set(md)].filter((x) => !blogSet.has(x));
 console.log("broken md blog links:", broken);
+failed += broken.length;
 
 // related-blog-guides destinations
 const guides = fs.readFileSync(
@@ -65,7 +72,9 @@ console.log("\n=== related guide hrefs ===");
 for (const h of hrefs) {
   if (h === "/blog") continue;
   const slug = h.replace("/blog/", "");
-  console.log(blogSet.has(slug) ? "OK" : "MISSING", h);
+  const exists = blogSet.has(slug);
+  console.log(exists ? "OK" : "MISSING", h);
+  if (!exists) failed++;
 }
 
 // homework-solver page
@@ -74,3 +83,11 @@ const hs = fs.readFileSync(
   "utf8"
 );
 console.log("\nhomework page has RelatedBlogGuides:", hs.includes("RelatedBlogGuides"));
+if (!hs.includes("RelatedBlogGuides")) failed++;
+
+if (failed) {
+  console.error(`\nFAIL: ${failed} SEO integrity issue(s) found.`);
+  process.exitCode = 1;
+} else {
+  console.log("\nPASS: SEO integrity checks passed.");
+}

@@ -111,8 +111,8 @@ export default function PrivacyPage() {
             .
           </p>
           <p className="mt-4">
-            <strong>Google AdSense:</strong> ToolNova participates in the Google
-            AdSense program (publisher ID:{""}
+            <strong>Google AdSense (when enabled):</strong> ToolNova may use Google
+            AdSense (publisher ID:{""}
             <code className="text-sm bg-slate-100 px-1.5 py-0.5 rounded">
               ca-pub-1328083083403070
             </code>

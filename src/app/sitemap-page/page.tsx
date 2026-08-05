@@ -3,6 +3,7 @@ import Link from"next/link";
 import { getAllTools, TOOL_COUNT } from"@/data/tools";
 import { getAllBlogPosts } from"@/data/blog";
 import { siteConfig } from"@/config/site";
+import { filterIndexableBlogPosts } from"@/lib/blog-seo";
 
 export const metadata: Metadata = {
   title:"Sitemap - All Tools, Guides & Pages",
@@ -22,7 +23,7 @@ const CATEGORY_HUBS: Record<string, { slug: string; name: string }> = {"Writing 
 
 export default function SitemapPage() {
   const allTools = getAllTools();
-  const blogPosts = getAllBlogPosts();
+  const blogPosts = filterIndexableBlogPosts(getAllBlogPosts());
 
   // Group tools by category, preserving the hub mapping.
   const toolsByCategory: Record<
@@ -49,7 +50,6 @@ export default function SitemapPage() {
     { name:"Pricing", href:"/pricing" },
     { name:"About Us", href:"/about" },
     { name:"Contact", href:"/contact" },
-    { name:"Search", href:"/search" },
   ];
 
   const legalPages = [

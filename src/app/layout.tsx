@@ -173,14 +173,9 @@ export default function RootLayout({
             gtag('set', 'ads_data_redaction', true);`}
         </Script>
 
-        {/* AdSense meta + lazy script for verification / AdsBot (Auto Ads init after consent) */}
+        {/* Publisher identity remains available to AdSense review. The ad script
+            itself is injected after the visitor grants optional-ad consent. */}
         <meta name="google-adsense-account" content={adsenseConfig.publisherId} />
-        <Script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseConfig.publisherId}`}
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />
 
         {/* RSS Feed autodiscovery */}
         <link

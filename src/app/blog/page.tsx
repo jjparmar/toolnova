@@ -1,7 +1,7 @@
 import { Metadata } from"next";
 import Link from"next/link";
 import NextImage from"next/image";
-import { getAllBlogPosts, getAllCategories } from"@/data/blog";
+import { getAllBlogPosts } from"@/data/blog";
 import {
   FaArrowRight,
   FaCalendar,
@@ -12,6 +12,7 @@ import { siteConfig } from"@/config/site";
 import { TOOL_COUNT_LABEL } from"@/data/tools";
 import BlogGridWithFilters from "@/components/blog/BlogGridWithFilters";
 import { formatDisplayDate, formatReadTime } from "@/lib/format";
+import { filterIndexableBlogPosts } from "@/lib/blog-seo";
 
 export const metadata: Metadata = {
   title:"Blog - AI Tools Guides, Tips & Expert Reviews 2026",
@@ -54,8 +55,10 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const blogPosts = getAllBlogPosts();
-  const categories = getAllCategories();
+  // Keep the public archive aligned with the sitemap and per-post robots
+  // policy. Posts held for a quality rewrite remain reachable by direct URL.
+  const blogPosts = filterIndexableBlogPosts(getAllBlogPosts());
+  const categories = [...new Set(blogPosts.map((post) => post.category))];
   const featuredPost = blogPosts[0];
   const otherPosts = blogPosts.slice(1);
 

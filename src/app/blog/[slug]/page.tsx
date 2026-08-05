@@ -110,8 +110,6 @@ export async function generateMetadata({
       canonical: canonicalUrl,
     },
     other: {
-      news_keywords:
-        post.keywords?.slice(0, 10).join(",") || post.category ||"",
       ...(publishedIso ? { "article:published_time": publishedIso } : {}),
       ...(modifiedIso ? { "article:modified_time": modifiedIso } : {}),
       "article:author":"ToolNova Editorial Team",
@@ -148,7 +146,7 @@ export default async function BlogPostPage({
     ?`${siteConfig.url}${post.coverImage}`
     :`${siteConfig.url}/og-image.png`;
 
-  const articleSchema = {"@context":"https://schema.org","@type":"NewsArticle",
+  const articleSchema = {"@context":"https://schema.org","@type":"BlogPosting",
     headline: post.title,
     description: post.metaDescription,
     image: {"@type":"ImageObject",
@@ -249,40 +247,8 @@ export default async function BlogPostPage({
         }
       : null;
 
-  // AEO: HowTo schema for guide/buyer's guide posts — ranks in AI Overviews & voice search
-  // Detect if post is a guide/how-to based on title keywords
-  const isGuidePost =
-    post.title.toLowerCase().includes("guide") ||
-    post.title.toLowerCase().includes("how to") ||
-    post.title.toLowerCase().includes("buyer") ||
-    post.title.toLowerCase().includes("choose") ||
-    post.title.toLowerCase().includes("best") ||
-    post.title.toLowerCase().includes("step");
-
-  const howToSchema = isGuidePost
-    ? {"@context":"https://schema.org","@type":"HowTo",
-        name: post.title,
-        description: post.metaDescription,
-        image: {"@type":"ImageObject",
-          url: articleImage,
-          width: 1200,
-          height: 630,
-        },
-        totalTime:`PT${parseInt(post.readTime) || 15}M`,
-        estimatedCost: {"@type":"MonetaryAmount",
-          currency:"USD",
-          value:"0",
-        },
-        step:
-          post.faq?.slice(0, 5).map((item, index) => ({"@type":"HowToStep",
-            position: index + 1,
-            name: item.question,
-            text: item.answer,
-            url:`${articleUrl}#faq`,
-          })) || [],
-      }
-    : null;
-
+  // Do not infer HowTo steps from FAQs: that would not describe the visible
+  // step-by-step instructions accurately enough for structured data.
   // Consolidate all schemas into a single @graph (Google best practice)
   const consolidatedSchema = {"@context":"https://schema.org","@graph": [
       articleSchema,
@@ -290,7 +256,6 @@ export default async function BlogPostPage({
       speakableSchema,
       ...(faqSchema ? [faqSchema] : []),
       ...(videoSchema ? [videoSchema] : []),
-      ...(howToSchema ? [howToSchema] : []),
     ],
   };
 

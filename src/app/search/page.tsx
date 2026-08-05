@@ -1,6 +1,7 @@
 import { Metadata } from"next";
 import { getAllTools } from"@/data/tools";
 import { getAllBlogPosts } from"@/data/blog";
+import { filterIndexableBlogPosts } from"@/lib/blog-seo";
 import { SearchClient } from"./client";
 
 export const metadata: Metadata = {
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
     canonical:"https://www.toolnovahub.com/search",
   },
   robots: {
-    index: true,
+    // Search-result URLs can create many thin, parameterized duplicates. Keep
+    // the search useful to visitors without asking search engines to index it.
+    index: false,
     follow: true,
   },
   openGraph: {
@@ -35,7 +38,7 @@ export default async function SearchPage({
     category: data.category,
   }));
 
-  const blogPosts = getAllBlogPosts().map((post) => ({
+  const blogPosts = filterIndexableBlogPosts(getAllBlogPosts()).map((post) => ({
     slug: post.slug,
     title: post.title,
     excerpt: post.excerpt,

@@ -3,7 +3,12 @@
 import Script from"next/script";
 import { useEffect, useState } from"react";
 import { siteConfig } from"@/config/site";
-import { initializeAutoAds, shouldShowAds } from"@/config/adsense";
+import {
+  adsenseConfig,
+  getAdsenseScriptUrl,
+  initializeAutoAds,
+  shouldShowAds,
+} from"@/config/adsense";
 
 /**
  * Loads GA + AdSense after cookie consent (Consent Mode v2).
@@ -41,12 +46,32 @@ export function ConsentedScripts() {
     tick();
   }
 
+  function loadAdsenseScript() {
+    if (!adsenseConfig.enabled || typeof window === "undefined") return;
+
+    const selector = 'script[data-toolnova-adsense="true"]';
+    const existing = document.querySelector<HTMLScriptElement>(selector);
+    if (existing) {
+      if (window.adsbygoogle) tryInitAds();
+      else existing.addEventListener("load", tryInitAds, { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = getAdsenseScriptUrl();
+    script.crossOrigin = "anonymous";
+    script.dataset.toolnovaAdsense = "true";
+    script.addEventListener("load", tryInitAds, { once: true });
+    document.head.appendChild(script);
+  }
+
   useEffect(() => {
     const consent = localStorage.getItem("cookie_consent");
     if (consent === "accepted") {
       setConsented(true);
       grantConsent();
-      tryInitAds();
+      loadAdsenseScript();
     }
   }, []);
 
@@ -56,7 +81,7 @@ export function ConsentedScripts() {
       if (consent === "accepted") {
         setConsented(true);
         grantConsent();
-        tryInitAds();
+        loadAdsenseScript();
       }
     };
     window.addEventListener("cookie-consent-changed", handler);

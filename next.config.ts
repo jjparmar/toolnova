@@ -185,6 +185,14 @@ const nextConfig: NextConfig = {
   // (blog internal links, guessed aliases, removed tools). Prevents 404s in GSC.
   async redirects() {
     return [
+      // The CDN can forward both hostnames to this app. Keep the apex from
+      // creating a duplicate version of every URL for crawlers.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "toolnovahub.com" }],
+        destination: "https://www.toolnovahub.com/:path*",
+        permanent: true,
+      },
       // Dead tool pages that were linked from blog content
       {
         source: "/tools/password-protect-pdf",

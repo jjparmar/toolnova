@@ -1,4 +1,9 @@
 :81 {
+	# The apex hostname is a duplicate of the canonical www host. Redirect it
+	# before proxying so users and crawlers see one URL for every page.
+	@apex host toolnovahub.com
+	redir @apex https://www.toolnovahub.com{uri} permanent
+
 	@transform_port_query {
 		query XTransformPort=*
 	}

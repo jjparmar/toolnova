@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical:`${siteConfig.url}/seo-audit`,
   },
+  // This is an internal-style status page, not standalone search content.
+  // Keeping it out of the index avoids making unverified marketing claims a
+  // crawl target while preserving the page for visitors.
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 const seoChecks = {
@@ -54,7 +61,7 @@ const recommendations = [
     priority:"high",
     category:"Content",
     title:"Add More FAQ Content",
-    description:"Expand FAQ schemas to all 47+ tools. Currently only 15 tools have FAQ data.",
+    description:"Expand FAQ schemas to all 50+ tools. Currently only 15 tools have FAQ data.",
     impact:"Higher chance of featured snippets and People Also Ask rankings",
   },
   {

@@ -5,6 +5,7 @@ import { getAllToolSlugs } from"@/data/tools";
 import { getAllBlogPosts } from"@/data/blog";
 import { siteConfig } from"@/config/site";
 import { TOOL_COUNT_LABEL } from"@/data/tools";
+import { filterIndexableBlogPosts } from"@/lib/blog-seo";
 
 /**
  * Image Sitemap — required for Google Discover image indexing
@@ -31,7 +32,7 @@ function escapeXml(s: string): string {
 export async function GET() {
   const baseUrl = siteConfig.url;
   const toolSlugs = getAllToolSlugs();
-  const blogPosts = getAllBlogPosts();
+  const blogPosts = filterIndexableBlogPosts(getAllBlogPosts());
   const fallbackOg ="/og-image.png";
 
   const entries: string[] = [];
