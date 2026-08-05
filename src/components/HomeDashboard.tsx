@@ -142,12 +142,12 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
             </span>
           </div>
 
-          <h1 className="hero-title font-heading mx-auto mb-5 max-w-4xl text-[2.15rem] font-bold tracking-tight text-foreground sm:text-5xl md:text-[3.4rem] md:leading-[1.08]">
+          <h1 className="hero-title font-heading mx-auto mb-5 max-w-4xl 3xl:max-w-6xl text-[2.15rem] font-bold tracking-tight text-foreground sm:text-5xl md:text-[3.4rem] 2xl:text-[4.5rem] 3xl:text-[5.5rem] md:leading-[1.08]">
             Work &amp; study <span className="text-gradient">smarter with AI</span>
             <span className="mt-1 block text-foreground/85">— all in one modern hub</span>
           </h1>
 
-          <p className="hero-description mx-auto mb-9 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="hero-description mx-auto mb-9 max-w-2xl 3xl:max-w-4xl text-base leading-relaxed text-muted-foreground md:text-lg 2xl:text-xl 3xl:text-2xl">
             Merge and compress PDFs, fix grammar, build flashcards, and draft essays in one place.{" "}
             <strong className="font-semibold text-foreground">
               {TOOL_COUNT_LABEL} free tools
@@ -156,9 +156,10 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
           </p>
 
           {/* Instant Tool Search Input */}
-          <div className="relative mx-auto mb-9 max-w-2xl text-left">
+          <div className="relative mx-auto mb-9 max-w-2xl 3xl:max-w-4xl text-left">
             <div className="group relative flex items-center">
-              <Search className="absolute left-5 h-5 w-5 text-muted-foreground transition-colors group-focus-within:text-primary" aria-hidden />
+              <div className="absolute -inset-1 rounded-[1.5rem] bg-gradient-to-r from-primary/40 via-fuchsia-500/40 to-primary/40 opacity-0 blur-lg transition-opacity duration-500 group-focus-within:opacity-100" aria-hidden="true" />
+              <Search className="absolute left-5 h-5 w-5 text-muted-foreground transition-colors group-focus-within:text-primary z-10" aria-hidden />
               <label htmlFor="home-tool-search" className="sr-only">
                 Search tools
               </label>
@@ -169,7 +170,7 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={`Search ${TOOL_COUNT_LABEL} tools (e.g. compress pdf, homework solver)…`}
-                className="input-surface w-full rounded-[1.15rem] border py-4 pl-14 pr-12 text-base font-medium text-foreground shadow-[var(--shadow-premium)] placeholder:text-muted-foreground/55 focus:outline-none"
+                className="input-surface relative z-10 w-full rounded-[1.15rem] border py-4 3xl:py-6 pl-14 3xl:pl-16 pr-12 text-base 3xl:text-xl font-medium text-foreground shadow-[var(--shadow-premium-lg)] placeholder:text-muted-foreground/55 focus:outline-none"
               />
               {searchQuery && (
                 <button
@@ -240,8 +241,8 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
           {/* Action CTAs */}
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/tools">
-              <Button size="lg" className="btn-premium h-13 min-w-[200px] gap-2 px-8 text-base font-bold">
-                <Grid2X2 className="h-5 w-5" />
+              <Button size="lg" className="btn-premium h-13 3xl:h-16 3xl:text-xl min-w-[200px] 3xl:min-w-[260px] gap-2 px-8 3xl:px-10 text-base font-bold">
+                <Grid2X2 className="h-5 w-5 3xl:h-6 3xl:w-6" />
                 Browse all tools
               </Button>
             </Link>
@@ -249,10 +250,10 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
               <Button
                 variant="outline"
                 size="lg"
-                className="h-13 min-w-[200px] gap-2 rounded-full border-[var(--border-color)] bg-card/90 px-8 text-base font-semibold shadow-sm"
+                className="h-13 3xl:h-16 3xl:text-xl min-w-[200px] 3xl:min-w-[260px] gap-2 rounded-full border-[var(--border-color)] bg-card/90 px-8 3xl:px-10 text-base font-semibold shadow-sm"
               >
                 Compress a PDF free
-                <ArrowRight className="h-4 w-4 text-primary" />
+                <ArrowRight className="h-4 w-4 3xl:h-5 3xl:w-5 text-primary" />
               </Button>
             </Link>
           </div>
@@ -301,16 +302,20 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
           </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-            {featuredTools.map((tool) => (
-              <ToolCard
-                key={tool.href}
-                href={tool.href}
-                icon={tool.icon}
-                title={tool.title}
-                description={tool.desc}
-                badge={tool.badge}
-                gradient={tool.gradient}
-              />
+            {featuredTools.map((tool, idx) => (
+              <div 
+                key={tool.href} 
+                className={(idx === 0 || idx === 1 || idx === 6 || idx === 7) ? "sm:col-span-2" : "col-span-1"}
+              >
+                <ToolCard
+                  href={tool.href}
+                  icon={tool.icon}
+                  title={tool.title}
+                  description={tool.desc}
+                  badge={tool.badge}
+                  gradient={tool.gradient}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -329,19 +334,21 @@ export function HomeDashboard({ recentPosts = [] }: { recentPosts?: BlogPost[] }
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             {categories.map((cat) => (
-              <Link
-                key={cat.href}
-                href={cat.href}
-                className="surface-card surface-card-interactive group flex flex-col p-6"
-              >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-primary ring-1 ring-primary/10 transition-transform duration-300 group-hover:scale-105">
-                  <cat.icon className="h-6 w-6" />
-                </div>
-                <h3 className="font-heading mb-1.5 text-lg font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
-                  {cat.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{cat.desc}</p>
-              </Link>
+              <div key={cat.href} className="group relative h-full">
+                <div className="absolute -inset-0.5 -z-10 rounded-[1.45rem] bg-gradient-to-r from-primary/40 via-fuchsia-500/40 to-primary/40 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-30 dark:group-hover:opacity-20" />
+                <Link
+                  href={cat.href}
+                  className="surface-card surface-card-interactive relative flex h-full flex-col p-6 overflow-hidden"
+                >
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-primary ring-1 ring-primary/10 transition-transform duration-300 group-hover:scale-105 shadow-sm">
+                    <cat.icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-heading mb-1.5 text-lg font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                    {cat.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{cat.desc}</p>
+                </Link>
+              </div>
             ))}
           </div>
         </div>

@@ -11,6 +11,11 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+		screens: {
+			'3xl': '1920px',
+			'4xl': '2560px',
+			'5xl': '3840px',
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -70,8 +75,8 @@ const config: Config = {
   			'3xl': 'calc(var(--radius) + 12px)'
   		},
   		fontFamily: {
-			sans: ['var(--font-manrope)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-			heading: ['var(--font-sora)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+			sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+			heading: ['var(--font-pjs)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 			mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace']
 		},
   		fontSize: {

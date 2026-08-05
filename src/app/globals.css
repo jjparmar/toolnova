@@ -6,8 +6,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-sora);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-pjs);
   --font-mono: var(--font-geist-mono);
 
   --color-border: var(--border);
@@ -51,10 +51,10 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
 
-  --shadow-premium-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -8px rgba(15, 23, 42, 0.08);
-  --shadow-premium: 0 4px 6px -2px rgba(15, 23, 42, 0.04), 0 16px 40px -12px rgba(124, 58, 237, 0.12);
-  --shadow-premium-lg: 0 12px 40px -12px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(139, 92, 246, 0.06);
-  --shadow-glow: 0 0 48px -8px hsl(var(--primary) / 0.35);
+  --shadow-premium-sm: 0 2px 4px rgba(0, 0, 0, 0.02), 0 8px 16px -4px rgba(0, 0, 0, 0.04), 0 16px 32px -8px rgba(124, 58, 237, 0.06);
+  --shadow-premium: 0 4px 8px rgba(0, 0, 0, 0.03), 0 16px 32px -8px rgba(0, 0, 0, 0.05), 0 32px 64px -12px rgba(124, 58, 237, 0.15);
+  --shadow-premium-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.05), 0 32px 64px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(139, 92, 246, 0.1);
+  --shadow-glow: 0 0 64px -8px hsl(var(--primary) / 0.45);
 }
 
 /* ========================================
@@ -64,15 +64,15 @@
 :root {
   --radius: 1rem;
 
-  /* Cool slate canvas with slightly more depth */
-  --background: 240 30% 98.5%;
-  --foreground: 224 42% 11%;
+  /* Vibrant & Rich Pearlescent Light Theme */
+  --background: 240 33% 98%;
+  --foreground: 224 40% 12%;
 
   --card: 0 0% 100%;
-  --card-foreground: 224 42% 11%;
+  --card-foreground: 224 40% 12%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 224 42% 11%;
+  --popover-foreground: 224 40% 12%;
 
   /* Violet primary #8b5cf6 / deep #7c3aed */
   --primary: 258 90% 66%;
@@ -121,17 +121,18 @@
   --card-gradient: linear-gradient(165deg, rgba(255, 255, 255, 0.99) 0%, rgba(250, 245, 255, 0.94) 100%);
   --border-color: rgba(124, 58, 237, 0.11);
   --primary-glow: rgba(139, 92, 246, 0.12);
-  --page-max: 76rem;
+  --page-max: 100rem;
   --header-h: 4.25rem;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dark {
-  --background: 228 32% 6%;
+  /* Deep, vibrant cinematic dark theme (Navy/Violet tinted) */
+  --background: 232 40% 6%;
   --foreground: 210 40% 98%;
-  --card: 228 28% 9%;
+  --card: 232 30% 9%;
   --card-foreground: 210 40% 98%;
-  --popover: 228 28% 9%;
+  --popover: 232 30% 9%;
   --popover-foreground: 210 40% 98%;
   --primary: 258 90% 72%;
   --primary-deep: 262 83% 64%;
@@ -180,7 +181,7 @@
 
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
@@ -202,7 +203,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-pjs), ui-sans-serif, system-ui, sans-serif;
     letter-spacing: -0.035em;
     font-weight: 700;
     color: hsl(var(--foreground));
@@ -411,7 +412,7 @@
 }
 
 .font-heading {
-  font-family: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-pjs), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Layout primitives — same rhythm on every page */
@@ -450,7 +451,7 @@
 
 /* Shared section heading block */
 .section-title {
-  font-family: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-pjs), ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(1.65rem, 2.5vw, 2.25rem);
   font-weight: 750;
   letter-spacing: -0.035em;
@@ -517,12 +518,13 @@
 /* ── Surfaces (unified) ── */
 .surface-card {
   background: var(--card-gradient);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  backdrop-filter: blur(24px) saturate(1.2);
   border: 1px solid var(--border-color);
   border-radius: 1.35rem;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4),
     var(--shadow-premium-sm);
   transition:
     border-color 0.28s var(--ease-out),
@@ -555,13 +557,14 @@ button.surface-card:hover,
 
 .glass-premium,
 .glass-card-premium {
-  background: color-mix(in srgb, hsl(var(--card)) 82%, transparent);
-  -webkit-backdrop-filter: blur(22px) saturate(1.4);
-  backdrop-filter: blur(22px) saturate(1.4);
+  background: color-mix(in srgb, hsl(var(--card)) 70%, transparent);
+  -webkit-backdrop-filter: blur(32px) saturate(1.5);
+  backdrop-filter: blur(32px) saturate(1.5);
   border-color: var(--border-color);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.65) inset,
-    0 10px 28px -18px rgba(124, 58, 237, 0.28);
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 16px 40px -12px rgba(124, 58, 237, 0.15);
   transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .glass-premium:hover,
@@ -600,7 +603,7 @@ button.surface-card:hover,
   background: hsl(var(--card));
 }
 .dark .glass-premium {
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 8px 24px -16px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 16px 40px -16px rgba(0, 0, 0, 0.6);
 }
 
 .content-panel,

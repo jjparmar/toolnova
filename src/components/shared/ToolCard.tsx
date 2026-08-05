@@ -63,49 +63,55 @@ export function ToolCard({
   }
 
   return (
-    <Link
-      href={href}
-      className={cn(
-        "surface-card surface-card-interactive group relative flex h-full flex-col overflow-hidden p-6",
-        className
-      )}
-    >
-      <div
+    <div className={cn("group relative h-full", className)}>
+      {/* Soft Premium Glow Behind Card */}
+      <div 
         className={cn(
-          "absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+          "absolute -inset-0.5 -z-10 rounded-[1.45rem] opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-30 dark:group-hover:opacity-20",
           iconBg || gradient
         )}
       />
-
-      {badge && (
-        <span className="absolute right-4 top-4 rounded-full border border-primary/15 bg-primary/8 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">
-          {badge}
-        </span>
-      )}
-
-      <div
-        className={cn(
-          "tool-icon mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-lg transition-transform duration-300 group-hover:scale-105",
-          iconBg || gradient
-        )}
+      <Link
+        href={href}
+        className="surface-card surface-card-interactive relative flex h-full flex-col overflow-hidden p-6"
       >
-        <Icon className="h-5.5 w-5.5" strokeWidth={2} />
-      </div>
+        <div
+          className={cn(
+            "absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+            iconBg || gradient
+          )}
+        />
 
-      <h3 className="font-heading mb-2 pr-12 text-lg font-bold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
-        {title}
-      </h3>
+        {badge && (
+          <span className="absolute right-4 top-4 rounded-full border border-primary/15 bg-primary/8 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">
+            {badge}
+          </span>
+        )}
 
-      {description && (
-        <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
-          {description}
-        </p>
-      )}
+        <div
+          className={cn(
+            "tool-icon mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-lg transition-transform duration-300 group-hover:scale-105",
+            iconBg || gradient
+          )}
+        >
+          <Icon className="h-5.5 w-5.5" strokeWidth={2} />
+        </div>
 
-      <div className="mt-5 flex items-center gap-1.5 border-t border-[var(--border-color)] pt-4 text-xs font-bold uppercase tracking-wider text-primary">
-        <span>Open tool</span>
-        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-      </div>
-    </Link>
+        <h3 className="font-heading mb-2 pr-12 text-lg font-bold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
+          {title}
+        </h3>
+
+        {description && (
+          <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
+            {description}
+          </p>
+        )}
+
+        <div className="mt-5 flex items-center gap-1.5 border-t border-[var(--border-color)] pt-4 text-xs font-bold uppercase tracking-wider text-primary">
+          <span>Open tool</span>
+          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+        </div>
+      </Link>
+    </div>
   );
 }

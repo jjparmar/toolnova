@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/google-font-preconnect */
 import type { Metadata, Viewport } from "next";
-import { Manrope, Sora, Geist_Mono } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ConsentedScripts } from "@/components/ConsentedScripts";
 import Script from "next/script";
@@ -18,20 +18,20 @@ import { adsenseConfig } from "@/config/adsense";
 import { Providers } from "@/components/Providers";
 import { TOOL_COUNT_LABEL } from "@/data/tools";
 
-/** Body — Manrope (modern geometric UI sans) */
-const manrope = Manrope({
-  variable: "--font-manrope",
+/** Body — Inter (Premium tech sans) */
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   preload: true,
   adjustFontFallback: true,
   fallback: ["system-ui", "arial"],
 });
 
-/** Headings — Sora (distinct modern display) */
-const sora = Sora({
-  variable: "--font-sora",
+/** Headings — Plus Jakarta Sans (Premium geometric display) */
+const pjs = Plus_Jakarta_Sans({
+  variable: "--font-pjs",
   subsets: ["latin"],
   display: "swap",
   weight: ["500", "600", "700", "800"],
@@ -212,7 +212,7 @@ export default function RootLayout({
             No global schema here to avoid duplicate JSON-LD across all pages. */}
       </head>
       <body
-        className={`${manrope.variable} ${sora.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${inter.variable} ${pjs.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
         <Providers>
           <VitalsInitializer />

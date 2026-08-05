@@ -61,11 +61,11 @@ export function Header() {
       className={cn(
         'glass-premium sticky top-0 z-50 w-full border-b transition-all duration-300',
         scrolled
-          ? 'border-[var(--border-color)] shadow-[0_10px_36px_-20px_rgba(124,58,237,0.45)]'
+          ? 'border-[var(--border-color)] shadow-[var(--shadow-premium-lg)]'
           : 'border-transparent shadow-none'
       )}
     >
-      <div className="page-container flex h-[4.25rem] items-center justify-between gap-3">
+      <div className="page-container flex h-[4.25rem] 3xl:h-20 items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3 sm:gap-5">
           <button
             type="button"
@@ -80,13 +80,13 @@ export function Header() {
 
           <Link href="/" className="group flex shrink-0 items-center gap-2.5">
             <div
-              className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#d946ef] text-sm font-extrabold text-white shadow-lg shadow-violet-500/30 transition-transform duration-300 group-hover:scale-105"
+              className="flex h-9 w-9 3xl:h-12 3xl:w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#d946ef] text-sm 3xl:text-base font-extrabold text-white shadow-lg shadow-violet-500/30 transition-transform duration-300 group-hover:scale-105"
               aria-hidden="true"
             >
               T
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-heading text-lg font-bold tracking-tight text-foreground sm:text-xl">
+              <span className="font-heading text-lg font-bold tracking-tight text-foreground sm:text-xl 3xl:text-2xl">
                 Tool<span className="text-gradient">Nova</span>
               </span>
               <span className="hidden rounded-full border border-primary/15 bg-primary/8 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary sm:inline-block">
