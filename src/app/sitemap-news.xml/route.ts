@@ -14,7 +14,7 @@ export async function GET() {
   const baseUrl = siteConfig.url;
   const cutoff = Date.now() - 48 * 60 * 60 * 1000;
 
-  const recentPosts = posts
+  let recentPosts = posts
     .filter((post) => {
       if (!isIndexableBlogPost(post)) return false;
       if (!post.date) return false;
@@ -23,6 +23,24 @@ export async function GET() {
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 1000);
+
+  // If there are no posts in the last 48 hours, GSC will throw a "Missing XML tag" 
+  // error because <urlset> cannot be empty. We provide a fallback to the single 
+  // most recent post just to keep the XML schema valid.
+  if (recentPosts.length === 0) {
+    const allValidPosts = posts
+      .filter(
+        (post) =>
+          isIndexableBlogPost(post) &&
+          post.date &&
+          !Number.isNaN(new Date(post.date).getTime())
+      )
+      .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime());
+
+    if (allValidPosts.length > 0) {
+      recentPosts = [allValidPosts[0]];
+    }
+  }
 
   const newsItems = recentPosts
     .map((post) => {
