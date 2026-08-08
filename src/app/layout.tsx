@@ -184,6 +184,19 @@ export default function RootLayout({
           title="ToolNova Blog RSS Feed"
           href="https://www.toolnovahub.com/feed.xml"
         />
+        {/* Google Discover Follow — enables "Follow" button on Discover cards */}
+        <link
+          rel="alternate"
+          type="application/atom+xml"
+          title="ToolNova Blog"
+          href="https://www.toolnovahub.com/feed.xml"
+        />
+        <link
+          rel="alternate"
+          type="application/atom+xml"
+          title="ToolNova Blog Atom Feed"
+          href="https://www.toolnovahub.com/feed.atom"
+        />
 
         {/* Prefetch third-parties (avoid preconnect to ads — protects LCP) */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
@@ -201,6 +214,8 @@ export default function RootLayout({
 
         {/* Theme Color — required for Google Discover & PWA */}
         <meta name="msapplication-TileColor" content="#8b5cf6" />
+        {/* Google Discover — site name entity for Follow button */}
+        <meta name="application-name" content="ToolNova" />
 
 
         {/* NOTE: Page-level JSON-LD schemas are injected by each page component.

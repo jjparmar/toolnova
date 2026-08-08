@@ -11,17 +11,17 @@ export const revalidate = 86400;
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
   // Stable lastmod for tools (bump when tool pages meaningfully change)
-  const toolsLastMod ="2026-08-05";
+  const toolsLastMod = "2026-08-08";
 
   // Real last-modified dates for static pages
   // Update these when you actually change a page's content
-  const HOMEPAGE_MODIFIED ="2026-08-05";
-  const TOOLS_MODIFIED ="2026-08-05";
-  const BLOG_MODIFIED ="2026-08-05";
-  const ABOUT_MODIFIED ="2026-07-15";
-  const CONTACT_MODIFIED ="2026-07-15";
-  const PRICING_MODIFIED ="2026-07-15";
-  const LEGAL_MODIFIED ="2026-07-15";
+  const HOMEPAGE_MODIFIED = "2026-08-08";
+  const TOOLS_MODIFIED = "2026-08-08";
+  const BLOG_MODIFIED = "2026-08-08";
+  const ABOUT_MODIFIED = "2026-08-08";
+  const CONTACT_MODIFIED = "2026-08-08";
+  const PRICING_MODIFIED = "2026-08-08";
+  const LEGAL_MODIFIED = "2026-08-08";
 
   // Get all blog posts
   const blogPosts = getAllBlogPosts();
@@ -92,9 +92,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
     {
-      url:`${baseUrl}/advertising`,
-      lastModified:"2026-07-15",
-      changeFrequency:"yearly" as const,
+      url: `${baseUrl}/advertising`,
+      lastModified: "2026-08-08",
+      changeFrequency: "yearly" as const,
       priority: 0.35,
     },
     {

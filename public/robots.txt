@@ -9,6 +9,7 @@ Allow: /llms.txt
 Allow: /.well-known/
 Allow: /openapi.yaml
 Allow: /feed.xml
+Allow: /feed.atom
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
